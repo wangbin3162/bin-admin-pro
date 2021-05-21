@@ -1,15 +1,35 @@
 {
   "name": "bin-admin-pro",
   "version": "0.1.0",
-  "private": true,
+  "description": "后台管理系统 vue3版本",
+  "keywords": [
+    "bin-ui-nex",
+    "bin",
+    "ui",
+    "admin",
+    "bin-admin",
+    "components"
+  ],
+  "author": "wang bin",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "vue": "^3.0.0",
+    "axios": "^0.21.1",
+    "bin-ui-next": "^0.2.4",
+    "core-js": "^3.12.1",
+    "good-storage": "^1.1.1",
+    "js-cookie": "^2.2.1",
+    "mockjs": "^1.1.0",
+    "vue": "^3.0.5",
     "vue-router": "^4.0.0-0",
     "vuex": "^4.0.0-0"
   },

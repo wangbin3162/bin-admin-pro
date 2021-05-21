@@ -1,6 +1,20 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import store from './store'
+import router, { setupRouter } from './router'
+import { setupStore } from './store'
+// 全局组件
+import { registerGlobComp } from './components/registerGlobComp'
+// 样式
+import 'bin-ui-next/lib/styles/index.css'
+import './assets/stylus/index.styl'
+// mock
+import './mock'
 
-createApp(App).use(store).use(router).mount('#app')
+const app = createApp(App)
+registerGlobComp(app)
+setupRouter(app)
+setupStore(app)
+// Mount when the route is ready
+router.isReady().then(() => {
+  app.mount('#app', true)
+})
