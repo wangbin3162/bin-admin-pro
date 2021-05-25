@@ -33,7 +33,7 @@ const permission = {
       return new Promise(resolve => {
         const accessedRouters = filterAsyncRoutes(asyncRouterMap, menuItems)
         commit('SET_ROUTERS', accessedRouters)
-        console.log(accessedRouters)
+        // console.log(accessedRouters)
         resolve(accessedRouters)
       })
     }

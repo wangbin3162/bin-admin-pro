@@ -10,39 +10,68 @@
     <div class="layer">
       <div class="content" flex="dir:top main:justify cross:center box:justify">
         <div class="header">
-          <p class="header-motto">
-            时间是一切财富中最宝贵的财富。 <span>—— 德奥弗拉斯多</span>
-          </p>
+          <p class="header-motto">开箱即用的中后台管理系统</p>
         </div>
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
           <img class="page-login--logo" src="@/assets/images/logo.png" alt="logo">
           <!-- 表单 -->
           <div class="form">
-            <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="default">
+            <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
               <b-form-item prop="username">
-                <b-input type="text" v-model="formLogin.username" placeholder="用户名" size="large"
-                         @keydown.enter="submit"
-                         prefix="user"></b-input>
+                <b-input
+                  type="text"
+                  v-model="formLogin.username"
+                  placeholder="用户名"
+                  @keydown.enter="submit"
+                >
+                  <template #prefix>
+                    <b-icon name="user" size="16"></b-icon>
+                  </template>
+                </b-input>
               </b-form-item>
               <b-form-item prop="password">
-                <b-input type="password" v-model="formLogin.password" size="large" placeholder="密码"
-                         @keydown.enter="submit"
-                         prefix="lock"></b-input>
+                <b-input
+                  type="password"
+                  v-model="formLogin.password"
+                  placeholder="密码"
+                  @keydown.enter="submit"
+                >
+                  <template #prefix>
+                    <b-icon name="lock" size="16"></b-icon>
+                  </template>
+                </b-input>
               </b-form-item>
               <b-form-item prop="code">
-                <b-input type="text" v-model="formLogin.code" placeholder="- - - -" style="width: 68%;"
-                         @keydown.enter="submit"
-                         prefix="audit" size="large"></b-input>
+                <b-input
+                  type="text"
+                  v-model="formLogin.code"
+                  placeholder="- - - -"
+                  style="width: 68%;"
+                  @keydown.enter="submit"
+                >
+                  <template #prefix>
+                    <b-icon name="bulb" size="16"></b-icon>
+                  </template>
+                </b-input>
                 <span class="login-code"><img src="@/assets/images/login-code.png" alt="code"></span>
               </b-form-item>
-              <b-button @click="submit" type="primary" size="large" class="button-login" v-waves>登录</b-button>
+              <b-button
+                @click="submit"
+                :loading="loading"
+                type="primary"
+                class="button-login"
+                size="large"
+              >
+                登录
+              </b-button>
             </b-form>
           </div>
         </div>
         <div class="footer">
           <p class="footer-copyright">
-            bin admin pro 简版后台管理系统3.0 <a href="https://github.com/wangbin3162/bin-admin" target="_blank">github</a>
+            bin admin pro 简版后台管理系统vue3 重构版
+            <a href="https://github.com/wangbin3162/bin-admin-pro" target="_blank">github</a>
           </p>
         </div>
       </div>
@@ -63,6 +92,8 @@ export default {
         password: 'admin',
         code: 'v9am'
       },
+      showPassword: false,
+      loading: false,
       // 校验
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -73,23 +104,26 @@ export default {
   methods: {
     // 提交登录信息
     submit() {
-      this.$refs.loginForm.validate((valid) => {
-        if (valid) {
-          // 登录
-          login(this.formLogin)
-            .then((res) => this.loginSuccess(res))
-            .catch(err => this.requestFailed(err))
-        } else {
-          // 登录表单校验失败
-          this.$message({ type: 'error', message: '请输入登录信息后登录' })
+      this.$refs.loginForm.validate(async (valid) => {
+        try {
+          this.loading = true
+          if (valid) {
+            // 登录
+            login(this.formLogin)
+              .then((res) => this.loginSuccess(res))
+              .catch(err => this.requestFailed(err))
+          } else {
+            // 登录表单校验失败
+            this.$message({ type: 'error', message: '请输入登录信息后登录' })
+          }
+        } catch (e) {
         }
+        this.loading = false
       })
     },
     loginSuccess(res) {
-      console.log(res)
       if (res.data.code === '0') {
         const token = res.data.data
-        console.log(token)
         this.$store.dispatch('setToken', token).then(() => {
           // 重定向对象不存在则返回顶层路径
           const redirect = this.$route.query.redirect

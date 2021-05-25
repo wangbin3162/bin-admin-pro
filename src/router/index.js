@@ -46,15 +46,15 @@ router.beforeEach(async (to, from) => {
       try {
         const res = await store.dispatch('getUserInfo')
         const menus = getFilterMenus(res.data.data.functions || [])
-        console.log('menus: ', menus)
+        // console.log('menus: ', menus)
         const { menuItems } = await store.dispatch('setRouterMenu', menus)
         const asyncRoute = await store.dispatch('generateRoutes', menuItems)
-        console.log('baseRoutes: ', router.getRoutes())
+        // console.log('baseRoutes: ', router.getRoutes())
         // [ 路由 ] 计算路由
-        console.log('asyncRoutes: ', asyncRoute)
+        // console.log('asyncRoutes: ', asyncRoute)
         // [ 路由 ] 重新设置路由
         resetRoutes(asyncRoute)
-        console.log('resultRoutes: ', router.getRoutes())
+        // console.log('resultRoutes: ', router.getRoutes())
         // 触发重定向
         return to.fullPath
       } catch (e) {
