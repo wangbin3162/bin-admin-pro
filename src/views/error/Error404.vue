@@ -158,7 +158,7 @@
     <div class="bin-result-title">404</div>
     <div class="bin-result-subtitle">抱歉，你访问的页面不存在。</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'index'}">
+      <router-link :to="{name:'Home'}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>

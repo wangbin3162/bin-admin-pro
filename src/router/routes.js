@@ -1,8 +1,11 @@
-import demo from './modules/demo'
 import layout from '../layouts'
+import demo from './modules/demo'
+import errorPage from './modules/error-page'
+import { h } from 'vue'
 
 export const asyncRouterMap = [
-  ...demo
+  ...demo,
+  ...errorPage
 ]
 
 /**
@@ -20,27 +23,9 @@ export function createRoutesInLayout(routes = []) {
         { path: 'home', name: 'Home', meta: { title: '首页' }, component: () => import('../views/Home.vue') },
         // 刷新页面 必须保留
         {
-          path: 'refresh',
-          name: 'refresh',
-          hidden: true,
-          component: {
-            beforeRouteEnter(to, from, next) {
-              next(vm => vm.$router.replace(from.fullPath))
-            },
-            render: h => h()
-          }
-        },
-        // 页面重定向 必须保留
-        {
-          path: 'redirect/:route*',
-          name: 'redirect',
-          hidden: true,
-          component: {
-            beforeRouteEnter(to, from, next) {
-              next(vm => vm.$router.replace(JSON.parse(from.params.route)))
-            },
-            render: h => h()
-          }
+          path: 'redirect/:path(.*)',
+          name: 'Redirect',
+          component: () => import('../views/redirect/index.vue')
         },
         ...routes
       ]

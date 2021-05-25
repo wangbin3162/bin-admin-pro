@@ -18,20 +18,12 @@ const app = {
       state.setting.sidebar = !state.setting.sidebar
       setAdminSetting(state.setting)
     },
+    SET_SIDEBAR_WIDTH: (state, width) => {
+      state.setting.sidebarWidth = width
+      setAdminSetting(state.setting)
+    },
     SET_TAGS_VIEW: (state) => {
       state.setting.tagsView = !state.setting.tagsView
-      setAdminSetting(state.setting)
-    },
-    SET_THEME: (state, theme) => {
-      state.setting.theme = theme
-      setAdminSetting(state.setting)
-    },
-    SET_MENU_TYPE: (state, type) => {
-      state.setting.menuType = type
-      setAdminSetting(state.setting)
-    },
-    SET_WIDE_TYPE: (state, type) => {
-      state.setting.wideType = type
       setAdminSetting(state.setting)
     },
     TOGGLE_FIXED_HEADER: (state, isFixed) => {
@@ -55,18 +47,11 @@ const app = {
     toggleSideBar: ({ commit }) => {
       commit('SET_SIDEBAR')
     },
+    setSideBarWidth: ({ commit }, width) => {
+      commit('SET_SIDEBAR_WIDTH', width)
+    },
     toggleTagsView: ({ commit }) => {
       commit('SET_TAGS_VIEW')
-    },
-    setThemeMode: ({ commit }, theme) => {
-      document.body.className = `theme-${theme}`
-      commit('SET_THEME', theme)
-    },
-    setMenuType: ({ commit }, type) => {
-      commit('SET_MENU_TYPE', type)
-    },
-    setWideType: ({ commit }, type) => {
-      commit('SET_WIDE_TYPE', type)
     },
     toggleFixedHeader: ({ commit }, isFixed) => {
       commit('TOGGLE_FIXED_HEADER', isFixed)

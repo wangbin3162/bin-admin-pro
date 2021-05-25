@@ -147,7 +147,7 @@
     <div class="bin-result-title">401</div>
     <div class="bin-result-subtitle">抱歉，你无权访问该页面。</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'index'}">
+      <router-link :to="{name:'Home'}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>
@@ -155,11 +155,11 @@
 </template>
 
 <script>
-  export default {
-    name: 'Error403'
-  }
+export default {
+  name: 'Error403'
+}
 </script>
 
 <style scoped lang="stylus">
-  @import "error-style.styl"
+@import "error-style.styl"
 </style>

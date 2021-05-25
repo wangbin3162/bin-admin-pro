@@ -147,7 +147,7 @@
     <div class="bin-result-title">403</div>
     <div class="bin-result-subtitle">抱歉，登录超时啦！</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'index'}">
+      <router-link :to="{name:'Home'}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>

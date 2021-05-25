@@ -1,9 +1,7 @@
 const getters = {
-  theme: state => state.app.setting.theme,
   sidebar: state => state.app.setting.sidebar,
+  sidebarWidth: state => state.app.setting.sidebarWidth,
   tagsView: state => state.app.setting.tagsView,
-  menuType: state => state.app.setting.menuType,
-  wideType: state => state.app.setting.wideType,
   fixedHeader: state => state.app.setting.fixedHeader,
   fixedAside: state => state.app.setting.fixedAside,
   // 菜单

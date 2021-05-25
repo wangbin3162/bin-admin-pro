@@ -1,11 +1,14 @@
 <template>
   <div class="home">
-    <b-button type="primary">测试按钮</b-button>
+    <b-button type="primary">Home</b-button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  created() {
+    console.log('home created')
+  }
 }
 </script>
