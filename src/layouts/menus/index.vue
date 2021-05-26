@@ -92,6 +92,34 @@ export default {
         background: #1089ff !important;
       }
     }
+    &.bin-menu--collapse {
+      .bin-submenu.is-active {
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 3px;
+          height: 100%;
+          background-color: #0960bd;
+          content: '';
+          z-index: 1;
+        }
+      }
+    }
+  }
+  .bin-scrollbar__wrap {
+    overflow-x: hidden;
+  }
+}
+.bin-menu--popup {
+  z-index: 100;
+  min-width: 180px;
+  border: none;
+  padding: 5px 0;
+  .bin-menu-item, .bin-submenu__title {
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
   }
 }
 </style>

@@ -15,11 +15,7 @@ export default {
     const { path } = params
     const _path = Array.isArray(path) ? path.join('/') : path
     console.log(_path)
-    replace({
-      path: '/' + _path,
-      query
-    })
-
+    replace({ path: '/' + _path, query })
     return {}
   }
 }

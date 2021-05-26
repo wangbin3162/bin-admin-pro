@@ -20,7 +20,7 @@ export default {
     }
   },
   actions: {
-    // 登录
+    // 设置token
     setToken({ commit }, token) {
       return new Promise((resolve, reject) => {
         try {
@@ -34,35 +34,25 @@ export default {
         }
       })
     },
-    // 登出
-    logout({ commit }) {
-      return new Promise((resolve) => {
-        // 删除缓存的token
-        commit('SET_TOKEN', '')
-        commit('SET_ROLES', [])
-        // 删除cookie
-        cookies.remove(ACCESS_TOKEN)
-        resolve()
-      })
+    // 清除token
+    clearToken({ commit }) {
+      // 删除缓存的token
+      commit('SET_TOKEN', '')
+      commit('SET_ROLES', [])
+      // 删除cookie
+      cookies.remove(ACCESS_TOKEN)
     },
     // 获取用户信息
-    getUserInfo({ commit }) {
-      return new Promise((resolve, reject) => {
-        getInfo().then(response => {
-          const result = response.data
-          // console.log(result)
-          // 判断角色权限是否存在,这里约定为roleCodes
-          if (result.code === '0') {
-            commit('SET_ROLES', result.data.roleCodes)
-            commit('SET_INFO', result.data)
-            resolve(response)
-          } else { // 如果是403 即为无效的token则重定向到login页面
-            reject(result)
-          }
-        }).catch(error => {
-          reject(error)
-        })
-      })
+    async getUserInfo({ commit }) {
+      const { data } = await getInfo()
+      // 判断角色权限是否存在,这里约定为roleCodes
+      if (data.code === '0') {
+        commit('SET_ROLES', data.data.roleCodes)
+        commit('SET_INFO', data.data)
+        return data.data
+      } else { // 如果是403 即为无效的token则重定向到login页面
+        return data
+      }
     }
   }
 }

@@ -1,7 +1,6 @@
 import layout from '../layouts'
 import demo from './modules/demo'
 import errorPage from './modules/error-page'
-import { h } from 'vue'
 
 export const asyncRouterMap = [
   ...demo,
@@ -27,6 +26,12 @@ export function createRoutesInLayout(routes = []) {
           name: 'Redirect',
           component: () => import('../views/redirect/index.vue')
         },
+        // 错误页面
+        {
+          path: '/:path(.*)*',
+          name: 'ErrorPage',
+          component: () => import('../views/error/index.vue')
+        },
         ...routes
       ]
     }
@@ -41,11 +46,7 @@ export function addRoutes(routes = []) {
 // 在 layout 之外显示的路由
 export const routesOutLayout = [
   // 登录
-  { path: '/login', name: 'Login', component: () => import('../views/Login.vue') },
-  { path: '/401', component: () => import(/* webpackChunkName: "error" */ '../views/error/Error401.vue') },
-  { path: '/403', component: () => import(/* webpackChunkName: "error" */ '../views/error/Error403.vue') },
-  { path: '/404', component: () => import(/* webpackChunkName: "error" */ '../views/error/Error404.vue') },
-  { path: '/500', component: () => import(/* webpackChunkName: "error" */ '../views/error/Error500.vue') }
+  { path: '/login', name: 'Login', component: () => import('../views/Login.vue') }
 ]
 
 /**

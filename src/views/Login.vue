@@ -81,6 +81,8 @@
 
 <script>
 import { login } from '@/api/login.api'
+import store from '@/store'
+import { Notice } from 'bin-ui-next'
 
 export default {
   name: 'Login',
@@ -110,7 +112,7 @@ export default {
           if (valid) {
             // 登录
             login(this.formLogin)
-              .then((res) => this.loginSuccess(res))
+              .then(res => this.loginSuccess(res))
               .catch(err => this.requestFailed(err))
           } else {
             // 登录表单校验失败
@@ -125,9 +127,17 @@ export default {
       if (res.data.code === '0') {
         const token = res.data.data
         this.$store.dispatch('setToken', token).then(() => {
+          this.$store.dispatch('getUserInfo').then(user => {
+            this.$notice.success({
+              title: '登录成功',
+              message: `欢迎回来:${user.realName || user.username}`,
+              offset: 60,
+              duration: 3
+            })
+          })
           // 重定向对象不存在则返回顶层路径
-          const redirect = this.$route.query.redirect
-          this.$router.push({ path: redirect || '/' })
+          const redirect = this.$route.query.redirect || '/'
+          this.$router.push({ path: redirect })
         })
       } else {
         this.$message({ message: res.data.message, type: 'success' })

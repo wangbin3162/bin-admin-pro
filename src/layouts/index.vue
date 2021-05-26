@@ -13,6 +13,9 @@
         </div>
       </aside>
       <main class="layout-main">
+        <!--占位顶部-->
+        <header class="layout-header" :style="fixedHeaderStyle" v-if="fixedHeader" />
+        <global-header />
         <div class="layout-content-wrap">
           <router-view v-slot="{ Component, route }">
             <transition appear name="fade-transverse" @before-leave="beforeLeave" @afterLeave="afterLeave">
@@ -30,13 +33,14 @@
 
 <script>
 import useSetting from '@/layouts/use-setting'
-import AsideMenus from '@/layouts/menus/aside-menus'
+import AsideMenus from '@/layouts/menus'
+import GlobalHeader from '@/layouts/header'
 
 export default {
   name: 'Layout',
-  components: { AsideMenus },
+  components: { GlobalHeader, AsideMenus },
   setup() {
-    const { sidebar, fixedAside, asideStyle, cachedViews } = useSetting()
+    const { sidebar, fixedAside, asideStyle, cachedViews, fixedHeaderStyle, fixedHeader } = useSetting()
 
     function beforeLeave(el) {
       el.style.position = 'absolute'
@@ -56,6 +60,8 @@ export default {
       fixedAside,
       asideStyle,
       cachedViews,
+      fixedHeaderStyle,
+      fixedHeader,
       beforeLeave,
       afterLeave
     }
@@ -101,7 +107,7 @@ export default {
       width: 100%;
       height: 48px;
       overflow: hidden;
-      padding-left: 18px;
+      padding-left: 20px;
       border-bottom: 1px solid rgba(0, 21, 41, .05);
       .icon {
         height: 32px;
@@ -119,6 +125,8 @@ export default {
   }
   &-main {
     position: relative;
+    display: flex;
+    flex-direction: column;
     flex: auto;
     transition: all .2s;
     min-height: 0;
@@ -126,13 +134,8 @@ export default {
   }
   &-content-wrap {
     position: relative;
-    width: 100%;
-    min-height: 100%;
-    transition: .3s;
-    &.wide {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
+    flex: 1 1 auto;
+    min-height: 0;
   }
 }
 

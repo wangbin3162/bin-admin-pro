@@ -1,11 +1,11 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import { LoadingBar } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
-import { addRoutes, constantRoutes } from './routes'
+import { constantRoutes } from './routes'
 import store from '@/store'
 import { getFilterMenus } from './menus'
 import cookies from '../utils/util.cookies'
-import { ACCESS_TOKEN } from '../config/token-const'
+import { ACCESS_TOKEN } from '@/config/token-const'
 
 /**
  * @description 创建路由
@@ -44,8 +44,8 @@ router.beforeEach(async (to, from) => {
       return true
     } else { // 否则就去拉取用户信息
       try {
-        const res = await store.dispatch('getUserInfo')
-        const menus = getFilterMenus(res.data.data.functions || [])
+        const user = await store.dispatch('getUserInfo')
+        const menus = getFilterMenus(user.functions || [])
         // console.log('menus: ', menus)
         const { menuItems } = await store.dispatch('setRouterMenu', menus)
         const asyncRoute = await store.dispatch('generateRoutes', menuItems)
@@ -55,7 +55,6 @@ router.beforeEach(async (to, from) => {
         // [ 路由 ] 重新设置路由
         resetRoutes(asyncRoute)
         // console.log('resultRoutes: ', router.getRoutes())
-        // 触发重定向
         return to.fullPath
       } catch (e) {
         return { name: 'Login', query: { redirect: to.fullPath } }
