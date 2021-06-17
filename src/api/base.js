@@ -1,4 +1,4 @@
-import { ACCESS_TOKEN } from '../config/token-const'
+import { ACCESS_TOKEN } from '@/config/token-const'
 import request from 'axios'
 import cookies from '../utils/util.cookies'
 

@@ -4,7 +4,7 @@
 
 <script>
 import { useRoute } from 'vue-router'
-import Error404 from '@/views/error/Error404'
+import Error404 from './Error404'
 
 export default {
   name: 'ErrorPage',

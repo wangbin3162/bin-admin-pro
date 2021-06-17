@@ -10,11 +10,9 @@ export default {
   name: 'Redirect',
   setup() {
     const { currentRoute, replace } = useRouter()
-
     const { params, query } = unref(currentRoute)
     const { path } = params
     const _path = Array.isArray(path) ? path.join('/') : path
-    console.log(_path)
     replace({ path: '/' + _path, query })
     return {}
   }

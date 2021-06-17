@@ -8,6 +8,7 @@
         <user-avatar />
       </div>
     </div>
+    <tags-view />
   </header>
 </template>
 
@@ -15,10 +16,11 @@
 import useSetting from '@/layouts/use-setting'
 import HeaderTrigger from '@/layouts/header-trigger'
 import UserAvatar from '@/layouts/user'
+import TagsView from '@/layouts/tags-view'
 
 export default {
   name: 'GlobalHeader',
-  components: { UserAvatar, HeaderTrigger },
+  components: { TagsView, UserAvatar, HeaderTrigger },
   setup() {
     const { sidebar, fixedHeader, fixedHeaderStyle, toggleSidebar } = useSetting()
     return { sidebar, fixedHeader, fixedHeaderStyle, toggleSidebar }
@@ -39,6 +41,8 @@ export default {
     background-color: #fff;
     align-items: center;
     justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    border-left: 1px solid #eee;
   }
 }
 </style>

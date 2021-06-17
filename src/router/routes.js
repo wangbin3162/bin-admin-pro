@@ -24,13 +24,13 @@ export function createRoutesInLayout(routes = []) {
         {
           path: 'redirect/:path(.*)',
           name: 'Redirect',
-          component: () => import('../views/redirect/index.vue')
+          component: () => import('../views/system/redirect/index.vue')
         },
         // 错误页面
         {
           path: '/:path(.*)*',
           name: 'ErrorPage',
-          component: () => import('../views/error/index.vue')
+          component: () => import('../views/system/error/index.vue')
         },
         ...routes
       ]
@@ -46,7 +46,7 @@ export function addRoutes(routes = []) {
 // 在 layout 之外显示的路由
 export const routesOutLayout = [
   // 登录
-  { path: '/login', name: 'Login', component: () => import('../views/Login.vue') }
+  { path: '/login', name: 'Login', component: () => import('../views/system/Login.vue') }
 ]
 
 /**

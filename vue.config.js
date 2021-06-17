@@ -10,7 +10,7 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
   // dev跨域问题
   devServer: {
-    port: '3017',
+    port: '8090',
     open: true
     // proxy: {
     //   '/admin': { target: 'http://localhost:8088/cms' }

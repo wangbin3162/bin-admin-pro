@@ -1,18 +1,14 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router, { setupRouter } from './router'
-import { setupStore } from './store'
-import BinUI from 'bin-ui-next'
-// 样式
-import 'bin-ui-next/lib/styles/index.css'
+import router, { setupRouter } from '@/router'
+import { setupStore } from '@/store'
+import { registerUI } from '@/plugins/bin-ui'
+import { registerGlobComp } from '@/components/registerGlobComp' // 全局组件
+import './mock' // mock
 import './assets/stylus/index.styl'
-// 全局组件
-import { registerGlobComp } from './components/registerGlobComp'
-// mock
-import './mock'
 
 const app = createApp(App)
-app.use(BinUI)
+registerUI(app)
 registerGlobComp(app)
 setupRouter(app)
 setupStore(app)

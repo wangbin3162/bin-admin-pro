@@ -81,8 +81,6 @@
 
 <script>
 import { login } from '@/api/login.api'
-import store from '@/store'
-import { Notice } from 'bin-ui-next'
 
 export default {
   name: 'Login',

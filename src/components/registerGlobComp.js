@@ -1,4 +1,4 @@
-import TitleBar from './VTitleBar'
+import TitleBar from './TitleBar'
 
 const compList = [TitleBar]
 

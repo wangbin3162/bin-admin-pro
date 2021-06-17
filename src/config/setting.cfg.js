@@ -1,7 +1,6 @@
 /**
  * 项目默认配置项
  */
-
 export default {
   sidebar: true, // 侧边栏开启状态
   sidebarWidth: 220, // 侧边栏宽度
