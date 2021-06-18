@@ -1,5 +1,5 @@
 <template>
-  <b-submenu :index="menu.name">
+  <b-submenu :index="menu.path">
     <template #title>
       <i v-if="menu.icon" :class="`b-iconfont b-icon-${menu.icon}`"></i>
       <span>{{ menu.title }}</span>

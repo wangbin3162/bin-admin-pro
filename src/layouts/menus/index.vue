@@ -17,46 +17,44 @@
 </template>
 
 <script>
-import useSetting from '@/layouts/use-setting'
+import useSetting from '@/hooks/use-setting'
 import MenuItem from '@/layouts/menus/menu-item'
 import Submenu from '@/layouts/menus/submenu'
 import { ref, watch } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import useStoreRouter from '@/hooks/use-store-router'
 
 export default {
   name: 'AsideMenus',
   components: { Submenu, MenuItem },
   setup() {
-    const router = useRouter()
-    const route = useRoute()
+    const { $store, $router, $route } = useStoreRouter()
     const activeMenu = ref('')
     const openNames = ref([])
     const { sidebar, sidebarWidth, navMenu, navMenuItems, addRouters } = useSetting()
 
     // 获取菜单项名称路径
-    function getMenuItemNamePath(name) {
-      const activeRoute = navMenuItems.value.find(item => `/${item.name}` === name)
+    function getMenuItemNamePath(path) {
+      const activeRoute = navMenuItems.value.find(item => `/${item.path}` === path)
       return activeRoute ? activeRoute.parents : []
     }
 
     function handleMenuSelect(index) {
       const path = `/${index}`
-      if (path === route.fullPath) {
-        router.push({ path: `/redirect${route.fullPath}` })
+      if (path === $route.fullPath) {
+        $store.dispatch('tagsView/refreshCurrentPage', $router)
         return
       }
       if (index === 'home' || addRouters.value.findIndex(item => item.path === index) > -1) {
-        router.push({ path })
+        $router.push({ path })
       } else {
-        router.push('/404')
+        $router.push('/404')
       }
     }
 
-    watch(() => route, (val) => {
+    watch(() => $route.path, (path) => {
       // 展开的菜单
-      openNames.value = getMenuItemNamePath(val.path)
-      activeMenu.value = val.path.replace('/', '')
-      console.log(openNames.value, activeMenu.value)
+      openNames.value = getMenuItemNamePath(path)
+      activeMenu.value = path.replace('/', '')
     }, { immediate: true })
 
     return {

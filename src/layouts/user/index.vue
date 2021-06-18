@@ -16,17 +16,14 @@
 
 <script>
 import { MessageBox } from 'bin-ui-next'
-import { useStore } from 'vuex'
 import { computed } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import useStoreRouter from '@/hooks/use-store-router'
 
 export default {
   name: 'UserAvatar',
   setup() {
-    const store = useStore()
-    const router = useRouter()
-    const route = useRoute()
-    const userInfo = computed(() => store.getters.userInfo)
+    const { $store, $router, $route } = useStoreRouter()
+    const userInfo = computed(() => $store.getters.userInfo)
 
     function handleClick(name) {
       if (name === 'logout') {
@@ -35,8 +32,8 @@ export default {
           title: '提示',
           message: '确认退出登录吗？'
         }).then(() => {
-          store.dispatch('clearToken')
-          router.push(`/login?redirect=${route.fullPath}`)
+          $store.dispatch('clearToken')
+          $router.push(`/login?redirect=${$route.fullPath}`)
         }).catch(e => {
         })
       }

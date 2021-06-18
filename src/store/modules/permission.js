@@ -9,7 +9,7 @@ import { asyncRouterMap, addRoutes } from '@/router/routes'
 function filterAsyncRoutes(routes, menuItems) {
   const all = []
   menuItems.forEach(menu => {
-    const matchIndex = routes.findIndex(item => item.path.toLowerCase() === menu.name.toLowerCase())
+    const matchIndex = routes.findIndex(item => item.path.toLowerCase() === menu.path.toLowerCase())
     if (matchIndex > -1) {
       all.push(routes[matchIndex])
     }

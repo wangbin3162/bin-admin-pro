@@ -3,12 +3,12 @@
  */
 export default [
   {
-    name: 'demo',
+    path: 'demo',
     title: 'Demo',
     icon: 'detail',
     children: [
       {
-        name: 'demo',
+        path: 'demo',
         title: '测试代码'
       }
     ]
@@ -17,28 +17,28 @@ export default [
 
 /**
  * 静态的临时的menus，不受接口返回影响
- * @type {{children: [{name: string, title: string}], name: string, icon: string, title: string}[]}
+ * @type {{children: [{path: string, title: string}], path: string, icon: string, title: string}[]}
  */
 export const staticMenu = [
   {
-    name: 'errorPage',
+    path: 'errorPage',
     title: '错误页面',
     icon: 'error',
     children: [
       {
-        name: 'error401',
+        path: 'error401',
         title: '异常页401'
       },
       {
-        name: 'error403',
+        path: 'error403',
         title: '异常页403'
       },
       {
-        name: 'error404',
+        path: 'error404',
         title: '异常页404'
       },
       {
-        name: 'error500',
+        path: 'error500',
         title: '异常页500'
       }
     ]
@@ -50,6 +50,6 @@ export const staticMenu = [
  * @param menus 接口返回的menus
  */
 export function getFilterMenus(menus = []) {
-  const temp = [{ name: 'home', title: '首页', icon: 'home' }]
+  const temp = [{ path: 'home', title: '首页', icon: 'home' }]
   return temp.concat(menus, staticMenu)
 }

@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import useSetting from '@/layouts/use-setting'
+import useSetting from '@/hooks/use-setting'
 import HeaderTrigger from '@/layouts/header-trigger'
 import UserAvatar from '@/layouts/user'
 import TagsView from '@/layouts/tags-view'

@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "bin-ui-next": "^0.3.4",
+    "bin-ui-next": "^0.3.7",
     "core-js": "^3.12.1",
     "good-storage": "^1.1.1",
     "js-cookie": "^2.2.1",

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import useSetting from '@/layouts/use-setting'
+import useSetting from '@/hooks/use-setting'
 import AsideMenus from '@/layouts/menus'
 import GlobalHeader from '@/layouts/header'
 

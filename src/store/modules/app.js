@@ -14,6 +14,10 @@ const app = {
       state.menu = menu
       state.menuItems = menuItems
     },
+    SET_THEME: (state, theme) => {
+      state.setting.theme = theme
+      setAdminSetting(state.setting)
+    },
     SET_SIDEBAR: (state) => {
       state.setting.sidebar = !state.setting.sidebar
       setAdminSetting(state.setting)
@@ -36,6 +40,13 @@ const app = {
     }
   },
   actions: {
+    // 载入时加载本地存储数据和主题配置信息
+    loadApp: ({ commit }) => {
+      // 存储设置对象
+      const setting = getAdminSetting()
+      commit('SAVE_SETTING', setting)
+      document.body.className = `theme-${setting.theme}`
+    },
     setRouterMenu: ({ commit, state }, menus) => {
       return new Promise(resolve => {
         const menu = setMenu(menus)
@@ -67,7 +78,7 @@ function setMenu(menus) {
   const all = []
   const mapper = (route, parent) => {
     const parents = parent ? parent.split(',') : []
-    parents.push(route.name)
+    parents.push(route.path)
     const child = []
     if (route.children) {
       route.children.forEach(item => {
@@ -96,7 +107,7 @@ function setMenu(menus) {
 function getMenuItems(menus) {
   const all = []
   const mapper = (menu) => {
-    if (menu.name && !menu.children) {
+    if (menu.path && !menu.children) {
       all.push({ ...menu })
     }
     if (menu.children) {
