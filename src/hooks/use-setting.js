@@ -4,6 +4,7 @@ import { computed } from 'vue'
 export default function useSetting() {
   const store = useStore()
 
+  const theme = computed(() => store.getters.theme)
   const sidebar = computed(() => store.getters.sidebar)
   const sidebarWidth = computed(() => store.getters.sidebarWidth)
   const fixedAside = computed(() => store.getters.fixedAside)
@@ -22,7 +23,7 @@ export default function useSetting() {
     return {
       padding: 0,
       width: fixedHeader.value ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
-      zIndex: 9,
+      zIndex: 5,
       right: fixedHeader.value ? 0 : null
     }
   })
@@ -32,11 +33,36 @@ export default function useSetting() {
 
   const cachedViews = computed(() => store.getters.cachedViews)
 
-  function toggleSidebar() {
-    store.dispatch('toggleSideBar')
+  async function toggleSidebar() {
+    await store.dispatch('toggleSideBar')
+  }
+
+  async function themChange(val) {
+    await store.dispatch('setThemeMode', val)
+  }
+
+  async function toggleTagsView(val) {
+    await store.dispatch('toggleTagsView')
+    if (!val) {
+      // 如果关闭tags，则需要关闭所有缓存
+      await store.dispatch('tagsView/delAllViews')
+    }
+  }
+
+  async function changeFixedHeader(val) {
+    await store.dispatch('toggleFixedHeader', val)
+  }
+
+  async function changeFixedAside(val) {
+    await store.dispatch('toggleFixedAside', val)
+  }
+
+  async function changeSidebarWidth(width) {
+    await store.dispatch('setSideBarWidth', width)
   }
 
   return {
+    theme,
     sidebar,
     sidebarWidth,
     fixedAside,
@@ -48,6 +74,11 @@ export default function useSetting() {
     fixedHeader,
     fixedHeaderStyle,
     showTagsView,
-    toggleSidebar
+    themChange,
+    toggleSidebar,
+    toggleTagsView,
+    changeFixedHeader,
+    changeFixedAside,
+    changeSidebarWidth
   }
 }

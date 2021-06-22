@@ -1,8 +1,8 @@
 <template>
   <b-dropdown @command="handleClick" append-to-body>
-    <div class="dropdown-trigger">
-      <b-icon name="user" size="20"></b-icon>&nbsp;
-      <span v-if="userInfo">你好,{{ userInfo.realName }}</span>
+    <div class="global-header-avatar-trigger">
+      <img src="@/assets/images/avatar.jpeg" class="avatar" alt="avatar">
+      <span v-if="userInfo">{{ userInfo.realName }}</span>
     </div>
     <template #dropdown>
       <b-dropdown-menu>
@@ -43,22 +43,3 @@ export default {
   }
 }
 </script>
-
-<style scoped lang="stylus">
-.dropdown-trigger {
-  display: flex;
-  height: 100%;
-  padding: 0 10px;
-  cursor: pointer;
-  align-items: center;
-  outline: none;
-  transition: background-color .2s;
-  .b-iconfont {
-    font-size: 18px;
-    color: rgba(0, 0, 0, .85);
-  }
-  &:hover {
-    background-color: #f6f6f6;
-  }
-}
-</style>

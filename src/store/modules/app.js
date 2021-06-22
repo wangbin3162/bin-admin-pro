@@ -58,6 +58,10 @@ const app = {
     toggleSideBar: ({ commit }) => {
       commit('SET_SIDEBAR')
     },
+    setThemeMode: ({ commit }, theme) => {
+      document.body.className = `theme-${theme} bin-popup-parent--hidden`
+      commit('SET_THEME', theme)
+    },
     setSideBarWidth: ({ commit }, width) => {
       commit('SET_SIDEBAR_WIDTH', width)
     },

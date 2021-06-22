@@ -1,6 +1,6 @@
 <template>
   <div class="tags-view-container">
-    <b-tabs v-model="activeTag" :data="viewTags" type="card" closable context-menu ref="tabsRef"
+    <b-tabs v-model="activeTag" :data="viewTags" type="tag" closable context-menu ref="tabsRef"
             @change="handleSelect" @tab-select="handleRightClick" @tab-close="handleCloseTag">
       <template v-slot:menu>
         <li @click="refreshSelected">刷新</li>
@@ -27,13 +27,14 @@ export default {
     const navMenuItems = computed(() => mapGetter().navMenuItems)
     const visitedViews = computed(() => mapGetter().visitedViews)
     const viewTags = computed(() => {
-      return [{ key: 'home', title: '首页', noClose: true }]
+      return [{ key: 'home', title: '首页', noClose: true, icon: '' }]
         .concat(visitedViews.value.map(i => ({ key: i.path, title: i.title })))
     })
 
     onMounted(() => {
       addTags()
       moveToCurrentTag()
+      console.log(viewTags.value)
     })
     watch(() => $route.path, (path) => {
       if (path.indexOf('/redirect') > -1) {
@@ -47,7 +48,6 @@ export default {
       const { path } = $route
       if (!path || path === '/home') return
       const current = navMenuItems.value.find(item => `/${item.path}` === path)
-      console.log(current)
       if (current) {
         $store.dispatch('tagsView/addView', { path: current.path, title: current.title })
       }
@@ -116,39 +116,3 @@ export default {
   }
 }
 </script>
-
-<style lang="stylus">
-.tags-view-container {
-  height: 32px;
-  line-height: 32px;
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
-
-  .bin-tabs-wrapper {
-    .nav-wrapper {
-      height: 32px;
-      .tab-item {
-        height: 28px;
-        line-height: 28px;
-        background: #fff;
-        margin-right: 6px;
-        color: #808695;
-        &::before {
-          content: none;
-        }
-        &:hover {
-          color: #515a6e;
-        }
-        &.active {
-          color: #1089ff;
-        }
-      }
-    }
-  }
-  .bin-tabs-wrapper.tag .nav-wrap.is-scrollable .nav-next,
-  .bin-tabs-wrapper.tag .nav-wrap.is-scrollable .nav-prev {
-    line-height: 32px;
-  }
-
-}
-</style>
