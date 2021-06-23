@@ -1,0 +1,86 @@
+$color-text-default = rgba(255, 255, 255, .7);
+$color-text-hover = #ffffff;
+// dark皮肤
+[data-theme=dark] {
+  // logo样式
+  .layout-aside .logo {
+    border-bottom: none;
+    h1 {
+      color: #ffffff;
+    }
+  }
+  // menu样式
+  .aside-menu {
+    .bin-menu {
+      .bin-menu-item {
+        color: $color-text-default;
+        background: var(--menu-bg-color);
+        &:hover {
+          color: $color-text-hover;
+        }
+        &.is-active {
+          color: $color-text-hover;
+          background: var(--primary-color);
+        }
+      }
+      .bin-submenu__title {
+        color: $color-text-default;
+        background: var(--menu-bg-color);
+        &:hover {
+          color: $color-text-hover;
+        }
+      }
+      // 收起菜单的样式
+      &.bin-menu--collapse {
+        .bin-menu-item {
+          &.is-active {
+            color: var(--primary-color);
+            background: var(--menu-bg-active-color);
+            &::after {
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 2px;
+              height: 100%;
+              background-color: var(--primary-color);
+              content: '';
+              z-index: 1;
+            }
+          }
+        }
+        .bin-submenu.is-active {
+          .bin-submenu__title {
+            color: var(--primary-color);
+            background: var(--menu-bg-active-color);
+          }
+          &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+            content: '';
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+  // menu-popup
+  .bin-menu--popup {
+    background: var(--menu-bg-color);
+    .bin-menu-item, .bin-submenu__title {
+      color: $color-text-default;
+      background: var(--menu-bg-color);
+      &:hover {
+        color: $color-text-hover;
+      }
+      &.is-active {
+        color: $color-text-hover;
+        background: var(--primary-color);
+      }
+    }
+  }
+}
+

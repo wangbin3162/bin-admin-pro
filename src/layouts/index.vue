@@ -1,6 +1,9 @@
 <template>
   <div class="layout layout-has-aside">
-    <div class="layout-aside" :class="{'fixed-aside':fixedAside}" :style="asideStyle">
+    <div class="layout-aside"
+         :class="[{'fixed-aside':fixedAside},`layout-aside-${theme}`]"
+         :style="asideStyle"
+    >
       <div class="logo" flex="cross:center">
         <img class="icon" src="@/assets/images/logo-icon-b.png" alt="logo-small" />
         <transition name="zoom-in">
@@ -42,6 +45,7 @@ export default {
   components: { GlobalHeader, GlobalFooter, AsideMenus },
   setup() {
     const {
+      theme,
       sidebar,
       showTagsView,
       sidebarWidth,
@@ -80,6 +84,7 @@ export default {
     }
 
     return {
+      theme,
       sidebar,
       fixedAside,
       asideStyle,

@@ -1,6 +1,8 @@
 <template>
   <div class="global-header-trigger" @click="$emit('click')">
-    <i :class="`b-iconfont b-icon-${icon}`" :style="{transform: `rotate(${rotate}deg)`}"></i>
+    <i :class="`b-iconfont b-icon-${icon}`"
+       :style="{transform: `rotate(${rotate}deg)`,fontSize:size,height:size}"
+    ></i>
   </div>
 </template>
 
@@ -13,6 +15,9 @@ export default {
     },
     rotate: {
       type: Number
+    },
+    size: {
+      type: String
     }
   },
   emits: ['click']

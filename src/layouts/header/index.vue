@@ -1,8 +1,8 @@
 <template>
   <header class="layout-header" :class="{'fixed-header':fixedHeader}" :style="fixedHeaderStyle">
-    <div class="global-header" :style="{borderBottom:showTagsView?'1px solid #eee':'none'}">
+    <div class="global-header" :class="{'has-border':showTagsView}">
       <div class="global-header-left">
-        <header-trigger :icon="sidebar?'outdent':'indent'" @click="toggleSidebar" />
+        <header-trigger :icon="sidebar?'outdent':'indent'" size="18px" @click="toggleSidebar" />
       </div>
       <div class="global-header-right">
         <user-avatar />

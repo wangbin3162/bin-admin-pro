@@ -1,7 +1,7 @@
 <template>
   <b-menu-item :index="menu.path">
     <i v-if="menu.icon" :class="`b-iconfont b-icon-${menu.icon}`"></i>
-    <span>{{ menu.title }}</span>
+    <template #title><span>{{ menu.title }}</span></template>
   </b-menu-item>
 </template>
 

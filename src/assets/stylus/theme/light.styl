@@ -1,0 +1,80 @@
+// light皮肤
+[data-theme=light] {
+  // logo样式
+  .layout-aside .logo {
+    border-bottom: 1px solid #eeeeee;
+    h1 {
+      color: var(--primary-color);
+    }
+  }
+  // menu样式
+  .aside-menu {
+    .bin-menu {
+      .bin-menu-item {
+        background: #fff;
+        &:hover {
+          color: var(--primary-color);
+        }
+        &.is-active {
+          color: var(--primary-color);
+          background: var(--primary-hover-color);
+          &::after {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+            content: '';
+            z-index: 1;
+          }
+        }
+      }
+      .bin-submenu__title {
+        background: #fff;
+        &:hover {
+          color: var(--primary-color);
+        }
+      }
+      // 收起菜单的样式
+      &.bin-menu--collapse {
+        .bin-menu-item {
+          &.is-active {
+            &::after {
+              left: 0;
+              right: unset;
+            }
+          }
+        }
+        .bin-submenu.is-active {
+          .bin-submenu__title {
+            background: var(--primary-hover-color);
+          }
+          &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 2px;
+            height: 100%;
+            background-color: var(--primary-color);
+            content: '';
+            z-index: 1;
+          }
+        }
+      }
+    }
+  }
+  // menu-popup
+  .bin-menu--popup {
+    .bin-menu-item, .bin-submenu__title {
+      &:hover {
+        color: var(--primary-color);
+        background: #fff;
+      }
+      &.is-active {
+        color: var(--primary-color);
+        background: var(--primary-hover-color);
+      }
+    }
+  }
+}
