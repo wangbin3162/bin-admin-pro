@@ -12,10 +12,12 @@
       </div>
     </div>
     <div class="layout-main layout" :style="mainStyle">
+      <!--占位顶部-->
+      <header class="layout-header" :style="headerHeight" v-if="fixedHeader"></header>
       <global-header />
-      <div class="layout-content-wrap" :style="contentStyle">
+      <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
-          <transition appear name="fade-transverse" @before-leave="beforeLeave" @afterLeave="afterLeave">
+          <transition appear name="fade-transverse" @before-leave="beforeLeave" @after-leave="afterLeave">
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.fullPath"></component>
             </keep-alive>
@@ -46,7 +48,6 @@ export default {
       fixedAside,
       asideStyle,
       cachedViews,
-      fixedHeaderStyle,
       fixedHeader
     } = useSetting()
 
@@ -63,18 +64,7 @@ export default {
       }
     })
 
-    const contentStyle = computed(() => {
-      let top = 0
-      if (fixedHeader.value) {
-        top += 48
-      }
-      if (showTagsView.value) {
-        top += 36
-      }
-      return {
-        paddingTop: `${top}px`
-      }
-    })
+    const headerHeight = computed(() => ({ height: showTagsView.value ? '80px' : '48px' }))
 
     function beforeLeave(el) {
       el.style.position = 'absolute'
@@ -94,10 +84,9 @@ export default {
       fixedAside,
       asideStyle,
       cachedViews,
-      fixedHeaderStyle,
+      headerHeight,
       fixedHeader,
       mainStyle,
-      contentStyle,
       beforeLeave,
       afterLeave
     }

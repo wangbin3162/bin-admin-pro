@@ -1,10 +1,13 @@
 import { useStore } from 'vuex'
 import { computed } from 'vue'
+import { MENU_THEME_COLOR_LIST, SYSTEM_PRIMARY_COLOR_LIST } from '@/config/setting.cfg'
 
 export default function useSetting() {
   const store = useStore()
 
   const theme = computed(() => store.getters.theme)
+  const menuTheme = computed(() => store.getters.menuTheme)
+  const systemPrimary = computed(() => store.getters.systemPrimary)
   const sidebar = computed(() => store.getters.sidebar)
   const sidebarWidth = computed(() => store.getters.sidebarWidth)
   const fixedAside = computed(() => store.getters.fixedAside)
@@ -30,7 +33,6 @@ export default function useSetting() {
   const navMenu = computed(() => store.getters.navMenu)
   const navMenuItems = computed(() => store.getters.navMenuItems)
   const addRouters = computed(() => store.getters.addRouters)
-
   const cachedViews = computed(() => store.getters.cachedViews)
 
   async function toggleSidebar() {
@@ -39,6 +41,18 @@ export default function useSetting() {
 
   async function themChange(val) {
     await store.dispatch('setThemeMode', val)
+  }
+
+  async function setMenuTheme(color) {
+    if (color !== menuTheme.value) {
+      await store.dispatch('setMenuTheme', color)
+    }
+  }
+
+  async function setSystemPrimary(color) {
+    if (color !== systemPrimary.value) {
+      await store.dispatch('setSystemPrimary', color)
+    }
   }
 
   async function toggleTagsView(val) {
@@ -63,6 +77,8 @@ export default function useSetting() {
 
   return {
     theme,
+    menuTheme,
+    systemPrimary,
     sidebar,
     sidebarWidth,
     fixedAside,
@@ -74,11 +90,15 @@ export default function useSetting() {
     fixedHeader,
     fixedHeaderStyle,
     showTagsView,
+    systemPrimaryColorList: SYSTEM_PRIMARY_COLOR_LIST,
+    menuThemeColorList: MENU_THEME_COLOR_LIST,
     themChange,
     toggleSidebar,
     toggleTagsView,
     changeFixedHeader,
     changeFixedAside,
-    changeSidebarWidth
+    changeSidebarWidth,
+    setMenuTheme,
+    setSystemPrimary
   }
 }

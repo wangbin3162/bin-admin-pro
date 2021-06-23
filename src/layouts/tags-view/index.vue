@@ -3,12 +3,36 @@
     <b-tabs v-model="activeTag" :data="viewTags" type="tag" closable context-menu ref="tabsRef"
             @change="handleSelect" @tab-select="handleRightClick" @tab-close="handleCloseTag">
       <template v-slot:menu>
-        <li @click="refreshSelected">刷新</li>
-        <li @click="closeSelected">关闭</li>
-        <li @click="closeOthers">关闭其他</li>
-        <li @click="closeAll">关闭所有</li>
+        <li @click="refreshSelected"><i class="b-iconfont b-icon-reload"></i>重新加载</li>
+        <li @click="closeSelected"><i class="b-iconfont b-icon-close"></i>关闭标签页</li>
+        <li @click="closeOthers"><i class="b-iconfont b-icon-pic-center"></i>关闭其他标签页</li>
+        <li @click="closeAll"><i class="b-iconfont b-icon-line"></i>关闭全部标签页</li>
       </template>
     </b-tabs>
+    <div class="tags-view-ctrl">
+      <span class="trigger" @click="refreshSelected">
+        <i class="b-iconfont b-icon-reload" style="transform: rotate(90deg);"></i>
+      </span>
+      <b-dropdown trigger="click" style="width: 32px;display: flex;" append-to-body @command="handleCommand">
+        <span class="trigger"><i class="b-iconfont b-icon-down"></i></span>
+        <template #dropdown>
+          <b-dropdown-menu>
+            <b-dropdown-item name="refreshSelected">
+              <i class="b-iconfont b-icon-reload"></i> 重新加载
+            </b-dropdown-item>
+            <b-dropdown-item name="closeSelected">
+              <i class="b-iconfont b-icon-close"></i> 关闭标签页
+            </b-dropdown-item>
+            <b-dropdown-item name="closeOthers" divided>
+              <i class="b-iconfont b-icon-pic-center"></i> 关闭其他标签页
+            </b-dropdown-item>
+            <b-dropdown-item name="closeAll">
+              <i class="b-iconfont b-icon-line"></i> 关闭全部标签页
+            </b-dropdown-item>
+          </b-dropdown-menu>
+        </template>
+      </b-dropdown>
+    </div>
   </div>
 </template>
 
@@ -100,6 +124,24 @@ export default {
       tabsRef.value.moveToCurrentTab()
     }
 
+    function handleCommand(name) {
+      handleRightClick({ key: activeTag.value })
+      switch (name) {
+        case 'refreshSelected':
+          refreshSelected()
+          break
+        case 'closeSelected':
+          closeSelected()
+          break
+        case 'closeOthers':
+          closeOthers()
+          break
+        case 'closeAll':
+          closeAll()
+          break
+      }
+    }
+
     return {
       tabsRef,
       selectedTag,
@@ -111,7 +153,8 @@ export default {
       refreshSelected,
       closeSelected,
       closeOthers,
-      closeAll
+      closeAll,
+      handleCommand
     }
   }
 }

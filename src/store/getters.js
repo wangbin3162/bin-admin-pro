@@ -1,5 +1,7 @@
 const getters = {
   theme: state => state.app.setting.theme,
+  menuTheme: state => state.app.setting.menuTheme,
+  systemPrimary: state => state.app.setting.systemPrimary,
   sidebar: state => state.app.setting.sidebar,
   sidebarWidth: state => state.app.setting.sidebarWidth,
   tagsView: state => state.app.setting.tagsView,

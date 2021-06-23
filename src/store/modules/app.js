@@ -1,4 +1,5 @@
 import { getAdminSetting, setAdminSetting } from '@/config/datastore'
+import { MENU_THEME_COLOR_LIST, setMenuTheme, setPrimaryColor, setThemeMode } from '@/config/setting.cfg'
 
 const app = {
   state: {
@@ -9,6 +10,7 @@ const app = {
   mutations: {
     SAVE_SETTING: (state, setting) => {
       state.setting = { ...setting }
+      setAdminSetting(state.setting)
     },
     SET_MENU: (state, { menu, menuItems }) => {
       state.menu = menu
@@ -16,6 +18,14 @@ const app = {
     },
     SET_THEME: (state, theme) => {
       state.setting.theme = theme
+      setAdminSetting(state.setting)
+    },
+    SET_MENU_THEME: (state, color) => {
+      state.setting.menuTheme = color
+      setAdminSetting(state.setting)
+    },
+    SET_SYSTEM_PRIMARY: (state, color) => {
+      state.setting.systemPrimary = color
       setAdminSetting(state.setting)
     },
     SET_SIDEBAR: (state) => {
@@ -45,7 +55,9 @@ const app = {
       // 存储设置对象
       const setting = getAdminSetting()
       commit('SAVE_SETTING', setting)
-      document.body.className = `theme-${setting.theme}`
+      setThemeMode(setting.theme)
+      setPrimaryColor(setting.systemPrimary)
+      setMenuTheme(setting.menuTheme)
     },
     setRouterMenu: ({ commit, state }, menus) => {
       return new Promise(resolve => {
@@ -59,8 +71,24 @@ const app = {
       commit('SET_SIDEBAR')
     },
     setThemeMode: ({ commit }, theme) => {
-      document.body.className = `theme-${theme} bin-popup-parent--hidden`
+      // 设置默认浅色和主色时需要自定义menu色值
+      const color = MENU_THEME_COLOR_LIST[theme === 'light' ? 2 : 0]
       commit('SET_THEME', theme)
+      commit('SET_MENU_THEME', color)
+      setThemeMode(theme)
+      setMenuTheme(color)
+    },
+    setMenuTheme: ({ commit }, color) => {
+      const isLight = ['#fff', '#ffffff'].includes(color.toLowerCase())
+      const theme = isLight ? 'light' : 'dark'
+      commit('SET_THEME', theme)
+      commit('SET_MENU_THEME', color)
+      setThemeMode(theme)
+      setMenuTheme(color)
+    },
+    setSystemPrimary: ({ commit }, color) => {
+      commit('SET_SYSTEM_PRIMARY', color)
+      setPrimaryColor(color)
     },
     setSideBarWidth: ({ commit }, width) => {
       commit('SET_SIDEBAR_WIDTH', width)
