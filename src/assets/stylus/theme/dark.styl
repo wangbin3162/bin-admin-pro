@@ -30,6 +30,17 @@ $color-text-hover = #ffffff;
           color: $color-text-hover;
         }
       }
+      .bin-submenu .bin-menu--inline {
+        .bin-menu-item, .bin-submenu__title {
+          background: var(--menu-bg-active-color);
+        }
+        .bin-menu-item {
+          &.is-active {
+            color: $color-text-hover;
+            background: var(--primary-color);
+          }
+        }
+      }
       // 收起菜单的样式
       &.bin-menu--collapse {
         .bin-menu-item {
