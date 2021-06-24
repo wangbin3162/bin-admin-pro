@@ -6,6 +6,7 @@
         <header-breadcrumb />
       </div>
       <div class="global-header-right">
+        <search />
         <user-avatar />
         <setting />
       </div>
@@ -21,10 +22,11 @@ import UserAvatar from '@/layouts/user'
 import TagsView from '@/layouts/tags-view'
 import Setting from '@/layouts/setting'
 import HeaderBreadcrumb from '@/layouts/header-breadcrumb'
+import Search from '@/layouts/search'
 
 export default {
   name: 'GlobalHeader',
-  components: { HeaderBreadcrumb, Setting, TagsView, UserAvatar, HeaderTrigger },
+  components: { Search, HeaderBreadcrumb, Setting, TagsView, UserAvatar, HeaderTrigger },
   setup() {
     const { sidebar, showTagsView, fixedHeader, fixedHeaderStyle, toggleSidebar } = useSetting()
     return { sidebar, showTagsView, fixedHeader, fixedHeaderStyle, toggleSidebar }

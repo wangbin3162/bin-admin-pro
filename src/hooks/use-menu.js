@@ -28,24 +28,23 @@ export default function useMenu() {
     return all
   })
 
-  // 获取菜单项名称路径
+  // 获取菜单项名称路径 附带斜杠
   function getMenuItemNamePath(path) {
     const activeRoute = navMenuItems.value.find(item => `/${item.path}` === path)
     return activeRoute ? activeRoute.parents : []
   }
 
-  // 获取当前
+  // 获取当前  附带斜杠
   function getCurrentMenu(path) {
     const activeRoute = allMenuItems.value.find(item => `/${item.path}` === path)
     return activeRoute || null
   }
 
-  // 获取当前菜单结构数组
-  function getBreadcrumbData() {
+  // 获取当前菜单结构数组  path 默认为route.path 需要斜杠/
+  function getBreadcrumbData(path) {
     const list = []
-    const current = getCurrentMenu($route.path)
+    const current = getCurrentMenu(path)
     if (!current) return []
-    console.log(current)
     const parents = current.parents
     if (parents.length === 1 && !current.children.length) {
       list.push(current)
@@ -58,11 +57,10 @@ export default function useMenu() {
         }
       })
     }
-    console.log(list)
     return list
   }
 
-  // 选中path
+  // 选中path 不带斜杠
   function handleMenuSelect(path) {
     const to = `/${path}`
     if (to === $route.fullPath) {
@@ -75,7 +73,8 @@ export default function useMenu() {
   }
 
   return {
-    getCurrentMenu,
+    navMenuItems,
+    allMenuItems,
     getBreadcrumbData,
     getMenuItemNamePath,
     handleMenuSelect

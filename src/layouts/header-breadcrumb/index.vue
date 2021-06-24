@@ -9,7 +9,7 @@
               v-for="child in item.children"
               :key="child.path"
               :name="child.path"
-              :disabled="child.children.length"
+              :disabled="child.children.length===0"
             >{{ child.title }}
             </b-dropdown-item>
           </b-dropdown-menu>
@@ -34,24 +34,14 @@ export default {
   setup(props) {
     const levelList = ref([])
     const { $route } = useStoreRouter()
-    const { getCurrentMenu, getBreadcrumbData, handleMenuSelect } = useMenu()
+    const { getBreadcrumbData, handleMenuSelect } = useMenu()
     const showDropdown = computed(() => {
       return !props.simple
     })
 
-    watch(() => $route.path, () => {
-      levelList.value = getBreadcrumbData()
+    watch(() => $route.path, (path) => {
+      levelList.value = getBreadcrumbData(path)
     }, { immediate: true })
-
-    function getBreadcrumb() {
-      const list = levelList.value = [
-        ...DASHBOARD_MENUS
-      ]
-      const { path } = $route
-      if (path === `/${HOME_PATH}`) return
-      const current = getCurrentMenu(path)
-      console.log(list, current)
-    }
 
     return {
       showDropdown,
