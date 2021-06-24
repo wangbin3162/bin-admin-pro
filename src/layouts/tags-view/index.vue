@@ -39,6 +39,7 @@
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import useStoreRouter from '@/hooks/use-store-router'
+import { HOME_PATH, HOME_NAME } from '@/router/menus'
 
 export default {
   name: 'TagsView',
@@ -51,14 +52,13 @@ export default {
     const navMenuItems = computed(() => mapGetter().navMenuItems)
     const visitedViews = computed(() => mapGetter().visitedViews)
     const viewTags = computed(() => {
-      return [{ key: 'home', title: '首页', noClose: true, icon: '' }]
-        .concat(visitedViews.value.map(i => ({ key: i.path, title: i.title })))
+      const visitedTabs = visitedViews.value.map(i => ({ key: i.path, title: i.title }))
+      return [{ key: HOME_PATH, title: HOME_NAME, noClose: true, icon: '' }, ...visitedTabs]
     })
 
     onMounted(() => {
       addTags()
       moveToCurrentTag()
-      console.log(viewTags.value)
     })
     watch(() => $route.path, (path) => {
       if (path.indexOf('/redirect') > -1) {
@@ -70,7 +70,7 @@ export default {
 
     function addTags() {
       const { path } = $route
-      if (!path || path === '/home') return
+      if (!path || path === `/${HOME_PATH}`) return
       const current = navMenuItems.value.find(item => `/${item.path}` === path)
       if (current) {
         $store.dispatch('tagsView/addView', { path: current.path, title: current.title })
@@ -103,7 +103,7 @@ export default {
 
     function closeSelected() {
       const selectedTagVal = selectedTag.value
-      if (selectedTagVal.key === '/home') return
+      if (selectedTagVal.key === `/${HOME_PATH}`) return
       // 这里需要调用组件的关闭选择的tag
       tabsRef.value.closeSelectedTab(selectedTagVal)
     }
@@ -119,7 +119,7 @@ export default {
     // 关闭所有
     async function closeAll() {
       await $store.dispatch('tagsView/delAllViews')
-      await $router.push('/home')
+      await $router.push(`/${HOME_PATH}`)
       await nextTick()
       tabsRef.value.moveToCurrentTab()
     }

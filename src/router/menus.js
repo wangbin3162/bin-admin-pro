@@ -1,6 +1,7 @@
 /**
  * default menu list
  */
+
 export default [
   {
     path: 'demo',
@@ -8,8 +9,42 @@ export default [
     icon: 'detail',
     children: [
       {
-        path: 'demo',
+        path: 'tableTest',
         title: '测试代码'
+      }
+    ]
+  },
+  {
+    path: 'nested',
+    title: '嵌套菜单',
+    icon: 'menu',
+    children: [
+      {
+        path: 'menu1',
+        title: '菜单1',
+        children: [
+          { path: 'menu1-1', title: '菜单1-1' },
+          { path: 'menu1-2', title: '菜单1-2' },
+          { path: 'menu1-3', title: '菜单1-3' }
+        ]
+      },
+      { path: 'menu2', title: '菜单2' }
+    ]
+  }
+]
+
+// 基础
+export const HOME_PATH = 'workbench'
+export const HOME_NAME = '工作台'
+export const DASHBOARD_MENUS = [
+  {
+    path: 'dashboard',
+    title: 'Dashboard',
+    icon: 'appstore',
+    children: [
+      {
+        path: HOME_PATH,
+        title: HOME_NAME
       }
     ]
   }
@@ -17,7 +52,7 @@ export default [
 
 /**
  * 静态的临时的menus，不受接口返回影响
- * @type {{children: [{path: string, title: string}], path: string, icon: string, title: string}[]}
+ *  {{children: [{path: string, title: string}], path: string, icon: string, title: string}[]}
  */
 export const staticMenu = [
   {
@@ -25,10 +60,6 @@ export const staticMenu = [
     title: '错误页面',
     icon: 'error',
     children: [
-      {
-        path: 'error401',
-        title: '异常页401'
-      },
       {
         path: 'error403',
         title: '异常页403'
@@ -42,6 +73,11 @@ export const staticMenu = [
         title: '异常页500'
       }
     ]
+  },
+  {
+    path: 'about',
+    title: '关于',
+    icon: 'dingtalk'
   }
 ]
 
@@ -50,6 +86,5 @@ export const staticMenu = [
  * @param menus 接口返回的menus
  */
 export function getFilterMenus(menus = []) {
-  const temp = [{ path: 'home', title: '首页', icon: 'home' }]
-  return temp.concat(menus, staticMenu)
+  return DASHBOARD_MENUS.concat(menus, staticMenu)
 }

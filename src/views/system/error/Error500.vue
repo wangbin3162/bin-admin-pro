@@ -179,7 +179,7 @@
     <div class="bin-result-title">500</div>
     <div class="bin-result-subtitle">抱歉，服务器出错了。</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'Home'}">
+      <router-link :to="{path:HOME_PATH}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>
@@ -187,8 +187,14 @@
 </template>
 
 <script>
+import { HOME_PATH } from '@/router/menus'
   export default {
-    name: 'Error500'
+    name: 'Error500',
+    data() {
+      return {
+        HOME_PATH
+      }
+    }
   }
 </script>
 

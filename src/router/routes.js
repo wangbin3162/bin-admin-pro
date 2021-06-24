@@ -1,10 +1,19 @@
 import layout from '../layouts'
 import demo from './modules/demo'
+import nested from './modules/nested'
 import errorPage from './modules/error-page'
+import { HOME_PATH, HOME_NAME } from '@/router/menus'
 
 export const asyncRouterMap = [
   ...demo,
-  ...errorPage
+  ...nested,
+  ...errorPage,
+  {
+    path: 'about',
+    name: 'About',
+    component: () => import('@/views/about/about'),
+    meta: { title: '关于' }
+  }
 ]
 
 /**
@@ -15,11 +24,16 @@ export function createRoutesInLayout(routes = []) {
   return [
     {
       path: '/',
-      redirect: { name: 'Home' },
+      redirect: { name: 'Workbench' },
       name: 'Root',
       component: layout,
       children: [
-        { path: 'home', name: 'Home', meta: { title: '首页' }, component: () => import('../views/Home.vue') },
+        {
+          path: `/${HOME_PATH}`,
+          name: 'Workbench',
+          meta: { title: HOME_NAME },
+          component: () => import('../views/dashboard/workbench.vue')
+        },
         // 刷新页面 必须保留
         {
           path: 'redirect/:path(.*)',
@@ -46,7 +60,7 @@ export function addRoutes(routes = []) {
 // 在 layout 之外显示的路由
 export const routesOutLayout = [
   // 登录
-  { path: '/login', name: 'Login', component: () => import('../views/system/Login.vue') }
+  { path: '/login', name: 'Login', component: () => import('../views/system/login.vue') }
 ]
 
 /**

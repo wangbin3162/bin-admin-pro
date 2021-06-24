@@ -158,7 +158,7 @@
     <div class="bin-result-title">404</div>
     <div class="bin-result-subtitle">抱歉，你访问的页面不存在。</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'Home'}">
+      <router-link :to="{path:HOME_PATH}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>
@@ -166,8 +166,14 @@
 </template>
 
 <script>
+import { HOME_PATH } from '@/router/menus'
 export default {
-  name: 'Error404'
+  name: 'Error404',
+  data() {
+    return {
+      HOME_PATH
+    }
+  }
 }
 </script>
 

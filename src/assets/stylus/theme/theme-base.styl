@@ -79,6 +79,17 @@
     &.has-border {
       border-bottom: 1px solid #eee;
     }
+    &-left {
+      display: flex;
+      align-items: center;
+      .global-header-trigger i {
+        position: relative;
+        top: -1px;
+      }
+      .header-breadcrumb {
+        padding: 0 6px;
+      }
+    }
     &-right {
       display: flex;
     }
@@ -146,13 +157,18 @@
         height: 24px;
         line-height: 24px;
         margin-right: 5px;
-        font-size: 13px;
+        font-size: 12px;
         color: #808695;
+        padding: 0 10px;
         &::before {
           content: unset;
         }
         &:hover {
           color: var(--primary-color);
+        }
+        .b-icon-close {
+          right: -4px;
+          margin-left: 0;
         }
         &.active {
           background: var(--primary-color);
@@ -160,7 +176,6 @@
           color: #ffffff;
           .b-icon-close {
             width: 14px;
-            margin-left: 2px;
             color: #ffffff;
           }
           .b-icon-close:hover {
@@ -202,6 +217,7 @@
 }
 // menu
 .aside-menu {
+  height: 100%;
   .bin-scrollbar__wrap {
     overflow-x: hidden;
   }

@@ -1,11 +1,5 @@
 export default [
   {
-    path: 'error401',
-    name: 'Error401',
-    component: () => import('../../views/system/error/Error401'),
-    meta: { title: '异常页401' }
-  },
-  {
     path: 'error403',
     name: 'Error403',
     component: () => import('../../views/system/error/Error403'),

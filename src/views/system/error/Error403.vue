@@ -145,9 +145,9 @@
       </svg>
     </div>
     <div class="bin-result-title">403</div>
-    <div class="bin-result-subtitle">抱歉，登录超时啦！</div>
+    <div class="bin-result-subtitle">抱歉，您无权访问此页面！</div>
     <div class="bin-result-extra">
-      <router-link :to="{name:'Home'}">
+      <router-link :to="{path:HOME_PATH}">
         <b-button type="primary">返回首页</b-button>
       </router-link>
     </div>
@@ -155,8 +155,14 @@
 </template>
 
 <script>
+import { HOME_PATH } from '@/router/menus'
 export default {
-  name: 'Error403'
+  name: 'Error403',
+  data() {
+    return {
+      HOME_PATH
+    }
+  }
 }
 </script>
 
