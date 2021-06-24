@@ -1,10 +1,18 @@
 import layout from '../layouts'
+import comp from './modules/comp'
 import demo from './modules/demo'
 import nested from './modules/nested'
 import errorPage from './modules/error-page'
 import { HOME_PATH, HOME_NAME } from '@/router/menus'
 
 export const asyncRouterMap = [
+  {
+    path: 'analysis',
+    name: 'Analysis',
+    meta: { title: '分析页' },
+    component: () => import('../views/dashboard/analysis.vue')
+  },
+  ...comp,
   ...demo,
   ...nested,
   ...errorPage,

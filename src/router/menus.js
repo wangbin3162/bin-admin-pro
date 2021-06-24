@@ -1,17 +1,19 @@
-/**
- * default menu list
- */
-
+// default menu list
 export default [
+  {
+    path: 'comp',
+    title: '组件',
+    icon: 'dropbox',
+    children: [
+      { path: 'basic', title: '基础组件' }
+    ]
+  },
   {
     path: 'demo',
     title: 'Demo',
     icon: 'detail',
     children: [
-      {
-        path: 'tableTest',
-        title: '测试代码'
-      }
+      { path: 'tableTest', title: '测试代码' }
     ]
   },
   {
@@ -42,10 +44,8 @@ export const DASHBOARD_MENUS = [
     title: 'Dashboard',
     icon: 'appstore',
     children: [
-      {
-        path: HOME_PATH,
-        title: HOME_NAME
-      }
+      { path: HOME_PATH, title: HOME_NAME },
+      { path: 'analysis', title: '分析页' }
     ]
   }
 ]

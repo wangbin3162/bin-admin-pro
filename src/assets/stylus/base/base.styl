@@ -17,7 +17,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  user-select: none;
   color: #515a6e;
 }
 a, a:focus, a:hover {
@@ -52,4 +51,15 @@ a:active, a:focus, button, div, span, svg {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b6b7b9;
+}
+
+/* webkit, opera, IE9 */
+::selection {
+  background: var(--primary-color);
+  color: #fff;
+}
+/* mozilla firefox */
+::-moz-selection {
+  background: var(--primary-color);
+  color: #fff;
 }

@@ -1,4 +1,4 @@
-<template functional>
+<template>
   <b-alert title="menu 1">
     menu 1
     <div style="padding:30px;">

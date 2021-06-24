@@ -1,7 +1,7 @@
 <template>
   <header-trigger icon="setting" @click="visible = true"></header-trigger>
   <!--设置抽屉-->
-  <b-drawer v-model="visible" append-to-body :z-index="0">
+  <b-drawer v-model="visible" append-to-body>
     <div class="setting-panel">
       <h3 class="setting-title"><span>整体风格设置</span></h3>
       <div>
