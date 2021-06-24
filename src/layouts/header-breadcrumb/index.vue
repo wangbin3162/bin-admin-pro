@@ -9,7 +9,7 @@
               v-for="child in item.children"
               :key="child.path"
               :name="child.path"
-              :disabled="child.children.length===0"
+              :disabled="child.children.length>0"
             >{{ child.title }}
             </b-dropdown-item>
           </b-dropdown-menu>
