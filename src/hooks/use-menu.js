@@ -72,9 +72,14 @@ export default function useMenu() {
     }
   }
 
+  function getCurrentRouteMenu() {
+    return getCurrentMenu($route.path)
+  }
+
   return {
     navMenuItems,
     allMenuItems,
+    getCurrentRouteMenu,
     getBreadcrumbData,
     getMenuItemNamePath,
     handleMenuSelect

@@ -1,49 +1,22 @@
 <template>
-  <div>
-    <div class="demo-button">
-      <b-button>Default</b-button>
-      <b-button type="dashed">Dashed</b-button>
-      <b-button type="primary">Primary</b-button>
-      <b-button type="success">Success</b-button>
-      <b-button type="info">Info</b-button>
-      <b-button type="warning">Warning</b-button>
-      <b-button type="danger">Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button type="primary" plain>Primary</b-button>
-      <b-button type="success" plain>Success</b-button>
-      <b-button type="info" plain>Info</b-button>
-      <b-button type="warning" plain>Warning</b-button>
-      <b-button type="danger" plain>Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button type="primary" round>Primary</b-button>
-      <b-button type="success" round>Success</b-button>
-      <b-button type="info" round>Info</b-button>
-      <b-button type="warning" round>Warning</b-button>
-      <b-button type="danger" round>Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button dashed>Default</b-button>
-      <b-button type="primary" dashed>Primary</b-button>
-      <b-button type="success" dashed>Success</b-button>
-      <b-button type="info" dashed>Info</b-button>
-      <b-button type="warning" dashed>Warning</b-button>
-      <b-button type="danger" dashed>Danger</b-button>
-    </div>
-    <div class="demo-button" style="background: #cad4d4;padding: 10px;">
-      <b-button type="primary" transparent size="small">Primary</b-button>
-      <b-button type="success" transparent size="small">Success</b-button>
-      <b-button type="info" transparent size="small">Info</b-button>
-      <b-button type="warning" transparent size="small">Warning</b-button>
-      <b-button type="danger" transparent size="small">Danger</b-button>
-    </div>
-  </div>
+  <page-wrapper desc="表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景" show-close content-bg>
+    <p v-for="i in 100" :key="i">站位行。。。</p>
+    <page-footer>
+      <b-button>提交</b-button>
+      <template #right>
+        <b-button>取消</b-button>
+      </template>
+    </page-footer>
+  </page-wrapper>
 </template>
 
 <script>
+import PageWrapper from '@/components/Page/PageWrapper'
+import PageFooter from '@/components/Page/PageFooter'
+
 export default {
-  name: 'demo'
+  name: 'Demo',
+  components: { PageFooter, PageWrapper }
 }
 </script>
 

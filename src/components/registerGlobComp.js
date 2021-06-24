@@ -1,6 +1,8 @@
+import PageWrapper from './Page/PageWrapper'
+import PageFooter from './Page/PageFooter'
 import TitleBar from './TitleBar'
 
-const compList = [TitleBar]
+const compList = [PageWrapper, PageFooter, TitleBar]
 
 /**
  * 注册全局组件，外部引入的第三方组件也在此引入
