@@ -6,10 +6,12 @@ import { registerUI } from '@/plugins/bin-ui'
 import './mock' // mock
 import './assets/stylus/index.styl'
 import { registerEditor } from '@/plugins/bin-ace-editor'
+import { registerCharts } from '@/plugins/bin-charts'
 
 const app = createApp(App)
 registerUI(app)
 registerEditor(app)
+registerCharts(app)
 setupRouter(app)
 setupStore(app)
 // Mount when the route is ready

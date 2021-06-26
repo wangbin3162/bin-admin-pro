@@ -19,14 +19,16 @@
   "license": "MIT",
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --report",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "bin-ace-editor": "^3.0.1",
-    "bin-ui-next": "^0.3.8",
+    "bin-ace-editor": "^3.0.2",
+    "bin-charts": "^3.0.0",
+    "bin-ui-next": "^0.4.0",
     "core-js": "^3.12.1",
+    "echarts": "^5.1.2",
     "good-storage": "^1.1.1",
     "js-cookie": "^2.2.1",
     "mockjs": "^1.1.0",
