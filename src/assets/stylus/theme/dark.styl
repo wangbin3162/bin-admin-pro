@@ -1,5 +1,3 @@
-$color-text-default = rgba(255, 255, 255, .7);
-$color-text-hover = #ffffff;
 // dark皮肤
 [data-theme=dark] {
   // logo样式
@@ -10,69 +8,110 @@ $color-text-hover = #ffffff;
     }
   }
   // menu样式
-  .aside-menu {
-    .bin-menu {
+  .bin-menu {
+    .bin-menu-item {
+      color: $color-text-white-light;
+      background: getMenuBg();
+      &.is-disabled {
+        background: getMenuBg() !important;
+        opacity: .9;
+        &:hover {
+          color: $color-text-white-light;
+        }
+      }
+      &:hover {
+        color: $color-text-white;
+      }
+      &.is-active {
+        color: $color-text-white;
+        background: getColor();
+      }
+    }
+    .bin-submenu__title {
+      color: $color-text-white-light;
+      background: getMenuBg();
+      &:hover {
+        color: $color-text-white;
+      }
+    }
+    .bin-menu-item-group__title {
+      color: $color-text-white-disable;
+      background: getMenuBgActive();
+    }
+    .bin-submenu .bin-menu--inline {
+      .bin-menu-item, .bin-submenu__title {
+        background: getMenuBgActive();
+      }
       .bin-menu-item {
-        color: $color-text-default;
-        background: var(--menu-bg-color);
-        &:hover {
-          color: $color-text-hover;
-        }
         &.is-active {
-          color: $color-text-hover;
-          background: var(--primary-color);
+          color: $color-text-white;
+          background: getColor();
         }
       }
-      .bin-submenu__title {
-        color: $color-text-default;
-        background: var(--menu-bg-color);
-        &:hover {
-          color: $color-text-hover;
-        }
-      }
-      .bin-submenu .bin-menu--inline {
-        .bin-menu-item, .bin-submenu__title {
-          background: var(--menu-bg-active-color);
-        }
-        .bin-menu-item {
-          &.is-active {
-            color: $color-text-hover;
-            background: var(--primary-color);
-          }
-        }
-      }
-      // 收起菜单的样式
-      &.bin-menu--collapse {
-        .bin-menu-item {
-          &.is-active {
-            color: var(--primary-color);
-            background: var(--menu-bg-active-color);
-            &::after {
-              position: absolute;
-              top: 0;
-              left: 0;
-              width: 2px;
-              height: 100%;
-              background-color: var(--primary-color);
-              content: '';
-              z-index: 1;
-            }
-          }
-        }
-        .bin-submenu.is-active {
-          .bin-submenu__title {
-            color: var(--primary-color);
-            background: var(--menu-bg-active-color);
-          }
-          &::before {
+    }
+    // 收起菜单的样式
+    &.bin-menu--collapse {
+      .bin-menu-item {
+        &.is-active {
+          color: getColor();
+          background: getMenuBgActive();
+          &::after {
             position: absolute;
             top: 0;
             left: 0;
             width: 2px;
             height: 100%;
-            background-color: var(--primary-color);
+            background-color: getColor();
             content: '';
             z-index: 1;
+          }
+        }
+      }
+      .bin-submenu.is-active {
+        .bin-submenu__title {
+          color: getColor();
+          background: getMenuBgActive();
+        }
+        &::before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 2px;
+          height: 100%;
+          background-color: getColor();
+          content: '';
+          z-index: 1;
+        }
+      }
+    }
+    &.bin-menu--horizontal {
+      .bin-menu-item {
+        color: $color-text-white-light;
+        background: getMenuBg();
+        &:hover {
+          color: $color-text-white;
+        }
+        &.is-active {
+          color: $color-text-white;
+          background: getColor();
+          border-bottom-color: getColor();
+        }
+      }
+      .bin-submenu {
+        .bin-submenu__title {
+          &:not(.is-disabled):hover, &:not(.is-disabled):focus {
+            color: $color-text-white;
+            background: getMenuBg() !important;
+          }
+          &:hover {
+            color: $color-text-white;
+            background: getMenuBg() !important;
+          }
+        }
+        &.is-active {
+          .bin-submenu__title {
+            border-bottom-color: getColor();
+            color: getColor();
           }
         }
       }
@@ -80,16 +119,16 @@ $color-text-hover = #ffffff;
   }
   // menu-popup
   .bin-menu--popup {
-    background: var(--menu-bg-color);
+    background: getMenuBg();
     .bin-menu-item, .bin-submenu__title {
-      color: $color-text-default;
-      background: var(--menu-bg-color);
+      color: $color-text-white-light;
+      background: getMenuBg();
       &:hover {
-        color: $color-text-hover;
+        color: $color-text-white;
       }
       &.is-active {
-        color: $color-text-hover;
-        background: var(--primary-color);
+        color: $color-text-white;
+        background: getColor();
       }
     }
   }

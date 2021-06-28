@@ -1,0 +1,105 @@
+[data-theme] {
+  // input
+  .bin-input:focus, .bin-input:hover {
+    border-color: getColor();
+  }
+  .bin-input:focus {
+    box-shadow: 0 0 0 2px getShadow();
+  }
+  // input-number
+  .bin-input-number:focus, .bin-input-number:hover {
+    border-color: getColor();
+  }
+  .bin-input-number-focused, .bin-input-number:focus {
+    border-color: getColor();
+    box-shadow: 0 0 0 2px getShadow();
+  }
+  .bin-input-number-handler-up:hover .bin-input-number-handler-up-inner {
+    color: getColor();
+  }
+  .bin-input-number-handler-down:hover .bin-input-number-handler-down-inner {
+    color: getColor();
+  }
+
+  // select
+  .bin-select__popper .bin-select-dropdown__item.selected {
+    color: getColor();
+    font-weight: 600;
+    background: getLightenHover()
+  }
+
+  .bin-select__popper .is-multiple .bin-select-dropdown__item.selected::after {
+    color: getHover();
+  }
+  // checkbox
+  .bin-checkbox:hover .bin-checkbox__inner {
+    border-color: getColor();
+  }
+  .bin-checkbox__input.is-checked {
+    .bin-checkbox__inner {
+      border-color: getColor();
+      background-color: getColor();
+    }
+    &:after {
+      border-color: getColor();
+    }
+  }
+  .bin-checkbox__input.is-indeterminate .bin-checkbox__inner:after {
+    background-color: getColor();
+  }
+  // radio
+  .bin-radio__input.is-checked .bin-radio__inner, .bin-radio__input.is-checked:after {
+    border-color: getColor();
+  }
+  .bin-radio__inner:after {
+    background-color: getColor()
+  }
+  // switch
+  .bin-switch-checked {
+    border-color: getColor()
+    background-color: getColor()
+  }
+  .bin-switch:focus {
+    box-shadow: 0 0 0 2px getShadow();
+  }
+  // date
+  .bin-date-table td.today,
+  .bin-date-table td:hover,
+  .bin-date-picker__next-btn:hover i,
+  .bin-date-picker__prev-btn:hover i,
+  .bin-date-picker__header-label:hover,
+  .bin-picker-panel__shortcut:hover,
+  .bin-month-table td.today .cell {
+    color: getColor();
+  }
+  .bin-date-table td.current span, .bin-date-table td.current:hover span,
+  .bin-year-table td .cell:hover, .bin-year-table td.current:not(.disabled) .cell,
+  .bin-month-table td .cell:hover, .bin-month-table td.current:not(.disabled) .cell,
+  .bin-date-table td.end-date span, .bin-date-table td.start-date span,
+  .bin-month-table td.end-date .cell, .bin-month-table td.start-date .cell {
+    background-color: getColor();
+  }
+  .bin-date-table td.in-range div, .bin-date-table td.in-range div:hover,
+  .bin-month-table td.in-range div, .bin-month-table td.in-range div:hover {
+    background: getLightenHover();
+  }
+  // slider
+  .bin-slider__bar {
+    background-color: getColor();
+  }
+  .bin-slider__button {
+    border-color: getColor();
+  }
+  // form
+  .bin-form-item.is-error {
+    .bin-input, bin-input-number {
+      border: 1px solid #ff4d4f;
+    }
+    .bin-input-number:hover {
+      border: 1px solid #ff4d4f;
+    }
+    .bin-range-editor.bin-input.is-active {
+      box-shadow: 0 0 0 2px alpha(#ff4d4f, 0.2);
+    }
+  }
+}

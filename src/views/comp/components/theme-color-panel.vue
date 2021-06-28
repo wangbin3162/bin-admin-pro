@@ -1,5 +1,5 @@
 <template>
-  <b-collapse-wrap title="主题设置" shadow="none" :model-value="true" class="mb-20">
+  <b-collapse-wrap title="主题设置" shadow="none" class="mb-20">
     <div class="p10">
       <theme-panel mode="horizontal" only-theme />
     </div>

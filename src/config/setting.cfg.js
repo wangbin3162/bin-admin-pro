@@ -1,7 +1,7 @@
 /**
  * 项目默认配置项
  */
-import { mixBlack, mixWhite } from '@/utils/color'
+import { getAlpha, mixBlack, mixWhite } from '@/utils/color'
 
 export default {
   theme: 'dark',
@@ -31,11 +31,10 @@ export const MENU_THEME_COLOR_LIST = [
   '#273352',
   '#ffffff',
   '#191b24',
-  '#191a23',
   '#304156',
-  '#001628',
+  '#031d21',
   '#28333E',
-  '#344058',
+  '#292c37',
   '#383f45'
 ]
 
@@ -45,6 +44,8 @@ const PRIMARY_HOVER_VAR = '--primary-hover-color'
 const PRIMARY_LIGHTEN_3_VAR = '--primary-lighten3-color'
 const PRIMARY_LIGHTEN_5_VAR = '--primary-lighten5-color'
 const PRIMARY_LIGHTEN_HOVER_VAR = '--primary-lighten-hover-color'
+const PRIMARY_SHADOW_VAR = '--primary-shadow-color'
+const PRIMARY_SHADOW_LIGHT_VAR = '--primary-lighten-shadow-color'
 
 const MENU_THEME_VAR = '--menu-bg-color'
 const MENU_THEME_ACTIVE_VAR = '--menu-bg-active-color'
@@ -72,6 +73,9 @@ export function setPrimaryColor(color) {
   const lighten3 = mixWhite(color, 0.6)
   const lighten5 = mixWhite(color, 0.9)
   const lightenHover = mixWhite(color, 0.95)
+  // alpha
+  const shadow = getAlpha(color, 0.2)
+  const shadowLight = getAlpha(color, 0.08)
 
   setCssVar(PRIMARY_VAR, color) // primary
   setCssVar(PRIMARY_ACTIVE_VAR, darkColor) // active
@@ -80,6 +84,9 @@ export function setPrimaryColor(color) {
   setCssVar(PRIMARY_LIGHTEN_3_VAR, lighten3)
   setCssVar(PRIMARY_LIGHTEN_5_VAR, lighten5)
   setCssVar(PRIMARY_LIGHTEN_HOVER_VAR, lightenHover)
+  // alpha
+  setCssVar(PRIMARY_SHADOW_VAR, shadow)
+  setCssVar(PRIMARY_SHADOW_LIGHT_VAR, shadowLight)
 }
 
 // 设置menuTheme

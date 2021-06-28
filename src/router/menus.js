@@ -6,7 +6,17 @@ export default [
     icon: 'block',
     children: [
       { path: 'colorVar', title: '主题颜色' },
-      { path: 'basic', title: '基础组件' }
+      {
+        path: 'ui',
+        title: '组件库',
+        children: [
+          { path: 'basic', title: '基础组件' },
+          { path: 'navComp', title: '导航组件' },
+          { path: 'formComp', title: '表单组件' },
+          { path: 'dataComp', title: '数据组件' },
+          { path: 'otherComp', title: '其他组件' }
+        ]
+      }
     ]
   },
   {

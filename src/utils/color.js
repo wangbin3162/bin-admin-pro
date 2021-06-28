@@ -2,7 +2,6 @@
  * 依赖color插件，在此基础上封装部分转换函数
  * 参考文档说明：https://www.npmjs.com/package/color
  */
-
 import Color from 'color'
 
 /**
@@ -25,4 +24,8 @@ export function mixWhite(color, concentration) {
 
 export function mixBlack(color, concentration) {
   return mix('#000000', color, concentration)
+}
+
+export function getAlpha(color, concentration) {
+  return Color(color).fade(1 - concentration)
 }

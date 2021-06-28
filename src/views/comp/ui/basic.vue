@@ -1,6 +1,7 @@
 <template>
   <page-wrapper desc="基础组件依赖于bin-ui-next，主要用于验证不同组件的主色颜色主题。主题样式默认只覆盖default和primary主色">
-    <b-collapse-wrap title="default" shadow="none" :model-value="true" class="mb-20">
+    <theme-color-panel />
+    <b-collapse-wrap title="default" shadow="none" class="mb-20">
       <div class="p10">
         <b-button>默 认</b-button>
         <b-button disabled>禁 用</b-button>
@@ -9,7 +10,7 @@
         <b-button loading>loading</b-button>
       </div>
     </b-collapse-wrap>
-    <b-collapse-wrap title="primary" shadow="none" :model-value="true" class="mb-20">
+    <b-collapse-wrap title="primary" shadow="none" class="mb-20">
       <div class="p10">
         <b-button type="primary">主按钮</b-button>
         <b-button type="primary" loading>loading</b-button>
@@ -29,7 +30,7 @@
         <b-button type="text" disabled>text</b-button>
       </div>
     </b-collapse-wrap>
-    <b-collapse-wrap title="其他状态" shadow="none" :model-value="true" class="mb-20">
+    <b-collapse-wrap title="其他状态" shadow="none" class="mb-20">
       <b-divider align="left">success</b-divider>
       <div class="pl-10">
         <b-button type="success">成 功</b-button>
@@ -78,7 +79,7 @@
         <b-button type="info" round>round</b-button>
         <b-button type="info" transparent>transparent</b-button>
         <b-button type="info" dashed>dashed</b-button>
-        <b-button type="text"  text-color="info">text</b-button>
+        <b-button type="text" text-color="info">text</b-button>
         <b-button type="text" disabled text-color="info">[disabled info text]</b-button>
         <b-button type="text" disabled>[disabled text]</b-button>
       </div>
@@ -87,17 +88,11 @@
 </template>
 
 <script>
-
 import PageWrapper from '@/components/Page/PageWrapper'
+import ThemeColorPanel from '@/views/comp/components/theme-color-panel'
 
 export default {
   name: 'Basic',
-  components: { PageWrapper }
+  components: { ThemeColorPanel, PageWrapper }
 }
 </script>
-
-<style scoped>
-.demo-button {
-  margin-bottom: 8px;
-}
-</style>

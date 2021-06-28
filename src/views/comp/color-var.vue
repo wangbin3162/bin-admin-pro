@@ -1,7 +1,7 @@
 <template>
   <page-wrapper title="基础颜色" desc="基础颜色，系统主题会默认注入不同的主色和颜色，这里可以动态设置颜色查看效果">
     <theme-color-panel />
-    <b-collapse-wrap title="颜色设置" shadow="none" :model-value="true">
+    <b-collapse-wrap title="颜色设置" shadow="none">
       <div class="p10">
         <b-alert>
           颜色值根据主色变换而来，颜色转换借助
@@ -27,11 +27,12 @@
 </template>
 
 <script>
+import PageWrapper from '@/components/Page/PageWrapper'
 import ThemeColorPanel from '@/views/comp/components/theme-color-panel'
 
 export default {
   name: 'ColorVar',
-  components: { ThemeColorPanel }
+  components: { PageWrapper, ThemeColorPanel }
 }
 </script>
 

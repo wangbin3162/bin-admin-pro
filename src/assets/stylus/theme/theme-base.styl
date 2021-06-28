@@ -12,7 +12,7 @@
     }
   }
   &-aside {
-    background: var(--menu-bg-color);
+    background: getMenuBg();
     transition: all .2s;
     position: relative;
     z-index: 10;
@@ -164,16 +164,16 @@
           content: unset;
         }
         &:hover {
-          color: var(--primary-color);
+          color: getColor();
         }
         .b-icon-close {
           right: -4px;
           margin-left: 0;
         }
         &.active {
-          background: var(--primary-color);
-          border-color: var(--primary-color);
-          color: #ffffff;
+          background: getColor();
+          border-color: getColor();
+          color: #ffffff !important;
           .b-icon-close {
             width: 14px;
             color: #ffffff;

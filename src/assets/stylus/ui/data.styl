@@ -1,0 +1,31 @@
+[data-theme] {
+  // table
+  .bin-table tr.bin-table-row-hover td,
+  .bin-table-row-highlight td,
+  tr.bin-table-row-highlight.bin-table-row-hover td,
+  .bin-table-stripe .bin-table-body tr.bin-table-row-highlight:nth-child(2n) td,
+  .bin-table-stripe .bin-table-fixed-body tr.bin-table-row-highlight:nth-child(2n) td {
+    background-color: getLighten5();
+  }
+
+  .bin-table-row.bin-table-ghost-class td {
+    background: getLighten3();
+  }
+  // page
+  .bin-page-item-active, .bin-page-item:hover, .bin-page-next:hover, .bin-page-prev:hover,
+  .bin-page-options-elevator input:focus, .bin-page-options-elevator input:hover {
+    border-color: getColor()
+  }
+  .bin-page-item-active a, .bin-page-item-active:hover a, .bin-page-item:hover a,
+  .bin-page-next:hover a, .bin-page-prev:hover a {
+    color: getColor();
+  }
+  .bin-page-options-elevator input:focus {
+    outline: 0;
+    box-shadow: 0 0 0 2px getShadow();
+  }
+  // tree
+  .bin-tree-title.is-selected, .bin-tree-title.is-selected:hover {
+    background-color: getLighten3()
+  }
+}

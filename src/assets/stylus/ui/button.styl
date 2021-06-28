@@ -2,88 +2,88 @@
 [data-theme] {
   .bin-button {
     &--primary {
-      background-color: var(--primary-color);
-      border-color: var(--primary-color);
+      background-color: getColor();
+      border-color: getColor();
       &:hover, &:focus {
-        background: var(--primary-hover-color);
-        border-color: var(--primary-hover-color);
+        background: getHover();
+        border-color: getHover();
         color: #fff;
       }
       &:active {
-        background: var(--primary-active-color);
-        border-color: var(--primary-active-color);
+        background: getActive();
+        border-color: getActive();
       }
       &.is-plain {
-        color: var(--primary-color);
-        background-color: var(--primary-lighten5-color);
-        border-color: var(--primary-lighten3-color);
+        color: getColor();
+        background-color: getLighten5();
+        border-color: getLighten3();
         &:hover, &:focus {
-          border-color: var(--primary-hover-color);
+          border-color: getHover();
         }
         &:active {
-          color: var(--primary-active-color);
-          border-color: var(--primary-active-color);
+          color: getActive();
+          border-color: getActive();
         }
         &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
           cursor: not-allowed;
-          color: var(--primary-lighten3-color);
-          background-color: var(--primary-lighten-hover-color);
-          border-color: var(--primary-lighten5-color);
+          color: getLighten3();
+          background-color: getLightenHover();
+          border-color: getLighten5();
         }
       }
       &.is-transparent {
-        border-color: var(--primary-color);
-        color: var(--primary-color);
+        border-color: getColor();
+        color: getColor();
         background-color: transparent;
         &:hover, &:focus {
-          border-color: var(--primary-hover-color);
+          border-color: getHover();
         }
         &:active {
-          color: var(--primary-active-color);
-          border-color: var(--primary-active-color);
+          color: getActive();
+          border-color: getActive();
         }
         &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
           background-color: transparent;
-          color: var(--primary-lighten3-color);
-          border-color: var(--primary-lighten5-color);
+          color: getLighten3();
+          border-color: getLighten5();
         }
       }
       &.is-dashed {
         background: #ffffff;
-        color: var(--primary-color);
+        color: getColor();
         &:hover, &:focus {
-          border-color: var(--primary-hover-color);
+          border-color: getHover();
         }
         &:active {
-          color: var(--primary-active-color);
-          border-color: var(--primary-active-color);
+          color: getActive();
+          border-color: getActive();
         }
         &.is-disabled, &.is-disabled:focus, &.is-disabled:hover, &.is-loading {
           background-color: #ffffff;
-          color: var(--primary-lighten3-color);
-          border-color: var(--primary-lighten5-color);
+          color: getLighten3();
+          border-color: getLighten5();
         }
       }
       // 默认禁用
       &.is-disabled, &.is-disabled:focus, &.is-disabled:hover, &.is-loading {
         color: #ffffff;
-        border-color: var(--primary-lighten3-color);
-        background-color: var(--primary-lighten3-color);
+        border-color: getLighten3();
+        background-color: getLighten3();
       }
     }
     &--text {
       border-color: transparent;
-      color: var(--primary-color)
+      color: getColor()
       background: transparent;
       background-image: none;
       &:focus, &:hover {
-        color: var(--primary-hover-color);
+        color: getHover();
         border-color: transparent;
         background-color: transparent;
         box-shadow: none;
       }
       &:active {
-        color: var(--primary-active-color);
+        color: getActive();
       }
       &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
         cursor: not-allowed;
