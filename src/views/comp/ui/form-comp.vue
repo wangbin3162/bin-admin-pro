@@ -14,7 +14,7 @@
             <b-row>
               <b-col :span="12">
                 <b-form-item prop="age" label="年龄">
-                  <b-input-number style="width: 100%;" v-model="form.age" always></b-input-number>
+                  <b-input-number style="width: 100%;" v-model="form.age"></b-input-number>
                 </b-form-item>
               </b-col>
               <b-col :span="12">
@@ -44,14 +44,6 @@
                   <b-date-picker v-model="form.birthday" type="date" placeholder="出生日期"
                                  :shortcuts="shortcuts"></b-date-picker>
                 </b-form-item>
-              </b-col>
-            </b-row>
-            <b-row>
-              <b-col :span="12">
-                <b-cascader
-                  v-model="selected"
-                  :options="cities">
-                </b-cascader>
               </b-col>
             </b-row>
             <b-form-item label="爱好" prop="hobby">
@@ -123,16 +115,6 @@ export default {
             return date
           })()
         }],
-      cities: [
-        {
-          value: 'nanjing',
-          label: '南京'
-        },
-        {
-          value: 'xuzhou',
-          label: '徐州'
-        }
-      ],
       form: {
         name: '',
         age: null,
@@ -159,8 +141,7 @@ export default {
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
           { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
         ]
-      },
-      selected: []
+      }
     }
   },
   methods: {
