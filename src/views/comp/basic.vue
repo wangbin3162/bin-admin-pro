@@ -1,70 +1,95 @@
 <template>
-  <page-wrapper desc="基础组件依赖于bin-ui-next,组件库已有的基础组件" content-bg>
-    <div class="demo-button">
-      <b-button>Default</b-button>
-      <b-button type="dashed">Dashed</b-button>
-      <b-button type="primary">Primary</b-button>
-      <b-button type="success">Success</b-button>
-      <b-button type="info">Info</b-button>
-      <b-button type="warning">Warning</b-button>
-      <b-button type="danger">Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button type="primary" plain>Primary</b-button>
-      <b-button type="success" plain>Success</b-button>
-      <b-button type="info" plain>Info</b-button>
-      <b-button type="warning" plain>Warning</b-button>
-      <b-button type="danger" plain>Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button type="primary" round>Primary</b-button>
-      <b-button type="success" round>Success</b-button>
-      <b-button type="info" round>Info</b-button>
-      <b-button type="warning" round>Warning</b-button>
-      <b-button type="danger" round>Danger</b-button>
-    </div>
-    <div class="demo-button">
-      <b-button dashed>Default</b-button>
-      <b-button type="primary" dashed>Primary</b-button>
-      <b-button type="success" dashed>Success</b-button>
-      <b-button type="info" dashed>Info</b-button>
-      <b-button type="warning" dashed>Warning</b-button>
-      <b-button type="danger" dashed>Danger</b-button>
-    </div>
-    <div class="demo-button" style="background: #cad4d4;padding: 10px;">
-      <b-button type="primary" transparent size="small">Primary</b-button>
-      <b-button type="success" transparent size="small">Success</b-button>
-      <b-button type="info" transparent size="small">Info</b-button>
-      <b-button type="warning" transparent size="small">Warning</b-button>
-      <b-button type="danger" transparent size="small">Danger</b-button>
-    </div>
-    <b-divider></b-divider>
-    <div class="demo-button">
-      <b-button disabled>Default</b-button>
-      <b-button type="dashed" disabled>Dashed</b-button>
-      <b-button type="primary" disabled>Primary</b-button>
-      <b-button type="success" disabled>Success</b-button>
-      <b-button type="info" disabled>Info</b-button>
-      <b-button type="warning" disabled>Warning</b-button>
-      <b-button type="danger" disabled>Danger</b-button>
-    </div>
-    <b-divider></b-divider>
-    <div>
-      <b-button type="text">文字按钮</b-button>
-      <b-button type="text" text-color="primary">Primary</b-button>
-      <b-button type="text" text-color="success">Success</b-button>
-      <b-button type="text" text-color="info">Info</b-button>
-      <b-button type="text" text-color="warning">Warning</b-button>
-      <b-button type="text" text-color="danger">Danger</b-button>
-      <b-button type="text" text-color="#b37feb">多彩按钮</b-button>
-      <b-button type="text" text-color="#f759ab">多彩按钮2</b-button>
-    </div>
+  <page-wrapper desc="基础组件依赖于bin-ui-next，主要用于验证不同组件的主色颜色主题。主题样式默认只覆盖default和primary主色">
+    <b-collapse-wrap title="default" shadow="none" :model-value="true" class="mb-20">
+      <div class="p10">
+        <b-button>默 认</b-button>
+        <b-button disabled>禁 用</b-button>
+        <b-button background>拟物按钮</b-button>
+        <b-button background disabled>拟物禁用</b-button>
+        <b-button loading>loading</b-button>
+      </div>
+    </b-collapse-wrap>
+    <b-collapse-wrap title="primary" shadow="none" :model-value="true" class="mb-20">
+      <div class="p10">
+        <b-button type="primary">主按钮</b-button>
+        <b-button type="primary" loading>loading</b-button>
+        <b-button type="primary" plain>plain</b-button>
+        <b-button type="primary" round>round</b-button>
+        <b-button type="primary" transparent>transparent</b-button>
+        <b-button type="primary" dashed>dashed</b-button>
+        <b-button type="text">text</b-button>
+      </div>
+      <div class="p10">
+        <b-button type="primary" disabled>主按钮</b-button>
+        <b-button type="primary" loading disabled>loading</b-button>
+        <b-button type="primary" plain disabled>plain</b-button>
+        <b-button type="primary" round disabled>round</b-button>
+        <b-button type="primary" transparent disabled>transparent</b-button>
+        <b-button type="primary" dashed disabled>dashed</b-button>
+        <b-button type="text" disabled>text</b-button>
+      </div>
+    </b-collapse-wrap>
+    <b-collapse-wrap title="其他状态" shadow="none" :model-value="true" class="mb-20">
+      <b-divider align="left">success</b-divider>
+      <div class="pl-10">
+        <b-button type="success">成 功</b-button>
+        <b-button type="success" disabled>禁 用</b-button>
+        <b-button type="success" loading>loading</b-button>
+        <b-button type="success" plain>plain</b-button>
+        <b-button type="success" round>round</b-button>
+        <b-button type="success" transparent>transparent</b-button>
+        <b-button type="success" dashed>dashed</b-button>
+        <b-button type="text" text-color="success">text</b-button>
+        <b-button type="text" disabled text-color="success">[disabled success text]</b-button>
+        <b-button type="text" disabled>[disabled text]</b-button>
+      </div>
+      <b-divider align="left">warning</b-divider>
+      <div class="pl-10">
+        <b-button type="warning">警 告</b-button>
+        <b-button type="warning" disabled>禁 用</b-button>
+        <b-button type="warning" loading>loading</b-button>
+        <b-button type="warning" plain>plain</b-button>
+        <b-button type="warning" round>round</b-button>
+        <b-button type="warning" transparent>transparent</b-button>
+        <b-button type="warning" dashed>dashed</b-button>
+        <b-button type="text" text-color="warning">text</b-button>
+        <b-button type="text" disabled text-color="warning">[disabled warning text]</b-button>
+        <b-button type="text" disabled>[disabled text]</b-button>
+      </div>
+      <b-divider align="left">danger</b-divider>
+      <div class="pl-10">
+        <b-button type="danger">错 误</b-button>
+        <b-button type="danger" disabled>禁 用</b-button>
+        <b-button type="danger" loading>loading</b-button>
+        <b-button type="danger" plain>plain</b-button>
+        <b-button type="danger" round>round</b-button>
+        <b-button type="danger" transparent>transparent</b-button>
+        <b-button type="danger" dashed>dashed</b-button>
+        <b-button type="text" text-color="danger">text</b-button>
+        <b-button type="text" disabled text-color="danger">[disabled danger text]</b-button>
+        <b-button type="text" disabled>[disabled text]</b-button>
+      </div>
+      <b-divider align="left">info</b-divider>
+      <div class="pl-10 pb-15">
+        <b-button type="info">信 息</b-button>
+        <b-button type="info" disabled>禁 用</b-button>
+        <b-button type="info" loading>loading</b-button>
+        <b-button type="info" plain>plain</b-button>
+        <b-button type="info" round>round</b-button>
+        <b-button type="info" transparent>transparent</b-button>
+        <b-button type="info" dashed>dashed</b-button>
+        <b-button type="text"  text-color="info">text</b-button>
+        <b-button type="text" disabled text-color="info">[disabled info text]</b-button>
+        <b-button type="text" disabled>[disabled text]</b-button>
+      </div>
+    </b-collapse-wrap>
   </page-wrapper>
 </template>
 
 <script>
 
 import PageWrapper from '@/components/Page/PageWrapper'
+
 export default {
   name: 'Basic',
   components: { PageWrapper }

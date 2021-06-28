@@ -1,0 +1,96 @@
+// button 样式覆盖
+[data-theme] {
+  .bin-button {
+    &--primary {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+      &:hover, &:focus {
+        background: var(--primary-hover-color);
+        border-color: var(--primary-hover-color);
+        color: #fff;
+      }
+      &:active {
+        background: var(--primary-active-color);
+        border-color: var(--primary-active-color);
+      }
+      &.is-plain {
+        color: var(--primary-color);
+        background-color: var(--primary-lighten5-color);
+        border-color: var(--primary-lighten3-color);
+        &:hover, &:focus {
+          border-color: var(--primary-hover-color);
+        }
+        &:active {
+          color: var(--primary-active-color);
+          border-color: var(--primary-active-color);
+        }
+        &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
+          cursor: not-allowed;
+          color: var(--primary-lighten3-color);
+          background-color: var(--primary-lighten-hover-color);
+          border-color: var(--primary-lighten5-color);
+        }
+      }
+      &.is-transparent {
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        background-color: transparent;
+        &:hover, &:focus {
+          border-color: var(--primary-hover-color);
+        }
+        &:active {
+          color: var(--primary-active-color);
+          border-color: var(--primary-active-color);
+        }
+        &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
+          background-color: transparent;
+          color: var(--primary-lighten3-color);
+          border-color: var(--primary-lighten5-color);
+        }
+      }
+      &.is-dashed {
+        background: #ffffff;
+        color: var(--primary-color);
+        &:hover, &:focus {
+          border-color: var(--primary-hover-color);
+        }
+        &:active {
+          color: var(--primary-active-color);
+          border-color: var(--primary-active-color);
+        }
+        &.is-disabled, &.is-disabled:focus, &.is-disabled:hover, &.is-loading {
+          background-color: #ffffff;
+          color: var(--primary-lighten3-color);
+          border-color: var(--primary-lighten5-color);
+        }
+      }
+      // 默认禁用
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:hover, &.is-loading {
+        color: #ffffff;
+        border-color: var(--primary-lighten3-color);
+        background-color: var(--primary-lighten3-color);
+      }
+    }
+    &--text {
+      border-color: transparent;
+      color: var(--primary-color)
+      background: transparent;
+      background-image: none;
+      &:focus, &:hover {
+        color: var(--primary-hover-color);
+        border-color: transparent;
+        background-color: transparent;
+        box-shadow: none;
+      }
+      &:active {
+        color: var(--primary-active-color);
+      }
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
+        cursor: not-allowed;
+        background-color: transparent;
+        border-color: transparent;
+        opacity: .5;
+      }
+    }
+  }
+}

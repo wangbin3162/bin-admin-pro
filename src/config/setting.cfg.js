@@ -1,7 +1,7 @@
 /**
  * 项目默认配置项
  */
-import { darken, isHexColor } from '@/utils/color'
+import { mixBlack, mixWhite } from '@/utils/color'
 
 export default {
   theme: 'dark',
@@ -25,41 +25,6 @@ export const SYSTEM_PRIMARY_COLOR_LIST = [
   '#9c27b0',
   '#ff9800'
 ]
-export const SYSTEM_PRIMARY_HOVER_COLOR_LIST = [
-  'rgba(16, 137, 255, 0.1)',
-  'rgba(0, 150, 136, 0.1)',
-  'rgba(9, 96, 189, 0.1)',
-  'rgba(83, 109, 239, 0.1)',
-  'rgba(255, 92, 147, 0.1)',
-  'rgba(238, 79, 18, 0.1)',
-  'rgba(0, 150, 199, 0.1)',
-  'rgba(156, 39, 176, 0.1)',
-  'rgba(255, 152, 0, 0.1)'
-]
-
-export const SYSTEM_PRIMARY_HOVER2_COLOR_LIST = [
-  'rgba(16, 137, 255, 0.6)',
-  'rgba(0, 150, 136, 0.6)',
-  'rgba(9, 96, 189, 0.6)',
-  'rgba(83, 109, 239, 0.6)',
-  'rgba(255, 92, 147, 0.6)',
-  'rgba(238, 79, 18, 0.6)',
-  'rgba(0, 150, 199, 0.6)',
-  'rgba(156, 39, 176, 0.6)',
-  'rgba(255, 152, 0, 0.6)'
-]
-
-export const SYSTEM_PRIMARY_ACTIVE_COLOR_LIST = [
-  '#0c58a9',
-  '#00695e',
-  '#06448a',
-  '#3141a0',
-  '#ae3f63',
-  '#c13d0d',
-  '#00678a',
-  '#7c208c',
-  '#a26203'
-]
 
 export const MENU_THEME_COLOR_LIST = [
   '#001529',
@@ -74,10 +39,13 @@ export const MENU_THEME_COLOR_LIST = [
   '#383f45'
 ]
 
-const SYSTEM_PRIMARY_VAR = '--primary-color'
-const SYSTEM_PRIMARY_HOVER_VAR = '--primary-hover-color'
-const SYSTEM_PRIMARY_HOVER2_VAR = '--primary-hover2-color'
-const SYSTEM_PRIMARY_ACTIVE_VAR = '--primary-active-color'
+const PRIMARY_ACTIVE_VAR = '--primary-active-color'
+const PRIMARY_VAR = '--primary-color'
+const PRIMARY_HOVER_VAR = '--primary-hover-color'
+const PRIMARY_LIGHTEN_3_VAR = '--primary-lighten3-color'
+const PRIMARY_LIGHTEN_5_VAR = '--primary-lighten5-color'
+const PRIMARY_LIGHTEN_HOVER_VAR = '--primary-lighten-hover-color'
+
 const MENU_THEME_VAR = '--menu-bg-color'
 const MENU_THEME_ACTIVE_VAR = '--menu-bg-active-color'
 
@@ -96,18 +64,28 @@ export function setThemeMode(theme = 'light') {
 
 // 设置全局主题色变量
 export function setPrimaryColor(color) {
-  setCssVar(SYSTEM_PRIMARY_VAR, color)
+  // active
+  const darkColor = mixBlack(color, 0.1)
   // hover
-  const index = SYSTEM_PRIMARY_COLOR_LIST.findIndex(v => v === color)
-  setCssVar(SYSTEM_PRIMARY_HOVER_VAR, SYSTEM_PRIMARY_HOVER_COLOR_LIST[index])
-  setCssVar(SYSTEM_PRIMARY_HOVER2_VAR, SYSTEM_PRIMARY_HOVER2_COLOR_LIST[index])
-  setCssVar(SYSTEM_PRIMARY_ACTIVE_VAR, SYSTEM_PRIMARY_ACTIVE_COLOR_LIST[index])
+  const hoverColor = mixWhite(color, 0.2)
+  // lighten
+  const lighten3 = mixWhite(color, 0.6)
+  const lighten5 = mixWhite(color, 0.9)
+  const lightenHover = mixWhite(color, 0.95)
+
+  setCssVar(PRIMARY_VAR, color) // primary
+  setCssVar(PRIMARY_ACTIVE_VAR, darkColor) // active
+  // hover
+  setCssVar(PRIMARY_HOVER_VAR, hoverColor)
+  setCssVar(PRIMARY_LIGHTEN_3_VAR, lighten3)
+  setCssVar(PRIMARY_LIGHTEN_5_VAR, lighten5)
+  setCssVar(PRIMARY_LIGHTEN_HOVER_VAR, lightenHover)
 }
 
 // 设置menuTheme
 export function setMenuTheme(color) {
-  if (!isHexColor(color)) return
   // bg color
   setCssVar(MENU_THEME_VAR, color)
-  setCssVar(MENU_THEME_ACTIVE_VAR, darken(color, 6))
+  const activeColor = mixBlack(color, 0.2)
+  setCssVar(MENU_THEME_ACTIVE_VAR, activeColor)
 }

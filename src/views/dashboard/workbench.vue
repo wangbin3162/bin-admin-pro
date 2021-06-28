@@ -1,8 +1,5 @@
 <template>
-  <div class="home">
-    <b-button type="primary">Home</b-button>
-    <p v-for="i in 100" :key="i">{{ i }}内容填充....</p>
-  </div>
+  <div>工作台</div>
 </template>
 
 <script>
@@ -10,3 +7,6 @@ export default {
   name: 'Workbench'
 }
 </script>
+
+<style lang="stylus" scoped>
+</style>

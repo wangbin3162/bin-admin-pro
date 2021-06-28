@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'VTitleBar',
+  name: 'TitleBar',
   props: {
     label: {
       type: String,
@@ -56,7 +56,7 @@ export default {
     &:after {
       content: '';
       position: absolute;
-      background-color: #1890ff;
+      background-color: var(--primary-color);
     }
 
     &.tip-left {

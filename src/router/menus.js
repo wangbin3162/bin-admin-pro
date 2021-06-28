@@ -3,8 +3,9 @@ export default [
   {
     path: 'comp',
     title: '组件',
-    icon: 'dropbox',
+    icon: 'block',
     children: [
+      { path: 'colorVar', title: '主题颜色' },
       { path: 'basic', title: '基础组件' }
     ]
   },

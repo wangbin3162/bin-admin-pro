@@ -7,11 +7,13 @@ import './mock' // mock
 import './assets/stylus/index.styl'
 import { registerEditor } from '@/plugins/bin-ace-editor'
 import { registerCharts } from '@/plugins/bin-charts'
+import { registerGlobComp } from '@/components/registerGlobComp'
 
 const app = createApp(App)
 registerUI(app)
 registerEditor(app)
 registerCharts(app)
+registerGlobComp(app)
 setupRouter(app)
 setupStore(app)
 // Mount when the route is ready

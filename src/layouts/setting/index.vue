@@ -3,47 +3,7 @@
   <!--设置抽屉-->
   <b-drawer v-model="visible" append-to-body>
     <div class="setting-panel">
-      <h3 class="setting-title"><span>整体风格设置</span></h3>
-      <div>
-        <div class="theme-tab">
-          <b-tooltip content="亮色主题风格" append-to-body>
-            <span @click="themChange('light')">
-              <img src="@/assets/images/light.svg" alt="">
-              <i v-if="theme === 'light'" class="b-iconfont b-icon-check"></i>
-            </span>
-          </b-tooltip>
-        </div>
-        <div class="theme-tab">
-          <b-tooltip content="暗色主题风格" append-to-body>
-            <span @click="themChange('dark')">
-              <img src="@/assets/images/dark.svg" alt="">
-              <i v-if="theme === 'dark'" class="b-iconfont b-icon-check"></i>
-            </span>
-          </b-tooltip>
-        </div>
-      </div>
-      <h3 class="setting-title"><span>系统主题</span></h3>
-      <div class="theme-picker">
-        <span
-          v-for="color in systemPrimaryColorList"
-          :key="color"
-          class="color-item"
-          :class="{active:isActiveColor(systemPrimary,color)}"
-          :style="{background:color}"
-          @click="setSystemPrimary(color)"
-        ></span>
-      </div>
-      <h3 class="setting-title"><span>菜单主题</span></h3>
-      <div class="theme-picker">
-        <span
-          v-for="color in menuThemeColorList"
-          :key="color"
-          class="color-item"
-          :class="{active:isActiveColor(menuTheme,color)}"
-          :style="{background:color}"
-          @click="setMenuTheme(color)"
-        ></span>
-      </div>
+      <theme-panel />
       <h3 class="setting-title"><span>功能设置</span></h3>
       <div class="setting-list-item">
         <span>是否开启多页签</span>
@@ -85,57 +45,36 @@
 import HeaderTrigger from '@/layouts/header-trigger'
 import useSetting from '@/hooks/use-setting'
 import { ref } from 'vue'
-import { isHexColor, rgb2Hex } from '@/utils/color'
+import ThemePanel from '@/layouts/setting/theme-panel'
 
 export default {
   name: 'Setting',
-  components: { HeaderTrigger },
+  components: { ThemePanel, HeaderTrigger },
   setup() {
     const visible = ref(false)
     const {
-      theme,
-      menuTheme,
-      systemPrimary,
       showTagsView,
       sidebarWidth,
       fixedHeader,
       fixedAside,
-      themChange,
       toggleSidebar,
       toggleTagsView,
       changeFixedHeader,
       changeFixedAside,
-      changeSidebarWidth,
-      setMenuTheme,
-      setSystemPrimary,
-      systemPrimaryColorList,
-      menuThemeColorList
+      changeSidebarWidth
     } = useSetting()
-
-    function isActiveColor(color1, color2) {
-      return isHexColor(color1) && isHexColor(color2) && color1 === color2
-    }
 
     return {
       visible,
-      theme,
-      menuTheme,
-      systemPrimary,
       showTagsView,
       sidebarWidth,
       fixedHeader,
       fixedAside,
       toggleSidebar,
-      themChange,
       toggleTagsView,
       changeFixedHeader,
       changeFixedAside,
-      changeSidebarWidth,
-      setMenuTheme,
-      setSystemPrimary,
-      systemPrimaryColorList,
-      menuThemeColorList,
-      isActiveColor
+      changeSidebarWidth
     }
   }
 }
@@ -145,20 +84,6 @@ export default {
 // 主题弹窗样式
 .setting-panel {
   padding: 0 4px;
-  .theme-tab {
-    position: relative;
-    display: inline-flex;
-    margin-right: 20px;
-    height: 45px;
-    cursor: pointer;
-    .b-icon-check {
-      position: absolute;
-      right: 6px;
-      bottom: 6px;
-      font-size: 18px;
-      color: #1890ff;
-    }
-  }
   .setting-title {
     position: relative;
     display: block;
@@ -182,32 +107,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     padding: 12px 0;
-  }
-  .theme-picker {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 16px 0;
-    justify-content: space-around;
-    .color-item {
-      cursor: pointer;
-      box-sizing: border-box;
-      width: 20px;
-      height: 20px;
-      border-radius: 2px;
-      border: 1px solid #eeeeee;
-      &.active {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        border-color: var(--primary-color);
-        &:after {
-          color: inherit;
-          font-family: "b-iconfont" !important;
-          content: "\e829";
-        }
-      }
-    }
   }
 }
 </style>

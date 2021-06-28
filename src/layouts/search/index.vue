@@ -61,7 +61,6 @@ export default {
     function handleOpen() {
       visible.value = true
       hideScroll()
-      console.log(navMenuItems.value, allMenuItems.value)
     }
 
     function handleClick(path) {

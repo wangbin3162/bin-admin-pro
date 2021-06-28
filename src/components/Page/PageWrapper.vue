@@ -14,7 +14,11 @@
       </div>
     </div>
     <div class="grid-content">
-      <div class="page-header-wrap-children-content" :class="{'has-bg':contentBg}" :style="{padding:contentPadding}">
+      <div
+        class="page-header-wrap-children-content"
+        :class="{'has-bg':bg}"
+        :style="{padding:bg?contentPadding:null}"
+      >
         <slot>
         </slot>
       </div>
@@ -34,7 +38,7 @@ export default {
     title: String,
     desc: String,
     showClose: Boolean,
-    contentBg: Boolean,
+    bg: Boolean,
     contentPadding: {
       type: String,
       default: '16px'
