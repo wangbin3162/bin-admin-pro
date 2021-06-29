@@ -1,11 +1,13 @@
 <template>
   <page-wrapper desc="标题组件，全局的内置标题组件，附带不同的效果">
-    <b-collapse-wrap title="标题组件" shadow="none">
+    <b-collapse-wrap title="基础标题，title参数 或 默认插槽显示标题" shadow="none">
       <div class="p10">
-        <b-divider align="left">基础标题，title参数 或 默认插槽显示标题</b-divider>
         <title-bar title="Title标题"></title-bar>
         <title-bar>默认插槽标题</title-bar>
-        <b-divider align="left">标题样式</b-divider>
+      </div>
+    </b-collapse-wrap>
+    <b-collapse-wrap title="标题样式" shadow="none">
+      <div class="p10">
         <title-bar :title-style="{fontSize:'14px',fontWeight:700}">自定义大小</title-bar>
         <title-bar>
           <b-icon name="sketch"></b-icon>

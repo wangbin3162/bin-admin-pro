@@ -1,8 +1,9 @@
 import PageWrapper from './Page/PageWrapper'
 import PageFooter from './Page/PageFooter'
 import TitleBar from './TitleBar'
+import Iconfont from './Iconfont/iconfont'
 
-const compList = [PageWrapper, PageFooter, TitleBar]
+const compList = [PageWrapper, PageFooter, TitleBar, Iconfont]
 
 /**
  * 注册全局组件，外部引入的第三方组件也在此引入

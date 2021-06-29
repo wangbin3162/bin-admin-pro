@@ -18,6 +18,7 @@ export default [
         ]
       },
       { path: 'compCountTo', title: '数字动画' },
+      { path: 'compIconfont', title: '图标组件' },
       { path: 'compTitleBar', title: '标题组件' }
     ]
   },

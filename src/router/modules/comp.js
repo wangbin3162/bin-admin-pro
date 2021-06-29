@@ -48,6 +48,12 @@ export default [
     meta: { title: '数字动画' }
   },
   {
+    path: 'compIconfont',
+    name: 'CompIconfont',
+    component: () => import('../../views/comp/comp-iconfont'),
+    meta: { title: '图标字体' }
+  },
+  {
     path: 'compTitleBar',
     name: 'CompTitleBar',
     component: () => import('../../views/comp/comp-title-bar'),
