@@ -10,7 +10,7 @@ export const asyncRouterMap = [
     path: 'analysis',
     name: 'Analysis',
     meta: { title: '分析页' },
-    component: () => import('../views/dashboard/analysis.vue')
+    component: () => import('../views/dashboard/analysis')
   },
   ...comp,
   ...demo,
