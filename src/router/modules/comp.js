@@ -40,5 +40,17 @@ export default [
     name: 'OtherComp',
     component: () => import('../../views/comp/ui/other-comp'),
     meta: { title: '其他组件' }
+  },
+  {
+    path: 'compCountTo',
+    name: 'CompCountTo',
+    component: () => import('../../views/comp/comp-count-to'),
+    meta: { title: '数字动画' }
+  },
+  {
+    path: 'compTitleBar',
+    name: 'CompTitleBar',
+    component: () => import('../../views/comp/comp-title-bar'),
+    meta: { title: '数字动画' }
   }
 ]

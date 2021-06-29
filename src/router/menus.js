@@ -16,7 +16,9 @@ export default [
           { path: 'dataComp', title: '数据组件' },
           { path: 'otherComp', title: '其他组件' }
         ]
-      }
+      },
+      { path: 'compCountTo', title: '数字动画' },
+      { path: 'compTitleBar', title: '标题组件' }
     ]
   },
   {

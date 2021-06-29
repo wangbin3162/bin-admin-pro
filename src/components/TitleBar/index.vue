@@ -1,11 +1,10 @@
 <template>
-  <div class="title" :class="{'no-border':noBorder}">
-    <div class="label" :class="`tip-${tipPos}`" :style="labelStyle">
-      <b-icon :name="icon" v-if="icon"></b-icon>
-      <span>{{ label }}</span>
+  <div class="title-wrap" :class="{'no-border':noBorder}">
+    <div class="title" :class="`tip-${tipPos}`" :style="titleStyle">
+      <slot><span>{{ title }}</span></slot>
     </div>
     <div class="right" v-if="$slots.default">
-      <slot></slot>
+      <slot name="right"></slot>
     </div>
   </div>
 </template>
@@ -14,17 +13,14 @@
 export default {
   name: 'TitleBar',
   props: {
-    label: {
+    title: {
       type: String,
       default: '标题'
     },
-    labelStyle: { type: Object },
-    icon: {
-      type: String
-    },
+    titleStyle: { type: Object },
     tipPos: {
       type: String,
-      validator (value) {
+      validator(value) {
         return ['bottom', 'left'].includes(value)
       },
       default: 'bottom'
@@ -35,12 +31,12 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-.title {
+.title-wrap {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   border-bottom: 1px solid #f0f0f0;
   color: #333333;
   background: #fff;
@@ -48,7 +44,7 @@ export default {
     border-bottom: none;
   }
 
-  .label {
+  > .title {
     position: relative;
     display: inline-block;
     vertical-align: middle;
@@ -75,12 +71,6 @@ export default {
         right: 0;
         height: 2px;
       }
-    }
-
-    .iconfont {
-      display: inline-block;
-      vertical-align: baseline;
-      margin-right: 4px;
     }
 
     span {
