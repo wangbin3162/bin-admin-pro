@@ -423,6 +423,9 @@ export default {
 <style scoped lang="stylus">
 .analysis-wrap {
   padding: 16px;
+  :deep(.bin-card__header) {
+    color: rgba(0, 0, 0, .85);
+  }
 }
 .analysis-center {
   margin: 16px 0;

@@ -5,7 +5,7 @@ import user from './modules/user'
 import permission from './modules/permission'
 import tagsView from './modules/tagsView'
 
-const debug = false// process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production'
 const store = createStore({
   getters,
   modules: { app, user, permission, tagsView },

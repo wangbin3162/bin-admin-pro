@@ -52,7 +52,9 @@
 
 <script>
 import useSetting from '@/hooks/use-setting'
-import { isEqual } from '@/utils/color'
+import { Utils } from 'bin-ui-next'
+
+const { isEqual } = Utils.color
 
 export default {
   name: 'ThemePanel',

@@ -12,3 +12,38 @@ export function getAdminSetting() {
 export function setAdminSetting(setting) {
   return storage.set(KEY, setting)
 }
+
+// 代办事项设置
+const TODO_KEY = '__bin_admin_pro_todo__'
+
+export function getTodoList() {
+  return storage.get(TODO_KEY, [
+    { done: false, text: '未完成任务事项' },
+    { done: false, text: '实现代码更新' },
+    { done: false, text: '更新组件库' },
+    { done: true, text: '代办事项文字说明' },
+    { done: false, text: '编写统一的说明文档' }
+  ])
+}
+
+export function setTodoList(list) {
+  return storage.set(TODO_KEY, list)
+}
+
+// 快捷链接操作
+const LINK_KEY = '__bin_admin_pro_links__'
+
+export function getLinks() {
+  return storage.get(LINK_KEY, [
+      { link: 'https://wangbin3162.gitee.io/bin-ui-next', text: 'bin-ui-next' },
+      { link: 'https://wangbin3162.gitee.io/bin-ace-editor', text: 'bin-ace-editor' },
+      { link: 'https://wangbin3162.gitee.io/bin-charts', text: 'bin-charts' },
+      { link: 'https://wangbin3162.gitee.io/bin-tree-org', text: 'bin-tree-org' },
+      { link: 'https://wangbin3162.gitee.io/bin-animation', text: 'bin-animation' }
+    ]
+  )
+}
+
+export function setLinks(list) {
+  return storage.set(LINK_KEY, list)
+}

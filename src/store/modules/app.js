@@ -1,9 +1,13 @@
-import { getAdminSetting, setAdminSetting } from '@/config/datastore'
+import { getAdminSetting, getLinks, getTodoList, setAdminSetting, setLinks } from '@/config/datastore'
 import { MENU_THEME_COLOR_LIST, setMenuTheme, setPrimaryColor, setThemeMode } from '@/config/setting.cfg'
 
 const app = {
   state: {
     setting: getAdminSetting(),
+    todoList: getTodoList(),
+    links: getLinks(),
+    searchVisible: false,
+    settingVisible: false,
     menu: [],
     menuItems: [] // 平铺菜单
   },
@@ -47,6 +51,16 @@ const app = {
     TOGGLE_FIXED_ASIDE: (state, isFixed) => {
       state.setting.fixedAside = isFixed
       setAdminSetting(state.setting)
+    },
+    TOGGLE_SEARCH: (state) => {
+      state.searchVisible = !state.searchVisible
+    },
+    TOGGLE_SETTING: (state) => {
+      state.settingVisible = !state.settingVisible
+    },
+    SET_LINKS: (state, links) => {
+      state.links = links
+      setLinks(links)
     }
   },
   actions: {
@@ -96,11 +110,20 @@ const app = {
     toggleTagsView: ({ commit }) => {
       commit('SET_TAGS_VIEW')
     },
+    toggleSearchPane: ({ commit }) => {
+      commit('TOGGLE_SEARCH')
+    },
+    toggleSettingPane: ({ commit }) => {
+      commit('TOGGLE_SETTING')
+    },
     toggleFixedHeader: ({ commit }, isFixed) => {
       commit('TOGGLE_FIXED_HEADER', isFixed)
     },
     toggleFixedAside: ({ commit }, isFixed) => {
       commit('TOGGLE_FIXED_ASIDE', isFixed)
+    },
+    setLinks: ({ commit }, links) => {
+      commit('SET_LINKS', links)
     }
   }
 }

@@ -21,6 +21,10 @@ export default function useSetting() {
     }
   })
   const showTagsView = computed(() => store.getters.tagsView)
+
+  const searchVisible = computed(() => store.getters.searchVisible)
+  const settingVisible = computed(() => store.getters.settingVisible)
+
   const fixedHeader = computed(() => store.getters.fixedHeader)
   const fixedHeaderStyle = computed(() => {
     return {
@@ -37,6 +41,14 @@ export default function useSetting() {
 
   async function toggleSidebar() {
     await store.dispatch('toggleSideBar')
+  }
+
+  async function toggleSearch() {
+    await store.dispatch('toggleSearchPane')
+  }
+
+  async function toggleSetting() {
+    await store.dispatch('toggleSettingPane')
   }
 
   async function themChange(val) {
@@ -90,11 +102,15 @@ export default function useSetting() {
     fixedHeader,
     fixedHeaderStyle,
     showTagsView,
+    searchVisible,
+    settingVisible,
     systemPrimaryColorList: SYSTEM_PRIMARY_COLOR_LIST,
     menuThemeColorList: MENU_THEME_COLOR_LIST,
     themChange,
     toggleSidebar,
     toggleTagsView,
+    toggleSearch,
+    toggleSetting,
     changeFixedHeader,
     changeFixedAside,
     changeSidebarWidth,

@@ -20,10 +20,13 @@ body {
   text-rendering: optimizeLegibility;
   color: #515a6e;
 }
-a, a:focus, a:hover {
+a {
   cursor: pointer;
   color: getColor();
   text-decoration: none;
+}
+a:focus, a:hover {
+  color: getHover();
 }
 #app {
   min-height: 100%;

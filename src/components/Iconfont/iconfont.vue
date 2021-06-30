@@ -7,7 +7,10 @@
 <script>
 import useSetting from '@/hooks/use-setting'
 import { computed } from 'vue'
-import { mixWhite } from '@/utils/color'
+
+import { Utils } from 'bin-ui-next'
+
+const { mixWhite } = Utils.color
 
 export default {
   name: 'Iconfont',

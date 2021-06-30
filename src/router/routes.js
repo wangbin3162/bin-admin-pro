@@ -40,7 +40,7 @@ export function createRoutesInLayout(routes = []) {
           path: `/${HOME_PATH}`,
           name: 'Workbench',
           meta: { title: HOME_NAME },
-          component: () => import('../views/dashboard/workbench.vue')
+          component: () => import('../views/dashboard/workbench')
         },
         // 刷新页面 必须保留
         {

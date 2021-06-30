@@ -1,0 +1,48 @@
+<template>
+  <div class="workplace">
+    <top-box />
+    <div class="work-center">
+      <b-row :gutter="16">
+        <b-col span="14">
+          <project-box />
+          <dynamic-box />
+        </b-col>
+        <b-col span="10">
+          <quick-link />
+          <div class="banner">
+            <img src="@/assets/images/bg/work.png" alt="work">
+          </div>
+          <todos />
+        </b-col>
+      </b-row>
+    </div>
+  </div>
+</template>
+
+<script>
+import TopBox from './top-box'
+import ProjectBox from './project-box'
+import DynamicBox from './dynamic-box'
+import QuickLink from '@/views/dashboard/workbench/quick-link'
+import Todos from '@/views/dashboard/workbench/todos'
+
+export default {
+  name: 'Workbench',
+  components: { Todos, QuickLink, DynamicBox, TopBox, ProjectBox }
+}
+</script>
+
+<style lang="stylus" scoped>
+.work-center {
+  margin: 16px;
+  .banner {
+    padding: 16px;
+    margin: 16px 0;
+    background: #fff;
+    text-align: center;
+    img {
+      height: 300px;
+    }
+  }
+}
+</style>

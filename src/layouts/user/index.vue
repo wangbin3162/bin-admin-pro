@@ -1,7 +1,7 @@
 <template>
   <b-dropdown @command="handleClick" append-to-body>
     <div class="global-header-avatar-trigger">
-      <img src="@/assets/images/avatar.jpeg" class="avatar" alt="avatar">
+      <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
       <span v-if="userInfo">{{ userInfo.realName }}</span>
     </div>
     <template #dropdown>

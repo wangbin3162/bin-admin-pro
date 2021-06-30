@@ -1,8 +1,11 @@
 /**
  * 项目默认配置项
  */
-import { getAlpha, mixBlack, mixWhite } from '@/utils/color'
+import { Utils } from 'bin-ui-next'
 
+const { mixWhite, mixBlack, alpha } = Utils.color
+
+// 全局setting变量
 export default {
   theme: 'dark',
   menuTheme: '#ffffff',
@@ -74,8 +77,8 @@ export function setPrimaryColor(color) {
   const lighten5 = mixWhite(color, 0.9)
   const lightenHover = mixWhite(color, 0.95)
   // alpha
-  const shadow = getAlpha(color, 0.2)
-  const shadowLight = getAlpha(color, 0.08)
+  const shadow = alpha(color, 0.2)
+  const shadowLight = alpha(color, 0.08)
 
   setCssVar(PRIMARY_VAR, color) // primary
   setCssVar(PRIMARY_ACTIVE_VAR, darkColor) // active

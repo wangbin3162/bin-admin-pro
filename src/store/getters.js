@@ -7,6 +7,10 @@ const getters = {
   tagsView: state => state.app.setting.tagsView,
   fixedHeader: state => state.app.setting.fixedHeader,
   fixedAside: state => state.app.setting.fixedAside,
+  // 搜索弹窗
+  searchVisible: state => state.app.searchVisible,
+  // 设置弹窗
+  settingVisible: state => state.app.settingVisible,
   // 菜单
   navMenu: state => state.app.menu,
   // 菜单

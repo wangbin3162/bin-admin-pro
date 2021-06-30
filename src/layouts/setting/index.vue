@@ -1,7 +1,7 @@
 <template>
-  <header-trigger icon="setting" @click="visible = true"></header-trigger>
+  <header-trigger icon="setting" @click="toggleSetting"></header-trigger>
   <!--设置抽屉-->
-  <b-drawer v-model="visible" append-to-body>
+  <b-drawer :model-value="settingVisible" append-to-body @close="toggleSetting">
     <div class="setting-panel">
       <theme-panel />
       <h3 class="setting-title"><span>功能设置</span></h3>
@@ -51,7 +51,6 @@ export default {
   name: 'Setting',
   components: { ThemePanel, HeaderTrigger },
   setup() {
-    const visible = ref(false)
     const {
       showTagsView,
       sidebarWidth,
@@ -61,11 +60,13 @@ export default {
       toggleTagsView,
       changeFixedHeader,
       changeFixedAside,
-      changeSidebarWidth
+      changeSidebarWidth,
+      settingVisible,
+      toggleSetting
     } = useSetting()
 
     return {
-      visible,
+      settingVisible,
       showTagsView,
       sidebarWidth,
       fixedHeader,
@@ -74,7 +75,8 @@ export default {
       toggleTagsView,
       changeFixedHeader,
       changeFixedAside,
-      changeSidebarWidth
+      changeSidebarWidth,
+      toggleSetting
     }
   }
 }
