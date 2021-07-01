@@ -3,10 +3,11 @@ import { ACCESS_TOKEN } from '@/config/token-const'
 import cookies from '@/utils/util.cookies'
 
 export default {
+  namespaced: true,
   state: {
     token: '', // token
     roles: [],
-    info: null // user的登录信息
+    userInfo: null // user的登录信息
   },
   mutations: {
     SET_TOKEN: (state, token) => {
@@ -16,7 +17,7 @@ export default {
       state.roles = roles
     },
     SET_INFO: (state, info) => {
-      state.info = info
+      state.userInfo = info
     }
   },
   actions: {

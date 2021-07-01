@@ -17,13 +17,13 @@
 <script>
 import { MessageBox } from 'bin-ui-next'
 import { computed } from 'vue'
-import useStoreRouter from '@/hooks/use-store-router'
+import useStoreRouter from '@/hooks/useStoreRouter'
 
 export default {
   name: 'UserAvatar',
   setup() {
     const { $store, $router, $route } = useStoreRouter()
-    const userInfo = computed(() => $store.getters.userInfo)
+    const userInfo = computed(() => $store.state.user.userInfo)
 
     function handleClick(name) {
       if (name === 'logout') {
@@ -32,7 +32,7 @@ export default {
           title: '提示',
           message: '确认退出登录吗？'
         }).then(() => {
-          $store.dispatch('clearToken')
+          $store.dispatch('user/clearToken')
           $router.push(`/login?redirect=${$route.fullPath}`)
         }).catch(e => {
         })

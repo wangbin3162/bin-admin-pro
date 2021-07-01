@@ -34,11 +34,12 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/use-setting'
+import useSetting from '@/hooks/useSetting'
 import AsideMenus from '@/layouts/menus'
 import GlobalHeader from '@/layouts/header'
 import GlobalFooter from '@/layouts/footer'
 import { computed } from 'vue'
+import useTagsView from '@/hooks/useTagsView'
 
 export default {
   name: 'Layout',
@@ -51,9 +52,9 @@ export default {
       sidebarWidth,
       fixedAside,
       asideStyle,
-      cachedViews,
       fixedHeader
     } = useSetting()
+    const { cachedViews } = useTagsView()
 
     const mainStyle = computed(() => {
       let left = 0

@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/use-setting'
+import useSetting from '@/hooks/useSetting'
 import MenuItem from '@/layouts/menus/menu-item'
 import Submenu from '@/layouts/menus/submenu'
 import { ref, watch } from 'vue'
-import useStoreRouter from '@/hooks/use-store-router'
-import useMenu from '@/hooks/use-menu'
+import useStoreRouter from '@/hooks/useStoreRouter'
+import useMenu from '@/hooks/useMenu'
 
 export default {
   name: 'AsideMenus',
@@ -31,8 +31,8 @@ export default {
     const { $route } = useStoreRouter()
     const activeMenu = ref('')
     const openNames = ref([])
-    const { sidebar, menuTheme, sidebarWidth, navMenu } = useSetting()
-    const { getMenuItemNamePath, handleMenuSelect } = useMenu()
+    const { sidebar, menuTheme, sidebarWidth } = useSetting()
+    const { getMenuItemNamePath, handleMenuSelect, navMenu } = useMenu()
 
     watch(() => $route.path, (path) => {
       // 展开的菜单

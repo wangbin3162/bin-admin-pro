@@ -126,7 +126,7 @@
 <script>
 import TopCard from '@/views/dashboard/analysis/top-card'
 import { onMounted, ref } from 'vue'
-import { useChartsColor } from '@/hooks/use-charts'
+import { useChartsColor } from '@/hooks/useCharts'
 import Iconfont from '@/components/Iconfont/iconfont'
 
 export default {

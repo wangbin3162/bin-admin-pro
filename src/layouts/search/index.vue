@@ -6,7 +6,7 @@
 <script>
 import HeaderTrigger from '@/layouts/header-trigger'
 import SearchPanel from '@/layouts/search/search-panel'
-import useSetting from '@/hooks/use-setting'
+import useSetting from '@/hooks/useSetting'
 
 export default {
   name: 'Search',

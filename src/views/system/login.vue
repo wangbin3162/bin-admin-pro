@@ -124,8 +124,8 @@ export default {
     loginSuccess(res) {
       if (res.data.code === '0') {
         const token = res.data.data
-        this.$store.dispatch('setToken', token).then(() => {
-          this.$store.dispatch('getUserInfo').then(user => {
+        this.$store.dispatch('user/setToken', token).then(() => {
+          this.$store.dispatch('user/getUserInfo').then(user => {
             this.$notice.success({
               title: '登录成功',
               message: `欢迎回来:${user.realName || user.username}`,

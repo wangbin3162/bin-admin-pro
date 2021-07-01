@@ -28,9 +28,9 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/use-setting'
 import { computed } from 'vue'
-import useMenu from '@/hooks/use-menu'
+import useSetting from '@/hooks/useSetting'
+import useMenu from '@/hooks/useMenu'
 
 export default {
   name: 'PageWrapper',

@@ -4,13 +4,13 @@
 
 <script>
 import { onMounted } from 'vue'
-import useStoreRouter from '@/hooks/use-store-router'
+import useStoreRouter from '@/hooks/useStoreRouter'
 
 export default {
   setup() {
     const { $store } = useStoreRouter()
     onMounted(async () => {
-      await $store.dispatch('loadApp')
+      await $store.dispatch('app/loadApp')
     })
   }
 }

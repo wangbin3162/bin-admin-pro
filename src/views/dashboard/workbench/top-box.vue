@@ -7,7 +7,7 @@
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
-        <div class="welcome-weather">今日晴，20℃ - 32℃！</div>
+        <div class="welcome-weather">{{ currentDate }} 今日晴，20℃ - 32℃！</div>
       </div>
       <div class="right-box">
         <div class="item">
@@ -37,27 +37,20 @@
 </template>
 
 <script>
-import { computed, unref } from 'vue'
-import useStoreRouter from '@/hooks/use-store-router'
-import dayjs from 'dayjs'
 import Iconfont from '@/components/Iconfont/iconfont'
+import useTodos from '@/hooks/useTodos'
+import useUser from '@/hooks/useUser'
 
 export default {
   name: 'top-box',
   components: { Iconfont },
   setup() {
-    const { $store } = useStoreRouter()
-    const userInfo = computed(() => $store.getters.userInfo)
-    const welcomeTitle = computed(() => {
-      const hour = dayjs().hour()
-      return `${hour < 12 ? '上午好' : (hour < 18 ? '下午好' : '晚上好')}，${userInfo.value.realName}`
-    })
-    const todos = computed(() => $store.state.app.todoList)
-    const todoDone = computed(() => todos.value.filter(v => v.done))
-    const todoLabel = computed(() => `${todoDone.value.length} / ${todos.value.length}`)
+    const { welcomeTitle, currentDate } = useUser()
+    const { todoLabel } = useTodos()
 
     return {
       welcomeTitle,
+      currentDate,
       todoLabel
     }
   }

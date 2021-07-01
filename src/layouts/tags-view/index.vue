@@ -3,14 +3,22 @@
     <b-tabs v-model="activeTag" :data="viewTags" type="tag" closable context-menu ref="tabsRef"
             @change="handleSelect" @tab-select="handleRightClick" @tab-close="handleCloseTag">
       <template v-slot:menu>
-        <li @click="refreshSelected"><i class="b-iconfont b-icon-reload"></i>重新加载</li>
-        <li @click="closeSelected"><i class="b-iconfont b-icon-close"></i>关闭标签页</li>
-        <li @click="closeOthers"><i class="b-iconfont b-icon-pic-center"></i>关闭其他标签页</li>
-        <li @click="closeAll"><i class="b-iconfont b-icon-line"></i>关闭全部标签页</li>
+        <li @click="refreshCurrentPage">
+          <i class="b-iconfont b-icon-reload"></i>重新加载
+        </li>
+        <li :class="{'disabled':rightHome}" @click="closeSelected">
+          <i class="b-iconfont b-icon-close"></i>关闭标签页
+        </li>
+        <li :class="{'disabled':rightHome}" @click="closeOthers">
+          <i class="b-iconfont b-icon-pic-center"></i>关闭其他标签页
+        </li>
+        <li :class="{'disabled':rightHome}" @click="closeAll">
+          <i class="b-iconfont b-icon-line"></i>关闭全部标签页
+        </li>
       </template>
     </b-tabs>
     <div class="tags-view-ctrl">
-      <span class="trigger" @click="refreshSelected">
+      <span class="trigger" @click="refreshCurrentPage">
         <i class="b-iconfont b-icon-reload" style="transform: rotate(90deg);"></i>
       </span>
       <b-dropdown trigger="click" style="width: 32px;display: flex;" append-to-body @command="handleCommand">
@@ -20,13 +28,13 @@
             <b-dropdown-item name="refreshSelected">
               <i class="b-iconfont b-icon-reload"></i> 重新加载
             </b-dropdown-item>
-            <b-dropdown-item name="closeSelected">
+            <b-dropdown-item name="closeSelected" :disabled="currentHome">
               <i class="b-iconfont b-icon-close"></i> 关闭标签页
             </b-dropdown-item>
-            <b-dropdown-item name="closeOthers" divided>
+            <b-dropdown-item name="closeOthers" divided :disabled="currentHome">
               <i class="b-iconfont b-icon-pic-center"></i> 关闭其他标签页
             </b-dropdown-item>
-            <b-dropdown-item name="closeAll">
+            <b-dropdown-item name="closeAll" :disabled="currentHome">
               <i class="b-iconfont b-icon-line"></i> 关闭全部标签页
             </b-dropdown-item>
           </b-dropdown-menu>
@@ -38,23 +46,23 @@
 
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import useStoreRouter from '@/hooks/use-store-router'
-import { HOME_PATH, HOME_NAME } from '@/router/menus'
+import useStoreRouter from '@/hooks/useStoreRouter'
+import { HOME_PATH } from '@/router/menus'
+import useMenu from '@/hooks/useMenu'
+import useTagsView from '@/hooks/useTagsView'
 
 export default {
   name: 'TagsView',
   setup() {
-    const { $store, $router, $route, mapGetter } = useStoreRouter()
+    const { $store, $router, $route } = useStoreRouter()
     const activeTag = ref('')
     const selectedTag = ref({})
     const tabsRef = ref(null)
 
-    const navMenuItems = computed(() => mapGetter().navMenuItems)
-    const visitedViews = computed(() => mapGetter().visitedViews)
-    const viewTags = computed(() => {
-      const visitedTabs = visitedViews.value.map(i => ({ key: i.path, title: i.title }))
-      return [{ key: HOME_PATH, title: HOME_NAME, noClose: true, icon: '' }, ...visitedTabs]
-    })
+    const { navMenuItems } = useMenu()
+    const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
+    const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
+    const currentHome = computed(() => $route.path === `/${HOME_PATH}`)
 
     onMounted(() => {
       addTags()
@@ -70,7 +78,7 @@ export default {
 
     function addTags() {
       const { path } = $route
-      if (!path || path === `/${HOME_PATH}`) return
+      if (currentHome.value) return
       const current = navMenuItems.value.find(item => `/${item.path}` === path)
       if (current) {
         $store.dispatch('tagsView/addView', { path: current.path, title: current.title })
@@ -96,12 +104,10 @@ export default {
       $store.dispatch('tagsView/delView', { path: tag.key, title: tag.title })
     }
 
-    // 刷新当前view
-    function refreshSelected() {
-      $store.dispatch('tagsView/refreshCurrentPage', $router)
-    }
-
     function closeSelected() {
+      if (rightHome.value) {
+        return
+      }
       const selectedTagVal = selectedTag.value
       if (selectedTagVal.key === `/${HOME_PATH}`) return
       // 这里需要调用组件的关闭选择的tag
@@ -110,6 +116,9 @@ export default {
 
     // 关闭其他tags
     function closeOthers() {
+      if (rightHome.value) {
+        return
+      }
       const selectedTagVal = selectedTag.value
       $router.push({ path: selectedTagVal.key })
       $store.dispatch('tagsView/delOthersViews', { path: selectedTagVal.key, title: selectedTagVal.title })
@@ -118,6 +127,9 @@ export default {
 
     // 关闭所有
     async function closeAll() {
+      if (rightHome.value) {
+        return
+      }
       await $store.dispatch('tagsView/delAllViews')
       await $router.push(`/${HOME_PATH}`)
       await nextTick()
@@ -128,7 +140,7 @@ export default {
       handleRightClick({ key: activeTag.value })
       switch (name) {
         case 'refreshSelected':
-          refreshSelected()
+          refreshCurrentPage()
           break
         case 'closeSelected':
           closeSelected()
@@ -144,13 +156,16 @@ export default {
 
     return {
       tabsRef,
+      rightHome,
+      currentHome,
       selectedTag,
       activeTag,
+      visitedViews,
       viewTags,
+      refreshCurrentPage,
       handleSelect,
       handleRightClick,
       handleCloseTag,
-      refreshSelected,
       closeSelected,
       closeOthers,
       closeAll,
@@ -159,3 +174,16 @@ export default {
   }
 }
 </script>
+
+<style lang="stylus">
+.tags-view-container .bin-tabs-wrapper .contextmenu li {
+  &.disabled {
+    opacity: 1;
+    cursor: not-allowed;
+    color: #C0C4CC;
+    &:hover {
+      background: #fff;
+    }
+  }
+}
+</style>

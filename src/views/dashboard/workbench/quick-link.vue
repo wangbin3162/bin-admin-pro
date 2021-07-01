@@ -69,8 +69,8 @@
 
 <script>
 import { ref, reactive } from 'vue'
-import useSetting from '@/hooks/use-setting'
-import useLinks from '@/hooks/use-links'
+import useSetting from '@/hooks/useSetting'
+import useLinks from '@/hooks/useLinks'
 import { Message } from 'bin-ui-next'
 
 export default {

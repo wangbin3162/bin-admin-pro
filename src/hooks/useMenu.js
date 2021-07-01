@@ -1,16 +1,17 @@
-import { DASHBOARD_MENUS, HOME_PATH } from '@/router/menus'
+import { HOME_PATH } from '@/router/menus'
 
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
+import useTagsView from '@/hooks/useTagsView'
 
 export default function useMenu() {
   const $store = useStore()
   const $router = useRouter()
   const $route = useRoute()
-  const navMenu = computed(() => $store.getters.navMenu)
-  const navMenuItems = computed(() => $store.getters.navMenuItems)
-  const addRouters = computed(() => $store.getters.addRouters)
+  const navMenu = computed(() => $store.state.menu.menu)
+  const navMenuItems = computed(() => $store.state.menu.menuItems)
+  const addRouters = computed(() => $store.state.menu.addRouters)
   const allMenuItems = computed(() => {
     const functions = navMenu.value
     const all = []
@@ -27,6 +28,7 @@ export default function useMenu() {
     })
     return all
   })
+  const { refreshCurrentPage } = useTagsView()
 
   // 获取菜单项名称路径 附带斜杠
   function getMenuItemNamePath(path) {
@@ -64,7 +66,7 @@ export default function useMenu() {
   function handleMenuSelect(path) {
     const to = `/${path}`
     if (to === $route.fullPath) {
-      $store.dispatch('tagsView/refreshCurrentPage', $router)
+      refreshCurrentPage()
       return
     }
     if (path === HOME_PATH || addRouters.value.findIndex(item => item.path === path) > -1) {
@@ -77,7 +79,9 @@ export default function useMenu() {
   }
 
   return {
+    navMenu,
     navMenuItems,
+    addRouters,
     allMenuItems,
     getCurrentRouteMenu,
     getBreadcrumbData,
