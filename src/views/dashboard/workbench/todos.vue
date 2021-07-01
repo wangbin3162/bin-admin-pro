@@ -1,34 +1,163 @@
 <template>
   <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{padding: '0'}">
     <template #header>
-      <div class="top" style="font-weight: normal;">
-        <iconfont icon="check-square" color="warning" bg round></iconfont>
-        <span class="ml-5">待办事项</span>
+      <div flex="main:justify cross:center" style="font-weight: normal;">
+        <div class="top">
+          <iconfont icon="check-square" color="warning" bg round></iconfont>
+          <span class="ml-5">待办事项</span>
+        </div>
+        <b-tooltip content="新增代办">
+          <b-icon name="plus-circle" type="button" @click="handleAdd"></b-icon>
+        </b-tooltip>
       </div>
     </template>
-    <ul class="todo-list">
-      <li class="todo">
-        <span class="toggle">
+    <ul class="todo-list" ref="listRef">
+      <li
+        v-for="item in list"
+        :key="item._rowKey"
+        :data-key="item._rowKey"
+        class="todo"
+        :class="[{done:item.done},{edit: editIndex === item._index}]"
+      >
+        <i class="handle drag b-iconfont b-icon-menu"></i>
+        <span class="toggle" @click="toggleCheck(item._index)">
           <b-icon name="check"></b-icon>
         </span>
-        <label>star this repository</label>
-        <i class="destroy b-iconfont b-icon-close"></i>
-      </li>
-      <li class="todo done">
-        <span class="toggle">
-          <b-icon name="check"></b-icon>
-        </span>
-        <label>star this repository</label>
-        <i class="destroy b-iconfont b-icon-close"></i>
+        <label v-if="editIndex === item._index">
+          <b-input ref="inputRef" v-model="editText" size="small" clearable @blur="inputBlur(item._index)"></b-input>
+        </label>
+        <label v-else @dblclick="dbClickEdit(item._index)">{{ item.text }}</label>
+        <i class="destroy b-iconfont b-icon-close" @click="removeOne(item._index)"></i>
       </li>
     </ul>
-    <footer class="footer"></footer>
+    <footer class="footer">
+      <span class="count"><strong>{{ leftCount }}</strong>项未完成</span>
+      <span class="count"><strong>{{ todoLabel }}</strong></span>
+    </footer>
   </b-card>
 </template>
 
 <script>
+import useTodos from '@/hooks/useTodos'
+import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { Utils } from 'bin-ui-next'
+import { generateId } from '@/utils/util'
+import Sortable from 'sortablejs'
+
+const { deepCopy } = Utils.util
+let rowKey = 1
+
 export default {
-  name: 'todos'
+  name: 'todos',
+  setup() {
+    const editIndex = ref(-1)
+    const editText = ref('')
+    const inputRef = ref(null)
+    const listRef = ref(null)
+    const { todos, todoLabel, leftCount, saveTodos } = useTodos()
+    const list = ref(todos.value)
+    let sortInstance = null
+    watch(todos, (val) => {
+      list.value = makeData()
+    }, { immediate: true })
+
+    onMounted(() => {
+      if (sortInstance) sortInstance.destroy()
+      const el = listRef.value
+      sortInstance = Sortable.create(el, {
+        animation: 150,
+        ghostClass: 'ghost',
+        handle: '.drag',
+        onEnd: (evt) => {
+          const { newIndex, oldIndex } = evt
+          const newData = deepCopy(list.value)
+          const targetRow = newData.splice(oldIndex, 1)[0]
+          newData.splice(newIndex, 0, targetRow)
+          updateState(newData)
+        }
+      })
+    })
+
+    function updateState(list) {
+      saveTodos(list)
+    }
+
+    onBeforeUnmount(() => {
+      if (sortInstance) {
+        sortInstance.destroy()
+        sortInstance = null
+      }
+    })
+
+    async function handleAdd() {
+      if (editIndex.value > -1) {
+        editIndex.value = -1
+        editText.value = ''
+        return
+      }
+      list.value.push({ _index: list.value.length, text: '', done: false })
+      editIndex.value = list.value.length - 1
+      editText.value = ''
+      await nextTick()
+      inputRef.value && inputRef.value.focus()
+    }
+
+    async function dbClickEdit(index) {
+      editIndex.value = index
+      editText.value = list.value[index].text
+      await nextTick()
+      inputRef.value && inputRef.value.focus()
+    }
+
+    function inputBlur(index) {
+      const text = editText.value
+      if (text === '') {
+        if (index > -1) { // 为空时候移除这个
+          list.value.splice(index, 1)
+        }
+      } else {
+        list.value[index].text = text
+        editIndex.value = -1
+        updateState(list.value)
+      }
+    }
+
+    function toggleCheck(index) {
+      list.value[index].done = !list.value[index].done
+      updateState(list.value)
+    }
+
+    function removeOne(index) {
+      list.value.splice(index, 1)
+      updateState(list.value)
+    }
+
+    // 重新组织ID
+    function makeData() {
+      const data = deepCopy(todos.value)
+      data.forEach((row, index) => {
+        row._index = index
+        row._rowKey = generateId() + rowKey++
+      })
+      return data
+    }
+
+    return {
+      editIndex,
+      editText,
+      list,
+      todos,
+      todoLabel,
+      leftCount,
+      inputRef,
+      listRef,
+      handleAdd,
+      inputBlur,
+      removeOne,
+      dbClickEdit,
+      toggleCheck
+    }
+  }
 }
 </script>
 
@@ -41,17 +170,30 @@ export default {
   .todo {
     position: relative;
     font-size: 24px;
-    height: 46px;
+    height: 44px;
     border-bottom: 1px solid #ededed;
+    .drag {
+      cursor: grab;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 22px;
+      height: 22px;
+      top: 12px;
+      right: 6px;
+      font-size: 12px;
+      z-index: 1;
+    }
     .toggle {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 26px;
-      height: 26px;
+      width: 22px;
+      height: 22px;
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 12px;
+      left: 14px;
       border: 1px solid #dddddd;
       border-radius: 50%;
       opacity: 0.5;
@@ -85,9 +227,15 @@ export default {
         color: #f74e57;
       }
     }
+    &.edit {
+      label {
+        padding: 9px 60px 7px 50px;
+      }
+    }
     &.done {
       .toggle {
         border-color: #bae7a3;
+        background-color: #f6fcf4;
         opacity: 1;
         i {
           color: #52c41a;
@@ -104,15 +252,25 @@ export default {
         display: block;
       }
     }
+    &:last-child {
+      border-bottom: none;
+    }
   }
 }
 .footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   color: #777;
   position: relative;
   padding: 10px 15px;
   height: 40px;
-  text-align: center;
+  text-align: left;
   border-top: 1px solid #e6e6e6;
+  font-size: 12px;
+  .count {
+
+  }
   &:before {
     content: "";
     position: absolute;
@@ -123,5 +281,9 @@ export default {
     overflow: hidden;
     box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, .2);
   }
+}
+.ghost {
+  opacity: 0.8;
+  background: #86c2ff;
 }
 </style>

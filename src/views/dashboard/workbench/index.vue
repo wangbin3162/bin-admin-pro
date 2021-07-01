@@ -41,7 +41,7 @@ export default {
     background: #fff;
     text-align: center;
     img {
-      height: 300px;
+      height: 260px;
     }
   }
 }
