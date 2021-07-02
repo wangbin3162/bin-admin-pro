@@ -1,5 +1,5 @@
 <template>
-  <div class="page-footer" :style="footerWidth">
+  <div class="page-footer" :style="footerWidth" v-if="render">
     <div class="page-footer__left">
       <slot name="left" />
     </div>
@@ -12,15 +12,19 @@
 
 <script>
 import useSetting from '@/hooks/useSetting'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 export default {
   name: 'PageFooter',
   setup() {
     const { sidebar, sidebarWidth } = useSetting()
+    const render = ref(false)
     const footerWidth = computed(() => ({ width: `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` }))
+    onMounted(() => {
+      render.value = true
+    })
 
-    return { footerWidth }
+    return { render, footerWidth }
   }
 }
 </script>

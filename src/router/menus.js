@@ -27,8 +27,8 @@ export default [
     title: '结果页面',
     icon: 'check-circle',
     children: [
-      { path: 'success', title: '成功页面' },
-      { path: 'fail', title: '成功页面' }
+      { path: 'success', title: '成功页' },
+      { path: 'fail', title: '失败页' }
     ]
   },
   {
