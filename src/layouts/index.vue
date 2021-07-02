@@ -30,7 +30,7 @@
       <global-footer></global-footer>
     </div>
   </div>
-  <b-back-top :height="200" :right="10"></b-back-top>
+  <b-back-top :height="200" :right="24" :bottom="60"></b-back-top>
 </template>
 
 <script>
@@ -77,7 +77,7 @@ export default {
       el.style.left = '0'
       el.style.width = '100%'
       el.style.height = '100%'
-      el.style.overflow = 'hidden'
+      // el.style.overflow = 'hidden'
     }
 
     function afterLeave(el) {

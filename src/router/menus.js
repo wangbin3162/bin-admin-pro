@@ -23,6 +23,16 @@ export default [
     ]
   },
   {
+    path: 'form',
+    title: '表单页面',
+    icon: 'reconciliation',
+    children: [
+      { path: 'baseForm', title: '基础表单' },
+      { path: 'stepForm', title: '分步表单' },
+      { path: 'advancedForm', title: '高级表单' }
+    ]
+  },
+  {
     path: 'result',
     title: '结果页面',
     icon: 'check-circle',

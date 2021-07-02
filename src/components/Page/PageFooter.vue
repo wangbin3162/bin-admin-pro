@@ -1,13 +1,15 @@
 <template>
-  <div class="page-footer" :style="footerWidth" v-if="render">
-    <div class="page-footer__left">
-      <slot name="left" />
+  <teleport to="#app">
+    <div class="page-footer" :style="footerWidth">
+      <div class="page-footer__left">
+        <slot name="left" />
+      </div>
+      <slot name="center" />
+      <div class="page-footer__right">
+        <slot />
+      </div>
     </div>
-    <slot />
-    <div class="page-footer__right">
-      <slot name="right" />
-    </div>
-  </div>
+  </teleport>
 </template>
 
 <script>
@@ -18,13 +20,9 @@ export default {
   name: 'PageFooter',
   setup() {
     const { sidebar, sidebarWidth } = useSetting()
-    const render = ref(false)
     const footerWidth = computed(() => ({ width: `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` }))
-    onMounted(() => {
-      render.value = true
-    })
 
-    return { render, footerWidth }
+    return { footerWidth }
   }
 }
 </script>
@@ -34,7 +32,7 @@ export default {
   position: fixed;
   right: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;

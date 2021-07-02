@@ -1,8 +1,5 @@
 import layout from '../layouts'
-import comp from './modules/comp'
-import result from './modules/result'
-import nested from './modules/nested'
-import errorPage from './modules/error-page'
+import modules from './modules'
 import { HOME_PATH, HOME_NAME } from '@/router/menus'
 
 export const asyncRouterMap = [
@@ -12,10 +9,7 @@ export const asyncRouterMap = [
     meta: { title: '分析页' },
     component: () => import('../views/dashboard/analysis')
   },
-  ...comp,
-  ...result,
-  ...nested,
-  ...errorPage,
+  ...modules,
   {
     path: 'about',
     name: 'About',

@@ -23,7 +23,6 @@
         </slot>
       </div>
     </div>
-    <slot name="footer"></slot>
   </div>
 </template>
 
@@ -62,7 +61,6 @@ export default {
   .page-header {
     box-sizing: border-box;
     margin: 0;
-    color: rgba(0, 0, 0, .85);
     font-size: 14px;
     font-variant: tabular-nums;
     line-height: 1.5715;
@@ -78,7 +76,7 @@ export default {
       overflow: hidden;
       &-title {
         color: #17233d;
-        font-weight: 600;
+        font-weight: 500;
         font-size: 18px;
         margin-bottom: 0;
         padding-right: 12px;
