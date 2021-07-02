@@ -44,7 +44,6 @@
 <script>
 import HeaderTrigger from '@/layouts/header-trigger'
 import useSetting from '@/hooks/useSetting'
-import { ref } from 'vue'
 import ThemePanel from '@/layouts/setting/theme-panel'
 
 export default {
