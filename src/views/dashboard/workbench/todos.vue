@@ -24,7 +24,14 @@
           <b-icon name="check"></b-icon>
         </span>
         <label v-if="editIndex === item._index">
-          <b-input ref="inputRef" v-model="editText" size="small" clearable @blur="inputBlur(item._index)"></b-input>
+          <b-input
+            ref="inputRef"
+            v-model="editText"
+            size="small"
+            clearable
+            @enter="inputBlur(item._index)"
+            @blur="inputBlur(item._index)"
+          ></b-input>
         </label>
         <label v-else @dblclick="dbClickEdit(item._index)">{{ item.text }}</label>
         <i class="destroy b-iconfont b-icon-close" @click="removeOne(item._index)"></i>

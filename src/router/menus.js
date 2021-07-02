@@ -23,11 +23,31 @@ export default [
     ]
   },
   {
-    path: 'demo',
-    title: 'Demo',
-    icon: 'detail',
+    path: 'result',
+    title: '结果页面',
+    icon: 'check-circle',
     children: [
-      { path: 'tableTest', title: '测试代码' }
+      { path: 'success', title: '成功页面' },
+      { path: 'fail', title: '成功页面' }
+    ]
+  },
+  {
+    path: 'errorPage',
+    title: '异常页面',
+    icon: 'error',
+    children: [
+      {
+        path: 'error403',
+        title: '异常页403'
+      },
+      {
+        path: 'error404',
+        title: '异常页404'
+      },
+      {
+        path: 'error500',
+        title: '异常页500'
+      }
     ]
   },
   {
@@ -70,25 +90,6 @@ export const DASHBOARD_MENUS = [
  */
 export const staticMenu = [
   {
-    path: 'errorPage',
-    title: '错误页面',
-    icon: 'error',
-    children: [
-      {
-        path: 'error403',
-        title: '异常页403'
-      },
-      {
-        path: 'error404',
-        title: '异常页404'
-      },
-      {
-        path: 'error500',
-        title: '异常页500'
-      }
-    ]
-  },
-  {
     path: 'about',
     title: '关于',
     icon: 'dingtalk'
@@ -100,5 +101,9 @@ export const staticMenu = [
  * @param menus 接口返回的menus
  */
 export function getFilterMenus(menus = []) {
-  return DASHBOARD_MENUS.concat(menus, staticMenu)
+  return [
+    ...DASHBOARD_MENUS,
+    ...menus,
+    ...staticMenu
+  ]
 }

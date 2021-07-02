@@ -1,6 +1,6 @@
 import layout from '../layouts'
 import comp from './modules/comp'
-import demo from './modules/demo'
+import result from './modules/result'
 import nested from './modules/nested'
 import errorPage from './modules/error-page'
 import { HOME_PATH, HOME_NAME } from '@/router/menus'
@@ -13,7 +13,7 @@ export const asyncRouterMap = [
     component: () => import('../views/dashboard/analysis')
   },
   ...comp,
-  ...demo,
+  ...result,
   ...nested,
   ...errorPage,
   {

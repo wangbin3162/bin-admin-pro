@@ -1,7 +1,8 @@
 {
   "name": "bin-admin-pro",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "后台管理系统 vue3版本",
+  "homepage": "https://github.com/wangbin3162/bin-admin-pro",
   "keywords": [
     "bin-ui-nex",
     "bin",
