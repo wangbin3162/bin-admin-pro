@@ -207,7 +207,6 @@ export default {
       }
     }
   },
-  computed: {},
   methods: {
     updateBase() {
       this.$message.success('更新成功！')
