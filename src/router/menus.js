@@ -42,12 +42,12 @@ export default [
     ]
   },
   {
-    path: 'result',
-    title: '结果页面',
-    icon: 'check-circle',
+    path: 'personal',
+    title: '个人页面',
+    icon: 'control',
     children: [
-      { path: 'success', title: '成功页' },
-      { path: 'fail', title: '失败页' }
+      { path: 'userCenter', title: '个人中心' },
+      { path: 'userSetting', title: '个人设置' }
     ]
   },
   {
@@ -67,6 +67,15 @@ export default [
         path: 'error500',
         title: '异常页500'
       }
+    ]
+  },
+  {
+    path: 'result',
+    title: '结果页面',
+    icon: 'check-circle',
+    children: [
+      { path: 'success', title: '成功页' },
+      { path: 'fail', title: '失败页' }
     ]
   },
   {
