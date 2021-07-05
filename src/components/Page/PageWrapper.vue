@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/var.styl"
 .page-header-wrap {
   .page-header {
     box-sizing: border-box;
@@ -68,6 +69,7 @@ export default {
     position: relative;
     padding: 16px 24px;
     background-color: #fff;
+    border-bottom: $color-border-base;
     &-heading {
       display: flex;
       justify-content: space-between;

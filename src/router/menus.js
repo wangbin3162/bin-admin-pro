@@ -33,6 +33,15 @@ export default [
     ]
   },
   {
+    path: 'detail',
+    title: '详情页面',
+    icon: 'filedone',
+    children: [
+      { path: 'baseDetail', title: '基础详情' },
+      { path: 'advancedDetail', title: '高级详情' }
+    ]
+  },
+  {
     path: 'result',
     title: '结果页面',
     icon: 'check-circle',

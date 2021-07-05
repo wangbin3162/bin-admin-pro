@@ -69,6 +69,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/var.styl"
 .card-panel {
   margin-bottom: 16px;
 }
@@ -89,7 +90,7 @@ export default {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
   .title {
-    color: rgba(0, 0, 0, .85);
+    color: $color-text-primary;
     font-size: 18px;
     padding-bottom: 4px;
     > span {
@@ -97,7 +98,7 @@ export default {
     }
   }
   .desc {
-    color: rgba(0, 0, 0, .45);
+    color: $color-text-secondary;
     margin-top: 12px;
   }
 }

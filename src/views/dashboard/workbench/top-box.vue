@@ -90,7 +90,7 @@ export default {
         margin-bottom: 12px;
       }
       &-weather {
-        color: $color-text-light;
+        color: $color-text-secondary;
       }
     }
     .right-box {

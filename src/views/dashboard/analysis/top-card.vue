@@ -51,9 +51,10 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/var.styl"
 .card-panel {
   .top {
-    color: rgba(0, 0, 0, .45);
+    color: $color-text-default;
     font-size: 14px;
     line-height: 22px;
     height: 22px;
@@ -61,8 +62,9 @@ export default {
   .center {
     height: 100px;
     .count-to {
+      color: $color-text-default;
       margin-bottom: 0;
-      font-size: 30px;
+      font-size: 28px;
       line-height: 38px;
       height: 38px;
     }

@@ -127,6 +127,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/var.styl"
 @import "~@/assets/stylus/base/mixins.styl"
 .card-panel {
   margin-bottom: 16px;
@@ -168,7 +169,7 @@ export default {
   margin-top: 16px;
   padding-left: 24px;
   a {
-    color: rgba(0, 0, 0, .65);
+    color: $color-text-default;
     i {
       display: none;
     }

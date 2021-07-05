@@ -421,10 +421,11 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/var.styl"
 .analysis-wrap {
   padding: 16px;
   :deep(.bin-card__header) {
-    color: rgba(0, 0, 0, .85);
+    color: $color-text-primary;
   }
 }
 .analysis-center {
