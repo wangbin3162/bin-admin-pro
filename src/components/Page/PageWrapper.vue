@@ -5,11 +5,12 @@
         <div class="page-header has-breadcrumb">
           <div class="page-header-heading">
             <span class="page-header-heading-title">{{ normalTitle }}</span>
-            <b-icon v-if="showClose" name="close" @click="$emit('close')"></b-icon>
+            <slot name="right"></slot>
           </div>
           <div class="page-header-desc" v-if="$slots.desc || desc">
             <slot name="desc">{{ desc }}</slot>
           </div>
+          <b-icon v-if="showClose" name="close" @click="$emit('close')"></b-icon>
         </div>
       </div>
     </div>
@@ -60,13 +61,13 @@ export default {
 @import "~@/assets/stylus/base/var.styl"
 .page-header-wrap {
   .page-header {
+    position: relative;
     box-sizing: border-box;
     margin: 0;
     font-size: 14px;
     font-variant: tabular-nums;
     line-height: 1.5715;
     list-style: none;
-    position: relative;
     padding: 16px 24px;
     background-color: #fff;
     border-bottom: $color-border-base;
@@ -83,15 +84,19 @@ export default {
         margin-bottom: 0;
         padding-right: 12px;
       }
-      .b-icon-close {
-        font-weight: normal;
-        cursor: pointer;
-        font-size: 20px;
-        margin-right: 6px;
-        color: rgba(0, 0, 0, .65);
-        &:hover {
-          color: rgba(0, 0, 0, .85);
-        }
+    }
+    .b-icon-close {
+      position: absolute;
+      right: 24px;
+      top: 16px;
+      z-index: 1;
+      font-weight: normal;
+      cursor: pointer;
+      font-size: 20px;
+      margin-right: 6px;
+      color: rgba(0, 0, 0, .65);
+      &:hover {
+        color: rgba(0, 0, 0, .85);
       }
     }
     &-desc {
