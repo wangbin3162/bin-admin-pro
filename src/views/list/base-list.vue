@@ -82,7 +82,7 @@
 <script>
 import useTable from '@/hooks/service/useTable'
 import { getBaseList } from '@/api/list.api'
-import { ref, reactive, toRefs, watch } from 'vue'
+import { reactive, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
 import ActionButton from '@/components/ActionButton'
 

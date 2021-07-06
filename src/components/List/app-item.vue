@@ -1,5 +1,5 @@
 <template>
-  <b-card class="app-item" :body-style="{padding:0}" shadow="never">
+  <b-card class="app-item" :style="styles" :body-style="{padding:0}" shadow="never">
     <div class="p16">
       <div flex="cross:center">
         <img :src="item.avatar" class="avatar-img" alt="">
@@ -50,6 +50,9 @@ export default {
       default() {
         return {}
       }
+    },
+    styles: {
+      type: Object
     }
   }
 }
@@ -94,6 +97,8 @@ export default {
       line-height: 32px;
     }
     a {
+      display: inline-block;
+      line-height: 32px;
       color: $color-text-default;
     }
   }
