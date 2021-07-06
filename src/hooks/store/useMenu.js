@@ -3,7 +3,7 @@ import { HOME_PATH } from '@/router/menus'
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
-import useTagsView from '@/hooks/useTagsView'
+import useTagsView from '@/hooks/store/useTagsView'
 
 export default function useMenu() {
   const $store = useStore()

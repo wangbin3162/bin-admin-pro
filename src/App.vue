@@ -4,7 +4,7 @@
 
 <script>
 import { onMounted } from 'vue'
-import useStoreRouter from '@/hooks/useStoreRouter'
+import useStoreRouter from '@/hooks/store/useStoreRouter'
 
 export default {
   setup() {

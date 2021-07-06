@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import AsideMenus from '@/layouts/menus'
 import GlobalHeader from '@/layouts/header'
 import GlobalFooter from '@/layouts/footer'
 import { computed } from 'vue'
-import useTagsView from '@/hooks/useTagsView'
+import useTagsView from '@/hooks/store/useTagsView'
 
 export default {
   name: 'Layout',

@@ -17,7 +17,7 @@
 <script>
 import { MessageBox } from 'bin-ui-next'
 import { computed } from 'vue'
-import useStoreRouter from '@/hooks/useStoreRouter'
+import useStoreRouter from '@/hooks/store/useStoreRouter'
 
 export default {
   name: 'UserAvatar',

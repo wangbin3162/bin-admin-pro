@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import { Utils } from 'bin-ui-next'
 
 const { isEqual } = Utils.color

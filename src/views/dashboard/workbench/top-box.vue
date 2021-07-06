@@ -38,8 +38,8 @@
 
 <script>
 import Iconfont from '@/components/Iconfont/iconfont'
-import useTodos from '@/hooks/useTodos'
-import useUser from '@/hooks/useUser'
+import useTodos from '@/hooks/store/useTodos'
+import useUser from '@/hooks/store/useUser'
 
 export default {
   name: 'top-box',

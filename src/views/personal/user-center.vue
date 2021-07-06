@@ -62,11 +62,10 @@
 </template>
 
 <script>
-import articles from '@/mock/article-list'
-import projects from '@/mock/project-list'
 import ArticleItem from '@/components/List/article-item'
 import ImgItem from '@/components/List/img-item'
 import AppItem from '@/components/List/app-item'
+import { getArticleList, getProjectList } from '@/api/list.api'
 
 export default {
   name: 'UserCenter',
@@ -74,14 +73,23 @@ export default {
   data() {
     return {
       tabs: [
-        { key: 'tab1', title: `文章(${articles.length})` },
-        { key: 'tab2', title: `项目(${projects.length})` },
-        { key: 'tab3', title: `应用(${projects.length})` }
+        { key: 'tab1', title: '文章' },
+        { key: 'tab2', title: '项目' },
+        { key: 'tab3', title: '应用' }
       ],
       activeTab: 'tab1',
-      articleList: articles,
-      projectList: projects
+      articleList: [],
+      projectList: []
     }
+  },
+  async created() {
+    const articles = await getArticleList()
+    const projects = await getProjectList()
+    this.tabs[0].title = `文章(${articles.list.length})`
+    this.tabs[1].title = `项目(${projects.list.length})`
+    this.tabs[2].title = `应用(${projects.list.length})`
+    this.articleList = articles.list
+    this.projectList = projects.list
   }
 }
 </script>

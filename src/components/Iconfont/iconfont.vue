@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import { computed } from 'vue'
 
 import { Utils } from 'bin-ui-next'

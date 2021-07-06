@@ -43,7 +43,7 @@
 
 <script>
 import HeaderTrigger from '@/layouts/header-trigger'
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import ThemePanel from '@/layouts/setting/theme-panel'
 
 export default {

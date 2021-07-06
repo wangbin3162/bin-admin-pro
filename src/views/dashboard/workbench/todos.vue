@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import useTodos from '@/hooks/useTodos'
+import useTodos from '@/hooks/store/useTodos'
 import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Utils } from 'bin-ui-next'
 import { generateId } from '@/utils/util'

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import HeaderTrigger from '@/layouts/header-trigger'
 import UserAvatar from '@/layouts/user'
 import TagsView from '@/layouts/tags-view'

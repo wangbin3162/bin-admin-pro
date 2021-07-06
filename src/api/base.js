@@ -12,6 +12,19 @@ const service = request.create({
   timeout: 60000 // 请求超时时间
 })
 
+export async function fetchData(config) {
+  try {
+    const { data } = await request(config)
+    if (data.code === '0') {
+      return data.data
+    } else {
+      throw data.message
+    }
+  } catch (e) {
+    throw Error(e)
+  }
+}
+
 const err = (error) => {
   if (error.response) {
     const data = error.response.data

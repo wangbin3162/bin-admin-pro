@@ -31,8 +31,8 @@
 
 <script>
 import { ref, watch } from 'vue'
-import useMenu from '@/hooks/useMenu'
-import useSetting from '@/hooks/useSetting'
+import useMenu from '@/hooks/store/useMenu'
+import useSetting from '@/hooks/store/useSetting'
 
 export default {
   name: 'search-panel',

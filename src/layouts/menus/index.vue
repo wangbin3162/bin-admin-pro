@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import MenuItem from '@/layouts/menus/menu-item'
 import Submenu from '@/layouts/menus/submenu'
 import { ref, watch } from 'vue'
-import useStoreRouter from '@/hooks/useStoreRouter'
-import useMenu from '@/hooks/useMenu'
+import useStoreRouter from '@/hooks/store/useStoreRouter'
+import useMenu from '@/hooks/store/useMenu'
 
 export default {
   name: 'AsideMenus',

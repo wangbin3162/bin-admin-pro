@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/useSetting'
+import useSetting from '@/hooks/store/useSetting'
 import { computed, onMounted, ref } from 'vue'
 
 export default {

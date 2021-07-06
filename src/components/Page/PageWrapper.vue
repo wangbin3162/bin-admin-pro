@@ -29,8 +29,8 @@
 
 <script>
 import { computed } from 'vue'
-import useSetting from '@/hooks/useSetting'
-import useMenu from '@/hooks/useMenu'
+import useSetting from '@/hooks/store/useSetting'
+import useMenu from '@/hooks/store/useMenu'
 
 export default {
   name: 'PageWrapper',

@@ -33,6 +33,17 @@ export default [
     ]
   },
   {
+    path: 'list',
+    title: '列表页面',
+    icon: 'table',
+    children: [
+      { path: 'baseList', title: '基础列表' },
+      { path: 'cardList', title: '卡片列表' },
+      { path: 'userList', title: '用户列表' },
+      { path: 'searchList', title: '查询列表' }
+    ]
+  },
+  {
     path: 'detail',
     title: '详情页面',
     icon: 'filedone',
@@ -48,6 +59,15 @@ export default [
     children: [
       { path: 'userCenter', title: '个人中心' },
       { path: 'userSetting', title: '个人设置' }
+    ]
+  },
+  {
+    path: 'result',
+    title: '结果页面',
+    icon: 'check-circle',
+    children: [
+      { path: 'success', title: '成功页' },
+      { path: 'fail', title: '失败页' }
     ]
   },
   {
@@ -67,15 +87,6 @@ export default [
         path: 'error500',
         title: '异常页500'
       }
-    ]
-  },
-  {
-    path: 'result',
-    title: '结果页面',
-    icon: 'check-circle',
-    children: [
-      { path: 'success', title: '成功页' },
-      { path: 'fail', title: '失败页' }
     ]
   },
   {

@@ -46,10 +46,10 @@
 
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import useStoreRouter from '@/hooks/useStoreRouter'
+import useStoreRouter from '@/hooks/store/useStoreRouter'
 import { HOME_PATH } from '@/router/menus'
-import useMenu from '@/hooks/useMenu'
-import useTagsView from '@/hooks/useTagsView'
+import useMenu from '@/hooks/store/useMenu'
+import useTagsView from '@/hooks/store/useTagsView'
 
 export default {
   name: 'TagsView',

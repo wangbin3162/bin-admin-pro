@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import useStoreRouter from '@/hooks/useStoreRouter'
+import useStoreRouter from '@/hooks/store/useStoreRouter'
 import { computed, ref, watch } from 'vue'
 import { DASHBOARD_MENUS, HOME_PATH } from '@/router/menus'
-import useMenu from '@/hooks/useMenu'
+import useMenu from '@/hooks/store/useMenu'
 
 export default {
   name: 'HeaderBreadcrumb',
