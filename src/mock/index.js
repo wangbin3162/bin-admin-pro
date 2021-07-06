@@ -6,6 +6,7 @@ import Mock from 'mockjs'
 // 使用同步加载依赖
 // 防止 vuex 中的 GetInfo 早于 mock 运行，导致无法 mock 请求返回结果
 require('./services/user')
+require('./services/roles')
 require('./services/list')
 
 Mock.setup({

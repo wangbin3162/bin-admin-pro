@@ -1,6 +1,7 @@
 import Mock from 'mockjs'
 import { builder, getBody } from '../util'
 import menuList from '@/router/menus'
+import users from '@/mock/list/users'
 
 // 默认的用户名密码
 const username = ['admin', 'user', 'super']
@@ -35,3 +36,4 @@ const info = (options) => {
 
 Mock.mock(/\/user\/login/, 'post', login)
 Mock.mock(/\/user\/info/, 'get', info)
+Mock.mock(/\/user\/list/, 'get', () => builder(users))
