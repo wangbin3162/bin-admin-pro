@@ -90,9 +90,9 @@ export default {
     const copyList = ref([])
     const {
       loading,
-      getDataSource,
       list,
       total,
+      getDataSource,
       pageChange,
       pageSizeChange
     } = useTable({ api: getUserList, params: query })

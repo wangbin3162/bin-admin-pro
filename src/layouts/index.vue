@@ -43,7 +43,11 @@ import useTagsView from '@/hooks/store/useTagsView'
 
 export default {
   name: 'Layout',
-  components: { GlobalHeader, GlobalFooter, AsideMenus },
+  components: {
+    GlobalHeader,
+    GlobalFooter,
+    AsideMenus
+  },
   setup() {
     const {
       theme,
@@ -61,7 +65,7 @@ export default {
       if (fixedAside.value) {
         left = sidebarWidth.value
       }
-      if (!sidebar.value) {
+      if (!sidebar.value && fixedAside.value) {
         left = 64
       }
       return {

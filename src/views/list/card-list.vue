@@ -41,6 +41,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin: -8px -8px 0;
+
   .card-item {
     width: 33.33%;
     padding: 8px;

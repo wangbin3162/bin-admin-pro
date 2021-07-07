@@ -8,7 +8,7 @@ const { mixWhite, mixBlack, alpha } = Utils.color
 // 全局setting变量
 export default {
   theme: 'dark',
-  menuTheme: '#ffffff',
+  menuTheme: '#001529',
   systemPrimary: '#1089ff',
   sidebar: true, // 侧边栏开启状态
   sidebarWidth: 256, // 侧边栏宽度
