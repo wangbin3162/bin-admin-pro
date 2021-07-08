@@ -85,10 +85,14 @@ import { getBaseList } from '@/api/list.api'
 import { reactive, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
 import ActionButton from '@/components/ActionButton'
+import PageWrapper from '@/components/Page/PageWrapper'
 
 export default {
   name: 'BaseList',
-  components: { ActionButton },
+  components: {
+    PageWrapper,
+    ActionButton
+  },
   setup() {
     const query = reactive({
       name: '',

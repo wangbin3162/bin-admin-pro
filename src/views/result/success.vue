@@ -25,8 +25,10 @@
 </template>
 
 <script>
+import Result from '@/components/Result'
 export default {
-  name: 'Success'
+  name: 'Success',
+  components: { Result }
 }
 </script>
 

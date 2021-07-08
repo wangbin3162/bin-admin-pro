@@ -106,10 +106,11 @@
 <script>
 import { ref } from 'vue'
 import Result from '@/components/Result'
+import PageWrapper from '@/components/Page/PageWrapper'
 
 export default {
   name: 'StepForm',
-  components: { Result },
+  components: { PageWrapper, Result },
   setup() {
     const step = ref(0)
     const form1Ref = ref(null)

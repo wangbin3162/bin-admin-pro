@@ -25,8 +25,10 @@
 </template>
 
 <script>
+import PageWrapper from '@/components/Page/PageWrapper'
 export default {
   name: 'BaseDetail',
+  components: { PageWrapper },
   data() {
     return {
       columns: [

@@ -51,8 +51,8 @@
       </div>
     </div>
   </b-card>
-  <b-modal v-model="visible" title="普通的模态框标题">
-    <b-form ref="ruleFormRef" :model="form" label-width="85px" class="mt-20" :rules="ruleValidate">
+  <b-modal v-model="visible" title="添加一个快捷链接">
+    <b-form ref="ruleFormRef" :model="form" label-width="85px" class="mt-16" :rules="ruleValidate">
       <b-form-item prop="link" label="地址">
         <b-input v-model="form.link"></b-input>
       </b-form-item>
@@ -72,9 +72,11 @@ import { ref, reactive } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
 import useLinks from '@/hooks/store/useLinks'
 import { Message } from 'bin-ui-next'
+import Iconfont from '@/components/Iconfont/iconfont'
 
 export default {
   name: 'quick-link',
+  components: { Iconfont },
   setup() {
     const visible = ref(false)
     const { toggleSearch, toggleSetting } = useSetting()

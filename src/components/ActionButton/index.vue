@@ -1,5 +1,5 @@
 <template>
-  <b-popover v-model:visible="visible" :width="200" :disabled="!confirm">
+  <b-popover v-model:visible="visible" :width="popperWidth" :disabled="!confirm">
     <b-button v-bind="buttonProps" @click="handleClick" :title="tooltip">
       <slot></slot>
     </b-button>
@@ -27,6 +27,10 @@ export default {
           type: 'text'
         }
       }
+    },
+    popperWidth: {
+      type: Number,
+      default: 220
     },
     message: {
       type: String,

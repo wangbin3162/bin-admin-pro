@@ -60,8 +60,10 @@
 </template>
 
 <script>
+import PageWrapper from '@/components/Page/PageWrapper'
 export default {
   name: 'AdvancedDetail',
+  components: { PageWrapper },
   data() {
     return {
       columns: [

@@ -62,9 +62,11 @@
 <script>
 import { ref } from 'vue'
 import { Message } from 'bin-ui-next'
+import PageWrapper from '@/components/Page/PageWrapper'
 
 export default {
   name: 'BaseForm',
+  components: { PageWrapper },
   setup() {
     const formRef = ref(null)
     const form = ref({

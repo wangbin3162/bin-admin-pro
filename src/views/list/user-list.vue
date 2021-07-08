@@ -78,10 +78,11 @@ import { getUserList } from '@/api/user.api'
 import { reactive, ref, watch } from 'vue'
 import { Message } from 'bin-ui-next'
 import ActionButton from '@/components/ActionButton'
+import PageWrapper from '@/components/Page/PageWrapper'
 
 export default {
   name: 'UserList',
-  components: { ActionButton },
+  components: { PageWrapper, ActionButton },
   setup() {
     const query = reactive({
       page: 1,

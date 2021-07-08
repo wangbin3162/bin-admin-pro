@@ -135,9 +135,12 @@
 import { reactive, ref, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
 import dayjs from 'dayjs'
+import PageWrapper from '@/components/Page/PageWrapper'
+import PageFooter from '@/components/Page/PageFooter'
 
 export default {
   name: 'AdvancedForm',
+  components: { PageFooter, PageWrapper },
   setup() {
     const formRef = ref(null)
     const form = ref({

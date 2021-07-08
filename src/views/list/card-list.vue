@@ -18,9 +18,12 @@
 <script>
 import useTable from '@/hooks/service/useTable'
 import { getProjectList } from '@/api/list.api'
+import PageWrapper from '@/components/Page/PageWrapper'
+import AppItem from '@/components/List/app-item'
 
 export default {
   name: 'CardList',
+  components: { AppItem, PageWrapper },
   setup() {
     const {
       getDataSource,

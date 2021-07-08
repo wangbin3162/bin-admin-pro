@@ -66,10 +66,11 @@
 
 <script>
 import Iconfont from '@/components/Iconfont/iconfont'
+import PageWrapper from '@/components/Page/PageWrapper'
 
 export default {
   name: 'CompIconfont',
-  components: { Iconfont },
+  components: { PageWrapper, Iconfont },
   methods: {
     clickFunc(icon) {
       this.$message.info(`点击了图标:${icon}`)
