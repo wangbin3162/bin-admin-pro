@@ -188,7 +188,7 @@ export default {
       width: 22px;
       height: 22px;
       top: 12px;
-      right: 6px;
+      left: 6px;
       font-size: 12px;
       z-index: 1;
     }
@@ -200,7 +200,7 @@ export default {
       height: 22px;
       position: absolute;
       top: 12px;
-      left: 14px;
+      left: 32px;
       border: 1px solid #dddddd;
       border-radius: 50%;
       opacity: 0.5;
@@ -212,7 +212,7 @@ export default {
     }
     label {
       word-break: break-all;
-      padding: 15px 15px 15px 50px;
+      padding: 15px 15px 15px 64px;
       display: block;
       line-height: 1;
       font-size: 14px;
@@ -236,7 +236,7 @@ export default {
     }
     &.edit {
       label {
-        padding: 9px 60px 7px 50px;
+        padding: 9px 60px 7px 64px;
       }
     }
     &.done {

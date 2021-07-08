@@ -2098,10 +2098,10 @@ bin-charts@^3.0.0:
     bin-ace-editor "^3.0.2"
     resize-observer-polyfill "^1.5.1"
 
-bin-ui-next@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.5.0.tgz#3d2e101d458e5d6fd4328adb43dbcef94ff033d9"
-  integrity sha512-V7MzK1qh1RtHDx2HM3VKpZIOHmtMGf2uJeG7tnA6TB836FLJDMF8pT8RbpjOLy8naizP1NZI04gTQdOwRsxWWA==
+bin-ui-next@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.6.0.tgz#66b8149bb515225873ea56b62b7ae3a5f48746f7"
+  integrity sha512-7oG1ZJ4ly4hsIrxPKCB5UNbXGwEturpVC3VnlS/rDKEh7+KXK5PHBDFbB+QgRLBuHwxVQrzI3Q9nG6LxpQ63Wg==
   dependencies:
     "@popperjs/core" "^2.9.2"
     async-validator "^3.4.0"
@@ -3163,9 +3163,9 @@ dashdash@^1.12.0:
     assert-plus "^1.0.0"
 
 dayjs@^1.10.4:
-  version "1.10.5"
-  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
-  integrity sha512-BUFis41ikLz+65iH6LHQCDm4YPMj5r1YFLdupPIyM4SGcXMmtiLQ7U37i+hGS8urIuqe7I/ou3IS1jVc4nbN4g==
+  version "1.10.6"
+  resolved "https://registry.npmjs.org/dayjs/-/dayjs-1.10.6.tgz#288b2aa82f2d8418a6c9d4df5898c0737ad02a63"
+  integrity sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw==
 
 debug@2.6.9, debug@^2.2.0, debug@^2.3.3, debug@^2.6.9:
   version "2.6.9"
