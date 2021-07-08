@@ -50,12 +50,14 @@ import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { Utils } from 'bin-ui-next'
 import { generateId } from '@/utils/util'
 import Sortable from 'sortablejs'
+import Iconfont from '@/components/Iconfont/iconfont'
 
 const { deepCopy } = Utils.util
 let rowKey = 1
 
 export default {
   name: 'todos',
+  components: { Iconfont },
   setup() {
     const editIndex = ref(-1)
     const editText = ref('')

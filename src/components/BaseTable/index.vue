@@ -1,17 +1,28 @@
 <template>
   <div class="base-table">
-    <div class="base-table-form">
-      <b-form label-width="95px">
-        <slot name="filter"></slot>
-      </b-form>
+    <div class="base-table-form" v-if="$slots.filter">
+      <slot name="filter"></slot>
+    </div>
+    <div class="base-table-box">
+      <div class="base-table-action" v-if="$slots.action || $slots.actionRight">
+        <div class="left">
+          <slot name="action"></slot>
+        </div>
+        <div class="right">
+          <slot name="actionRight"></slot>
+        </div>
+      </div>
+      <slot></slot>
+      <div class="base-table-pagination" v-if="$slots.action">
+        <slot name="page"></slot>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'BaseTable',
-  props: {}
+  name: 'BaseTable'
 }
 </script>
 
@@ -28,6 +39,9 @@ export default {
       .bin-form-item {
         margin-right: 0;
         margin-bottom: 10px;
+        .bin-form-item__label {
+          padding-left: 6px;
+        }
       }
       @media (min-width: 576px) {
         .bin-form-item {
@@ -36,14 +50,7 @@ export default {
           max-width: 100%;
         }
       }
-      @media (min-width: 992px) {
-        .bin-form-item {
-          display: block;
-          flex: 0 0 33.33333333%;
-          max-width: 33.33333333%;
-        }
-      }
-      @media (min-width: 768px) {
+      @media (min-width: 960px) {
         .bin-form-item {
           display: block;
           flex: 0 0 50%;
@@ -57,7 +64,29 @@ export default {
           max-width: 33.33333333%;
         }
       }
+      @media (min-width: 1600px) {
+        .bin-form-item {
+          display: block;
+          flex: 0 0 25%;
+          max-width: 25%;
+        }
+      }
     }
+  }
+  .base-table-box {
+    background: #fff;
+    border-radius: 2px;
+    padding: 10px;
+    .base-table-action {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+  }
+  .base-table-pagination {
+    text-align: right;
+    margin-top: 10px;
   }
 }
 </style>

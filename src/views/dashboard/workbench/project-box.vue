@@ -63,8 +63,10 @@
 </template>
 
 <script>
+import Iconfont from '@/components/Iconfont/iconfont'
 export default {
-  name: 'project-box'
+  name: 'project-box',
+  components: { Iconfont }
 }
 </script>
 
