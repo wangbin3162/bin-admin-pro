@@ -1,6 +1,6 @@
 <template>
   <b-popover v-model:visible="visible" :width="popperWidth" :disabled="!confirm">
-    <b-button v-bind="buttonProps" @click="handleClick" :title="tooltip">
+    <b-button v-bind="btnProps" @click="handleClick" :title="tooltip">
       <slot></slot>
     </b-button>
     <template #content>
@@ -21,12 +21,7 @@ export default {
   name: 'ActionButton',
   props: {
     buttonProps: {
-      type: Object,
-      default() {
-        return {
-          type: 'text'
-        }
-      }
+      type: Object
     },
     popperWidth: {
       type: Number,
@@ -37,7 +32,11 @@ export default {
       default: '确定删除本条数据吗？'
     },
     confirm: Boolean,
-    tooltip: String
+    tooltip: String,
+    icon: String, // 按钮的icon
+    type: String, // 按钮的样式
+    color: String, // 图标按钮时的颜色
+    isIcon: Boolean // 仅为图标按钮
   },
   data() {
     return {
@@ -45,6 +44,17 @@ export default {
     }
   },
   emits: ['cancel', 'click'],
+  computed: {
+    btnProps() {
+      if (this.buttonProps) return this.buttonProps
+      return {
+        icon: this.icon,
+        type: this.isIcon ? 'text' : this.type,
+        textColor: this.color,
+        iconStyle: this.isIcon ? { fontSize: '16px' } : {}
+      }
+    }
+  },
   methods: {
     handleCancel() {
       this.visible = false
@@ -63,7 +73,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

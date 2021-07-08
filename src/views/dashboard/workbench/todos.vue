@@ -47,12 +47,10 @@
 <script>
 import useTodos from '@/hooks/store/useTodos'
 import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { Utils } from 'bin-ui-next'
-import { generateId } from '@/utils/util'
+import { deepCopy, generateId } from '@/utils/util'
 import Sortable from 'sortablejs'
 import Iconfont from '@/components/Iconfont/iconfont'
 
-const { deepCopy } = Utils.util
 let rowKey = 1
 
 export default {
@@ -63,7 +61,12 @@ export default {
     const editText = ref('')
     const inputRef = ref(null)
     const listRef = ref(null)
-    const { todos, todoLabel, leftCount, saveTodos } = useTodos()
+    const {
+      todos,
+      todoLabel,
+      leftCount,
+      saveTodos
+    } = useTodos()
     const list = ref(todos.value)
     let sortInstance = null
     watch(todos, (val) => {
@@ -78,7 +81,10 @@ export default {
         ghostClass: 'ghost',
         handle: '.drag',
         onEnd: (evt) => {
-          const { newIndex, oldIndex } = evt
+          const {
+            newIndex,
+            oldIndex
+          } = evt
           const newData = deepCopy(list.value)
           const targetRow = newData.splice(oldIndex, 1)[0]
           newData.splice(newIndex, 0, targetRow)
@@ -104,7 +110,11 @@ export default {
         editText.value = ''
         return
       }
-      list.value.push({ _index: list.value.length, text: '', done: false })
+      list.value.push({
+        _index: list.value.length,
+        text: '',
+        done: false
+      })
       editIndex.value = list.value.length - 1
       editText.value = ''
       await nextTick()

@@ -4,8 +4,9 @@ import list from './list'
 import detail from './detail'
 import result from './result'
 import personal from './personal'
-import nested from './nested'
 import errorPage from './error-page'
+import nested from './nested'
+import system from './system'
 
 export default [
   ...comp,
@@ -15,5 +16,6 @@ export default [
   ...result,
   ...personal,
   ...nested,
+  ...system,
   ...errorPage
 ]

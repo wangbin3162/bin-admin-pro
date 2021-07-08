@@ -5,21 +5,48 @@ export default [
     title: '组件',
     icon: 'block',
     children: [
-      { path: 'colorVar', title: '主题颜色' },
+      {
+        path: 'colorVar',
+        title: '主题颜色'
+      },
       {
         path: 'ui',
         title: '组件库',
         children: [
-          { path: 'basic', title: '基础组件' },
-          { path: 'navComp', title: '导航组件' },
-          { path: 'formComp', title: '表单组件' },
-          { path: 'dataComp', title: '数据组件' },
-          { path: 'otherComp', title: '其他组件' }
+          {
+            path: 'basic',
+            title: '基础组件'
+          },
+          {
+            path: 'navComp',
+            title: '导航组件'
+          },
+          {
+            path: 'formComp',
+            title: '表单组件'
+          },
+          {
+            path: 'dataComp',
+            title: '数据组件'
+          },
+          {
+            path: 'otherComp',
+            title: '其他组件'
+          }
         ]
       },
-      { path: 'compCountTo', title: '数字动画' },
-      { path: 'compIconfont', title: '图标组件' },
-      { path: 'compTitleBar', title: '标题组件' }
+      {
+        path: 'compCountTo',
+        title: '数字动画'
+      },
+      {
+        path: 'compIconfont',
+        title: '图标组件'
+      },
+      {
+        path: 'compTitleBar',
+        title: '标题组件'
+      }
     ]
   },
   {
@@ -27,9 +54,18 @@ export default [
     title: '表单页面',
     icon: 'reconciliation',
     children: [
-      { path: 'baseForm', title: '基础表单' },
-      { path: 'stepForm', title: '分步表单' },
-      { path: 'advancedForm', title: '高级表单' }
+      {
+        path: 'baseForm',
+        title: '基础表单'
+      },
+      {
+        path: 'stepForm',
+        title: '分步表单'
+      },
+      {
+        path: 'advancedForm',
+        title: '高级表单'
+      }
     ]
   },
   {
@@ -37,10 +73,22 @@ export default [
     title: '列表页面',
     icon: 'table',
     children: [
-      { path: 'baseList', title: '基础列表' },
-      { path: 'cardList', title: '卡片列表' },
-      { path: 'userList', title: '用户列表' },
-      { path: 'searchList', title: '查询列表' }
+      {
+        path: 'baseList',
+        title: '基础列表'
+      },
+      {
+        path: 'cardList',
+        title: '卡片列表'
+      },
+      {
+        path: 'userList',
+        title: '用户列表'
+      },
+      {
+        path: 'searchList',
+        title: '查询列表'
+      }
     ]
   },
   {
@@ -48,8 +96,14 @@ export default [
     title: '详情页面',
     icon: 'filedone',
     children: [
-      { path: 'baseDetail', title: '基础详情' },
-      { path: 'advancedDetail', title: '高级详情' }
+      {
+        path: 'baseDetail',
+        title: '基础详情'
+      },
+      {
+        path: 'advancedDetail',
+        title: '高级详情'
+      }
     ]
   },
   {
@@ -57,8 +111,14 @@ export default [
     title: '个人页面',
     icon: 'control',
     children: [
-      { path: 'userCenter', title: '个人中心' },
-      { path: 'userSetting', title: '个人设置' }
+      {
+        path: 'userCenter',
+        title: '个人中心'
+      },
+      {
+        path: 'userSetting',
+        title: '个人设置'
+      }
     ]
   },
   {
@@ -66,8 +126,14 @@ export default [
     title: '结果页面',
     icon: 'check-circle',
     children: [
-      { path: 'success', title: '成功页' },
-      { path: 'fail', title: '失败页' }
+      {
+        path: 'success',
+        title: '成功页'
+      },
+      {
+        path: 'fail',
+        title: '失败页'
+      }
     ]
   },
   {
@@ -98,12 +164,47 @@ export default [
         path: 'menu1',
         title: '菜单1',
         children: [
-          { path: 'menu1-1', title: '菜单1-1' },
-          { path: 'menu1-2', title: '菜单1-2' },
-          { path: 'menu1-3', title: '菜单1-3' }
+          {
+            path: 'menu1-1',
+            title: '菜单1-1'
+          },
+          {
+            path: 'menu1-2',
+            title: '菜单1-2'
+          },
+          {
+            path: 'menu1-3',
+            title: '菜单1-3'
+          }
         ]
       },
-      { path: 'menu2', title: '菜单2' }
+      {
+        path: 'menu2',
+        title: '菜单2'
+      }
+    ]
+  },
+  {
+    path: 'system',
+    title: '系统管理',
+    icon: 'setting',
+    children: [
+      {
+        path: 'userAccount',
+        title: '用户管理'
+      },
+      {
+        path: 'depart',
+        title: '部门管理'
+      },
+      {
+        path: 'menu',
+        title: '菜单管理'
+      },
+      {
+        path: 'role',
+        title: '角色管理'
+      }
     ]
   }
 ]
@@ -117,8 +218,14 @@ export const DASHBOARD_MENUS = [
     title: 'Dashboard',
     icon: 'appstore',
     children: [
-      { path: HOME_PATH, title: HOME_NAME },
-      { path: 'analysis', title: '分析页' }
+      {
+        path: HOME_PATH,
+        title: HOME_NAME
+      },
+      {
+        path: 'analysis',
+        title: '分析页'
+      }
     ]
   }
 ]

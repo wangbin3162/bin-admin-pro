@@ -60,7 +60,7 @@
           {{ roleMap[row.roles] }}
         </template>
         <template #action>
-          <action-button>编辑</action-button>
+          <action-button type="text">编辑</action-button>
         </template>
       </b-table>
       <template #page>

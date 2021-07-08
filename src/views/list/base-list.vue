@@ -53,9 +53,10 @@
               </div>
             </div>
             <div class="list-item-action">
-              <action-button @click="handleEdit(item)">编辑</action-button>
+              <action-button type="text" @click="handleEdit(item)">编辑</action-button>
               <action-button
-                :button-props="{type:'text',textColor:'danger'}"
+                type="text"
+                color="danger"
                 @click="handleDelete(item)"
                 confirm>删除
               </action-button>

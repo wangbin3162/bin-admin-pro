@@ -106,7 +106,7 @@ export default {
       copyList.value[index].roles = role
     }
 
-    watch(list, (val) => {
+    watch(() => list.value, (val) => {
       copyList.value = val.map(item => ({ ...item, expand: false }))
     })
     // 执行一次内容
