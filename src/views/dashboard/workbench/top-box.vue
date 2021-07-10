@@ -62,7 +62,7 @@ export default {
 .page-header {
   padding: 16px 32px 0 32px;
   background: #fff;
-  border-bottom: $color-border-base
+  border-bottom: $border-base
   &-title {
     display: inline-block;
     color: $color-text-primary;

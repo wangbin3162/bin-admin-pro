@@ -85,11 +85,11 @@ export default {
   async created() {
     const articles = await getArticleList()
     const projects = await getProjectList()
-    this.tabs[0].title = `文章(${articles.list.length})`
-    this.tabs[1].title = `项目(${projects.list.length})`
-    this.tabs[2].title = `应用(${projects.list.length})`
-    this.articleList = articles.list
-    this.projectList = projects.list
+    this.tabs[0].title = `文章(${articles.rows.length})`
+    this.tabs[1].title = `项目(${projects.rows.length})`
+    this.tabs[2].title = `应用(${projects.rows.length})`
+    this.articleList = articles.rows
+    this.projectList = projects.rows
   }
 }
 </script>

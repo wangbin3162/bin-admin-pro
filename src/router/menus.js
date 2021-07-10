@@ -46,6 +46,10 @@ export default [
       {
         path: 'compTitleBar',
         title: '标题组件'
+      },
+      {
+        path: 'compBaseTree',
+        title: '树结构'
       }
     ]
   },

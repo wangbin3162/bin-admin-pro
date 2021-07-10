@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { Notice } from 'bin-ui-next'
 
 /**
  * 表格分页等函数hook，可以支持数据参数，page配置等
@@ -8,9 +9,13 @@ import { ref } from 'vue'
  *   params: obj 请求参数，对象，外部定义reactive类型，内部可以进行操作
  * }
  * @param isPagination 是否是分页数据，如是分页数据则会有专门的total赋值，否则不分页的话赋值为list.length
+ * @param listKey 列表数据返回的key值，默认分页的话为rows，传入null的话直接从data中取得
  */
-export default function useTable(config, isPagination = true) {
-  const { api, params } = config
+export default function useTable(config, isPagination = true, listKey = 'rows') {
+  const {
+    api,
+    params
+  } = config
   // list loading status
   const loading = ref(false)
   // list 的 total
@@ -20,11 +25,14 @@ export default function useTable(config, isPagination = true) {
   // fun：获取数据
   async function getDataSource() {
     if (!api) return
-    console.log(params)
-    setLoading(true)
-    const data = await api(params)
-    list.value = data.list
-    total.value = isPagination ? (data.total || 0) : data.list.length
+    try {
+      setLoading(true)
+      const data = await api(params)
+      list.value = listKey ? data[listKey] : data
+      total.value = isPagination ? (data.total || 0) : data.list.length
+    } catch (e) {
+      Notice.error(e)
+    }
     setLoading(false)
   }
 
@@ -46,6 +54,7 @@ export default function useTable(config, isPagination = true) {
     params.page = page
     await getDataSource()
   }
+
   // fun:page-size-change
   async function pageSizeChange(size) {
     params.page = 1

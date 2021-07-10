@@ -1,20 +1,14 @@
 import { computed, ref, watch } from 'vue'
+import { Message } from 'bin-ui-next'
 
 /**
  * 表单操作、状态内容定义
  */
-export default function useForm(moduleName = '') {
+export default function useForm() {
   const formRef = ref(null) // form组件
   const editStatus = ref('normal')
   const editLoading = ref(false)
 
-  const editStatusMap = computed(() => ({
-    normal: '默认',
-    detail: moduleName + '详情',
-    edit: '修改' + moduleName,
-    create: '新增' + moduleName
-  }))
-  const editTitle = computed(() => editStatusMap.value[editStatus.value])
   const pageStatus = computed(() => ({
     isNormal: editStatus.value === 'normal',
     isCreate: editStatus.value === 'create',
@@ -44,8 +38,34 @@ export default function useForm(moduleName = '') {
     editStatus.value = 'normal'
   }
 
+  function submitForm(doneFun, validateErrMsg = '表单校验错误，轻填写正确后再次提交！') {
+    if (!formRef.value) return
+    formRef.value.validate((valid) => {
+      if (valid) {
+        if (typeof doneFun === 'function') {
+          doneFun()
+        }
+      } else {
+        Message.error(validateErrMsg)
+        return false
+      }
+    })
+  }
+
+  function resetForm() {
+    formRef.value && formRef.value.resetFields()
+  }
+
   return {
     formRef,
-    editLoading
+    editLoading,
+    editStatus,
+    pageStatus,
+    openDetail,
+    openCreate,
+    openEdit,
+    backNormal,
+    submitForm,
+    resetForm
   }
 }

@@ -3,7 +3,7 @@
  * roles :[admin,user,op]
  */
 export default {
-  list: [
+  rows: [
     {
       id: 10000001,
       realName: 'Wang',

@@ -165,7 +165,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-bottom: $color-border-base;
+  border-bottom: $border-base;
   .list-item-meta {
     display: flex;
     width: 45%;

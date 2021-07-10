@@ -1,5 +1,5 @@
 export default {
-  list: [
+  rows: [
     {
       id: '001',
       title: 'Bin UI Next',

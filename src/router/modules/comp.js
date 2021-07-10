@@ -58,5 +58,11 @@ export default [
     name: 'CompTitleBar',
     component: () => import('../../views/comp/comp-title-bar'),
     meta: { title: '数字动画' }
+  },
+  {
+    path: 'compBaseTree',
+    name: 'CompBaseTree',
+    component: () => import('../../views/comp/comp-base-tree'),
+    meta: { title: '树结构' }
   }
 ]

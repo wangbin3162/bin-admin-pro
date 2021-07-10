@@ -1,5 +1,5 @@
 export default {
-  list: [
+  rows: [
     {
       id: '001',
       title: '前端知识梳理-VUE篇',

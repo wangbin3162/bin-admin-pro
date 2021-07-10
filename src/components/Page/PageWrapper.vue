@@ -70,7 +70,7 @@ export default {
     list-style: none;
     padding: 16px 24px;
     background-color: #fff;
-    border-bottom: $color-border-base;
+    border-bottom: $border-base;
     &-heading {
       display: flex;
       justify-content: space-between;

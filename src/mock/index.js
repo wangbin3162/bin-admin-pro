@@ -8,6 +8,7 @@ import Mock from 'mockjs'
 require('./services/user')
 require('./services/roles')
 require('./services/list')
+require('./services/depart')
 
 Mock.setup({
   timeout: 300 // setter delay time

@@ -12,6 +12,7 @@ const service = request.create({
   timeout: 60000 // 请求超时时间
 })
 
+// 获取填充数据
 export async function fetchData(config) {
   try {
     const { data } = await request(config)
