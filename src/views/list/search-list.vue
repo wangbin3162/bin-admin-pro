@@ -112,10 +112,7 @@ export default {
       getDataSource,
       pageChange,
       pageSizeChange
-    } = useTable({
-      api: getUserList,
-      params: query
-    })
+    } = useTable(getUserList, query)
     watch(list, (val) => {
       copyList.value = val.map(item => ({
         ...item,

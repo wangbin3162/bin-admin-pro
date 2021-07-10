@@ -1,4 +1,4 @@
-import { nextTick, ref } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import { Notice } from 'bin-ui-next'
 
 /**
@@ -6,8 +6,9 @@ import { Notice } from 'bin-ui-next'
  * @param fetch 填充数据，可选api或者直接传入数组或对象
  * @param params 请求数据的参数
  * @param ctx setup ctx
+ * @param titleKey
  */
-export default function useTree(fetch, params = {}, ctx) {
+export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   const treeRef = ref(null)
   // 树节点原始数据
   const treeData = ref([])
@@ -21,6 +22,7 @@ export default function useTree(fetch, params = {}, ctx) {
     if (!fetch) return
     if (typeof fetch === 'object') {
       treeData.value = fetch
+      console.log(fetch)
       return
     }
     try {
@@ -73,7 +75,7 @@ export default function useTree(fetch, params = {}, ctx) {
   // 过滤函数
   const filterNode = (value, node) => {
     if (!value) return true
-    return node.text.indexOf(value) !== -1
+    return node[titleKey].indexOf(value) !== -1
   }
 
   return {

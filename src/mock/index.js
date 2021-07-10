@@ -9,6 +9,7 @@ require('./services/user')
 require('./services/roles')
 require('./services/list')
 require('./services/depart')
+require('./services/menu')
 
 Mock.setup({
   timeout: 300 // setter delay time

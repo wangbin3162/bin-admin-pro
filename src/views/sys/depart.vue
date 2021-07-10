@@ -55,8 +55,8 @@
                       </b-form-item>
                       <b-form-item label="部门状态">
                         <b-switch size="large" v-model="copyNode.status" true-value="1" false-value="0">
-                          <template #open><span>开启</span></template>
-                          <template #close><span>关闭</span></template>
+                          <template #open><span>启用</span></template>
+                          <template #close><span>禁用</span></template>
                         </b-switch>
                       </b-form-item>
                       <b-form-item label="部门描述">
@@ -146,11 +146,12 @@ export default {
       if (edit === 'edit') {
         const flatState = flatStateBuffer.value
         const current = currentNode.value
-        const parent = flatState[current.nodeKey].parent
+        const parentKey = flatState[current.nodeKey].parent
+        const parentNode = (parentKey || parentKey === 0) ? flatState[parentKey].node : {}
         copyNode.value = current ? {
           ...deepCopy(current),
-          parentId: parent,
-          parentName: (parent || parent === 0) ? flatState[parent].node.text : undefined
+          parentId: parentKey === 0 ? '' : parentNode.id,
+          parentName: parentNode.title
         } : {}
         return
       }
@@ -163,7 +164,6 @@ export default {
         parentId: '',
         parentName: undefined
       }
-      console.log(copyNode.value)
     }
 
     function cancel() {
@@ -188,7 +188,7 @@ export default {
         editLoading.value = true
         const status = pageStatus.value
         setTimeout(() => {
-          Message.success(`${status.isCreate ? '新增' : '保存'}成功！`)
+          Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
           backNormal()
           const keys = currentNode.value ? [currentNode.value.nodeKey] : []
           treeRef.value && treeRef.value.reloadTree(keys)

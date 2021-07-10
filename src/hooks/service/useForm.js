@@ -56,12 +56,17 @@ export default function useForm() {
     formRef.value && formRef.value.resetFields()
   }
 
+  function setBtnLoading(flag = true) {
+    editLoading.value = flag
+  }
+
   return {
     formRef,
     editLoading,
     editStatus,
     pageStatus,
     openDetail,
+    setBtnLoading,
     openCreate,
     openEdit,
     backNormal,

@@ -107,10 +107,7 @@ export default {
       total,
       pageChange,
       pageSizeChange
-    } = useTable({
-      api: getBaseList,
-      params: query
-    })
+    } = useTable(getBaseList, query)
 
     function handleSearch(val) {
       query.name = val

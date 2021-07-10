@@ -1,9 +1,9 @@
 // 获取基础列表
 import { fetchData } from '@/api/base'
 
-export function getRoleEnum() {
+export function getRoleList() {
   return fetchData({
-    url: '/role/enum',
+    url: '/role/list',
     method: 'get'
   })
 }

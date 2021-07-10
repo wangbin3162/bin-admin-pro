@@ -28,6 +28,7 @@ export default {
 
 <style scoped lang="stylus">
 .base-table {
+  width: 100%;
   .base-table-form {
     background: #fff;
     border-radius: 2px;
@@ -39,36 +40,10 @@ export default {
       .bin-form-item {
         margin-right: 0;
         margin-bottom: 10px;
+        flex: 0 0 33.33333333%;
+        min-width: 33.33333333%;
         .bin-form-item__label {
           padding-left: 6px;
-        }
-      }
-      @media (min-width: 576px) {
-        .bin-form-item {
-          display: block;
-          flex: 0 0 100%;
-          max-width: 100%;
-        }
-      }
-      @media (min-width: 960px) {
-        .bin-form-item {
-          display: block;
-          flex: 0 0 50%;
-          max-width: 50%;
-        }
-      }
-      @media (min-width: 1200px) {
-        .bin-form-item {
-          display: block;
-          flex: 0 0 33.33333333%;
-          max-width: 33.33333333%;
-        }
-      }
-      @media (min-width: 1600px) {
-        .bin-form-item {
-          display: block;
-          flex: 0 0 25%;
-          max-width: 25%;
         }
       }
     }

@@ -32,7 +32,7 @@
         </div>
         <b-tree
           :data="treeData"
-          title-key="text"
+          :title-key="titleKey"
           :show-checkbox="showCheckbox"
           :filter-node-method="filterNode"
           :render="render"
@@ -48,7 +48,7 @@
 
 <script>
 import useTree from '@/hooks/service/useTree'
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 export default {
   name: 'BaseTree',
@@ -80,6 +80,10 @@ export default {
     },
     showFilter: {
       type: Boolean
+    },
+    titleKey: {
+      type: String,
+      default: 'text'
     }
   },
   emits: ['select-change', 'check-change', 'command'],
@@ -99,9 +103,7 @@ export default {
       handleChecked,
       handleFilter,
       filterNode
-    } = useTree(props.fetch, props.params, ctx)
-
-    getTreeData()
+    } = useTree(props.fetch, props.params, ctx, props.titleKey)
 
     // 右侧指令事件列表
     function handleAction(name) {
@@ -122,6 +124,9 @@ export default {
       ctx.emit('command', name)
     }
 
+    if (typeof props.fetch === 'function') {
+      getTreeData()
+    }
     return {
       treeEl,
       showTopSearch,

@@ -2098,10 +2098,10 @@ bin-charts@^3.0.0:
     bin-ace-editor "^3.0.2"
     resize-observer-polyfill "^1.5.1"
 
-bin-ui-next@^0.6.5:
-  version "0.6.5"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.6.5.tgz#8cad4cd3f29f1b9eb1cd4e67145a3f465e057b94"
-  integrity sha512-foaIKSmqdBPgJJZFj7SshWvYUnHHC2OawSOCIYRGKhiNTlBu66liMwv/+mpRs5ULH4iMlfIsVa9aoUYKG22m9w==
+bin-ui-next@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.6.6.tgz#61765e8787098fbdbabf89c941b362dda0c5a8ed"
+  integrity sha512-LTrWhs3knbvvLhF3V3myk9qc98G7BMCw2MOG3ivZq+Uv1yDo2W5M4uTEBpcmp/7DAexpd0xyrzZBX3F58tE3tQ==
   dependencies:
     "@popperjs/core" "^2.9.2"
     async-validator "^3.4.0"

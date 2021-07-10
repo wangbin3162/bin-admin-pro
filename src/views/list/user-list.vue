@@ -111,10 +111,7 @@ export default {
       getDataSource,
       pageChange,
       pageSizeChange
-    } = useTable({
-      api: getUserList,
-      params: query
-    })
+    } = useTable(getUserList, query)
 
     function handleCopy(id) {
       Message.success(`复制ID：${id}成功！`)
