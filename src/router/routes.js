@@ -1,15 +1,7 @@
 import layout from '../layouts'
-import modules from './modules'
 import { HOME_PATH, HOME_NAME } from '@/router/menus'
 
 export const asyncRouterMap = [
-  {
-    path: 'analysis',
-    name: 'Analysis',
-    meta: { title: '分析页' },
-    component: () => import('../views/dashboard/analysis')
-  },
-  ...modules,
   {
     path: 'about',
     name: 'About',
