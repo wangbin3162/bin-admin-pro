@@ -124,9 +124,7 @@ export default {
       ctx.emit('command', name)
     }
 
-    if (typeof props.fetch === 'function') {
-      getTreeData()
-    }
+    getTreeData()
     return {
       treeEl,
       showTopSearch,

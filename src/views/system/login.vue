@@ -14,7 +14,7 @@
         </div>
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <img class="page-login--logo" src="@/assets/images/logo.png" alt="logo">
+          <div class="page-login--logo" />
           <!-- 表单 -->
           <div class="form">
             <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
@@ -191,9 +191,14 @@ export default {
 
     .main {
       .page-login--logo {
-        width: 200px;
-        margin-bottom: 2em;
-        margin-top: -2em;
+        width: 340px;
+        height: 70px;
+        margin-bottom: 1em;
+        margin-top: -1em;
+        background-image: url('~@/assets/images/bg/Bin-Admin-Pro-03.png');
+        background-repeat: no-repeat;
+        background-position: -8px -92px;
+        background-size: 100%;
       }
       .form {
         width: 340px;
@@ -246,7 +251,7 @@ export default {
       @keyframes animate {
         0% {
           transform: translateY(0) rotate(0deg);
-          opacity: 1;
+          opacity: .3;
           border-radius: 0;
         }
         100% {

@@ -4,7 +4,7 @@
       <div class="search-modal" @click.stop v-if="visible">
         <div class="search-modal-content" v-click-outside="handleClose">
           <div class="search-modal-input__wrapper">
-            <b-input size="large" v-model="query" placeholder="搜索" class="input-item">
+            <b-input ref="inputRef" size="large" v-model="query" placeholder="搜索" class="input-item">
               <template #prefix>
                 <b-icon name="search" size="22"></b-icon>
               </template>
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { ref, watch } from 'vue'
+import { nextTick, ref, watch } from 'vue'
 import useMenu from '@/hooks/store/useMenu'
 import useSetting from '@/hooks/store/useSetting'
 
@@ -38,6 +38,7 @@ export default {
   name: 'search-panel',
   setup() {
     const visible = ref(false)
+    const inputRef = ref(null)
     const dataText = ref('暂无搜索结果')
     const query = ref('')
     const filterList = ref([])
@@ -68,7 +69,10 @@ export default {
 
     function open() {
       visible.value = true
-      hideScroll()
+      nextTick(() => {
+        hideScroll()
+        inputRef.value && inputRef.value.focus()
+      })
     }
 
     function handleClick(path) {
@@ -92,6 +96,7 @@ export default {
 
     return {
       visible,
+      inputRef,
       query,
       filterList,
       dataText,

@@ -19,7 +19,6 @@
       </template>
       <template #action>
         <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
-        {{ modalVisible }}
       </template>
       <b-table :columns="columns" :data="copyList" :loading="loading" border>
         <template #status="{row}">
