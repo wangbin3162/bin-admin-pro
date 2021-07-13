@@ -28,7 +28,6 @@
             ref="inputRef"
             v-model="editText"
             size="small"
-            clearable
             @enter="inputBlur(item._index)"
             @blur="inputBlur(item._index)"
           ></b-input>
