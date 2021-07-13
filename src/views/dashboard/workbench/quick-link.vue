@@ -37,7 +37,7 @@
              :key="link.link"
         >
           <b-dropdown trigger="contextmenu" @command="closeLink" placement="bottom-start">
-            <a href="javascript:void(0)">{{ link.text }}</a>
+            <a :href="link.link" target="_blank">{{ link.text }}</a>
             <template #dropdown>
               <b-dropdown-menu>
                 <b-dropdown-item :name="link.link" style="color: #ed4014;">移除</b-dropdown-item>
