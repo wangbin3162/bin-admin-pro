@@ -7,7 +7,7 @@ function resolve(dir) {
 
 module.exports = {
   // 配置基础链接地址，根据发布环境添加
-  publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/bin-admin-pro/' : '/',
   // dev跨域问题
   devServer: {
     port: '8090',

@@ -1,24 +1,69 @@
 # bin-admin-pro
 
-## Project setup
-```
-yarn install
-```
+[预览](https://wangbin3162.github.io/bin-admin-pro/)
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+全新的admin-pro基于 Vue3，配合使用最新支持vue3的组件库 [bin-ui-next](https://github.com/wangbin3162/bin-ui-next/) 
 
-### Compiles and minifies for production
-```
-yarn build
-```
+组件库提供了全新的主题系统和配置参数，增加了系统的个性化功能，并提供了多个自定义组件用于日常开发，配合组件库以及示例，可以快速的
+搭建自己的业务管理模块。
 
-### Lints and fixes files
-```
-yarn lint
-```
+部分截图
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![登录](/public/preview/login.png)
+
+![预览1](/public/preview/1.png)
+
+![预览2](/public/preview/2.png)
+
+![预览3](/public/preview/3.png)
+
+![预览4](/public/preview/4.png)
+
+![预览5](/public/preview/5.png)
+
+![预览6](/public/preview/6.png)
+
+![预览7](/public/preview/7.png)
+
+## 目录结构
+
+整个项目的目录结构如下，具体包含内容后续会进行详细介绍和解释
+
+    ├── docs                       // 文档目录
+    ├── public                     // 公共资源，第三方,不打包资源
+    ├── src                        // 源代码
+    │   ├── api                    // 所有请求相关资源
+    │   ├── assets                 // 静态资源，会打包的资源
+    │   ├── components             // 全局公用组件
+    │   ├── config                 // 通用配置信息
+    │   ├── hooks                  // 通用的hooks模块
+    │   ├── layouts                // 全局布局模块
+    │   ├── mock                   // mock server 数据
+    │   ├── plugins                // 自定义插件
+    │   ├── router                 // 路由
+    │   ├── store                  // 全局 store 
+    │   ├── utils                  // 工具函数模块
+    │   ├── views                  // views 视图显示（system文件夹为系统默认必带的试图显示）
+    │   ├── App.vue                // 入口页面
+    │   └── main.js                // 入口文件 加载组件 初始化等
+    ├── .eslintrc.js               // eslint 配置项
+    ├── .gitignore                 // git 忽略项
+    ├── babel.config.js            // babel 配置项
+    ├── vue.config.js              // vue-cli集成配置项
+    └── package.json               // package.json
+
+
+## 安装
+
+```bash
+# 克隆项目
+git clone https://github.com/wangbin3162/bin-admin-pro.git
+
+# 安装依赖
+npm install or yarn install
+
+# 本地开发 启动项目
+npm run serve
+# OR vue ui 图形化界面启动
+vue ui
+```
