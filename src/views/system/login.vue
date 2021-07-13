@@ -14,7 +14,10 @@
         </div>
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
-          <div class="page-login--logo" />
+          <div class="page-login--logo">
+            <img src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo">
+            <span>BIN-ADMIN-PRO</span>
+          </div>
           <!-- 表单 -->
           <div class="form">
             <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
@@ -191,14 +194,21 @@ export default {
 
     .main {
       .page-login--logo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 340px;
         height: 70px;
         margin-bottom: 1em;
         margin-top: -1em;
-        background-image: url('~@/assets/images/bg/Bin-Admin-Pro-03.png');
-        background-repeat: no-repeat;
-        background-position: -8px -92px;
-        background-size: 100%;
+        img {
+          width: 48px;
+        }
+        span {
+          padding-left: 12px;
+          font-size: 32px;
+          font-weight: bold;
+        }
       }
       .form {
         width: 340px;

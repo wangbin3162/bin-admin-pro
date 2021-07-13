@@ -16,7 +16,7 @@
           <span class="ml-15">Bin UI Next</span>
         </div>
         <div class="desc">一个基于 vue3 的组件库</div>
-        <div class="desc" flex="main:justify"><span>开源库</span><span>0.4.7</span></div>
+        <div class="desc" flex="main:justify"><span>开源库</span><span>0.7.0</span></div>
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ace-editor" target="_blank">
         <div class="title">
@@ -56,7 +56,7 @@
           <span class="ml-15">Admin Pro</span>
         </div>
         <div class="desc">基于 bin-ui 的集成管理平台</div>
-        <div class="desc" flex="main:justify"><span>admin</span><span>0.1.0</span></div>
+        <div class="desc" flex="main:justify"><span>admin</span><span>1.0.0</span></div>
       </a>
     </div>
   </b-card>

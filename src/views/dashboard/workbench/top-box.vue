@@ -29,7 +29,7 @@
             <iconfont icon="bell" color="success" bg round></iconfont>
             <span class="ml-5">通知数量</span>
           </div>
-          <p>2321</p>
+          <p>23</p>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 // 配置路径别名
 const path = require('path')
 
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
@@ -16,6 +16,7 @@ module.exports = {
     //   '/admin': { target: 'http://localhost:8088/cms' }
     // }
   },
+  outputDir: 'docs',
   productionSourceMap: false,
   lintOnSave: process.env.NODE_ENV !== 'production',
   assetsDir: 'static',
