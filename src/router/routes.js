@@ -7,13 +7,13 @@ export const asyncRouterMap = [
     path: 'analysis',
     name: 'Analysis',
     meta: { title: '分析页' },
-    component: () => import('../views/dashboard/analysis')
+    component: () => import(/* webpackChunkName: "Analysis" */ '../views/dashboard/analysis')
   },
   ...modules,
   {
     path: 'about',
     name: 'About',
-    component: () => import('@/views/about/about'),
+    component: () => import(/* webpackChunkName: "About" */ '@/views/about/about'),
     meta: { title: '关于' }
   }
 ]
@@ -34,19 +34,19 @@ export function createRoutesInLayout(routes = []) {
           path: `/${HOME_PATH}`,
           name: 'Workbench',
           meta: { title: HOME_NAME },
-          component: () => import('../views/dashboard/workbench')
+          component: () => import(/* webpackChunkName: "Workbench" */ '../views/dashboard/workbench')
         },
         // 刷新页面 必须保留
         {
           path: 'redirect/:path(.*)',
           name: 'Redirect',
-          component: () => import('../views/system/redirect/index.vue')
+          component: () => import(/* webpackChunkName: "Redirect" */ '../views/system/redirect/index.vue')
         },
         // 错误页面
         {
           path: '/:path(.*)*',
           name: 'ErrorPage',
-          component: () => import('../views/system/error/index.vue')
+          component: () => import(/* webpackChunkName: "ErrorPage" */ '../views/system/error/index.vue')
         },
         ...routes
       ]
@@ -62,7 +62,7 @@ export function addRoutes(routes = []) {
 // 在 layout 之外显示的路由
 export const routesOutLayout = [
   // 登录
-  { path: '/login', name: 'Login', component: () => import('../views/system/login.vue') }
+  { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "Login" */ '../views/system/login.vue') }
 ]
 
 /**

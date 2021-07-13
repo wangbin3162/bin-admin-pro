@@ -27,5 +27,36 @@ module.exports = {
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src')) // key,value自行定义，比如.set('@@', resolve('src/components'))
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.splitChunks({
+        cacheGroups: {
+          common: {
+            name: 'chunk-common',
+            chunks: 'all',
+            minChunks: 2,
+            maxInitialRequests: 5,
+            minSize: 0,
+            priority: 1,
+            reuseExistingChunk: true
+          },
+          vendors: {
+            name: 'chunk-vendors',
+            test: /[\\/]node_modules[\\/]/,
+            chunks: 'all',
+            priority: 2,
+            reuseExistingChunk: true,
+            enforce: true
+          },
+          BinUINext: {
+            name: 'chunk-bin-ui-next',
+            test: /[\\/]node_modules[\\/]bin-ui-next[\\/]/,
+            chunks: 'all',
+            priority: 3,
+            reuseExistingChunk: true,
+            enforce: true
+          }
+        }
+      })
+    }
   }
 }
