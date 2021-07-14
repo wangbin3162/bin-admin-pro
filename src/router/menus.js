@@ -44,6 +44,10 @@ export default [
         title: '图标组件'
       },
       {
+        path: 'compSvgLoading',
+        title: 'Svg Loading'
+      },
+      {
         path: 'compTitleBar',
         title: '标题组件'
       },

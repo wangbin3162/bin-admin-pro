@@ -54,6 +54,12 @@ export default [
     meta: { title: '图标字体' }
   },
   {
+    path: 'compSvgLoading',
+    name: 'CompSvgLoading',
+    component: () => import(/* webpackChunkName: "CompSvgLoading" */ '../../views/comp/comp-svg-loading'),
+    meta: { title: 'Svg Loading' }
+  },
+  {
     path: 'compTitleBar',
     name: 'CompTitleBar',
     component: () => import(/* webpackChunkName: "CompTitleBar" */ '../../views/comp/comp-title-bar'),
