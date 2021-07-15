@@ -1,4 +1,4 @@
-import { getInfo } from '@/api/login.api'
+import { getInfo } from '@/api/modules/login.api'
 import { ACCESS_TOKEN } from '@/config/token-const'
 import cookies from '@/utils/util.cookies'
 

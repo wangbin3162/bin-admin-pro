@@ -35,11 +35,22 @@
         <b-card :bordered="false" shadow="never" :body-style="{padding: '8px 0 0'}">
           <b-tabs v-model="activeTab" :data="tabs"></b-tabs>
           <div v-if="activeTab === 'tab1'" class="p16">
-            <article-item
-              v-for="(item,index) in articleList"
-              :key="index"
-              :item="item"
-            ></article-item>
+            <b-skeleton :loading="loading" animation>
+              <template #template>
+                <b-skeleton />
+                <b-divider />
+                <b-skeleton />
+                <b-divider />
+                <b-skeleton />
+              </template>
+              <template #default>
+                <article-item
+                  v-for="(item,index) in articleList"
+                  :key="index"
+                  :item="item"
+                ></article-item>
+              </template>
+            </b-skeleton>
           </div>
           <div v-if="activeTab === 'tab2'" class="pt-16 pl-16">
             <img-item
@@ -65,7 +76,7 @@
 import ArticleItem from '@/components/List/article-item'
 import ImgItem from '@/components/List/img-item'
 import AppItem from '@/components/List/app-item'
-import { getArticleList, getProjectList } from '@/api/list.api'
+import { getArticleList, getProjectList } from '@/api/modules/list.api'
 
 export default {
   name: 'UserCenter',
@@ -79,10 +90,12 @@ export default {
       ],
       activeTab: 'tab1',
       articleList: [],
-      projectList: []
+      projectList: [],
+      loading: false
     }
   },
   async created() {
+    this.loading = true
     const articles = await getArticleList()
     const projects = await getProjectList()
     this.tabs[0].title = `文章(${articles.rows.length})`
@@ -90,6 +103,7 @@ export default {
     this.tabs[2].title = `应用(${projects.rows.length})`
     this.articleList = articles.rows
     this.projectList = projects.rows
+    this.loading = false
   }
 }
 </script>

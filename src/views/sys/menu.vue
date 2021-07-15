@@ -79,7 +79,7 @@
 
 <script>
 import PageWrapper from '@/components/Page/PageWrapper'
-import { getMenuTree } from '@/api/menu.api'
+import { getMenuTree } from '@/api/modules/menu.api'
 import BaseTree from '@/components/BaseTree'
 import Iconfont from '@/components/Iconfont/iconfont'
 import { ref } from 'vue'

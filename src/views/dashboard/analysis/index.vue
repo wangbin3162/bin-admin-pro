@@ -403,7 +403,7 @@ export default {
     onMounted(() => {
       setTimeout(() => {
         loading.value = false
-      }, 1200)
+      }, 600)
     })
     return {
       loading,

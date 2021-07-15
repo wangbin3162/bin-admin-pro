@@ -21,9 +21,6 @@ module.exports = {
   lintOnSave: process.env.NODE_ENV !== 'production',
   assetsDir: 'static',
   filenameHashing: true, // 发布打包文件是否有哈希后缀
-  configureWebpack: {
-    externals: {}
-  },
   chainWebpack: config => {
     config.resolve.alias
       .set('@', resolve('src')) // key,value自行定义，比如.set('@@', resolve('src/components'))
@@ -50,6 +47,22 @@ module.exports = {
           BinUINext: {
             name: 'chunk-bin-ui-next',
             test: /[\\/]node_modules[\\/]bin-ui-next[\\/]/,
+            chunks: 'all',
+            priority: 3,
+            reuseExistingChunk: true,
+            enforce: true
+          },
+          echarts: {
+            name: 'chunk-echarts',
+            test: /[\\/]node_modules[\\/]echarts[\\/]/,
+            chunks: 'all',
+            priority: 3,
+            reuseExistingChunk: true,
+            enforce: true
+          },
+          brace: {
+            name: 'chunk-brace',
+            test: /[\\/]node_modules[\\/]brace[\\/]/,
             chunks: 'all',
             priority: 3,
             reuseExistingChunk: true,

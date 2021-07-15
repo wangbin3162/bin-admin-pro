@@ -25,7 +25,7 @@
                 <b-input
                   type="text"
                   v-model="formLogin.username"
-                  placeholder="用户名"
+                  placeholder="用户名[admin,wang]"
                   @keydown.enter="submit"
                 >
                   <template #prefix>
@@ -37,7 +37,7 @@
                 <b-input
                   type="password"
                   v-model="formLogin.password"
-                  placeholder="密码"
+                  placeholder="密码[admin,123456]"
                   @keydown.enter="submit"
                 >
                   <template #prefix>
@@ -45,10 +45,10 @@
                   </template>
                 </b-input>
               </b-form-item>
-              <b-form-item prop="code">
+              <b-form-item prop="captcha">
                 <b-input
                   type="text"
-                  v-model="formLogin.code"
+                  v-model="formLogin.captcha"
                   placeholder="- - - -"
                   style="width: 68%;"
                   @keydown.enter="submit"
@@ -83,7 +83,7 @@
 </template>
 
 <script>
-import { login } from '@/api/login.api'
+import { login } from '@/api/modules/login.api'
 
 export default {
   name: 'Login',
@@ -93,14 +93,15 @@ export default {
       formLogin: {
         username: 'admin',
         password: 'admin',
-        code: 'v9am'
+        captcha: 'v9am'
       },
       showPassword: false,
       loading: false,
       // 校验
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+        captcha: [{ required: true, message: '验证码必填', trigger: 'blur' }]
       }
     }
   },
@@ -141,12 +142,14 @@ export default {
           this.$router.push({ path: redirect })
         })
       } else {
-        this.$message({ message: res.data.message, type: 'success' })
+        console.log(res)
+        this.$message.error(res.data.message)
       }
     },
     // 登录失败
     requestFailed(err) {
-      this.$message({ type: 'danger', content: ((err.response || {}).data || {}).message || '请求出现错误，请稍后再试' })
+      console.log(err)
+      this.$message.error(((err.response || {}).data || {}).message || '请求出现错误，请稍后再试')
     }
   }
 }

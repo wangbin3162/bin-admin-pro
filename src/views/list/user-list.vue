@@ -86,7 +86,7 @@
 
 <script>
 import useTable from '@/hooks/service/useTable'
-import { getUserList } from '@/api/user.api'
+import { getUserList } from '@/api/modules/user.api'
 import { reactive, ref, watch } from 'vue'
 import { Message } from 'bin-ui-next'
 import ActionButton from '@/components/ActionButton'

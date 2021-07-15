@@ -1,3 +1,5 @@
+import { deepCopy } from '@/utils/util'
+
 const responseBody = {
   message: '',
   timestamp: 0,
@@ -7,19 +9,20 @@ const responseBody = {
 
 // 返回装配器，data为结果data，message为返回消息
 export const builder = (data, message, code = '0', headers = {}) => {
-  responseBody.data = data
+  const body = deepCopy(responseBody)
+  body.data = data
   if (message !== undefined && message !== null) {
-    responseBody.message = message
+    body.message = message
   }
   if (code !== '0') {
-    responseBody.code = code
-    responseBody._status = code
+    body.code = code
+    body._status = code
   }
   if (headers !== null && typeof headers === 'object' && Object.keys(headers).length > 0) {
-    responseBody._headers = headers
+    body._headers = headers
   }
-  responseBody.timestamp = new Date().getTime()
-  return responseBody
+  body.timestamp = new Date().getTime()
+  return body
 }
 
 export const getQueryParameters = (options) => {

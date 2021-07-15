@@ -94,7 +94,7 @@
 import BaseTable from '@/components/BaseTable'
 import { computed, reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
-import { getRoleList } from '@/api/role.api'
+import { getRoleList } from '@/api/modules/role.api'
 import ActionButton from '@/components/ActionButton'
 import PageWrapper from '@/components/Page/PageWrapper'
 import useForm from '@/hooks/service/useForm'

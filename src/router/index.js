@@ -34,8 +34,14 @@ export function setupRouter(app) {
   app.use(router)
 }
 
+// 权限白名单 no redirect whitelist
+const whiteList = ['/login', '/404', '/401', '/403', '/500']
 router.beforeEach(async (to, from) => {
   LoadingBar.start()
+  // 没有登录的时候跳转到登录界面 // 携带上登陆成功之后需要跳转的页面完整路径
+  if (whiteList.indexOf(to.path) !== -1) { // 在免登陆白名单中
+    return true
+  }
   const token = cookies.get(ACCESS_TOKEN)
   if (token && token !== 'undefined') {
     // 确定用户是否通过getInfo获得了他的权限角色// 这里暂时默认获取了角色
@@ -61,14 +67,7 @@ router.beforeEach(async (to, from) => {
       }
     }
   } else {
-    // 权限白名单 no redirect whitelist
-    const whiteList = ['/login', '/404', '/401', '/403', '/500']
-    // 没有登录的时候跳转到登录界面 // 携带上登陆成功之后需要跳转的页面完整路径
-    if (whiteList.indexOf(to.path) !== -1) { // 在免登陆白名单中
-      return true
-    } else {
-      return { name: 'Login', query: { redirect: to.fullPath } }
-    }
+    return { name: 'Login', query: { redirect: to.fullPath } }
   }
 })
 router.afterEach(() => {

@@ -81,7 +81,7 @@
 <script>
 import { reactive, ref, watch } from 'vue'
 import BaseTable from '@/components/BaseTable'
-import { getUserList } from '@/api/user.api'
+import { getUserList } from '@/api/modules/user.api'
 import PageWrapper from '@/components/Page/PageWrapper'
 import useTable from '@/hooks/service/useTable'
 import ActionButton from '@/components/ActionButton'

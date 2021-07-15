@@ -76,7 +76,7 @@
 
 <script>
 import PageWrapper from '@/components/Page/PageWrapper'
-import { getDepartTree } from '@/api/depart.api'
+import { getDepartTree } from '@/api/modules/depart.api'
 import BaseTree from '@/components/BaseTree'
 import { h } from 'vue'
 
