@@ -46,12 +46,11 @@ export default {
     // 获取用户信息
     async getUserInfo({ commit }) {
       const { data } = await getInfo()
-      // 判断角色权限是否存在,这里约定为roleCodes
       if (data.code === '0') {
         commit('SET_ROLES', data.data.roleCodes)
         commit('SET_INFO', data.data)
         return data.data
-      } else { // 如果是403 即为无效的token则重定向到login页面
+      } else {
         return data
       }
     }

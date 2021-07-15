@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LoadingBar } from 'bin-ui-next'
+import { LoadingBar, Notice } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import store from '@/store'
@@ -63,6 +63,7 @@ router.beforeEach(async (to, from) => {
         // console.log('resultRoutes: ', router.getRoutes())
         return to.fullPath
       } catch (e) {
+        Notice.error({ title: '请求错误', message: e })
         return { name: 'Login', query: { redirect: to.fullPath } }
       }
     }

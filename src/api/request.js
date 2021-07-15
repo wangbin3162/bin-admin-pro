@@ -16,7 +16,7 @@ const service = request.create({
 // 获取填充数据
 export async function fetchData(config) {
   try {
-    const { data } = await request(config)
+    const { data } = await service(config)
     if (data.code === '0') {
       return data.data
     } else {

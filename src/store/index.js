@@ -15,6 +15,7 @@ const store = createStore({
 
 export function setupStore(app) {
   app.use(store)
+  store.dispatch('app/loadApp')
 }
 
 export default store
