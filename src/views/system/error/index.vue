@@ -1,12 +1,11 @@
 <template>
   <div class="system-error-page">
     <div class="bin-result">
-      <div class="bin-result-icon bin-result-image" v-if="isErrorPage">
-        <component :is="`error${status}`"></component>
-      </div>
-      <div v-else class="bin-result-icon bin-result-icon-error">
-        <Error404 v-if="$route.path!=='/error'"></Error404>
-        <b-icon v-else name="close-circle-fill"></b-icon>
+      <div class="bin-result-icon bin-result-image">
+        <img v-if="$route.path==='/403'" src="@/assets/images/default/auth.svg" alt="403">
+        <img v-else-if="$route.path==='/500'" src="@/assets/images/default/error500.svg" alt="500">
+        <img v-else-if="$route.path==='/error'" src="@/assets/images/default/file-max.svg" alt="error">
+        <img v-else src="@/assets/images/default/error404.svg" alt="404">
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>
@@ -23,11 +22,8 @@
 </template>
 
 <script>
-import Error403 from './Error403'
-import Error404 from './Error404'
-import Error500 from './Error500'
 import useStoreRouter from '@/hooks/store/useStoreRouter'
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
 
 /**
@@ -37,7 +33,6 @@ import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
  */
 export default {
   name: 'ErrorPage',
-  components: { Error403, Error404, Error500 },
   setup() {
     // 此代码根据ERROR_PATH_LIST错误路由列表映射而来，如后缀了message，query，则默认先显示对应错误
     const errorNormalMsg = {
@@ -54,13 +49,14 @@ export default {
 
     function init() {
       const path = $route.path.slice(1)
+      const no = $route.query.status
       const message = $route.query.message
       // 如果是预定义的错误页面
       if (isErrorPage.value) {
         status.value = path.toUpperCase()
         errorMessage.value = message || errorNormalMsg[path]
       } else if (path === 'error') { // 通用的错误页面
-        status.value = path
+        status.value = no || path
         errorMessage.value = message
       } else { // 非通用页面的其他错误页面
         status.value = '404'
@@ -82,36 +78,21 @@ export default {
 <style lang="stylus">
 .system-error-page {
   .bin-result {
-    padding: 48px 32px;
-    height: 100vh;
+    padding: 32px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .bin-result-icon {
-    margin-bottom: 24px;
-    text-align: center;
-  }
-  .bin-result-icon.bin-result-icon-error {
-    display: inline-block;
-    border-radius: 50%;
-    margin-bottom: 24px;
-    i {
-      font-size: 82px;
-      color: #f5222d;
-    }
-  }
-
   .bin-result-image {
-    width: 250px;
-    height: 295px;
+    width: 400px;
+    height: 340px;
   }
   .bin-result-title {
-    margin-bottom: 16px;
+    margin-bottom: 24px;
     color: #17233d;
-    font-weight: 500;
-    font-size: 28px;
+    font-weight: bold;
+    font-size: 32px;
     line-height: 32px;
     opacity: 0;
     animation-name: slideUp;
@@ -130,7 +111,6 @@ export default {
     animation-fill-mode: forwards;
   }
   .bin-result-extra {
-    margin-top: 26px;
     text-align: center;
     opacity: 0;
     animation-name: slideUp;
