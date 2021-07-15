@@ -1,4 +1,4 @@
-import { HOME_PATH } from '@/router/menus'
+import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
 
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
@@ -71,6 +71,10 @@ export default function useMenu() {
     }
     if (path === HOME_PATH || addRouters.value.findIndex(item => item.path === path) > -1) {
       $router.push({ path })
+    }
+    // 判断是不是错误页面
+    if (ERROR_PATH_LIST.includes(path)) {
+      $router.push({ path: to })
     }
   }
 

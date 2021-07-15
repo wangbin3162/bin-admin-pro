@@ -47,7 +47,7 @@
 <script>
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import useStoreRouter from '@/hooks/store/useStoreRouter'
-import { HOME_PATH } from '@/router/menus'
+import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
 import useTagsView from '@/hooks/store/useTagsView'
 
@@ -61,20 +61,26 @@ export default {
 
     const { navMenuItems } = useMenu()
     const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
+
+    // 所有动态的路由表paths
+    const addRoutersPaths = computed(() => $store.state.menu.addRouters.map(v => `/${v.path}`))
     const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
     const currentHome = computed(() => $route.path === `/${HOME_PATH}`)
 
     onMounted(() => {
-      addTags()
-      moveToCurrentTag()
+      refresh()
     })
     watch(() => $route.path, (path) => {
-      if (path.indexOf('/redirect') > -1) {
-        return
-      }
+      refresh()
+    })
+
+    function refresh() {
+      const path = $route.path
+      // 如果是重定向或者错误页面则跳过
+      if (!addRoutersPaths.value.includes(path)) return
       addTags()
       moveToCurrentTag()
-    })
+    }
 
     function addTags() {
       const { path } = $route

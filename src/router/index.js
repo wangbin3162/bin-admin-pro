@@ -3,7 +3,7 @@ import { LoadingBar, Notice } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import store from '@/store'
-import { getFilterMenus } from './menus'
+import { ERROR_PATH_LIST, getFilterMenus } from './menus'
 import cookies from '../utils/util.cookies'
 import { ACCESS_TOKEN } from '@/config/token-const'
 
@@ -35,7 +35,7 @@ export function setupRouter(app) {
 }
 
 // 权限白名单 no redirect whitelist
-const whiteList = ['/login', '/404', '/401', '/403', '/500']
+const whiteList = ['/login', ERROR_PATH_LIST.map(path => `/${path}`)]
 router.beforeEach(async (to, from) => {
   LoadingBar.start()
   // 没有登录的时候跳转到登录界面 // 携带上登陆成功之后需要跳转的页面完整路径

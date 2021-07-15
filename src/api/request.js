@@ -55,9 +55,9 @@ service.interceptors.response.use(
   error => {
     if (error.response) {
       if (error.response.status >= 500) { // 如果是服务器端错误则跳转至服务错误页面
-        router.push({ path: '/500' })
+        router.push({ path: `/errorPage?status=${500}` })
       } else if (error.response.status === 404) {
-        router.push({ path: '/404' })
+        router.push({ path: `/errorPage?status=${404}` })
       }
     } else {
       console.log('Error', error.message)

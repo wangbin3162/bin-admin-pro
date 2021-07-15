@@ -150,16 +150,20 @@ export default [
     icon: 'error',
     children: [
       {
-        path: 'error403',
+        path: '403',
         title: '异常页403'
       },
       {
-        path: 'error404',
+        path: '404',
         title: '异常页404'
       },
       {
-        path: 'error500',
+        path: '500',
         title: '异常页500'
+      },
+      {
+        path: 'errorDemo',
+        title: '异常触发'
       }
     ]
   },
@@ -220,6 +224,7 @@ export default [
 // 基础
 export const HOME_PATH = 'workbench'
 export const HOME_NAME = '工作台'
+export const ERROR_PATH_LIST = ['403', '404', '500']
 export const DASHBOARD_MENUS = [
   {
     path: 'dashboard',
