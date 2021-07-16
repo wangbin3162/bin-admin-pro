@@ -84,6 +84,7 @@
 
 <script>
 import { login } from '@/api/modules/login.api'
+import { throwError } from '@/utils/util'
 
 export default {
   name: 'Login',
@@ -101,7 +102,7 @@ export default {
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        captcha: [{ required: true, message: '验证码必填', trigger: 'blur' }]
+        captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
       }
     }
   },
@@ -109,25 +110,21 @@ export default {
     // 提交登录信息
     submit() {
       this.$refs.loginForm.validate(async (valid) => {
-        try {
-          this.loading = true
-          if (valid) {
-            // 登录
-            login(this.formLogin)
-              .then(res => this.loginSuccess(res))
-              .catch(err => this.requestFailed(err))
-          } else {
-            // 登录表单校验失败
-            this.$message({ type: 'error', message: '请输入登录信息后登录' })
+        if (valid) {
+          try {
+            this.loading = true
+            const { data } = await login(this.formLogin)
+            await this.loginSuccess(data)
+          } catch (e) {
+            throwError('login/requestFailed', e)
           }
-        } catch (e) {
+          this.loading = false
         }
-        this.loading = false
       })
     },
-    loginSuccess(res) {
-      if (res.data.code === '0') {
-        const token = res.data.data
+    loginSuccess(data) {
+      if (data.code === '0') {
+        const token = data.data
         this.$store.dispatch('user/setToken', token).then(() => {
           this.$store.dispatch('user/getUserInfo').then(user => {
             this.$notice.success({
@@ -142,14 +139,8 @@ export default {
           this.$router.push({ path: redirect })
         })
       } else {
-        console.log(res)
-        this.$message.error(res.data.message)
+        throwError('login/requestFailed', data)
       }
-    },
-    // 登录失败
-    requestFailed(err) {
-      console.log(err)
-      this.$message.error(((err.response || {}).data || {}).message || '请求出现错误，请稍后再试')
     }
   }
 }

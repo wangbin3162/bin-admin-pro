@@ -6,12 +6,16 @@ export default {
   state: {
     setting: getAdminSetting(),
     searchVisible: false,
-    settingVisible: false
+    settingVisible: false,
+    weather: {}
   },
   mutations: {
     SAVE_SETTING: (state, setting) => {
       state.setting = { ...setting }
       setAdminSetting(state.setting)
+    },
+    SAVE_WEATHER: (state, weather) => {
+      state.weather = { ...weather }
     },
     TOGGLE_SEARCH: (state) => {
       state.searchVisible = !state.searchVisible
@@ -84,6 +88,24 @@ export default {
     },
     toggleSettingPane: ({ commit }) => {
       commit('TOGGLE_SETTING')
+    },
+    toggleSearchBtn: ({ commit, state }) => {
+      const setting = { ...state.setting }
+      setting.showSearch = !setting.showSearch
+      commit('SAVE_SETTING', setting)
+    },
+    toggleMessageBtn: ({ commit, state }) => {
+      const setting = { ...state.setting }
+      setting.showMessage = !setting.showMessage
+      commit('SAVE_SETTING', setting)
+    },
+    toggleWeatherBtn: ({ commit, state }) => {
+      const setting = { ...state.setting }
+      setting.showWeather = !setting.showWeather
+      commit('SAVE_SETTING', setting)
+    },
+    setWeather: ({ commit }, weather) => {
+      commit('SAVE_WEATHER', weather)
     }
   }
 }

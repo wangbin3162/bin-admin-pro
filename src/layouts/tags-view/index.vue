@@ -77,9 +77,10 @@ export default {
     function refresh() {
       const path = $route.path
       // 如果是重定向或者错误页面则跳过
-      if (!addRoutersPaths.value.includes(path)) return
-      addTags()
-      moveToCurrentTag()
+      if (addRoutersPaths.value.includes(path) || currentHome.value) {
+        addTags()
+        moveToCurrentTag()
+      }
     }
 
     function addTags() {

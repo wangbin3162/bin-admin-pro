@@ -1,5 +1,3 @@
-import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
-
 import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
@@ -69,13 +67,7 @@ export default function useMenu() {
       refreshCurrentPage()
       return
     }
-    if (path === HOME_PATH || addRouters.value.findIndex(item => item.path === path) > -1) {
-      $router.push({ path })
-    }
-    // 判断是不是错误页面
-    if (ERROR_PATH_LIST.includes(path)) {
-      $router.push({ path: to })
-    }
+    $router.push({ path })
   }
 
   function getCurrentRouteMenu() {

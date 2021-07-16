@@ -10,6 +10,8 @@ export default function useSetting() {
   const searchVisible = computed(() => store.state.app.searchVisible)
   // 设置面板，不需要缓存，这里设置vuex可以全局调用
   const settingVisible = computed(() => store.state.app.settingVisible)
+  // 保存的weather对象信息
+  const weather = computed(() => store.state.app.weather)
 
   // setting 设置getter
   const theme = computed(() => setting.value.theme)
@@ -20,6 +22,11 @@ export default function useSetting() {
   const showTagsView = computed(() => setting.value.tagsView)
   const fixedAside = computed(() => setting.value.fixedAside)
   const fixedHeader = computed(() => setting.value.fixedHeader)
+
+  // 功能设置
+  const showSearch = computed(() => setting.value.showSearch)
+  const showMessage = computed(() => setting.value.showMessage)
+  const showWeather = computed(() => setting.value.showWeather)
 
   // 根据不同的设置返回额外属性
   const asideStyle = computed(() => {
@@ -98,6 +105,21 @@ export default function useSetting() {
     await store.dispatch('app/setSideBarWidth', width)
   }
 
+  // 设置顶栏搜索
+  async function toggleSearchBtn() {
+    await store.dispatch('app/toggleSearchBtn')
+  }
+
+  // 设置顶栏message
+  async function toggleMessageBtn() {
+    await store.dispatch('app/toggleMessageBtn')
+  }
+
+  // 设置顶栏天气
+  async function toggleWeatherBtn() {
+    await store.dispatch('app/toggleWeatherBtn')
+  }
+
   return {
     // state
     theme,
@@ -108,9 +130,13 @@ export default function useSetting() {
     showTagsView,
     fixedAside,
     fixedHeader,
+    showSearch,
+    showMessage,
+    showWeather,
     // self state
     searchVisible,
     settingVisible,
+    weather,
     // computed
     asideStyle,
     fixedHeaderStyle,
@@ -127,6 +153,9 @@ export default function useSetting() {
     changeFixedHeader,
     changeFixedAside,
     toggleSearch,
-    toggleSetting
+    toggleSetting,
+    toggleSearchBtn,
+    toggleMessageBtn,
+    toggleWeatherBtn
   }
 }

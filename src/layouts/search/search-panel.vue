@@ -87,11 +87,13 @@ export default {
 
     function hideScroll() {
       document.body.classList.add('bin-popup-parent--hidden')
+      document.body.style.paddingRight = '6px'
     }
 
     function showScroll() {
       query.value = ''
       document.body.classList.remove('bin-popup-parent--hidden')
+      document.body.style = null
     }
 
     return {

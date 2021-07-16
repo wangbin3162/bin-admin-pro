@@ -5,10 +5,19 @@
       <span v-if="userInfo">{{ userInfo.realName }}</span>
     </div>
     <template #dropdown>
-      <b-dropdown-menu>
+      <b-dropdown-menu style="width: 120px;">
+        <b-dropdown-item name="userCenter">
+          <div flex="cross:center">
+            <b-icon name="user" size="16"></b-icon>
+            <span class="ml-5">用户中心</span>
+          </div>
+        </b-dropdown-item>
         <b-dropdown-item name="logout">
-          <b-icon name="logout" size="16"></b-icon>&nbsp;
-          <span style="vertical-align: middle;">注销登录</span></b-dropdown-item>
+          <div flex="cross:center">
+            <b-icon name="logout" size="16"></b-icon>
+            <span class="ml-5">注销登录</span>
+          </div>
+        </b-dropdown-item>
       </b-dropdown-menu>
     </template>
   </b-dropdown>
@@ -26,6 +35,9 @@ export default {
     const userInfo = computed(() => $store.state.user.userInfo)
 
     function handleClick(name) {
+      if (name === 'userCenter') {
+        $router.push('/userCenter')
+      }
       if (name === 'logout') {
         MessageBox.confirm({
           type: 'warning',

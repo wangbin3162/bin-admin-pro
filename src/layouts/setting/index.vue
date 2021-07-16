@@ -6,7 +6,7 @@
       <theme-panel />
       <h3 class="setting-title"><span>功能设置</span></h3>
       <div class="setting-list-item">
-        <span>是否开启多页签</span>
+        <span>多页签</span>
         <b-switch :model-value="showTagsView" @change="toggleTagsView">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
@@ -37,6 +37,35 @@
           @change="changeSidebarWidth"
         ></b-input-number>
       </div>
+      <h3 class="setting-title"><span>顶栏设置</span></h3>
+      <div class="setting-list-item">
+        <span>折叠菜单</span>
+        <b-switch :model-value="sidebar" @change="toggleSidebar" :true-value="false" :false-value="true">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item">
+        <span>菜单搜索</span>
+        <b-switch :model-value="showSearch" @change="toggleSearchBtn">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item">
+        <span>消息通知</span>
+        <b-switch :model-value="showMessage" @change="toggleMessageBtn">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item">
+        <span>城市天气</span>
+        <b-switch :model-value="showWeather" @change="toggleWeatherBtn">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
     </div>
   </b-drawer>
 </template>
@@ -52,6 +81,7 @@ export default {
   setup() {
     const {
       showTagsView,
+      sidebar,
       sidebarWidth,
       fixedHeader,
       fixedAside,
@@ -61,11 +91,19 @@ export default {
       changeFixedAside,
       changeSidebarWidth,
       settingVisible,
-      toggleSetting
+      toggleSetting,
+      showSearch,
+      showMessage,
+      showWeather,
+      toggleSearch,
+      toggleSearchBtn,
+      toggleMessageBtn,
+      toggleWeatherBtn
     } = useSetting()
 
     return {
       settingVisible,
+      sidebar,
       showTagsView,
       sidebarWidth,
       fixedHeader,
@@ -75,7 +113,14 @@ export default {
       changeFixedHeader,
       changeFixedAside,
       changeSidebarWidth,
-      toggleSetting
+      toggleSetting,
+      showSearch,
+      showMessage,
+      showWeather,
+      toggleSearch,
+      toggleSearchBtn,
+      toggleMessageBtn,
+      toggleWeatherBtn
     }
   }
 }

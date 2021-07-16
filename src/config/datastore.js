@@ -1,6 +1,5 @@
 import storage from 'good-storage'
 import setting from './setting.cfg'
-import { generateId } from '@/utils/util'
 // 本地缓存库
 
 // app系统设置内容

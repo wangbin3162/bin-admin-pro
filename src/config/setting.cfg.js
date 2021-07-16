@@ -14,7 +14,10 @@ export default {
   sidebarWidth: 256, // 侧边栏宽度
   tagsView: true, // 多页签开启状态
   fixedHeader: false,
-  fixedAside: false
+  fixedAside: false,
+  showWeather: true,
+  showSearch: true,
+  showMessage: true
 }
 
 export const SYSTEM_PRIMARY_COLOR_LIST = [

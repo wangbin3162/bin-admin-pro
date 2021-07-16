@@ -6,8 +6,9 @@
         <header-breadcrumb />
       </div>
       <div class="global-header-right">
-        <search />
-        <message />
+        <search v-if="showSearch" />
+        <message v-if="showMessage" />
+        <weather v-if="showWeather" />
         <user-avatar />
         <setting />
       </div>
@@ -25,13 +26,32 @@ import Setting from '@/layouts/setting'
 import HeaderBreadcrumb from '@/layouts/header-breadcrumb'
 import Search from '@/layouts/search'
 import Message from '@/layouts/message'
+import Weather from '@/layouts/weather'
 
 export default {
   name: 'GlobalHeader',
-  components: { Message, Search, HeaderBreadcrumb, Setting, TagsView, UserAvatar, HeaderTrigger },
+  components: { Weather, Message, Search, HeaderBreadcrumb, Setting, TagsView, UserAvatar, HeaderTrigger },
   setup() {
-    const { sidebar, showTagsView, fixedHeader, fixedHeaderStyle, toggleSidebar } = useSetting()
-    return { sidebar, showTagsView, fixedHeader, fixedHeaderStyle, toggleSidebar }
+    const {
+      sidebar,
+      showTagsView,
+      fixedHeader,
+      fixedHeaderStyle,
+      toggleSidebar,
+      showSearch,
+      showMessage,
+      showWeather
+    } = useSetting()
+    return {
+      sidebar,
+      showTagsView,
+      fixedHeader,
+      fixedHeaderStyle,
+      toggleSidebar,
+      showSearch,
+      showMessage,
+      showWeather
+    }
   }
 }
 </script>

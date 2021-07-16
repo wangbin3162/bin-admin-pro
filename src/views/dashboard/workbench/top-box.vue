@@ -7,7 +7,14 @@
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
-        <div class="welcome-weather">{{ currentDate }} 今日晴，20℃ - 32℃！</div>
+        <div class="welcome-weather">
+          <span class="mr-8">{{ currentDate }}</span>
+          <b-space v-if="showWeather">
+            <span>{{ weather.city }}</span>
+            <span>{{ weather.wea }}</span>
+            <span>{{ weather.tem }}</span>
+          </b-space>
+        </div>
       </div>
       <div class="right-box">
         <div class="item">
@@ -40,6 +47,7 @@
 import Iconfont from '@/components/Iconfont/iconfont'
 import useTodos from '@/hooks/store/useTodos'
 import useUser from '@/hooks/store/useUser'
+import useSetting from '@/hooks/store/useSetting'
 
 export default {
   name: 'top-box',
@@ -47,11 +55,14 @@ export default {
   setup() {
     const { welcomeTitle, currentDate } = useUser()
     const { todoLabel } = useTodos()
+    const { weather, showWeather } = useSetting()
 
     return {
       welcomeTitle,
       currentDate,
-      todoLabel
+      todoLabel,
+      weather,
+      showWeather
     }
   }
 }
