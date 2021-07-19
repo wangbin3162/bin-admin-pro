@@ -1,19 +1,22 @@
 import layout from '../layouts'
 import modules from './modules'
-import { HOME_PATH, HOME_NAME } from '@/router/menus'
+import { HOME_NAME } from '@/router/menus'
 
+/**
+ * meta 为附带参数，title为默认路由标题，noCache为缓存标识，为true时开启tag-view时不缓存
+ */
 export const asyncRouterMap = [
   {
     path: 'analysis',
     name: 'Analysis',
-    meta: { title: '分析页' },
-    component: () => import(/* webpackChunkName: "Analysis" */ '../views/dashboard/analysis')
+    meta: { title: '分析页', noCache: true },
+    component: () => import(/* webpackChunkName: "Analysis" */ '@/views/dashboard/analysis')
   },
   ...modules,
   {
     path: 'about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "About" */ '@/views/about/about'),
+    component: () => import(/* webpackChunkName: "About" */ '@/views/demo/about/about'),
     meta: { title: '关于' }
   }
 ]
@@ -31,7 +34,7 @@ export function createRoutesInLayout(routes = []) {
       component: layout,
       children: [
         {
-          path: `/${HOME_PATH}`,
+          path: 'workbench',
           name: 'Workbench',
           meta: { title: HOME_NAME },
           component: () => import(/* webpackChunkName: "Workbench" */ '../views/dashboard/workbench')
@@ -62,7 +65,11 @@ export function addRoutes(routes = []) {
 // 在 layout 之外显示的路由
 export const routesOutLayout = [
   // 登录
-  { path: '/login', name: 'Login', component: () => import(/* webpackChunkName: "Login" */ '../views/system/login.vue') }
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "Login" */ '../views/system/login.vue')
+  }
 ]
 
 /**

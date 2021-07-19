@@ -48,7 +48,7 @@ export default {
 function filterAsyncRoutes(routes, menuItems) {
   const all = []
   menuItems.forEach(menu => {
-    const matchIndex = routes.findIndex(item => item.path.toLowerCase() === menu.path.toLowerCase())
+    const matchIndex = routes.findIndex(item => item.name.toUpperCase() === menu.name.toUpperCase())
     if (matchIndex > -1) {
       all.push(routes[matchIndex])
     }
@@ -61,7 +61,7 @@ function setMenu(menus) {
   const all = []
   const mapper = (route, parent) => {
     const parents = parent ? parent.split(',') : []
-    parents.push(route.path)
+    parents.push(route.name)
     const child = []
     if (route.children) {
       route.children.forEach(item => {
@@ -90,7 +90,7 @@ function setMenu(menus) {
 function getMenuItems(menus) {
   const all = []
   const mapper = (menu) => {
-    if (menu.path && !menu.children) {
+    if (menu.name && !menu.children) {
       all.push({ ...menu })
     }
     if (menu.children) {

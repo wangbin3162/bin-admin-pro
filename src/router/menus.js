@@ -1,220 +1,220 @@
 // default menu list
 export default [
   {
-    path: 'comp',
+    name: 'Comp',
     title: '组件',
     icon: 'block',
     children: [
       {
-        path: 'colorVar',
+        name: 'ColorVar',
         title: '主题颜色'
       },
       {
-        path: 'ui',
+        name: 'UI',
         title: '组件库',
         children: [
           {
-            path: 'basic',
+            name: 'Basic',
             title: '基础组件'
           },
           {
-            path: 'navComp',
+            name: 'NavComp',
             title: '导航组件'
           },
           {
-            path: 'formComp',
+            name: 'FormComp',
             title: '表单组件'
           },
           {
-            path: 'dataComp',
+            name: 'DataComp',
             title: '数据组件'
           },
           {
-            path: 'otherComp',
+            name: 'OtherComp',
             title: '其他组件'
           }
         ]
       },
       {
-        path: 'compCountTo',
+        name: 'CompCountTo',
         title: '数字动画'
       },
       {
-        path: 'compIconfont',
+        name: 'CompIconfont',
         title: '图标组件'
       },
       {
-        path: 'compSvgLoading',
+        name: 'CompSvgLoading',
         title: 'Svg Loading'
       },
       {
-        path: 'compTitleBar',
+        name: 'CompTitleBar',
         title: '标题组件'
       },
       {
-        path: 'compBaseTree',
+        name: 'CompBaseTree',
         title: '树结构'
       }
     ]
   },
   {
-    path: 'form',
+    name: 'Form',
     title: '表单页面',
     icon: 'reconciliation',
     children: [
       {
-        path: 'baseForm',
+        name: 'BaseForm',
         title: '基础表单'
       },
       {
-        path: 'stepForm',
+        name: 'StepForm',
         title: '分步表单'
       },
       {
-        path: 'advancedForm',
+        name: 'AdvancedForm',
         title: '高级表单'
       }
     ]
   },
   {
-    path: 'list',
+    name: 'List',
     title: '列表页面',
     icon: 'table',
     children: [
       {
-        path: 'baseList',
+        name: 'BaseList',
         title: '基础列表'
       },
       {
-        path: 'cardList',
+        name: 'CardList',
         title: '卡片列表'
       },
       {
-        path: 'userList',
+        name: 'UserList',
         title: '用户列表'
       },
       {
-        path: 'searchList',
+        name: 'SearchList',
         title: '查询列表'
       }
     ]
   },
   {
-    path: 'detail',
+    name: 'Detail',
     title: '详情页面',
     icon: 'filedone',
     children: [
       {
-        path: 'baseDetail',
+        name: 'BaseDetail',
         title: '基础详情'
       },
       {
-        path: 'advancedDetail',
+        name: 'AdvancedDetail',
         title: '高级详情'
       }
     ]
   },
   {
-    path: 'personal',
+    name: 'Personal',
     title: '个人页面',
     icon: 'control',
     children: [
       {
-        path: 'userCenter',
+        name: 'UserCenter',
         title: '个人中心'
       },
       {
-        path: 'userSetting',
+        name: 'UserSetting',
         title: '个人设置'
       }
     ]
   },
   {
-    path: 'result',
+    name: 'Result',
     title: '结果页面',
     icon: 'check-circle',
     children: [
       {
-        path: 'success',
+        name: 'Success',
         title: '成功页'
       },
       {
-        path: 'fail',
+        name: 'Fail',
         title: '失败页'
       }
     ]
   },
   {
-    path: 'errorPage',
+    name: 'ErrorPage',
     title: '异常页面',
     icon: 'error',
     children: [
       {
-        path: '403',
+        name: 'Error403',
         title: '异常页403'
       },
       {
-        path: '404',
+        name: 'Error404',
         title: '异常页404'
       },
       {
-        path: '500',
+        name: 'Error500',
         title: '异常页500'
       },
       {
-        path: 'errorDemo',
+        name: 'ErrorDemo',
         title: '异常触发'
       }
     ]
   },
   {
-    path: 'nested',
+    name: 'Nested',
     title: '嵌套菜单',
     icon: 'menu',
     children: [
       {
-        path: 'menu1',
+        name: 'Menu1',
         title: '菜单1',
         children: [
           {
-            path: 'menu1-1',
+            name: 'Menu1-1',
             title: '菜单1-1'
           },
           {
-            path: 'menu1-2',
+            name: 'Menu1-2',
             title: '菜单1-2'
           },
           {
-            path: 'menu1-3',
+            name: 'Menu1-3',
             title: '菜单1-3'
           }
         ]
       },
       {
-        path: 'menu2',
+        name: 'Menu2',
         title: '菜单2'
       }
     ]
   },
   {
-    path: 'system',
+    name: 'System',
     title: '系统管理',
     icon: 'setting',
     children: [
       {
-        path: 'userAccount',
+        name: 'UserAccount',
         title: '用户管理'
       },
       {
-        path: 'depart',
+        name: 'Depart',
         title: '部门管理'
       },
       {
-        path: 'menu',
+        name: 'Menu',
         title: '菜单管理'
       },
       {
-        path: 'role',
+        name: 'Role',
         title: '角色管理'
       }
     ]
@@ -222,34 +222,28 @@ export default [
 ]
 
 // 基础
-export const HOME_PATH = 'workbench'
+export const HOME_PATH = 'Workbench'
 export const HOME_NAME = '工作台'
 export const ERROR_PATH_LIST = ['403', '404', '500']
 export const DASHBOARD_MENUS = [
   {
-    path: 'dashboard',
+    name: 'Dashboard',
     title: 'Dashboard',
     icon: 'appstore',
     children: [
-      {
-        path: HOME_PATH,
-        title: HOME_NAME
-      },
-      {
-        path: 'analysis',
-        title: '分析页'
-      }
+      { name: HOME_PATH, title: HOME_NAME },
+      { name: 'Analysis', title: '分析页' }
     ]
   }
 ]
 
 /**
  * 静态的临时的menus，不受接口返回影响
- *  {{children: [{path: string, title: string}], path: string, icon: string, title: string}[]}
+ *  {{children: [{name: string, title: string}], name: string, icon: string, title: string}[]}
  */
 export const staticMenu = [
   {
-    path: 'about',
+    name: 'About',
     title: '关于',
     icon: 'dingtalk'
   }

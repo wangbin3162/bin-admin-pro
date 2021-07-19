@@ -13,10 +13,10 @@
           <ul class="search-modal-list" v-no-data:[dataText]="filterList.length===0">
             <li
               v-for="item in filterList"
-              :key="item.path"
+              :key="item.name"
               class="list-item"
             >
-              <a @click="handleClick(item.path)">
+              <a @click="handleClick(item.name)">
                 <i class="b-iconfont b-icon-group"></i>
                 <span>{{ item.display }}</span>
                 <i class="b-iconfont b-icon-enter"></i>
@@ -55,11 +55,11 @@ export default {
     watch(query, (val) => {
       const list = []
       if (val !== '') {
-        const matchList = navMenuItems.value.filter(menu => menu.title.includes(val) || menu.path.includes(val))
+        const matchList = navMenuItems.value.filter(menu => menu.title.includes(val) || menu.name.includes(val))
         matchList.forEach((matchItem) => {
-          const data = getBreadcrumbData(`/${matchItem.path}`)
+          const data = getBreadcrumbData(matchItem.name)
           list.push({
-            path: matchItem.path,
+            name: matchItem.name,
             display: data.map(v => v.title).join(' > ')
           })
         })
@@ -75,8 +75,8 @@ export default {
       })
     }
 
-    function handleClick(path) {
-      handleMenuSelect(path)
+    function handleClick(name) {
+      handleMenuSelect(name)
       handleClose()
     }
 

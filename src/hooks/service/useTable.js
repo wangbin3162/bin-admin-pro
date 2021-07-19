@@ -1,6 +1,6 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { Notice } from 'bin-ui-next'
-import { addResizeListener, removeResizeListener } from '@/utils/util'
+import { addResizeListener, removeResizeListener, throwError } from '@/utils/util'
 
 /**
  * 表格分页等函数hook，可以支持数据参数，page配置等
@@ -30,8 +30,8 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
       list.value = listKey ? data[listKey] : data
       total.value = isPagination ? (data.total || 0) : data.list.length
     } catch (e) {
-      console.log(e)
-      Notice.error(e)
+      // 响应时触发错误
+      throwError('userTable/getDataSource', e, 'notice')
     }
     setLoading(false)
   }

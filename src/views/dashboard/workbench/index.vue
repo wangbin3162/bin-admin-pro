@@ -1,18 +1,18 @@
 <template>
   <div class="workplace">
-    <top-box />
+    <top-box/>
     <div class="work-center">
       <b-row :gutter="16">
         <b-col span="14">
-          <project-box />
-          <dynamic-box />
+          <project-box/>
+          <dynamic-box/>
         </b-col>
         <b-col span="10">
-          <quick-link />
+          <quick-link/>
           <div class="banner">
             <img src="@/assets/images/bg/work.png" alt="work">
           </div>
-          <todos />
+          <todos/>
         </b-col>
       </b-row>
     </div>

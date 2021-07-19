@@ -34,10 +34,10 @@ export default {
     const { sidebar, menuTheme, sidebarWidth } = useSetting()
     const { getMenuItemNamePath, handleMenuSelect, navMenu } = useMenu()
 
-    watch(() => $route.path, (path) => {
+    watch(() => $route.name, (name) => {
       // 展开的菜单
-      openNames.value = getMenuItemNamePath(path)
-      activeMenu.value = path.replace('/', '')
+      openNames.value = getMenuItemNamePath(name)
+      activeMenu.value = name
     }, { immediate: true })
 
     return {

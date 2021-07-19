@@ -48,7 +48,7 @@ import useTodos from '@/hooks/store/useTodos'
 import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
 import { deepCopy, generateId } from '@/utils/util'
 import Sortable from 'sortablejs'
-import Iconfont from '@/components/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont'
 
 let rowKey = 1
 

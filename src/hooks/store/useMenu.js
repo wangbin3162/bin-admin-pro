@@ -2,6 +2,7 @@ import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
+import { ERROR_PATH_LIST } from '@/router/menus'
 
 export default function useMenu() {
   const $store = useStore()
@@ -16,7 +17,7 @@ export default function useMenu() {
     const mapper = route => {
       const mapperNode = { ...route }
       mapperNode.children = (route.children && route.children.map(mapper)) || []
-      if (route.path) {
+      if (route.name) {
         all.push(mapperNode)
       }
       return mapperNode
@@ -28,30 +29,30 @@ export default function useMenu() {
   })
   const { refreshCurrentPage } = useTagsView()
 
-  // 获取菜单项名称路径 附带斜杠
-  function getMenuItemNamePath(path) {
-    const activeRoute = navMenuItems.value.find(item => `/${item.path}` === path)
+  // 获取菜单项名称路径
+  function getMenuItemNamePath(name) {
+    const activeRoute = navMenuItems.value.find(item => item.name === name)
     return activeRoute ? activeRoute.parents : []
   }
 
-  // 获取当前  附带斜杠
-  function getCurrentMenu(path) {
-    const activeRoute = allMenuItems.value.find(item => `/${item.path}` === path)
+  // 获取当前
+  function getCurrentMenu(name) {
+    const activeRoute = allMenuItems.value.find(item => item.name === name)
     return activeRoute || null
   }
 
-  // 获取当前菜单结构数组  path 默认为route.path 需要斜杠/
-  function getBreadcrumbData(path) {
+  // 获取当前菜单结构数组
+  function getBreadcrumbData(name) {
     const list = []
-    const current = getCurrentMenu(path)
+    const current = getCurrentMenu(name)
     if (!current) return []
     const parents = current.parents
     if (parents.length === 1 && !current.children.length) {
       list.push(current)
     } else {
       // 如果有多级层级，则需要遍历查询父级菜单集合
-      parents.forEach(path => {
-        const route = getCurrentMenu(`/${path}`)
+      parents.forEach(name => {
+        const route = getCurrentMenu(name)
         if (route) {
           list.push(route)
         }
@@ -60,18 +61,17 @@ export default function useMenu() {
     return list
   }
 
-  // 选中path 不带斜杠
-  function handleMenuSelect(path) {
-    const to = `/${path}`
-    if (to === $route.fullPath) {
+  // 选中路由名称
+  function handleMenuSelect(name) {
+    if (name === $route.name) {
       refreshCurrentPage()
       return
     }
-    $router.push({ path })
+    $router.push({ name })
   }
 
   function getCurrentRouteMenu() {
-    return getCurrentMenu($route.path)
+    return getCurrentMenu($route.name)
   }
 
   return {

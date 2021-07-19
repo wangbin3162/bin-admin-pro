@@ -42,7 +42,7 @@ export default function useSetting() {
     return {
       padding: 0,
       width: fixedHeader.value ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
-      zIndex: 5,
+      zIndex: 10,
       right: fixedHeader.value ? 0 : null
     }
   })

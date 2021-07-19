@@ -11,7 +11,6 @@ const testMenu = menuList
 const login = (options) => {
   // 拼装请求体
   const body = getBody(options)
-  // console.log('mock: body', body)
   if (username.includes(body.username) && password.includes(body.password)) {
     return builder('4291d7da9005377ec9aec4a71ea837f', '', '0', { 'Custom-Header': Mock.mock('@guid') })
   }

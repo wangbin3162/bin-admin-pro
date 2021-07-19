@@ -7,7 +7,7 @@
             <template #right>
               <b-tag type="success">月</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts1" />
+            <b-charts height="70px" :options="topCharts1"/>
             <template #bottom>
               <span>日注册数</span><span>343个</span>
             </template>
@@ -18,7 +18,7 @@
             <template #right>
               <b-tag type="primary">月</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts2" />
+            <b-charts height="70px" :options="topCharts2"/>
             <template #bottom>
               <span>日户反馈数</span><span>5</span>
             </template>
@@ -29,7 +29,7 @@
             <template #right>
               <b-tag type="warning">日</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts3" />
+            <b-charts height="70px" :options="topCharts3"/>
             <template #bottom>
               <span>日反馈</span><span>34</span>
             </template>
@@ -40,7 +40,7 @@
             <template #right>
               <b-tag type="danger">次</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts4" />
+            <b-charts height="70px" :options="topCharts4"/>
             <template #bottom>
               <span>日访问量</span><span>3242</span>
             </template>
@@ -56,11 +56,11 @@
         </template>
         <b-skeleton :loading="loading" animation>
           <template #template>
-            <b-skeleton style="margin-bottom: 16px;" />
-            <b-skeleton />
+            <b-skeleton style="margin-bottom: 16px;"/>
+            <b-skeleton/>
           </template>
           <template #default>
-            <b-charts height="350px" :options="centerChart" />
+            <b-charts height="350px" :options="centerChart"/>
           </template>
         </b-skeleton>
       </b-card>
@@ -75,11 +75,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
-                <b-skeleton />
+                <b-skeleton style="margin-bottom: 16px;"/>
+                <b-skeleton/>
               </template>
               <template #default>
-                <b-charts height="300px" :options="radarOptions" />
+                <b-charts height="300px" :options="radarOptions"/>
               </template>
             </b-skeleton>
           </b-card>
@@ -92,11 +92,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
-                <b-skeleton />
+                <b-skeleton style="margin-bottom: 16px;"/>
+                <b-skeleton/>
               </template>
               <template #default>
-                <b-charts height="300px" :options="barOptions" />
+                <b-charts height="300px" :options="barOptions"/>
               </template>
             </b-skeleton>
           </b-card>
@@ -109,11 +109,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
-                <b-skeleton />
+                <b-skeleton style="margin-bottom: 16px;"/>
+                <b-skeleton/>
               </template>
               <template #default>
-                <b-charts height="300px" :options="roseOptions" />
+                <b-charts height="300px" :options="roseOptions"/>
               </template>
             </b-skeleton>
           </b-card>
@@ -127,7 +127,7 @@
 import TopCard from '@/views/dashboard/analysis/top-card'
 import { onMounted, ref } from 'vue'
 import { useChartsColor } from '@/hooks/useCharts'
-import Iconfont from '@/components/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont'
 
 export default {
   name: 'Analysis',

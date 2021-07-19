@@ -1,14 +1,14 @@
 <template>
   <b-breadcrumb class="header-breadcrumb" separator="/">
-    <b-breadcrumb-item v-for="item in levelList" :key="item.path">
+    <b-breadcrumb-item v-for="item in levelList" :key="item.name">
       <b-dropdown @command="handleMenuSelect" v-if="showDropdown&&item.children.length">
         <span class="breadcrumb-item">{{ item.title }}<i class="b-iconfont b-icon-down"></i></span>
         <template #dropdown>
           <b-dropdown-menu>
             <b-dropdown-item
               v-for="child in item.children"
-              :key="child.path"
-              :name="child.path"
+              :key="child.name"
+              :name="child.name"
               :disabled="child.children.length>0"
             >{{ child.title }}
             </b-dropdown-item>
@@ -23,7 +23,6 @@
 <script>
 import useStoreRouter from '@/hooks/store/useStoreRouter'
 import { computed, ref, watch } from 'vue'
-import { DASHBOARD_MENUS, HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
 
 export default {
@@ -39,8 +38,8 @@ export default {
       return !props.simple
     })
 
-    watch(() => $route.path, (path) => {
-      levelList.value = getBreadcrumbData(path)
+    watch(() => $route.name, (name) => {
+      levelList.value = getBreadcrumbData(name)
     }, { immediate: true })
 
     return {

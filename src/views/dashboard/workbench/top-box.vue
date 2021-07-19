@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont'
 import useTodos from '@/hooks/store/useTodos'
 import useUser from '@/hooks/store/useUser'
 import useSetting from '@/hooks/store/useSetting'

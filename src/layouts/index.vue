@@ -5,24 +5,24 @@
          :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
-        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
+        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small"/>
         <transition name="zoom-in">
           <h1 v-show="sidebar">BIN-ADMIN-PRO</h1>
         </transition>
       </div>
       <div class="layout-aside-children">
-        <aside-menus />
+        <aside-menus/>
       </div>
     </div>
     <div class="layout-main layout" :style="mainStyle">
       <!--占位顶部-->
       <header class="layout-header" :style="headerHeight" v-if="fixedHeader"></header>
-      <global-header />
+      <global-header/>
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
           <transition appear name="fade-transverse" @before-leave="beforeLeave" @after-leave="afterLeave">
             <keep-alive :include="cachedViews">
-              <component :is="Component" :key="route.fullPath"></component>
+              <component :is="Component" :key="route.path"></component>
             </keep-alive>
           </transition>
         </router-view>

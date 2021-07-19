@@ -6,7 +6,7 @@ export default {
   },
   mutations: {
     ADD_VISITED_VIEW: (state, view) => {
-      if (state.visitedViews.some(v => v.path === view.path)) return
+      if (state.visitedViews.some(v => v.name === view.name)) return
       state.visitedViews.push(
         Object.assign({}, view, {
           title: view.title || 'no-name'
@@ -14,26 +14,26 @@ export default {
       )
     },
     ADD_CACHED_VIEW: (state, view) => {
-      if (state.cachedViews.includes(view.path)) return
-      state.cachedViews.push(view.path)
+      if (state.cachedViews.includes(view.name)) return
+      state.cachedViews.push(view.name)
     },
     DEL_VISITED_VIEW: (state, view) => {
       for (const [i, v] of state.visitedViews.entries()) {
-        if (v.path === view.path) {
+        if (v.name === view.name) {
           state.visitedViews.splice(i, 1)
           break
         }
       }
     },
     DEL_CACHED_VIEW: (state, view) => {
-      const index = state.cachedViews.indexOf(view.path)
+      const index = state.cachedViews.indexOf(view.name)
       index > -1 && state.cachedViews.splice(index, 1)
     },
     DEL_OTHERS_VISITED_VIEWS: (state, view) => {
-      state.visitedViews = state.visitedViews.filter(v => v.path === view.path)
+      state.visitedViews = state.visitedViews.filter(v => v.name === view.name)
     },
     DEL_OTHERS_CACHED_VIEWS: (state, view) => {
-      const index = state.cachedViews.indexOf(view.path)
+      const index = state.cachedViews.indexOf(view.name)
       if (index > -1) {
         state.cachedViews = state.cachedViews.slice(index, index + 1)
       } else {
@@ -50,7 +50,7 @@ export default {
     },
     UPDATE_VISITED_VIEW: (state, view) => {
       for (let v of state.visitedViews) {
-        if (v.path === view.path) {
+        if (v.name === view.name) {
           v = Object.assign(v, view)
           break
         }
@@ -60,7 +60,9 @@ export default {
   actions: {
     addView({ commit }, view) {
       commit('ADD_VISITED_VIEW', view)
-      commit('ADD_CACHED_VIEW', view)
+      if (!view.noCache) {
+        commit('ADD_CACHED_VIEW', view)
+      }
     },
     delView({ commit, state }, view) {
       return new Promise(resolve => {
@@ -105,9 +107,9 @@ export default {
     async refreshCurrentPage({ commit }, router) {
       try {
         const { currentRoute } = router
-        const path = currentRoute.value.fullPath || ''
-        const view = { path: path.slice(1), title: '' }
-        await commit('DEL_CACHED_VIEW', view)
+        const path = currentRoute.value.fullPath
+        const name = currentRoute.value.name
+        await commit('DEL_CACHED_VIEW', { name })
         router.push({ path: `/redirect${path}` })
       } catch (e) {
       }

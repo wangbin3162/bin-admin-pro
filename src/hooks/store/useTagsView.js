@@ -9,7 +9,7 @@ export default function useTagsView() {
   const cachedViews = computed(() => $store.state.tagsView.cachedViews)
   const visitedViews = computed(() => $store.state.tagsView.visitedViews)
   const viewTags = computed(() => {
-    const visitedTabs = visitedViews.value.map(i => ({ key: i.path, title: i.title }))
+    const visitedTabs = visitedViews.value.map(i => ({ key: i.name, title: i.title }))
     return [{ key: HOME_PATH, title: HOME_NAME, noClose: true, icon: '' }, ...visitedTabs]
   })
 

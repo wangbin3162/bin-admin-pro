@@ -2,6 +2,7 @@ import { ACCESS_TOKEN } from '@/config/token-const'
 import request from 'axios'
 import cookies from '../utils/util.cookies'
 import router from '@/router'
+import { throwError } from '@/utils/util'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? '/' : '/mock'
 
@@ -32,7 +33,7 @@ const err = (error) => {
     const data = error.response.data
     const token = cookies.get(ACCESS_TOKEN)
     // 响应时触发错误
-    console.log(data.message)
+    throwError('request/error', data)
   }
   return Promise.reject(error)
 }
@@ -60,7 +61,7 @@ service.interceptors.response.use(
         router.push({ path: `/errorPage?status=${404}` })
       }
     } else {
-      console.log('Error', error.message)
+      throwError('request/error', error)
     }
     return Promise.reject(error)
   }

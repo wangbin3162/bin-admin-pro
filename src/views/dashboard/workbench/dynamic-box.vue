@@ -28,7 +28,8 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont'
+
 export default {
   name: 'dynamic-box',
   components: { Iconfont },

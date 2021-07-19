@@ -59,48 +59,53 @@ export default {
     const selectedTag = ref({})
     const tabsRef = ref(null)
 
-    const { navMenuItems } = useMenu()
+    const { navMenuItems, addRouters } = useMenu()
     const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
 
-    // 所有动态的路由表paths
-    const addRoutersPaths = computed(() => $store.state.menu.addRouters.map(v => `/${v.path}`))
+    // 所有动态的路由表name 拼接
+    const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
     const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
-    const currentHome = computed(() => $route.path === `/${HOME_PATH}`)
+    const currentHome = computed(() => $route.name === HOME_PATH)
 
     onMounted(() => {
       refresh()
     })
-    watch(() => $route.path, (path) => {
+    watch(() => $route.name, () => {
       refresh()
     })
 
     function refresh() {
-      const path = $route.path
+      const name = $route.name
       // 如果是重定向或者错误页面则跳过
-      if (addRoutersPaths.value.includes(path) || currentHome.value) {
+      if (addRoutersNames.value.includes(name) || currentHome.value) {
         addTags()
         moveToCurrentTag()
       }
     }
 
     function addTags() {
-      const { path } = $route
+      const { name } = $route
       if (currentHome.value) return
-      const current = navMenuItems.value.find(item => `/${item.path}` === path)
-      if (current) {
-        $store.dispatch('tagsView/addView', { path: current.path, title: current.title })
+      const current = navMenuItems.value.find(item => item.name === name)
+      const currentRoute = addRouters.value.find(item => item.name === name)
+      if (current && currentRoute) {
+        $store.dispatch('tagsView/addView', {
+          name: current.name,
+          title: current.title,
+          noCache: currentRoute.meta.noCache || false
+        })
       }
       return false
     }
 
     async function moveToCurrentTag() {
       await nextTick()
-      activeTag.value = $route.path.slice(1)
+      activeTag.value = $route.name
     }
 
     // 选中一个tag
     function handleSelect(tag) {
-      $router.push({ path: tag.key })
+      $router.push({ name: tag.key })
     }
 
     function handleRightClick(tag) {
@@ -108,7 +113,7 @@ export default {
     }
 
     function handleCloseTag(tag) {
-      $store.dispatch('tagsView/delView', { path: tag.key, title: tag.title })
+      $store.dispatch('tagsView/delView', { name: tag.key, title: tag.title })
     }
 
     function closeSelected() {
@@ -116,7 +121,7 @@ export default {
         return
       }
       const selectedTagVal = selectedTag.value
-      if (selectedTagVal.key === `/${HOME_PATH}`) return
+      if (selectedTagVal.key === HOME_PATH) return
       // 这里需要调用组件的关闭选择的tag
       tabsRef.value.closeSelectedTab(selectedTagVal)
     }
@@ -127,8 +132,8 @@ export default {
         return
       }
       const selectedTagVal = selectedTag.value
-      $router.push({ path: selectedTagVal.key })
-      $store.dispatch('tagsView/delOthersViews', { path: selectedTagVal.key, title: selectedTagVal.title })
+      $router.push({ name: selectedTagVal.key })
+      $store.dispatch('tagsView/delOthersViews', { name: selectedTagVal.key, title: selectedTagVal.title })
       tabsRef.value.moveToCurrentTab()
     }
 
@@ -138,7 +143,7 @@ export default {
         return
       }
       await $store.dispatch('tagsView/delAllViews')
-      await $router.push(`/${HOME_PATH}`)
+      await $router.push({ name: HOME_PATH })
       await nextTick()
       tabsRef.value.moveToCurrentTab()
     }
