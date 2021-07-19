@@ -1,11 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LoadingBar, Notice } from 'bin-ui-next'
+import { LoadingBar } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import store from '@/store'
 import { ERROR_PATH_LIST, getFilterMenus } from './menus'
 import cookies from '../utils/util.cookies'
 import { ACCESS_TOKEN } from '@/config/token-const'
+import { throwError } from '@/utils/util'
 
 /**
  * @description 创建路由
@@ -61,9 +62,9 @@ router.beforeEach(async (to, from) => {
         // [ 路由 ] 重新设置路由
         resetRoutes(asyncRoute)
         // console.log('resultRoutes: ', router.getRoutes())
-        return to.fullPath
+        return to.path
       } catch (e) {
-        Notice.error({ title: '请求错误', message: e })
+        throwError('router/beforeEach', e, 'notice', '初始化信息出错')
         return { name: 'Login', query: { redirect: to.fullPath } }
       }
     }

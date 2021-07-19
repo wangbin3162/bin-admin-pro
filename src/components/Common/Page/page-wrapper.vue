@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { computed, nextTick, ref, onActivated, onDeactivated } from 'vue'
+import { computed, ref } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
 import useMenu from '@/hooks/store/useMenu'
 import PageFooter from '@/components/Common/Page/page-footer'
@@ -125,7 +125,6 @@ export default {
     }
   }
 }
-
 .grid-content {
   width: 100%;
   min-height: 100%;
