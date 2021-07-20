@@ -18,7 +18,7 @@ const service = request.create({
 export async function fetchData(config) {
   try {
     const { data } = await service(config)
-    if (data.code === '0') {
+    if (data.code === '00') {
       return data.data
     } else {
       throw data.message

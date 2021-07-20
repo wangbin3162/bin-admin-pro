@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LoadingBar } from 'bin-ui-next'
+import { LoadingBar, Notice } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import store from '@/store'
@@ -52,6 +52,13 @@ router.beforeEach(async (to, from) => {
     } else { // 否则就去拉取用户信息
       try {
         const user = await store.dispatch('user/getUserInfo')
+        if (from.name === 'Login') {
+          Notice.success({
+            title: '登录成功',
+            message: `欢迎回来: ${user.realName || user.username}`,
+            offset: 60
+          })
+        }
         const menus = getFilterMenus(user.functions || [])
         // console.log('menus: ', menus)
         const { menuItems } = await store.dispatch('menu/setRouterMenu', menus)

@@ -28,7 +28,7 @@
           <div style="position: relative;min-height: 100px;overflow:hidden;">
             <transition name="fade-in">
               <div style="position:absolute;width: 100%;">
-                <b-alert v-show="pageStatus.isNormal">点选左侧部门，进行编辑操作</b-alert>
+                <b-alert v-show="pageStatus.isNormal">点选左侧菜单，进行编辑操作</b-alert>
               </div>
             </transition>
             <transition name="fade-transverse">

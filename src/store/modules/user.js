@@ -46,7 +46,7 @@ export default {
     // 获取用户信息
     async getUserInfo({ commit }) {
       const { data } = await getInfo()
-      if (data.code === '0') {
+      if (data.code === '00') {
         commit('SET_ROLES', data.data.roleCodes)
         commit('SET_INFO', data.data)
         return data.data

@@ -27,7 +27,12 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
     }
     try {
       setLoading(true)
-      treeData.value = await fetch(params)
+      const data = await fetch(params)
+      if (typeof data === 'object') {
+        treeData.value = [data]
+      } else {
+        treeData.value = data
+      }
     } catch (e) {
       // 响应时触发错误
       throwError('useTree/getTreeData', e, 'notice')

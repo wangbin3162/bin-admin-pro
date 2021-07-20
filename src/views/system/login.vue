@@ -96,7 +96,6 @@ export default {
         password: 'admin',
         captcha: 'v9am'
       },
-      showPassword: false,
       loading: false,
       // 校验
       rules: {
@@ -122,22 +121,13 @@ export default {
         }
       })
     },
-    loginSuccess(data) {
-      if (data.code === '0') {
-        const token = data.data
-        this.$store.dispatch('user/setToken', token).then(() => {
-          this.$store.dispatch('user/getUserInfo').then(user => {
-            this.$notice.success({
-              title: '登录成功',
-              message: `欢迎回来:${user.realName || user.username}`,
-              offset: 60,
-              duration: 3
-            })
-          })
-          // 重定向对象不存在则返回顶层路径
-          const redirect = this.$route.query.redirect || '/'
-          this.$router.push({ path: redirect })
-        })
+    async loginSuccess(data) {
+      if (data.code === '00') {
+        const token = data.data.accessToken
+        await this.$store.dispatch('user/setToken', token)
+        // 重定向对象不存在则返回顶层路径
+        const redirect = this.$route.query.redirect || '/'
+        await this.$router.push({ path: redirect })
       } else {
         throwError('login/requestFailed', data)
       }
@@ -255,7 +245,7 @@ export default {
       @keyframes animate {
         0% {
           transform: translateY(0) rotate(0deg);
-          opacity: .3;
+          opacity: 1;
           border-radius: 0;
         }
         100% {

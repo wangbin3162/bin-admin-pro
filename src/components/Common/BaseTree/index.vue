@@ -4,7 +4,7 @@
       <span class="base-title">{{ treeTitle }}</span>
       <div class="base-ctrl">
         <div class="search">
-          <b-input v-if="showTopSearch" size="small" search v-model="query" placeholder="搜索" @search="handleFilter" />
+          <b-input v-if="showTopSearch" size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
           <slot></slot>
         </div>
         <div class="ctrl">
@@ -28,7 +28,7 @@
     <div class="tree-wrap" v-loading="loading">
       <b-scrollbar>
         <div class="inner-search" v-if="showInnerSearch">
-          <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter" />
+          <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
         </div>
         <b-tree
           :data="treeData"
@@ -48,7 +48,7 @@
 
 <script>
 import useTree from '@/hooks/service/useTree'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 
 export default {
   name: 'BaseTree',
