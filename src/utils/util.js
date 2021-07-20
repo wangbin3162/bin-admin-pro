@@ -2,6 +2,8 @@ import { Utils, Message, Notice, MessageBox } from 'bin-ui-next'
 
 export const generateId = Utils.helper.generateId
 
+export const typeOf = Utils.util.typeOf
+
 export const deepCopy = Utils.util.deepCopy
 
 export const throttle = Utils.util.throttle

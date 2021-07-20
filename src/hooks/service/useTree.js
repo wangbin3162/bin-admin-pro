@@ -1,6 +1,5 @@
-import { nextTick, ref, watch } from 'vue'
-import { Notice } from 'bin-ui-next'
-import { throwError } from '@/utils/util'
+import { nextTick, ref } from 'vue'
+import { throwError, typeOf } from '@/utils/util'
 
 /**
  * 获取树结构hook
@@ -21,14 +20,14 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   // fun：获取数据
   const getTreeData = async () => {
     if (!fetch) return
-    if (typeof fetch === 'object') {
+    if (typeOf(fetch) === 'object') {
       treeData.value = fetch
       return
     }
     try {
       setLoading(true)
       const data = await fetch(params)
-      if (typeof data === 'object') {
+      if (typeOf(data) === 'object') {
         treeData.value = [data]
       } else {
         treeData.value = data
