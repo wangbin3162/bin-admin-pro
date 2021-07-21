@@ -49,6 +49,7 @@
 <script>
 import useTree from '@/hooks/service/useTree'
 import { computed, ref } from 'vue'
+import { typeOf } from '@/utils/util'
 
 export default {
   name: 'BaseTree',
@@ -124,7 +125,9 @@ export default {
       ctx.emit('command', name)
     }
 
-    getTreeData()
+    if (typeOf(props.fetch) === 'function') {
+      getTreeData()
+    }
     return {
       treeEl,
       showTopSearch,
@@ -195,7 +198,7 @@ export default {
     height: 32px;
   }
   .tree-wrap {
-    padding: 5px 0 5px 3px;
+    padding: 5px;
     height: calc(100% - 42px);
   }
 }
