@@ -37,7 +37,7 @@
              :key="link.link"
         >
           <b-dropdown trigger="contextmenu" @command="closeLink" placement="bottom-start">
-            <a :href="link.link" target="_blank">{{ link.text }}</a>
+            <a :href="link.link" :target="link.newTab ? '_blank':'_self'">{{ link.text }}</a>
             <template #dropdown>
               <b-dropdown-menu>
                 <b-dropdown-item :name="link.link" style="color: #ed4014;">移除</b-dropdown-item>
@@ -52,16 +52,22 @@
     </div>
   </b-card>
   <b-modal v-model="visible" title="添加一个快捷链接">
-    <b-form ref="ruleFormRef" :model="form" label-width="85px" class="mt-16" :rules="ruleValidate">
-      <b-form-item prop="link" label="地址">
+    <b-form ref="ruleFormRef" :model="form" label-width="115px" class="mt-16" :rules="ruleValidate">
+      <b-form-item prop="link" label="链接地址">
         <b-input v-model="form.link"></b-input>
       </b-form-item>
-      <b-form-item prop="text" label="名称">
+      <b-form-item prop="text" label="链接名称">
         <b-input v-model="form.text"></b-input>
+      </b-form-item>
+      <b-form-item prop="text" label="新标签页打开">
+        <b-switch v-model="form.newTab">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
       </b-form-item>
     </b-form>
     <template #footer>
-      <b-button type="text" @click="visible = false">取 消</b-button>
+      <b-button @click="visible = false">取 消</b-button>
       <b-button type="primary" @click="submitForm">确 定</b-button>
     </template>
   </b-modal>
@@ -84,7 +90,8 @@ export default {
     const ruleFormRef = ref(null)
     const form = reactive({
       link: '',
-      text: ''
+      text: '',
+      newTab: true
     })
     const ruleValidate = ref({
       link: [{ required: true, message: '地址必填', trigger: 'blur' }],
@@ -95,6 +102,7 @@ export default {
       visible.value = true
       form.link = ''
       form.text = ''
+      form.newTab = true
       ruleFormRef.value && ruleFormRef.value.resetFields()
     }
 
