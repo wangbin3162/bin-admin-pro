@@ -13,7 +13,7 @@
         </div>
       </div>
       <slot></slot>
-      <div class="base-table-pagination" v-if="$slots.action">
+      <div class="base-table-pagination" v-if="$slots.page">
         <slot name="page"></slot>
       </div>
     </div>
