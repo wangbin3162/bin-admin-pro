@@ -51,7 +51,7 @@ export default {
         commit('SET_INFO', data.data)
         return data.data
       } else {
-        return data
+        throw new Error(data.message)
       }
     }
   }

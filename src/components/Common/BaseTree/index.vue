@@ -37,6 +37,7 @@
           :filter-node-method="filterNode"
           :render="render"
           :lock-select="lock"
+          :default-expand="defaultExpand"
           ref="treeRef"
           @select-change="handleSelect"
           @check-change="handleChecked"
@@ -48,8 +49,7 @@
 
 <script>
 import useTree from '@/hooks/service/useTree'
-import { computed, ref } from 'vue'
-import { typeOf } from '@/utils/util'
+import { computed, ref, watch } from 'vue'
 
 export default {
   name: 'BaseTree',
@@ -85,6 +85,9 @@ export default {
     titleKey: {
       type: String,
       default: 'text'
+    },
+    defaultExpand: {
+      type: Boolean
     }
   },
   emits: ['select-change', 'check-change', 'command'],
@@ -125,9 +128,9 @@ export default {
       ctx.emit('command', name)
     }
 
-    if (typeOf(props.fetch) === 'function') {
+    watch(() => props.fetch, () => {
       getTreeData()
-    }
+    }, { immediate: true })
     return {
       treeEl,
       showTopSearch,
