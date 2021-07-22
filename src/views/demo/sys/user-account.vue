@@ -103,7 +103,7 @@
 
     <b-modal
       :model-value="modalVisible"
-      :title="`${pageStatus.isCreate?'新增':'修改'}角色`"
+      :title="`${pageStatus.isCreate?'新增':'修改'}用户`"
       @closed="handleCancel"
     >
       <div v-if="modalVisible">

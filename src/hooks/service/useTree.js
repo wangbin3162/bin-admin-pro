@@ -40,10 +40,11 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   }
 
   // 重载树结构，可附加选中的节点keys
-  const reloadTree = async (keys = []) => {
+  const reloadTree = async (keys = [], expandKeys = []) => {
     await getTreeData()
     await nextTick()
-    treeRef.value && treeRef.value.setSelected(keys)
+    treeRef.value.setSelected(keys)
+    treeRef.value.setExpand(expandKeys)
   }
 
   // 重载树结构，附加checked 回显用

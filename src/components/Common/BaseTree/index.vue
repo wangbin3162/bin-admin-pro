@@ -93,7 +93,7 @@ export default {
     },
     expandKeys: {
       type: Array,
-      default: () => [0]
+      default: () => []
     }
   },
   emits: ['select-change', 'check-change', 'command'],

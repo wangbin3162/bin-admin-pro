@@ -31,6 +31,7 @@ export default {
       type: String,
       default: '确定删除本条数据吗？'
     },
+    disabled: Boolean,
     confirm: Boolean,
     tooltip: String,
     icon: String, // 按钮的icon
@@ -46,12 +47,13 @@ export default {
   emits: ['cancel', 'click'],
   computed: {
     btnProps() {
-      if (this.buttonProps) return this.buttonProps
       return {
         icon: this.icon,
         type: this.isIcon ? 'text' : this.type,
         textColor: this.color,
-        iconStyle: this.isIcon ? { fontSize: '16px' } : {}
+        disabled: this.disabled,
+        iconStyle: this.isIcon ? { fontSize: '16px' } : {},
+        ...this.buttonProps
       }
     }
   },
