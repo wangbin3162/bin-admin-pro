@@ -30,18 +30,20 @@
         <div class="inner-search" v-if="showInnerSearch">
           <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
         </div>
-        <b-tree
-          :data="treeData"
-          :title-key="titleKey"
-          :show-checkbox="showCheckbox"
-          :filter-node-method="filterNode"
-          :render="render"
-          :lock-select="lock"
-          :default-expand="defaultExpand"
-          ref="treeRef"
-          @select-change="handleSelect"
-          @check-change="handleChecked"
-        ></b-tree>
+        <div class="mr-5">
+          <b-tree
+            :data="treeData"
+            :title-key="titleKey"
+            :show-checkbox="showCheckbox"
+            :filter-node-method="filterNode"
+            :render="render"
+            :lock-select="lock"
+            :default-expand="defaultExpand"
+            ref="treeRef"
+            @select-change="handleSelect"
+            @check-change="handleChecked"
+          ></b-tree>
+        </div>
       </b-scrollbar>
     </div>
   </div>
@@ -88,6 +90,10 @@ export default {
     },
     defaultExpand: {
       type: Boolean
+    },
+    expandKeys: {
+      type: Array,
+      default: () => [0]
     }
   },
   emits: ['select-change', 'check-change', 'command'],
@@ -129,7 +135,9 @@ export default {
     }
 
     watch(() => props.fetch, () => {
-      getTreeData()
+      getTreeData().then(() => {
+        treeRef.value && treeRef.value.setExpand(props.expandKeys)
+      })
     }, { immediate: true })
     return {
       treeEl,
@@ -201,7 +209,7 @@ export default {
     height: 32px;
   }
   .tree-wrap {
-    padding: 5px;
+    padding: 5px 0 5px 5px;
     height: calc(100% - 42px);
   }
 }
