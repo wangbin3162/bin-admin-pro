@@ -14,7 +14,7 @@
             <b-row>
               <b-col :span="12">
                 <b-form-item prop="age" label="年龄">
-                  <b-input-number style="width: 100%;" v-model="form.age"></b-input-number>
+                  <b-input-number style="width: 100%;" v-model="form.age" :min="0" :editable="false"></b-input-number>
                 </b-form-item>
               </b-col>
               <b-col :span="12">

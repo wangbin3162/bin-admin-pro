@@ -103,7 +103,7 @@
 
     <b-modal
       :model-value="modalVisible"
-      :title="`${pageStatus.isCreate?'新增':'修改'}用户`"
+      :title="`${pageStatus.isCreate?'新增':'修改'}角色`"
       @closed="handleCancel"
     >
       <div v-if="modalVisible">
@@ -195,9 +195,9 @@ export default {
       backNormal,
       submitForm,
       resetForm,
-      setBtnLoading
+      setBtnLoading,
+      modalVisible
     } = useForm()
-    const modalVisible = computed(() => pageStatus.value.isCreate || pageStatus.value.isEdit)
     watch(list, (val) => {
       copyList.value = val.map(item => ({
         ...item,

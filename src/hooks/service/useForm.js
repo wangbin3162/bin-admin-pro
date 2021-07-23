@@ -16,6 +16,9 @@ export default function useForm() {
     isDetail: editStatus.value === 'detail'
   }))
 
+  // 给弹窗使用的visible
+  const modalVisible = computed(() => pageStatus.value.isCreate || pageStatus.value.isEdit)
+
   watch(() => editStatus.value, () => {
     window.scrollTo(0, 0)
   })
@@ -66,6 +69,7 @@ export default function useForm() {
     editStatus,
     pageStatus,
     openDetail,
+    modalVisible,
     setBtnLoading,
     openCreate,
     openEdit,

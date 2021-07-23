@@ -1,6 +1,13 @@
 // button 样式覆盖
 [data-theme] {
+
   .bin-button {
+    &--default {
+      &:focus, &:hover {
+        color: getColor();
+        border-color: getColor();
+      }
+    }
     &--primary {
       background-color: getColor();
       border-color: getColor();
@@ -32,7 +39,7 @@
         }
       }
       &.is-transparent {
-        border-color: getColor();
+        border-color: getLighten3();
         color: getColor();
         background-color: transparent;
         &:hover, &:focus {

@@ -92,7 +92,7 @@
 
 <script>
 import BaseTable from '@/components/Common/BaseTable'
-import { computed, reactive, ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getRoleList } from '@/api/modules/role.api'
 import ActionButton from '@/components/Common/ActionButton'
@@ -134,9 +134,9 @@ export default {
       backNormal,
       submitForm,
       resetForm,
-      setBtnLoading
+      setBtnLoading,
+      modalVisible
     } = useForm()
-    const modalVisible = computed(() => pageStatus.value.isCreate || pageStatus.value.isEdit)
 
     watch(() => list.value, (val) => {
       copyList.value = val

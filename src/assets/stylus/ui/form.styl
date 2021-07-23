@@ -21,6 +21,10 @@
     color: getColor();
   }
 
+  .bin-input-number-always .bin-input-number-handler-minus:hover .b-iconfont,
+  .bin-input-number-always .bin-input-number-handler-plus:hover .b-iconfont {
+    color: getColor();
+  }
   // select
   .bin-select__popper .bin-select-dropdown__item.selected {
     color: getColor();
@@ -53,6 +57,19 @@
   }
   .bin-radio__inner:after {
     background-color: getColor()
+  }
+  .bin-radio__input:hover .bin-radio__inner {
+    border-color: getLighten3()
+  }
+  .bin-radio-group-button .bin-radio:hover {
+    color: getColor()
+    border-color: getColor()
+  }
+  .bin-radio-group-button .bin-radio.is-checked,
+  .bin-radio-group-button .bin-radio:hover.is-checked {
+    background: getColor()
+    border-color: getColor()
+    color: #fff;
   }
   // switch
   .bin-switch-checked {
