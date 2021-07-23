@@ -67,7 +67,11 @@ export default function useMenu() {
       refreshCurrentPage()
       return
     }
-    $router.push({ name })
+    if (addRouters.value.find(item => item.name === name)) {
+      $router.push({ name })
+    } else {
+      $router.push('/404')
+    }
   }
 
   function getCurrentRouteMenu() {

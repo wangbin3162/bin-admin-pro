@@ -1,7 +1,7 @@
 <template>
   <Teleport to="body">
     <transition name="zoom-in" mode="out-in" @after-leave="showScroll">
-      <div class="search-modal" @click.stop v-if="visible">
+      <div class="search-modal" @click.stop v-if="searchVisible">
         <div class="search-modal-content" v-click-outside="handleClose">
           <div class="search-modal-input__wrapper">
             <b-input ref="inputRef" size="large" v-model="query" placeholder="搜索" class="input-item">
@@ -37,7 +37,6 @@ import useSetting from '@/hooks/store/useSetting'
 export default {
   name: 'search-panel',
   setup() {
-    const visible = ref(false)
     const inputRef = ref(null)
     const dataText = ref('暂无搜索结果')
     const query = ref('')
@@ -54,21 +53,18 @@ export default {
 
     watch(query, (val) => {
       const list = []
-      if (val !== '') {
-        const matchList = navMenuItems.value.filter(menu => menu.title.includes(val) || menu.name.includes(val))
-        matchList.forEach((matchItem) => {
-          const data = getBreadcrumbData(matchItem.name)
-          list.push({
-            name: matchItem.name,
-            display: data.map(v => v.title).join(' > ')
-          })
+      const matchList = navMenuItems.value.filter(menu => menu.title.includes(val) || menu.name.includes(val))
+      matchList.forEach((matchItem) => {
+        const data = getBreadcrumbData(matchItem.name)
+        list.push({
+          name: matchItem.name,
+          display: data.map(v => v.title).join(' > ')
         })
-      }
+      })
       filterList.value = list
-    })
+    }, { immediate: true })
 
     function open() {
-      visible.value = true
       nextTick(() => {
         hideScroll()
         inputRef.value && inputRef.value.focus()
@@ -81,7 +77,6 @@ export default {
     }
 
     function handleClose() {
-      visible.value = false
       toggleSearch()
     }
 
@@ -97,7 +92,7 @@ export default {
     }
 
     return {
-      visible,
+      searchVisible,
       inputRef,
       query,
       filterList,

@@ -38,8 +38,9 @@ import useSetting from '@/hooks/store/useSetting'
 import AsideMenus from '@/layouts/menus'
 import GlobalHeader from '@/layouts/header'
 import GlobalFooter from '@/layouts/footer'
-import { computed } from 'vue'
+import { computed, onBeforeUnmount, onMounted } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
+import { on, off } from '@/utils/util'
 
 export default {
   name: 'Layout',
@@ -56,7 +57,10 @@ export default {
       sidebarWidth,
       fixedAside,
       asideStyle,
-      fixedHeader
+      fixedHeader,
+      showSearch,
+      searchVisible,
+      toggleSearch
     } = useSetting()
     const { cachedViews } = useTagsView()
 
@@ -87,6 +91,32 @@ export default {
     function afterLeave(el) {
       el.style = ''
     }
+
+    // ctrl + f 全局呼出搜索面板
+    const keydownEvent = (e) => {
+      if (!showSearch.value) return
+      const { ctrlKey, code } = e
+      // 面板打开
+      if (searchVisible.value) {
+        if (code === 'Escape') {
+          e.preventDefault()
+          toggleSearch()
+        }
+      } else {
+        if (ctrlKey && code === 'KeyF') {
+          e.preventDefault()
+          toggleSearch()
+        }
+      }
+    }
+
+    onMounted(() => {
+      on(document, 'keydown', keydownEvent)
+    })
+
+    onBeforeUnmount(() => {
+      off(document, 'keydown', keydownEvent)
+    })
 
     return {
       theme,
