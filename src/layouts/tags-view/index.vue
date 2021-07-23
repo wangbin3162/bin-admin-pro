@@ -67,12 +67,9 @@ export default {
     const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
     const currentHome = computed(() => $route.name === HOME_PATH)
 
-    onMounted(() => {
+    watch(() => $route.path, () => {
       refresh()
-    })
-    watch(() => $route.name, () => {
-      refresh()
-    })
+    }, { immediate: true })
 
     function refresh() {
       const name = $route.name
