@@ -2,7 +2,7 @@ import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
 import { computed } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
-import { ERROR_PATH_LIST } from '@/router/menus'
+import { HOME_PATH } from '@/router/menus'
 
 export default function useMenu() {
   const $store = useStore()
@@ -67,7 +67,7 @@ export default function useMenu() {
       refreshCurrentPage()
       return
     }
-    if (addRouters.value.find(item => item.name === name)) {
+    if (addRouters.value.find(item => item.name === name) || name === HOME_PATH) {
       $router.push({ name })
     } else {
       $router.push('/404')
