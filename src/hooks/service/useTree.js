@@ -32,6 +32,7 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
       } else {
         treeData.value = data
       }
+      ctx.emit('init-success')
     } catch (e) {
       // 响应时触发错误
       throwError('useTree/getTreeData', e, 'notice')

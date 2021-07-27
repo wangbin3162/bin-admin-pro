@@ -25,7 +25,10 @@
         </div>
       </div>
     </div>
-    <div class="tree-wrap" v-loading="loading">
+    <div class="tree-wrap" :class="{'has-bottom':$slots.bottom}" v-loading="loading">
+      <div class="tree-inner" v-if="$slots.inner">
+        <slot name="inner"></slot>
+      </div>
       <b-scrollbar>
         <div class="inner-search" v-if="showInnerSearch">
           <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
@@ -46,6 +49,9 @@
         </div>
       </b-scrollbar>
     </div>
+    <div class="tree-bottom" v-if="$slots.bottom">
+      <slot name="bottom"></slot>
+    </div>
   </div>
 </template>
 
@@ -58,7 +64,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '280px'
+      default: '320px'
     },
     treeTitle: {
       type: String
@@ -94,9 +100,13 @@ export default {
     expandKeys: {
       type: Array,
       default: () => []
+    },
+    selectedKeys: {
+      type: Array,
+      default: () => []
     }
   },
-  emits: ['select-change', 'check-change', 'command'],
+  emits: ['select-change', 'check-change', 'command', 'init-success'],
   setup(props, ctx) {
     const treeEl = ref(null)
     const showTopSearch = computed(() => props.showFilter && props.filterPosition === 'top')
@@ -137,6 +147,7 @@ export default {
     watch(() => props.fetch, () => {
       getTreeData().then(() => {
         treeRef.value && treeRef.value.setExpand(props.expandKeys)
+        treeRef.value && treeRef.value.setSelected(props.selectedKeys)
       })
     }, { immediate: true })
     return {
@@ -165,7 +176,7 @@ export default {
 .base-tree {
   flex-shrink: 0;
   flex-grow: 0;
-  min-height: 300px;
+  min-height: 400px;
   max-height: 768px;
   background: #fff;
   border-radius: 2px;
@@ -211,6 +222,18 @@ export default {
   .tree-wrap {
     padding: 5px 0 5px 5px;
     height: calc(100% - 42px);
+    &.has-bottom {
+      height: calc(100% - 72px);
+    }
+  }
+  .tree-inner {
+    text-align: left;
+    padding: 0 6px 6px;
+  }
+  .tree-bottom {
+    border-top: $border-base;
+    text-align: right;
+    padding: 4px 8px 6px;
   }
 }
 </style>
