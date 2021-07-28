@@ -32,7 +32,7 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
       } else {
         treeData.value = data
       }
-      ctx.emit('init-success')
+      ctx && ctx.emit('init-success')
     } catch (e) {
       // 响应时触发错误
       throwError('useTree/getTreeData', e, 'notice')
@@ -65,13 +65,13 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   }
 
   const handleSelect = (selected, node, flatState) => {
-    ctx.emit('select-change', node, flatState)
+    ctx && ctx.emit('select-change', node, flatState)
   }
 
   const handleChecked = (checked, node, indeterminate) => {
     hasChecked.value = checked.length > 0
     // 包含半选节点
-    ctx.emit('check-change', checked, node, indeterminate)
+    ctx && ctx.emit('check-change', checked, node, indeterminate)
   }
 
   // 过滤树节点

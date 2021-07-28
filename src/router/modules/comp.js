@@ -70,5 +70,11 @@ export default [
     name: 'CompBaseTree',
     component: () => import(/* webpackChunkName: "CompBaseTree" */ '../../views/demo/comp/comp-base-tree'),
     meta: { title: '树结构' }
+  },
+  {
+    path: 'compKeyValue',
+    name: 'CompKeyValue',
+    component: () => import(/* webpackChunkName: "CompKeyValue" */ '../../views/demo/comp/comp-key-value'),
+    meta: { title: '映射配置' }
   }
 ]

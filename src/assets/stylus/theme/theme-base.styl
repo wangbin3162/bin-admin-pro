@@ -137,10 +137,10 @@
 
 // tags-view
 .tags-view-container {
+  position: relative;
   display: flex;
   height: 32px;
   box-sizing: content-box;
-  border-bottom: 1px solid #eee;
   background-color: #ffffff;
   .bin-tabs-wrapper {
     margin: 0 8px;
@@ -210,6 +210,15 @@
         color: $color-text-primary;
       }
     }
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 1px;
+    bottom: 0;
+    background-color: #eee;
   }
 }
 // menu

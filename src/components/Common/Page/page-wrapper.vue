@@ -10,7 +10,7 @@
           <div class="page-header-desc" v-if="$slots.desc || desc">
             <slot name="desc">{{ desc }}</slot>
           </div>
-          <b-icon v-if="showClose" name="close" @click="$emit('close')"></b-icon>
+          <b-icon v-if="showClose" name="close" type="button" @click="$emit('close')"></b-icon>
         </div>
       </div>
     </div>

@@ -54,6 +54,10 @@ export default [
       {
         name: 'CompBaseTree',
         title: '树结构'
+      },
+      {
+        name: 'CompKeyValue',
+        title: 'KeyValue'
       }
     ]
   },

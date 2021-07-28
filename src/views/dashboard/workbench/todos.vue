@@ -13,27 +13,26 @@
     </template>
     <ul class="todo-list" ref="listRef">
       <li
-        v-for="item in list"
-        :key="item._rowKey"
-        :data-key="item._rowKey"
+        v-for="(item,index) in list"
+        :key="index"
         class="todo"
-        :class="[{done:item.done},{edit: editIndex === item._index}]"
+        :class="[{done:item.done},{edit: editIndex === index}]"
       >
         <i class="handle drag b-iconfont b-icon-menu"></i>
-        <span class="toggle" @click="toggleCheck(item._index)">
+        <span class="toggle" @click="toggleCheck(index)">
           <b-icon name="check"></b-icon>
         </span>
-        <label v-if="editIndex === item._index">
+        <label v-if="editIndex === index">
           <b-input
             ref="inputRef"
             v-model="editText"
             size="small"
-            @enter="inputBlur(item._index)"
-            @blur="inputBlur(item._index)"
+            @enter="inputBlur(index)"
+            @blur="inputBlur(index)"
           ></b-input>
         </label>
-        <label v-else @dblclick="dbClickEdit(item._index)">{{ item.text }}</label>
-        <i class="destroy b-iconfont b-icon-close" @click="removeOne(item._index)"></i>
+        <label v-else @dblclick="dbClickEdit(index)">{{ item.text }}</label>
+        <i class="destroy b-iconfont b-icon-close" @click="removeOne(index)"></i>
       </li>
     </ul>
     <footer class="footer">
@@ -45,12 +44,10 @@
 
 <script>
 import useTodos from '@/hooks/store/useTodos'
-import { nextTick, ref, watch, onMounted, onBeforeUnmount } from 'vue'
-import { deepCopy, generateId } from '@/utils/util'
-import Sortable from 'sortablejs'
+import { nextTick, ref, watch } from 'vue'
 import Iconfont from '@/components/Common/Iconfont/iconfont'
-
-let rowKey = 1
+import useSortable from '@/hooks/useSortable'
+import { deepCopy } from '@/utils/util'
 
 export default {
   name: 'todos',
@@ -59,49 +56,23 @@ export default {
     const editIndex = ref(-1)
     const editText = ref('')
     const inputRef = ref(null)
-    const listRef = ref(null)
     const {
       todos,
       todoLabel,
       leftCount,
       saveTodos
     } = useTodos()
-    const list = ref(todos.value)
-    let sortInstance = null
-    watch(todos, (val) => {
-      list.value = makeData()
-    }, { immediate: true })
+    const list = ref([])
+    const { listRef } = useSortable(list, updateState, { ghostClass: 'ghost' })
 
-    onMounted(() => {
-      if (sortInstance) sortInstance.destroy()
-      const el = listRef.value
-      sortInstance = Sortable.create(el, {
-        animation: 150,
-        ghostClass: 'ghost',
-        handle: '.drag',
-        onEnd: (evt) => {
-          const {
-            newIndex,
-            oldIndex
-          } = evt
-          const newData = deepCopy(list.value)
-          const targetRow = newData.splice(oldIndex, 1)[0]
-          newData.splice(newIndex, 0, targetRow)
-          updateState(newData)
-        }
-      })
-    })
+    // 数据变化后更新操作mapping
+    watch(() => todos.value, (val) => {
+      list.value = deepCopy(val)
+    }, { immediate: true, deep: true })
 
-    function updateState(list) {
-      saveTodos(list)
+    function updateState() {
+      saveTodos(list.value)
     }
-
-    onBeforeUnmount(() => {
-      if (sortInstance) {
-        sortInstance.destroy()
-        sortInstance = null
-      }
-    })
 
     async function handleAdd() {
       if (editIndex.value > -1) {
@@ -110,7 +81,6 @@ export default {
         return
       }
       list.value.push({
-        _index: list.value.length,
         text: '',
         done: false
       })
@@ -136,28 +106,18 @@ export default {
       } else {
         list.value[index].text = text
         editIndex.value = -1
-        updateState(list.value)
+        updateState()
       }
     }
 
     function toggleCheck(index) {
       list.value[index].done = !list.value[index].done
-      updateState(list.value)
+      updateState()
     }
 
     function removeOne(index) {
       list.value.splice(index, 1)
-      updateState(list.value)
-    }
-
-    // 重新组织ID
-    function makeData() {
-      const data = deepCopy(todos.value)
-      data.forEach((row, index) => {
-        row._index = index
-        row._rowKey = generateId() + rowKey++
-      })
-      return data
+      updateState()
     }
 
     return {

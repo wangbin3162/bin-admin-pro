@@ -1,11 +1,15 @@
 // button 样式覆盖
 [data-theme] {
-
   .bin-button {
     &--default {
       &:focus, &:hover {
         color: getColor();
         border-color: getColor();
+      }
+      // 默认禁用
+      &.is-disabled, &.is-disabled:focus, &.is-disabled:hover, &.is-loading {
+        color: #c0c4cc;
+        border-color: #ebeef5;
       }
     }
     &--primary {
@@ -39,7 +43,7 @@
         }
       }
       &.is-transparent {
-        border-color: getLighten3();
+        border-color: getColor();
         color: getColor();
         background-color: transparent;
         &:hover, &:focus {
@@ -52,7 +56,7 @@
         &.is-disabled, &.is-disabled:focus, &.is-disabled:hover {
           background-color: transparent;
           color: getLighten3();
-          border-color: getLighten5();
+          border-color: getLighten3();
         }
       }
       &.is-dashed {

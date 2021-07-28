@@ -51,10 +51,10 @@
         <b-col span="12">
           <b-alert show-icon closable>确认支付后，资金会直接打入对方账户，无法退回。</b-alert>
           <b-form :model="form2" ref="form2Ref" label-width="100px" label-suffix=":">
-            <b-form-item label="付款账户">{{ form1.payment }}</b-form-item>
-            <b-form-item label="收款账户">{{ form1.collection }}</b-form-item>
-            <b-form-item label="收款人名称">{{ form1.name }}</b-form-item>
-            <b-form-item label="金额">¥ {{ form1.money }}</b-form-item>
+            <b-form-item label="付款账户"><label>{{ form1.payment }}</label></b-form-item>
+            <b-form-item label="收款账户"><label>{{ form1.collection }}</label></b-form-item>
+            <b-form-item label="收款人名称"><label>{{ form1.name }}</label></b-form-item>
+            <b-form-item label="金额"><label>¥ {{ form1.money }}</label></b-form-item>
             <b-divider></b-divider>
             <b-form-item
               label="支付密码"
@@ -76,10 +76,10 @@
         <template #desc>预计2小时内到账</template>
         <template #extra>
           <b-form label-width="100px" label-suffix=":">
-            <b-form-item label="付款账户">{{ form1.payment }}</b-form-item>
-            <b-form-item label="收款账户">{{ form1.collection }}</b-form-item>
-            <b-form-item label="收款人名称">{{ form1.name }}</b-form-item>
-            <b-form-item label="金额">¥ {{ form1.money }}</b-form-item>
+            <b-form-item label="付款账户"><label>{{ form1.payment }}</label></b-form-item>
+            <b-form-item label="收款账户"><label>{{ form1.collection }}</label></b-form-item>
+            <b-form-item label="收款人名称"><label>{{ form1.name }}</label></b-form-item>
+            <b-form-item label="金额"><label>¥ {{ form1.money }}</label></b-form-item>
           </b-form>
         </template>
         <template #actions>

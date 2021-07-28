@@ -4,6 +4,7 @@ import router, { setupRouter } from '@/router'
 import { setupStore } from '@/store'
 import { registerUI } from '@/plugins/bin-ui'
 import { registerCharts } from '@/plugins/bin-charts'
+import { registerEditor } from '@/plugins/bin-ace-editor'
 import 'bin-ui-next/lib/styles/normalize.css' // 初始化样式
 import 'bin-ui-next/lib/styles/index.css' // 组件库样式
 import './assets/stylus/index.styl' // 项目样式
@@ -20,6 +21,7 @@ import './mock'
 const app = createApp(App)
 registerUI(app)
 registerCharts(app)
+registerEditor(app)
 setupRouter(app)
 setupStore(app)
 // Mount when the route is ready

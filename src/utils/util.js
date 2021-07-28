@@ -55,3 +55,19 @@ export function throwError(callFun, e, type = 'message', title, log = true) {
     Utils.log.danger('----------------------------------------------------------')
   }
 }
+
+/**
+ * 数组转对象值
+ */
+export function arrToObj(arr = [], keyCode = 'key', valueCode = 'value') {
+  const map = new Map()
+  if (arr.length === 0) return {}
+  arr.forEach(item => {
+    map.set(item[keyCode], item[valueCode])
+  })
+  const obj = {}
+  for (const [k, v] of map) {
+    obj[k] = v
+  }
+  return obj
+}
