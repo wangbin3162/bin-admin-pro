@@ -53,7 +53,9 @@ export default {
 
     watch(query, (val) => {
       const list = []
-      const matchList = navMenuItems.value.filter(menu => menu.title.includes(val) || menu.name.includes(val))
+      const matchList = navMenuItems.value.filter(menu => {
+        return menu.title.includes(val) || menu.name.toUpperCase().includes(val.toUpperCase())
+      })
       matchList.forEach((matchItem) => {
         const data = getBreadcrumbData(matchItem.name)
         list.push({
