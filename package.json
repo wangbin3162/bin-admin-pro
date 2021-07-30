@@ -27,7 +27,7 @@
     "axios": "^0.21.1",
     "bin-ace-editor": "^3.0.4",
     "bin-charts": "^3.0.1",
-    "bin-ui-next": "^0.8.0",
+    "bin-ui-next": "^0.8.2",
     "echarts": "^5.1.2",
     "good-storage": "^1.1.1",
     "js-cookie": "^2.2.1",

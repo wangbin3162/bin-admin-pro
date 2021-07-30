@@ -1,5 +1,5 @@
 <template>
-  <header-trigger icon="search" tooltip="搜索" @click="toggleSearch" />
+  <header-trigger icon="search" tooltip="搜索/ctrl+f" @click="toggleSearch" />
   <search-panel />
 </template>
 
