@@ -20,11 +20,11 @@
       <global-header/>
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
-          <transition appear name="fade-transverse" @before-leave="beforeLeave" @after-leave="afterLeave">
+          <move-transition>
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.path"></component>
             </keep-alive>
-          </transition>
+          </move-transition>
         </router-view>
       </div>
       <global-footer></global-footer>
@@ -41,10 +41,12 @@ import GlobalFooter from '@/layouts/footer'
 import { computed, onBeforeUnmount, onMounted } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
 import { on, off } from '@/utils/util'
+import MoveTransition from '@/components/Common/MoveTransition'
 
 export default {
   name: 'Layout',
   components: {
+    MoveTransition,
     GlobalHeader,
     GlobalFooter,
     AsideMenus
@@ -78,19 +80,6 @@ export default {
     })
 
     const headerHeight = computed(() => ({ height: showTagsView.value ? '80px' : '48px' }))
-
-    function beforeLeave(el) {
-      el.style.position = 'absolute'
-      el.style.top = '0'
-      el.style.left = '0'
-      el.style.width = '100%'
-      el.style.height = '100%'
-      el.style.overflow = 'hidden'
-    }
-
-    function afterLeave(el) {
-      el.style = ''
-    }
 
     // ctrl + f 全局呼出搜索面板
     const keydownEvent = (e) => {
@@ -126,9 +115,7 @@ export default {
       cachedViews,
       headerHeight,
       fixedHeader,
-      mainStyle,
-      beforeLeave,
-      afterLeave
+      mainStyle
     }
   }
 }
