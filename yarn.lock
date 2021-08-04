@@ -958,9 +958,9 @@
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
 "@popperjs/core@^2.9.2":
-  version "2.9.2"
-  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.2.tgz#adea7b6953cbb34651766b0548468e743c6a2353"
-  integrity sha512-VZMYa7+fXHdwIq1TDhSXoVmSPEGM/aa+6Aiq3nVVJ9bXr24zScr+NlKFKC3iPljA7ho/GAZr+d2jOf5GIRC30Q==
+  version "2.9.3"
+  resolved "https://registry.npmjs.org/@popperjs/core/-/core-2.9.3.tgz#8b68da1ebd7fc603999cf6ebee34a4899a14b88e"
+  integrity sha512-xDu17cEfh7Kid/d95kB6tZsLOmSWKCZKtprnhVepjsSaCij+lM3mItSJDuuHDMbCWTh8Ejmebwb+KONcCJ0eXQ==
 
 "@soda/friendly-errors-webpack-plugin@^1.7.1":
   version "1.8.0"
@@ -2095,10 +2095,10 @@ bin-charts@^3.0.1:
   resolved "https://registry.npmjs.org/bin-charts/-/bin-charts-3.0.1.tgz#a55bec892cc5892663db9c1d55511bfd0fa5142e"
   integrity sha512-t7k1qgEq+FS5qOSuVMxw4A92u5UaXYMMn2eCB6/Rg9S99QmOhfTifSINs+7lJXXRy6aN357C3BbQEWQJnazlnA==
 
-bin-ui-next@^0.8.2:
-  version "0.8.2"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.8.2.tgz#83adb11ef7cb3d9448c9eae78141e7f2de9974cf"
-  integrity sha512-0bJTxIS9NpzyRNgDIxSox7mDtic1Z+3FNppVrXn9ZjzZSsyC0JLRLB3jJm4KG4N4zz7PCvnMfvgwgaEshUL/iQ==
+bin-ui-next@^0.8.3:
+  version "0.8.3"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.8.3.tgz#b29367d18e37d3c144e932180e403cfc7c43d79a"
+  integrity sha512-JHj6sWcU+TpLbmQNAjrlPgzlq+HPjbiUgR+7wpRR1qxyAqV1MTSGy4nIVcgE0garsnY1ZgA1trYPQksEc33bhQ==
   dependencies:
     "@popperjs/core" "^2.9.2"
     async-validator "^3.4.0"

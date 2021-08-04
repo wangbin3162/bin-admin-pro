@@ -191,7 +191,7 @@ export default {
         emitValue()
         Message.success('上传成功！')
       } catch (e) {
-        throwError('AttachmentUpload/doUpload', e, 'notice')
+        throwError('AttachmentUpload/doUpload', e)
       }
       loadingStatus.value = false
       uploadFiles.value = [] // 清空暂存文件列表
@@ -213,7 +213,7 @@ export default {
         // 移除更新fileList
         handleRemove(index)
       } catch (e) {
-        throwError('AttachmentUpload/handleDownload', e, 'notice')
+        throwError('AttachmentUpload/handleDownload', e)
       }
     }
 

@@ -31,7 +31,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
       total.value = isPagination ? (data.total || 0) : data.list.length
     } catch (e) {
       // 响应时触发错误
-      throwError('userTable/getDataSource', e, 'notice')
+      throwError('userTable/getDataSource', e)
     }
     setLoading(false)
   }
