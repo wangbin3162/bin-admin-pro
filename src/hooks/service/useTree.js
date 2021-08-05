@@ -20,10 +20,6 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   // fun：获取数据
   const getTreeData = async () => {
     if (!fetch) return
-    if (typeOf(fetch) === 'array') {
-      treeData.value = fetch
-      return
-    }
     try {
       setLoading(true)
       const data = await fetch(params)

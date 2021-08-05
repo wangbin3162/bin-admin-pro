@@ -57,7 +57,8 @@
 
 <script>
 import useTree from '@/hooks/service/useTree'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
+import { typeOf } from '@/utils/util'
 
 export default {
   name: 'BaseTree',
@@ -144,11 +145,22 @@ export default {
       ctx.emit('command', name)
     }
 
-    watch(() => props.fetch, () => {
-      getTreeData().then(() => {
-        treeRef.value && treeRef.value.setExpand(props.expandKeys)
-        treeRef.value && treeRef.value.setSelected(props.selectedKeys)
-      })
+    function setDefault() {
+      treeRef.value && treeRef.value.setExpand(props.expandKeys)
+      treeRef.value && treeRef.value.setSelected(props.selectedKeys)
+    }
+
+    watch(() => props.fetch, async (val) => {
+      if (typeOf(val) === 'array') {
+        treeData.value = val
+        if (val.length > 0) {
+          await nextTick()
+          setDefault()
+        }
+        return true
+      }
+      await getTreeData()
+      setDefault()
     }, { immediate: true })
     return {
       treeEl,
