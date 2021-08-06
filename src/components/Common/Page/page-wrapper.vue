@@ -114,7 +114,7 @@ export default {
       }
     }
     &-desc {
-      padding-top: 8px;
+      padding-top: 16px;
       overflow: hidden;
     }
   }

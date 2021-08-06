@@ -1,5 +1,4 @@
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { Notice } from 'bin-ui-next'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 import { addResizeListener, removeResizeListener, throwError } from '@/utils/util'
 
 /**
@@ -22,7 +21,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
   }
 
   // fun：获取数据
-  async function getDataSource() {
+  async function getListData() {
     if (!fetch) return
     try {
       setLoading(true)
@@ -31,7 +30,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
       total.value = isPagination ? (data.total || 0) : data.list.length
     } catch (e) {
       // 响应时触发错误
-      throwError('userTable/getDataSource', e)
+      throwError('userTable/getListData', e)
     }
     setLoading(false)
   }
@@ -41,7 +40,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     if (isPagination && params.page) {
       params.page = 1
     }
-    await getDataSource()
+    await getListData()
   }
 
   // fun：设置表格loading状态
@@ -52,14 +51,14 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
   // fun:page-change
   async function pageChange(page) {
     params.page = page
-    await getDataSource()
+    await getListData()
   }
 
   // fun:page-size-change
   async function pageSizeChange(size) {
     params.page = 1
     params.size = size
-    await getDataSource()
+    await getListData()
   }
 
   function updateWrapSize() {
@@ -81,7 +80,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     loading,
     total,
     list,
-    getDataSource,
+    getListData,
     reload,
     setLoading,
     pageChange,

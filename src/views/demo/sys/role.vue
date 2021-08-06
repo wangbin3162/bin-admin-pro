@@ -13,7 +13,7 @@
           </b-form-item>
           <b-form-item>
             <b-button>重置</b-button>
-            <b-button type="primary" :loading="loading" @click="getDataSource">查询</b-button>
+            <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
           </b-form-item>
         </b-form>
       </template>
@@ -120,7 +120,7 @@ export default {
       loading,
       list,
       total,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange
     } = useTable(getRoleList, query)
@@ -143,7 +143,7 @@ export default {
     })
 
     // 执行一次内容
-    getDataSource()
+    getListData()
 
     function handleCreate() {
       role.value = {
@@ -168,7 +168,7 @@ export default {
 
     function handleDelete() {
       Message.success('删除成功！')
-      getDataSource()
+      getListData()
     }
 
     function handleSubmit() {
@@ -179,7 +179,7 @@ export default {
           Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
           setBtnLoading(false)
           backNormal()
-          getDataSource()
+          getListData()
         }, 1000)
       })
     }
@@ -233,7 +233,7 @@ export default {
       loading,
       total,
       copyList,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange,
       modalVisible,

@@ -51,8 +51,14 @@
     position: relative;
     flex: auto;
     min-height: 0;
+    .table-wrap {
+      display: flex;
+      .table-right {
+        width: calc(100% - 320px);
+        padding-left: 16px;
+      }
+    }
   }
-
 }
 
 // header

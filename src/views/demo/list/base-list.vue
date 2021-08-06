@@ -102,7 +102,7 @@ export default {
     })
     const {
       loading,
-      getDataSource,
+      getListData,
       list,
       total,
       pageChange,
@@ -111,7 +111,7 @@ export default {
 
     function handleSearch(val) {
       query.name = val
-      getDataSource()
+      getListData()
     }
 
     function handleEdit(item) {
@@ -124,7 +124,7 @@ export default {
     }
 
     // 执行一次内容
-    getDataSource()
+    getListData()
     return {
       ...toRefs(query),
       loading,

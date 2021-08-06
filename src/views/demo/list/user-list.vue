@@ -108,7 +108,7 @@ export default {
       loading,
       list,
       total,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange
     } = useTable(getUserList, query)
@@ -128,7 +128,7 @@ export default {
       }))
     })
     // 执行一次内容
-    getDataSource()
+    getListData()
     return {
       query,
       roleMap: {

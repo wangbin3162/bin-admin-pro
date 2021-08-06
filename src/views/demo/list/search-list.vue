@@ -109,7 +109,7 @@ export default {
       loading,
       list,
       total,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange
     } = useTable(getUserList, query)
@@ -121,7 +121,7 @@ export default {
     })
 
     // 执行一次内容
-    getDataSource()
+    getListData()
     return {
       expand,
       query,
@@ -133,7 +133,7 @@ export default {
       },
       total,
       copyList,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange,
       columns: [

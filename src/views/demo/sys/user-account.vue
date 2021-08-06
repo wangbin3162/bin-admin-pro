@@ -37,7 +37,7 @@
               </template>
               <b-form-item>
                 <b-button>重置</b-button>
-                <b-button type="primary" :loading="loading" @click="getDataSource">查询</b-button>
+                <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
                 <b-button
                   type="text"
                   :icon="expand?'up':'down'"
@@ -181,7 +181,7 @@ export default {
       loading,
       list,
       total,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange
     } = useTable(getUserList, query)
@@ -237,7 +237,7 @@ export default {
 
     function handleDelete() {
       Message.success('删除成功！')
-      getDataSource()
+      getListData()
     }
 
     function handleSubmit() {
@@ -248,13 +248,13 @@ export default {
           Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
           setBtnLoading(false)
           backNormal()
-          getDataSource()
+          getListData()
         }, 1000)
       })
     }
 
     // 执行一次内容
-    getDataSource()
+    getListData()
 
     return {
       // tree,
@@ -274,7 +274,7 @@ export default {
       },
       total,
       copyList,
-      getDataSource,
+      getListData,
       pageChange,
       pageSizeChange,
       columns: [

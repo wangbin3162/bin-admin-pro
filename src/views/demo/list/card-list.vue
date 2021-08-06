@@ -25,10 +25,10 @@ export default {
   name: 'CardList',
   components: { AppItem, PageWrapper },
   setup() {
-    const { getDataSource, list } = useTable(getProjectList)
+    const { getListData, list } = useTable(getProjectList)
 
     // 执行一次内容
-    getDataSource()
+    getListData()
     return {
       list
     }
