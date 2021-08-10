@@ -6,7 +6,7 @@
         :key="index"
         class="mapping-item"
       >
-        <i class="handle drag b-iconfont b-icon-menu"></i>
+        <drag-handle></drag-handle>
         <label>
           <b-input v-model="list[index].key" placeholder="key" clearable @input="inputChange"></b-input>
         </label>
@@ -26,9 +26,11 @@
 import { ref, watch } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useSortable from '@/hooks/useSortable'
+import DragHandle from '@/components/Common/DragHandle'
 
 export default {
   name: 'KeyValueMapping',
+  components: { DragHandle },
   props: {
     modelValue: {
       type: Array,
@@ -89,15 +91,6 @@ export default {
       justify-content: space-between;
       font-size: 24px;
       height: 44px;
-      .drag {
-        cursor: grab;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 22px;
-        height: 22px;
-        font-size: 14px;
-      }
       label {
         word-break: break-all;
         display: block;

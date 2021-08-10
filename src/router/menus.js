@@ -58,6 +58,10 @@ export default [
       {
         name: 'CompKeyValue',
         title: 'KeyValue'
+      },
+      {
+        name: 'CompService',
+        title: '业务组件'
       }
     ]
   },

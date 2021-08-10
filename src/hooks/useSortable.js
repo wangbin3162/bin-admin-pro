@@ -5,7 +5,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
  * sortable hooks，用于创建拖拽排序列表
  * @param list 列表list<ref>
  * @param endFun 拖拽结束事件函数
- * @param option
+ * @param option 其他sortable配置项
  */
 export default function useSortable(list, endFun, option = {}) {
   const defaultOptions = {

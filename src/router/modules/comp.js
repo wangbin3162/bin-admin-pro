@@ -76,5 +76,11 @@ export default [
     name: 'CompKeyValue',
     component: () => import(/* webpackChunkName: "CompKeyValue" */ '../../views/demo/comp/comp-key-value'),
     meta: { title: '映射配置' }
+  },
+  {
+    path: 'compService',
+    name: 'CompService',
+    component: () => import(/* webpackChunkName: "CompService" */ '../../views/demo/comp/comp-service'),
+    meta: { title: '业务组件' }
   }
 ]

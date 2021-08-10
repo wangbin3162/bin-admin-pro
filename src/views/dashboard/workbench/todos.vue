@@ -18,7 +18,7 @@
         class="todo"
         :class="[{done:item.done},{edit: editIndex === index}]"
       >
-        <i class="handle drag b-iconfont b-icon-menu"></i>
+        <drag-handle type="icon" icon="menu" icon-font-size="16px"></drag-handle>
         <span class="toggle" @click="toggleCheck(index)">
           <b-icon name="check"></b-icon>
         </span>
@@ -48,10 +48,11 @@ import { nextTick, ref, watch } from 'vue'
 import Iconfont from '@/components/Common/Iconfont/iconfont'
 import useSortable from '@/hooks/useSortable'
 import { deepCopy } from '@/utils/util'
+import DragHandle from '@/components/Common/DragHandle'
 
 export default {
   name: 'todos',
-  components: { Iconfont },
+  components: { DragHandle, Iconfont },
   setup() {
     const editIndex = ref(-1)
     const editText = ref('')
@@ -151,16 +152,9 @@ export default {
     height: 44px;
     border-bottom: 1px solid #ededed;
     .drag {
-      cursor: grab;
       position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 22px;
-      height: 22px;
       top: 12px;
       left: 6px;
-      font-size: 12px;
       z-index: 1;
     }
     .toggle {
