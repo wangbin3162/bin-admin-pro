@@ -1,9 +1,9 @@
 <template>
   <div class="base-table">
-    <div class="base-table-form" v-if="$slots.filter">
+    <div class="base-table-form" v-if="$slots.filter" :style="filterStyle">
       <slot name="filter"></slot>
     </div>
-    <div class="base-table-box">
+    <div class="base-table-box" :style="tableStyle">
       <div class="base-table-action" v-if="$slots.action || $slots.actionRight">
         <div class="left">
           <slot name="action"></slot>
@@ -13,7 +13,7 @@
         </div>
       </div>
       <slot></slot>
-      <div class="base-table-pagination" v-if="$slots.page">
+      <div class="base-table-pagination" v-if="$slots.page" :style="pageStyle">
         <slot name="page"></slot>
       </div>
     </div>
@@ -22,7 +22,12 @@
 
 <script>
 export default {
-  name: 'BaseTable'
+  name: 'BaseTable',
+  props: {
+    filterStyle: Object,
+    tableStyle: Object,
+    pageStyle: Object
+  }
 }
 </script>
 

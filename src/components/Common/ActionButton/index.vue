@@ -37,7 +37,8 @@ export default {
     icon: String, // 按钮的icon
     type: String, // 按钮的样式
     color: String, // 图标按钮时的颜色
-    isIcon: Boolean // 仅为图标按钮
+    isIcon: Boolean, // 仅为图标按钮
+    loading: Boolean
   },
   data() {
     return {
@@ -52,6 +53,7 @@ export default {
         type: this.isIcon ? 'text' : this.type,
         textColor: this.color,
         disabled: this.disabled,
+        loading: this.loading,
         iconStyle: this.isIcon ? { fontSize: '16px' } : {},
         ...this.buttonProps
       }

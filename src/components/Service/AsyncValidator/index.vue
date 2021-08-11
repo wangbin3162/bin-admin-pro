@@ -7,7 +7,7 @@
           <b-checkbox v-model="isRequired" @change="requiredChange" style="margin-right: 0;">
             必填项
           </b-checkbox>
-          <b-divider type="vertical"/>
+          <b-divider type="vertical" />
           <b-dropdown @command="setRules">
             <span style="cursor:pointer;color: #13c2c2;">
               静态规则
@@ -25,7 +25,7 @@
               </b-dropdown-menu>
             </template>
           </b-dropdown>
-          <b-divider type="vertical"/>
+          <b-divider type="vertical" />
           <b-dropdown @command="setRules">
             <span style="cursor:pointer;color: #52c41a;">
               动态规则
@@ -45,7 +45,7 @@
         </div>
         <div>
           <b-tooltip content="初始化校验">
-            <b-button background size="mini" @click="initRules">
+            <b-button background size="mini" @click="refreshRules">
               <i class="b-iconfont b-icon-reload"></i>
             </b-button>
           </b-tooltip>
@@ -477,13 +477,6 @@ export default {
       }
     }
 
-    // 重载校验信息
-    function initRules() {
-      const value = JSON.stringify([])
-      emit('update:modelValue', value)
-      emit('change', value)
-    }
-
     // 重置校验
     function refreshRules() {
       checkRules.value = []
@@ -531,7 +524,7 @@ export default {
       allowDrop,
       onDrop,
       reload,
-      initRules
+      refreshRules
     }
   }
 }
