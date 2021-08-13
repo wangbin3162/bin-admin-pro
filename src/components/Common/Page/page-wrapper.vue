@@ -115,7 +115,6 @@ export default {
     }
     &-desc {
       padding-top: 16px;
-      overflow: hidden;
     }
   }
   &-children-content {

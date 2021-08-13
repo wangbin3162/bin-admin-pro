@@ -1,6 +1,7 @@
 <template>
   <b-popover v-model:visible="visible" :width="popperWidth" :disabled="!confirm">
     <b-button v-bind="btnProps" @click="handleClick" :title="tooltip">
+      <i v-if="icon" :class="`b-iconfont b-icon-${icon}`" :style="iconStyle"></i>
       <slot></slot>
     </b-button>
     <template #content>
@@ -38,7 +39,13 @@ export default {
     type: String, // 按钮的样式
     color: String, // 图标按钮时的颜色
     isIcon: Boolean, // 仅为图标按钮
-    loading: Boolean
+    loading: Boolean,
+    iconStyle: {
+      type: Object,
+      default: () => ({
+        fontSize: '16px'
+      })
+    }
   },
   data() {
     return {
@@ -49,12 +56,10 @@ export default {
   computed: {
     btnProps() {
       return {
-        icon: this.icon,
-        type: this.isIcon ? 'text' : this.type,
+        type: this.type,
         textColor: this.color,
         disabled: this.disabled,
         loading: this.loading,
-        iconStyle: this.isIcon ? { fontSize: '16px' } : {},
         ...this.buttonProps
       }
     }

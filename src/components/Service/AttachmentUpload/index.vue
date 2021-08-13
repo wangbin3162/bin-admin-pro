@@ -37,7 +37,7 @@
       >
         <div class="file-name">
           <i :class="`b-iconfont b-icon-${format(file.fileName)}`"></i>
-          <span>{{ file.fileName }}</span>
+          <span :title="file.name">{{ file.fileName }}</span>
         </div>
         <i v-if="!onlyFiles"
            class="b-iconfont b-icon-close file-list-remove"
@@ -55,8 +55,8 @@
         class="file-list-file"
       >
         <div class="file-name" style="color: #999;">
-          <span class="mr-5">待上传</span>
-          <span>{{ file.name }}</span>
+          <span style="flex-shrink: 0;" class="mr-5">待上传</span>
+          <span :title="file.name">{{ file.name }}</span>
         </div>
         <i
           class="b-iconfont b-icon-close file-list-remove"
@@ -70,7 +70,7 @@
 <script>
 import { ref, watch } from 'vue'
 import { Message } from 'bin-ui-next'
-import { deepCopy, throwError } from '@/utils/util'
+import { deepCopy, downloadFile, throwError } from '@/utils/util'
 import { commonDownload, commonUpload } from '@/api/common.api'
 
 export default {
@@ -209,9 +209,8 @@ export default {
 
     async function handleDownload(file, index) {
       try {
-        await commonDownload(file.id)
-        // 移除更新fileList
-        handleRemove(index)
+        const { data } = await commonDownload(file.id)
+        downloadFile(data, file.fileName)
       } catch (e) {
         throwError('AttachmentUpload/handleDownload', e)
       }
@@ -261,6 +260,13 @@ export default {
         display: inline-flex;
         align-items: center;
         height: 100%;
+        width: calc(100% - 24px);
+        > span:last-child {
+          width: 100%;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
         i {
           font-size: 16px;
           margin-right: 4px;

@@ -68,15 +68,17 @@
           <b-space>
             <div class="role-name" :class="rulesClass(rule.name)">{{ RULE_NAME_MAP[rule.name] }}</div>
             <div class="title-box" title="触发条件">
-              <span>触发条件</span>
-              <b-select v-model.trim="checkRules[index].trigger" size="small" @change="emitValue">
-                <b-option v-for="item in TRIGGER" :key="item" :label="item" :value="item"></b-option>
+              <span title="输入框为失焦事件，其余控件为改变事件">触发条件</span>
+              <b-select v-model="checkRules[index].trigger" size="small" append-to-body @change="emitValue">
+                <b-option label="失焦" value="blur"></b-option>
+                <b-option label="改变" value="change"></b-option>
               </b-select>
             </div>
             <div class="title-box" title="取值类型">
-              <span>取值类型</span>
-              <b-select v-model.trim="checkRules[index].type" size="small" @change="emitValue">
-                <b-option v-for="item in TYPE" :key="item" :label="item" :value="item"></b-option>
+              <span title="非数字类型选择字符">取值类型</span>
+              <b-select v-model="checkRules[index].type" size="small" append-to-body @change="emitValue">
+                <b-option label="字符" value="string"></b-option>
+                <b-option label="数字" value="number"></b-option>
               </b-select>
             </div>
           </b-space>
@@ -210,7 +212,7 @@
             <template v-if="rule.name===RULE.timeBound">
               <div class="title-box" title="比较模式">
                 <span>比较模式</span>
-                <b-select v-model="checkRules[index].compareMode" size="small" @change="emitValue">
+                <b-select v-model="checkRules[index].compareMode" append-to-body size="small" @change="emitValue">
                   <b-option value="gt" label="&gt;"></b-option>
                   <b-option value="ge" label="&ge;"></b-option>
                   <b-option value="lt" label="&lt;"></b-option>
