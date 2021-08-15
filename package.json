@@ -25,8 +25,8 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "bin-ace-editor": "^3.0.4",
-    "bin-charts": "^3.0.1",
+    "bin-ace-editor": "^3.1.1",
+    "bin-charts": "^3.1.0",
     "bin-ui-next": "^0.8.10",
     "echarts": "^5.1.2",
     "good-storage": "^1.1.1",
