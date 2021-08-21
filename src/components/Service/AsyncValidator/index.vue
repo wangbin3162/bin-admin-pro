@@ -124,11 +124,11 @@
             </template>
             <!--身份证，统一社会信用代码，组织机构代码，工商注册号-->
             <template v-if="[RULE.idCode,RULE.unifiedCode,RULE.orgInstCode,RULE.regNo].includes(rule.name)">
-              <div class="title-box" title="前置字段">
+              <div class="title-box" title="前置字段"
+                   @drop="onDrop($event,index)"
+                   @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
-                  @drop.native="onDrop($event,index)"
-                  @dragover.native="allowDrop($event)"
                   v-model.trim="checkRules[index].preField"
                   size="small"
                   placeholder="前置字段"
@@ -141,11 +141,11 @@
             </template>
             <!--条件必填，条件必不填-->
             <template v-if="rule.name===RULE.conditionRequired||rule.name===RULE.conditionNotRequired">
-              <div class="title-box" title="前置字段">
+              <div class="title-box" title="前置字段"
+                   @drop="onDrop($event,index)"
+                   @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
-                  @drop.native="onDrop($event,index)"
-                  @dragover.native="allowDrop($event)"
                   v-model.trim="checkRules[index].preField"
                   size="small"
                   placeholder="前置字段"
@@ -164,11 +164,11 @@
             </template>
             <!--条件不为某值-->
             <template v-if="rule.name===RULE.conditionNotBe">
-              <div class="title-box" title="前置字段">
+              <div class="title-box" title="前置字段"
+                   @drop="onDrop($event,index)"
+                   @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
-                  @drop.native="onDrop($event,index)"
-                  @dragover.native="allowDrop($event)"
                   v-model.trim="checkRules[index].preField"
                   size="small"
                   placeholder="前置字段"
@@ -196,11 +196,11 @@
             </template>
             <!--值不能相同-->
             <template v-if="rule.name===RULE.notSame">
-              <div class="title-box" title="前置字段">
+              <div class="title-box" title="前置字段"
+                   @drop="onDrop($event,index)"
+                   @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
-                  @drop.native="onDrop($event,index)"
-                  @dragover.native="allowDrop($event)"
                   v-model.trim="checkRules[index].preField"
                   size="small"
                   placeholder="前置字段"
@@ -219,11 +219,12 @@
                   <b-option value="le" label="&le;"></b-option>
                 </b-select>
               </div>
-              <div class="title-box">
+              <div class="title-box"
+                   @drop="onDrop($event,index)"
+                   @dragover="allowDrop($event)"
+              >
                 <span title="比较值(yyyy-MM-dd)，可以是字段名，也可以填写$now取得当前时间">比较取值</span>
                 <b-input
-                  @drop.native="onDrop($event,index)"
-                  @dragover.native="allowDrop($event)"
                   v-model.trim="checkRules[index].time"
                   size="small"
                   @change="emitValue"
@@ -327,12 +328,12 @@ export default {
     // 字段填充
     function onDrop(e, index) {
       // eslint-disable-next-line no-prototype-builtins
-      if (checkRules[index].value.hasOwnProperty('preField')) {
-        checkRules[index].value.preField = e.dataTransfer.getData('index')
+      if (checkRules.value[index].hasOwnProperty('preField')) {
+        checkRules.value[index].preField = e.dataTransfer.getData('index')
       }
       // eslint-disable-next-line no-prototype-builtins
-      if (checkRules[index].value.hasOwnProperty('time')) {
-        checkRules[index].value.time = e.dataTransfer.getData('index')
+      if (checkRules.value[index].hasOwnProperty('time')) {
+        checkRules.value[index].time = e.dataTransfer.getData('index')
       }
       emitValue()
       e.preventDefault()
@@ -487,7 +488,7 @@ export default {
 
     // 更新emit
     function emitValue() {
-      const value = JSON.stringify(checkRules.value)
+      const value = checkRules.value.length ? JSON.stringify(checkRules.value) : ''
       emit('update:modelValue', value)
       emit('change', value)
     }

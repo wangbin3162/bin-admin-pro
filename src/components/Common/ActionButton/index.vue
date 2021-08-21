@@ -43,7 +43,7 @@ export default {
     iconStyle: {
       type: Object,
       default: () => ({
-        fontSize: '16px'
+        fontSize: '18px'
       })
     }
   },

@@ -3,7 +3,7 @@
     <i class="b-iconfont b-icon-reconciliation"></i>
     <slot>{{ title }}</slot>
   </b-button>
-  <b-modal v-model="visible" :title="title||$slots.default" width="660px" draggable append-to-body>
+  <b-modal v-model="visible" :title="title||$slots.default" width="660px" append-to-body>
     <async-validator v-model="rules" :original-rules="oldRules"></async-validator>
     <template #footer>
       <b-button @click="visible = false">取 消</b-button>

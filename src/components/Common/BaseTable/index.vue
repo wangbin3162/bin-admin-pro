@@ -45,8 +45,7 @@ export default {
       .bin-form-item {
         margin-right: 0;
         margin-bottom: 10px;
-        flex: 0 0 33.33333333%;
-        min-width: 33.33333333%;
+        width: 33.33333333%;
         .bin-form-item__label {
           padding-left: 6px;
         }

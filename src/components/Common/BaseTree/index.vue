@@ -4,7 +4,7 @@
       <span class="base-title">{{ treeTitle }}</span>
       <div class="base-ctrl">
         <div class="search">
-          <b-input v-if="showTopSearch" size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
+          <b-input v-if="showTopSearch" size="small" search v-model="query" placeholder="搜索" @search="handleFilter" />
           <slot></slot>
         </div>
         <div class="ctrl">
@@ -25,29 +25,27 @@
         </div>
       </div>
     </div>
-    <div class="tree-wrap" :class="{'has-bottom':$slots.bottom}" v-loading="loading">
+    <div class="tree-wrap" :class="{'has-bottom':$slots.bottom}" :style="{minHeight,maxHeight}" v-loading="loading">
       <div class="tree-inner" v-if="$slots.inner">
         <slot name="inner"></slot>
       </div>
-      <b-scrollbar>
-        <div class="inner-search" v-if="showInnerSearch">
-          <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter"/>
-        </div>
-        <div class="mr-5">
-          <b-tree
-            :data="treeData"
-            :title-key="titleKey"
-            :show-checkbox="showCheckbox"
-            :filter-node-method="filterNode"
-            :render="render"
-            :lock-select="lock"
-            :default-expand="defaultExpand"
-            ref="treeRef"
-            @select-change="handleSelect"
-            @check-change="handleChecked"
-          ></b-tree>
-        </div>
-      </b-scrollbar>
+      <div class="inner-search" v-if="showInnerSearch">
+        <b-input size="small" search v-model="query" placeholder="搜索" @search="handleFilter" />
+      </div>
+      <div class="mr-5">
+        <b-tree
+          :data="treeData"
+          :title-key="titleKey"
+          :show-checkbox="showCheckbox"
+          :filter-node-method="filterNode"
+          :render="render"
+          :lock-select="lock"
+          :default-expand="defaultExpand"
+          ref="treeRef"
+          @select-change="handleSelect"
+          @check-change="handleChecked"
+        ></b-tree>
+      </div>
     </div>
     <div class="tree-bottom" v-if="$slots.bottom">
       <slot name="bottom"></slot>
@@ -66,6 +64,14 @@ export default {
     width: {
       type: String,
       default: '320px'
+    },
+    minHeight: {
+      type: String,
+      default: '300px'
+    },
+    maxHeight: {
+      type: String,
+      default: '700px'
     },
     treeTitle: {
       type: String
@@ -188,8 +194,6 @@ export default {
 .base-tree {
   flex-shrink: 0;
   flex-grow: 0;
-  min-height: 400px;
-  max-height: 768px;
   background: #fff;
   border-radius: 2px;
   overflow: hidden;
@@ -233,10 +237,17 @@ export default {
   }
   .tree-wrap {
     padding: 5px 0 5px 5px;
-    height: calc(100% - 42px);
-    &.has-bottom {
-      height: calc(100% - 72px);
+    min-height: 400px;
+    max-height: 700px;
+    :deep(.bin-tree-node) {
+      width: 100%;
     }
+    :deep(.bin-tree-render-title) {
+      flex: 1;
+      width: auto;
+      height: 24px;
+    }
+    overflow: auto;
   }
   .tree-inner {
     text-align: left;
@@ -244,8 +255,11 @@ export default {
   }
   .tree-bottom {
     border-top: $border-base;
-    text-align: right;
-    padding: 4px 8px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 8px;
+    height: 32px;
   }
 }
 </style>
