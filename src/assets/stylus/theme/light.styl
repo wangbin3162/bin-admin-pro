@@ -1,10 +1,21 @@
 // light皮肤
 [data-theme=light] {
   // logo样式
-  .layout-aside .logo {
-    border-bottom: 1px solid #eeeeee;
-    h1 {
-      color: getColor();
+  .layout-aside {
+    .logo {
+      border-bottom: 1px solid #eeeeee;
+      h1 {
+        color: getColor();
+      }
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: 1px;
+      background-color: #eeeeee;
     }
   }
   // menu样式

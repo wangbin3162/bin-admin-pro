@@ -26,15 +26,26 @@ export default {
   },
   actions: {
     // 载入时加载本地存储数据和主题配置信息
-    loadApp: ({ state }) => {
+    loadApp: ({ commit, state }) => {
       const setting = { ...state.setting }
       setThemeMode(setting.theme)
       setPrimaryColor(setting.systemPrimary)
       setMenuTheme(setting.menuTheme)
+      setting.contentFull = false
+      commit('SAVE_SETTING', setting)
     },
     toggleSideBar: ({ commit, state }) => {
       const setting = { ...state.setting }
       setting.sidebar = !setting.sidebar
+      commit('SAVE_SETTING', setting)
+    },
+    toggleContentFull: ({ commit, state }) => {
+      const setting = { ...state.setting }
+      setting.contentFull = !setting.contentFull
+      if (setting.contentFull) { // 如果内容区撑满全屏，则需要设置
+        setting.tagsView = true
+        setting.fixedHeader = true
+      }
       commit('SAVE_SETTING', setting)
     },
     setThemeMode: ({ commit, state }, theme) => {

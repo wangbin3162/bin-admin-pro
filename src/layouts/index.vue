@@ -1,23 +1,25 @@
 <template>
   <div class="layout layout-has-aside">
-    <div class="layout-aside"
-         :class="[{'fixed-aside':fixedAside},`layout-aside-${theme}`]"
-         :style="asideStyle"
+    <div
+      v-show="!contentFull"
+      class="layout-aside"
+      :class="[{'fixed-aside':fixedAside},`layout-aside-${theme}`]"
+      :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
-        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small"/>
+        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
         <transition name="zoom-in">
           <h1 v-show="sidebar">BIN-ADMIN-PRO</h1>
         </transition>
       </div>
       <div class="layout-aside-children">
-        <aside-menus/>
+        <aside-menus />
       </div>
     </div>
     <div class="layout-main layout" :style="mainStyle">
       <!--占位顶部-->
       <header class="layout-header" :style="headerHeight" v-if="fixedHeader"></header>
-      <global-header/>
+      <global-header />
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
           <move-transition>
@@ -55,6 +57,8 @@ export default {
     const {
       theme,
       sidebar,
+      contentFull,
+      toggleSidebar,
       showTagsView,
       sidebarWidth,
       fixedAside,
@@ -67,6 +71,9 @@ export default {
     const { cachedViews } = useTagsView()
 
     const mainStyle = computed(() => {
+      if (contentFull.value) {
+        return { paddingLeft: 0 }
+      }
       let left = 0
       if (fixedAside.value) {
         left = sidebarWidth.value
@@ -74,12 +81,12 @@ export default {
       if (!sidebar.value && fixedAside.value) {
         left = 64
       }
-      return {
-        paddingLeft: `${left}px`
-      }
+      return { paddingLeft: `${left}px` }
     })
 
-    const headerHeight = computed(() => ({ height: showTagsView.value ? '80px' : '48px' }))
+    const headerHeight = computed(() => {
+      return contentFull.value ? { height: '32px' } : { height: showTagsView.value ? '80px' : '48px' }
+    })
 
     // ctrl + f 全局呼出搜索面板
     const keydownEvent = (e) => {
@@ -99,12 +106,21 @@ export default {
       }
     }
 
+    const windowSizeChange = () => {
+      if (window.innerWidth <= 1200 && sidebar.value) {
+        toggleSidebar()
+      }
+    }
+
     onMounted(() => {
       on(document, 'keydown', keydownEvent)
+      on(window, 'resize', windowSizeChange)
+      windowSizeChange()
     })
 
     onBeforeUnmount(() => {
       off(document, 'keydown', keydownEvent)
+      off(window, 'resize', windowSizeChange)
     })
 
     return {
@@ -115,7 +131,8 @@ export default {
       cachedViews,
       headerHeight,
       fixedHeader,
-      mainStyle
+      mainStyle,
+      contentFull
     }
   }
 }

@@ -2,7 +2,7 @@
   <b-popover placement="bottom-start" width="300px" popper-class="message-box">
     <div class="global-header-trigger">
       <b-badge :is-dot="messageCount>0" class="item">
-        <i class="b-iconfont b-icon-bell" style="font-size: 16px;"></i>
+        <i class="b-iconfont b-icon-bell" style="font-size: 18px;"></i>
       </b-badge>
     </div>
     <template #content>

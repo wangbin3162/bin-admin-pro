@@ -104,8 +104,8 @@
       transition: background-color .2s;
       .b-iconfont {
         vertical-align: -.125em;
-        font-size: 16px;
-        height: 16px;
+        font-size: 18px;
+        height: 18px;
         color: $color-text-default;
         line-height: 1;
       }
@@ -150,7 +150,7 @@
   background-color: #ffffff;
   .bin-tabs-wrapper {
     margin: 0 8px;
-    width: calc(100% - 64px);
+    width: calc(100% - 96px);
     .nav-wrapper {
       height: 32px;
       .tab-list {
@@ -199,7 +199,7 @@
     }
   }
   .tags-view-ctrl {
-    width: 64px;
+    width: 96px;
     display: flex;
     .trigger {
       width: 32px;
@@ -210,9 +210,10 @@
       border-left: 1px solid #eee;
       i {
         position: relative;
+        font-size: 16px;
         top: -1px;
       }
-      &:hover {
+      &:hover i {
         color: $color-text-primary;
       }
     }

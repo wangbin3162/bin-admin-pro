@@ -1,6 +1,6 @@
 <template>
   <header class="layout-header" :class="{'fixed-header':fixedHeader}" :style="fixedHeaderStyle">
-    <div class="global-header" :class="{'has-border':showTagsView}">
+    <div v-show="!contentFull" class="global-header" :class="{'has-border':showTagsView}">
       <div class="global-header-left">
         <header-trigger :icon="sidebar?'outdent':'indent'" size="18px" @click="toggleSidebar" />
         <header-breadcrumb />
@@ -35,6 +35,7 @@ export default {
     const {
       sidebar,
       showTagsView,
+      contentFull,
       fixedHeader,
       fixedHeaderStyle,
       toggleSidebar,
@@ -50,7 +51,8 @@ export default {
       toggleSidebar,
       showSearch,
       showMessage,
-      showWeather
+      showWeather,
+      contentFull
     }
   }
 }

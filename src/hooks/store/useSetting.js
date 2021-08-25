@@ -22,6 +22,7 @@ export default function useSetting() {
   const showTagsView = computed(() => setting.value.tagsView)
   const fixedAside = computed(() => setting.value.fixedAside)
   const fixedHeader = computed(() => setting.value.fixedHeader)
+  const contentFull = computed(() => setting.value.contentFull)
 
   // 功能设置
   const showSearch = computed(() => setting.value.showSearch)
@@ -38,10 +39,17 @@ export default function useSetting() {
       width: `${width}px`
     }
   })
+  // 右侧区域宽度
+  const rightContentWidth = computed(() => {
+    return {
+      width: (!contentFull.value && fixedHeader.value)
+        ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%'
+    }
+  })
   const fixedHeaderStyle = computed(() => {
     return {
+      ...rightContentWidth.value,
       padding: 0,
-      width: fixedHeader.value ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
       zIndex: 10,
       right: fixedHeader.value ? 0 : null
     }
@@ -50,6 +58,11 @@ export default function useSetting() {
   // toggle侧边栏
   async function toggleSidebar() {
     await store.dispatch('app/toggleSideBar')
+  }
+
+  // toggle内容区域撑满
+  async function toggleContentFull() {
+    await store.dispatch('app/toggleContentFull')
   }
 
   // toggle搜索面板
@@ -127,6 +140,7 @@ export default function useSetting() {
     systemPrimary,
     sidebar,
     sidebarWidth,
+    contentFull,
     showTagsView,
     fixedAside,
     fixedHeader,
@@ -139,6 +153,7 @@ export default function useSetting() {
     weather,
     // computed
     asideStyle,
+    rightContentWidth,
     fixedHeaderStyle,
     // normal colors
     systemPrimaryColorList: SYSTEM_PRIMARY_COLOR_LIST,
@@ -156,6 +171,7 @@ export default function useSetting() {
     toggleSetting,
     toggleSearchBtn,
     toggleMessageBtn,
-    toggleWeatherBtn
+    toggleWeatherBtn,
+    toggleContentFull
   }
 }

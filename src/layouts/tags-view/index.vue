@@ -18,7 +18,7 @@
       </template>
     </b-tabs>
     <div class="tags-view-ctrl">
-      <span class="trigger" @click="refreshCurrentPage">
+      <span class="trigger" title="刷新" @click="refreshCurrentPage">
         <i class="b-iconfont b-icon-reload" style="transform: rotate(90deg);"></i>
       </span>
       <b-dropdown trigger="click" style="width: 32px;display: flex;" append-to-body @command="handleCommand">
@@ -40,16 +40,20 @@
           </b-dropdown-menu>
         </template>
       </b-dropdown>
+      <span class="trigger" :title="contentFull?'收缩':'全屏'" @click="toggleContentFull">
+        <i :class="`b-iconfont b-icon-${contentFull?'compress':'expend'}`"></i>
+      </span>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import useStoreRouter from '@/hooks/store/useStoreRouter'
-import { ERROR_PATH_LIST, HOME_PATH } from '@/router/menus'
+import { HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
 import useTagsView from '@/hooks/store/useTagsView'
+import useSetting from '@/hooks/store/useSetting'
 
 export default {
   name: 'TagsView',
@@ -61,6 +65,7 @@ export default {
 
     const { navMenuItems, addRouters } = useMenu()
     const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
+    const { toggleContentFull, contentFull } = useSetting()
 
     // 所有动态的路由表name 拼接
     const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
@@ -178,7 +183,9 @@ export default {
       closeSelected,
       closeOthers,
       closeAll,
-      handleCommand
+      handleCommand,
+      contentFull,
+      toggleContentFull
     }
   }
 }

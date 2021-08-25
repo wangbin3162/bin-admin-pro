@@ -1,11 +1,11 @@
 <template>
-  <div class="page-footer" :style="footerWidth">
+  <div class="page-footer" :style="rightContentWidth">
     <div class="page-footer__left">
-      <slot name="left"/>
+      <slot name="left" />
     </div>
-    <slot name="center"/>
+    <slot name="center" />
     <div class="page-footer__right">
-      <slot name="right"/>
+      <slot name="right" />
     </div>
   </div>
 </template>
@@ -17,10 +17,8 @@ import { computed } from 'vue'
 export default {
   name: 'PageFooter',
   setup() {
-    const { sidebar, sidebarWidth } = useSetting()
-    const footerWidth = computed(() => ({ width: `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` }))
-
-    return { footerWidth }
+    const { rightContentWidth } = useSetting()
+    return { rightContentWidth }
   }
 }
 </script>

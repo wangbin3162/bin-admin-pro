@@ -17,7 +17,8 @@ export default {
   fixedAside: false,
   showWeather: true,
   showSearch: true,
-  showMessage: true
+  showMessage: true,
+  contentFull: false // 中间内容区域是否撑满
 }
 
 export const SYSTEM_PRIMARY_COLOR_LIST = [

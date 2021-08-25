@@ -2,6 +2,8 @@ import { Utils, Notice } from 'bin-ui-next'
 
 export const generateId = Utils.helper.generateId
 
+export const copyText = Utils.util.copy
+
 export const typeOf = Utils.util.typeOf
 
 export const deepCopy = Utils.util.deepCopy
