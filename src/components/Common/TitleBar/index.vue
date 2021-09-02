@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/mixins.styl"
 .title-wrap {
   display: flex;
   justify-content: space-between;
@@ -52,7 +53,7 @@ export default {
     &:after {
       content: '';
       position: absolute;
-      background-color: var(--primary-color);
+      background-color: getColor();
     }
 
     &.tip-left {

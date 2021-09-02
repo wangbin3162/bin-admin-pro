@@ -94,6 +94,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "~@/assets/stylus/base/mixins.styl"
 // 主题弹窗样式
 .theme-panel {
   padding: 0 4px;
@@ -115,7 +116,7 @@ export default {
       right: 6px;
       bottom: 6px;
       font-size: 18px;
-      color: #1890ff;
+      color: getColor();
     }
   }
   .setting-title {
@@ -153,7 +154,7 @@ export default {
         align-items: center;
         justify-content: center;
         color: #fff;
-        border-color: var(--primary-color);
+        border-color: getColor();
         &:after {
           color: inherit;
           font-family: "b-iconfont" !important;

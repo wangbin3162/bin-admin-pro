@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "~@/assets/stylus/base/mixins.styl"
 .header-breadcrumb {
   display: inline-block;
   font-size: 14px;
@@ -65,7 +66,7 @@ export default {
       font-size: 12px;
     }
     &:hover {
-      color: var(--primary-color);
+      color: getColor();
     }
   }
   .no-redirect {

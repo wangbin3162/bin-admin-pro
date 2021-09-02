@@ -1,6 +1,6 @@
 <template>
   <page-wrapper title="基础颜色" desc="基础颜色，系统主题会默认注入不同的主色和颜色，这里可以动态设置颜色查看效果">
-    <theme-color-panel/>
+    <theme-color-panel />
     <b-collapse-wrap title="颜色设置" shadow="none">
       <div class="p10">
         <b-alert>
@@ -37,6 +37,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "~@/assets/stylus/base/mixins.styl"
 .block {
   display: inline-flex;
   align-items: center;
@@ -51,25 +52,25 @@ export default {
   color: #333;
 }
 .primary-color {
-  background: var(--primary-color);
+  background: getColor();
 }
 .primary-hover-color {
-  background: var(--primary-hover-color);
+  background: getHover();
 }
 .primary-active-color {
-  background: var(--primary-active-color);
+  background: getActive();
 }
 .primary-lighten3-color {
   color: #333;
-  background: var(--primary-lighten3-color);
+  background: getLighten3();
 }
 .primary-lighten5-color {
   color: #333;
-  background: var(--primary-lighten5-color);
+  background: getLighten5();
 }
 .primary-lighten-hover-color {
   color: #333;
-  background: var(--primary-lighten-hover-color);
+  background: getLightenHover();
 }
 .menu-bg-color {
   box-shadow: 0 0 3px #d4d4d4;

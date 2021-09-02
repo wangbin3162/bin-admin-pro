@@ -3,7 +3,7 @@
  */
 import { Utils } from 'bin-ui-next'
 
-const { mixWhite, mixBlack, alpha } = Utils.color
+const { getPalette, mixBlack, alpha } = Utils.color
 
 // 全局setting变量
 export default {
@@ -45,15 +45,6 @@ export const MENU_THEME_COLOR_LIST = [
   '#383f45'
 ]
 
-const PRIMARY_ACTIVE_VAR = '--primary-active-color'
-const PRIMARY_VAR = '--primary-color'
-const PRIMARY_HOVER_VAR = '--primary-hover-color'
-const PRIMARY_LIGHTEN_3_VAR = '--primary-lighten3-color'
-const PRIMARY_LIGHTEN_5_VAR = '--primary-lighten5-color'
-const PRIMARY_LIGHTEN_HOVER_VAR = '--primary-lighten-hover-color'
-const PRIMARY_SHADOW_VAR = '--primary-shadow-color'
-const PRIMARY_SHADOW_LIGHT_VAR = '--primary-lighten-shadow-color'
-
 const MENU_THEME_VAR = '--menu-bg-color'
 const MENU_THEME_ACTIVE_VAR = '--menu-bg-active-color'
 
@@ -72,34 +63,26 @@ export function setThemeMode(theme = 'light') {
 
 // 设置全局主题色变量
 export function setPrimaryColor(color) {
-  // active
-  const darkColor = mixBlack(color, 0.1)
-  // hover
-  const hoverColor = mixWhite(color, 0.2)
-  // lighten
-  const lighten3 = mixWhite(color, 0.6)
-  const lighten5 = mixWhite(color, 0.9)
-  const lightenHover = mixWhite(color, 0.95)
+  const paletteColors = getPalette(color)
   // alpha
   const shadow = alpha(color, 0.2)
-  const shadowLight = alpha(color, 0.08)
 
-  setCssVar(PRIMARY_VAR, color) // primary
-  setCssVar(PRIMARY_ACTIVE_VAR, darkColor) // active
-  // hover
-  setCssVar(PRIMARY_HOVER_VAR, hoverColor)
-  setCssVar(PRIMARY_LIGHTEN_3_VAR, lighten3)
-  setCssVar(PRIMARY_LIGHTEN_5_VAR, lighten5)
-  setCssVar(PRIMARY_LIGHTEN_HOVER_VAR, lightenHover)
-  // alpha
-  setCssVar(PRIMARY_SHADOW_VAR, shadow)
-  setCssVar(PRIMARY_SHADOW_LIGHT_VAR, shadowLight)
+  // 覆盖默认主题色
+  setCssVar('--bin-color-primary-active', paletteColors[3])
+  setCssVar('--bin-color-primary', paletteColors[4])
+  setCssVar('--bin-color-primary-light1', paletteColors[5])
+  setCssVar('--bin-color-primary-light2', paletteColors[6])
+  setCssVar('--bin-color-primary-light3', paletteColors[7])
+  setCssVar('--bin-color-primary-light4', paletteColors[8])
+  setCssVar('--bin-color-primary-light5', paletteColors[9])
+  setCssVar('--bin-color-primary-light6', paletteColors[10])
+  setCssVar('--bin-color-input-shadow', shadow)
 }
 
 // 设置menuTheme
 export function setMenuTheme(color) {
   // bg color
-  setCssVar(MENU_THEME_VAR, color)
   const activeColor = mixBlack(color, 0.2)
+  setCssVar(MENU_THEME_VAR, color)
   setCssVar(MENU_THEME_ACTIVE_VAR, activeColor)
 }

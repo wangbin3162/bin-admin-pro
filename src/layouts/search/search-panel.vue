@@ -109,6 +109,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+@import "~@/assets/stylus/base/mixins.styl"
 .search-modal {
   position: fixed;
   top: 0;
@@ -172,7 +173,7 @@ export default {
           margin: 0 8px;
         }
         &:hover {
-          background: var(--primary-color)
+          background: getColor()
           color: #fff;
         }
       }

@@ -2131,10 +2131,10 @@ bin-charts@^3.1.0:
   resolved "https://registry.npmjs.org/bin-charts/-/bin-charts-3.1.0.tgz#41f5de37091f73cc52bf48364d9d6d9a3a1f766c"
   integrity sha512-qRY/FjmDjk6mcrR3JX+tZx/tB5ZWJNCS3zg4EqK/KHMlxAqgM7RIM7gt/zQj+YR8b0OJXJwMGsuTV17eoRyhoQ==
 
-bin-ui-next@^0.9.6:
-  version "0.9.6"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.9.6.tgz#e1f16ca59f6be73084faef8f66fda1e7bb2ab595"
-  integrity sha512-FVLA99ArEEAvRv0pW+47wZ4f9Cz3aM+muG/3FS2ke8RMNbYhO82y4t71RjR5CaBj8Sm6xWWNrsC4LpNQDBwGOg==
+bin-ui-next@^0.9.7:
+  version "0.9.7"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.9.7.tgz#0d333a42ce79d24283153c61858627f051e32241"
+  integrity sha512-lQZ9bRYzhfefUO4AWLVwmnONtO23RU9Zww4jQqcDUUDsP/twCkM6gRQGs7kRqnKw4dBrzPGpEiK+GHPWFIFgag==
   dependencies:
     "@popperjs/core" "^2.9.3"
     async-validator "^4.0.3"
