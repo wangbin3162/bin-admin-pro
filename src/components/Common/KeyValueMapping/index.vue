@@ -106,7 +106,6 @@ export default {
       .destroy {
         margin-left: 8px;
         width: 24px;
-        height: 18px;
         font-size: 18px;
         color: #f5222d;
         transition: color .2s ease-out;

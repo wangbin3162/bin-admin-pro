@@ -36,7 +36,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
   }
 
   // fun：刷新表格
-  async function reload() {
+  async function handleSearch() {
     if (isPagination && params.page) {
       params.page = 1
     }
@@ -81,7 +81,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     total,
     list,
     getListData,
-    reload,
+    handleSearch,
     setLoading,
     pageChange,
     pageSizeChange

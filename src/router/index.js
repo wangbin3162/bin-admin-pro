@@ -36,7 +36,7 @@ export function setupRouter(app) {
 }
 
 // 权限白名单 no redirect whitelist
-const whiteList = ['/login', ERROR_PATH_LIST.map(path => `/${path}`)]
+const whiteList = ['/login', ERROR_PATH_LIST.map(path => `/${path}`), '/error']
 router.beforeEach(async (to, from) => {
   LoadingBar.start()
   // 没有登录的时候跳转到登录界面 // 携带上登陆成功之后需要跳转的页面完整路径
@@ -71,7 +71,7 @@ router.beforeEach(async (to, from) => {
         // console.log('resultRoutes: ', router.getRoutes())
         return to.path
       } catch (e) {
-        throwError('router/beforeEach', e, 'notice', '初始化信息出错')
+        throwError('router/beforeEach', e, '初始化信息出错')
         return { name: 'Login', query: { redirect: to.fullPath } }
       }
     }

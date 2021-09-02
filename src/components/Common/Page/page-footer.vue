@@ -12,7 +12,6 @@
 
 <script>
 import useSetting from '@/hooks/store/useSetting'
-import { computed } from 'vue'
 
 export default {
   name: 'PageFooter',

@@ -26,7 +26,7 @@ export default {
     },
     popperWidth: {
       type: Number,
-      default: 220
+      default: 260
     },
     message: {
       type: String,
