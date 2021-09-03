@@ -35,12 +35,12 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import SvgLoading from '@/components/Common/SvgLoading'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import SvgLoading from '@/components/Common/SvgLoading/index.vue'
 
 export default {
   name: 'comp-svg-loading',
-  components: { SvgLoading, PageWrapper }
+  components: { SvgLoading, PageWrapper },
 }
 </script>
 

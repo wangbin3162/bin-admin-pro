@@ -9,13 +9,13 @@
     <b-skeleton :loading="loading" animation>
       <template #template>
         <div>
-          <b-skeleton-item variant="p" style="width: 30%;margin-bottom: 16px;"/>
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;"/>
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;"/>
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;"/>
+          <b-skeleton-item variant="p" style="width: 30%;margin-bottom: 16px;" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
           <div flex="main:justify cross:center" style="border-top:1px solid #e5e5e5;padding-top: 10px;">
-            <b-skeleton-item variant="text" style="width: 10%;"/>
-            <b-skeleton-item variant="text" style="width: 10%;"/>
+            <b-skeleton-item variant="text" style="width: 10%;" />
+            <b-skeleton-item variant="text" style="width: 10%;" />
           </div>
         </div>
       </template>
@@ -44,14 +44,14 @@ export default {
     loading: Boolean,
     count: {
       type: Number,
-      default: 2000
-    }
-  }
+      default: 2000,
+    },
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .card-panel {
   .top {
     color: $color-text-default;

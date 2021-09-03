@@ -27,17 +27,17 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'ColorVar',
-  components: { PageWrapper, ThemeColorPanel }
+  components: { PageWrapper, ThemeColorPanel },
 }
 </script>
 
 <style lang="stylus" scoped>
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .block {
   display: inline-flex;
   align-items: center;

@@ -5,19 +5,19 @@
 </template>
 
 <script>
-import Loading01 from '@/components/Common/SvgLoading/loading/loading01'
-import Loading02 from '@/components/Common/SvgLoading/loading/loading02'
-import Loading03 from '@/components/Common/SvgLoading/loading/loading03'
-import Loading04 from '@/components/Common/SvgLoading/loading/loading04'
-import Loading05 from '@/components/Common/SvgLoading/loading/loading05'
-import Loading06 from '@/components/Common/SvgLoading/loading/loading06'
-import Loading07 from '@/components/Common/SvgLoading/loading/loading07'
-import Loading08 from '@/components/Common/SvgLoading/loading/loading08'
-import Loading09 from '@/components/Common/SvgLoading/loading/loading09'
-import Loading10 from '@/components/Common/SvgLoading/loading/loading10'
-import Loading11 from '@/components/Common/SvgLoading/loading/loading11'
-import Loading12 from '@/components/Common/SvgLoading/loading/loading12'
-import LoadingText from '@/components/Common/SvgLoading/loading/loading-text'
+import Loading01 from '@/components/Common/SvgLoading/loading/loading01.vue'
+import Loading02 from '@/components/Common/SvgLoading/loading/loading02.vue'
+import Loading03 from '@/components/Common/SvgLoading/loading/loading03.vue'
+import Loading04 from '@/components/Common/SvgLoading/loading/loading04.vue'
+import Loading05 from '@/components/Common/SvgLoading/loading/loading05.vue'
+import Loading06 from '@/components/Common/SvgLoading/loading/loading06.vue'
+import Loading07 from '@/components/Common/SvgLoading/loading/loading07.vue'
+import Loading08 from '@/components/Common/SvgLoading/loading/loading08.vue'
+import Loading09 from '@/components/Common/SvgLoading/loading/loading09.vue'
+import Loading10 from '@/components/Common/SvgLoading/loading/loading10.vue'
+import Loading11 from '@/components/Common/SvgLoading/loading/loading11.vue'
+import Loading12 from '@/components/Common/SvgLoading/loading/loading12.vue'
+import LoadingText from '@/components/Common/SvgLoading/loading/loading-text.vue'
 
 /**
  * design by https://loading.io/
@@ -37,38 +37,33 @@ export default {
     Loading10,
     Loading11,
     Loading12,
-    LoadingText
+    LoadingText,
   },
   props: {
     name: {
       type: String,
-      required: true
+      required: true,
     },
     width: {
       type: Number,
-      default: 200
+      default: 200,
     },
     height: {
-      type: Number
+      type: Number,
     },
     background: {
       type: String,
-      default: 'transparent'
-    }
+      default: 'transparent',
+    },
   },
   computed: {
     loadingStyle() {
       return {
         width: `${this.width}px`,
         height: `${this.height ? this.height : this.width}px`,
-        background: this.background
+        background: this.background,
       }
-    }
-  }
+    },
+  },
 }
 </script>
-
-<style scoped lang="stylus">
-.svg-loading-wrapper {
-}
-</style>

@@ -37,8 +37,8 @@ export default {
     const { weather, currentDate } = useWeather()
     return {
       weather,
-      currentDate
+      currentDate,
     }
-  }
+  },
 }
 </script>

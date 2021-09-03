@@ -75,16 +75,16 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import BaseTree from '@/components/Common/BaseTree/index.vue'
 import { getDepartTree } from '@/api/modules/depart.api'
-import BaseTree from '@/components/Common/BaseTree'
 import { h } from 'vue'
 
 export default {
   name: 'CompBaseTree',
   components: {
     BaseTree,
-    PageWrapper
+    PageWrapper,
   },
   data() {
     return {
@@ -98,29 +98,29 @@ export default {
               style: {
                 display: 'inline-flex',
                 justifyContent: 'space-between',
-                width: '100%'
-              }
+                width: '100%',
+              },
             }, [
               h('span', data.title),
               h('i', {
                 class: ['b-iconfont', 'b-icon-plus-square'],
                 style: {
                   fontSize: '16px',
-                  color: '#1089ff'
+                  color: '#1089ff',
                 },
                 onClick: () => {
                   this.append(data)
-                }
-              })
+                },
+              }),
             ])
           },
           children: [
             { title: 'child 1-1' },
-            { title: 'child 1-2' }
-          ]
-        }
+            { title: 'child 1-2' },
+          ],
+        },
       ],
-      currentNode: null
+      currentNode: null,
     }
   },
   methods: {
@@ -129,8 +129,8 @@ export default {
         style: {
           display: 'inline-flex',
           justifyContent: 'space-between',
-          width: '100%'
-        }
+          width: '100%',
+        },
       }, [
         h('span', data.title),
         h('span', { style: { display: 'inline-block' } }, [
@@ -140,7 +140,7 @@ export default {
             onClick: (e) => {
               e.stopPropagation()
               this.append(data)
-            }
+            },
           }),
           h('i', {
             class: ['b-iconfont', 'b-icon-minus-circle'],
@@ -148,9 +148,9 @@ export default {
             onClick: (e) => {
               e.stopPropagation()
               this.remove(root, node, data)
-            }
-          })
-        ])
+            },
+          }),
+        ]),
       ])
     },
     renderContent2({ root, node, data }) {
@@ -158,8 +158,8 @@ export default {
         style: {
           display: 'inline-flex',
           justifyContent: 'space-between',
-          width: '100%'
-        }
+          width: '100%',
+        },
       }, [
         h('span', data.text),
         h('span', { style: { display: 'inline-block' } }, [
@@ -169,7 +169,7 @@ export default {
             onClick: (e) => {
               e.stopPropagation()
               this.$message(`给[${data.text}]增加子节点`)
-            }
+            },
           }),
           h('i', {
             class: ['b-iconfont', 'b-icon-minus-square-fill'],
@@ -177,9 +177,9 @@ export default {
             onClick: (e) => {
               e.stopPropagation()
               this.$message(`移除[${data.text}]`)
-            }
-          })
-        ])
+            },
+          }),
+        ]),
       ])
     },
     append(data) {
@@ -208,7 +208,7 @@ export default {
     },
     handleCommand(name) {
       this.$message('click on item: ' + JSON.stringify(name))
-    }
-  }
+    },
+  },
 }
 </script>

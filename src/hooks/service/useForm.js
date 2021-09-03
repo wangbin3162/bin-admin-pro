@@ -13,7 +13,7 @@ export default function useForm() {
     isNormal: editStatus.value === 'normal',
     isCreate: editStatus.value === 'create',
     isEdit: editStatus.value === 'edit',
-    isDetail: editStatus.value === 'detail'
+    isDetail: editStatus.value === 'detail',
   }))
 
   // 给弹窗使用的visible
@@ -75,6 +75,6 @@ export default function useForm() {
     openEdit,
     backNormal,
     submitForm,
-    resetForm
+    resetForm,
   }
 }

@@ -18,12 +18,12 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import StylesEditor from '@/components/Service/StylesEditor'
-import AsyncValidator from '@/components/Service/AsyncValidator'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import StylesEditor from '@/components/Service/StylesEditor/index.vue'
+import AsyncValidator from '@/components/Service/AsyncValidator/index.vue'
 
 export default {
   name: 'CompService',
-  components: { AsyncValidator, StylesEditor, PageWrapper }
+  components: { AsyncValidator, StylesEditor, PageWrapper },
 }
 </script>

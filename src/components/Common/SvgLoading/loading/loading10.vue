@@ -21,6 +21,6 @@
 
 <script>
 export default {
-  name: 'loading10'
+  name: 'loading10',
 }
 </script>

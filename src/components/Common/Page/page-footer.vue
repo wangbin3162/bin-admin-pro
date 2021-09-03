@@ -18,7 +18,7 @@ export default {
   setup() {
     const { rightContentWidth } = useSetting()
     return { rightContentWidth }
-  }
+  },
 }
 </script>
 

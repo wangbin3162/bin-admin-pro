@@ -9,7 +9,7 @@ const themes = {
     '#9661BC',
     '#F6903D',
     '#008685',
-    '#F08BB4'
+    '#F08BB4',
   ],
   color20: [
     '#5B8FF9',
@@ -31,8 +31,8 @@ const themes = {
     '#008685',
     '#BBDEDE',
     '#F08BB4',
-    '#FFE0ED'
-  ]
+    '#FFE0ED',
+  ],
 }
 
 export function useChartsColor(name) {

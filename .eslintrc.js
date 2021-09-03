@@ -1,15 +1,13 @@
 module.exports = {
   root: true,
+  parser: 'vue-eslint-parser',
   env: {
-    node: true
+    browser: true,
+    node: true,
   },
   extends: [
     'plugin:vue/vue3-essential',
-    '@vue/standard'
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
   rules: {
     'indent': 'off',
     'space-before-function-paren': 'off',
@@ -17,6 +15,6 @@ module.exports = {
     'template-curly-spacing': 'off',
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'vue/no-deprecated-v-on-native-modifier': 'off'
-  }
+    'vue/no-deprecated-v-on-native-modifier': 'off',
+  },
 }

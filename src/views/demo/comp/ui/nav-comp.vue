@@ -137,8 +137,8 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'NavComp',
@@ -150,10 +150,10 @@ export default {
         { key: 'tab0', title: '首页', noClose: true },
         { key: 'tab1', title: '用户管理' },
         { key: 'tab2', title: '组织管理' },
-        { key: 'tab3', title: '系统管理' }
+        { key: 'tab3', title: '系统管理' },
       ],
       activeTab: 'tab0',
-      current: 0
+      current: 0,
     }
   },
   methods: {
@@ -163,7 +163,7 @@ export default {
       } else {
         this.current += 1
       }
-    }
-  }
+    },
+  },
 }
 </script>

@@ -26,8 +26,8 @@ export default {
   props: {
     filterStyle: Object,
     tableStyle: Object,
-    pageStyle: Object
-  }
+    pageStyle: Object,
+  },
 }
 </script>
 

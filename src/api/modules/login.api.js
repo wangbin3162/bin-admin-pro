@@ -7,7 +7,7 @@ export function login(data) {
   return request({
     url: '/user/login',
     method: 'post',
-    data: data
+    data: data,
   })
 }
 
@@ -19,7 +19,7 @@ export function getInfo() {
     url: '/user/info',
     method: 'get',
     headers: {
-      'Content-Type': 'application/json;charset=UTF-8'
-    }
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
   })
 }

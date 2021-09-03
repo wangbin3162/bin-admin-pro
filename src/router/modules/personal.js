@@ -2,13 +2,13 @@ export default [
   {
     path: 'userCenter',
     name: 'UserCenter',
-    component: () => import(/* webpackChunkName: "UserCenter" */ '../../views/demo/personal/user-center'),
-    meta: { title: '个人中心' }
+    component: () => import('@/views/demo/personal/user-center.vue'),
+    meta: { title: '个人中心' },
   },
   {
     path: 'userSetting',
     name: 'UserSetting',
-    component: () => import(/* webpackChunkName: "UserSetting" */ '../../views/demo/personal/user-setting'),
-    meta: { title: '个人设置' }
-  }
+    component: () => import('@/views/demo/personal/user-setting.vue'),
+    meta: { title: '个人设置' },
+  },
 ]

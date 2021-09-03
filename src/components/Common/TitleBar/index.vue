@@ -15,7 +15,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '标题'
+      default: '标题',
     },
     titleStyle: { type: Object },
     tipPos: {
@@ -23,15 +23,15 @@ export default {
       validator(value) {
         return ['bottom', 'left'].includes(value)
       },
-      default: 'bottom'
+      default: 'bottom',
     },
-    noBorder: Boolean
-  }
+    noBorder: Boolean,
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .title-wrap {
   display: flex;
   justify-content: space-between;

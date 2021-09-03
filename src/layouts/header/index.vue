@@ -19,14 +19,14 @@
 
 <script>
 import useSetting from '@/hooks/store/useSetting'
-import HeaderTrigger from '@/layouts/header-trigger'
-import UserAvatar from '@/layouts/user'
-import TagsView from '@/layouts/tags-view'
-import Setting from '@/layouts/setting'
-import HeaderBreadcrumb from '@/layouts/header-breadcrumb'
-import Search from '@/layouts/search'
-import Message from '@/layouts/message'
-import Weather from '@/layouts/weather'
+import HeaderTrigger from '@/layouts/header-trigger/index.vue'
+import UserAvatar from '@/layouts/user/index.vue'
+import TagsView from '@/layouts/tags-view/index.vue'
+import Setting from '@/layouts/setting/index.vue'
+import HeaderBreadcrumb from '@/layouts/header-breadcrumb/index.vue'
+import Search from '@/layouts/search/index.vue'
+import Message from '@/layouts/message/index.vue'
+import Weather from '@/layouts/weather/index.vue'
 
 export default {
   name: 'GlobalHeader',
@@ -41,7 +41,7 @@ export default {
       toggleSidebar,
       showSearch,
       showMessage,
-      showWeather
+      showWeather,
     } = useSetting()
     return {
       sidebar,
@@ -52,8 +52,8 @@ export default {
       showSearch,
       showMessage,
       showWeather,
-      contentFull
+      contentFull,
     }
-  }
+  },
 }
 </script>

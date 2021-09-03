@@ -4,7 +4,7 @@
       <b-col span="7">
         <b-card class="info-pane" :bordered="false" shadow="never">
           <div class="avatar">
-            <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar">
+            <img src="/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar">
           </div>
           <h2>Wang</h2>
           <p>千里之行，始于足下。</p>
@@ -37,11 +37,11 @@
           <div v-if="activeTab === 'tab1'" class="p16">
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton/>
-                <b-divider/>
-                <b-skeleton/>
-                <b-divider/>
-                <b-skeleton/>
+                <b-skeleton />
+                <b-divider />
+                <b-skeleton />
+                <b-divider />
+                <b-skeleton />
               </template>
               <template #default>
                 <article-item
@@ -73,10 +73,10 @@
 </template>
 
 <script>
-import ArticleItem from '@/components/Common/List/article-item'
-import ImgItem from '@/components/Common/List/img-item'
-import AppItem from '@/components/Common/List/app-item'
 import { getArticleList, getProjectList } from '@/api/modules/list.api'
+import ArticleItem from '@/components/Common/List/article-item.vue'
+import ImgItem from '@/components/Common/List/img-item.vue'
+import AppItem from '@/components/Common/List/app-item.vue'
 
 export default {
   name: 'UserCenter',
@@ -86,12 +86,12 @@ export default {
       tabs: [
         { key: 'tab1', title: '文章' },
         { key: 'tab2', title: '项目' },
-        { key: 'tab3', title: '应用' }
+        { key: 'tab3', title: '应用' },
       ],
       activeTab: 'tab1',
       articleList: [],
       projectList: [],
-      loading: false
+      loading: false,
     }
   },
   async created() {
@@ -104,13 +104,13 @@ export default {
     this.articleList = articles.rows
     this.projectList = projects.rows
     this.loading = false
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .center-wrap {
   margin: 16px;
   .info-pane {

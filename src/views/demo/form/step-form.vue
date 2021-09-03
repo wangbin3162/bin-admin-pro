@@ -105,8 +105,8 @@
 
 <script>
 import { ref } from 'vue'
-import Result from '@/components/Common/Result'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import Result from '@/components/Common/Result/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'StepForm',
@@ -120,10 +120,10 @@ export default {
       collectionType: 'wechat',
       collection: 'bin@.admin',
       name: 'Wang',
-      money: 100
+      money: 100,
     })
     const form2 = ref({
-      password: '123456'
+      password: '123456',
     })
     const loading = ref(false)
 
@@ -162,14 +162,14 @@ export default {
         payment: [{ required: true, message: '请选择付款账户', trigger: 'change' }],
         collection: [{ required: true, message: '请输入收款账户', trigger: 'blur' }],
         name: [{ required: true, message: '请输入收款人姓名', trigger: 'blur' }],
-        money: [{ required: true, type: 'number', message: '请输入正确的金额', trigger: 'blur' }]
+        money: [{ required: true, type: 'number', message: '请输入正确的金额', trigger: 'blur' }],
       },
       form2,
       loading,
       next,
       prev,
-      submitForm
+      submitForm,
     }
-  }
+  },
 }
 </script>

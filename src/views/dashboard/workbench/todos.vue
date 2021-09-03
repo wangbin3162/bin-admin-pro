@@ -45,10 +45,10 @@
 <script>
 import useTodos from '@/hooks/store/useTodos'
 import { nextTick, ref, watch } from 'vue'
-import Iconfont from '@/components/Common/Iconfont/iconfont'
 import useSortable from '@/hooks/useSortable'
 import { deepCopy } from '@/utils/util'
-import DragHandle from '@/components/Common/DragHandle'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
+import DragHandle from '@/components/Common/DragHandle/index.vue'
 
 export default {
   name: 'todos',
@@ -61,7 +61,7 @@ export default {
       todos,
       todoLabel,
       leftCount,
-      saveTodos
+      saveTodos,
     } = useTodos()
     const list = ref([])
     const { listRef } = useSortable(list, updateState, { ghostClass: 'ghost' })
@@ -83,7 +83,7 @@ export default {
       }
       list.value.push({
         text: '',
-        done: false
+        done: false,
       })
       editIndex.value = list.value.length - 1
       editText.value = ''
@@ -134,14 +134,14 @@ export default {
       inputBlur,
       removeOne,
       dbClickEdit,
-      toggleCheck
+      toggleCheck,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .todo-list {
   margin: 0;
   padding: 0;

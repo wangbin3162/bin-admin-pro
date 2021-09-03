@@ -63,55 +63,55 @@ export default {
   props: {
     width: {
       type: String,
-      default: '320px'
+      default: '320px',
     },
     minHeight: {
       type: String,
-      default: '300px'
+      default: '300px',
     },
     maxHeight: {
       type: String,
-      default: '700px'
+      default: '700px',
     },
     treeTitle: {
-      type: String
+      type: String,
     },
     filterPosition: {
       type: String,
-      default: 'top'
+      default: 'top',
     },
     lock: Boolean,
     fetch: {
-      type: [Function, Array]
+      type: [Function, Array],
     },
     params: {
-      type: Object
+      type: Object,
     },
     render: Function,
     showCheckbox: {
-      type: Boolean
+      type: Boolean,
     },
     checkStrictly: {
-      type: Boolean
+      type: Boolean,
     },
     showFilter: {
-      type: Boolean
+      type: Boolean,
     },
     titleKey: {
       type: String,
-      default: 'text'
+      default: 'text',
     },
     defaultExpand: {
-      type: Boolean
+      type: Boolean,
     },
     expandKeys: {
       type: Array,
-      default: () => []
+      default: () => [],
     },
     selectedKeys: {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   emits: ['select-change', 'check-change', 'command', 'init-success'],
   setup(props, ctx) {
@@ -129,7 +129,7 @@ export default {
       handleSelect,
       handleChecked,
       handleFilter,
-      filterNode
+      filterNode,
     } = useTree(props.fetch, props.params, ctx, props.titleKey)
 
     // 右侧指令事件列表
@@ -183,14 +183,14 @@ export default {
       handleChecked,
       handleAction,
       handleFilter,
-      filterNode
+      filterNode,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .base-tree {
   flex-shrink: 0;
   flex-grow: 0;

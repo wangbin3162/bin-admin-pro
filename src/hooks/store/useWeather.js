@@ -23,26 +23,26 @@ import { Utils } from 'bin-ui-next'
 export default function useWeather() {
   const store = useStore()
   const weaImgMap = {
-    xue: require('@/assets/images/weather/xue-1.png'),
-    lei: require('@/assets/images/weather/lei-1.png'),
-    shachen: require('@/assets/images/weather/shachen-1.png'),
-    wu: require('@/assets/images/weather/wu-1.png'),
-    bingbao: require('@/assets/images/weather/bingbao-1.png'),
-    yun: require('@/assets/images/weather/yun-1.png'),
-    yu: require('@/assets/images/weather/yu-1.png'),
-    yin: require('@/assets/images/weather/yin-1.png'),
-    qing: require('@/assets/images/weather/qing-1.png')
+    xue: '/images/weather/xue-1.png',
+    lei: '/images/weather/lei-1.png',
+    shachen: '/images/weather/shachen-1.png',
+    wu: '/images/weather/wu-1.png',
+    bingbao: '/images/weather/bingbao-1.png',
+    yun: '/images/weather/yun-1.png',
+    yu: '/images/weather/yu-1.png',
+    yin: '/images/weather/yin-1.png',
+    qing: '/images/weather/qing-1.png',
   }
   const weaImgMapColor = {
-    xue: require('@/assets/images/weather/xue.png'),
-    lei: require('@/assets/images/weather/lei.png'),
-    shachen: require('@/assets/images/weather/shachen.png'),
-    wu: require('@/assets/images/weather/wu.png'),
-    bingbao: require('@/assets/images/weather/bingbao.png'),
-    yun: require('@/assets/images/weather/yun.png'),
-    yu: require('@/assets/images/weather/yu.png'),
-    yin: require('@/assets/images/weather/yin.png'),
-    qing: require('@/assets/images/weather/qing.png')
+    xue: '/images/weather/xue.png',
+    lei: '/images/weather/lei.png',
+    shachen: '/images/weather/shachen.png',
+    wu: '/images/weather/wu.png',
+    bingbao: '/images/weather/bingbao.png',
+    yun: '/images/weather/yun.png',
+    yu: '/images/weather/yu.png',
+    yin: '/images/weather/yin.png',
+    qing: '/images/weather/qing.png',
   }
   axios.get('https://www.tianqiapi.com/free/day?appid=78873955&appsecret=19VQ9LC5').then(res => {
     const data = res.data
@@ -56,7 +56,7 @@ export default function useWeather() {
       wind: `${data.win} ${data.win_speed}`,
       air: data.air,
       airText: getAirObj(data.air).title,
-      airColor: getAirObj(data.air).color
+      airColor: getAirObj(data.air).color,
     }
     store.dispatch('app/setWeather', weather)
   })
@@ -79,6 +79,6 @@ export default function useWeather() {
   const weather = computed(() => store.state.app.weather)
   return {
     weather,
-    currentDate: Utils.util.parseTime(new Date(), '{y}-{m}-{d} 周{a}')
+    currentDate: Utils.util.parseTime(new Date(), '{y}-{m}-{d} 周{a}'),
   }
 }

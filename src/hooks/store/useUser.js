@@ -13,6 +13,6 @@ export default function useUser() {
   return {
     userInfo,
     welcomeTitle,
-    currentDate
+    currentDate,
   }
 }

@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'dynamic-box',
@@ -38,43 +38,43 @@ export default {
       list: [
         {
           id: 1,
-          avatar: require('@/assets/images/avatar/avatar05.jpeg'),
+          avatar: '/images/avatar/avatar05.jpeg',
           title: '<strong>Wang</strong> 关注了  <a>Jack</a>',
-          time: '2021-06-01 12:35:20'
+          time: '2021-06-01 12:35:20',
         },
         {
           id: 2,
-          avatar: require('@/assets/images/avatar/avatar04.jpeg'),
+          avatar: '/images/avatar/avatar04.jpeg',
           title: '<strong>小李子</strong> 提出了问题 <a>组件库如何按需引入</a>',
-          time: '2021-06-01 12:35:20'
+          time: '2021-06-01 12:35:20',
         },
         {
           id: 3,
-          avatar: require('@/assets/images/avatar/avatar07.jpeg'),
+          avatar: '/images/avatar/avatar07.jpeg',
           title: '<strong>PDD</strong> 发布了文章 <a>Vue页面优化</a>',
-          time: '2021-06-01 12:35:20'
+          time: '2021-06-01 12:35:20',
         },
         {
           id: 4,
-          avatar: require('@/assets/images/avatar/avatar11.jpeg'),
+          avatar: '/images/avatar/avatar11.jpeg',
           title: '<strong>花仙子</strong> 发现了问题 <a>弹窗bug</a>',
-          time: '2021-06-01 12:35:20'
+          time: '2021-06-01 12:35:20',
         },
         {
           id: 5,
-          avatar: require('@/assets/images/avatar/avatar07.jpeg'),
+          avatar: '/images/avatar/avatar07.jpeg',
           title: '<strong>Sunny</strong> 实现了 <a>Modal弹窗动画设置</a>',
-          time: '2021-06-01 12:35:20'
+          time: '2021-06-01 12:35:20',
         },
         {
           id: 6,
-          avatar: require('@/assets/images/avatar/avatar03.jpg'),
+          avatar: '/images/avatar/avatar03.jpg',
           title: '<strong>史蒂夫</strong> 回复了 <a>Rose</a> 的问题 <a>如何返回顶部</a>',
-          time: '2021-06-01 12:35:20'
-        }
-      ]
+          time: '2021-06-01 12:35:20',
+        },
+      ],
     }
-  }
+  },
 }
 </script>
 

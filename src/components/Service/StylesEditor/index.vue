@@ -50,16 +50,16 @@ export default {
   props: {
     modelValue: {
       type: String,
-      default: ''
+      default: '',
     },
     showAction: {
       type: Boolean,
-      default: true
+      default: true,
     },
     height: {
       type: String,
-      default: '100px'
-    }
+      default: '100px',
+    },
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
@@ -95,9 +95,9 @@ export default {
       width,
       styleValue,
       emitValue,
-      resetStyle
+      resetStyle,
     }
-  }
+  },
 }
 </script>
 

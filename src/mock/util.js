@@ -2,7 +2,7 @@ const responseBody = {
   message: '',
   timestamp: 0,
   data: null,
-  code: '00'
+  code: '00',
 }
 
 // 返回装配器，data为结果data，message为返回消息

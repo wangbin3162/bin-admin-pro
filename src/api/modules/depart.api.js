@@ -4,6 +4,6 @@ import { fetchData } from '../request'
 export function getDepartTree() {
   return fetchData({
     url: '/depart/tree',
-    method: 'get'
+    method: 'get',
   })
 }

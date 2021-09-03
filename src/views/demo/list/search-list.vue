@@ -80,18 +80,18 @@
 
 <script>
 import { reactive, ref, watch } from 'vue'
-import BaseTable from '@/components/Common/BaseTable'
 import { getUserList } from '@/api/modules/user.api'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
 import useTable from '@/hooks/service/useTable'
-import ActionButton from '@/components/Common/ActionButton'
+import BaseTable from '@/components/Common/BaseTable/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ActionButton from '@/components/Common/ActionButton/index.vue'
 
 export default {
   name: 'SearchList',
   components: {
     ActionButton,
     PageWrapper,
-    BaseTable
+    BaseTable,
   },
   setup() {
     const query = reactive({
@@ -101,7 +101,7 @@ export default {
       roles: '',
       status: '',
       date: '',
-      email: ''
+      email: '',
     })
     const expand = ref(false)
     const copyList = ref([])
@@ -111,12 +111,12 @@ export default {
       total,
       getListData,
       pageChange,
-      pageSizeChange
+      pageSizeChange,
     } = useTable(getUserList, query)
     watch(list, (val) => {
       copyList.value = val.map(item => ({
         ...item,
-        expand: false
+        expand: false,
       }))
     })
 
@@ -129,7 +129,7 @@ export default {
       roleMap: {
         admin: '管理员',
         user: '普通用户',
-        op: '实施人员'
+        op: '实施人员',
       },
       total,
       copyList,
@@ -139,32 +139,32 @@ export default {
       columns: [
         {
           title: '姓名',
-          key: 'realName'
+          key: 'realName',
         },
         {
           title: '登录名',
-          key: 'username'
+          key: 'username',
         },
         {
           title: '邮箱',
-          key: 'email'
+          key: 'email',
         },
         {
           title: '角色',
-          slot: 'roles'
+          slot: 'roles',
         },
         {
           title: '出生日期',
-          key: 'createDate'
+          key: 'createDate',
         },
         {
           title: '操作',
           width: 100,
           align: 'center',
-          slot: 'action'
-        }
-      ]
+          slot: 'action',
+        },
+      ],
     }
-  }
+  },
 }
 </script>

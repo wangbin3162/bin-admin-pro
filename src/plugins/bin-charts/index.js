@@ -8,7 +8,7 @@ import {
   PieChart,
   RadarChart,
   ScatterChart,
-  EffectScatterChart
+  EffectScatterChart,
 } from 'echarts/charts'
 // 引入提示框，标题，直角坐标系组件，组件后缀都为 Component
 import { TitleComponent, TooltipComponent } from 'echarts/components'
@@ -26,6 +26,6 @@ export function registerCharts(app) {
     EffectScatterChart,
     TitleComponent,
     TooltipComponent,
-    CanvasRenderer
+    CanvasRenderer,
   ])
 }

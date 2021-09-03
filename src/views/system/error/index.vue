@@ -2,10 +2,10 @@
   <div class="system-error-page">
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
-        <img v-if="$route.path==='/403'" src="@/assets/images/default/auth.svg" alt="403">
-        <img v-else-if="$route.path==='/500'" src="@/assets/images/default/error500.svg" alt="500">
-        <img v-else-if="$route.path==='/error'" src="@/assets/images/default/file-max.svg" alt="error">
-        <img v-else src="@/assets/images/default/error404.svg" alt="404">
+        <img v-if="$route.path==='/403'" src="/images/default/auth.svg" alt="403">
+        <img v-else-if="$route.path==='/500'" src="/images/default/error500.svg" alt="500">
+        <img v-else-if="$route.path==='/error'" src="/images/default/file-max.svg" alt="error">
+        <img v-else src="/images/default/error404.svg" alt="404">
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>
@@ -38,7 +38,7 @@ export default {
     const errorNormalMsg = {
       403: '抱歉，您无权访问此页面！',
       404: '抱歉，你访问的页面不存在！',
-      500: '抱歉，服务器出错了！'
+      500: '抱歉，服务器出错了！',
     }
     const { $route } = useStoreRouter()
 
@@ -69,9 +69,9 @@ export default {
       status,
       errorMessage,
       isErrorPage,
-      HOME_PATH
+      HOME_PATH,
     }
-  }
+  },
 }
 </script>
 

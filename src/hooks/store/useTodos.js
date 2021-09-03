@@ -21,6 +21,6 @@ export default function useTodos() {
     todoDone,
     todoLabel,
     leftCount,
-    saveTodos
+    saveTodos,
   }
 }

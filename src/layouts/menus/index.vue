@@ -18,8 +18,8 @@
 
 <script>
 import useSetting from '@/hooks/store/useSetting'
-import MenuItem from '@/layouts/menus/menu-item'
-import Submenu from '@/layouts/menus/submenu'
+import MenuItem from '@/layouts/menus/menu-item.vue'
+import Submenu from '@/layouts/menus/submenu.vue'
 import { ref, watch } from 'vue'
 import useStoreRouter from '@/hooks/store/useStoreRouter'
 import useMenu from '@/hooks/store/useMenu'
@@ -46,8 +46,8 @@ export default {
       menuTheme,
       navMenu,
       activeMenu,
-      handleMenuSelect
+      handleMenuSelect,
     }
-  }
+  },
 }
 </script>

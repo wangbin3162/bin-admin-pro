@@ -69,12 +69,12 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'OtherComp',
-  components: { PageWrapper, ThemeColorPanel }
+  components: { PageWrapper, ThemeColorPanel },
 }
 </script>
 

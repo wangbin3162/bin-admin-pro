@@ -9,9 +9,9 @@ const baseUrl = process.env.NODE_ENV === 'production' ? '/' : '/mock'
 const service = request.create({
   baseUrl,
   headers: {
-    'X-Requested-With': 'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest',
   },
-  timeout: 60000 // 请求超时时间
+  timeout: 60000, // 请求超时时间
 })
 
 // 获取填充数据
@@ -64,7 +64,7 @@ service.interceptors.response.use(
       throwError('request/error', error)
     }
     return Promise.reject(error)
-  }
+  },
 )
 
 export default service

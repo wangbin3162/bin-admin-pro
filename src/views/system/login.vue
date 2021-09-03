@@ -15,7 +15,7 @@
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
           <div class="page-login--logo">
-            <img src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo">
+            <img src="/images/logo/bin-ui-next-02.svg" alt="logo">
             <span>BIN-ADMIN-PRO</span>
           </div>
           <!-- 表单 -->
@@ -57,7 +57,7 @@
                     <b-icon name="bulb" size="16"></b-icon>
                   </template>
                 </b-input>
-                <span class="login-code"><img src="@/assets/images/login-code.png" alt="code"></span>
+                <span class="login-code"><img src="/images/login-code.png" alt="code"></span>
               </b-form-item>
               <b-button
                 @click="submit"
@@ -94,15 +94,15 @@ export default {
       formLogin: {
         username: 'admin',
         password: 'admin',
-        captcha: 'v9am'
+        captcha: 'v9am',
       },
       loading: false,
       // 校验
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }]
-      }
+        captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+      },
     }
   },
   methods: {
@@ -131,8 +131,8 @@ export default {
       } else {
         throwError('login/requestFailed', data)
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -142,7 +142,7 @@ export default {
   background-color: #F0F2F5;
   height: 100vh;
   position: relative;
-  background-image: url('~@/assets/images/login-background.svg');
+  background-image: url('/images/login-background.svg');
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;

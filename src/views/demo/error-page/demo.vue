@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'ErrorDemo',
-  components: { PageWrapper }
+  components: { PageWrapper },
 }
 </script>

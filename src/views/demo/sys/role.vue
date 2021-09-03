@@ -94,12 +94,12 @@
 </template>
 
 <script>
-import BaseTable from '@/components/Common/BaseTable'
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getRoleList } from '@/api/modules/role.api'
-import ActionButton from '@/components/Common/ActionButton'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import BaseTable from '@/components/Common/BaseTable/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ActionButton from '@/components/Common/ActionButton/index.vue'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 
@@ -108,14 +108,14 @@ export default {
   components: {
     PageWrapper,
     ActionButton,
-    BaseTable
+    BaseTable,
   },
   setup() {
     const query = reactive({
       page: 1,
       size: 10,
       roleName: '',
-      status: ''
+      status: '',
     })
     const copyList = ref([])
     const role = ref({})
@@ -125,7 +125,7 @@ export default {
       total,
       getListData,
       pageChange,
-      pageSizeChange
+      pageSizeChange,
     } = useTable(getRoleList, query)
     const {
       formRef,
@@ -138,7 +138,7 @@ export default {
       submitForm,
       resetForm,
       setBtnLoading,
-      modalVisible
+      modalVisible,
     } = useForm()
 
     watch(() => list.value, (val) => {
@@ -152,14 +152,14 @@ export default {
       role.value = {
         roleName: '',
         roleCode: '',
-        status: '1'
+        status: '1',
       }
       openCreate()
     }
 
     function handleEdit(row) {
       role.value = {
-        ...row
+        ...row,
       }
       openEdit()
     }
@@ -190,31 +190,31 @@ export default {
     return {
       statusMap: {
         0: '禁用',
-        1: '启用'
+        1: '启用',
       },
       columns: [
         {
           title: '角色名称',
-          key: 'roleName'
+          key: 'roleName',
         },
         {
           title: '角色编码',
-          key: 'roleCode'
+          key: 'roleCode',
         },
         {
           title: '状态',
-          slot: 'status'
+          slot: 'status',
         },
         {
           title: '创建日期',
-          key: 'createDate'
+          key: 'createDate',
         },
         {
           title: '操作',
           width: 100,
           align: 'center',
-          slot: 'action'
-        }
+          slot: 'action',
+        },
       ],
       // form
       formRef,
@@ -229,7 +229,7 @@ export default {
       resetForm,
       ruleValidate: {
         roleName: [{ required: true, message: '角色名称必填', trigger: 'blur' }],
-        roleCode: [{ required: true, message: '角色编码必填', trigger: 'blur' }]
+        roleCode: [{ required: true, message: '角色编码必填', trigger: 'blur' }],
       },
       // list
       query,
@@ -244,8 +244,8 @@ export default {
       handleCancel,
       handleEdit,
       handleSubmit,
-      handleDelete
+      handleDelete,
     }
-  }
+  },
 }
 </script>

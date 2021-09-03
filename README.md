@@ -1,5 +1,9 @@
 # bin-admin-pro
 
+默认分支已更换为vite搭建，cli版本详见第二分支。
+
+工程已全面升级为vue3.2+版本，组件库插件等也会定期更新vue版本依赖。
+
 [预览](https://wangbin3162.github.io/bin-admin-pro/)
 
 全新的admin-pro基于 Vue3，配合使用最新支持vue3的组件库 [bin-ui-next](https://github.com/wangbin3162/bin-ui-next/) 

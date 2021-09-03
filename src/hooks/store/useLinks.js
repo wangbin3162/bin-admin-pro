@@ -33,6 +33,6 @@ export default function useLinks() {
   return {
     links,
     addLink,
-    closeLink
+    closeLink,
   }
 }

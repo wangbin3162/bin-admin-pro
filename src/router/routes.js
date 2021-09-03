@@ -1,4 +1,4 @@
-import layout from '../layouts'
+import layout from '@/layouts/index.vue'
 import modules from './modules'
 import { HOME_NAME } from '@/router/menus'
 
@@ -10,15 +10,15 @@ export const asyncRouterMap = [
     path: 'analysis',
     name: 'Analysis',
     meta: { title: '分析页', noCache: true },
-    component: () => import(/* webpackChunkName: "Analysis" */ '@/views/dashboard/analysis')
+    component: () => import( '@/views/dashboard/analysis/index.vue'),
   },
   ...modules,
   {
     path: 'about',
     name: 'About',
-    component: () => import(/* webpackChunkName: "About" */ '@/views/demo/about/about'),
-    meta: { title: '关于' }
-  }
+    component: () => import('@/views/demo/about/about.vue'),
+    meta: { title: '关于' },
+  },
 ]
 
 /**
@@ -37,23 +37,23 @@ export function createRoutesInLayout(routes = []) {
           path: 'workbench',
           name: 'Workbench',
           meta: { title: HOME_NAME },
-          component: () => import(/* webpackChunkName: "Workbench" */ '../views/dashboard/workbench')
+          component: () => import('@/views/dashboard/workbench/index.vue'),
         },
         // 刷新页面 必须保留
         {
           path: 'redirect/:path(.*)',
           name: 'Redirect',
-          component: () => import(/* webpackChunkName: "Redirect" */ '../views/system/redirect/index.vue')
+          component: () => import('@/views/system/redirect/index.vue'),
         },
         // 错误页面
         {
           path: '/:path(.*)*',
           name: 'ErrorPage',
-          component: () => import(/* webpackChunkName: "ErrorPage" */ '../views/system/error/index.vue')
+          component: () => import('@/views/system/error/index.vue'),
         },
-        ...routes
-      ]
-    }
+        ...routes,
+      ],
+    },
   ]
 }
 
@@ -68,8 +68,8 @@ export const routesOutLayout = [
   {
     path: '/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/system/login.vue')
-  }
+    component: () => import('@/views/system/login.vue'),
+  },
 ]
 
 /**

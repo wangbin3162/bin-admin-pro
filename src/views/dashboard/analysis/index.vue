@@ -7,7 +7,7 @@
             <template #right>
               <b-tag type="success">月</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts1"/>
+            <b-charts height="70px" :options="topCharts1" />
             <template #bottom>
               <span>日注册数</span><span>343个</span>
             </template>
@@ -18,7 +18,7 @@
             <template #right>
               <b-tag type="primary">月</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts2"/>
+            <b-charts height="70px" :options="topCharts2" />
             <template #bottom>
               <span>日户反馈数</span><span>5</span>
             </template>
@@ -29,7 +29,7 @@
             <template #right>
               <b-tag type="warning">日</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts3"/>
+            <b-charts height="70px" :options="topCharts3" />
             <template #bottom>
               <span>日反馈</span><span>34</span>
             </template>
@@ -40,7 +40,7 @@
             <template #right>
               <b-tag type="danger">次</b-tag>
             </template>
-            <b-charts height="70px" :options="topCharts4"/>
+            <b-charts height="70px" :options="topCharts4" />
             <template #bottom>
               <span>日访问量</span><span>3242</span>
             </template>
@@ -56,11 +56,11 @@
         </template>
         <b-skeleton :loading="loading" animation>
           <template #template>
-            <b-skeleton style="margin-bottom: 16px;"/>
-            <b-skeleton/>
+            <b-skeleton style="margin-bottom: 16px;" />
+            <b-skeleton />
           </template>
           <template #default>
-            <b-charts height="350px" :options="centerChart"/>
+            <b-charts height="350px" :options="centerChart" />
           </template>
         </b-skeleton>
       </b-card>
@@ -75,11 +75,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;"/>
-                <b-skeleton/>
+                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton />
               </template>
               <template #default>
-                <b-charts height="300px" :options="radarOptions"/>
+                <b-charts height="300px" :options="radarOptions" />
               </template>
             </b-skeleton>
           </b-card>
@@ -92,11 +92,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;"/>
-                <b-skeleton/>
+                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton />
               </template>
               <template #default>
-                <b-charts height="300px" :options="barOptions"/>
+                <b-charts height="300px" :options="barOptions" />
               </template>
             </b-skeleton>
           </b-card>
@@ -109,11 +109,11 @@
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;"/>
-                <b-skeleton/>
+                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton />
               </template>
               <template #default>
-                <b-charts height="300px" :options="roseOptions"/>
+                <b-charts height="300px" :options="roseOptions" />
               </template>
             </b-skeleton>
           </b-card>
@@ -124,10 +124,10 @@
 </template>
 
 <script>
-import TopCard from '@/views/dashboard/analysis/top-card'
 import { onMounted, ref } from 'vue'
 import { useChartsColor } from '@/hooks/useCharts'
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import TopCard from '@/views/dashboard/analysis/top-card.vue'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'Analysis',
@@ -140,31 +140,31 @@ export default {
       tooltip: {
         trigger: 'axis',
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
+          type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
+        },
       },
       xAxis: {
         type: 'category',
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-        show: false
+        show: false,
       },
       yAxis: {
         type: 'value',
-        show: false
+        show: false,
       },
       series: [{
         name: '用户注册数',
         type: 'bar',
         stack: 'vistors',
         barWidth: '60%',
-        data: [22, 34, 11, 24, 22, 8, 12]
-      }]
+        data: [22, 34, 11, 24, 22, 8, 12],
+      }],
     })
     const topCharts2 = ref({
       color: ['#5B8FF9', '#9661BC'],
       xAxis: {
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-        show: false
+        show: false,
       },
       yAxis: { show: false },
       grid: {
@@ -172,21 +172,21 @@ export default {
         right: 3,
         bottom: 0,
         top: 0,
-        containLabel: true
+        containLabel: true,
       },
       tooltip: { trigger: 'axis' },
       series: [
         {
           name: '发布',
           type: 'line',
-          data: [40, 32, 16, 53, 70, 16, 96]
+          data: [40, 32, 16, 53, 70, 16, 96],
         },
         {
           name: '草稿',
           type: 'line',
-          data: [25, 18, 99, 35, 66, 94, 24]
-        }
-      ]
+          data: [25, 18, 99, 35, 66, 94, 24],
+        },
+      ],
     })
     const topCharts3 = ref({
       color,
@@ -196,12 +196,12 @@ export default {
         right: '4%',
         bottom: '3%',
         height: 60,
-        containLabel: true
+        containLabel: true,
       },
       xAxis: {
         type: 'value',
         show: false,
-        max: 22
+        max: 22,
       },
       yAxis: { type: 'category', show: false },
       series: [
@@ -209,49 +209,49 @@ export default {
           name: '反馈数量',
           type: 'bar',
           stack: '总量',
-          data: [12]
+          data: [12],
         },
         {
           name: '回复数量',
           type: 'bar',
           stack: '总量',
-          data: [10]
-        }
-      ]
+          data: [10],
+        },
+      ],
     })
     const topCharts4 = ref({
       tooltip: {},
       grid: { left: '5%', right: '5%' },
       xAxis: {
         show: false,
-        data: ['7.1', '7.2', '7.3', '7.4', '7.5', '7.6', '7.7', '7.8', '7.9', '7.10']
+        data: ['7.1', '7.2', '7.3', '7.4', '7.5', '7.6', '7.7', '7.8', '7.9', '7.10'],
       },
       yAxis: { show: false },
       series: [{
         name: '访问数量',
         type: 'bar',
         data: [234, 634, 234, 764, 88, 235, 179, 152, 200, 334],
-        itemStyle: { color: '#fa6b9b', borderRadius: 3 }
-      }]
+        itemStyle: { color: '#fa6b9b', borderRadius: 3 },
+      }],
     })
     const centerChart = ref({
       xAxis: {
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-        axisTick: { show: false }
+        axisTick: { show: false },
       },
       grid: {
         left: 20,
         right: 30,
         bottom: 20,
         top: 50,
-        containLabel: true
+        containLabel: true,
       },
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'cross'
+          type: 'cross',
         },
-        padding: [5, 10]
+        padding: [5, 10],
       },
       yAxis: { axisTick: { show: false } },
       legend: { right: 0, data: ['浏览量', '实际访客'] },
@@ -261,7 +261,7 @@ export default {
           itemStyle: { color: '#FF005A' },
           smooth: true,
           type: 'line',
-          data: [100, 120, 161, 134, 105, 160, 165]
+          data: [100, 120, 161, 134, 105, 160, 165],
         },
         {
           name: '实际访客',
@@ -269,9 +269,9 @@ export default {
           type: 'line',
           itemStyle: { color: '#3888fa' },
           areaStyle: { opacity: 0.1 },
-          data: [120, 82, 91, 154, 162, 140, 145]
-        }
-      ]
+          data: [120, 82, 91, 154, 162, 140, 145],
+        },
+      ],
     })
     const radarOptions = ref({
       color,
@@ -287,8 +287,8 @@ export default {
             shadowBlur: 45,
             shadowColor: 'rgba(0,0,0,.5)',
             shadowOffsetX: 0,
-            shadowOffsetY: 15
-          }
+            shadowOffsetY: 15,
+          },
         },
         indicator: [
           { name: '行政', max: 10000 },
@@ -296,13 +296,13 @@ export default {
           { name: '科技', max: 20000 },
           { name: '服务', max: 20000 },
           { name: '开发', max: 20000 },
-          { name: '市场', max: 20000 }
-        ]
+          { name: '市场', max: 20000 },
+        ],
       },
       legend: {
         left: 'center',
         bottom: '10',
-        data: ['北京', '上海']
+        data: ['北京', '上海'],
       },
       series: [{
         type: 'radar',
@@ -312,76 +312,76 @@ export default {
           shadowColor: 'rgba(0,0,0,.2)',
           shadowOffsetX: 0,
           shadowOffsetY: 10,
-          opacity: 1
+          opacity: 1,
         },
         data: [
           {
             value: [6000, 12000, 14000, 11000, 15000, 14000],
-            name: '北京'
+            name: '北京',
           },
           {
             value: [4000, 9000, 15000, 15000, 13000, 11000],
-            name: '上海'
-          }
-        ]
-      }]
+            name: '上海',
+          },
+        ],
+      }],
     })
     const barOptions = ref({
       color,
       tooltip: {
         trigger: 'axis',
         axisPointer: { // 坐标轴指示器，坐标轴触发有效
-          type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-        }
+          type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
+        },
       },
       grid: {
         top: 10,
         left: '2%',
         right: '2%',
         bottom: '3%',
-        containLabel: true
+        containLabel: true,
       },
       xAxis: [{
         type: 'category',
         data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
         axisTick: {
-          alignWithLabel: true
-        }
+          alignWithLabel: true,
+        },
       }],
       yAxis: [{
         type: 'value',
-        axisTick: { show: false }
+        axisTick: { show: false },
       }],
       series: [{
         name: 'pageA',
         type: 'bar',
         stack: 'vistors',
         barWidth: '60%',
-        data: [179, 52, 200, 334, 390, 330, 220]
+        data: [179, 52, 200, 334, 390, 330, 220],
       }, {
         name: 'pageB',
         type: 'bar',
         stack: 'vistors',
         barWidth: '60%',
-        data: [80, 52, 200, 334, 390, 330, 220]
+        data: [80, 52, 200, 334, 390, 330, 220],
       }, {
         name: 'pageC',
         type: 'bar',
         stack: 'vistors',
         barWidth: '60%',
-        data: [66, 52, 200, 334, 390, 330, 220]
-      }]
+        data: [66, 52, 200, 334, 390, 330, 220],
+      }],
     })
     const roseOptions = ref({
       color,
       tooltip: {
         trigger: 'item',
-        formatter: '{a} <br/>{b} : {c} ({d}%)'
+        formatter: '{a} <br/>{b} : {c} ({d}%)',
       },
       legend: {
         left: 'center',
         bottom: '10',
-        data: ['搜索引擎', '直接访问', '邮件营销', '联盟广告', '公众号']
+        data: ['搜索引擎', '直接访问', '邮件营销', '联盟广告', '公众号'],
       },
       calculable: true,
       series: [
@@ -395,10 +395,10 @@ export default {
             { value: 332, name: '直接访问' },
             { value: 211, name: '邮件营销' },
             { value: 176, name: '联盟广告' },
-            { value: 66, name: '公众号' }
-          ]
-        }
-      ]
+            { value: 66, name: '公众号' },
+          ],
+        },
+      ],
     })
     onMounted(() => {
       setTimeout(() => {
@@ -414,14 +414,14 @@ export default {
       centerChart,
       radarOptions,
       barOptions,
-      roseOptions
+      roseOptions,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .analysis-wrap {
   padding: 16px;
   :deep(.bin-card__header) {

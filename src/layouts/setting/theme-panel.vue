@@ -6,7 +6,7 @@
         <div class="theme-tab">
           <b-tooltip content="亮色主题风格" append-to-body>
             <span @click="themChange('light')">
-              <img src="@/assets/images/light.svg" alt="">
+              <img src="/images/light.svg" alt="">
               <i v-if="theme === 'light'" class="b-iconfont b-icon-check"></i>
             </span>
           </b-tooltip>
@@ -14,7 +14,7 @@
         <div class="theme-tab">
           <b-tooltip content="暗色主题风格" append-to-body>
             <span @click="themChange('dark')">
-              <img src="@/assets/images/dark.svg" alt="">
+              <img src="/images/dark.svg" alt="">
               <i v-if="theme === 'dark'" class="b-iconfont b-icon-check"></i>
             </span>
           </b-tooltip>
@@ -60,7 +60,7 @@ export default {
   name: 'ThemePanel',
   props: {
     mode: String,
-    onlyTheme: Boolean
+    onlyTheme: Boolean,
   },
   setup() {
     const {
@@ -71,7 +71,7 @@ export default {
       setMenuTheme,
       setSystemPrimary,
       systemPrimaryColorList,
-      menuThemeColorList
+      menuThemeColorList,
     } = useSetting()
 
     function isActiveColor(color1, color2) {
@@ -87,14 +87,14 @@ export default {
       menuThemeColorList,
       menuTheme,
       setMenuTheme,
-      isActiveColor
+      isActiveColor,
     }
-  }
+  },
 }
 </script>
 
 <style lang="stylus" scoped>
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../assets/stylus/base/mixins.styl"
 // 主题弹窗样式
 .theme-panel {
   padding: 0 4px;

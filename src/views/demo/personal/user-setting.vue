@@ -52,9 +52,9 @@
                   <div class="avatar-wrap">
                     <div class="mb-8">头像</div>
                     <div class="avatar-img mb-8">
-                      <img src="@/assets/images/avatar/avatar05.jpeg" alt="logo">
+                      <img src="/images/avatar/avatar05.jpeg" alt="logo">
                     </div>
-                    <b-upload action="//jsonplaceholder.typicode.com/posts/">
+                    <b-upload action="">
                       <b-button icon="cloud-upload">更换头像</b-button>
                     </b-upload>
                   </div>
@@ -195,7 +195,7 @@ export default {
         base: { title: '基本设置', desc: '个人账户信息设置' },
         safe: { title: '安全设置', desc: '密码邮箱设置' },
         auth: { title: '认证设置', desc: '账号绑定、实名认证设置' },
-        message: { title: '通知设置', desc: '消息通知设置' }
+        message: { title: '通知设置', desc: '消息通知设置' },
       },
       active: 'base',
       baseInfo: {
@@ -203,21 +203,21 @@ export default {
         name: 'Wang',
         phone: '176****1212',
         intro: '个人简介',
-        address: '徐州市'
-      }
+        address: '徐州市',
+      },
     }
   },
   methods: {
     updateBase() {
       this.$message.success('更新成功！')
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .setting-wrap {
   margin: 16px;
   .ctrl-header {

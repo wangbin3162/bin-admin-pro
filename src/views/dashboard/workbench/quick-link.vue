@@ -8,27 +8,27 @@
     </template>
     <div class="items-wrap">
       <router-link to="/analysis" tag="a" class="hover-item">
-        <iconfont icon="linechart" color="success" :size="40"/>
+        <iconfont icon="linechart" color="success" :size="40" />
         <span>监控页</span>
       </router-link>
       <router-link to="/colorVar" tag="a" class="hover-item">
-        <iconfont icon="bg-colors" color="#eb2f96" :size="40"/>
+        <iconfont icon="bg-colors" color="#eb2f96" :size="40" />
         <span>主题</span>
       </router-link>
       <a class="hover-item">
-        <iconfont icon="table" color="#fa541c" :size="40"/>
+        <iconfont icon="table" color="#fa541c" :size="40" />
         <span>列表</span>
       </a>
       <a class="hover-item" @click.stop="toggleSearch">
-        <iconfont icon="search" color="#722ed1" :size="40"/>
+        <iconfont icon="search" color="#722ed1" :size="40" />
         <span>搜索</span>
       </a>
       <a class="hover-item" @click.stop="toggleSetting">
-        <iconfont icon="setting" color="#42cece" :size="40"/>
+        <iconfont icon="setting" color="#42cece" :size="40" />
         <span>设置</span>
       </a>
       <a class="hover-item">
-        <iconfont icon="shopping" color="#a0d911" :size="40"/>
+        <iconfont icon="shopping" color="#a0d911" :size="40" />
         <span>工具</span>
       </a>
       <div class="link-wrap">
@@ -78,7 +78,7 @@ import { ref, reactive } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
 import useLinks from '@/hooks/store/useLinks'
 import { Message } from 'bin-ui-next'
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'quick-link',
@@ -91,11 +91,11 @@ export default {
     const form = reactive({
       link: '',
       text: '',
-      newTab: true
+      newTab: true,
     })
     const ruleValidate = ref({
       link: [{ required: true, message: '地址必填', trigger: 'blur' }],
-      text: [{ required: true, message: '名称必填', trigger: 'blur' }]
+      text: [{ required: true, message: '名称必填', trigger: 'blur' }],
     })
 
     function handleAdd() {
@@ -130,15 +130,15 @@ export default {
       submitForm,
       ruleValidate,
       form,
-      links
+      links,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .card-panel {
   margin-bottom: 16px;
 }

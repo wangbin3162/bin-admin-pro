@@ -26,11 +26,11 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import TitleBar from '@/components/Common/TitleBar'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import TitleBar from '@/components/Common/TitleBar/index.vue'
 
 export default {
   name: 'CompTitleBar',
-  components: { TitleBar, PageWrapper }
+  components: { TitleBar, PageWrapper },
 }
 </script>

@@ -2,11 +2,11 @@
   <page-wrapper desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。" bg>
     <b-skeleton :loading="loading">
       <template #template>
-        <b-skeleton animation/>
+        <b-skeleton animation />
         <b-divider></b-divider>
-        <b-skeleton animation/>
+        <b-skeleton animation />
         <b-divider></b-divider>
-        <b-skeleton animation/>
+        <b-skeleton animation />
         <b-divider></b-divider>
       </template>
       <template #default>
@@ -89,19 +89,19 @@ import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
 import { reactive, ref, watch } from 'vue'
 import { Message } from 'bin-ui-next'
-import ActionButton from '@/components/Common/ActionButton'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import ActionButton from '@/components/Common/ActionButton/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'UserList',
   components: {
     PageWrapper,
-    ActionButton
+    ActionButton,
   },
   setup() {
     const query = reactive({
       page: 1,
-      size: 10
+      size: 10,
     })
     const copyList = ref([])
     const {
@@ -110,7 +110,7 @@ export default {
       total,
       getListData,
       pageChange,
-      pageSizeChange
+      pageSizeChange,
     } = useTable(getUserList, query)
 
     function handleCopy(id) {
@@ -124,7 +124,7 @@ export default {
     watch(() => list.value, (val) => {
       copyList.value = val.map(item => ({
         ...item,
-        expand: false
+        expand: false,
       }))
     })
     // 执行一次内容
@@ -134,12 +134,12 @@ export default {
       roleMap: {
         admin: '管理员',
         user: '普通用户',
-        op: '实施人员'
+        op: '实施人员',
       },
       roleMapStyle: {
         admin: 'purple',
         user: 'blue',
-        op: 'volcano'
+        op: 'volcano',
       },
       loading,
       list,
@@ -148,14 +148,14 @@ export default {
       pageChange,
       pageSizeChange,
       handleCopy,
-      setRole
+      setRole,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .list-wrap {
   min-height: 200px;
   .user-list-item {

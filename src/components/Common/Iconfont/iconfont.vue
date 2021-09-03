@@ -7,7 +7,6 @@
 <script>
 import useSetting from '@/hooks/store/useSetting'
 import { computed } from 'vue'
-
 import { Utils } from 'bin-ui-next'
 
 const { mixWhite } = Utils.color
@@ -17,18 +16,18 @@ export default {
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     color: {
-      type: String
+      type: String,
     },
     size: {
       type: Number,
-      default: 24
+      default: 24,
     },
     bg: Boolean,
     round: Boolean,
-    type: String
+    type: String,
   },
   emits: ['click'],
   setup(props, { emit }) {
@@ -42,7 +41,7 @@ export default {
         success: '#52c41a',
         info: '#35495E',
         warning: '#fea638',
-        danger: '#ff4d4f'
+        danger: '#ff4d4f',
       }
       return colorMap[color] ? colorMap[color] : color
     })
@@ -62,7 +61,7 @@ export default {
         fontSize: `${iconSize}px`,
         color: colorVar.value,
         backgroundColor: bgVar.value,
-        borderRadius: props.round ? '50%' : '2px'
+        borderRadius: props.round ? '50%' : '2px',
       }
     })
 
@@ -76,9 +75,9 @@ export default {
       colorVar,
       bgVar,
       styles,
-      handleClick
+      handleClick,
     }
-  }
+  },
 }
 </script>
 

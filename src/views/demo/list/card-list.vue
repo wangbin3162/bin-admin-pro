@@ -18,8 +18,8 @@
 <script>
 import useTable from '@/hooks/service/useTable'
 import { getProjectList } from '@/api/modules/list.api'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import AppItem from '@/components/Common/List/app-item'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import AppItem from '@/components/Common/List/app-item.vue'
 
 export default {
   name: 'CardList',
@@ -30,9 +30,9 @@ export default {
     // 执行一次内容
     getListData()
     return {
-      list
+      list,
     }
-  }
+  },
 }
 </script>
 

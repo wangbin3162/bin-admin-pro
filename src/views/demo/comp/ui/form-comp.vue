@@ -1,6 +1,6 @@
 <template>
   <page-wrapper desc="表单类别的组件，可验证不同主题色的正确性。">
-    <theme-color-panel/>
+    <theme-color-panel />
     <b-collapse-wrap title="Form 表单输入" shadow="none" class="mb-20">
       <div class="p20" flex="main:center">
         <div style="width: 800px;">
@@ -78,8 +78,8 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'FormComp',
@@ -92,12 +92,12 @@ export default {
         { value: 'shanghai', label: '上海' },
         { value: 'xuzhou', label: '徐州' },
         { value: 'guangzhou', label: '广州' },
-        { value: 'shenzhen', label: '深圳' }
+        { value: 'shenzhen', label: '深圳' },
       ],
       shortcuts: [
         {
           text: '今日',
-          value: new Date()
+          value: new Date(),
         },
         {
           text: '昨天',
@@ -105,7 +105,7 @@ export default {
             const date = new Date()
             date.setTime(date.getTime() - 3600 * 1000 * 24)
             return date
-          })()
+          })(),
         },
         {
           text: '一周前',
@@ -113,7 +113,7 @@ export default {
             const date = new Date()
             date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
             return date
-          })()
+          })(),
         }],
       form: {
         name: '',
@@ -123,25 +123,25 @@ export default {
         hobby: [],
         sex: '',
         status: 'disable',
-        birthday: ''
+        birthday: '',
       },
       ruleValidate: {
         name: [{ required: true, message: '用户名不能为空', trigger: 'blur' }],
         region: [{ required: true, message: '户籍地不能为空', trigger: 'change' }],
         age: [
           { required: true, type: 'number', message: '年龄不为空', trigger: 'change' },
-          { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' }
+          { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' },
         ],
         hobby: [
-          { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }
+          { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' },
         ],
         sex: [{ required: true, message: '性别必选', trigger: 'change' }],
         birthday: [{ required: true, type: 'date', message: '出生日期必选', trigger: 'blur' }],
         mail: [
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
-          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-        ]
-      }
+          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' },
+        ],
+      },
     }
   },
   methods: {
@@ -154,7 +154,7 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
-    }
-  }
+    },
+  },
 }
 </script>

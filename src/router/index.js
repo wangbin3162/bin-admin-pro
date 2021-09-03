@@ -15,7 +15,7 @@ import { throwError } from '@/utils/util'
 const initRouter = (routes = []) => createRouter({
   history: createWebHashHistory(),
   scrollBehavior,
-  routes
+  routes,
 })
 
 const router = initRouter(constantRoutes)
@@ -56,7 +56,7 @@ router.beforeEach(async (to, from) => {
           Notice.success({
             title: '登录成功',
             message: `欢迎回来: ${user.realName || user.username}`,
-            offset: 60
+            offset: 60,
           })
         }
         const menus = getFilterMenus(user.functions || [])

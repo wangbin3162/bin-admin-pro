@@ -26,7 +26,7 @@
 import { ref, watch } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useSortable from '@/hooks/useSortable'
-import DragHandle from '@/components/Common/DragHandle'
+import DragHandle from '@/components/Common/DragHandle/index.vue'
 
 export default {
   name: 'KeyValueMapping',
@@ -36,8 +36,8 @@ export default {
       type: Array,
       default() {
         return []
-      }
-    }
+      },
+    },
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -72,14 +72,14 @@ export default {
       list,
       inputChange,
       handleAdd,
-      handleRemove
+      handleRemove,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .key-value-wrapper {
   .mapping-list {
     margin: 0;

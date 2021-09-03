@@ -78,10 +78,10 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
 import { getMenuTree } from '@/api/modules/menu.api'
-import BaseTree from '@/components/Common/BaseTree'
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import BaseTree from '@/components/Common/BaseTree/index.vue'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useForm from '@/hooks/service/useForm'
@@ -92,7 +92,7 @@ export default {
   components: {
     Iconfont,
     BaseTree,
-    PageWrapper
+    PageWrapper,
   },
   setup() {
     const treeRef = ref(null)
@@ -111,7 +111,7 @@ export default {
       openEdit,
       backNormal,
       submitForm,
-      resetForm
+      resetForm,
     } = useForm()
 
     function handleSelect(node, flatState) {
@@ -145,7 +145,7 @@ export default {
         copyNode.value = current ? {
           ...deepCopy(current),
           parentPath: parentKey === 0 ? '' : parentNode.path,
-          parentName: parentNode.title
+          parentName: parentNode.title,
         } : {}
         return
       }
@@ -155,7 +155,7 @@ export default {
         title: '',
         icon: '',
         parentPath: '',
-        parentName: undefined
+        parentName: undefined,
       }
     }
 
@@ -214,10 +214,10 @@ export default {
       resetForm,
       ruleValidate: {
         path: [{ required: true, message: '菜单路径必填', trigger: 'blur' }],
-        title: [{ required: true, message: '菜单名称必填', trigger: 'blur' }]
-      }
+        title: [{ required: true, message: '菜单名称必填', trigger: 'blur' }],
+      },
     }
-  }
+  },
 }
 </script>
 

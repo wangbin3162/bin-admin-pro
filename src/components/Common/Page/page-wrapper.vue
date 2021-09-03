@@ -26,10 +26,10 @@
     </div>
     <page-footer v-if="getShowFooter">
       <template #left>
-        <slot name="leftFooter"/>
+        <slot name="leftFooter" />
       </template>
       <template #right>
-        <slot name="rightFooter"/>
+        <slot name="rightFooter" />
       </template>
     </page-footer>
   </div>
@@ -39,7 +39,7 @@
 import { computed, ref } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
 import useMenu from '@/hooks/store/useMenu'
-import PageFooter from '@/components/Common/Page/page-footer'
+import PageFooter from '@/components/Common/Page/page-footer.vue'
 
 export default {
   name: 'PageWrapper',
@@ -51,8 +51,8 @@ export default {
     bg: Boolean,
     contentPadding: {
       type: String,
-      default: '16px'
-    }
+      default: '16px',
+    },
   },
   emits: ['close'],
   setup(props, { slots }) {
@@ -65,14 +65,14 @@ export default {
     return {
       normalTitle,
       showTagsView,
-      getShowFooter
+      getShowFooter,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .page-header-wrap {
   .page-header {
     position: relative;

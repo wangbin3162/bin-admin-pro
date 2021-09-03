@@ -94,7 +94,7 @@ export default {
         $store.dispatch('tagsView/addView', {
           name: current.name,
           title: current.title,
-          noCache: currentRoute.meta.noCache || false
+          noCache: currentRoute.meta.noCache || false,
         })
       }
       return false
@@ -185,9 +185,9 @@ export default {
       closeAll,
       handleCommand,
       contentFull,
-      toggleContentFull
+      toggleContentFull,
     }
-  }
+  },
 }
 </script>
 

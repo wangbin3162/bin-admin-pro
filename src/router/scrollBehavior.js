@@ -6,19 +6,19 @@
  * @param {object} savedPosition Used by popstate navigations
  * @returns {(object|boolean)} Scroll position or `false`
  */
-export async function scrollBehavior (to, from, savedPosition) {
+export async function scrollBehavior(to, from, savedPosition) {
   const behavior = 'smooth'
   if (savedPosition) {
     return {
       ...savedPosition,
-      behavior
+      behavior,
     }
   }
 
   if (to.hash) {
     return {
       el: decodeURI(to.hash),
-      behavior
+      behavior,
     }
   }
 
@@ -28,6 +28,6 @@ export async function scrollBehavior (to, from, savedPosition) {
   return {
     left: 0,
     top: 0,
-    behavior
+    behavior,
   }
 }

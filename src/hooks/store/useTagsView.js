@@ -22,6 +22,6 @@ export default function useTagsView() {
     cachedViews,
     visitedViews,
     viewTags,
-    refreshCurrentPage
+    refreshCurrentPage,
   }
 }

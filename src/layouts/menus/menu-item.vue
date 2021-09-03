@@ -13,8 +13,8 @@ export default {
       type: Object,
       required: false,
       default: () => {
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

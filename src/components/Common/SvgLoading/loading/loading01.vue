@@ -87,6 +87,6 @@
 
 <script>
 export default {
-  name: 'loading01'
+  name: 'loading01',
 }
 </script>

@@ -4,12 +4,10 @@
   "description": "后台管理系统 vue3版本",
   "homepage": "https://github.com/wangbin3162/bin-admin-pro",
   "keywords": [
-    "bin-ui-nex",
-    "bin",
-    "ui",
-    "admin",
-    "bin-admin",
-    "components"
+    "bin-ui-next",
+    "bin-admin-pro",
+    "vue3",
+    "vite"
   ],
   "author": "wang bin",
   "files": [
@@ -19,40 +17,35 @@
   "private": false,
   "license": "MIT",
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build --report",
-    "lint": "vue-cli-service lint"
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "bin-ace-editor": "^3.1.1",
     "bin-charts": "^3.1.0",
     "bin-ui-next": "^0.9.7",
-    "echarts": "^5.1.2",
+    "echarts": "^5.2.0",
     "good-storage": "^1.1.1",
-    "js-cookie": "^2.2.1",
+    "js-cookie": "^3.0.1",
     "mockjs": "^1.1.0",
-    "vue": "^3.2.7",
+    "vue": "^3.2.8",
     "vue-router": "^4.0.11",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
-    "@vue/compiler-sfc": "^3.2.7",
-    "@vue/eslint-config-standard": "^5.1.2",
-    "babel-eslint": "^10.1.0",
-    "core-js": "^3.12.1",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^7.0.0",
-    "stylus": "^0.54.7",
-    "stylus-loader": "^3.0.2"
+    "@babel/core": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
+    "@types/node": "^16.7.10",
+    "@vitejs/plugin-vue": "^1.6.0",
+    "@vue/compiler-sfc": "^3.2.8",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-vue": "^7.17.0",
+    "rimraf": "^3.0.2",
+    "stylus": "^0.54.8",
+    "vite": "^2.5.3"
   }
 }

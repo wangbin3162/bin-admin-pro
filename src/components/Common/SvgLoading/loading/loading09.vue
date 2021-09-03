@@ -34,6 +34,6 @@
 
 <script>
 export default {
-  name: 'loading09'
+  name: 'loading09',
 }
 </script>

@@ -65,8 +65,8 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'CompIconfont',
@@ -74,7 +74,7 @@ export default {
   methods: {
     clickFunc(icon) {
       this.$message.info(`点击了图标:${icon}`)
-    }
-  }
+    },
+  },
 }
 </script>

@@ -53,8 +53,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .list-item {
   padding 16px 0;
   border-bottom: 1px solid #e8eaec;

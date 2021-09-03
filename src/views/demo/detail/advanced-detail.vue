@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'AdvancedDetail',
@@ -70,16 +70,16 @@ export default {
       columns: [
         { title: '姓名', key: 'name' },
         { title: '工号', key: 'no' },
-        { title: '所属分组', key: 'dept' }
+        { title: '所属分组', key: 'dept' },
       ],
       data: [
         { name: 'Wang', no: '001', dept: '前端组' },
         { name: '郭小宁', no: '002', dept: '前端组' },
         { name: '约修亚', no: '003', dept: '前端组' },
         { name: '李小红', no: '004', dept: '后端组' },
-        { name: '张小发', no: '005', dept: '测试组' }
-      ]
+        { name: '张小发', no: '005', dept: '测试组' },
+      ],
     }
-  }
+  },
 }
 </script>

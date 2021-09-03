@@ -147,13 +147,13 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-import BaseTable from '@/components/Common/BaseTable'
-import { computed, reactive, ref, watch } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
-import ActionButton from '@/components/Common/ActionButton'
-import BaseTree from '@/components/Common/BaseTree'
+import BaseTable from '@/components/Common/BaseTable/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import ActionButton from '@/components/Common/ActionButton/index.vue'
+import BaseTree from '@/components/Common/BaseTree/index.vue'
 import { getDepartTree } from '@/api/modules/depart.api'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
@@ -172,7 +172,7 @@ export default {
       roles: '',
       status: '',
       date: '',
-      email: ''
+      email: '',
     })
     const expand = ref(false)
     const copyList = ref([])
@@ -186,7 +186,7 @@ export default {
       total,
       getListData,
       pageChange,
-      pageSizeChange
+      pageSizeChange,
     } = useTable(getUserList, query)
     const {
       formRef,
@@ -199,12 +199,12 @@ export default {
       submitForm,
       resetForm,
       setBtnLoading,
-      modalVisible
+      modalVisible,
     } = useForm()
     watch(list, (val) => {
       copyList.value = val.map(item => ({
         ...item,
-        expand: false
+        expand: false,
       }))
     })
 
@@ -220,7 +220,7 @@ export default {
         username: '',
         email: '',
         roles: '',
-        depart: ''
+        depart: '',
       }
       openCreate()
     }
@@ -228,7 +228,7 @@ export default {
     function handleEdit(row) {
       user.value = {
         ...row,
-        depart: ''
+        depart: '',
       }
       openEdit()
     }
@@ -273,7 +273,7 @@ export default {
       roleMap: {
         admin: '管理员',
         user: '普通用户',
-        op: '实施人员'
+        op: '实施人员',
       },
       total,
       copyList,
@@ -286,7 +286,7 @@ export default {
         { title: '邮箱', key: 'email' },
         { title: '角色', slot: 'roles' },
         { title: '出生日期', key: 'createDate' },
-        { title: '操作', width: 100, align: 'center', slot: 'action' }
+        { title: '操作', width: 100, align: 'center', slot: 'action' },
       ],
       // form
       user,
@@ -301,15 +301,15 @@ export default {
       resetForm,
       ruleValidate: {
         realName: [{ required: true, message: '真实名称必填', trigger: 'blur' }],
-        username: [{ required: true, message: '用户名必填', trigger: 'blur' }]
+        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
       },
       modalVisible,
       handleCreate,
       handleCancel,
       handleEdit,
       handleSubmit,
-      handleDelete
+      handleDelete,
     }
-  }
+  },
 }
 </script>

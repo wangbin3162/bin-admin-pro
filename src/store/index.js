@@ -10,7 +10,7 @@ const debug = false // process.env.NODE_ENV !== 'production'
 const store = createStore({
   modules: { app, user, menu, tagsView, links, todos },
   strict: debug,
-  plugins: debug ? [createLogger()] : []
+  plugins: debug ? [createLogger()] : [],
 })
 
 export function setupStore(app) {

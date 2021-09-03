@@ -77,40 +77,40 @@ export default {
   name: 'AttachmentUpload',
   props: {
     title: {
-      type: String
+      type: String,
     },
     text: {
       type: String,
-      default: '上传附件'
+      default: '上传附件',
     },
     tip: {
-      type: String
+      type: String,
     },
     modelValue: {
       type: Array,
       default() {
         return []
-      }
+      },
     },
     multiple: {
       type: Boolean,
-      default: false
+      default: false,
     },
     accept: {
       type: Array,
       default() {
         return [] // 接收文件后缀名列表,会进行过滤筛选
-      }
+      },
     },
     size: {
       type: String,
-      default: 'default'
+      default: 'default',
     },
     max: {
       type: Number,
-      default: 10
+      default: 10,
     },
-    onlyFiles: Boolean // 是否仅展示文件列表
+    onlyFiles: Boolean, // 是否仅展示文件列表
   },
   emits: ['update:modelValue'],
   setup(props, { emit }) {
@@ -186,7 +186,7 @@ export default {
         const list = await commonUpload(attachments)
         fileList.value = [
           ...fileList.value,
-          ...list
+          ...list,
         ]
         emitValue()
         Message.success('上传成功！')
@@ -230,15 +230,15 @@ export default {
       handleDownload,
       emitValue,
       doUpload,
-      handleRemoveFiles
+      handleRemoveFiles,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .attachment-upload-wrap {
   display: inline-block;
   width: 100%;

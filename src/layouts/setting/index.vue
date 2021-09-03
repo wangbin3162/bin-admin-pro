@@ -71,9 +71,9 @@
 </template>
 
 <script>
-import HeaderTrigger from '@/layouts/header-trigger'
+import HeaderTrigger from '@/layouts/header-trigger/index.vue'
 import useSetting from '@/hooks/store/useSetting'
-import ThemePanel from '@/layouts/setting/theme-panel'
+import ThemePanel from './theme-panel.vue'
 
 export default {
   name: 'Setting',
@@ -98,7 +98,7 @@ export default {
       toggleSearch,
       toggleSearchBtn,
       toggleMessageBtn,
-      toggleWeatherBtn
+      toggleWeatherBtn,
     } = useSetting()
 
     return {
@@ -120,9 +120,9 @@ export default {
       toggleSearch,
       toggleSearchBtn,
       toggleMessageBtn,
-      toggleWeatherBtn
+      toggleWeatherBtn,
     }
-  }
+  },
 }
 </script>
 

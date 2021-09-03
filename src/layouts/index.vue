@@ -7,7 +7,7 @@
       :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
-        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
+        <img class="icon" src="/images/logo/bin-ui-next-02.svg" alt="logo-small" />
         <transition name="zoom-in">
           <h1 v-show="sidebar">BIN-ADMIN-PRO</h1>
         </transition>
@@ -37,13 +37,13 @@
 
 <script>
 import useSetting from '@/hooks/store/useSetting'
-import AsideMenus from '@/layouts/menus'
-import GlobalHeader from '@/layouts/header'
-import GlobalFooter from '@/layouts/footer'
+import AsideMenus from '@/layouts/menus/index.vue'
+import GlobalHeader from '@/layouts/header/index.vue'
+import GlobalFooter from '@/layouts/footer/index.vue'
 import { computed, onBeforeUnmount, onMounted } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
 import { on, off } from '@/utils/util'
-import MoveTransition from '@/components/Common/MoveTransition'
+import MoveTransition from '@/components/Common/MoveTransition/index'
 
 export default {
   name: 'Layout',
@@ -51,7 +51,7 @@ export default {
     MoveTransition,
     GlobalHeader,
     GlobalFooter,
-    AsideMenus
+    AsideMenus,
   },
   setup() {
     const {
@@ -66,7 +66,7 @@ export default {
       fixedHeader,
       showSearch,
       searchVisible,
-      toggleSearch
+      toggleSearch,
     } = useSetting()
     const { cachedViews } = useTagsView()
 
@@ -132,8 +132,8 @@ export default {
       headerHeight,
       fixedHeader,
       mainStyle,
-      contentFull
+      contentFull,
     }
-  }
+  },
 }
 </script>

@@ -1,8 +1,8 @@
 <template>
   <page-wrapper desc="数字动画组件，现已收录至bin-ui-next，此为示例">
     <b-collapse-wrap title="数字动画" shadow="none">
-      <div class="p10">
-        <h1 style="font-size: 60px;color: #1089ff;">
+      <div class="count-wrap p10">
+        <h1 style="font-size: 60px;">
           <b-count-to
             :start-val="startVal"
             :end-val="endVal"
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'CompCountTo',
@@ -56,7 +56,7 @@ export default {
       endVal: 2021,
       duration: 4000,
       prefix: '¥',
-      suffix: 'rmb'
+      suffix: 'rmb',
     }
   },
   methods: {
@@ -65,12 +65,18 @@ export default {
     },
     togglePlay() {
       this.$refs.countTo.pauseResume()
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="stylus" scoped>
+@import "../../../assets/stylus/base/mixins.styl"
+.count-wrap {
+  h1 {
+    color: getColor();
+  }
+}
 .input-item {
   display: inline-flex;
   align-items: center;

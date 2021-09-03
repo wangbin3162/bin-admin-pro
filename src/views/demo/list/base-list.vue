@@ -85,20 +85,20 @@ import useTable from '@/hooks/service/useTable'
 import { getBaseList } from '@/api/modules/list.api'
 import { reactive, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
-import ActionButton from '@/components/Common/ActionButton'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import ActionButton from '@/components/Common/ActionButton/index.vue'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'BaseList',
   components: {
     PageWrapper,
-    ActionButton
+    ActionButton,
   },
   setup() {
     const query = reactive({
       name: '',
       page: 1,
-      size: 10
+      size: 10,
     })
     const {
       loading,
@@ -106,7 +106,7 @@ export default {
       list,
       total,
       pageChange,
-      pageSizeChange
+      pageSizeChange,
     } = useTable(getBaseList, query)
 
     function handleSearch(val) {
@@ -134,14 +134,14 @@ export default {
       pageSizeChange,
       handleSearch,
       handleEdit,
-      handleDelete
+      handleDelete,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .task-wrapper {
   text-align: center;
   margin-bottom: 16px;

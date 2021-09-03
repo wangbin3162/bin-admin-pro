@@ -186,6 +186,6 @@
 
 <script>
 export default {
-  name: 'loading-text'
+  name: 'loading-text',
 }
 </script>

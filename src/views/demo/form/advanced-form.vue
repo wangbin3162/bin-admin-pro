@@ -181,7 +181,7 @@
 import { reactive, ref, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
 import dayjs from 'dayjs'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'AdvancedForm',
@@ -198,7 +198,7 @@ export default {
       taskDate: '',
       duty: '',
       execute: '',
-      level: '' // 0：紧急 1： 急 3：一般
+      level: '', // 0：紧急 1： 急 3：一般
     })
     const list = ref([
       {
@@ -206,36 +206,36 @@ export default {
         age: 18,
         birthday: '1990-04-22',
         hobby: '1',
-        address: '北京市朝阳区芍药居'
+        address: '北京市朝阳区芍药居',
       },
       {
         name: '张小刚',
         age: 25,
         birthday: '1990-11-11',
         hobby: '1',
-        address: '北京市海淀区西二旗'
+        address: '北京市海淀区西二旗',
       },
       {
         name: '李小红',
         age: 30,
         birthday: '1985-02-05',
         hobby: '3',
-        address: '上海市浦东新区世纪大道'
+        address: '上海市浦东新区世纪大道',
       },
       {
         name: '周小伟',
         age: 26,
         birthday: '1993-07-11',
         hobby: '1',
-        address: '深圳市南山区深南大道'
+        address: '深圳市南山区深南大道',
       },
       {
         name: '张小发',
         age: 33,
         birthday: '1999-12-12',
         hobby: '2',
-        address: '南京市龙眠大道'
-      }
+        address: '南京市龙眠大道',
+      },
     ])
     const edit = reactive({
       editName: '',
@@ -244,7 +244,7 @@ export default {
       editHobby: '',
       editAddress: '',
       editIndex: -1,
-      editIsCreate: false
+      editIsCreate: false,
     })
 
     function handleEdit(row, index) {
@@ -277,7 +277,7 @@ export default {
         age: null,
         birthday: '',
         hobby: '',
-        address: ''
+        address: '',
       }
       list.value.push(row)
       handleEdit(row, list.value.length - 1)
@@ -317,7 +317,7 @@ export default {
         taskDate: [{ required: true, type: 'date', message: '请选择任务日期', trigger: 'change' }],
         duty: [{ required: true, message: '请输入责任人', trigger: 'blur' }],
         execute: [{ required: true, message: '请输入执行人', trigger: 'blur' }],
-        level: [{ required: true, message: '勾选任务紧急程度', trigger: 'change' }]
+        level: [{ required: true, message: '勾选任务紧急程度', trigger: 'change' }],
       },
       columns: [
         { title: '姓名', slot: 'name' },
@@ -325,7 +325,7 @@ export default {
         { title: '出生日期', slot: 'birthday' },
         { title: '爱好', slot: 'hobby' },
         { title: '地址', slot: 'address' },
-        { title: '操作', slot: 'action' }
+        { title: '操作', slot: 'action' },
       ],
       hobbyMap: { 1: '吃饭', 2: '睡觉', 3: '打豆豆' },
       list,
@@ -335,8 +335,8 @@ export default {
       handleSave,
       handleEdit,
       handleAdd,
-      handleRemove
+      handleRemove,
     }
-  }
+  },
 }
 </script>

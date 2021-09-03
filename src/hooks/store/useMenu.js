@@ -86,6 +86,6 @@ export default function useMenu() {
     getCurrentRouteMenu,
     getBreadcrumbData,
     getMenuItemNamePath,
-    handleMenuSelect
+    handleMenuSelect,
   }
 }

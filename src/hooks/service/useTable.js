@@ -17,7 +17,7 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
   const list = ref([])
   const wrapSize = {
     width: 0,
-    height: 0
+    height: 0,
   }
 
   // fun：获取数据
@@ -84,6 +84,6 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     handleSearch,
     setLoading,
     pageChange,
-    pageSizeChange
+    pageSizeChange,
   }
 }

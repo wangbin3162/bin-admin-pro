@@ -29,11 +29,11 @@
 </template>
 
 <script>
-import Result from '@/components/Common/Result'
+import Result from '@/components/Common/Result/index.vue'
 
 export default {
   name: 'Fail',
-  components: { Result }
+  components: { Result },
 }
 </script>
 

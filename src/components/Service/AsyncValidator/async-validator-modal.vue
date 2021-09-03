@@ -14,7 +14,7 @@
 
 <script>
 import { ref } from 'vue'
-import AsyncValidator from '@/components/Service/AsyncValidator/index'
+import AsyncValidator from '@/components/Service/AsyncValidator/index.vue'
 
 /**
  * 校验模块，弹窗配置
@@ -25,13 +25,13 @@ export default {
   props: {
     modelValue: {
       type: String,
-      default: ''
+      default: '',
     },
     title: {
       type: String,
-      default: '配置校验参数'
+      default: '配置校验参数',
     },
-    dataLength: Number // 当前字段的数据长度
+    dataLength: Number, // 当前字段的数据长度
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
@@ -57,8 +57,8 @@ export default {
       rules,
       oldRules,
       handleOpen,
-      handleOK
+      handleOK,
     }
-  }
+  },
 }
 </script>

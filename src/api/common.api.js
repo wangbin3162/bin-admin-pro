@@ -13,7 +13,7 @@ export const STATUS = {
   DISABLE: 'N',
   MAPPING: { Y: '启用', N: '禁用' },
   COLOR: { Y: 'primary', N: 'danger' },
-  ICON: { Y: 'check', N: 'close' }
+  ICON: { Y: 'check', N: 'close' },
 }
 
 // 获取参数信息统一接口
@@ -21,7 +21,7 @@ export function getConfInfo(code) {
   return fetchData({
     url: '/management/conf/getConfInfo',
     method: 'post',
-    data: { code }
+    data: { code },
   })
 }
 
@@ -35,7 +35,7 @@ export function commonUpload(files) {
     url: '/management/comm/file/upload',
     method: 'post',
     headers: { 'Content-Type': 'multipart/form-data' },
-    data
+    data,
   })
 }
 
@@ -45,6 +45,6 @@ export function commonDownload(attachmentId) {
     url: '/management/comm/file/downLoad',
     method: 'post',
     responseType: 'arraybuffer',
-    data: { attachmentId }
+    data: { attachmentId },
   })
 }

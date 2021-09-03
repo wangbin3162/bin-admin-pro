@@ -4,6 +4,6 @@ import { fetchData } from '../request'
 export function getMenuTree() {
   return fetchData({
     url: '/menu/tree',
-    method: 'get'
+    method: 'get',
   })
 }

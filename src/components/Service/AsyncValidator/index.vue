@@ -267,7 +267,7 @@
 import { SIMPLE_RULE, MULTIPLE_RULE, TYPE, RULE, RULE_NAME_MAP, TRIGGER } from './util'
 import { computed, ref, watch } from 'vue'
 import useSortable from '@/hooks/useSortable'
-import DragHandle from '@/components/Common/DragHandle'
+import DragHandle from '@/components/Common/DragHandle/index.vue'
 
 /**
  * 校验控制参数，受业务影响
@@ -280,13 +280,13 @@ export default {
   props: {
     modelValue: {
       type: String,
-      default: ''
+      default: '',
     },
     dataLength: Number, // 当前字段的数据长度
     originalRules: { // 存储原始配置校验参数，即保存时保存一个初始副本
-      type: String
+      type: String,
     },
-    showLog: Boolean
+    showLog: Boolean,
   },
   emits: ['update:modelValue', 'change'],
   setup(props, { emit }) {
@@ -358,7 +358,7 @@ export default {
         case RULE.required:
           checkRules.value.unshift({
             ...normalCfg(ruleType),
-            message: '必填项'
+            message: '必填项',
           })
           break
         case RULE.length:
@@ -366,19 +366,19 @@ export default {
             ...normalCfg(ruleType),
             min: 1,
             max: props.dataLength || Infinity,
-            message: '长度必须在指定的范围内'
+            message: '长度必须在指定的范围内',
           })
           break
         case RULE.email:
           checkRules.value.push({
             ...normalCfg(ruleType),
-            message: '邮箱格式不正确'
+            message: '邮箱格式不正确',
           })
           break
         case RULE.phone:
           checkRules.value.push({
             ...normalCfg(ruleType),
-            message: '手机号格式不正确'
+            message: '手机号格式不正确',
           })
           break
         case RULE.idCode:
@@ -386,7 +386,7 @@ export default {
             ...normalCfg(ruleType),
             preField: '', // 前置判断字段
             message: '身份证格式不正确',
-            ignoreCase: true
+            ignoreCase: true,
           })
           break
         case RULE.unifiedCode:
@@ -394,7 +394,7 @@ export default {
             ...normalCfg(ruleType),
             preField: '',
             message: '统一社会信用代码格式不正确',
-            ignoreCase: true
+            ignoreCase: true,
           })
           break
         case RULE.orgInstCode:
@@ -402,7 +402,7 @@ export default {
             ...normalCfg(ruleType),
             preField: '',
             message: '组织机构代码格式不正确',
-            ignoreCase: true
+            ignoreCase: true,
           })
           break
         case RULE.regNo:
@@ -410,14 +410,14 @@ export default {
             ...normalCfg(ruleType),
             preField: '',
             message: '工商注册号格式不正确',
-            ignoreCase: true
+            ignoreCase: true,
           })
           break
         case RULE.regexp:
           checkRules.value.push({
             ...normalCfg(ruleType),
             regexp: '',
-            message: '正则表达式不匹配'
+            message: '正则表达式不匹配',
           })
           break
         case RULE.conditionRequired:
@@ -425,7 +425,7 @@ export default {
             ...normalCfg(ruleType),
             preField: '',
             preFieldValue: '',
-            message: '当前字段在前置字段条件达成下必填'
+            message: '当前字段在前置字段条件达成下必填',
           })
           break
         case RULE.conditionNotRequired:
@@ -433,7 +433,7 @@ export default {
             ...normalCfg(ruleType),
             preField: '',
             preFieldValue: '',
-            message: '当前字段在前置字段条件达成下不可填写'
+            message: '当前字段在前置字段条件达成下不可填写',
           })
           break
         case RULE.conditionNotBe:
@@ -442,14 +442,14 @@ export default {
             preField: '',
             preFieldValue: '',
             notValue: '',
-            message: '当前字段在前置字段条件达成下不能为某值'
+            message: '当前字段在前置字段条件达成下不能为某值',
           })
           break
         case RULE.notSame:
           checkRules.value.push({
             ...normalCfg(ruleType),
             preField: '',
-            message: '不能和前置字段值相同'
+            message: '不能和前置字段值相同',
           })
           break
         case RULE.timeBound:
@@ -457,7 +457,7 @@ export default {
             ...normalCfg(ruleType),
             time: '$now',
             compareMode: 'gt',
-            message: '日期不符合区间设置'
+            message: '日期不符合区间设置',
           })
           break
         default:
@@ -527,15 +527,15 @@ export default {
       allowDrop,
       onDrop,
       reload,
-      refreshRules
+      refreshRules,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../../assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/mixins.styl"
 .validator-wrap {
   width: 100%;
   overflow-x: auto;

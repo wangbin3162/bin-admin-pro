@@ -12,7 +12,7 @@
     <div class="items-wrap">
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ui-next" target="_blank">
         <div class="title">
-          <iconfont icon="appstore" color="#25bbe3" :size="36" bg round/>
+          <iconfont icon="appstore" color="#25bbe3" :size="36" bg round />
           <span class="ml-15">Bin UI Next</span>
         </div>
         <div class="desc">一个基于 vue3 的组件库</div>
@@ -20,7 +20,7 @@
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ace-editor" target="_blank">
         <div class="title">
-          <iconfont icon="codelibrary" color="#4ab017" :size="36" bg round/>
+          <iconfont icon="codelibrary" color="#4ab017" :size="36" bg round />
           <span class="ml-15">Ace Editor</span>
         </div>
         <div class="desc">基于 vue3 的json编辑器组件</div>
@@ -28,7 +28,7 @@
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-charts" target="_blank">
         <div class="title">
-          <iconfont icon="barchart" color="#304255" :size="36" bg round/>
+          <iconfont icon="barchart" color="#304255" :size="36" bg round />
           <span class="ml-15">Charts</span>
         </div>
         <div class="desc">基于 vue3,echart5的图表组件</div>
@@ -36,7 +36,7 @@
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-tree-org" target="_blank">
         <div class="title">
-          <iconfont icon="cluster" color="#fa8c16" :size="36" bg round/>
+          <iconfont icon="cluster" color="#fa8c16" :size="36" bg round />
           <span class="ml-15">Tree Org</span>
         </div>
         <div class="desc">树形组织结构</div>
@@ -44,7 +44,7 @@
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-animation" target="_blank">
         <div class="title">
-          <iconfont icon="thunderbolt" color="#eb2f96" :size="36" bg round/>
+          <iconfont icon="thunderbolt" color="#eb2f96" :size="36" bg round />
           <span class="ml-15">Animation</span>
         </div>
         <div class="desc">CSS3动画库</div>
@@ -52,7 +52,7 @@
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-admin-pro" target="_blank">
         <div class="title">
-          <iconfont icon="sketch" color="#8e58da" :size="36" bg round/>
+          <iconfont icon="sketch" color="#8e58da" :size="36" bg round />
           <span class="ml-15">Admin Pro</span>
         </div>
         <div class="desc">基于 bin-ui 的集成管理平台</div>
@@ -63,16 +63,16 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'project-box',
-  components: { Iconfont }
+  components: { Iconfont },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .card-panel {
   margin-bottom: 16px;
 }

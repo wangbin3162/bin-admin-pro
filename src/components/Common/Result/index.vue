@@ -23,18 +23,18 @@ export default {
     status: {
       type: String,
       validator: (val) => ['success', 'error'].includes(val),
-      default: 'success'
+      default: 'success',
     },
     statusMap: {
       type: Object,
       default() {
         return {
           success: '提交成功',
-          error: '提交失败'
+          error: '提交失败',
         }
-      }
+      },
     },
-    extraWhite: Boolean
+    extraWhite: Boolean,
   },
   computed: {
     iconClass() {
@@ -43,14 +43,14 @@ export default {
     iconName() {
       const iconMap = {
         success: 'check-circle-fill',
-        error: 'close-circle-fill'
+        error: 'close-circle-fill',
       }
       return iconMap[this.status]
     },
     statusText() {
       return this.statusMap[this.status]
-    }
-  }
+    },
+  },
 }
 </script>
 

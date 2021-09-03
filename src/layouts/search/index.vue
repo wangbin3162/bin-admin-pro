@@ -4,8 +4,8 @@
 </template>
 
 <script>
-import HeaderTrigger from '@/layouts/header-trigger'
-import SearchPanel from '@/layouts/search/search-panel'
+import HeaderTrigger from '@/layouts/header-trigger/index.vue'
+import SearchPanel from '@/layouts/search/search-panel.vue'
 import useSetting from '@/hooks/store/useSetting'
 
 export default {
@@ -15,8 +15,8 @@ export default {
     const { toggleSearch } = useSetting()
 
     return {
-      toggleSearch
+      toggleSearch,
     }
-  }
+  },
 }
 </script>

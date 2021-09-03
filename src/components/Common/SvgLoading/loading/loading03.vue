@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  name: 'loading03'
+  name: 'loading03',
 }
 </script>

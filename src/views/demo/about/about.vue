@@ -60,17 +60,16 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
-
-const config = require('../../../../package.json')
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import config from '../../../../package.json'
 
 export default {
   name: 'About',
   components: { PageWrapper },
   data() {
     return {
-      config
+      config,
     }
-  }
+  },
 }
 </script>

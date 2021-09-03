@@ -93,6 +93,6 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
     handleFilter,
     filterNode,
     handleSelect,
-    handleChecked
+    handleChecked,
   }
 }

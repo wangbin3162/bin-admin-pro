@@ -12,8 +12,7 @@
 </template>
 
 <script>
-
-import MenuItem from '@/layouts/menus/menu-item'
+import MenuItem from '@/layouts/menus/menu-item.vue'
 
 export default {
   name: 'Submenu',
@@ -23,8 +22,8 @@ export default {
       type: Object,
       required: false,
       default: () => {
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>

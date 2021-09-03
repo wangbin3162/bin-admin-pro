@@ -60,7 +60,7 @@ export default {
         const data = getBreadcrumbData(matchItem.name)
         list.push({
           name: matchItem.name,
-          display: data.map(v => v.title).join(' > ')
+          display: data.map(v => v.title).join(' > '),
         })
       })
       filterList.value = list
@@ -102,14 +102,14 @@ export default {
       open,
       handleClose,
       showScroll,
-      handleClick
+      handleClick,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../assets/stylus/base/mixins.styl"
 .search-modal {
   position: fixed;
   top: 0;

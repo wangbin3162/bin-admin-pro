@@ -62,7 +62,7 @@
 <script>
 import { ref } from 'vue'
 import { Message } from 'bin-ui-next'
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'BaseForm',
@@ -77,7 +77,7 @@ export default {
       hobby: [],
       sex: '',
       status: 'disable',
-      birthday: ''
+      birthday: '',
     })
 
     function submitForm() {
@@ -105,17 +105,17 @@ export default {
         region: [{ required: true, message: '户籍地不能为空', trigger: 'change' }],
         age: [
           { required: true, type: 'number', message: '年龄不为空', trigger: 'change' },
-          { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' }
+          { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' },
         ],
         hobby: [{ type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }],
         sex: [{ required: true, message: '性别必选', trigger: 'change' }],
         birthday: [{ required: true, type: 'date', message: '出生日期必选', trigger: 'blur' }],
         mail: [
           { required: true, message: '邮箱不能为空', trigger: 'blur' },
-          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' }
-        ]
-      }
+          { type: 'email', message: '邮箱格式不正确', trigger: 'blur' },
+        ],
+      },
     }
-  }
+  },
 }
 </script>

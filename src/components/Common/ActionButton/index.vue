@@ -22,15 +22,15 @@ export default {
   name: 'ActionButton',
   props: {
     buttonProps: {
-      type: Object
+      type: Object,
     },
     popperWidth: {
       type: Number,
-      default: 260
+      default: 260,
     },
     message: {
       type: String,
-      default: '确定删除本条数据吗？'
+      default: '确定删除本条数据吗？',
     },
     disabled: Boolean,
     confirm: Boolean,
@@ -43,13 +43,13 @@ export default {
     iconStyle: {
       type: Object,
       default: () => ({
-        fontSize: '18px'
-      })
-    }
+        fontSize: '18px',
+      }),
+    },
   },
   data() {
     return {
-      visible: false
+      visible: false,
     }
   },
   emits: ['cancel', 'click'],
@@ -60,9 +60,9 @@ export default {
         textColor: this.color,
         disabled: this.disabled,
         loading: this.loading,
-        ...this.buttonProps
+        ...this.buttonProps,
       }
-    }
+    },
   },
   methods: {
     handleCancel() {
@@ -78,7 +78,7 @@ export default {
         return
       }
       this.$emit('click')
-    }
-  }
+    },
+  },
 }
 </script>

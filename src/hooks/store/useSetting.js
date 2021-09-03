@@ -36,14 +36,14 @@ export default function useSetting() {
       flex: `0 0 ${width}px`,
       maxWidth: `${width}px`,
       minWidth: `${width}px`,
-      width: `${width}px`
+      width: `${width}px`,
     }
   })
   // 右侧区域宽度
   const rightContentWidth = computed(() => {
     return {
       width: (!contentFull.value && fixedHeader.value)
-        ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%'
+        ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
     }
   })
   const fixedHeaderStyle = computed(() => {
@@ -51,7 +51,7 @@ export default function useSetting() {
       ...rightContentWidth.value,
       padding: 0,
       zIndex: 10,
-      right: fixedHeader.value ? 0 : null
+      right: fixedHeader.value ? 0 : null,
     }
   })
 
@@ -172,6 +172,6 @@ export default function useSetting() {
     toggleSearchBtn,
     toggleMessageBtn,
     toggleWeatherBtn,
-    toggleContentFull
+    toggleContentFull,
   }
 }

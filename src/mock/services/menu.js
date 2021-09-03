@@ -7,5 +7,5 @@ Mock.mock(/\/menu\/tree/, 'get', () => builder([{
   title: '系统菜单',
   path: 'root',
   expand: true,
-  children: menus
+  children: menus,
 }]))

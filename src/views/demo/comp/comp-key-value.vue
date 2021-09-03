@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import KeyValueMapping from '@/components/Common/KeyValueMapping/index.vue'
 import { computed, ref } from 'vue'
-import KeyValueMapping from '@/components/Common/KeyValueMapping'
 
 const STR = `import Sortable from 'sortablejs'
 import { onBeforeUnmount, onMounted, ref } from 'vue'
@@ -99,18 +99,14 @@ export default {
     const mapping = ref([
       { key: '1', value: 'a' },
       { key: '2', value: 'b' },
-      { key: '3', value: 'c' }
+      { key: '3', value: 'c' },
     ])
     const mappingJson = computed(() => JSON.stringify(mapping.value, null, 2))
     return {
       mapping,
       mappingJson,
-      STR
+      STR,
     }
-  }
+  },
 }
 </script>
-
-<style scoped lang="stylus">
-
-</style>

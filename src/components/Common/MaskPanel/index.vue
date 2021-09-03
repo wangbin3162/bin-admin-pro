@@ -8,31 +8,31 @@ export default {
   props: {
     title: {
       type: String,
-      default: '不可编辑'
+      default: '不可编辑',
     },
     zIndex: {
       type: Number,
-      default: 10
+      default: 10,
     },
     theme: {
       type: String,
       validate: (val) => ['light', 'dark'].includes(val),
-      default: 'light'
+      default: 'light',
     },
     opacity: {
       type: Number,
-      default: 0.2
-    }
+      default: 0.2,
+    },
   },
   computed: {
     customStyles() {
       return {
         zIndex: this.zIndex,
         background: { light: '#ffffff', dark: '#000000' }[this.theme],
-        opacity: this.opacity
+        opacity: this.opacity,
       }
-    }
-  }
+    },
+  },
 }
 </script>
 

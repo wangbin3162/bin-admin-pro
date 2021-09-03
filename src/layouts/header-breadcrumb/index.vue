@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-@import "~@/assets/stylus/base/mixins.styl"
+@import "../../assets/stylus/base/mixins.styl"
 .header-breadcrumb {
   display: inline-block;
   font-size: 14px;

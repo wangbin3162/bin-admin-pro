@@ -1,18 +1,18 @@
 <template>
   <div class="workplace">
-    <top-box/>
+    <top-box />
     <div class="work-center">
       <b-row :gutter="16">
         <b-col span="14">
-          <project-box/>
-          <dynamic-box/>
+          <project-box />
+          <dynamic-box />
         </b-col>
         <b-col span="10">
-          <quick-link/>
+          <quick-link />
           <div class="banner">
-            <img src="@/assets/images/bg/work.png" alt="work">
+            <img src="/images/bg/work.png" alt="work">
           </div>
-          <todos/>
+          <todos />
         </b-col>
       </b-row>
     </div>
@@ -20,15 +20,15 @@
 </template>
 
 <script>
-import TopBox from './top-box'
-import ProjectBox from './project-box'
-import DynamicBox from './dynamic-box'
-import QuickLink from '@/views/dashboard/workbench/quick-link'
-import Todos from '@/views/dashboard/workbench/todos'
+import TopBox from './top-box.vue'
+import ProjectBox from './project-box.vue'
+import DynamicBox from './dynamic-box.vue'
+import QuickLink from './quick-link.vue'
+import Todos from './todos.vue'
 
 export default {
   name: 'Workbench',
-  components: { Todos, QuickLink, DynamicBox, TopBox, ProjectBox }
+  components: { Todos, QuickLink, DynamicBox, TopBox, ProjectBox },
 }
 </script>
 

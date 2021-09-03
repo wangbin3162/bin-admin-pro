@@ -3,7 +3,7 @@
     <div class="page-header-title">工作台</div>
     <div class="page-header-detail">
       <div class="avatar-img">
-        <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
+        <img src="/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 import useTodos from '@/hooks/store/useTodos'
 import useUser from '@/hooks/store/useUser'
 import useSetting from '@/hooks/store/useSetting'
@@ -62,14 +62,14 @@ export default {
       currentDate,
       todoLabel,
       weather,
-      showWeather
+      showWeather,
     }
-  }
+  },
 }
 </script>
 
 <style scoped lang="stylus">
-@import "~@/assets/stylus/base/var.styl"
+@import "../../../assets/stylus/base/var.styl"
 .page-header {
   padding: 16px 32px 0 32px;
   background: #fff;

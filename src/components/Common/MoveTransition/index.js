@@ -18,8 +18,8 @@ export default {
         },
         onAfterLeave(el) {
           el.style = ''
-        }
+        },
       }, slots.default)
     }
-  }
+  },
 }

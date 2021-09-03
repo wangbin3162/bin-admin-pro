@@ -79,7 +79,7 @@
 
 <script>
 export default {
-  name: 'loading06'
+  name: 'loading06',
 }
 </script>
 

@@ -21,7 +21,7 @@ export const SIMPLE_RULE = {
   idCode: '$idCode',
   unifiedCode: '$unifiedCode',
   orgInstCode: '$orgInstCode',
-  regNo: '$regNo'
+  regNo: '$regNo',
 }
 /**
  * 可多次添加的特殊校验名称
@@ -32,7 +32,7 @@ export const MULTIPLE_RULE = {
   conditionNotRequired: '$conditionNotRequired',
   conditionNotBe: '$conditionNotBe',
   notSame: '$notSame',
-  timeBound: '$timeBound'
+  timeBound: '$timeBound',
 }
 /**
  * 校验枚举值，全部
@@ -40,7 +40,7 @@ export const MULTIPLE_RULE = {
 export const RULE = {
   required: '$required',
   ...SIMPLE_RULE,
-  ...MULTIPLE_RULE
+  ...MULTIPLE_RULE,
 }
 
 /**
@@ -60,7 +60,7 @@ export const RULE_NAME_MAP = {
   $conditionNotRequired: '条件必不填',
   $conditionNotBe: '条件不为某值',
   $notSame: '值不能相同',
-  $timeBound: '日期区间'
+  $timeBound: '日期区间',
 }
 
 /**
@@ -104,7 +104,7 @@ export const validatorBuild = {
         if (!result) callback(new Error(opts.message))
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 统一社会信用代码 opts: { preField,ignoreCase,message,trigger }
@@ -123,7 +123,7 @@ export const validatorBuild = {
         // console.log('$unifiedCode', result)
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 工商注册号 opts: { preField, ignoreCase,message,trigger }
@@ -142,7 +142,7 @@ export const validatorBuild = {
         // console.log('$regNo', result)
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 组织机构代码 opts: { preField,ignoreCase,message,trigger }
@@ -161,7 +161,7 @@ export const validatorBuild = {
         // console.log('$orgInstCode', result)
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 条件必填 opts: { preField, preFieldValue,message,trigger} obj:form
@@ -184,7 +184,7 @@ export const validatorBuild = {
         }
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 条件必不填 opts: { preField, preFieldValue,message,trigger} obj:form
@@ -208,7 +208,7 @@ export const validatorBuild = {
         }
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 条件不能为某值 opts: { preField, preFieldValue,notValue,message,trigger} obj:form
@@ -231,7 +231,7 @@ export const validatorBuild = {
         }
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 值不能相同 opts: { preField,message,trigger} obj:form
@@ -247,7 +247,7 @@ export const validatorBuild = {
         }
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
   },
   // 日期区间验证 opts: { time, compareMode:{gt,ge,lt,le} ,message , trigger} obj:form
@@ -300,7 +300,7 @@ export const validatorBuild = {
         if (!result) callback(new Error(opts.message))
         callback()
       },
-      trigger: opts.trigger
+      trigger: opts.trigger,
     }
-  }
+  },
 }

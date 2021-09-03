@@ -15,7 +15,7 @@ export default function useSortable(list, endFun, option = {}) {
     dragClass: 'drag-item-class',
     // ************* 禁用html5原生拖拽行为
     forceFallback: true,
-    handle: '.drag'
+    handle: '.drag',
   }
   const listRef = ref(null)
   let sortInstance = null
@@ -44,7 +44,7 @@ export default function useSortable(list, endFun, option = {}) {
       },
       onEnd: (evt) => {
         endFun && endFun()
-      }
+      },
     })
   })
   onBeforeUnmount(() => {
@@ -54,6 +54,6 @@ export default function useSortable(list, endFun, option = {}) {
     }
   })
   return {
-    listRef
+    listRef,
   }
 }

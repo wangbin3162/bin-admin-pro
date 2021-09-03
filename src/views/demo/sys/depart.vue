@@ -85,21 +85,21 @@
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper'
 import { getDepartTree } from '@/api/modules/depart.api'
-import BaseTree from '@/components/Common/BaseTree'
-import Iconfont from '@/components/Common/Iconfont/iconfont'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
-import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
+import useForm from '@/hooks/service/useForm'
+import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
+import BaseTree from '@/components/Common/BaseTree/index.vue'
+import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'Depart',
   components: {
     Iconfont,
     BaseTree,
-    PageWrapper
+    PageWrapper,
   },
   setup() {
     const treeRef = ref(null)
@@ -117,7 +117,7 @@ export default {
       openEdit,
       backNormal,
       submitForm,
-      resetForm
+      resetForm,
     } = useForm()
 
     function handleSelect(node, flatState) {
@@ -151,7 +151,7 @@ export default {
         copyNode.value = current ? {
           ...deepCopy(current),
           parentId: parentKey === 0 ? '' : parentNode.id,
-          parentName: parentNode.title
+          parentName: parentNode.title,
         } : {}
         return
       }
@@ -162,7 +162,7 @@ export default {
         status: '1',
         desc: '',
         parentId: '',
-        parentName: undefined
+        parentName: undefined,
       }
     }
 
@@ -221,10 +221,10 @@ export default {
       resetForm,
       ruleValidate: {
         text: [{ required: true, message: '部门名称必填', trigger: 'blur' }],
-        deptCode: [{ required: true, message: '部门编码必填', trigger: 'blur' }]
-      }
+        deptCode: [{ required: true, message: '部门编码必填', trigger: 'blur' }],
+      },
     }
-  }
+  },
 }
 </script>
 

@@ -167,7 +167,7 @@
 
 <script>
 export default {
-  name: 'loading11'
+  name: 'loading11',
 }
 </script>
 

@@ -4,7 +4,7 @@ import { fetchData } from '../request'
 export function getBaseList() {
   return fetchData({
     url: '/list/base',
-    method: 'get'
+    method: 'get',
   })
 }
 
@@ -12,7 +12,7 @@ export function getBaseList() {
 export function getArticleList() {
   return fetchData({
     url: '/list/articles',
-    method: 'get'
+    method: 'get',
   })
 }
 
@@ -20,6 +20,6 @@ export function getArticleList() {
 export function getProjectList() {
   return fetchData({
     url: '/list/projects',
-    method: 'get'
+    method: 'get',
   })
 }

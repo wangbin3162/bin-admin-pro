@@ -1,7 +1,7 @@
 <template>
   <b-dropdown @command="handleClick" append-to-body>
     <div class="global-header-avatar-trigger">
-      <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
+      <img src="/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
       <span v-if="userInfo">{{ userInfo.realName }}</span>
     </div>
     <template #dropdown>
@@ -42,7 +42,7 @@ export default {
         MessageBox.confirm({
           type: 'warning',
           title: '提示',
-          message: '确认退出登录吗？'
+          message: '确认退出登录吗？',
         }).then(() => {
           $store.dispatch('user/clearToken')
           $router.push(`/login?redirect=${$route.fullPath}`)
@@ -52,6 +52,6 @@ export default {
     }
 
     return { userInfo, handleClick }
-  }
+  },
 }
 </script>

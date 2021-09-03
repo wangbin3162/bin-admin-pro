@@ -2,7 +2,7 @@
   <div class="system-error-page">
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
-        <img src="@/assets/images/default/error500.svg" alt="500">
+        <img src="/images/default/error500.svg" alt="500">
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>
@@ -29,7 +29,7 @@ export default {
     const errorNormalMsg = {
       403: '抱歉，您无权访问此页面！',
       404: '抱歉，你访问的页面不存在！',
-      500: '抱歉，服务器出错了！'
+      500: '抱歉，服务器出错了！',
     }
 
     const status = ref(500)
@@ -38,9 +38,9 @@ export default {
     return {
       status,
       errorMessage,
-      HOME_PATH
+      HOME_PATH,
     }
-  }
+  },
 }
 </script>
 
