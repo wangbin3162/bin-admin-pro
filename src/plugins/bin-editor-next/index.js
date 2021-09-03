@@ -1,4 +1,4 @@
-import BAceEditor from 'bin-ace-editor'
+import BAceEditor from 'bin-editor-next'
 import 'brace/ext/emmet'
 import 'brace/ext/language_tools'
 import 'brace/mode/json'

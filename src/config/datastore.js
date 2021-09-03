@@ -36,8 +36,8 @@ const LINK_KEY = '__bin_admin_pro_links__'
 export function getLinks() {
   return storage.get(LINK_KEY, [
       { link: 'https://wangbin3162.gitee.io/bin-ui-next', text: 'bin-ui-next', newTab: true },
-      { link: 'https://wangbin3162.gitee.io/bin-ace-editor', text: 'bin-ace-editor', newTab: true },
-      { link: 'https://wangbin3162.gitee.io/bin-charts', text: 'bin-charts', newTab: true },
+      { link: 'https://wangbin3162.gitee.io/bin-editor-next', text: 'bin-editor-next', newTab: true },
+      { link: 'https://wangbin3162.gitee.io/bin-charts-next', text: 'bin-charts-next', newTab: true },
       { link: 'https://wangbin3162.gitee.io/bin-tree-org', text: 'bin-tree-org', newTab: true },
       { link: 'https://wangbin3162.gitee.io/bin-animation', text: 'bin-animation', newTab: true }
     ]

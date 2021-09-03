@@ -33,6 +33,7 @@
 <script>
 import { computed, ref } from 'vue'
 import day from 'dayjs'
+import { getImageUrl } from '@/utils/assets'
 
 export default {
   name: 'Message',
@@ -41,22 +42,22 @@ export default {
     const activeTab = ref('message')
     const messageList = ref([
       {
-        icon: '/images/avatar/avatar01.jpeg',
+        icon: getImageUrl('/avatar/avatar01.jpeg'),
         title: '您今天有12个任务',
         date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
       },
       {
-        icon: '/images/avatar/avatar00.jpeg',
+        icon: getImageUrl('/avatar/avatar00.jpeg'),
         title: '今日需要修改发布新版程序',
         date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
       },
       {
-        icon: '/images/avatar/avatar06.jpeg',
+        icon: getImageUrl('/avatar/avatar06.jpeg'),
         title: '最新的文章已经发布',
         date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
       },
       {
-        icon: '/images/avatar/avatar03.jpg',
+        icon: getImageUrl('/avatar/avatar03.jpg'),
         title: '这是通知示例，实际需要根据业务需求自行修改',
         date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
       },

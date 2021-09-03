@@ -2,7 +2,7 @@
   <div class="system-error-page">
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
-        <img src="/images/default/error500.svg" alt="500">
+        <img src="@/assets/images/default/error500.svg" alt="500">
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>

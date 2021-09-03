@@ -3,7 +3,7 @@
     <div class="page-header-title">工作台</div>
     <div class="page-header-detail">
       <div class="avatar-img">
-        <img src="/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
+        <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>

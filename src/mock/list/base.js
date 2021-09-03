@@ -1,3 +1,5 @@
+import { getImageUrl } from '@/utils/assets'
+
 export default {
   rows: [
     {
@@ -5,7 +7,7 @@ export default {
       title: 'Bin UI Next',
       desc: '基于vue3的ui组件库，内涵60+组件',
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-07-04 12:00:00',
       progress: 95,
       status: 'text', // text success exception
@@ -15,7 +17,7 @@ export default {
       title: 'Bin Admin Pro',
       desc: '基于vue3,bin-ui-next的企业级后台管理框架',
       author: 'wangbin',
-      avatar: '/images/avatar/avatar02.jpeg',
+      avatar: getImageUrl('/avatar/avatar02.jpeg'),
       time: '2021-06-04 12:00:00',
       progress: 80,
       status: 'text',
@@ -25,7 +27,7 @@ export default {
       title: 'Bin Ace Editor',
       desc: '基于vue3的代码编辑器，支持多种格式',
       author: 'wangbin',
-      avatar: '/images/avatar/avatar07.jpeg',
+      avatar: getImageUrl('/avatar/avatar07.jpeg'),
       time: '2021-06-04 12:00:00',
       progress: 100,
       status: 'success',
@@ -35,7 +37,7 @@ export default {
       title: 'Bin Charts',
       desc: '基于vue3、echart5 的图表封装组件',
       author: 'wangbin',
-      avatar: '/images/avatar/avatar04.jpeg',
+      avatar: getImageUrl('/avatar/avatar04.jpeg'),
       time: '2021-06-04 12:00:00',
       progress: 75,
       status: 'text',
@@ -45,7 +47,7 @@ export default {
       title: 'Bin UI',
       desc: '基于vue2的基础组件库。',
       author: 'wangbin',
-      avatar: '/images/avatar/avatar01.jpeg',
+      avatar: getImageUrl('/avatar/avatar01.jpeg'),
       time: '2021-06-04 12:00:00',
       progress: 100,
       status: 'success',
@@ -55,7 +57,7 @@ export default {
       title: 'test',
       desc: '测试任务描述',
       author: 'test',
-      avatar: '/images/avatar/avatar09.jpeg',
+      avatar: getImageUrl('/avatar/avatar09.jpeg'),
       time: '2021-06-04 12:00:00',
       progress: 40,
       status: 'exception',

@@ -1,7 +1,7 @@
 <template>
   <b-dropdown @command="handleClick" append-to-body>
     <div class="global-header-avatar-trigger">
-      <img src="/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
+      <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
       <span v-if="userInfo">{{ userInfo.realName }}</span>
     </div>
     <template #dropdown>
@@ -24,34 +24,35 @@
 </template>
 
 <script>
-import { MessageBox } from 'bin-ui-next'
+import { MessageBox, Message } from 'bin-ui-next'
 import { computed } from 'vue'
 import useStoreRouter from '@/hooks/store/useStoreRouter'
 
 export default {
   name: 'UserAvatar',
   setup() {
-    const { $store, $router, $route } = useStoreRouter()
+    const { $store } = useStoreRouter()
     const userInfo = computed(() => $store.state.user.userInfo)
 
-    function handleClick(name) {
+    return { userInfo }
+  },
+  methods: {
+    handleClick(name) {
       if (name === 'userCenter') {
-        $router.push('/userCenter')
+        this.$router.push('/userCenter')
       }
       if (name === 'logout') {
-        MessageBox.confirm({
+        this.$confirm({
           type: 'warning',
           title: '提示',
           message: '确认退出登录吗？',
         }).then(() => {
-          $store.dispatch('user/clearToken')
-          $router.push(`/login?redirect=${$route.fullPath}`)
+          this.$store.dispatch('user/clearToken')
+          this.$router.push(`/login?redirect=${this.$route.fullPath}`)
         }).catch(e => {
         })
       }
-    }
-
-    return { userInfo, handleClick }
+    },
   },
 }
 </script>

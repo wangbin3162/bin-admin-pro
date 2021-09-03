@@ -2,6 +2,7 @@ import axios from 'axios'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { Utils } from 'bin-ui-next'
+import { getImageUrl } from '@/utils/assets'
 
 /**
  * 天气 hook
@@ -23,26 +24,26 @@ import { Utils } from 'bin-ui-next'
 export default function useWeather() {
   const store = useStore()
   const weaImgMap = {
-    xue: '/images/weather/xue-1.png',
-    lei: '/images/weather/lei-1.png',
-    shachen: '/images/weather/shachen-1.png',
-    wu: '/images/weather/wu-1.png',
-    bingbao: '/images/weather/bingbao-1.png',
-    yun: '/images/weather/yun-1.png',
-    yu: '/images/weather/yu-1.png',
-    yin: '/images/weather/yin-1.png',
-    qing: '/images/weather/qing-1.png',
+    xue: getImageUrl('/weather/xue-1.png'),
+    lei: getImageUrl('/weather/lei-1.png'),
+    shachen: getImageUrl('/weather/shachen-1.png'),
+    wu: getImageUrl('/weather/wu-1.png'),
+    bingbao: getImageUrl('/weather/bingbao-1.png'),
+    yun: getImageUrl('/weather/yun-1.png'),
+    yu: getImageUrl('/weather/yu-1.png'),
+    yin: getImageUrl('/weather/yin-1.png'),
+    qing: getImageUrl('/weather/qing-1.png'),
   }
   const weaImgMapColor = {
-    xue: '/images/weather/xue.png',
-    lei: '/images/weather/lei.png',
-    shachen: '/images/weather/shachen.png',
-    wu: '/images/weather/wu.png',
-    bingbao: '/images/weather/bingbao.png',
-    yun: '/images/weather/yun.png',
-    yu: '/images/weather/yu.png',
-    yin: '/images/weather/yin.png',
-    qing: '/images/weather/qing.png',
+    xue: getImageUrl('/weather/xue.png'),
+    lei: getImageUrl('/weather/lei.png'),
+    shachen: getImageUrl('/weather/shachen.png'),
+    wu: getImageUrl('/weather/wu.png'),
+    bingbao: getImageUrl('/weather/bingbao.png'),
+    yun: getImageUrl('/weather/yun.png'),
+    yu: getImageUrl('/weather/yu.png'),
+    yin: getImageUrl('/weather/yin.png'),
+    qing: getImageUrl('/weather/qing.png'),
   }
   axios.get('https://www.tianqiapi.com/free/day?appid=78873955&appsecret=19VQ9LC5').then(res => {
     const data = res.data

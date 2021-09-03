@@ -2,7 +2,7 @@
   <div class="system-error-page">
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
-        <img src="/images/default/auth.svg" alt="403">
+        <img src="@/assets/images/default/auth.svg" alt="403">
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>

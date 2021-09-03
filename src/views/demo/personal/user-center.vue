@@ -4,7 +4,7 @@
       <b-col span="7">
         <b-card class="info-pane" :bordered="false" shadow="never">
           <div class="avatar">
-            <img src="/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar">
+            <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar">
           </div>
           <h2>Wang</h2>
           <p>千里之行，始于足下。</p>

@@ -1,4 +1,4 @@
-import BCharts from 'bin-charts'
+import BCharts from 'bin-charts-next'
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from 'echarts/core'
 // 引入柱状图图表，图表后缀都为 Chart

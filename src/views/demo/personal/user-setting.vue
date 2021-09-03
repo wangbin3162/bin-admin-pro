@@ -52,7 +52,7 @@
                   <div class="avatar-wrap">
                     <div class="mb-8">头像</div>
                     <div class="avatar-img mb-8">
-                      <img src="/images/avatar/avatar05.jpeg" alt="logo">
+                      <img src="@/assets/images/avatar/avatar05.jpeg" alt="logo">
                     </div>
                     <b-upload action="">
                       <b-button icon="cloud-upload">更换头像</b-button>

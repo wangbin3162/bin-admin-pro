@@ -1,3 +1,5 @@
+import { getImageUrl } from '@/utils/assets'
+
 export default {
   rows: [
     {
@@ -5,9 +7,9 @@ export default {
       title: 'Bin UI Next',
       url: 'https://wangbin3162.gitee.io/bin-ui-next/#/guide',
       desc: '基于vue3的ui组件库，内涵60+组件',
-      banner: '/images/banner/banner2.jpeg',
+      banner: getImageUrl('/banner/banner2.jpeg'),
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-07-04',
     },
     {
@@ -15,9 +17,9 @@ export default {
       title: 'Bin Admin Pro',
       url: 'https://wangbin3162.gitee.io/bin-ace-editor/#/guide',
       desc: '基于vue3,bin-ui-next的企业级后台管理框架',
-      banner: '/images/banner/banner3.jpeg',
+      banner: getImageUrl('/banner/banner3.jpeg'),
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-06-04',
     },
     {
@@ -25,9 +27,9 @@ export default {
       title: 'Bin Ace Editor',
       url: 'https://wangbin3162.gitee.io/bin-ace-editor/#/guide',
       desc: '基于vue3的代码编辑器，支持多种格式',
-      banner: '/images/banner/banner1.jpeg',
+      banner: getImageUrl('/banner/banner1.jpeg'),
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-06-04',
     },
     {
@@ -35,9 +37,9 @@ export default {
       title: 'Bin Charts',
       url: 'https://wangbin3162.gitee.io/bin-charts/#/guide',
       desc: '基于vue3、echart5 的图表封装组件',
-      banner: '/images/banner/banner4.jpeg',
+      banner: getImageUrl('/banner/banner4.jpeg'),
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-06-04',
     },
     {
@@ -45,9 +47,9 @@ export default {
       title: 'Bin UI',
       url: 'https://wangbin3162.gitee.io/bin-ui/#/guide',
       desc: '基于vue2的基础组件库。',
-      banner: '/images/banner/banner6.jpeg',
+      banner: getImageUrl('/banner/banner6.jpeg'),
       author: 'wangbin',
-      avatar: '/images/avatar/avatar05.jpeg',
+      avatar: getImageUrl('/avatar/avatar05.jpeg'),
       time: '2021-06-04',
     },
   ],

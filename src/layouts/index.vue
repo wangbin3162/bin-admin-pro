@@ -7,7 +7,7 @@
       :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
-        <img class="icon" src="/images/logo/bin-ui-next-02.svg" alt="logo-small" />
+        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
         <transition name="zoom-in">
           <h1 v-show="sidebar">BIN-ADMIN-PRO</h1>
         </transition>

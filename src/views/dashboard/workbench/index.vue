@@ -10,7 +10,7 @@
         <b-col span="10">
           <quick-link />
           <div class="banner">
-            <img src="/images/bg/work.png" alt="work">
+            <img src="@/assets/images/bg/work.png" alt="work">
           </div>
           <todos />
         </b-col>
