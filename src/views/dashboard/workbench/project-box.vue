@@ -16,23 +16,23 @@
           <span class="ml-15">Bin UI Next</span>
         </div>
         <div class="desc">一个基于 vue3 的组件库</div>
-        <div class="desc" flex="main:justify"><span>开源库</span><span>0.7.0</span></div>
+        <div class="desc" flex="main:justify"><span>开源库</span><span>1.0.0</span></div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ace-editor" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-editor-next" target="_blank">
         <div class="title">
           <iconfont icon="codelibrary" color="#4ab017" :size="36" bg round />
           <span class="ml-15">Ace Editor</span>
         </div>
         <div class="desc">基于 vue3 的json编辑器组件</div>
-        <div class="desc" flex="main:justify"><span>开源库</span><span>3.0.2</span></div>
+        <div class="desc" flex="main:justify"><span>开源库</span><span>1.0.0</span></div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-charts" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-charts-next" target="_blank">
         <div class="title">
           <iconfont icon="barchart" color="#304255" :size="36" bg round />
           <span class="ml-15">Charts</span>
         </div>
         <div class="desc">基于 vue3,echart5的图表组件</div>
-        <div class="desc" flex="main:justify"><span>开源库</span><span>3.0.0</span></div>
+        <div class="desc" flex="main:justify"><span>开源库</span><span>1.0.0</span></div>
       </a>
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-tree-org" target="_blank">
         <div class="title">

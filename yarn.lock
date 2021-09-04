@@ -1181,10 +1181,10 @@ bin-editor-next@^1.0.0:
   dependencies:
     brace "^0.11.1"
 
-bin-ui-next@^0.9.9:
-  version "0.9.9"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.9.9.tgz#9830221f91f56094d63665eaa894a275ab570e68"
-  integrity sha512-6K81m2BFvDFJ03iBz5wGVWQI6eaTNlMq9a7B0FRY7K8j8Tg44J99/pL1xy31dJcJZesKC2Dcnqf0cN54pqm6og==
+bin-ui-next@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-1.0.0.tgz#5b5946d69c1ea8acaed718259175f3fd0624a85c"
+  integrity sha512-Lk0jm9OE2sqTT7rVbdovhx4aqJSdtFAio4VFDmWIBMHxVPnBb8oqplC0AssbTUR95VXf3FTyTg+S0Ub1KKPh4Q==
   dependencies:
     "@popperjs/core" "^2.9.3"
     async-validator "^4.0.3"

@@ -44,8 +44,8 @@ export default defineConfig({
     outDir: 'docs',
     rollupOptions: {
       output: {
-        chunkFileNames: 'js/[name]-[hash].js',
-        entryFileNames: 'js/[name]-[hash].js',
+        chunkFileNames: 'static/js/[name]-[hash].js',
+        entryFileNames: 'static/js/[name]-[hash].js',
         assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
         manualChunks(id) {
           if (id.includes('/node_modules/')) {
