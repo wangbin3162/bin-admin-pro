@@ -8,7 +8,7 @@ function pathResolve(dir) {
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: process.env.NODE_ENV === 'production' ? '/' : '/',
+  base: process.env.NODE_ENV === 'production' ? '/bin-admin-pro/' : '/',
   plugins: [vue()],
   server: {
     host: '0.0.0.0',
