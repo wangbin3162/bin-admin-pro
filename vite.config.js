@@ -39,7 +39,6 @@ export default defineConfig({
     exclude: [],
   },
   build: {
-    target: 'es2015',
     sourcemap: false,
     outDir: 'docs',
     rollupOptions: {
@@ -50,7 +49,7 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('/node_modules/')) {
             // 设置需要独立打包的npm包
-            const expansions = ['bin-ui-next', 'echarts', 'brace']
+            const expansions = ['bin-ui-next', 'brace']
             const c = expansions.find(exp => id.includes(`/node_modules/${exp}`))
             if (c) {
               return `chunk-${c}`

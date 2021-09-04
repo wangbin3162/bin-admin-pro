@@ -2,8 +2,48 @@ import axios from 'axios'
 import { useStore } from 'vuex'
 import { computed } from 'vue'
 import { Utils } from 'bin-ui-next'
-import { getImageUrl } from '@/utils/assets'
 
+import img_xue from '@/assets/images/weather/xue.png'
+import img_xue1 from '@/assets/images/weather/xue-1.png'
+import img_lei from '@/assets/images/weather/lei.png'
+import img_lei1 from '@/assets/images/weather/lei-1.png'
+import img_shachen from '@/assets/images/weather/shachen.png'
+import img_shachen1 from '@/assets/images/weather/shachen-1.png'
+import img_wu from '@/assets/images/weather/wu.png'
+import img_wu1 from '@/assets/images/weather/wu-1.png'
+import img_bingbao from '@/assets/images/weather/bingbao.png'
+import img_bingbao1 from '@/assets/images/weather/bingbao-1.png'
+import img_yun from '@/assets/images/weather/yun.png'
+import img_yun1 from '@/assets/images/weather/yun-1.png'
+import img_yu from '@/assets/images/weather/yu.png'
+import img_yu1 from '@/assets/images/weather/yu-1.png'
+import img_yin from '@/assets/images/weather/yin.png'
+import img_yin1 from '@/assets/images/weather/yin-1.png'
+import img_qing from '@/assets/images/weather/qing.png'
+import img_qing1 from '@/assets/images/weather/qing-1.png'
+
+const weaImgMap = {
+  xue: img_xue1,
+  lei: img_lei1,
+  shachen: img_shachen1,
+  wu: img_wu1,
+  bingbao: img_bingbao1,
+  yun: img_yun1,
+  yu: img_yu1,
+  yin: img_yin1,
+  qing: img_qing1,
+}
+const weaImgMapColor = {
+  xue: img_xue,
+  lei: img_lei,
+  shachen: img_shachen,
+  wu: img_wu,
+  bingbao: img_bingbao,
+  yun: img_yun,
+  yu: img_yu,
+  yin: img_yin,
+  qing: img_qing,
+}
 /**
  * 天气 hook
  * 天气数据来源于 https://www.tianqiapi.com
@@ -23,28 +63,6 @@ import { getImageUrl } from '@/utils/assets'
  */
 export default function useWeather() {
   const store = useStore()
-  const weaImgMap = {
-    xue: getImageUrl('/weather/xue-1.png'),
-    lei: getImageUrl('/weather/lei-1.png'),
-    shachen: getImageUrl('/weather/shachen-1.png'),
-    wu: getImageUrl('/weather/wu-1.png'),
-    bingbao: getImageUrl('/weather/bingbao-1.png'),
-    yun: getImageUrl('/weather/yun-1.png'),
-    yu: getImageUrl('/weather/yu-1.png'),
-    yin: getImageUrl('/weather/yin-1.png'),
-    qing: getImageUrl('/weather/qing-1.png'),
-  }
-  const weaImgMapColor = {
-    xue: getImageUrl('/weather/xue.png'),
-    lei: getImageUrl('/weather/lei.png'),
-    shachen: getImageUrl('/weather/shachen.png'),
-    wu: getImageUrl('/weather/wu.png'),
-    bingbao: getImageUrl('/weather/bingbao.png'),
-    yun: getImageUrl('/weather/yun.png'),
-    yu: getImageUrl('/weather/yu.png'),
-    yin: getImageUrl('/weather/yin.png'),
-    qing: getImageUrl('/weather/qing.png'),
-  }
   axios.get('https://www.tianqiapi.com/free/day?appid=78873955&appsecret=19VQ9LC5').then(res => {
     const data = res.data
     const weather = {

@@ -1,4 +1,4 @@
-import { getImageUrl } from '@/utils/assets'
+import avatar from '@/assets/images/avatar/avatar05.jpeg'
 
 export default {
   rows: [
@@ -13,7 +13,7 @@ export default {
       favour: 206,
       remark: 13,
       author: 'wangbin',
-      avatar: getImageUrl('/avatar/avatar05.jpeg'),
+      avatar,
     },
     {
       id: '002',
@@ -26,7 +26,7 @@ export default {
       favour: 8,
       remark: 0,
       author: 'wangbin',
-      avatar: getImageUrl('/avatar/avatar05.jpeg'),
+      avatar,
     },
     {
       id: '003',
@@ -39,7 +39,7 @@ export default {
       favour: 10,
       remark: 0,
       author: 'wangbin',
-      avatar: getImageUrl('/avatar/avatar05.jpeg'),
+      avatar,
     },
     {
       id: '004',
@@ -52,7 +52,7 @@ export default {
       favour: 12,
       remark: 0,
       author: 'wangbin',
-      avatar: getImageUrl('/avatar/avatar05.jpeg'),
+      avatar,
     },
   ],
 }

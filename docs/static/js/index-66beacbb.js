@@ -1,0 +1,1 @@
+import{J as e,o as a,A as s,u as n,w as r,q as t}from"./vendor-76eb7e0b.js";import"./chunk-brace-7f859248.js";const o={},u={style:{padding:"30px"}},d=t("menu 2");o.render=function(t,o){const l=e("b-alert");return a(),s("div",u,[n(l,null,{default:r((()=>[d])),_:1})])};export{o as default};

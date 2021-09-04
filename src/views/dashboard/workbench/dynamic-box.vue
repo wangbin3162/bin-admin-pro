@@ -29,7 +29,12 @@
 
 <script>
 import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
-import { getImageUrl } from '@/utils/assets'
+import avatar1 from '@/assets/images/avatar/avatar05.jpeg'
+import avatar2 from '@/assets/images/avatar/avatar04.jpeg'
+import avatar3 from '@/assets/images/avatar/avatar07.jpeg'
+import avatar4 from '@/assets/images/avatar/avatar11.jpeg'
+import avatar5 from '@/assets/images/avatar/avatar12.jpeg'
+import avatar6 from '@/assets/images/avatar/avatar01.jpeg'
 
 export default {
   name: 'dynamic-box',
@@ -39,37 +44,37 @@ export default {
       list: [
         {
           id: 1,
-          avatar: getImageUrl('/avatar/avatar05.jpeg'),
+          avatar: avatar1,
           title: '<strong>Wang</strong> 关注了  <a>Jack</a>',
           time: '2021-06-01 12:35:20',
         },
         {
           id: 2,
-          avatar: getImageUrl('/avatar/avatar04.jpeg'),
+          avatar: avatar2,
           title: '<strong>小李子</strong> 提出了问题 <a>组件库如何按需引入</a>',
           time: '2021-06-01 12:35:20',
         },
         {
           id: 3,
-          avatar: getImageUrl('/avatar/avatar07.jpeg'),
+          avatar: avatar3,
           title: '<strong>PDD</strong> 发布了文章 <a>Vue页面优化</a>',
           time: '2021-06-01 12:35:20',
         },
         {
           id: 4,
-          avatar: getImageUrl('/avatar/avatar11.jpeg'),
+          avatar: avatar4,
           title: '<strong>花仙子</strong> 发现了问题 <a>弹窗bug</a>',
           time: '2021-06-01 12:35:20',
         },
         {
           id: 5,
-          avatar: getImageUrl('/avatar/avatar07.jpeg'),
+          avatar: avatar5,
           title: '<strong>Sunny</strong> 实现了 <a>Modal弹窗动画设置</a>',
           time: '2021-06-01 12:35:20',
         },
         {
           id: 6,
-          avatar: getImageUrl('/avatar/avatar03.jpg'),
+          avatar: avatar6,
           title: '<strong>史蒂夫</strong> 回复了 <a>Rose</a> 的问题 <a>如何返回顶部</a>',
           time: '2021-06-01 12:35:20',
         },
