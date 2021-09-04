@@ -1,0 +1,1 @@
+import{k as t}from"./index-d446e02d.js";function e(){return t({url:"/list/base",method:"get"})}function r(){return t({url:"/list/articles",method:"get"})}function s(){return t({url:"/list/projects",method:"get"})}export{s as a,r as b,e as g};

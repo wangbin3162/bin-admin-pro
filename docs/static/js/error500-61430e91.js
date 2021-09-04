@@ -1,1 +1,1 @@
-var r="./static/svg/error500-48661dea.svg";export{r as _};
+var r="/static/svg/error500-48661dea.svg";export{r as _};

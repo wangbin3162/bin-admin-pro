@@ -142,7 +142,7 @@ export default {
   background-color: #F0F2F5;
   height: 100vh;
   position: relative;
-  background-image: url('../../assets/images/login-background.svg');
+  background-image: url('@/assets/images/login-background.svg');
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
