@@ -7,6 +7,7 @@ import personal from './personal'
 import errorPage from './error-page'
 import nested from './nested'
 import system from './system'
+import graph from './graph'
 
 export default [
   ...comp,
@@ -15,7 +16,8 @@ export default [
   ...detail,
   ...result,
   ...personal,
+  ...errorPage,
   ...nested,
   ...system,
-  ...errorPage
+  ...graph,
 ]

@@ -11,7 +11,7 @@ export default {
   menuTheme: '#001529',
   systemPrimary: '#1089ff',
   sidebar: true, // 侧边栏开启状态
-  sidebarWidth: 256, // 侧边栏宽度
+  sidebarWidth: 220, // 侧边栏宽度
   tagsView: true, // 多页签开启状态
   fixedHeader: false,
   fixedAside: false,

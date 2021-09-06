@@ -7,7 +7,7 @@ export default [
     children: [
       {
         name: 'ColorVar',
-        title: '主题颜色'
+        title: '主题颜色',
       },
       {
         name: 'UI',
@@ -15,55 +15,55 @@ export default [
         children: [
           {
             name: 'Basic',
-            title: '基础组件'
+            title: '基础组件',
           },
           {
             name: 'NavComp',
-            title: '导航组件'
+            title: '导航组件',
           },
           {
             name: 'FormComp',
-            title: '表单组件'
+            title: '表单组件',
           },
           {
             name: 'DataComp',
-            title: '数据组件'
+            title: '数据组件',
           },
           {
             name: 'OtherComp',
-            title: '其他组件'
-          }
-        ]
+            title: '其他组件',
+          },
+        ],
       },
       {
         name: 'CompCountTo',
-        title: '数字动画'
+        title: '数字动画',
       },
       {
         name: 'CompIconfont',
-        title: '图标组件'
+        title: '图标组件',
       },
       {
         name: 'CompSvgLoading',
-        title: 'Svg Loading'
+        title: 'Svg Loading',
       },
       {
         name: 'CompTitleBar',
-        title: '标题组件'
+        title: '标题组件',
       },
       {
         name: 'CompBaseTree',
-        title: '树结构'
+        title: '树结构',
       },
       {
         name: 'CompKeyValue',
-        title: 'KeyValue'
+        title: 'KeyValue',
       },
       {
         name: 'CompService',
-        title: '业务组件'
-      }
-    ]
+        title: '业务组件',
+      },
+    ],
   },
   {
     name: 'Form',
@@ -72,17 +72,17 @@ export default [
     children: [
       {
         name: 'BaseForm',
-        title: '基础表单'
+        title: '基础表单',
       },
       {
         name: 'StepForm',
-        title: '分步表单'
+        title: '分步表单',
       },
       {
         name: 'AdvancedForm',
-        title: '高级表单'
-      }
-    ]
+        title: '高级表单',
+      },
+    ],
   },
   {
     name: 'List',
@@ -91,21 +91,21 @@ export default [
     children: [
       {
         name: 'BaseList',
-        title: '基础列表'
+        title: '基础列表',
       },
       {
         name: 'CardList',
-        title: '卡片列表'
+        title: '卡片列表',
       },
       {
         name: 'UserList',
-        title: '用户列表'
+        title: '用户列表',
       },
       {
         name: 'SearchList',
-        title: '查询列表'
-      }
-    ]
+        title: '查询列表',
+      },
+    ],
   },
   {
     name: 'Detail',
@@ -114,13 +114,13 @@ export default [
     children: [
       {
         name: 'BaseDetail',
-        title: '基础详情'
+        title: '基础详情',
       },
       {
         name: 'AdvancedDetail',
-        title: '高级详情'
-      }
-    ]
+        title: '高级详情',
+      },
+    ],
   },
   {
     name: 'Personal',
@@ -129,13 +129,13 @@ export default [
     children: [
       {
         name: 'UserCenter',
-        title: '个人中心'
+        title: '个人中心',
       },
       {
         name: 'UserSetting',
-        title: '个人设置'
-      }
-    ]
+        title: '个人设置',
+      },
+    ],
   },
   {
     name: 'Result',
@@ -144,13 +144,13 @@ export default [
     children: [
       {
         name: 'Success',
-        title: '成功页'
+        title: '成功页',
       },
       {
         name: 'Fail',
-        title: '失败页'
-      }
-    ]
+        title: '失败页',
+      },
+    ],
   },
   {
     name: 'ErrorPage',
@@ -159,21 +159,21 @@ export default [
     children: [
       {
         name: 'Error403',
-        title: '异常页403'
+        title: '异常页403',
       },
       {
         name: 'Error404',
-        title: '异常页404'
+        title: '异常页404',
       },
       {
         name: 'Error500',
-        title: '异常页500'
+        title: '异常页500',
       },
       {
         name: 'ErrorDemo',
-        title: '异常触发'
-      }
-    ]
+        title: '异常触发',
+      },
+    ],
   },
   {
     name: 'Nested',
@@ -186,23 +186,23 @@ export default [
         children: [
           {
             name: 'Menu1-1',
-            title: '菜单1-1'
+            title: '菜单1-1',
           },
           {
             name: 'Menu1-2',
-            title: '菜单1-2'
+            title: '菜单1-2',
           },
           {
             name: 'Menu1-3',
-            title: '菜单1-3'
-          }
-        ]
+            title: '菜单1-3',
+          },
+        ],
       },
       {
         name: 'Menu2',
-        title: '菜单2'
-      }
-    ]
+        title: '菜单2',
+      },
+    ],
   },
   {
     name: 'System',
@@ -211,22 +211,33 @@ export default [
     children: [
       {
         name: 'UserAccount',
-        title: '用户管理'
+        title: '用户管理',
       },
       {
         name: 'Depart',
-        title: '部门管理'
+        title: '部门管理',
       },
       {
         name: 'Menu',
-        title: '菜单管理'
+        title: '菜单管理',
       },
       {
         name: 'Role',
-        title: '角色管理'
-      }
-    ]
-  }
+        title: '角色管理',
+      },
+    ],
+  },
+  {
+    name: 'Graph',
+    title: '图形图表',
+    icon: 'pointmap',
+    children: [
+      {
+        name: 'PivotDemo',
+        title: '交叉表',
+      },
+    ],
+  },
 ]
 
 // 基础
@@ -240,9 +251,9 @@ export const DASHBOARD_MENUS = [
     icon: 'appstore',
     children: [
       { name: HOME_PATH, title: HOME_NAME },
-      { name: 'Analysis', title: '分析页' }
-    ]
-  }
+      { name: 'Analysis', title: '分析页' },
+    ],
+  },
 ]
 
 /**
@@ -253,8 +264,8 @@ export const staticMenu = [
   {
     name: 'About',
     title: '关于',
-    icon: 'dingtalk'
-  }
+    icon: 'dingtalk',
+  },
 ]
 
 /**
@@ -265,6 +276,6 @@ export function getFilterMenus(menus = []) {
   return [
     ...DASHBOARD_MENUS,
     ...menus,
-    ...staticMenu
+    ...staticMenu,
   ]
 }
