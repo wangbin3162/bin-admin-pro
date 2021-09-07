@@ -48,16 +48,20 @@ export default [
         title: 'Svg Loading',
       },
       {
+        name: 'CompDraggable',
+        title: 'Draggable',
+      },
+      {
+        name: 'CompKeyValue',
+        title: 'KeyValue',
+      },
+      {
         name: 'CompTitleBar',
         title: '标题组件',
       },
       {
         name: 'CompBaseTree',
         title: '树结构',
-      },
-      {
-        name: 'CompKeyValue',
-        title: 'KeyValue',
       },
       {
         name: 'CompService',

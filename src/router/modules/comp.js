@@ -54,12 +54,6 @@ export default [
     meta: { title: '图标字体' },
   },
   {
-    path: 'compSvgLoading',
-    name: 'CompSvgLoading',
-    component: () => import('@/views/demo/comp/comp-svg-loading.vue'),
-    meta: { title: 'Svg Loading' },
-  },
-  {
     path: 'compTitleBar',
     name: 'CompTitleBar',
     component: () => import('@/views/demo/comp/comp-title-bar.vue'),
@@ -70,6 +64,18 @@ export default [
     name: 'CompBaseTree',
     component: () => import('@/views/demo/comp/comp-base-tree.vue'),
     meta: { title: '树结构' },
+  },
+  {
+    path: 'compSvgLoading',
+    name: 'CompSvgLoading',
+    component: () => import('@/views/demo/comp/comp-svg-loading.vue'),
+    meta: { title: 'Svg Loading' },
+  },
+  {
+    path: 'compDraggable',
+    name: 'CompDraggable',
+    component: () => import('@/views/demo/comp/comp-draggable.vue'),
+    meta: { title: 'Draggable' },
   },
   {
     path: 'compKeyValue',
