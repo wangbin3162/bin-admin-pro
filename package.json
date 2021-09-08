@@ -39,7 +39,7 @@
     "@babel/core": "^7.15.4",
     "@babel/preset-env": "^7.15.4",
     "@types/node": "^16.7.10",
-    "@vitejs/plugin-vue": "^1.6.0",
+    "@vitejs/plugin-vue": "^1.6.1",
     "@vue/compiler-sfc": "^3.2.10",
     "cross-env": "^7.0.3",
     "eslint": "^7.32.0",

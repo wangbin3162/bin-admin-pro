@@ -12,7 +12,7 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     host: '0.0.0.0',
-    port: 9090,
+    port: 8082,
     open: true,
     // proxy: {
     //   '/admin': { target: 'http://localhost:8088/cms' }
