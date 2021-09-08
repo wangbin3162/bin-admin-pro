@@ -39,7 +39,11 @@
         :gpu-acceleration="false"
       >
         <template #trigger>
-          <b-button :type="variant" icon="caret-down" style="padding: 0 6px;"></b-button>
+          <b-button
+            :type="variant"
+            icon="caret-down"
+            style="padding: 0 6px;"
+          ></b-button>
         </template>
         <!--选项-->
         <div style="width: 160px;">

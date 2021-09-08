@@ -8,16 +8,25 @@
       <div class="right-col" v-if="showSettings">
         <div class="drag-area" :class="dragAreaClass">
           <div class="drag-area-title">{{ availableFieldsLabelText }}</div>
-          <div class="drag-area-zone" flex ref="avaFieldsRef">
-            <div v-for="key in internal.availableFieldKeys" :key="key" class="field">
-              <field-label :field="fieldsWithValues[key]" :field-values="fieldValues[key]">
-                <!-- pass down scoped slots -->
-                <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
-                  <slot :name="slot" v-bind="scope" />
-                </template>
-              </field-label>
-            </div>
-          </div>
+          <draggable
+            v-model="internal.availableFieldKeys"
+            class="drag-area-zone"
+            item-key="key"
+            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
+            @start="dragStart"
+            @end="dragEnd"
+          >
+            <template #item="{element}">
+              <div class="field">
+                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]" variant="warning">
+                  <!-- pass down scoped slots -->
+                  <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
+                  </template>
+                </field-label>
+              </div>
+            </template>
+          </draggable>
         </div>
       </div>
     </div>
@@ -30,16 +39,25 @@
       <div class="right-col">
         <div class="drag-area border-primary" :class="dragAreaClass">
           <div class="drag-area-title">{{ colsLabelText }}</div>
-          <div class="drag-area-zone" flex ref="colFieldsRef">
-            <div v-for="key in internal.colFieldKeys" :key="key" class="field">
-              <field-label :field="fieldsWithValues[key]" :field-values="fieldValues[key]">
-                <!-- pass down scoped slots -->
-                <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
-                  <slot :name="slot" v-bind="scope" />
-                </template>
-              </field-label>
-            </div>
-          </div>
+          <draggable
+            v-model="internal.colFieldKeys"
+            class="drag-area-zone"
+            item-key="key"
+            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
+            @start="dragStart"
+            @end="dragEnd"
+          >
+            <template #item="{element}">
+              <div class="field">
+                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]">
+                  <!-- pass down scoped slots -->
+                  <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
+                  </template>
+                </field-label>
+              </div>
+            </template>
+          </draggable>
         </div>
       </div>
     </div>
@@ -53,21 +71,21 @@
           <draggable
             v-model="internal.rowFieldKeys"
             class="drag-area-zone"
-            flex="dir:top"
-            group="fields"
-            handle=".btn-draggable"
-            ghost-class="sortable-ghost"
+            item-key="key"
+            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
             @start="dragStart"
             @end="dragEnd"
           >
-            <div v-for="key in internal.rowFieldKeys" :key="key" class="field">
-              <field-label :field-values="fieldValues[key]" :field="fieldsWithValues[key]">
-                <!-- pass down scoped slots -->
-                <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
-                  <slot :name="slot" v-bind="scope" />
-                </template>
-              </field-label>
-            </div>
+            <template #item="{element}">
+              <div class="field">
+                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]">
+                  <!-- pass down scoped slots -->
+                  <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
+                    <slot :name="slot" v-bind="scope" />
+                  </template>
+                </field-label>
+              </div>
+            </template>
           </draggable>
         </div>
       </div>
@@ -93,14 +111,14 @@
 </template>
 
 <script>
+import draggable from 'vuedraggable'
 import { computed, reactive, ref, watch } from 'vue'
 import { naturalSort } from '@/components/Common/PivotTable/uitl'
 import FieldLabel from '@/components/Common/PivotTable/field-label.vue'
-import Draggable from '@/components/Common/Draggable/index.vue'
 
 export default {
   name: 'pivot',
-  components: { Draggable, FieldLabel },
+  components: { draggable, FieldLabel },
   props: {
     // 数据
     data: {
@@ -308,6 +326,7 @@ export default {
         display: inline-flex;
         align-items: center;
         min-height: 42px;
+        margin-right: 10px;
       }
     }
   }
