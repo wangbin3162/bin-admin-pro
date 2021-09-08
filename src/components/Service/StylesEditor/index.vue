@@ -76,12 +76,28 @@ export default {
       emitValue()
     }
 
+    function backWidth() {
+      const val = props.modelValue
+      if (val.includes('width: 25%;')) {
+        width.value = '25%'
+      } else if (val.includes('width: 50%;')) {
+        width.value = '50%'
+      } else if (val.includes('width: 75%;')) {
+        width.value = '75%'
+      } else if (val.includes('width: 100%;')) {
+        width.value = '100%'
+      } else {
+        width.value = ''
+      }
+    }
+
     // 初始value监听watch
     watch(() => props.modelValue, val => {
       if (val === '') {
         resetStyle()
         return
       }
+      backWidth()
       styleValue.value = val
     }, { immediate: true })
 

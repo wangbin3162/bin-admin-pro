@@ -261,5 +261,14 @@ export default {
     padding: 0 8px;
     height: 32px;
   }
+  :deep(.bin-tree-render-title) {
+    .bin-button {
+      height: 24px;
+      line-height: 1;
+      + .bin-button {
+        margin-left: 0;
+      }
+    }
+  }
 }
 </style>

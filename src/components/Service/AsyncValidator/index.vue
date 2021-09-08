@@ -483,6 +483,7 @@ export default {
     // 重置校验
     function refreshRules() {
       checkRules.value = []
+      isRequired.value = false
       emitValue()
     }
 
