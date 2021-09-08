@@ -42,16 +42,17 @@ export default {
         MessageBox.confirm({
           type: 'warning',
           title: '提示',
-          message: '确认退出登录吗？'
+          message: '确认退出登录吗？',
         }).then(() => {
           $store.dispatch('user/clearToken')
           $router.push(`/login?redirect=${$route.fullPath}`)
         }).catch(e => {
+          console.log(e)
         })
       }
     }
 
     return { userInfo, handleClick }
-  }
+  },
 }
 </script>

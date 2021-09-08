@@ -1169,22 +1169,22 @@ big.js@^5.2.2:
   resolved "https://registry.npmjs.org/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
   integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
 
-bin-charts-next@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/bin-charts-next/-/bin-charts-next-1.0.0.tgz#574b40e4f4eff251f00ead33ceee30fcec9f52a8"
-  integrity sha512-2ugRylNxCZEcCjOzIHhEkr6LXaeROqp1FEwYLwPStrqhOoUhCrYeS2+EcQL7GFR+Pk2ZuClCenZc7g4qOkgYow==
+bin-charts-next@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/bin-charts-next/-/bin-charts-next-1.0.3.tgz#20a3e5a984af027401d33c75f5bc737f057daf24"
+  integrity sha512-plFAFYY4FRUsTBOHOlnri8mz/g1hWenCjq9VrNxfgOupSyjhE72MywxPwKWc3NLs/rJU3Mc3J2CW5zLblzmi3A==
 
-bin-editor-next@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/bin-editor-next/-/bin-editor-next-1.0.0.tgz#7ef8c6281c51db271c109ccc32bbff2ba3428e22"
-  integrity sha512-zgnEt+QltCFE6uYXkvsmH0suE1Yp+Rr7GeWQ52OuynWOjSAFjn+el4XzcdVynOlWnsNPp0Rkx3s5z54E5K+G0w==
+bin-editor-next@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/bin-editor-next/-/bin-editor-next-1.0.3.tgz#f1ce44a6f103f5cb9db57998f0d315280ac54017"
+  integrity sha512-O3p0gvb6wOE0tiMRo6SU7tYeyaW5i1K9qwvG6MLy70cfdKaQU+Qg9k8xMxFlCweVA0DXsxZ+geYZwxa6E+LVvg==
   dependencies:
     brace "^0.11.1"
 
-bin-ui-next@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-1.0.2.tgz#8532b78eaa674fd93a3d6c0e23fa84d4a2e99bdb"
-  integrity sha512-ucabd0uj2lgigBE3nC9SICA2FIuE5tLPAou+2Y3E4llHA+FyWTIZRpZmfFDyL6w9fODMwanJHKJsADaAqQTEzQ==
+bin-ui-next@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-1.0.3.tgz#fe6a6e8fac548ba52a91e860446e9bbf42a0fe15"
+  integrity sha512-McMMy8jSLnbhS/ozF7DR/6SZ//HRhTW7O5ty4y//ViVnVxV3McHtQXGov7+x12ZYAoxrV8pHu2CB7okVCjeZQQ==
   dependencies:
     "@popperjs/core" "^2.9.3"
     async-validator "^4.0.3"
@@ -2920,7 +2920,7 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-vite@^2.5.3:
+vite@^2.5.5:
   version "2.5.5"
   resolved "https://registry.npmjs.org/vite/-/vite-2.5.5.tgz#995409791d9d16e31890d5c4192fcff5d0b0f78c"
   integrity sha512-VuPw2sS5j+JzkBQ8Mkhb5GodcGp2YcljwumzFfEraICwMVkTDvh9+noogwtFg+JIHJD5iwpcJhqWIzqIYMKc5Q==

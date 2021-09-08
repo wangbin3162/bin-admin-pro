@@ -23,9 +23,9 @@
   },
   "dependencies": {
     "axios": "^0.21.1",
-    "bin-charts-next": "^1.0.0",
-    "bin-editor-next": "^1.0.0",
-    "bin-ui-next": "^1.0.2",
+    "bin-charts-next": "^1.0.3",
+    "bin-editor-next": "^1.0.3",
+    "bin-ui-next": "^1.0.3",
     "echarts": "^5.2.0",
     "good-storage": "^1.1.1",
     "js-cookie": "^3.0.1",
@@ -47,6 +47,6 @@
     "eslint-plugin-vue": "^7.17.0",
     "rimraf": "^3.0.2",
     "stylus": "^0.54.8",
-    "vite": "^2.5.3"
+    "vite": "^2.5.5"
   }
 }
