@@ -86,7 +86,7 @@ export function downloadFile(content, fileName) {
     jpg: 'image/jpeg',
     png: 'image/png',
     txt: 'text/plain',
-    xml: 'image/text/xml'
+    xml: 'image/text/xml',
   }
   const hg = fileName.split('.').pop().toLocaleLowerCase() || ''
 

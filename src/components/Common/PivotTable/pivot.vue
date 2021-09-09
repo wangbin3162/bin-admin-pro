@@ -91,20 +91,20 @@
       </div>
       <!-- Table -->
       <div class="right-col" :style="tableWrapperStyle">
-        table
-        <b-ace-editor :model-value="JSON.stringify(internal.rowFieldKeys,null,2)"></b-ace-editor>
-      </div>
-    </div>
-
-    <!--dev log-->
-    <div class="mt-20" flex="box:mean">
-      <div>
-        <div>fieldValues</div>
-        <b-ace-editor :model-value="JSON.stringify(fieldValues,null,2)"></b-ace-editor>
-      </div>
-      <div>
-        <div>fieldsWithValues</div>
-        <b-ace-editor :model-value="JSON.stringify(fieldsWithValues,null,2)"></b-ace-editor>
+        <pivot-table
+          :data="data"
+          :row-fields="rowFields"
+          :col-fields="colFields"
+          :reducer="reducer"
+          :reducer-initial-value="reducerInitialValue"
+          :no-data-warning-text="noDataWarningText"
+          :is-data-loading="isDataLoading"
+        >
+          <!-- pass down scoped slots -->
+          <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
+            <slot :name="slot" v-bind="scope" />
+          </template>
+        </pivot-table>
       </div>
     </div>
   </div>
@@ -113,12 +113,13 @@
 <script>
 import draggable from 'vuedraggable'
 import { computed, reactive, ref, watch } from 'vue'
-import { naturalSort } from '@/components/Common/PivotTable/uitl'
+import naturalSort from 'javascript-natural-sort'
 import FieldLabel from '@/components/Common/PivotTable/field-label.vue'
+import PivotTable from '@/components/Common/PivotTable/pivot-table.vue'
 
 export default {
   name: 'pivot',
-  components: { draggable, FieldLabel },
+  components: { PivotTable, draggable, FieldLabel },
   props: {
     // 数据
     data: {
@@ -262,6 +263,65 @@ export default {
     // *********** table *********** //
     const tableWrapperStyle = computed(() => ({ width: showSettings.value ? 'calc(100% - 200px - 2rem)' : '100%' }))
 
+    // field value过滤去重后的值，返回{key,set()}
+    const valuesFiltered = computed(() => {
+      const obj = {}
+      for (let [key, valuesObject] of Object.entries(fieldValues.value)) {
+        obj[key] = new Set()
+        valuesObject.forEach(valueObject => {
+          if (valueObject.checked) {
+            obj[key].add(valueObject.value)
+          }
+        })
+      }
+      return obj
+    })
+    const rowFields = computed(() => {
+      const _rows = []
+
+      internal.rowFieldKeys.forEach(key => {
+        const field = props.fields.find(field => field.key === key)
+        // Generate headerSlotNames from headers
+        if (field.headers) {
+          field.headerSlotNames = field.headers
+            .filter(header => header.checked)
+            .map(header => header.slotName)
+        }
+
+        // Add selected values
+        if (field.valueFilter) {
+          field.valuesFiltered = valuesFiltered.value[field.key]
+        }
+        _rows.push(field)
+      })
+
+      return _rows
+    })
+    const colFields = computed(() => {
+      const _cols = []
+
+      internal.colFieldKeys.forEach(key => {
+        const field = props.fields.find(field => field.key === key)
+
+        // Generate headerSlotNames from headers
+        if (field.headers) {
+          field.headerSlotNames = field.headers
+            .filter(header => header.checked)
+            .map(header => header.slotName)
+        }
+
+        // Add selected values
+        if (field.valueFilter) {
+          field.valuesFiltered = valuesFiltered.value[field.key]
+        }
+
+        _cols.push(field)
+      })
+
+      return _cols
+    })
+
+
     watch(() => props.fields, val => {
       // 过滤是否需要转换value的字段并初始化
       val.filter(field => field.valueFilter).forEach(field => {
@@ -289,6 +349,8 @@ export default {
       dragEnd,
       // *********** table *********** //
       tableWrapperStyle,
+      rowFields,
+      colFields,
     }
   },
 }

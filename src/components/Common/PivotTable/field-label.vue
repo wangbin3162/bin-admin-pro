@@ -88,7 +88,6 @@
 
 <script>
 import { ref, watch } from 'vue'
-import { deepCopy } from '@/utils/util'
 
 export default {
   name: 'field-label',
@@ -108,7 +107,7 @@ export default {
       default: 'primary',
     },
   },
-  setup(props, { emit }) {
+  setup(props) {
     const indeterminate = ref(true)
     const checkAll = ref(false)
 
