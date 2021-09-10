@@ -240,6 +240,10 @@ export default [
         name: 'PivotDemo',
         title: '交叉表',
       },
+      {
+        name: 'LinkNodeDemo',
+        title: '连接节点',
+      },
     ],
   },
 ]

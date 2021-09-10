@@ -56,7 +56,7 @@
     ├── .eslintrc.js               // eslint 配置项
     ├── .gitignore                 // git 忽略项
     ├── babel.config.js            // babel 配置项
-    ├── vue.config.js              // vue-cli集成配置项
+    ├── vite.config.js             // vite配置项
     └── package.json               // package.json
 
 

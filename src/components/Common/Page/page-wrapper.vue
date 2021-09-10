@@ -18,7 +18,7 @@
       <div
         class="page-header-wrap-children-content"
         :class="{'has-bg':bg}"
-        :style="{padding:bg?contentPadding:null}"
+        :style="{margin:contentMargin,padding:bg?contentPadding:null}"
       >
         <slot>
         </slot>
@@ -50,6 +50,10 @@ export default {
     showClose: Boolean,
     bg: Boolean,
     contentPadding: {
+      type: String,
+      default: '16px',
+    },
+    contentMargin: {
       type: String,
       default: '16px',
     },
