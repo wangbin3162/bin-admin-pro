@@ -69,6 +69,9 @@ export default {
       }[status]
     })
     const defaultContentHeight = computed(() => {
+      if (!slots.draggable) {
+        return '100%'
+      }
       const status = draggableStatus.value
       return {
         default: props.defaultHeight,
