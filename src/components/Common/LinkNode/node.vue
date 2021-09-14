@@ -1,5 +1,13 @@
 <template>
-  <div class="link-node-info" :class="{'is-empty':data.isEmpty}">
+  <div
+    class="link-node-info"
+    :class="{'is-empty':data.isEmpty}"
+    @click="nodeClick"
+    @drop="onDrop($event)"
+    @dragover="e=>e.preventDefault()"
+    @dragenter="onDragEnter($event)"
+    @dragleave="onDragLeave($event)"
+  >
     <div class="link-node-title" style="height: 28px; padding: 5px 8px;">
       <i v-if="!data.isEmpty" class="link-node-icon" :class="`b-iconfont b-icon-${data.icon||defaultIcon}`"></i>
       <div class="link-node-name">{{ data.title }}</div>
@@ -12,6 +20,8 @@
 </template>
 
 <script>
+import { computed, inject } from 'vue'
+
 export default {
   name: 'link-node',
   props: {
@@ -23,6 +33,46 @@ export default {
       type: String,
       default: 'table',
     },
+  },
+  setup(props) {
+    const LinkNodeInstance = inject('LinkNodeInstance', {})
+
+    const node = computed(() => [
+      LinkNodeInstance.states.flatState,
+      LinkNodeInstance.states.flatState.find(v => v.nodeKey === props.data.nodeKey),
+    ])
+
+    function nodeClick() {
+      if (props.data.isEmpty) return
+      LinkNodeInstance.handleNodeClick(props.data.nodeKey)
+    }
+
+    let lastElement = null
+
+    // 字段拖动进入
+    function onDragEnter(e) {
+      lastElement = e.target
+      LinkNodeInstance.onNodeDragenter(props.data.nodeKey)
+    }
+
+    function onDragLeave(e) {
+      if (lastElement === e.target) {
+        LinkNodeInstance.onNodeDragleave(props.data.nodeKey)
+      }
+    }
+
+    // 字段填充
+    function onDrop(e) {
+      LinkNodeInstance.onNodeDrop(props.data.nodeKey, e.dataTransfer.getData('id'))
+    }
+
+    return {
+      node,
+      nodeClick,
+      onDragEnter,
+      onDragLeave,
+      onDrop,
+    }
   },
 }
 </script>

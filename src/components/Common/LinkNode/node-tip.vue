@@ -1,5 +1,5 @@
 <template>
-  <div class="node-tip" :class="{'is-empty':data.isEmpty}">
+  <div class="node-tip" :class="{'is-empty':data.isEmpty}" @click="linkClick">
     <div v-if="!data.isEmpty" class="node-icon-wrapper">
       <i class="svg-icon-wrapper icon-bi-engine-zuowailianjie1">
         <svg class="svg-icon" viewBox="0 0 1536 1024" aria-hidden="true" width="1em" height="1em" fill="currentColor">
@@ -16,18 +16,16 @@
         </svg>
       </i>
     </div>
-    <div class="node-line horizontal " :style="horizontalStyle"></div>
-    <div class="node-line vertical " :style="verticalStyle"></div>
+    <div class="node-line horizontal " :style="lineStyle[0]"></div>
+    <div class="node-line vertical " :style="lineStyle[1]"></div>
   </div>
 </template>
 
 <script>
 // 节点高度
-const NODE_HEIGHT = 30
-// 节点宽度
-const NODE_WIDTH = 180
-// 节点tip宽度
-const NODE_TIP_WIDTH = 90
+import { getTipLineStyle } from '@/components/Common/LinkNode/node-util'
+import { computed, inject } from 'vue'
+
 export default {
   name: 'node-tip',
   props: {
@@ -36,24 +34,32 @@ export default {
       default: () => ({}),
     },
   },
-  computed: {
-    // 是否是拐点
-    isKnee() {
-      return this.data.isKnee
-    },
-    horizontalStyle() {
-      return {
-        top: '15px',
-        width: this.isKnee ? `${NODE_TIP_WIDTH - 18}px` : `${NODE_TIP_WIDTH}px`,
-      }
-    },
-    verticalStyle() {
-      const { row } = this.data
-      return {
-        height: this.isKnee ? `${row * NODE_HEIGHT + 18}px` : 0,
-        bottom: '15px',
-      }
-    },
+  setup(props) {
+    const LinkNodeInstance = inject('LinkNodeInstance', {})
+    const node = computed(() => [
+      LinkNodeInstance.states.flatState,
+      LinkNodeInstance.states.flatState.find(v => v.nodeKey === props.data.nodeKey),
+    ])
+    const isKnee = computed(() => props.data.isKnee)
+    const lineStyle = computed(() => {
+      const [flatState, stateNode] = node.value
+      const { row, isKnee } = stateNode.node
+      const parent = flatState[stateNode.parent]
+      const parentRow = parent ? parent.node.row : 0
+      return getTipLineStyle(row, isKnee, parentRow)
+    })
+
+    function linkClick() {
+      if (props.data.isEmpty) return
+      LinkNodeInstance.handleLinkClick(props.data.nodeKey)
+    }
+
+    return {
+      node,
+      isKnee,
+      lineStyle,
+      linkClick,
+    }
   },
 }
 </script>
@@ -71,6 +77,9 @@ export default {
     z-index: 2;
     background: #c1c1c1;
   }
+  &:hover .node-line {
+    background: getColor();
+  }
   .node-line.horizontal {
     right: 0;
     height: 1px;
@@ -82,6 +91,7 @@ export default {
   .node-icon-wrapper {
     position: absolute;
     z-index: 3;
+    cursor: pointer;
     .svg-icon-wrapper {
       display: block;
       height: 16px;
