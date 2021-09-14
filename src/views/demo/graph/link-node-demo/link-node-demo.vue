@@ -5,7 +5,10 @@
         <template #left>left</template>
         <template #default>
           <div class="p24" style="background-color: #f2f2f2;height: 100%;">
-            <link-node-wrapper :data="nodeData"></link-node-wrapper>
+            <link-node-wrapper
+              :data="nodeData"
+              empty-text="请从左侧拖拽数据表开始创建"
+            ></link-node-wrapper>
           </div>
         </template>
       </page-cube-wrapper>
@@ -16,21 +19,21 @@
 <script>
 import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
-import LinkNodeWrapper from '@/components/Common/LinkNode/link-node-wrapper.vue'
+import LinkNodeWrapper from '@/components/Service/LinkNode/link-node-wrapper.vue'
 
 export default {
   name: 'link-node-demo.vue',
   components: { LinkNodeWrapper, PageCubeWrapper, PageWrapper },
   data() {
     return {
-      nodeData: [{
+      nodeData: {
         title: 'root',
         children: [
-          { title: 'batch_job', children: [{ title: 'job1' }, { title: 'job2' }] },
-          { title: 'depart', children: [{ title: 'depart_child' }] },
+          // { title: 'batch_job', children: [{ title: 'job1' }, { title: 'job2' }] },
+          // { title: 'depart', children: [{ title: 'depart_child' }] },
           { title: 'analysis' },
         ],
-      }],
+      },
     }
   },
 }
