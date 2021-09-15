@@ -11,9 +11,22 @@
     <div class="link-node-title" style="height: 28px; padding: 5px 8px;">
       <i v-if="!data.isEmpty" class="link-node-icon" :class="`b-iconfont b-icon-${data.icon||defaultIcon}`"></i>
       <div class="link-node-name">{{ data.title }}</div>
-      <div class="link-node-handle" v-if="$slots.action && !data.isEmpty">
-        <slot name="action">
-        </slot>
+      <div class="link-node-handle">
+        <b-dropdown placement="bottom-end" @command="activeCommand" v-if="!data.isEmpty" append-to-body>
+          <i class="b-iconfont b-icon-ellipsis" @click.stop.prevent></i>
+          <template #dropdown>
+            <b-dropdown-menu style="width: 160px;">
+              <b-dropdown-item name="selected">
+                <b-icon name="code" size="12"></b-icon>
+                <span style="font-size: 12px;">字段选择</span>
+              </b-dropdown-item>
+              <b-dropdown-item name="remove" style="color: #ed4014;" v-if="data.isLeaf">
+                <b-icon name="delete" size="12"></b-icon>
+                <span style="font-size: 12px;">删除</span>
+              </b-dropdown-item>
+            </b-dropdown-menu>
+          </template>
+        </b-dropdown>
       </div>
     </div>
   </div>
@@ -39,12 +52,26 @@ export default {
 
     const node = computed(() => [
       LinkNodeInstance.states.flatState,
-      LinkNodeInstance.states.flatState.find(v => v.nodeKey === props.data.nodeKey),
+      LinkNodeInstance.states.flatState.find(v => v.nodeIndex === props.data.nodeIndex),
     ])
+
+    // 操作事件
+    function activeCommand(name) {
+      if (name === 'selected') {
+        nodeClick()
+      } else if (name === 'remove') {
+        nodeRemove()
+      }
+    }
 
     function nodeClick() {
       if (props.data.isEmpty) return
-      LinkNodeInstance.handleNodeClick(props.data.nodeKey)
+      LinkNodeInstance.handleNodeClick(props.data.nodeIndex)
+    }
+
+    function nodeRemove() {
+      if (props.data.isEmpty) return
+      LinkNodeInstance.handleNodeRemove(props.data.nodeIndex)
     }
 
     let lastElement = null
@@ -52,22 +79,23 @@ export default {
     // 字段拖动进入
     function onDragEnter(e) {
       lastElement = e.target
-      LinkNodeInstance.onNodeDragenter(props.data.nodeKey)
+      LinkNodeInstance.onNodeDragenter(props.data.nodeIndex)
     }
 
     function onDragLeave(e) {
       if (lastElement === e.target) {
-        LinkNodeInstance.onNodeDragleave(props.data.nodeKey)
+        LinkNodeInstance.onNodeDragleave(props.data.nodeIndex)
       }
     }
 
     // 字段填充
     function onDrop(e) {
-      LinkNodeInstance.onNodeDrop(props.data.nodeKey, e.dataTransfer.getData('id'))
+      LinkNodeInstance.onNodeDrop(props.data.nodeIndex, e.dataTransfer.getData('id'))
     }
 
     return {
       node,
+      activeCommand,
       nodeClick,
       onDragEnter,
       onDragLeave,
@@ -96,6 +124,7 @@ export default {
       overflow: hidden;
       white-space: nowrap;
       font-size: 12px;
+      line-height: 1.5;
     }
     &:hover {
       padding: 0;
@@ -124,11 +153,12 @@ export default {
   &-handle {
     flex-shrink: 0;
     display: flex;
-    width: 16px;
+    width: 18px;
     cursor: pointer;
-    :deep(.b-iconfont) {
+    .b-iconfont {
+      font-size: 18px;
+      transform: rotate(90deg);
       outline: none;
-      font-size: 16px;
     }
   }
 }

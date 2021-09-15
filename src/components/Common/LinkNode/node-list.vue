@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { Message } from 'bin-ui-next'
+
 export default {
   name: 'node-list',
   props: {
@@ -28,11 +30,19 @@ export default {
       type: Array,
       default: () => ([]),
     },
+    rootNode: {
+      type: Object,
+      default: () => ({}),
+    },
   },
   emits: ['start', 'end'],
   setup(props, { emit }) {
     // 表格拖拽开始
     function onDrag(e, item) {
+      if (props.rootNode.title === item.title) {
+        Message.warning('当前数据表已经存在，请不要重复关联！')
+        return
+      }
       e.dataTransfer.setData('id', item.id)
       emit('start')
     }

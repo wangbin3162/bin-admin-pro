@@ -13,10 +13,11 @@
               <node-list
                 :data="tableList"
                 :all-node-title="allNodeTitle"
+                :root-node="stateTree"
                 @start="dragging=true"
                 @end="dragging=false"
               ></node-list>
-              <b-ace-editor :model-value="JSON.stringify(nodeData,null,2)"></b-ace-editor>
+              <b-ace-editor :model-value="JSON.stringify(stateTree,null,2)"></b-ace-editor>
             </div>
           </div>
         </template>
@@ -24,12 +25,12 @@
           <div class="p24" style="background-color: #f2f2f2;height: 100%;overflow: auto;">
             <link-node-wrapper
               :dragging="dragging"
-              :data="nodeData"
-              empty-text="请从左侧拖拽数据表开始创建"
+              :data="stateTree"
               @node-click="handleNodeClick"
+              @node-remove="handleNodeRemove"
               @node-drop="handleNodeDrop"
               @link-click="handleLinkClick"
-              @update-flatState="handleUpdateFlatState"
+              @empty-drop="handleEmptyDrop"
               dev
             ></link-node-wrapper>
           </div>
@@ -44,16 +45,17 @@ import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
 import LinkNodeWrapper from '@/components/Common/LinkNode/link-node-wrapper.vue'
 import NodeList from '@/components/Common/LinkNode/node-list.vue'
-import { ref } from 'vue'
+import { computed, reactive, ref, toRefs, watch } from 'vue'
 import { Message } from 'bin-ui-next'
+import { compileFlatState } from '@/components/Common/LinkNode/node-util'
 
 export default {
-  name: 'link-node-demo.vue',
+  name: 'LinkNodeDemo',
   components: { NodeList, LinkNodeWrapper, PageCubeWrapper, PageWrapper },
   setup(props) {
     const tableList = ref([
       {
-        id: 0,
+        id: '0000',
         title: 'root',
         fields: [
           { fieldName: 'col_1', fieldDesc: '名称', type: 'string' },
@@ -61,7 +63,7 @@ export default {
         ],
       },
       {
-        id: 1,
+        id: '0001',
         title: 'depart',
         fields: [
           { fieldName: 'col_1', fieldDesc: '资源信息', type: 'string' },
@@ -72,7 +74,7 @@ export default {
         ],
       },
       {
-        id: 2,
+        id: '0002',
         title: 'analysis',
         fields: [
           { fieldName: 'col_1', fieldDesc: '国家', type: 'string' },
@@ -82,7 +84,7 @@ export default {
         ],
       },
       {
-        id: 3,
+        id: '0003',
         title: 'batch_job',
         fields: [
           { fieldName: 'job_1', fieldDesc: '任务名称', type: 'string' },
@@ -93,48 +95,89 @@ export default {
       },
     ])
 
-    const nodeData = ref({
-      title: 'root',
-      children: [
-        // { title: 'batch_job', children: [{ title: 'job1' }, { title: 'job2' }] },
-        // { title: 'depart', children: [{ title: 'depart_child1' }] },
-        { title: 'analysis' },
-      ],
+    // 树结构状态值
+    const states = reactive({
+      stateTree: {
+        id: '0000',
+        title: 'root',
+        children: [
+          { id: '0001', title: 'depart', children: [{ title: 'depart_child1' }, { title: 'depart_child2' }] },
+          { id: '0002', title: 'analysis', children: [{ title: 'analysis_child1' }] },
+          { id: '0003', title: 'batch_job', children: [{ title: 'job_child1' }, { title: 'job_child2' }] },
+        ],
+      },
+      flatState: [], // 拉平的树结构
     })
-    const allNodeTitle = ref([])
+
+    const allNodeTitle = computed(() => states.flatState.map(v => v.node.title))
     const dragging = ref(false)
 
-    // flatState 更新事件
-    function handleUpdateFlatState(flatState) {
-      allNodeTitle.value = flatState.filter(v => !v.node.isEmpty).map(v => v.node.title)
-    }
-
-    function handleNodeClick(node, flatState) {
-      console.log(node, flatState)
+    // 节点点击事件
+    function handleNodeClick(nodeKey) {
+      const node = states.flatState[nodeKey].node
+      console.log(nodeKey, node)
       Message(`点击了${node.title}节点`)
     }
 
-    function handleLinkClick(node, parentNode, flatState) {
-      console.log(node, parentNode, flatState)
+    // 节点移除事件
+    function handleNodeRemove(nodeKey, parentNodeKey) {
+      const node = states.flatState[nodeKey].node
+      // 执行移除节点操作
+      if (node.nodeKey === 0) { // 根节点删除
+        states.stateTree = {}
+        updateStateTree()
+        return
+      }
+      const parentNode = states.flatState[parentNodeKey].node
+      const index = parentNode.children.indexOf(node)
+      parentNode.children.splice(index, 1)
+      updateStateTree()
+    }
+
+    // 连接桩点击事件
+    function handleLinkClick(nodeKey, parentNodeKey) {
+      const node = states.flatState[nodeKey].node
+      const parentNode = states.flatState[parentNodeKey].node
+      console.log(nodeKey, parentNodeKey)
       Message(`点击了[${node.title}]-[${parentNode.title}]连接桩`)
     }
 
-    function handleNodeDrop(node, parentNode, tableId) {
-      console.log(node, parentNode, tableId)
+    // 拖拽增加节点
+    function handleNodeDrop(parentNodeKey, tableId) {
+      const parentNode = states.flatState[parentNodeKey].node
+      const table = tableList.value.find(v => v.id.toString() === tableId)
+      // 执行新增节点操作
+      const children = parentNode.children || []
+      children.push({ id: table.id, title: table.title })
+      parentNode.children = children
+      updateStateTree()
     }
 
+    // 增加根节点
+    function handleEmptyDrop(tableId) {
+      const table = tableList.value.find(v => v.id.toString() === tableId)
+      states.stateTree = { id: table.id, title: table.title }
+      updateStateTree()
+    }
 
+    // 更新树数据
+    function updateStateTree() {
+      states.flatState = compileFlatState(states.stateTree)
+    }
+
+    updateStateTree()
     return {
+      ...toRefs(states),
       // 左侧列表
       tableList,
       allNodeTitle,
       // 右侧操作区
       dragging,
-      nodeData,
       handleNodeClick,
-      handleLinkClick,
-      handleUpdateFlatState,
+      handleNodeRemove,
       handleNodeDrop,
+      handleLinkClick,
+      handleEmptyDrop,
     }
   },
 }

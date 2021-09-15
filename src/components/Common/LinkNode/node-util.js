@@ -1,4 +1,6 @@
 // 节点高度
+import { isEmpty } from '@/utils/util'
+
 export const NODE_HEIGHT = 30
 // 节点宽度
 export const NODE_WIDTH = 180
@@ -10,11 +12,47 @@ export const NODE_MARGIN = 18
 export const HALF_H = NODE_HEIGHT / 2
 
 /**
+ * 处理拉平树结构
+ * @param stateTree
+ * @returns {*[]}
+ */
+export function compileFlatState(stateTree) {
+  let keyCounter = 0
+  let childrenKey = 'children'
+  const flatTree = []
+
+  const flattenChildren = (node, parent, parentKeys) => {
+    if (isEmpty(node)) return
+    node.nodeKey = keyCounter++
+    flatTree[node.nodeKey] = { node: node, nodeKey: node.nodeKey }
+    if (typeof parent !== 'undefined') {
+      flatTree[node.nodeKey].parent = parent.nodeKey
+      flatTree[parent.nodeKey][childrenKey].push(node.nodeKey)
+    }
+    let parents = parentKeys ? parentKeys.split(',').map(i => +i) : []
+    // 拼接parents
+    if (typeof parentKeys !== 'undefined') {
+      parents.push(parent.nodeKey)
+      flatTree[node.nodeKey].parents = parents
+    }
+
+    if (node[childrenKey]) {
+      flatTree[node.nodeKey][childrenKey] = []
+      node[childrenKey].forEach((child) => flattenChildren(child, node, parents.join(',')))
+    }
+  }
+
+  flattenChildren(stateTree)
+
+  return flatTree
+}
+
+/**
  * 获取link-margin style
  */
 export function getLinkMarginStyle(maxLevel, maxRow, defaultStyle = {}) {
-  const left = NODE_WIDTH * (maxLevel + 1) + NODE_TIP_WIDTH * (maxLevel) + NODE_MARGIN
-  const top = (NODE_HEIGHT) * (maxRow + 2) + NODE_MARGIN
+  const left = NODE_WIDTH * (maxLevel + 1) + NODE_TIP_WIDTH * maxLevel + NODE_MARGIN
+  const top = (NODE_HEIGHT + NODE_MARGIN) * (maxRow + 1)
   return [
     { top: 0, left: `${left}px`, ...defaultStyle },
     { left: 0, top: `${top}px`, ...defaultStyle },

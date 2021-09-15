@@ -5,7 +5,7 @@
         class="link-wrapper"
         v-for="(item, i) in renderList"
         :key="i"
-        :class="{'empty-highlight':item.node.isEmpty && item.nodeKey !== dragoverNodeKey}"
+        :class="{'empty-highlight':item.node.isEmpty && item.nodeIndex !== dragoverNodeIndex}"
       >
         <!--tip连接桩-->
         <node-tip
@@ -24,19 +24,23 @@
       <div class="link-margin" :style="linkMargin[0]"></div>
       <div class="link-margin" :style="linkMargin[1]"></div>
     </template>
-    <div v-else :class="{'empty-tips':true,dragging}">
+    <div v-else
+         :class="{'empty-tips':true,dragging}"
+         @drop="onEmptyDrop($event)"
+         @dragover="e=>e.preventDefault()"
+    >
       <b-empty style="margin: 16px 0">{{ emptyText }}</b-empty>
     </div>
     <!--dev-->
     <div v-if="dev" class="dev">
-      <b-ace-editor :model-value="JSON.stringify({maxLevel,maxRow,flatState},null,2)" height="500"></b-ace-editor>
+      <b-ace-editor :model-value="JSON.stringify({maxLevel,maxRow,stateTree},null,2)" height="500"></b-ace-editor>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, onMounted, provide, reactive, toRefs, watch } from 'vue'
-import { isEmpty } from '@/utils/util'
+import { computed, provide, reactive, toRefs, watch } from 'vue'
+import { deepCopy, isEmpty } from '@/utils/util'
 import LinkNode from '@/components/Common/LinkNode/node.vue'
 import NodeTip from '@/components/Common/LinkNode/node-tip.vue'
 import { getLinkMarginStyle, getNodeStyle } from '@/components/Common/LinkNode/node-util'
@@ -55,7 +59,7 @@ export default {
     },
     emptyText: {
       type: String,
-      default: '暂无数据',
+      default: '请从左侧拖拽数据表开始创建',
     },
     emptyNodeText: {
       type: String,
@@ -70,7 +74,7 @@ export default {
       default: false,
     },
   },
-  emits: ['node-click', 'link-click', 'update-flatState', 'node-drop'],
+  emits: ['node-click', 'node-remove', 'link-click', 'node-drop', 'empty-drop'],
   setup(props, { emit }) {
     const states = reactive({
       stateTree: {},
@@ -78,7 +82,7 @@ export default {
       renderList: [],
       maxLevel: 0,
       maxRow: 0,
-      dragoverNodeKey: -1,
+      dragoverNodeIndex: -1,
     })
 
     const dataEmpty = computed(() => isEmpty(states.stateTree))
@@ -92,25 +96,30 @@ export default {
 
     // 1.树节点处理，追加和分配层级和行标识
     function updateStateTree() {// 每个结点都有一个关系父结点/子结点
+      let keyIndex = 0
       let keyCounter = 0
       let keyRow = 0
       let childrenKey = 'children'
 
       const flattenChildren = (node, level = 0) => {
         if (isEmpty(node)) return
-        node['nodeKey'] = keyCounter++
-        node['level'] = level
-        node['row'] = keyRow
-        node['isEmpty'] = false
+        node.nodeKey = keyCounter++
+        node.nodeIndex = keyIndex++
+        node.level = level
+        node.row = keyRow
+        node.isEmpty = false
+        if (typeof node.isLeaf === 'undefined') {
+          node.isLeaf = !node[childrenKey]
+        }
         if (!isEmpty(node[childrenKey])) {
           const _level = level + 1
           node[childrenKey].forEach((child, index) => {
             if (index === 0) {
-              child['row'] = keyRow
-              child['isKnee'] = false
+              child.row = keyRow
+              child.isKnee = false
             } else {
-              child['row'] = ++keyRow
-              child['isKnee'] = true
+              child.row = ++keyRow
+              child.isKnee = true
             }
             flattenChildren(child, _level)
           })
@@ -118,7 +127,7 @@ export default {
           node[childrenKey].push({
             title: props.dev ? `${node.title} - empty node` : props.emptyNodeText,
             level: level + 1,
-            nodeKey: keyCounter++,
+            nodeIndex: keyIndex++,
             row: ++keyRow,
             isEmpty: true, // 是否是空节点
             isKnee: true,// 是否是拐点
@@ -131,12 +140,12 @@ export default {
             row: keyRow,
             isEmpty: true, // 是否是空节点
             isKnee: false,// 是否是拐点
-            nodeKey: keyCounter++,
+            nodeIndex: keyIndex++,
           }]
         }
       }
 
-      flattenChildren(props.data)
+      flattenChildren(states.stateTree)
     }
 
     // 2.拉平节点，追加子父级关系
@@ -146,20 +155,20 @@ export default {
 
       const flattenChildren = (node, parent, parentKeys) => {
         if (isEmpty(node)) return
-        flatTree[node.nodeKey] = { node: node, nodeKey: node.nodeKey }
+        flatTree[node.nodeIndex] = { node: node, nodeIndex: node.nodeIndex }
         if (typeof parent !== 'undefined') {
-          flatTree[node.nodeKey].parent = parent.nodeKey
-          flatTree[parent.nodeKey][childrenKey].push(node.nodeKey)
+          flatTree[node.nodeIndex].parent = parent.nodeIndex
+          flatTree[parent.nodeIndex][childrenKey].push(node.nodeIndex)
         }
         let parents = parentKeys ? parentKeys.split(',').map(i => +i) : []
         // 拼接parents
         if (typeof parentKeys !== 'undefined') {
-          parents.push(parent.nodeKey)
-          flatTree[node.nodeKey].parents = parents
+          parents.push(parent.nodeIndex)
+          flatTree[node.nodeIndex].parents = parents
         }
 
         if (node[childrenKey]) {
-          flatTree[node.nodeKey][childrenKey] = []
+          flatTree[node.nodeIndex][childrenKey] = []
           node[childrenKey].forEach(child => flattenChildren(child, node, parents.join(',')))
         }
       }
@@ -167,8 +176,6 @@ export default {
       flattenChildren(states.stateTree)
 
       states.flatState = flatTree
-
-      handleUpdateFlatState()
     }
 
     // 3.重新组建连接节点
@@ -193,54 +200,56 @@ export default {
 
     // 更新树节点数据
     function updateData() {
-      states.stateTree = props.data
+      states.stateTree = deepCopy(props.data)
       updateStateTree()
       updateFlatState()
       rebuildLinks()
     }
 
-    // flatState 更新事件
-    function handleUpdateFlatState() {
-      emit('update-flatState', states.flatState)
+    // 节点点击事件
+    function handleNodeClick(nodeIndex) {
+      const node = states.flatState[nodeIndex].node
+      emit('node-click', node.nodeKey)
     }
 
-    // 节点点击事件
-    function handleNodeClick(nodeKey) {
-      const node = states.flatState[nodeKey].node
-      emit('node-click', node, states.flatState)
+    function handleNodeRemove(nodeIndex) {
+      const stateNode = states.flatState[nodeIndex]
+      const node = stateNode.node
+      const parentNode = node.nodeKey === 0 ? {} : states.flatState[stateNode.parent].node
+      emit('node-remove', node.nodeKey, parentNode.nodeKey)
     }
 
     // 连接点击事件
-    function handleLinkClick(nodeKey) {
-      const stateNode = states.flatState[nodeKey]
+    function handleLinkClick(nodeIndex) {
+      const stateNode = states.flatState[nodeIndex]
       const node = stateNode.node
       const parentNode = states.flatState[stateNode.parent].node
-      emit('link-click', node, parentNode, states.flatState)
+      emit('link-click', node.nodeKey, parentNode.nodeKey)
     }
 
     // node-drag event
-    function onNodeDragenter(nodeKey) {
-      states.dragoverNodeKey = nodeKey
+    function onNodeDragenter(nodeIndex) {
+      states.dragoverNodeIndex = nodeIndex
     }
 
     function onNodeDragleave() {
-      states.dragoverNodeKey = -1
+      states.dragoverNodeIndex = -1
     }
 
-    function onNodeDrop(nodeKey, tableId) {
-      const stateNode = states.flatState[nodeKey]
-      const node = stateNode.node
+    function onNodeDrop(nodeIndex, tableId) {
+      const stateNode = states.flatState[nodeIndex]
       const parentNode = states.flatState[stateNode.parent].node
-      node.isEmpty = false
-      node.title = '测试'
-      updateFlatState()
-      rebuildLinks()
-      emit('node-drop', node, parentNode, tableId)
+      emit('node-drop', parentNode.nodeKey, tableId)
+    }
+
+    function onEmptyDrop(e) {
+      emit('empty-drop', e.dataTransfer.getData('id'))
     }
 
     provide('LinkNodeInstance', {
       states,
       handleNodeClick,
+      handleNodeRemove,
       handleLinkClick,
       onNodeDragenter,
       onNodeDragleave,
@@ -249,18 +258,17 @@ export default {
 
     watch(() => props.data, () => {
       updateData()
-    }, { immediate: true })
+    }, { deep: true, immediate: true })
 
     watch(() => props.dragging, () => {
       rebuildLinks()
     }, { immediate: true })
 
-    onMounted(() => {
-    })
     return {
       ...toRefs(states),
       dataEmpty,
       linkMargin,
+      onEmptyDrop,
     }
   },
 }
@@ -289,6 +297,7 @@ export default {
     color: rgba(0, 0, 0, .65);
     &.dragging {
       border: 1px dashed #c6c6c6;
+      background-color: #fafafa;
     }
   }
   .dev {

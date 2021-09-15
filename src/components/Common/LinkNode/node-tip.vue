@@ -38,7 +38,7 @@ export default {
     const LinkNodeInstance = inject('LinkNodeInstance', {})
     const node = computed(() => [
       LinkNodeInstance.states.flatState,
-      LinkNodeInstance.states.flatState.find(v => v.nodeKey === props.data.nodeKey),
+      LinkNodeInstance.states.flatState.find(v => v.nodeIndex === props.data.nodeIndex),
     ])
     const isKnee = computed(() => props.data.isKnee)
     const lineStyle = computed(() => {
@@ -51,7 +51,7 @@ export default {
 
     function linkClick() {
       if (props.data.isEmpty) return
-      LinkNodeInstance.handleLinkClick(props.data.nodeKey)
+      LinkNodeInstance.handleLinkClick(props.data.nodeIndex)
     }
 
     return {
