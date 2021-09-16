@@ -48,23 +48,27 @@ import NodeList from '@/components/Common/LinkNode/node-list.vue'
 import { computed, reactive, ref, toRefs, watch } from 'vue'
 import { Message } from 'bin-ui-next'
 import { compileFlatState } from '@/components/Common/LinkNode/node-util'
+import { generateId } from '@/utils/util'
 
 export default {
   name: 'LinkNodeDemo',
   components: { NodeList, LinkNodeWrapper, PageCubeWrapper, PageWrapper },
   setup(props) {
+    const idMock = [generateId().toString(), generateId().toString(), generateId().toString(), generateId().toString()]
     const tableList = ref([
       {
-        id: '0000',
+        id: idMock[0],
         title: 'root',
+        tableName: 'root',
         fields: [
           { fieldName: 'col_1', fieldDesc: '名称', type: 'string' },
           { fieldName: 'col_2', fieldDesc: '创建时间', type: 'date' },
         ],
       },
       {
-        id: '0001',
+        id: idMock[1],
         title: 'depart',
+        tableName: 'depart',
         fields: [
           { fieldName: 'col_1', fieldDesc: '资源信息', type: 'string' },
           { fieldName: 'col_2', fieldDesc: '创建时间', type: 'date' },
@@ -74,8 +78,9 @@ export default {
         ],
       },
       {
-        id: '0002',
+        id: idMock[2],
         title: 'analysis',
+        tableName: 'analysis',
         fields: [
           { fieldName: 'col_1', fieldDesc: '国家', type: 'string' },
           { fieldName: 'col_2', fieldDesc: '省', type: 'string' },
@@ -84,8 +89,9 @@ export default {
         ],
       },
       {
-        id: '0003',
+        id: idMock[3],
         title: 'batch_job',
+        tableName: 'batch_job',
         fields: [
           { fieldName: 'job_1', fieldDesc: '任务名称', type: 'string' },
           { fieldName: 'job_2', fieldDesc: '创建时间', type: 'date' },
@@ -98,12 +104,28 @@ export default {
     // 树结构状态值
     const states = reactive({
       stateTree: {
-        id: '0000',
+        id: idMock[0],
         title: 'root',
+        tableName: 'root',
         children: [
-          { id: '0001', title: 'depart', children: [{ title: 'depart_child1' }, { title: 'depart_child2' }] },
-          { id: '0002', title: 'analysis', children: [{ title: 'analysis_child1' }] },
-          { id: '0003', title: 'batch_job', children: [{ title: 'job_child1' }, { title: 'job_child2' }] },
+          {
+            id: idMock[1],
+            title: 'depart',
+            tableName: 'depart',
+            joinType: 'LEFT_OUTER_JOIN',
+          },
+          {
+            id: idMock[2],
+            title: 'analysis',
+            tableName: 'analysis',
+            joinType: 'INNER_JOIN',
+          },
+          {
+            id: idMock[3],
+            title: 'batch_job',
+            tableName: 'batch_job',
+            joinType: 'FULL_OUTER_JOIN',
+          },
         ],
       },
       flatState: [], // 拉平的树结构
@@ -148,7 +170,11 @@ export default {
       const table = tableList.value.find(v => v.id.toString() === tableId)
       // 执行新增节点操作
       const children = parentNode.children || []
-      children.push({ id: table.id, title: table.title })
+      children.push({
+        id: table.id,
+        title: table.title,
+        tableName: table.tableName,
+      })
       parentNode.children = children
       updateStateTree()
     }
@@ -156,7 +182,11 @@ export default {
     // 增加根节点
     function handleEmptyDrop(tableId) {
       const table = tableList.value.find(v => v.id.toString() === tableId)
-      states.stateTree = { id: table.id, title: table.title }
+      states.stateTree = {
+        id: table.id,
+        title: table.title,
+        tableName: table.tableName,
+      }
       updateStateTree()
     }
 

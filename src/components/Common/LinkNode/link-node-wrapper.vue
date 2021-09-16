@@ -24,12 +24,19 @@
       <div class="link-margin" :style="linkMargin[0]"></div>
       <div class="link-margin" :style="linkMargin[1]"></div>
     </template>
+    <!--empty-tips-->
     <div v-else
          :class="{'empty-tips':true,dragging}"
          @drop="onEmptyDrop($event)"
          @dragover="e=>e.preventDefault()"
     >
-      <b-empty style="margin: 16px 0">{{ emptyText }}</b-empty>
+      <img src="@/assets/images/link-node/empty-drag.png" alt="empty">
+      <p>{{ emptyText }}</p>
+    </div>
+    <!--empty with root-->
+    <div v-if="onlyRoot" class="help-wrapper">
+      <img src="@/assets/images/link-node/table-table.png" alt="empty">
+      <p>{{ helpText }}</p>
     </div>
     <!--dev-->
     <div v-if="dev" class="dev">
@@ -65,6 +72,10 @@ export default {
       type: String,
       default: '拖拽左侧表至此添加关联表',
     },
+    helpText: {
+      type: String,
+      default: '继续从左侧拖拽数据表进行表关联',
+    },
     dragging: {
       type: Boolean,
       default: false,
@@ -87,6 +98,8 @@ export default {
 
     const dataEmpty = computed(() => isEmpty(states.stateTree))
 
+    const onlyRoot = computed(() => states.stateTree.isLeaf)
+
     // link-margin
     const linkMargin = computed(() => {
       const devStyle = props.dev ? { background: 'red' } : {}
@@ -108,10 +121,8 @@ export default {
         node.level = level
         node.row = keyRow
         node.isEmpty = false
-        if (typeof node.isLeaf === 'undefined') {
-          node.isLeaf = !node[childrenKey]
-        }
         if (!isEmpty(node[childrenKey])) {
+          node.isLeaf = false
           const _level = level + 1
           node[childrenKey].forEach((child, index) => {
             if (index === 0) {
@@ -133,6 +144,7 @@ export default {
             isKnee: true,// 是否是拐点
           })
         } else {
+          node.isLeaf = true
           // 不存在children拼接一个空节点
           node[childrenKey] = [{
             title: props.dev ? `${node.title} - empty node` : props.emptyNodeText,
@@ -268,6 +280,7 @@ export default {
       ...toRefs(states),
       dataEmpty,
       linkMargin,
+      onlyRoot,
       onEmptyDrop,
     }
   },
@@ -298,6 +311,21 @@ export default {
     &.dragging {
       border: 1px dashed #c6c6c6;
       background-color: #fafafa;
+    }
+  }
+  .help-wrapper {
+    position: absolute;
+    width: 100%;
+    top: 30px;
+    border: 1px solid transparent;
+    color: rgba(0, 0, 0, .65);
+    text-align: center;
+    line-height: 1;
+    height: 100%;
+    opacity: .5;
+    > img {
+      width: 96px;
+      height: 60px;
     }
   }
   .dev {

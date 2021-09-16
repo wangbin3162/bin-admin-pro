@@ -1,6 +1,11 @@
-// 节点高度
 import { isEmpty } from '@/utils/util'
 
+export const JOIN_TYPE = {
+  LEFT_OUTER_JOIN: { label: '左外连接' },
+  INNER_JOIN: { label: '左外连接' },
+  FULL_OUTER_JOIN: { label: '左外连接' },
+}
+// 节点高度
 export const NODE_HEIGHT = 30
 // 节点宽度
 export const NODE_WIDTH = 180

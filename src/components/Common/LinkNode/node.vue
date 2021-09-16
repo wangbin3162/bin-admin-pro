@@ -15,14 +15,14 @@
         <b-dropdown placement="bottom-end" @command="activeCommand" v-if="!data.isEmpty" append-to-body>
           <i class="b-iconfont b-icon-ellipsis" @click.stop.prevent></i>
           <template #dropdown>
-            <b-dropdown-menu style="width: 160px;">
+            <b-dropdown-menu style="width: 180px;">
               <b-dropdown-item name="selected">
-                <b-icon name="code" size="12"></b-icon>
-                <span style="font-size: 12px;">字段选择</span>
+                <b-icon name="code"></b-icon>
+                <span>字段选择</span>
               </b-dropdown-item>
               <b-dropdown-item name="remove" style="color: #ed4014;" v-if="data.isLeaf">
-                <b-icon name="delete" size="12"></b-icon>
-                <span style="font-size: 12px;">删除</span>
+                <b-icon name="delete"></b-icon>
+                <span>删除</span>
               </b-dropdown-item>
             </b-dropdown-menu>
           </template>
@@ -34,6 +34,7 @@
 
 <script>
 import { computed, inject } from 'vue'
+import { MessageBox } from 'bin-ui-next'
 
 export default {
   name: 'link-node',
@@ -71,7 +72,14 @@ export default {
 
     function nodeRemove() {
       if (props.data.isEmpty) return
-      LinkNodeInstance.handleNodeRemove(props.data.nodeIndex)
+      MessageBox.confirm({
+        type: 'warning',
+        title: `确定要删除 [ ${props.data.title} ] 吗？`,
+        message: '删除后，将清除此表相关配置，请谨慎操作。',
+      }).then(() => {
+        LinkNodeInstance.handleNodeRemove(props.data.nodeIndex)
+      }).catch(() => {
+      })
     }
 
     let lastElement = null
@@ -113,13 +121,12 @@ export default {
     background: #fff;
     color: #000;
     cursor: pointer;
-    padding: 1px 1px 1px 0;
-    border-left: 2px solid getColor();
+    border: 1px solid transparent;
     width: 180px;
     height: 30px;
     .link-node-name {
       flex: 1;
-      padding: 0 4px;
+      padding: 0 14px 0 4px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
@@ -129,20 +136,27 @@ export default {
     &:hover {
       padding: 0;
       border: 1px solid getColor();
-      border-left: 2px solid getColor();
     }
     &.is-empty {
       padding: 0;
       border: 1px dashed getColor();
-      border-left: 2px solid getColor();
     }
   }
   &-title {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-grow: 1;
-    overflow: hidden;
+    &:before {
+      position: absolute;
+      content: '';
+      top: -1px;
+      bottom: -1px;
+      left: -1px;
+      width: 2px;
+      background-color: getColor();
+    }
   }
   &-icon {
     flex-shrink: 0;
@@ -151,12 +165,21 @@ export default {
     color: getColor();
   }
   &-handle {
+    position: absolute;
+    top: 1px;
+    right: -1px;
     flex-shrink: 0;
+    padding-right: 1px;
     display: flex;
-    width: 18px;
+    width: 28px;
+    height: 28px;
     cursor: pointer;
     .b-iconfont {
-      font-size: 18px;
+      padding: 4px 0 0 3px;
+      width: 28px;
+      height: 28px;
+      font-size: 20px;
+      line-height: 24px;
       transform: rotate(90deg);
       outline: none;
     }
