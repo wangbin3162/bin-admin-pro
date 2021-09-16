@@ -27,7 +27,7 @@
 
 <script>
 import { isEmpty } from '@/utils/util'
-import { JOIN_TYPE } from '@/components/Common/LinkNode/node-util'
+import { JOIN_TYPE } from '@/components/Service/LinkNode/node-util'
 
 export default {
   name: 'join-type',

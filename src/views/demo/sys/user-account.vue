@@ -1,15 +1,18 @@
 <template>
   <page-wrapper desc="页面数据为Mock数据，操作时不会进行真实操作。仅为模拟实现。">
-    <div flex>
-      <base-tree
-        ref="treeRef"
-        tree-title="部门列表"
-        show-filter
-        :fetch="getDepartTree"
-        @select-change="handleSelect"
-      >
-      </base-tree>
-      <div style="width: calc(100% - 280px)" class="pl-16">
+    <page-cube-wrapper>
+      <template #left>
+        <base-tree
+          ref="treeRef"
+          tree-title="部门列表"
+          show-filter
+          :fetch="getDepartTree"
+          @select-change="handleSelect"
+          width="240px"
+        >
+        </base-tree>
+      </template>
+      <div class="pl-16">
         <base-table>
           <template #filter>
             <b-form label-width="95px">
@@ -102,7 +105,7 @@
           </template>
         </base-table>
       </div>
-    </div>
+    </page-cube-wrapper>
 
     <b-modal
       :model-value="modalVisible"
@@ -158,10 +161,11 @@ import { getDepartTree } from '@/api/modules/depart.api'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 import useTree from '@/hooks/service/useTree'
+import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
 
 export default {
   name: 'UserAccount',
-  components: { BaseTree, ActionButton, BaseTable, PageWrapper },
+  components: { PageCubeWrapper, BaseTree, ActionButton, BaseTable, PageWrapper },
   setup() {
     const treeRef = ref(null)
     const currentTreeNode = ref({})

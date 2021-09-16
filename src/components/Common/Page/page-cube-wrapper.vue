@@ -2,7 +2,12 @@
   <div class="page-cube-wrapper">
     <div class="page-cube">
       <div v-if="$slots.left" class="page-cube-left" :style="{width: leftWidth}">
-        <div class="toggle" :style="{left: leftWidth}" :title="leftExpand?'收起':'展开'" @click="toggleLeft">
+        <div
+          class="toggle"
+          :style="{left: leftWidth, opacity: leftExpand?null:1}"
+          :title="leftExpand?leftCollapseText:leftExpandText"
+          @click="toggleLeft"
+        >
           <b-icon :name="leftExpand?'caret-left':'caret-right'"></b-icon>
         </div>
         <div class="cube-left-content" v-show="leftExpand">
@@ -35,6 +40,14 @@ export default {
     leftDefaultWidth: {
       type: String,
       default: '240px',
+    },
+    leftExpandText: {
+      type: String,
+      default: '展开',
+    },
+    leftCollapseText: {
+      type: String,
+      default: '收起',
     },
     defaultHeight: {
       type: String,

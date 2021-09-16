@@ -214,7 +214,7 @@ import { firstBy } from 'thenby'
 import naturalSort from 'javascript-natural-sort'
 import isEqual from 'lodash-es/isEqual'
 import { deepCopy } from '@/utils/util'
-import SvgLoading from '@/components/Common/SvgLoading/index.vue'
+import SvgLoading from '@/components/Common/SvgLoading'
 
 export default {
   name: 'pivot-table',

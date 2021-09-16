@@ -39,8 +39,9 @@
       <p>{{ helpText }}</p>
     </div>
     <!--dev-->
-    <div v-if="dev" class="dev">
-      <b-ace-editor :model-value="JSON.stringify({maxLevel,maxRow,stateTree},null,2)" height="500"></b-ace-editor>
+    <div v-if="dev" class="dev" flex="box:mean">
+      <b-ace-editor :model-value="JSON.stringify({maxLevel,maxRow,stateTree},null,2)" height="280"></b-ace-editor>
+      <b-ace-editor :model-value="JSON.stringify({flatState,renderList},null,2)" height="280"></b-ace-editor>
     </div>
   </div>
 </template>
@@ -48,9 +49,9 @@
 <script>
 import { computed, provide, reactive, toRefs, watch } from 'vue'
 import { deepCopy, isEmpty } from '@/utils/util'
-import LinkNode from '@/components/Common/LinkNode/node.vue'
-import NodeTip from '@/components/Common/LinkNode/node-tip.vue'
-import { getLinkMarginStyle, getNodeStyle } from '@/components/Common/LinkNode/node-util'
+import LinkNode from '@/components/Service/LinkNode/node.vue'
+import NodeTip from '@/components/Service/LinkNode/node-tip.vue'
+import { getLinkMarginStyle, getNodeStyle } from '@/components/Service/LinkNode/node-util'
 
 export default {
   name: 'link-node-wrapper',
@@ -102,7 +103,7 @@ export default {
 
     // link-margin
     const linkMargin = computed(() => {
-      const devStyle = props.dev ? { background: 'red' } : {}
+      const devStyle = props.dev ? { background: 'red', width: '100px' } : {}
       const { maxLevel, maxRow } = states
       return getLinkMarginStyle(maxLevel, maxRow, devStyle)
     })
@@ -298,7 +299,7 @@ export default {
   }
   .link-margin {
     position: absolute;
-    width: 100px;
+    width: 1px;
     height: 1px;
   }
   .empty-tips {
@@ -321,7 +322,7 @@ export default {
     color: rgba(0, 0, 0, .65);
     text-align: center;
     line-height: 1;
-    height: 100%;
+    height: 80%;
     opacity: .5;
     > img {
       width: 96px;
@@ -330,9 +331,10 @@ export default {
   }
   .dev {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 460px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 280px;
   }
 }
 </style>

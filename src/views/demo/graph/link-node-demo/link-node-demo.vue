@@ -4,21 +4,19 @@
       <page-cube-wrapper style="width: 100%;height:100%; background-color: #fff;">
         <template #left>
           <div class="datasource-wrapper">
-            <div class="datasource-content">
-              <div class="datasource-table-search">
-                <b-icon name="search" type="button"></b-icon>
-                <input placeholder="搜索数据表/文件" type="text" value="">
-                <b-icon name="redo" type="button"></b-icon>
-              </div>
-              <node-list
-                :data="tableList"
-                :all-node-title="allNodeTitle"
-                :root-node="stateTree"
-                @start="dragging=true"
-                @end="dragging=false"
-              ></node-list>
-              <b-ace-editor :model-value="JSON.stringify(stateTree,null,2)"></b-ace-editor>
+            <b-tabs :model-value="'file'" :data="[{key:'file',title:'数据集表信息'}]"></b-tabs>
+            <div class="datasource-table-search">
+              <b-icon name="search" type="button"></b-icon>
+              <input placeholder="搜索数据表/文件" type="text" value="">
+              <b-icon name="redo" type="button"></b-icon>
             </div>
+            <node-list
+              :data="tableList"
+              :all-node-title="allNodeTitle"
+              :root-node="stateTree"
+              @start="dragging=true"
+              @end="dragging=false"
+            ></node-list>
           </div>
         </template>
         <template #default>
@@ -31,7 +29,7 @@
               @node-drop="handleNodeDrop"
               @link-click="handleLinkClick"
               @empty-drop="handleEmptyDrop"
-              dev
+              :dev="true"
             ></link-node-wrapper>
           </div>
         </template>
@@ -43,96 +41,27 @@
 <script>
 import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
-import LinkNodeWrapper from '@/components/Common/LinkNode/link-node-wrapper.vue'
-import NodeList from '@/components/Common/LinkNode/node-list.vue'
-import { computed, reactive, ref, toRefs, watch } from 'vue'
+import LinkNodeWrapper from '@/components/Service/LinkNode/link-node-wrapper.vue'
+import NodeList from '@/components/Service/LinkNode/node-list.vue'
+import { computed, reactive, ref, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
-import { compileFlatState } from '@/components/Common/LinkNode/node-util'
-import { generateId } from '@/utils/util'
+import { compileFlatState } from '@/components/Service/LinkNode/node-util'
+import { getTableLinks, getTableList } from '@/views/demo/graph/link-node-demo/data'
 
 export default {
   name: 'LinkNodeDemo',
   components: { NodeList, LinkNodeWrapper, PageCubeWrapper, PageWrapper },
-  setup(props) {
-    const idMock = [generateId().toString(), generateId().toString(), generateId().toString(), generateId().toString()]
-    const tableList = ref([
-      {
-        id: idMock[0],
-        title: 'root',
-        tableName: 'root',
-        fields: [
-          { fieldName: 'col_1', fieldDesc: '名称', type: 'string' },
-          { fieldName: 'col_2', fieldDesc: '创建时间', type: 'date' },
-        ],
-      },
-      {
-        id: idMock[1],
-        title: 'depart',
-        tableName: 'depart',
-        fields: [
-          { fieldName: 'col_1', fieldDesc: '资源信息', type: 'string' },
-          { fieldName: 'col_2', fieldDesc: '创建时间', type: 'date' },
-          { fieldName: 'col_3', fieldDesc: '创建部门', type: 'string' },
-          { fieldName: 'col_4', fieldDesc: '总数', type: 'number' },
-          { fieldName: 'col_5', fieldDesc: '成功条数', type: 'number' },
-        ],
-      },
-      {
-        id: idMock[2],
-        title: 'analysis',
-        tableName: 'analysis',
-        fields: [
-          { fieldName: 'col_1', fieldDesc: '国家', type: 'string' },
-          { fieldName: 'col_2', fieldDesc: '省', type: 'string' },
-          { fieldName: 'col_3', fieldDesc: '市', type: 'string' },
-          { fieldName: 'col_4', fieldDesc: '统计', type: 'number' },
-        ],
-      },
-      {
-        id: idMock[3],
-        title: 'batch_job',
-        tableName: 'batch_job',
-        fields: [
-          { fieldName: 'job_1', fieldDesc: '任务名称', type: 'string' },
-          { fieldName: 'job_2', fieldDesc: '创建时间', type: 'date' },
-          { fieldName: 'job_3', fieldDesc: '总数', type: 'number' },
-          { fieldName: 'job_4', fieldDesc: '成功条数', type: 'number' },
-        ],
-      },
-    ])
-
+  setup() {
+    const tableList = ref([])
     // 树结构状态值
     const states = reactive({
-      stateTree: {
-        id: idMock[0],
-        title: 'root',
-        tableName: 'root',
-        children: [
-          {
-            id: idMock[1],
-            title: 'depart',
-            tableName: 'depart',
-            joinType: 'LEFT_OUTER_JOIN',
-          },
-          {
-            id: idMock[2],
-            title: 'analysis',
-            tableName: 'analysis',
-            joinType: 'INNER_JOIN',
-          },
-          {
-            id: idMock[3],
-            title: 'batch_job',
-            tableName: 'batch_job',
-            joinType: 'FULL_OUTER_JOIN',
-          },
-        ],
-      },
+      stateTree: {},
       flatState: [], // 拉平的树结构
     })
+    const dragging = ref(false)
+    const fieldModal = ref(false)
 
     const allNodeTitle = computed(() => states.flatState.map(v => v.node.title))
-    const dragging = ref(false)
 
     // 节点点击事件
     function handleNodeClick(nodeKey) {
@@ -190,12 +119,22 @@ export default {
       updateStateTree()
     }
 
+    // 获取表列表
+    getTableList().then(res => {
+      tableList.value = res.data
+    })
+
+    // 获取已配的节点信息
+    getTableLinks().then(res => {
+      states.stateTree = res.data
+      updateStateTree()
+    })
+
     // 更新树数据
     function updateStateTree() {
       states.flatState = compileFlatState(states.stateTree)
     }
 
-    updateStateTree()
     return {
       ...toRefs(states),
       // 左侧列表
@@ -203,6 +142,7 @@ export default {
       allNodeTitle,
       // 右侧操作区
       dragging,
+      fieldModal,
       handleNodeClick,
       handleNodeRemove,
       handleNodeDrop,
@@ -221,35 +161,29 @@ export default {
   height: calc(100vh - 270px);
   border-bottom: 1px solid #eee;
   .datasource-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
     height: 100%;
     width: 100%;
     background-color: #fafafa;
-    position: relative;
-    .datasource-content {
-      height: 100%;
-      width: 100%;
-      padding-top: 20px;
-      padding-bottom: 10px;
-      flex-direction: column;
+    padding-bottom: 10px;
+    .datasource-table-search {
       display: flex;
-      position: relative;
-      .datasource-table-search {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid rgba(0, 0, 0, .1);
-        margin: 0 10px 0;
-        > input {
-          background-color: #fafafa;
-          border: none;
-          width: 185px;
-          outline: none;
-          height: 32px;
-          padding: 4px 0 4px 5px;
-          color: #262626;
-          font-size: 12px;
-          line-height: 32px;
-        }
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(0, 0, 0, .1);
+      margin: 0 10px 0;
+      > input {
+        background-color: #fafafa;
+        border: none;
+        width: 185px;
+        outline: none;
+        height: 32px;
+        padding: 4px 0 4px 5px;
+        color: #262626;
+        font-size: 12px;
+        line-height: 32px;
       }
     }
     .datasource-content-list {

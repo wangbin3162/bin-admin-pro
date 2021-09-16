@@ -114,8 +114,8 @@
 import draggable from 'vuedraggable'
 import { computed, reactive, ref, watch } from 'vue'
 import naturalSort from 'javascript-natural-sort'
-import FieldLabel from '@/components/Common/PivotTable/field-label.vue'
-import PivotTable from '@/components/Common/PivotTable/pivot-table.vue'
+import FieldLabel from '@/components/Service/PivotTable/field-label.vue'
+import PivotTable from '@/components/Service/PivotTable/pivot-table.vue'
 
 export default {
   name: 'pivot',

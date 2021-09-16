@@ -118,9 +118,9 @@
 
 <script>
 import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import Pivot from '@/components/Common/PivotTable/pivot.vue'
-import PivotTable from '@/components/Common/PivotTable/pivot-table.vue'
-import PivotDoc from '@/components/Common/PivotTable/pivot-doc.vue'
+import Pivot from '@/components/Service/PivotTable/pivot.vue'
+import PivotTable from '@/components/Service/PivotTable/pivot-table.vue'
+import PivotDoc from '@/components/Service/PivotTable/pivot-doc.vue'
 import data from './data'
 import dataGdp from './data-gdp'
 
