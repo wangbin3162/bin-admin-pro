@@ -244,6 +244,10 @@ export default [
         name: 'LinkNodeDemo',
         title: '连接节点',
       },
+      {
+        name: 'DatasetDemo',
+        title: '数据集',
+      },
     ],
   },
 ]

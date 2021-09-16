@@ -16,6 +16,8 @@ export const debounce = Utils.util.debounce
 
 export const isEmpty = Utils.helper.isEmpty
 
+export const windowOpen = Utils.util.open
+
 export const on = Utils.dom.on
 
 export const off = Utils.dom.off

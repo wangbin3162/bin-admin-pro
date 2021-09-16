@@ -2,13 +2,19 @@ export default [
   {
     path: 'pivotDemo',
     name: 'PivotDemo',
-    component: () => import('@/views/demo/graph/pivot-demo/pivot-demo.vue'),
+    component: () => import('@/views/demo/graph/pivot-demo/index.vue'),
     meta: { title: '交叉表' },
   },
   {
-    path: 'LinkNodeDemo',
+    path: 'linkNodeDemo',
     name: 'LinkNodeDemo',
-    component: () => import('@/views/demo/graph/link-node-demo/link-node-demo.vue'),
+    component: () => import('@/views/demo/graph/link-node-demo/index.vue'),
     meta: { title: '连接节点' },
+  },
+  {
+    path: 'DatasetDemo',
+    name: 'DatasetDemo',
+    component: () => import('@/views/demo/graph/dataset-demo/index.vue'),
+    meta: { title: '数据集' },
   },
 ]

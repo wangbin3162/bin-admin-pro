@@ -69,7 +69,7 @@ router.beforeEach(async (to, from) => {
         // [ 路由 ] 重新设置路由
         resetRoutes(asyncRoute)
         // console.log('resultRoutes: ', router.getRoutes())
-        return to.path
+        return { path: to.path, query: to.query }
       } catch (e) {
         throwError('router/beforeEach', e, '初始化信息出错')
         return { name: 'Login', query: { redirect: to.fullPath } }
