@@ -34,7 +34,7 @@ export default {
   props: {
     type: {
       type: String,
-      default: 'LEFT_OUTER_JOIN',
+      default: '',
     },
     size: {
       type: Number,

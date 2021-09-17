@@ -1,5 +1,5 @@
 <template>
-  <div class="datasource-content-list" id="table-drag">
+  <div class="datasource-content-list" id="table-drag" v-loading="loading" v-no-data="data.length===0">
     <div
       v-for="item in data"
       :key="item.id"
@@ -61,6 +61,9 @@ export default {
       type: Object,
       default: () => ({}),
     },
+    loading: {
+      type: Boolean,
+    },
   },
   emits: ['start', 'end'],
   setup(props, { emit }) {
@@ -86,7 +89,6 @@ export default {
     // 表格点击事件
     function handleClick(table) {
       if (!isEmpty(table.fields)) {
-        console.log(table)
         states.visible = true
         states.current = deepCopy(table)
       }
@@ -105,6 +107,9 @@ export default {
 <style scoped lang="stylus">
 @import "../../../assets/stylus/base/var.styl"
 @import "../../../assets/stylus/base/mixins.styl"
+.datasource-content-list {
+  position: relative;
+}
 .datasource-content-item {
   position: relative;
   display: flex;

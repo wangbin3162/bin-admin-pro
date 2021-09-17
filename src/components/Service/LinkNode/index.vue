@@ -39,9 +39,9 @@
       <p>{{ helpText }}</p>
     </div>
     <!--dev-->
-    <div v-if="dev" class="dev" flex="box:mean">
-      <b-ace-editor :model-value="JSON.stringify({maxLevel,maxRow,stateTree},null,2)" height="280"></b-ace-editor>
-      <b-ace-editor :model-value="JSON.stringify({flatState,renderList},null,2)" height="280"></b-ace-editor>
+    <div v-if="dev" class="dev">
+      <b-ace-editor :model-value="JSON.stringify({realData:data},null,2)" height="200"></b-ace-editor>
+      <b-ace-editor :model-value="JSON.stringify({stateTree,flatState},null,2)" height="200"></b-ace-editor>
     </div>
   </div>
 </template>
@@ -331,10 +331,11 @@ export default {
   }
   .dev {
     position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 280px;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    overflow-y: auto;
   }
 }
 </style>

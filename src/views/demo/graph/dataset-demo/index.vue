@@ -54,7 +54,6 @@ import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import ActionButton from '@/components/Common/ActionButton/index.vue'
 import { reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
-import router from '@/router'
 
 export default {
   name: 'DatasetDemo',
@@ -95,7 +94,6 @@ export default {
         path: '/schema/cube',
         query: { id: item.id, workspaceId: item.workspaceId },
       })
-      console.log(routeData)
       window.open(routeData.href, '_blank')
     }
     return {

@@ -157,12 +157,12 @@ export default {
       width: 2px;
       background-color: getColor();
     }
-  }
-  &-icon {
-    flex-shrink: 0;
-    width: 16px;
-    font-size: 16px;
-    color: getColor();
+    .link-node-icon {
+      flex-shrink: 0;
+      width: 16px;
+      font-size: 16px;
+      color: getColor();
+    }
   }
   &-handle {
     position: absolute;

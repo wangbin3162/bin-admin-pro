@@ -12,7 +12,7 @@ export default [
     meta: { title: '连接节点' },
   },
   {
-    path: 'DatasetDemo',
+    path: 'datasetDemo',
     name: 'DatasetDemo',
     component: () => import('@/views/demo/graph/dataset-demo/index.vue'),
     meta: { title: '数据集' },

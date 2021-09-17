@@ -41,7 +41,7 @@
 <script>
 import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
-import LinkNodeWrapper from '@/components/Service/LinkNode/link-node-wrapper.vue'
+import LinkNodeWrapper from '@/components/Service/LinkNode/index.vue'
 import NodeList from '@/components/Service/LinkNode/node-list.vue'
 import { computed, reactive, ref, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
@@ -54,32 +54,31 @@ export default {
   setup() {
     const tableList = ref([])
     // 树结构状态值
-    const states = reactive({
+    const status = reactive({
       stateTree: {},
       flatState: [], // 拉平的树结构
     })
     const dragging = ref(false)
-    const fieldModal = ref(false)
 
-    const allNodeTitle = computed(() => states.flatState.map(v => v.node.title))
+    const allNodeTitle = computed(() => status.flatState.map(v => v.node.title))
 
     // 节点点击事件
     function handleNodeClick(nodeKey) {
-      const node = states.flatState[nodeKey].node
+      const node = status.flatState[nodeKey].node
       console.log(nodeKey, node)
       Message(`点击了${node.title}节点`)
     }
 
     // 节点移除事件
     function handleNodeRemove(nodeKey, parentNodeKey) {
-      const node = states.flatState[nodeKey].node
+      const node = status.flatState[nodeKey].node
       // 执行移除节点操作
       if (node.nodeKey === 0) { // 根节点删除
-        states.stateTree = {}
+        status.stateTree = {}
         updateStateTree()
         return
       }
-      const parentNode = states.flatState[parentNodeKey].node
+      const parentNode = status.flatState[parentNodeKey].node
       const index = parentNode.children.indexOf(node)
       parentNode.children.splice(index, 1)
       updateStateTree()
@@ -87,15 +86,15 @@ export default {
 
     // 连接桩点击事件
     function handleLinkClick(nodeKey, parentNodeKey) {
-      const node = states.flatState[nodeKey].node
-      const parentNode = states.flatState[parentNodeKey].node
+      const node = status.flatState[nodeKey].node
+      const parentNode = status.flatState[parentNodeKey].node
       console.log(nodeKey, parentNodeKey)
       Message(`点击了[${node.title}]-[${parentNode.title}]连接桩`)
     }
 
     // 拖拽增加节点
     function handleNodeDrop(parentNodeKey, tableId) {
-      const parentNode = states.flatState[parentNodeKey].node
+      const parentNode = status.flatState[parentNodeKey].node
       const table = tableList.value.find(v => v.id.toString() === tableId)
       // 执行新增节点操作
       const children = parentNode.children || []
@@ -111,7 +110,7 @@ export default {
     // 增加根节点
     function handleEmptyDrop(tableId) {
       const table = tableList.value.find(v => v.id.toString() === tableId)
-      states.stateTree = {
+      status.stateTree = {
         id: table.id,
         title: table.title,
         tableName: table.tableName,
@@ -126,23 +125,22 @@ export default {
 
     // 获取已配的节点信息
     getTableLinks().then(res => {
-      states.stateTree = res.data
+      status.stateTree = res.data
       updateStateTree()
     })
 
     // 更新树数据
     function updateStateTree() {
-      states.flatState = compileFlatState(states.stateTree)
+      status.flatState = compileFlatState(status.stateTree)
     }
 
     return {
-      ...toRefs(states),
+      ...toRefs(status),
       // 左侧列表
       tableList,
       allNodeTitle,
       // 右侧操作区
       dragging,
-      fieldModal,
       handleNodeClick,
       handleNodeRemove,
       handleNodeDrop,
