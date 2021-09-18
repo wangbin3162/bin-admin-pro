@@ -1,10 +1,11 @@
 import { reactive, ref, toRefs } from 'vue'
 import { compileFlatState } from '@/components/Service/LinkNode/node-util'
 import { getSchema } from '@/api/modules/bi-cube.api'
-import { throwError } from '@/utils/util'
-import { Message } from 'bin-ui-next'
+import { deepCopy, throwError } from '@/utils/util'
 
 export default function useSchema(dataset) {
+  const nodeEditRef = ref(null)
+  const linkEditRef = ref(null)
   // ****************** [左侧表结构] ****************** //
   const tableList = ref([])
   // ****************** [拖拽节点数据] ****************** //
@@ -14,20 +15,51 @@ export default function useSchema(dataset) {
     dragging: false,
     loading: false,
   })
+  // ****************** [编辑节点内容缓存] ****************** //
+  const currentNodeKey = ref(-1)
+  const currentParentNodeKey = ref(-1)
 
   // 节点点击事件
   function handleNodeClick(nodeKey) {
     const node = status.flatState[nodeKey].node
-    console.log(nodeKey, node)
-    Message(`点击了${node.title}节点`)
+    currentNodeKey.value = nodeKey
+    nodeEditRef.value && nodeEditRef.value.open(dataset, node)
+  }
+
+  // 保存一个nodeKey的节点fields选中项
+  function saveCheckedFields(nodeKey, selections) {
+    const node = status.flatState[nodeKey].node
+    // 设置字段选中状态
+    node.fields.forEach(item => {
+      item._checked = selections.includes(item.field)
+    })
+  }
+
+  // 保存已勾选的字段
+  function saveSelectedFields(selectedFields) {
+    saveCheckedFields(currentNodeKey.value, selectedFields)
+  }
+
+  // 保存join keys
+  function saveJoinKeys(parentSelectedFields, selectedFields, tableInfo) {
+    const { joinType, joinKeys } = tableInfo
+    // 保存两个节点勾选项
+    saveCheckedFields(currentParentNodeKey.value, parentSelectedFields)
+    saveCheckedFields(currentNodeKey.value, selectedFields)
+    const node = status.flatState[currentNodeKey.value].node
+    node.joinType = joinType
+    node.joinKeys = deepCopy(joinKeys)
   }
 
   // 连接桩点击事件
   function handleLinkClick(nodeKey, parentNodeKey) {
     const node = status.flatState[nodeKey].node
     const parentNode = status.flatState[parentNodeKey].node
-    console.log(nodeKey, parentNodeKey)
-    Message(`点击了[${node.title}]-[${parentNode.title}]连接桩`)
+
+    currentNodeKey.value = nodeKey
+    currentParentNodeKey.value = parentNodeKey
+
+    linkEditRef.value && linkEditRef.value.open(dataset, node, parentNode)
   }
 
   // 节点移除事件
@@ -59,16 +91,14 @@ export default function useSchema(dataset) {
     if (parentFields.length && fields.length) {
       joinKeys.push({
         sourceKey: parentFields[0].field,
-        sourceType: parentFields[0].type,
         targetKey: fields[0].field,
-        targetType: fields[0].type,
       })
     }
     children.push({
       id,
       title,
       tableName,
-      fields: fields.map(i => ({ ...i, checked: true })),
+      fields: fields.map(i => ({ ...i, _checked: true })),
       joinType: 'LEFT_OUTER_JOIN',
       joinKeys,
     })
@@ -85,7 +115,7 @@ export default function useSchema(dataset) {
       id,
       title,
       tableName,
-      fields: fields.map(i => ({ ...i, checked: true })),
+      fields: fields.map(i => ({ ...i, _checked: true })),
     }
     updateStateTree()
   }
@@ -111,12 +141,17 @@ export default function useSchema(dataset) {
   initData()
 
   return {
+    nodeEditRef,
+    linkEditRef,
     tableList,
     ...toRefs(status),
+    currentNodeKey,
     handleNodeClick,
     handleNodeRemove,
     handleNodeDrop,
     handleLinkClick,
     handleEmptyDrop,
+    saveSelectedFields,
+    saveJoinKeys,
   }
 }

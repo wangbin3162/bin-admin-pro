@@ -25,9 +25,9 @@
         </div>
         <div class="draggable-content" v-if="$slots.draggable" :style="{height: `calc(100% - ${height}px)`}">
           <div class="toggle">
-            <i class="b-iconfont b-icon-up" title="展开" @click="changeDragStatus('maximum')" />
-            <i class="b-iconfont b-icon-down" title="收起" @click="changeDragStatus('minimum')" />
-            <i class="b-iconfont b-icon-pic-center" title="默认高度" @click="changeDragStatus('default')" />
+            <i class="b-iconfont b-icon-caret-up" title="展开" @click="changeDragStatus('maximum')" />
+            <i class="b-iconfont b-icon-caret-down" title="收起" @click="changeDragStatus('minimum')" />
+            <i class="b-iconfont b-icon-creditcard-fill" title="默认高度" @click="changeDragStatus('default')" />
           </div>
           <div
             class="drag-handler"
@@ -172,25 +172,24 @@ export default {
       .toggle {
         position: absolute;
         z-index: 100;
-        top: 12px;
+        top: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 16px;
-        margin-left: -8px;
-        border-radius: 10px;
-        height: 80px;
+        transform: translate(-50%, 0);
+        width: 8px;
+        height: 100px;
         cursor: pointer;
-        background-color: #fff;
-        border: 1px solid #e8e8e8;
+        background-color: #fafafa;
         transition: .15s ease;
+        border-radius: 4px;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12);
         opacity: 0;
+        > i {
+          font-size: 12px;
+        }
         &:hover {
-          background-color: #fafafa;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, .1);
-          i {
-            color: getColor();
-          }
+          background-color: #f3f3f3;
         }
       }
       &:hover {
@@ -212,27 +211,26 @@ export default {
           position: absolute;
           z-index: 100;
           top: 0;
-          right: 32px;
+          left: 50%;
+          transform: translate(-50%, -50%);
           display: flex;
           align-items: center;
           justify-content: center;
-          width: 140px;
-          height: 24px;
-          margin-top: -12px;
+          width: 100px;
+          height: 14px;
           border-radius: 10px;
-          background-color: #fff;
-          border: 1px solid #e8e8e8;
           transition: .15s ease;
+          background-color: #fafafa;
+          box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12);
           opacity: 0;
           &:hover {
-            background-color: #fafafa;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, .08);
+            background-color: #ff3f3f3;
           }
           > i {
             cursor: pointer;
             padding: 2px;
             margin: 0 8px;
-            font-size: 16px;
+            font-size: 12px;
             &:hover {
               color: getColor();
             }

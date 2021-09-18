@@ -10,6 +10,7 @@ export default function useCubePage() {
     id: '',
     workspaceId: '',
     datasetName: '未命名',
+    datasourceName: '探索空间',
   })
 
   // 返回
@@ -24,6 +25,7 @@ export default function useCubePage() {
 
   const getBaseInfo = () => {
     dataset.datasetName = dataset.id === 'dataset_0001' ? '数据集（空）' : '数据集'
+    dataset.datasourceName = '探索空间'
   }
 
   watch(() => route.path, (path) => {

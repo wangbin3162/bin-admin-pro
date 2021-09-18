@@ -6,12 +6,6 @@ export default [
     meta: { title: '交叉表' },
   },
   {
-    path: 'linkNodeDemo',
-    name: 'LinkNodeDemo',
-    component: () => import('@/views/demo/graph/link-node-demo/index.vue'),
-    meta: { title: '连接节点' },
-  },
-  {
     path: 'datasetDemo',
     name: 'DatasetDemo',
     component: () => import('@/views/demo/graph/dataset-demo/index.vue'),

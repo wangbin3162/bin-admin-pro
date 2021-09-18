@@ -28,7 +28,7 @@
             :key="field.field"
           >
             <div class="table-field-icon">
-              <field-type-icon :type="field.type"></field-type-icon>
+              <field-type-icon :type="field.dataType"></field-type-icon>
             </div>
             <div class="table-field-name"><span>{{ field.field }}</span></div>
             <div class="table-field-title"><span>{{ field.title }}</span></div>

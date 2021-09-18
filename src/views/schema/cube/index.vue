@@ -32,6 +32,10 @@
           下方区域
         </template>
       </page-cube-wrapper>
+
+      <!--节点编辑-->
+      <cube-node-edit ref="nodeEditRef" @save="saveSelectedFields"></cube-node-edit>
+      <cube-link-edit ref="linkEditRef" @save="saveJoinKeys"></cube-link-edit>
     </div>
   </div>
 </template>
@@ -45,10 +49,12 @@ import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
 import LinkNodeWrapper from '@/components/Service/LinkNode/index.vue'
 import CubeHeader from '@/views/schema/cube/src/cube-header.vue'
 import CubeTableList from '@/views/schema/cube/src/cube-table-list.vue'
+import CubeNodeEdit from '@/views/schema/cube/src/cube-node-edit.vue'
+import CubeLinkEdit from '@/views/schema/cube/src/cube-link-edit.vue'
 
 export default {
   name: 'Cube',
-  components: { SvgLoading, LinkNodeWrapper, CubeTableList, PageCubeWrapper, CubeHeader },
+  components: { CubeLinkEdit, CubeNodeEdit, SvgLoading, LinkNodeWrapper, CubeTableList, PageCubeWrapper, CubeHeader },
   setup() {
     const pageStatus = useCubePage()
     const schemaStatus = useSchema(pageStatus.dataset)

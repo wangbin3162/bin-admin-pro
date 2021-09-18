@@ -1,9 +1,19 @@
 import { isEmpty } from '@/utils/util'
 
+// 连接类别
 export const JOIN_TYPE = {
   LEFT_OUTER_JOIN: { label: '左外连接' },
-  INNER_JOIN: { label: '左外连接' },
-  FULL_OUTER_JOIN: { label: '左外连接' },
+  INNER_JOIN: { label: '内连接' },
+  FULL_OUTER_JOIN: { label: '全连接' },
+}
+// 字段类别
+export const FIELD_TYPE = {
+  measure: 'M',
+  dimension: 'D',
+  mapping: {
+    M: { label: '度量' },
+    D: { label: '维度' },
+  },
 }
 // 节点高度
 export const NODE_HEIGHT = 30
