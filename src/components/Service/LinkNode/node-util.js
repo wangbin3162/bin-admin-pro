@@ -1,4 +1,4 @@
-import { isEmpty } from '@/utils/util'
+import { isEmpty, typeOf } from '@/utils/util'
 
 // 连接类别
 export const JOIN_TYPE = {

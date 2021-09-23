@@ -24,7 +24,7 @@
               @node-drop="handleNodeDrop"
               @link-click="handleLinkClick"
               @empty-drop="handleEmptyDrop"
-              :dev="true"
+              :dev="dev"
             ></link-node-wrapper>
           </div>
         </template>
@@ -34,27 +34,52 @@
               <span class="tab active">数据预览</span>
             </div>
             <div class="right-col">
+              <!--dev-->
+              <span v-if="dev" class="mr-8">
+                <b-button type="danger" size="mini" icon="bug" @click="debugVisible = true"></b-button>
+                <b-modal title="Debug Data" width="800" v-model="debugVisible" destroy-on-close>
+                  <div flex="box:mean">
+                    <b-ace-editor :model-value="JSON.stringify({dimensionTree,measureTree},null,2)"></b-ace-editor>
+                    <b-ace-editor :model-value="JSON.stringify({dimensionFields,measureFields},null,2)"></b-ace-editor>
+                  </div>
+                </b-modal>
+              </span>
               <b-button type="primary" size="mini" icon="reload">刷新预览</b-button>
             </div>
           </div>
           <div class="preview-data-content">
-            <div class="preview-data-left">
-              <div class="cube-field-panel">
-                <b-scrollbar>
-                  <div class="cube-tree">
-                    <b-tree
-                      :data="fieldTree"
-                      :render="renderContent"
-                      ref="tree"
-                      default-expand
-                      lock-select
-                    ></b-tree>
-                  </div>
-                </b-scrollbar>
+            <div class="preview-data-scroll">
+              <div class="preview-data-left">
+                <div class="cube-field-panel">
+                  <b-scrollbar>
+                    <div class="cube-tree">
+                      <b-tree
+                        :data="[dimensionTree]"
+                        :render="renderContent"
+                        ref="tree"
+                        default-expand
+                        lock-select
+                      ></b-tree>
+                    </div>
+                    <div class="cube-tree">
+                      <b-tree
+                        :data="[measureTree]"
+                        :render="renderContent"
+                        ref="tree"
+                        default-expand
+                        lock-select
+                      ></b-tree>
+                    </div>
+                  </b-scrollbar>
+                </div>
               </div>
-            </div>
-            <div class="preview-data-right">
-              preview-data-right
+              <div class="preview-data-right">
+                <cube-field-table
+                  :dimension-fields="dimensionFields"
+                  :measure-fields="measureFields"
+                  @command="handleDmCommand"
+                ></cube-field-table>
+              </div>
             </div>
           </div>
         </template>
@@ -68,7 +93,7 @@
 </template>
 
 <script>
-import { provide } from 'vue'
+import { provide, ref } from 'vue'
 import useCubePage from '@/views/schema/cube/hooks/use-cube-page'
 import useSchema from '@/views/schema/cube/hooks/use-schema'
 import SvgLoading from '@/components/Common/SvgLoading/index.vue'
@@ -78,10 +103,20 @@ import CubeHeader from '@/views/schema/cube/src/cube-header.vue'
 import CubeTableList from '@/views/schema/cube/src/cube-table-list.vue'
 import CubeNodeEdit from '@/views/schema/cube/src/cube-node-edit.vue'
 import CubeLinkEdit from '@/views/schema/cube/src/cube-link-edit.vue'
+import CubeFieldTable from '@/views/schema/cube/src/cube-field-table.vue'
 
 export default {
   name: 'Cube',
-  components: { CubeLinkEdit, CubeNodeEdit, SvgLoading, LinkNodeWrapper, CubeTableList, PageCubeWrapper, CubeHeader },
+  components: {
+    CubeFieldTable,
+    CubeLinkEdit,
+    CubeNodeEdit,
+    SvgLoading,
+    LinkNodeWrapper,
+    CubeTableList,
+    PageCubeWrapper,
+    CubeHeader,
+  },
   setup() {
     const pageStatus = useCubePage()
     const schemaStatus = useSchema(pageStatus.dataset)
@@ -92,6 +127,8 @@ export default {
     })
 
     return {
+      dev: true,
+      debugVisible: ref(false),
       ...pageStatus,
       ...schemaStatus,
     }
@@ -131,7 +168,6 @@ $cube-base-border-light = 1px solid #d8d8d8;
       box-sizing: border-box;
       padding: 0 20px;
       background-color: #fff;
-      min-width: 1000px;
       border-bottom: $cube-base-border;
       border-top: $cube-base-border;
       .header-tabs {
@@ -155,11 +191,21 @@ $cube-base-border-light = 1px solid #d8d8d8;
       }
     }
     .preview-data-content {
-      display: flex;
       height: calc(100% - 48px);
+      width: 100%;
       overflow: auto;
+      .preview-data-scroll {
+        display: flex;
+        min-width: 1000px;
+        height: 100%;
+      }
       .preview-data-left {
         width: 260px;
+      }
+      .preview-data-right {
+        width: calc(100% - 260px);
+        height: 100%;
+        overflow: auto;
       }
       .cube-field-panel {
         width: 260px;
@@ -168,13 +214,11 @@ $cube-base-border-light = 1px solid #d8d8d8;
         color: #191919;
         border-right: $cube-base-border-light;
         .cube-tree {
+          padding: 8px 5px;
+          + .cube-tree {
+            border-top: $cube-base-border-light;
+          }
           :deep(.bin-tree) {
-            > .bin-tree-children {
-              padding: 8px 5px;
-              + .bin-tree-children {
-                border-top: $cube-base-border-light;
-              }
-            }
             .setting-action {
               display: none;
             }
