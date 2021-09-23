@@ -29,7 +29,34 @@
           </div>
         </template>
         <template #draggable>
-          下方区域
+          <div class="table-header">
+            <div class="header-tabs">
+              <span class="tab active">数据预览</span>
+            </div>
+            <div class="right-col">
+              <b-button type="primary" size="mini" icon="reload">刷新预览</b-button>
+            </div>
+          </div>
+          <div class="preview-data-content">
+            <div class="preview-data-left">
+              <div class="cube-field-panel">
+                <b-scrollbar>
+                  <div class="cube-tree">
+                    <b-tree
+                      :data="fieldTree"
+                      :render="renderContent"
+                      ref="tree"
+                      default-expand
+                      lock-select
+                    ></b-tree>
+                  </div>
+                </b-scrollbar>
+              </div>
+            </div>
+            <div class="preview-data-right">
+              preview-data-right
+            </div>
+          </div>
         </template>
       </page-cube-wrapper>
 
@@ -75,6 +102,8 @@ export default {
 <style scoped lang="stylus">
 @import "../../../assets/stylus/base/var.styl"
 @import "../../../assets/stylus/base/mixins.styl"
+$cube-base-border = 1px solid #dcdbde;
+$cube-base-border-light = 1px solid #d8d8d8;
 .bi-cube-container {
   height: 100vh;
   width: 100%;
@@ -92,6 +121,77 @@ export default {
       background-color: #f2f2f2;
       height: 100%;
       overflow: auto;
+    }
+    .table-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      height: 48px;
+      box-sizing: border-box;
+      padding: 0 20px;
+      background-color: #fff;
+      min-width: 1000px;
+      border-bottom: $cube-base-border;
+      border-top: $cube-base-border;
+      .header-tabs {
+        display: flex;
+        height: 100%;
+        .tab {
+          position: relative;
+          height: 100%;
+          line-height: 48px;
+          color: getColor();
+          &.active:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 2px;
+            background-color: getColor();
+          }
+        }
+      }
+    }
+    .preview-data-content {
+      display: flex;
+      height: calc(100% - 48px);
+      overflow: auto;
+      .preview-data-left {
+        width: 260px;
+      }
+      .cube-field-panel {
+        width: 260px;
+        height: 100%;
+        background-color: #fff;
+        color: #191919;
+        border-right: $cube-base-border-light;
+        .cube-tree {
+          :deep(.bin-tree) {
+            > .bin-tree-children {
+              padding: 8px 5px;
+              + .bin-tree-children {
+                border-top: $cube-base-border-light;
+              }
+            }
+            .setting-action {
+              display: none;
+            }
+            .bin-tree-render-title {
+              .D > i {
+                color: getColor();
+              }
+              .M > i {
+                color: #52c41a;
+              }
+              &:hover .setting-action {
+                display: block;
+              }
+            }
+          }
+        }
+      }
     }
   }
 }

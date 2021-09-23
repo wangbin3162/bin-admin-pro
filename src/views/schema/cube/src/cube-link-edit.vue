@@ -19,7 +19,7 @@
           @selection-change="setParentSelections"
         >
           <template #field="{row}">
-            <div class="field-label">
+            <div class="field-label" flex="cross:center">
               <field-type-icon :type="row.dataType"></field-type-icon>
               <span>{{ row.field }}</span>
             </div>
@@ -37,7 +37,7 @@
           @selection-change="setSelections"
         >
           <template #field="{row}">
-            <div class="field-label">
+            <div class="field-label" flex="cross:center">
               <field-type-icon :type="row.dataType"></field-type-icon>
               <span>{{ row.field }}</span>
             </div>

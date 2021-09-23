@@ -1,5 +1,5 @@
 <template>
-  <i class="svg-icon-wrapper" :style="{fontSize:size}">
+  <i class="svg-icon-wrapper" :style="{fontSize:size,width:size,height:size,}">
     <svg v-if="type==='STRING'"
          class="svg-icon" viewBox="0 0 1706 1024" aria-hidden="true" width="1em" height="1em"
          fill="currentColor">
@@ -93,3 +93,14 @@ export default {
   },
 }
 </script>
+
+<style lang="stylus" scoped>
+.svg-icon-wrapper {
+  display: inline-block;
+  position: relative;
+  > svg {
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+</style>

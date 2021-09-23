@@ -1,7 +1,9 @@
-import { reactive, ref, toRefs } from 'vue'
-import { compileFlatState } from '@/components/Service/LinkNode/node-util'
+import { reactive, ref, toRefs, h } from 'vue'
+import { BDropdown, BDropdownMenu, BDropdownItem } from 'bin-ui-next'
+import { compileFlatState, FIELD_TYPE } from '@/components/Service/LinkNode/node-util'
 import { getSchema } from '@/api/modules/bi-cube.api'
-import { deepCopy, throwError } from '@/utils/util'
+import { deepCopy, isEmpty, throwError } from '@/utils/util'
+import fieldTypeIcon from '@/components/Service/LinkNode/field-type-icon.vue'
 
 export default function useSchema(dataset) {
   const nodeEditRef = ref(null)
@@ -10,8 +12,9 @@ export default function useSchema(dataset) {
   const tableList = ref([])
   // ****************** [拖拽节点数据] ****************** //
   const status = reactive({
-    stateTree: {},
+    stateTree: {}, // 表节点树
     flatState: [], // 拉平的树结构
+    fieldTree: [],
     dragging: false,
     loading: false,
   })
@@ -120,6 +123,64 @@ export default function useSchema(dataset) {
     updateStateTree()
   }
 
+  // 维度度量树
+  function renderContent({ root, node, data }) {
+    const inline = [
+      h('span',
+        {
+          class: `${data.type} t-ellipsis`,
+          style: { width: 'calc(100% - 24px)' },
+          flex: 'cross:center',
+        },
+        [
+          ...[data.nodeType !== 'root' ? h(fieldTypeIcon, {
+            type: data.dataType,
+            style: { marginRight: '4px' },
+          }) : null],
+          data.title,
+        ],
+      ),
+    ]
+    if (data.nodeType !== 'root') inline.push(renderSettingDropdown({ root, node, data }))
+    return h('span', {
+      style: { width: '100%', fontSize: '12px' },
+      flex: 'main:justify',
+    }, inline)
+  }
+
+  // render 渲染设置按钮
+  function renderSettingDropdown({ root, node, data }) {
+    return h(
+      BDropdown,
+      {
+        trigger: 'click',
+        appendToBody: true,
+        placement: 'bottom-start',
+        onCommand: (name) => {
+          console.log(name, data)
+        },
+      },
+      {
+        default: () => h('i', { 'class': ['b-iconfont', 'b-icon-setting', 'setting-action'] }),
+        dropdown: () => h(BDropdownMenu, () => [
+          h(
+            BDropdownItem,
+            { name: 'edit' },
+            () => [h('i', { 'class': 'b-iconfont b-icon-edit-square' }), '编辑'],
+          ),
+          h(
+            BDropdownItem,
+            { name: 'trans' },
+            () => [h('i', { 'class': 'b-iconfont b-icon-swap' }), `转换为${data.type === 'M' ? '维度' : '度量'}`]),
+          h(
+            BDropdownItem,
+            { name: 'delete' },
+            () => [h('i', { 'class': 'b-iconfont b-icon-delete' }), '删除']),
+        ]),
+      },
+    )
+  }
+
   // 更新树数据
   const updateStateTree = () => {
     status.flatState = compileFlatState(status.stateTree)
@@ -129,8 +190,19 @@ export default function useSchema(dataset) {
   const initData = async () => {
     status.loading = true
     try {
-      const { physicalSchema } = await getSchema(dataset)
+      const { physicalSchema, cubeSchema } = await getSchema(dataset)
       status.stateTree = physicalSchema
+      // 拼接树
+      if (cubeSchema) {
+        status.fieldTree = []
+        if (!isEmpty(cubeSchema.dimension)) {
+          status.fieldTree.push(cubeSchema.dimension)
+        }
+        if (!isEmpty(cubeSchema.measure)) {
+          status.fieldTree.push(cubeSchema.measure)
+        }
+      }
+      console.log(status.fieldTree)
       updateStateTree()
     } catch (e) {
       throwError('cube-table-list/initTable')
@@ -153,5 +225,6 @@ export default function useSchema(dataset) {
     handleEmptyDrop,
     saveSelectedFields,
     saveJoinKeys,
+    renderContent,
   }
 }

@@ -40,14 +40,19 @@
     </div>
     <!--dev-->
     <div v-if="dev" class="dev">
-      <b-ace-editor :model-value="JSON.stringify({realData:data},null,2)" height="200"></b-ace-editor>
-      <b-ace-editor :model-value="JSON.stringify({stateTree,flatState},null,2)" height="200"></b-ace-editor>
+      <b-button type="danger" size="mini" icon="bug" @click="debugVisible = true"></b-button>
+      <b-modal title="Debug Data" width="800" v-model="debugVisible" destroy-on-close>
+        <div flex="box:mean">
+          <b-ace-editor :model-value="JSON.stringify({sourceData:data},null,2)"></b-ace-editor>
+          <b-ace-editor :model-value="JSON.stringify({stateTree,flatState},null,2)"></b-ace-editor>
+        </div>
+      </b-modal>
     </div>
   </div>
 </template>
 
 <script>
-import { computed, provide, reactive, toRefs, watch } from 'vue'
+import { computed, provide, reactive, ref, toRefs, watch } from 'vue'
 import { deepCopy, isEmpty } from '@/utils/util'
 import LinkNode from '@/components/Service/LinkNode/node.vue'
 import NodeTip from '@/components/Service/LinkNode/node-tip.vue'
@@ -96,6 +101,7 @@ export default {
       maxRow: 0,
       dragoverNodeIndex: -1,
     })
+    const debugVisible = ref(false)
 
     const dataEmpty = computed(() => isEmpty(states.stateTree))
 
@@ -103,7 +109,7 @@ export default {
 
     // link-margin
     const linkMargin = computed(() => {
-      const devStyle = props.dev ? { background: 'red', width: '100px' } : {}
+      const devStyle = props.dev && debugVisible.value ? { background: 'red', width: '100px' } : {}
       const { maxLevel, maxRow } = states
       return getLinkMarginStyle(maxLevel, maxRow, devStyle)
     })
@@ -279,6 +285,7 @@ export default {
 
     return {
       ...toRefs(states),
+      debugVisible,
       dataEmpty,
       linkMargin,
       onlyRoot,
@@ -333,9 +340,6 @@ export default {
     position: absolute;
     top: 0;
     right: 0;
-    width: 400px;
-    height: 400px;
-    overflow-y: auto;
   }
 }
 </style>

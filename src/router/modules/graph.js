@@ -9,6 +9,6 @@ export default [
     path: 'datasetDemo',
     name: 'DatasetDemo',
     component: () => import('@/views/demo/graph/dataset-demo/index.vue'),
-    meta: { title: '数据集' },
+    meta: { title: '数据模型' },
   },
 ]
