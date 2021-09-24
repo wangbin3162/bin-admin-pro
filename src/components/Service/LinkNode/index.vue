@@ -143,7 +143,7 @@ export default {
           })
           // 存在子节点，追加一个空节点
           node[childrenKey].push({
-            title: props.dev ? `${node.title} - empty node` : props.emptyNodeText,
+            title: props.emptyNodeText,
             level: level + 1,
             nodeIndex: keyIndex++,
             row: ++keyRow,
@@ -154,7 +154,7 @@ export default {
           node.isLeaf = true
           // 不存在children拼接一个空节点
           node[childrenKey] = [{
-            title: props.dev ? `${node.title} - empty node` : props.emptyNodeText,
+            title: props.emptyNodeText,
             level: level + 1,
             row: keyRow,
             isEmpty: true, // 是否是空节点

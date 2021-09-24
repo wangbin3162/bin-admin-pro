@@ -63,10 +63,6 @@ Mock.mock(/\/dataset\/schema/, 'get', options => {
   if (id === 'dataset_0001') {
     return builder({
       physicalSchema: {},
-      cubeSchema: {
-        dimension: {},
-        measure: {},
-      },
     })
   }
   return builder({

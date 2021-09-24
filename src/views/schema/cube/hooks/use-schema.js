@@ -1,8 +1,7 @@
 import { reactive, ref, toRefs, h } from 'vue'
-import { BDropdown, BDropdownMenu, BDropdownItem } from 'bin-ui-next'
-import { compileFlatState, FIELD_TYPE } from '@/components/Service/LinkNode/node-util'
+import { compileFlatState } from '@/components/Service/LinkNode/node-util'
 import { getSchema } from '@/api/modules/bi-cube.api'
-import { deepCopy, throwError } from '@/utils/util'
+import { deepCopy, isEmpty, throwError } from '@/utils/util'
 import fieldTypeIcon from '@/components/Service/LinkNode/field-type-icon.vue'
 import settingDropdown from '../src/setting-dropdown.vue'
 
@@ -90,6 +89,7 @@ export default function useSchema(dataset) {
     const index = parentNode.children.indexOf(node)
     parentNode.children.splice(index, 1)
     updateStateTree()
+    fieldUpdateByTable()
   }
 
   // 拖拽增加子节点
@@ -119,6 +119,7 @@ export default function useSchema(dataset) {
     })
     parentNode.children = children
     updateStateTree()
+    fieldUpdateByTable()
   }
 
   // 增加根节点
@@ -133,6 +134,7 @@ export default function useSchema(dataset) {
       fields: fields.map(i => ({ ...i, _checked: true })),
     }
     updateStateTree()
+    fieldUpdateByTable()
   }
 
   // 维度度量树
@@ -276,7 +278,6 @@ export default function useSchema(dataset) {
         }
       })
     })
-
     const field = {
       dimension: {
         title: '维度',
@@ -293,10 +294,11 @@ export default function useSchema(dataset) {
   }
 
   // 更新字段数据
-  const updateFieldState = ({ dimension = {}, measure = {} }) => {
+  const updateFieldState = (cubeSchema) => {
+    const { dimension, measure } = cubeSchema || {}
     // 维度、度量树
-    status.dimensionTree = dimension
-    status.measureTree = measure
+    status.dimensionTree = dimension || { title: '维度', nodeType: 'root', children: [] }
+    status.measureTree = measure || { title: '度量', nodeType: 'root', children: [] }
     status.dimensionTreeFlats = compileFlatState(status.dimensionTree)
     status.measureTreeFlats = compileFlatState(status.measureTree)
     status.dimensionFields = status.dimensionTreeFlats.filter(v => v.node.nodeType === 'attribute')
@@ -313,7 +315,7 @@ export default function useSchema(dataset) {
       updateStateTree()
       updateFieldState(cubeSchema)
     } catch (e) {
-      throwError('cube-table-list/initTable')
+      throwError('cube-table-list/initTable', e)
     }
     status.loading = false
   }

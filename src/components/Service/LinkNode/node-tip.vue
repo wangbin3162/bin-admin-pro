@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// 节点高度
 import { getTipLineStyle } from '@/components/Service/LinkNode/node-util'
 import { computed, inject } from 'vue'
 import JoinType from '@/components/Service/LinkNode/join-type.vue'
