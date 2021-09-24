@@ -1,6 +1,6 @@
 import { reactive, ref, toRefs, h } from 'vue'
 import { BDropdown, BDropdownMenu, BDropdownItem } from 'bin-ui-next'
-import { compileFlatState } from '@/components/Service/LinkNode/node-util'
+import { compileFlatState, FIELD_TYPE } from '@/components/Service/LinkNode/node-util'
 import { getSchema } from '@/api/modules/bi-cube.api'
 import { deepCopy, throwError } from '@/utils/util'
 import fieldTypeIcon from '@/components/Service/LinkNode/field-type-icon.vue'
@@ -27,6 +27,11 @@ export default function useSchema(dataset) {
   // ****************** [编辑节点内容缓存] ****************** //
   const currentNodeKey = ref(-1)
   const currentParentNodeKey = ref(-1)
+  // ****************** [编辑字段内容] ****************** //
+  const fieldStatus = reactive({
+    fieldModal: false,
+    filedNode: {},
+  })
 
   // 节点点击事件
   function handleNodeClick(nodeKey) {
@@ -42,6 +47,7 @@ export default function useSchema(dataset) {
     node.fields.forEach(item => {
       item._checked = selections.includes(item.field)
     })
+    fieldUpdateByTable()
   }
 
   // 保存已勾选的字段
@@ -129,7 +135,6 @@ export default function useSchema(dataset) {
     updateStateTree()
   }
 
-
   // 维度度量树
   function renderContent({ root, node, data }) {
     const inline = [
@@ -157,20 +162,147 @@ export default function useSchema(dataset) {
 
   // 维度度量，字段操作函数
   function handleDmCommand({ name, node }) {
-    console.log({ name, node })
+    if (name === 'edit') {
+      fieldStatus.fieldModal = true
+      fieldStatus.filedNode = {
+        field: node.field,
+        title: node.title,
+        nodeKey: node.nodeKey,
+        type: node.type,
+      }
+    } else if (name === 'convert') {
+      convertField(node)
+    } else if (name === 'delete') {
+      removeField(node)
+    }
+  }
+
+  // 保存字段
+  function saveField() {
+    const { title, type, nodeKey } = fieldStatus.filedNode
+    const realNode = type === 'D' ? status.dimensionTreeFlats[nodeKey].node : status.measureTreeFlats[nodeKey].node
+    realNode.title = title
+    fieldStatus.fieldModal = false
+  }
+
+  // 字段转换函数
+  function convertField(node) {
+    // 维度转换度量
+    if (node.type === 'D') {
+      // 维度树节点移除当前children
+      const parentKey = status.dimensionTreeFlats[node.nodeKey].parent
+      const parent = status.dimensionTreeFlats[parentKey].node
+      if (parent !== undefined) {
+        const index = parent.children.indexOf(node)
+        parent.children.splice(index, 1)
+      }
+      // 度量树新增一个child
+      const children = status.measureTree.children || []
+      children.push({
+        tableId: node.tableId,
+        field: node.field,
+        title: node.title,
+        dataType: node.dataType,
+        nodeType: 'attribute',
+        type: 'M',
+      })
+      status.measureTree.children = children
+
+      status.measureTree = deepCopy(status.measureTree)
+    } else { // 度量转换维度
+      // 度量树节点移除当前children
+      const parentKey = status.measureTreeFlats[node.nodeKey].parent
+      const parent = status.measureTreeFlats[parentKey].node
+      if (parent !== undefined) {
+        const index = parent.children.indexOf(node)
+        parent.children.splice(index, 1)
+      }
+      // 维度树新增一个child
+      const children = status.dimensionTree.children || []
+      children.push({
+        tableId: node.tableId,
+        field: node.field,
+        title: node.title,
+        dataType: node.dataType,
+        nodeType: 'attribute',
+        type: 'D',
+      })
+      status.dimensionTree.children = children
+      status.dimensionTree = deepCopy(status.dimensionTree)
+    }
+    updateFieldState({
+      dimension: status.dimensionTree,
+      measure: status.measureTree,
+    })
+  }
+
+  // 移除一个字段项
+  function removeField(node) {
+    const { tableId, field } = node
+    // 查找上方表
+    const tableNode = status.flatState.find(v => v.node.id === tableId)
+    const tableKey = tableNode.nodeKey
+    const fields = tableNode.node.fields.filter(i => i._checked && i.field !== field).map(v => v.field)
+    saveCheckedFields(tableKey, fields)
   }
 
   // 更新树数据
   const updateStateTree = () => {
     status.flatState = compileFlatState(status.stateTree)
   }
+
+  // 根据上方表节点更新字段
+  const fieldUpdateByTable = () => {
+    // 保存勾选字段后需要重新刷新字段维度度量状态
+    const tableList = status.flatState.map(i => i.node)
+    const dimension = []
+    const measure = []
+    tableList.forEach(tableNode => {
+      tableNode.fields.forEach(f => {
+        const data = {
+          field: f.field,
+          title: f.title,
+          dataType: f.dataType,
+          type: f.type,
+          nodeType: 'attribute',
+          tableId: tableNode.id,
+        }
+        if (f._checked) {
+          if (f.type === 'D') {
+            dimension.push(data)
+          } else {
+            measure.push(data)
+          }
+        }
+      })
+    })
+
+    const field = {
+      dimension: {
+        title: '维度',
+        nodeType: 'root',
+        children: dimension,
+      },
+      measure: {
+        title: '度量',
+        nodeType: 'root',
+        children: measure,
+      },
+    }
+    updateFieldState(field)
+  }
+
   // 更新字段数据
-  const updateFieldState = () => {
+  const updateFieldState = ({ dimension = {}, measure = {} }) => {
+    // 维度、度量树
+    status.dimensionTree = dimension
+    status.measureTree = measure
     status.dimensionTreeFlats = compileFlatState(status.dimensionTree)
-    status.dimensionFields = status.dimensionTreeFlats.filter(v => v.node.nodeType === 'attribute')
     status.measureTreeFlats = compileFlatState(status.measureTree)
+    status.dimensionFields = status.dimensionTreeFlats.filter(v => v.node.nodeType === 'attribute')
     status.measureFields = status.measureTreeFlats.filter(v => v.node.nodeType === 'attribute')
   }
+
   // 初始化数据表
   const initData = async () => {
     status.loading = true
@@ -179,10 +311,7 @@ export default function useSchema(dataset) {
       // 表节点树
       status.stateTree = physicalSchema
       updateStateTree()
-      // 维度、度量树
-      status.dimensionTree = cubeSchema.dimension || {}
-      status.measureTree = cubeSchema.measure || {}
-      updateFieldState()
+      updateFieldState(cubeSchema)
     } catch (e) {
       throwError('cube-table-list/initTable')
     }
@@ -196,7 +325,9 @@ export default function useSchema(dataset) {
     linkEditRef,
     tableList,
     ...toRefs(status),
+    ...toRefs(fieldStatus),
     currentNodeKey,
+    currentParentNodeKey,
     handleNodeClick,
     handleNodeRemove,
     handleNodeDrop,
@@ -206,5 +337,6 @@ export default function useSchema(dataset) {
     saveJoinKeys,
     renderContent,
     handleDmCommand,
+    saveField,
   }
 }

@@ -242,7 +242,7 @@ export default [
       },
       {
         name: 'DatasetDemo',
-        title: '数据模型',
+        title: '分析模型',
       },
     ],
   },

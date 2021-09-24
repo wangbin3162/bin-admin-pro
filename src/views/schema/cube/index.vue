@@ -88,6 +88,20 @@
       <!--节点编辑-->
       <cube-node-edit ref="nodeEditRef" @save="saveSelectedFields"></cube-node-edit>
       <cube-link-edit ref="linkEditRef" @save="saveJoinKeys"></cube-link-edit>
+      <b-modal v-model="fieldModal" title="编辑字段">
+        <b-form :model="filedNode" label-width="90px">
+          <b-form-item label="字段名" required>
+            <label>{{ filedNode.field }}</label>
+          </b-form-item>
+          <b-form-item prop="title" label="字段标题" required>
+            <b-input v-model="filedNode.title"></b-input>
+          </b-form-item>
+        </b-form>
+        <template #footer>
+          <b-button @click="fieldModal=false">取 消</b-button>
+          <b-button type="primary" @click="saveField">确 定</b-button>
+        </template>
+      </b-modal>
     </div>
   </div>
 </template>
