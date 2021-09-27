@@ -1,7 +1,7 @@
 import { reactive, ref, toRefs, h } from 'vue'
 import { compileFlatState } from '@/components/Service/LinkNode/node-util'
 import { getSchema } from '@/api/modules/bi-cube.api'
-import { deepCopy, isEmpty, throwError } from '@/utils/util'
+import { deepCopy, throwError } from '@/utils/util'
 import fieldTypeIcon from '@/components/Service/LinkNode/field-type-icon.vue'
 import settingDropdown from '../src/setting-dropdown.vue'
 
@@ -201,6 +201,7 @@ export default function useSchema(dataset) {
       // 度量树新增一个child
       const children = status.measureTree.children || []
       children.push({
+        fieldId: node.fieldId,
         tableId: node.tableId,
         field: node.field,
         title: node.title,
@@ -222,6 +223,7 @@ export default function useSchema(dataset) {
       // 维度树新增一个child
       const children = status.dimensionTree.children || []
       children.push({
+        fieldId: node.fieldId,
         tableId: node.tableId,
         field: node.field,
         title: node.title,
@@ -240,11 +242,12 @@ export default function useSchema(dataset) {
 
   // 移除一个字段项
   function removeField(node) {
-    const { tableId, field } = node
+    const { tableId, fieldId } = node
     // 查找上方表
     const tableNode = status.flatState.find(v => v.node.id === tableId)
     const tableKey = tableNode.nodeKey
-    const fields = tableNode.node.fields.filter(i => i._checked && i.field !== field).map(v => v.field)
+    const fields = tableNode.node.fields.filter(i => i._checked && i.fieldId !== fieldId).map(v => v.field)
+
     saveCheckedFields(tableKey, fields)
   }
 
@@ -262,6 +265,7 @@ export default function useSchema(dataset) {
     tableList.forEach(tableNode => {
       tableNode.fields.forEach(f => {
         const data = {
+          fieldId: f.fieldId,
           field: f.field,
           title: f.title,
           dataType: f.dataType,
@@ -305,6 +309,26 @@ export default function useSchema(dataset) {
     status.measureFields = status.measureTreeFlats.filter(v => v.node.nodeType === 'attribute')
   }
 
+  function allowDrop(draggingNode, dropNode, type) {
+    if (dropNode.nodeType === 'attribute') {
+      return type !== 'inner'
+    } else {
+      return dropNode.nodeType !== 'root'
+    }
+  }
+
+  function allowDrag(draggingNode) {
+    // 限制拖拽节点
+    return draggingNode.nodeType === 'attribute'
+  }
+
+  function handleDrop(draggingNode, dropNode, dropType, ev) {
+    updateFieldState({
+      dimension: status.dimensionTree,
+      measure: status.measureTree,
+    })
+  }
+
   // 初始化数据表
   const initData = async () => {
     status.loading = true
@@ -330,6 +354,9 @@ export default function useSchema(dataset) {
     ...toRefs(fieldStatus),
     currentNodeKey,
     currentParentNodeKey,
+    allowDrop,
+    allowDrag,
+    handleDrop,
     handleNodeClick,
     handleNodeRemove,
     handleNodeDrop,

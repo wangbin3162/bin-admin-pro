@@ -11,4 +11,10 @@ export default [
     component: () => import('@/views/demo/graph/dataset-demo/index.vue'),
     meta: { title: '分析模型' },
   },
+  {
+    path: 'dashboardDemo',
+    name: 'DashboardDemo',
+    component: () => import('@/views/demo/graph/dashboard-demo/index.vue'),
+    meta: { title: '仪表板' },
+  },
 ]

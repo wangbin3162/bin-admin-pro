@@ -5,11 +5,11 @@
         <b-tabs v-model="activeTab" :data="tabs"></b-tabs>
       </div>
     </template>
-    <b-collapse-wrap title="数据集" shadow="none">
+    <b-collapse-wrap title="仪表板" shadow="none">
       <template #right>
         <b-space>
           <b-input size="small" placeholder="请输入..." search></b-input>
-          <b-button size="small" icon="plus" type="primary">新建数据集</b-button>
+          <b-button size="small" icon="plus" type="primary">新建仪表板</b-button>
           <b-button size="small" icon="plus" type="primary" transparent>新建文件夹</b-button>
         </b-space>
       </template>
@@ -17,7 +17,7 @@
         <ul class="list-wrap">
           <li v-for="item in list" :key="item.id" class="base-list-item">
             <div class="list-item-meta">
-              <b-icon name="database"></b-icon>
+              <b-icon name="barchart"></b-icon>
               <div class="list-item-meta-content">
                 <div class="list-item-meta-title">
                   <a @click="handleEdit(item)">{{ item.datasetName }}</a>
@@ -69,8 +69,8 @@ export default {
     const listStatus = reactive({
       list: [
         {
-          id: 'dataset-0001',
-          datasetName: '数据集（空）',
+          id: 'page-pc-0001',
+          datasetName: '仪表板（空）',
           workspaceId: 'test_datasource',
           datasourceName: '探索空间',
           creator: '316281400@qq.com',
@@ -78,8 +78,8 @@ export default {
           updateDate: '2021/9/16 08:50:29',
         },
         {
-          id: 'dataset-0002',
-          datasetName: '数据集',
+          id: 'page-pc-0002',
+          datasetName: '仪表板',
           workspaceId: 'test_datasource',
           datasourceName: '探索空间',
           creator: '316281400@qq.com',
@@ -91,8 +91,8 @@ export default {
     const router = useRouter()
     const handleEdit = (item) => {
       let routeData = router.resolve({
-        path: '/schema/cube',
-        query: { id: item.id, workspaceId: item.workspaceId },
+        path: '/schema/pc',
+        query: { pageId: item.id, workspaceId: item.workspaceId },
       })
       window.open(routeData.href, '_blank')
     }
@@ -123,7 +123,7 @@ export default {
     align-items: flex-start;
     font-size: 0;
     > .b-iconfont {
-      background-color: getColor();
+      background-color: #fa8c16;
       color: #fff;
       width: 40px;
       height: 40px;

@@ -244,6 +244,10 @@ export default [
         name: 'DatasetDemo',
         title: '分析模型',
       },
+      {
+        name: 'DashboardDemo',
+        title: '仪表板',
+      },
     ],
   },
 ]

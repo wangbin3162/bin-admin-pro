@@ -8,7 +8,7 @@
           </div>
         </b-tooltip>
         <div class="simple-cube-icon">
-          <cube-svg></cube-svg>
+          <pc-svg></pc-svg>
         </div>
         <input
           class="simple-header-input"
@@ -22,18 +22,32 @@
       <div class="simple-header-right">
         <div class="cube-btn" flex="cross:center">
           <b-space size="large">
-            <b-tooltip content="另存为" theme="light">
-              <b-icon name="file-copy" size="18" type="button"></b-icon>
-            </b-tooltip>
             <b-tooltip content="帮助" theme="light">
               <b-icon name="question-circle" size="18" type="button"></b-icon>
             </b-tooltip>
-            <span class="primary-btn" @click="handleSave">保存</span>
+            <span class="primary-btn transparent" @click="handleSave">预览</span>
+            <span class="primary-btn transparent" @click="handleSave">保存</span>
+            <span class="primary-btn" @click="handleSave">保存并发布</span>
           </b-space>
         </div>
-        <div class="cube-navigator" @click="handleCreatePc">
-          <b-icon name="barchart" size="16"></b-icon>
-          开始分析
+        <div class="cube-navigator">
+          <b-dropdown trigger="click">
+            <i class="iconfont svg-icon-wrapper icon-qbi-gengduo"
+               data-spm-anchor-id="0.0.0.i22.7ecf4666dsN92y">
+              <svg class="svg-icon" viewBox="0 0 1024 1024" aria-hidden="true" width="1em" height="1em"
+                   fill="currentColor"
+                   data-spm-anchor-id="0.0.0.i21.7ecf4666dsN92y">
+                <path
+                  d="M393.846154 787.692308h236.307692v236.307692H393.846154zM393.846154 393.846154h236.307692v236.307692H393.846154zM393.846154 0h236.307692v236.307692H393.846154z"
+                  fill="" data-spm-anchor-id="0.0.0.i7.7ecf4666dsN92y"></path>
+              </svg>
+            </i>
+            <template #dropdown>
+              <b-dropdown-menu>
+                <b-dropdown-item icon="file-copy">复制</b-dropdown-item>
+              </b-dropdown-menu>
+            </template>
+          </b-dropdown>
         </div>
       </div>
     </div>
@@ -42,12 +56,12 @@
 
 <script>
 import { ref, watch } from 'vue'
-import CubeSvg from '@/views/schema/cube/src/cube-svg.vue'
 import { useRouter } from 'vue-router'
+import PcSvg from '@/views/schema/pc/src/pc-svg.vue'
 
 export default {
-  name: 'cube-header',
-  components: { CubeSvg },
+  name: 'pc-header',
+  components: { PcSvg },
   emits: ['update:modelValue', 'save', 'back'],
   props: {
     modelValue: {
@@ -64,7 +78,6 @@ export default {
   },
   setup(props, { emit }) {
     const name = ref('')
-    const router = useRouter()
 
     const handleBack = () => {
       emit('back', props.backUrl)
@@ -78,16 +91,6 @@ export default {
       emit('update:modelValue', e.target.value.trim())
     }
 
-    // 创建仪表板
-    const handleCreatePc = () => {
-      const { id, workspaceId } = props.pageStatus
-      let routeData = router.resolve({
-        path: '/schema/pc',
-        query: { workspaceId, sourceId: id, sourceType: 'cube' },
-      })
-      window.open(routeData.href, '_blank')
-    }
-
     watch(() => props.modelValue, val => {
       name.value = val
     }, { immediate: true })
@@ -97,7 +100,6 @@ export default {
       handleSave,
       handleInputChange,
       handleBack,
-      handleCreatePc,
     }
   },
 }
@@ -167,25 +169,39 @@ export default {
       background-color: getColor();
       border: 1px solid getColor();
       border-radius: 14px;
+      &.transparent {
+        background-color: transparent;
+      }
       + .primary-btn {
         margin-left: 14px;
       }
     }
   }
-  .cube-navigator {
+  .cube-navigator .iconfont {
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 108px;
     height: 100%;
     cursor: pointer;
-    font-size: 12px;
-    &:hover {
-      background: #000;
+    font-size: 16px;
+    margin: 0 20px;
+    position: relative;
+    top: 2px;
+  }
+}
+</style>
+<style lang="stylus">
+.bi-pc-container {
+  .header-container {
+    .bin-dropdown__popper.bin-popper[role=tooltip] {
+      background-color: #0b1532;
     }
-    > i {
-      margin-right: 4px;
+    .bin-dropdown-menu .bin-dropdown-item {
+      color: #ced0d6
+      &:hover {
+        background: #2f3a5b;
+      }
     }
   }
 }

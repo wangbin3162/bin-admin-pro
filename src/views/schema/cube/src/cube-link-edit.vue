@@ -2,7 +2,6 @@
   <b-drawer
     v-model="visible"
     title="编辑关联关系"
-    :mask-closable="false"
     inner
     :width="800"
     :styles="{padding:0}"

@@ -6,11 +6,12 @@ export default function useCubePage() {
   const router = useRouter()
   const route = useRoute()
 
-  const dataset = reactive({
-    id: '',
+  const dashboard = reactive({
+    pageId: '',
     workspaceId: '',
-    datasetName: '未命名',
-    datasourceName: '探索空间',
+    sourceId: '',
+    sourceType: '',
+    dashboardName: '未命名', // 面板名称
   })
 
   // 返回
@@ -20,20 +21,22 @@ export default function useCubePage() {
 
   // 保存
   const handleSave = () => {
-    Message.success(`保存 [ ${dataset.datasetName} ] 成功`)
+    Message.success('保存成功')
   }
 
   const getBaseInfo = () => {
-    dataset.datasetName = dataset.id === 'dataset_0001' ? '数据集（空）' : '数据集'
-    dataset.datasourceName = '探索空间'
+    const { pageId, workspaceId, sourceId, sourceType } = route.query
+    dashboard.pageId = pageId
+    dashboard.workspaceId = workspaceId
+    dashboard.sourceId = sourceId
+    dashboard.sourceType = sourceType
+    dashboard.dashboardName = dashboard.pageId === 'page-pc-0001' ? '仪表板（空）' : '仪表板'
   }
 
   watch(() => route.path, (path) => {
-    if (path !== '/schema/cube') return
-    const { id, workspaceId } = route.query
-    if (id && workspaceId) {
-      dataset.id = id
-      dataset.workspaceId = workspaceId
+    if (path !== '/schema/pc') return
+    const { workspaceId } = route.query
+    if (workspaceId) {
       getBaseInfo()
     } else {
       Message.error({
@@ -44,11 +47,11 @@ export default function useCubePage() {
   }, { immediate: true })
 
   onMounted(() => {
-    document.title = dataset.datasetName
+    document.title = dashboard.dashboardName
   })
 
   return {
-    dataset,
+    dashboard,
     handleSave,
     handleBack,
   }

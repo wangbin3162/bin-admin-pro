@@ -2,6 +2,7 @@
   <div class="bi-cube-container">
     <cube-header
       v-model="dataset.datasetName"
+      :page-status="dataset"
       back-url="/datasetDemo"
       @save="handleSave"
       @back="handleBack"
@@ -54,20 +55,26 @@
                   <b-scrollbar>
                     <div class="cube-tree">
                       <b-tree
-                        :data="[dimensionTree]"
-                        :render="renderContent"
-                        ref="tree"
                         default-expand
                         lock-select
+                        draggable
+                        :allow-drop="allowDrop"
+                        :allow-drag="allowDrag"
+                        :data="[dimensionTree]"
+                        :render="renderContent"
+                        @node-drop="handleDrop"
                       ></b-tree>
                     </div>
                     <div class="cube-tree">
                       <b-tree
+                        default-expand
+                        draggable
+                        lock-select
+                        :allow-drop="allowDrop"
+                        :allow-drag="allowDrag"
                         :data="[measureTree]"
                         :render="renderContent"
-                        ref="tree"
-                        default-expand
-                        lock-select
+                        @node-drop="handleDrop"
                       ></b-tree>
                     </div>
                   </b-scrollbar>

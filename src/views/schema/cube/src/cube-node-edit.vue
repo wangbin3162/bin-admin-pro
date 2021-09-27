@@ -1,7 +1,6 @@
 <template>
   <b-drawer
     v-model="visible"
-    :mask-closable="false"
     inner
     :z-index="10"
     :width="400"
