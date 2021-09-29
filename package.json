@@ -25,7 +25,7 @@
     "axios": "^0.21.4",
     "bin-charts-next": "^1.0.5",
     "bin-editor-next": "^1.0.5",
-    "bin-ui-next": "^1.0.6",
+    "bin-ui-next": "^1.0.8",
     "echarts": "^5.2.1",
     "good-storage": "^1.1.1",
     "javascript-natural-sort": "^0.7.1",
