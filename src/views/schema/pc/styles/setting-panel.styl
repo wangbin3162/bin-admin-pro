@@ -1,0 +1,39 @@
+@import "schema-var.styl"
+
+.schema-setting-content {
+  // 覆盖收起容器
+  .bin-collapse-simple {
+    background-color: transparent;
+    border: none;
+    .bin-collapse-item {
+      border: none;
+    }
+    .bin-collapse-header {
+      padding: 0 6px;
+      height: 38px;
+      line-height: 38px;
+      color: rgba(255, 255, 255, .85);
+      font-size: 12px;
+      border: none;
+      > i.b-icon-right {
+        color: rgba(255, 255, 255, .45);
+        font-size: 12px;
+      }
+    }
+    .bin-collapse-content {
+      background-color: $bg-color-2;
+      padding: 0 12px;
+      color: $text-color;
+      .bin-collapse-content-box {
+        font-size: 12px;
+      }
+    }
+  }
+  .edit-item-title {
+    font-size: 12px;
+    line-height: 28px;
+    max-height: 28px;
+    font-weight: 400;
+    margin-right: 8px;
+  }
+}
