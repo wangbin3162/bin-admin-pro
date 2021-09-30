@@ -1,5 +1,6 @@
 @import "../../../../assets/stylus/base/mixins.styl"
 @import "schema-var.styl"
+@import "overlay.styl"
 @import "setting-panel.styl"
 .bi-pc-container {
   height: 100vh;
@@ -19,6 +20,7 @@
       height: 100%;
     }
   }
+
 
   // 顶部操作栏
   .action-panel {
@@ -103,15 +105,6 @@
       position: relative;
       top: 2px;
     }
-    .bin-dropdown__popper.bin-popper[role=tooltip] {
-      background-color: #0b1532;
-    }
-    .bin-dropdown-menu .bin-dropdown-item {
-      color: #ced0d6
-      &:hover {
-        background: #2f3a5b;
-      }
-    }
   }
 
 
@@ -164,6 +157,23 @@
   }
 
 
+  // canvas画布面板
+  .schema-canvas-wrap {
+    width: 100%;
+    height: calc(100% - 45px);
+    .editor-container {
+      height: 100%;
+      position: relative;
+      overflow: auto;
+      .editor-container-main {
+        min-height: 100%;
+        padding: 5px;
+        background: #f0f2f5;
+      }
+    }
+  }
+
+
   // 页面配置面板
   .page-config-panel {
     display: flex;
@@ -191,6 +201,7 @@
         .tabs-wrapper {
           display: flex;
           background: $bg-color-2;
+          height: 28px;
           border-bottom: 1px solid $bg-color;
           .tab-item {
             cursor: pointer;
@@ -212,5 +223,6 @@
       }
     }
   }
+
 }
 
