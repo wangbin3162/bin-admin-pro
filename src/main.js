@@ -6,6 +6,7 @@ import { registerUI } from '@/plugins/bin-ui-next'
 import { registerCharts } from '@/plugins/bin-charts-next'
 import { registerEditor } from '@/plugins/bin-editor-next'
 import 'bin-ui-next/lib/styles/normalize.css' // 初始化样式
+import 'bin-ui-next/lib/styles/scrollbar.css' // 滚动条样式
 import 'bin-ui-next/lib/styles/index.css' // 组件库样式
 import '@/assets/stylus/index.styl' // 项目样式
 
