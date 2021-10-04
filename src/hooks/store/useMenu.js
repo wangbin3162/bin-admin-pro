@@ -67,6 +67,13 @@ export default function useMenu() {
       refreshCurrentPage()
       return
     }
+    // 外链跳转
+    const curMenu = allMenuItems.value.find(item => item.name === name)
+    if (curMenu && curMenu.link) {
+      window.open(curMenu.link, '_blank')
+      return
+    }
+    // 路由跳转
     if (addRouters.value.find(item => item.name === name) || name === HOME_PATH) {
       $router.push({ name })
     } else {

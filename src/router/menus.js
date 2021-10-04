@@ -232,6 +232,37 @@ export default [
     ],
   },
   {
+    name: 'OutLink',
+    title: '外部连接',
+    icon: 'earth',
+    children: [
+      {
+        name: 'CompDoc',
+        title: '组件文档',
+        icon: 'link',
+        link: 'https://wangbin3162.gitee.io/bin-ui-next/',
+      },
+      {
+        name: 'Github',
+        title: '仓库地址',
+        icon: 'link',
+        link: 'https://github.com/wangbin3162/bin-ui-next',
+      },
+      {
+        name: 'DataV',
+        title: 'DataV',
+        icon: 'link',
+        link: 'https://wangbin3162.gitee.io/bin-datav/',
+      },
+      {
+        name: 'DataVSchema',
+        title: '数据分析平台',
+        icon: 'link',
+        link: 'https://wangbin3162.gitee.io/bin-datav-schema/',
+      },
+    ],
+  },
+  {
     name: 'Graph',
     title: '图形图表',
     icon: 'pointmap',
@@ -239,14 +270,6 @@ export default [
       {
         name: 'PivotDemo',
         title: '交叉表',
-      },
-      {
-        name: 'DatasetDemo',
-        title: '分析模型',
-      },
-      {
-        name: 'DashboardDemo',
-        title: '仪表板',
       },
     ],
   },

@@ -70,7 +70,5 @@ git clone https://github.com/wangbin3162/bin-admin-pro.git
 npm install or yarn install
 
 # 本地开发 启动项目
-npm run serve
-# OR vue ui 图形化界面启动
-vue ui
+npm run dev
 ```

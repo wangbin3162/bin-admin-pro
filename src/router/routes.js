@@ -70,17 +70,6 @@ export const routesOutLayout = [
     name: 'Login',
     component: () => import('@/views/system/login.vue'),
   },
-  // 分析看板
-  {
-    path: '/schema/cube',
-    name: 'Cube',
-    component: () => import('@/views/schema/cube/index.vue'),
-  },
-  {
-    path: '/schema/pc',
-    name: 'Pc',
-    component: () => import('@/views/schema/pc/index.vue'),
-  },
 ]
 
 /**

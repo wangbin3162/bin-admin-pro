@@ -41,7 +41,7 @@ export default function useForm() {
     editStatus.value = 'normal'
   }
 
-  function submitForm(doneFun, validateErrMsg = '表单校验错误，轻填写正确后再次提交！') {
+  function submitForm(doneFun, validateErrMsg = '表单校验错误，请填写正确后再次提交！') {
     if (!formRef.value) return
     formRef.value.validate((valid) => {
       if (valid) {

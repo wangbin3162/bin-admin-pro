@@ -8,7 +8,6 @@ import './services/roles'
 import './services/list'
 import './services/depart'
 import './services/menu'
-import './services/bi-cube'
 
 Mock.setup({
   timeout: 300, // setter delay time
