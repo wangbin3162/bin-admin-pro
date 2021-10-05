@@ -69,8 +69,8 @@ export default function useMenu() {
     }
     // 外链跳转
     const curMenu = allMenuItems.value.find(item => item.name === name)
-    if (curMenu && curMenu.link) {
-      window.open(curMenu.link, '_blank')
+    if (curMenu && curMenu.externalLink) {
+      window.open(curMenu.externalLink, '_blank')
       return
     }
     // 路由跳转
