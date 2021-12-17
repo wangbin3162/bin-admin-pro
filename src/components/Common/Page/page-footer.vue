@@ -1,5 +1,5 @@
 <template>
-  <div class="page-footer" :style="rightContentWidth">
+  <div class="page-footer" :style="pageFooterWidth">
     <div class="page-footer__left">
       <slot name="left" />
     </div>
@@ -16,8 +16,8 @@ import useSetting from '@/hooks/store/useSetting'
 export default {
   name: 'PageFooter',
   setup() {
-    const { rightContentWidth } = useSetting()
-    return { rightContentWidth }
+    const { pageFooterWidth } = useSetting()
+    return { pageFooterWidth }
   },
 }
 </script>

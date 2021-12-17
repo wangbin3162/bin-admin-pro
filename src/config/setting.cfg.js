@@ -9,28 +9,28 @@ const { getPalette, mixBlack, alpha } = Utils.color
 export default {
   theme: 'dark',
   menuTheme: '#001529',
-  systemPrimary: '#0e7be6',
+  systemPrimary: '#1089ff',
   sidebar: true, // 侧边栏开启状态
-  sidebarWidth: 220, // 侧边栏宽度
+  sidebarWidth: 256, // 侧边栏宽度
   tagsView: true, // 多页签开启状态
   fixedHeader: true,
   fixedAside: true,
   showWeather: true,
   showSearch: true,
-  showMessage: true,
-  contentFull: false, // 中间内容区域是否撑满
+  showMessage: false,
+  contentFull: false // 中间内容区域是否撑满
 }
 
 export const SYSTEM_PRIMARY_COLOR_LIST = [
-  '#0e7be6',
+  '#1089ff',
   '#009688',
   '#0960bd',
   '#536def',
   '#ff5c93',
   '#ee4f12',
   '#0096c7',
-  '#722ed1',
-  '#ff9800',
+  '#9c27b0',
+  '#ff9800'
 ]
 
 export const MENU_THEME_COLOR_LIST = [
@@ -42,7 +42,7 @@ export const MENU_THEME_COLOR_LIST = [
   '#031d21',
   '#28333E',
   '#292c37',
-  '#383f45',
+  '#383f45'
 ]
 
 const MENU_THEME_VAR = '--menu-bg-color'

@@ -16,8 +16,6 @@ export const debounce = Utils.util.debounce
 
 export const isEmpty = Utils.helper.isEmpty
 
-export const windowOpen = Utils.util.open
-
 export const on = Utils.dom.on
 
 export const off = Utils.dom.off
@@ -43,7 +41,11 @@ export function arraybuffer2Base64(data) {
  * @param log 是否打印到控制台
  */
 export function throwError(callFun, e, title, log = true) {
-  Notice.error({ title: title || '错误', message: e.message || '操作错误！' })
+  if (e.statusCode === 401) {
+    Notice.warning({ title: title || '提示', message: e.message || '操作错误！' })
+  } else {
+    Notice.error({ title: title || '错误', message: e.message || '操作错误！' })
+  }
   if (log) {
     const str = callFun.split('/')
     if (str && str.length >= 2) {
@@ -88,7 +90,7 @@ export function downloadFile(content, fileName) {
     jpg: 'image/jpeg',
     png: 'image/png',
     txt: 'text/plain',
-    xml: 'image/text/xml',
+    xml: 'image/text/xml'
   }
   const hg = fileName.split('.').pop().toLocaleLowerCase() || ''
 

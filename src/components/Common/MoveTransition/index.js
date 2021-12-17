@@ -3,10 +3,16 @@ import { h, Transition } from 'vue'
 export default {
   name: 'MoveTransition',
   functional: true,
+  props: {
+    name: {
+      type: String,
+      default: 'fade-transverse',
+    }
+  },
   setup(props, { slots }) {
     return () => {
       return h(Transition, {
-        name: 'fade-transverse',
+        name: props.name,
         appear: true,
         onBeforeLeave(el) {
           el.style.position = 'absolute'

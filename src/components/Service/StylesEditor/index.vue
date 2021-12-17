@@ -1,5 +1,16 @@
 <template>
-  <div class="styles-editor-wrap">
+  <div v-if="simple" class="styles-editor-simple-wrap">
+    <div class="mb-5" flex="cross:center">
+      <b-radio-group v-model="width" type="button" size="mini">
+        <b-radio label="25%">1</b-radio>
+        <b-radio label="50%">2</b-radio>
+        <b-radio label="75%">3</b-radio>
+        <b-radio label="100%">4</b-radio>
+      </b-radio-group>
+      <span class="ml-5">/&nbsp;4</span>
+    </div>
+  </div>
+  <div v-else class="styles-editor-wrap">
     <div flex="main:justify">
       <div class="editor-box">
         <b-ace-editor
@@ -53,6 +64,10 @@ export default {
       default: '',
     },
     showAction: {
+      type: Boolean,
+      default: true,
+    },
+    simple: {
       type: Boolean,
       default: true,
     },

@@ -39,16 +39,18 @@ export default function useSetting() {
       width: `${width}px`,
     }
   })
-  // 右侧区域宽度
-  const rightContentWidth = computed(() => {
+  // 页脚footer宽度
+  const pageFooterWidth = computed(() => {
+    return {
+      width: !contentFull.value ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
+    }
+  })
+
+  // 固定头部样式
+  const fixedHeaderStyle = computed(() => {
     return {
       width: (!contentFull.value && fixedHeader.value)
         ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
-    }
-  })
-  const fixedHeaderStyle = computed(() => {
-    return {
-      ...rightContentWidth.value,
       padding: 0,
       zIndex: 10,
       right: fixedHeader.value ? 0 : null,
@@ -153,7 +155,7 @@ export default function useSetting() {
     weather,
     // computed
     asideStyle,
-    rightContentWidth,
+    pageFooterWidth,
     fixedHeaderStyle,
     // normal colors
     systemPrimaryColorList: SYSTEM_PRIMARY_COLOR_LIST,

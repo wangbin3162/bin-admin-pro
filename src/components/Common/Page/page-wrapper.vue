@@ -4,11 +4,19 @@
       <div class="grid-content">
         <div class="page-header has-breadcrumb">
           <div class="page-header-heading">
-            <span class="page-header-heading-title">{{ normalTitle }}</span>
-            <slot name="right"></slot>
+            <b-popover trigger="hover" placement="right" width="" v-if="isBubbles">
+              <span class="page-header-heading-title">{{ normalTitle }}
+                 <b-icon  name="question-circle-fill"></b-icon>
+              </span>
+              <template #content >
+                <div>{{normalDesc}}</div>
+              </template>
+            </b-popover>
+            <span class="page-header-heading-title" v-if="!isBubbles">{{ normalTitle }}</span>
+              <slot name="right"></slot>
           </div>
-          <div class="page-header-desc" v-if="$slots.desc || desc">
-            <slot name="desc">{{ desc }}</slot>
+          <div class="page-header-desc" v-if="$slots.desc">
+            <slot name="desc">{{ normalDesc }}</slot>
           </div>
           <b-icon v-if="showClose" name="close" type="button" @click="$emit('close')"></b-icon>
         </div>
@@ -18,7 +26,7 @@
       <div
         class="page-header-wrap-children-content"
         :class="{'has-bg':bg}"
-        :style="{margin:contentMargin,padding:bg?contentPadding:null}"
+        :style="{padding:bg?contentPadding:null}"
       >
         <slot>
         </slot>
@@ -49,11 +57,11 @@ export default {
     desc: String,
     showClose: Boolean,
     bg: Boolean,
-    contentPadding: {
-      type: String,
-      default: '16px',
+    isBubbles: {
+      type: Boolean,
+      default: false
     },
-    contentMargin: {
+    contentPadding: {
       type: String,
       default: '16px',
     },
@@ -63,11 +71,12 @@ export default {
     const { showTagsView } = useSetting()
     const { getCurrentRouteMenu } = useMenu()
     const normalTitle = computed(() => props.title ? props.title : (getCurrentRouteMenu() ? getCurrentRouteMenu().title : 'no-title'))
-
+    const normalDesc = computed(() => props.desc ? props.desc: (getCurrentRouteMenu() ? getCurrentRouteMenu().desc : ''))
     const getShowFooter = ref(slots.leftFooter || slots.rightFooter)
 
     return {
       normalTitle,
+      normalDesc,
       showTagsView,
       getShowFooter,
     }
@@ -103,6 +112,9 @@ export default {
         padding-right: 12px;
       }
     }
+    &-desc{
+      padding-top: 10px;
+    }
     .b-icon-close {
       position: absolute;
       right: 24px;
@@ -116,9 +128,6 @@ export default {
       &:hover {
         color: rgba(0, 0, 0, .85);
       }
-    }
-    &-desc {
-      padding-top: 16px;
     }
   }
   &-children-content {

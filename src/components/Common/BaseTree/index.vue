@@ -63,7 +63,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '320px',
+      default: '280px',
     },
     minHeight: {
       type: String,

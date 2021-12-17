@@ -67,6 +67,11 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     wrapSize.height = wrap.height
   }
 
+  function closePage() {
+    total.value = 0
+    list.value = []
+  }
+
   onMounted(() => {
     addResizeListener(tableWrapRef.value, updateWrapSize)
   })
@@ -85,5 +90,6 @@ export default function useTable(fetch, params = {}, isPagination = true, listKe
     setLoading,
     pageChange,
     pageSizeChange,
+    closePage
   }
 }

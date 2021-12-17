@@ -69,9 +69,15 @@ export function isNonChinese(str) {
   return reg.test(str)
 }
 
+// 匹配非中文与非纯数字编码
+export function isField(str) {
+  const reg = /^[a-z][a-z0-9_]*$/
+  return reg.test(str)
+}
+
 // 字母开头，字母数字下划线
 export function isLetterW(str) {
-  const reg = /^([a-zA-Z][a-zA-Z0-9_])|(0-9]+)*$/
+  const reg = /^([a-zA-Z][a-zA-Z0-9_])|([0-9]+)*$/
   return reg.test(str)
 }
 
@@ -89,7 +95,8 @@ export function isInteger(str) {
 
 // 校验电话码格式
 export function isTel(str) {
-  const reg = /^((0\d{2,3}-\d{7,8})|(1[35874]\d{9}))$/
+  // const reg = /^((0\d{2,3}-\d{7,8})|(1[35874]\d{9}))$/
+  const reg = /^(1\d{10})$/
   return reg.test(str)
 }
 
