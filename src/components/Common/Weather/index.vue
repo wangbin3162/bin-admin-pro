@@ -129,7 +129,6 @@ export default {
           text: i.textDay,
           temp: `${i.tempMin}° ~ ${i.tempMax}°`,
         }))
-        console.log(daily.value)
       } catch (e) {
         console.log(e)
       }
