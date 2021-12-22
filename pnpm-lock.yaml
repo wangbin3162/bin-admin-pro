@@ -3,13 +3,13 @@ lockfileVersion: 5.3
 specifiers:
   '@babel/core': ^7.16.5
   '@babel/preset-env': ^7.16.5
-  '@types/node': ^16.11.14
+  '@types/node': ^16.11.15
   '@vitejs/plugin-vue': ^1.10.2
   '@vue/compiler-sfc': ^3.2.26
   axios: ^0.21.4
   bin-charts-next: ^1.0.6
   bin-editor-next: ^1.0.6
-  bin-ui-next: ^1.1.1
+  bin-ui-next: ^1.1.2
   brace: ^0.11.1
   cross-env: ^7.0.3
   dayjs: ^1.10.7
@@ -27,7 +27,7 @@ specifiers:
   sortablejs: ^1.14.0
   stylus: ^0.55.0
   thenby: ^1.3.4
-  vite: ^2.7.3
+  vite: ^2.7.6
   vue: ^3.2.26
   vue-router: ^4.0.12
   vuedraggable: ^4.1.0
@@ -37,7 +37,7 @@ dependencies:
   axios: 0.21.4
   bin-charts-next: 1.0.6_echarts@5.2.2+vue@3.2.26
   bin-editor-next: 1.0.6
-  bin-ui-next: 1.1.1_vue@3.2.26
+  bin-ui-next: 1.1.2_vue@3.2.26
   brace: 0.11.1
   dayjs: 1.10.7
   echarts: 5.2.2
@@ -56,8 +56,8 @@ dependencies:
 devDependencies:
   '@babel/core': 7.16.5
   '@babel/preset-env': 7.16.5_@babel+core@7.16.5
-  '@types/node': 16.11.14
-  '@vitejs/plugin-vue': 1.10.2_vite@2.7.3
+  '@types/node': 16.11.15
+  '@vitejs/plugin-vue': 1.10.2_vite@2.7.6
   '@vue/compiler-sfc': 3.2.26
   cross-env: 7.0.3
   eslint: 7.32.0
@@ -65,7 +65,7 @@ devDependencies:
   eslint-plugin-vue: 7.20.0_eslint@7.32.0
   rimraf: 3.0.2
   stylus: 0.55.0
-  vite: 2.7.3_stylus@0.55.0
+  vite: 2.7.6_stylus@0.55.0
   vue: 3.2.26
 
 packages:
@@ -1240,17 +1240,17 @@ packages:
     resolution: {integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=}
     dev: true
 
-  /@types/node/16.11.14:
-    resolution: {integrity: sha512-mK6BKLpL0bG6v2CxHbm0ed6RcZrAtTHBTd/ZpnlVPVa3HkumsqLE4BC4u6TQ8D7pnrRbOU0am6epuALs+Ncnzw==}
+  /@types/node/16.11.15:
+    resolution: {integrity: sha512-LMGR7iUjwZRxoYnfc9+YELxwqkaLmkJlo4/HUvOMyGvw9DaHO0gtAbH2FUdoFE6PXBTYZIT7x610r7kdo8o1fQ==}
     dev: true
 
-  /@vitejs/plugin-vue/1.10.2_vite@2.7.3:
+  /@vitejs/plugin-vue/1.10.2_vite@2.7.6:
     resolution: {integrity: sha512-/QJ0Z9qfhAFtKRY+r57ziY4BSbGUTGsPRMpB/Ron3QPwBZM4OZAZHdTa4a8PafCwU5DTatXG8TMDoP8z+oDqJw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       vite: ^2.5.10
     dependencies:
-      vite: 2.7.3_stylus@0.55.0
+      vite: 2.7.6_stylus@0.55.0
     dev: true
 
   /@vue/compiler-core/3.2.26:
@@ -1291,8 +1291,8 @@ packages:
       '@vue/shared': 3.2.26
     dev: true
 
-  /@vue/devtools-api/6.0.0-beta.20.1:
-    resolution: {integrity: sha512-R2rfiRY+kZugzWh9ZyITaovx+jpU4vgivAEAiz80kvh3yviiTU3CBuGuyWpSwGz9/C7TkSWVM/FtQRGlZ16n8Q==}
+  /@vue/devtools-api/6.0.0-beta.21.1:
+    resolution: {integrity: sha512-FqC4s3pm35qGVeXRGOjTsRzlkJjrBLriDS9YXbflHLsfA9FrcKzIyWnLXoNm+/7930E8rRakXuAc2QkC50swAw==}
     dev: false
 
   /@vue/reactivity-transform/3.2.26:
@@ -1508,8 +1508,8 @@ packages:
       brace: 0.11.1
     dev: false
 
-  /bin-ui-next/1.1.1_vue@3.2.26:
-    resolution: {integrity: sha512-BFowuofiyx+qzkjH63W/a7Na5VRrPhXgiOoVVqFD2OV/0Iv9TUNQNWYusxZhpcExrbfGNiCMxd1f0k6P9Lumew==}
+  /bin-ui-next/1.1.2_vue@3.2.26:
+    resolution: {integrity: sha512-CEeO8E2SkMHEbAjae44l0mcUnC+gSeSwRYxoKjifxO15HMGUPTuzuvqJSrTzAofl4JMwO0lteV/qXE3mDa2plw==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -1540,8 +1540,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001287
-      electron-to-chromium: 1.4.23
+      caniuse-lite: 1.0.30001292
+      electron-to-chromium: 1.4.26
       escalade: 3.1.1
       node-releases: 2.0.1
       picocolors: 1.0.0
@@ -1559,8 +1559,8 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  /caniuse-lite/1.0.30001287:
-    resolution: {integrity: sha512-4udbs9bc0hfNrcje++AxBuc6PfLNHwh3PO9kbwnfCQWyqtlzg3py0YgFu8jyRTTo85VAz4U+VLxSlID09vNtWA==}
+  /caniuse-lite/1.0.30001292:
+    resolution: {integrity: sha512-jnT4Tq0Q4ma+6nncYQVe7d73kmDmE9C3OGTx3MvW7lBM/eY1S1DZTMBON7dqV481RhNiS5OxD7k9JQvmDOTirw==}
     dev: true
 
   /chalk/2.4.2:
@@ -1735,8 +1735,8 @@ packages:
       zrender: 5.2.1
     dev: false
 
-  /electron-to-chromium/1.4.23:
-    resolution: {integrity: sha512-q3tB59Api3+DMbLnDPkW/UBHBO7KTGcF+rDCeb0GAGyqFj562s6y+c/2tDKTS/y5lbC+JOvT4MSUALJLPqlcSA==}
+  /electron-to-chromium/1.4.26:
+    resolution: {integrity: sha512-cA1YwlRzO6TGp7yd3+KAqh9Tt6Z4CuuKqsAJP6uF/H5MQryjAGDhMhnY5cEXo8MaRCczpzSBhMPdqRIodkbZYw==}
     dev: true
 
   /emoji-regex/8.0.0:
@@ -1768,7 +1768,7 @@ packages:
       is-shared-array-buffer: 1.0.1
       is-string: 1.0.7
       is-weakref: 1.0.2
-      object-inspect: 1.11.1
+      object-inspect: 1.12.0
       object-keys: 1.1.1
       object.assign: 4.1.2
       string.prototype.trimend: 1.0.4
@@ -2603,8 +2603,8 @@ packages:
     resolution: {integrity: sha512-CqyzN6z7Q6aMeF/ktcMVTzhAHCEpf8SOarwpzpf8pNBY2k5/oM34UHldUwp8VKI7uxct2HxSRdJjBaZeESzcxA==}
     dev: true
 
-  /object-inspect/1.11.1:
-    resolution: {integrity: sha512-If7BjFlpkzzBeV1cqgT3OSWT3azyoxDGajR+iGnFBfVV2EWyDyWaZZW2ERDjUaY2QM8i5jI3Sj7mhsM4DDAqWA==}
+  /object-inspect/1.12.0:
+    resolution: {integrity: sha512-Ho2z80bVIvJloH+YzRmpZVQe87+qASmBUKZDWgx9cu+KDrX2ZDH/3tMy+gXbZETVGs2M8YdxObOh7XAtim9Y0g==}
     dev: true
 
   /object-keys/1.1.1:
@@ -2861,7 +2861,7 @@ packages:
     dependencies:
       call-bind: 1.0.2
       get-intrinsic: 1.1.1
-      object-inspect: 1.11.1
+      object-inspect: 1.12.0
     dev: true
 
   /simple-swizzle/0.2.2:
@@ -3077,8 +3077,8 @@ packages:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
     dev: true
 
-  /vite/2.7.3_stylus@0.55.0:
-    resolution: {integrity: sha512-GAY1P+9fLJOju1SRm8+hykVnEXog+E+KXuqqyMBQDriKCUIKzWnPn142yNNhSdf/ixYGYdUa5ce3A8WaEajzGw==}
+  /vite/2.7.6_stylus@0.55.0:
+    resolution: {integrity: sha512-PBNoc87rDYLtkpFU9dbVeGdbcyKzz6c34oScqivE3FEa3BhVa4ASupCzcz0eDIiSECovfLcQnLUJt9vhiEU08g==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
@@ -3125,7 +3125,7 @@ packages:
     peerDependencies:
       vue: ^3.0.0
     dependencies:
-      '@vue/devtools-api': 6.0.0-beta.20.1
+      '@vue/devtools-api': 6.0.0-beta.21.1
       vue: 3.2.26
     dev: false
 
@@ -3153,7 +3153,7 @@ packages:
     peerDependencies:
       vue: ^3.0.2
     dependencies:
-      '@vue/devtools-api': 6.0.0-beta.20.1
+      '@vue/devtools-api': 6.0.0-beta.21.1
       vue: 3.2.26
     dev: false
 

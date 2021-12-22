@@ -26,7 +26,7 @@ import Setting from '@/layouts/setting/index.vue'
 import HeaderBreadcrumb from '@/layouts/header-breadcrumb/index.vue'
 import Search from '@/layouts/search/index.vue'
 import Message from '@/layouts/message/index.vue'
-import Weather from '@/layouts/weather/index.vue'
+import Weather from '@/components/Common/Weather/index.vue'
 
 export default {
   name: 'GlobalHeader',

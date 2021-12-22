@@ -158,7 +158,7 @@ export default {
         &:after {
           color: inherit;
           font-family: "b-iconfont" !important;
-          content: "\e829";
+          content: "\e886"
         }
       }
     }
