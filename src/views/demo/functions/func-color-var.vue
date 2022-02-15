@@ -31,7 +31,7 @@ import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
-  name: 'ColorVar',
+  name: 'FuncColorVar',
   components: { PageWrapper, ThemeColorPanel },
 }
 </script>

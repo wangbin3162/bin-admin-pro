@@ -69,7 +69,7 @@
 
 <script>
 import { ref, watch } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message, MessageBox } from 'bin-ui-next'
 import { deepCopy, downloadFile, throwError } from '@/utils/util'
 import { commonDownload, commonUpload } from '@/api/common.api'
 
@@ -199,12 +199,29 @@ export default {
 
     // 移除一个
     function handleRemove(index) {
-      fileList.value.splice(index, 1)
-      emitValue()
+      MessageBox.confirm({
+        type: 'warning',
+        title: '提示',
+        message: `<p>确定要删除, 是否继续?</p>`,
+        useHTML: true,
+      }).then(() => {
+        fileList.value.splice(index, 1)
+        emitValue()
+      }).catch(() => {
+
+      })
     }
 
     function handleRemoveFiles(index) {
-      uploadFiles.value.splice(index, 1)
+      MessageBox.confirm({
+        type: 'warning',
+        title: '提示',
+        message: `<p>确定要删除, 是否继续?</p>`,
+        useHTML: true,
+      }).then(() => {
+        uploadFiles.value.splice(index, 1)
+      }).catch(() => {
+      })
     }
 
     async function handleDownload(file, index) {

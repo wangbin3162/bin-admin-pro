@@ -1,4 +1,5 @@
 import comp from './comp'
+import functions from './functions'
 import form from './form'
 import list from './list'
 import detail from './detail'
@@ -11,6 +12,7 @@ import graph from './graph'
 
 export default [
   ...comp,
+  ...functions,
   ...form,
   ...list,
   ...detail,

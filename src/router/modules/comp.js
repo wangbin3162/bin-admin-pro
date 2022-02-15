@@ -1,11 +1,5 @@
 export default [
   {
-    path: 'colorVar',
-    name: 'ColorVar',
-    component: () => import('@/views/demo/comp/color-var.vue'),
-    meta: { title: '主题颜色' },
-  },
-  {
     path: 'basic',
     name: 'Basic',
     component: () => import('@/views/demo/comp/ui/basic.vue'),
@@ -60,33 +54,9 @@ export default [
     meta: { title: '数字动画' },
   },
   {
-    path: 'compBaseTree',
-    name: 'CompBaseTree',
-    component: () => import('@/views/demo/comp/comp-base-tree.vue'),
-    meta: { title: '树结构' },
-  },
-  {
     path: 'compSvgLoading',
     name: 'CompSvgLoading',
     component: () => import('@/views/demo/comp/comp-svg-loading.vue'),
     meta: { title: 'Svg Loading' },
-  },
-  {
-    path: 'compDraggable',
-    name: 'CompDraggable',
-    component: () => import('@/views/demo/comp/comp-draggable.vue'),
-    meta: { title: 'Draggable' },
-  },
-  {
-    path: 'compKeyValue',
-    name: 'CompKeyValue',
-    component: () => import('@/views/demo/comp/comp-key-value.vue'),
-    meta: { title: '映射配置' },
-  },
-  {
-    path: 'compService',
-    name: 'CompService',
-    component: () => import('@/views/demo/comp/comp-service.vue'),
-    meta: { title: '业务组件' },
   },
 ]

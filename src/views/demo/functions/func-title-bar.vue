@@ -30,7 +30,7 @@ import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import TitleBar from '@/components/Common/TitleBar/index.vue'
 
 export default {
-  name: 'CompTitleBar',
+  name: 'FuncTitleBar',
   components: { TitleBar, PageWrapper },
 }
 </script>

@@ -81,7 +81,7 @@ import { getDepartTree } from '@/api/modules/depart.api'
 import { h } from 'vue'
 
 export default {
-  name: 'CompBaseTree',
+  name: 'FuncBaseTree',
   components: {
     BaseTree,
     PageWrapper,

@@ -77,7 +77,7 @@ import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import draggable from 'vuedraggable'
 
 export default {
-  name: 'CompDraggable',
+  name: 'FuncDraggable',
   components: { draggable, PageWrapper },
   data() {
     return {

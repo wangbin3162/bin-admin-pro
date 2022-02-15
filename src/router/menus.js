@@ -6,34 +6,24 @@ export default [
     icon: 'block',
     children: [
       {
-        name: 'ColorVar',
-        title: '主题颜色',
+        name: 'Basic',
+        title: '基础组件',
       },
       {
-        name: 'UI',
-        title: '组件库',
-        children: [
-          {
-            name: 'Basic',
-            title: '基础组件',
-          },
-          {
-            name: 'NavComp',
-            title: '导航组件',
-          },
-          {
-            name: 'FormComp',
-            title: '表单组件',
-          },
-          {
-            name: 'DataComp',
-            title: '数据组件',
-          },
-          {
-            name: 'OtherComp',
-            title: '其他组件',
-          },
-        ],
+        name: 'NavComp',
+        title: '导航组件',
+      },
+      {
+        name: 'FormComp',
+        title: '表单组件',
+      },
+      {
+        name: 'DataComp',
+        title: '数据组件',
+      },
+      {
+        name: 'OtherComp',
+        title: '其他组件',
       },
       {
         name: 'CompCountTo',
@@ -47,25 +37,40 @@ export default [
         name: 'CompSvgLoading',
         title: 'Svg Loading',
       },
+    ],
+  },
+  {
+    name: 'Function',
+    title: '功能',
+    icon: 'codepen',
+    children: [
       {
-        name: 'CompDraggable',
-        title: 'Draggable',
+        name: 'FuncColorVar',
+        title: '主题颜色',
       },
       {
-        name: 'CompKeyValue',
-        title: 'KeyValue',
+        name: 'FuncDraggable',
+        title: '拖拽排序',
       },
       {
-        name: 'CompTitleBar',
+        name: 'FuncKeyValue',
+        title: '映射配置',
+      },
+      {
+        name: 'FuncTitleBar',
         title: '标题组件',
       },
       {
-        name: 'CompBaseTree',
+        name: 'FuncBaseTree',
         title: '树结构',
       },
       {
-        name: 'CompService',
+        name: 'FuncService',
         title: '业务组件',
+      },
+      {
+        name: 'FuncDynamicCode',
+        title: '动态编码',
       },
     ],
   },

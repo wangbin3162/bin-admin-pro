@@ -6,6 +6,11 @@
         <li v-for="n in 10" :key="n"></li>
       </ul>
     </div>
+    <div class="g-bg">
+      <div class="g-polygon g-polygon-1"></div>
+      <div class="g-polygon g-polygon-2"></div>
+      <div class="g-polygon g-polygon-3"></div>
+    </div>
     <!--登录框-->
     <div class="layer">
       <div class="content" flex="dir:top main:justify cross:center box:justify">
@@ -142,10 +147,10 @@ export default {
   background-color: #F0F2F5;
   height: 100vh;
   position: relative;
-  background-image: url('@/assets/images/login-background.svg');
-  background-repeat: no-repeat;
-  background-position: center 110px;
-  background-size: 100%;
+  //background-image: url('@/assets/images/login-background.svg');
+  //background-repeat: no-repeat;
+  //background-position: center 110px;
+  //background-size: 100%;
   .layer {
     position: absolute;
     left: 0;
@@ -153,6 +158,7 @@ export default {
     top: 0;
     bottom: 0;
     overflow: auto;
+    z-index: 2;
   }
 
   .area {
@@ -330,6 +336,56 @@ export default {
         animation-duration: 11s;
       }
     }
+  }
+  .g-bg {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+
+    & > div {
+      position: absolute;
+      opacity: .4;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+      backdrop-filter: blur(150px);
+      z-index: 1;
+    }
+  }
+  .g-polygon-1 {
+    bottom: 160px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 714px;
+    height: 390px;
+    background: linear-gradient(#ffee55, #fdee99);
+    clip-path: polygon(0 10%, 30% 0, 100% 40%, 70% 100%, 20% 90%);
+  }
+
+  .g-polygon-2 {
+    bottom: 0;
+    left: 25%;
+    transform: translate(-50%, 0);
+    width: 1000px;
+    height: 450px;
+    background: linear-gradient(-36deg, #E950D1, #f980D9);
+    clip-path: polygon(10% 0, 100% 70%, 100% 100%, 20% 90%);
+  }
+
+  .g-polygon-3 {
+    bottom: 0;
+    left: 70%;
+    transform: translate(-50%, 0);
+    width: 1000px;
+    height: 450px;
+    background: rgb(87, 80, 233);
+    clip-path: polygon(80% 0, 100% 70%, 100% 100%, 20% 90%);
   }
 }
 </style>

@@ -10,7 +10,9 @@
       </b-col>
       <b-col span="12">
         <b-collapse-wrap title="字段样式配置" shadow="none">
-          <styles-editor></styles-editor>
+          <div class="p10">
+            <styles-editor :simple="false"></styles-editor>
+          </div>
         </b-collapse-wrap>
       </b-col>
     </b-row>
@@ -23,7 +25,7 @@ import StylesEditor from '@/components/Service/StylesEditor/index.vue'
 import AsyncValidator from '@/components/Service/AsyncValidator/index.vue'
 
 export default {
-  name: 'CompService',
+  name: 'FuncService',
   components: { AsyncValidator, StylesEditor, PageWrapper },
 }
 </script>

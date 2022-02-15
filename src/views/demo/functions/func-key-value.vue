@@ -93,7 +93,7 @@ export default function useSortable(list, endFun, option = {}) {
 `
 
 export default {
-  name: 'CompKeyValue',
+  name: 'FuncKeyValue',
   components: { KeyValueMapping, PageWrapper },
   setup(props) {
     const mapping = ref([
