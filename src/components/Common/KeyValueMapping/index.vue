@@ -16,7 +16,7 @@
         <i class="destroy b-iconfont b-icon-delete" @click="handleRemove(index)"></i>
       </li>
     </ul>
-    <div class="mt-8 mb-8">
+    <div class="mt-8 mb-8" v-if="showAdd">
       <b-button icon="plus-circle" type="text" @click="handleAdd">新增</b-button>
     </div>
   </div>
@@ -37,6 +37,10 @@ export default {
       default() {
         return []
       },
+    },
+    showAdd: {
+      type: Boolean,
+      default: true,
     },
   },
   emits: ['update:modelValue'],

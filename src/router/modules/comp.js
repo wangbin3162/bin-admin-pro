@@ -48,12 +48,6 @@ export default [
     meta: { title: '图标字体' },
   },
   {
-    path: 'compTitleBar',
-    name: 'CompTitleBar',
-    component: () => import('@/views/demo/comp/comp-title-bar.vue'),
-    meta: { title: '数字动画' },
-  },
-  {
     path: 'compSvgLoading',
     name: 'CompSvgLoading',
     component: () => import('@/views/demo/comp/comp-svg-loading.vue'),
