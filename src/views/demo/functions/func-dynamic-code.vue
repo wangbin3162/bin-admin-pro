@@ -100,6 +100,48 @@
         </div>
       </div>
     </b-collapse-wrap>
+
+    <b-collapse-wrap title="用于校验函数" shadow="none" class="mb-16">
+      <div flex>
+        <div class="p10" style="width: 30%">
+          <b-ace-editor v-model="formObjStr"></b-ace-editor>
+        </div>
+        <div class="p10" style="width: 30%;">
+          <title-bar title="校验函数" tip-pos="left" class="mb-10"></title-bar>
+
+          <b-space>
+            <b-button size="mini" @click="addOne">新增校验字段</b-button>
+            <b-tag
+              :key="tag"
+              v-for="tag in formParams"
+              type="primary"
+              closable
+              @close="handleCloseTag(tag)">
+              {{ tag }}
+            </b-tag>
+            <b-input style="width: 100px;" v-if="formAdded" size="mini" v-model="formField" @keydown.enter="blurAdd"
+                     @blur="blurCancel" />
+          </b-space>
+          <b-divider style="margin: 10px 0;"></b-divider>
+
+          <func-body-editor
+            ref="formEditRef"
+            v-model="formFuncBody"
+            :augments="formParams"
+            height="240"
+          ></func-body-editor>
+          <b-divider style="margin: 10px 0;"></b-divider>
+
+          <b-button type="primary" @click="runTest3">执行校验</b-button>
+        </div>
+        <div class="p10" style="width: 30%;" v-if="formResult.type">
+          <b-alert :type="formResult.type" show-icon>
+            {{ formResult.type === 'success' ? '验证成功' : '验证失败' }}
+            <template #desc>{{ formResult.message }}</template>
+          </b-alert>
+        </div>
+      </div>
+    </b-collapse-wrap>
   </page-wrapper>
 </template>
 
@@ -173,6 +215,35 @@ export default {
     ])
     const goodsFuncBody = ref('const { price, num, discount } = goods;\n return price * num * discount;')
 
+
+    const formEditRef = ref(null)
+    const formObjStr = ref('{\n' +
+      '  "name": "张三",\n' +
+      '  "phone": "",\n' +
+      '  "age": 17,\n' +
+      '  "address": "江苏省徐州市云龙区"\n' +
+      '}')
+    const formParams = ref(['phone', 'age'])
+    const formField = ref('')
+    const formAdded = ref(false)
+    const formFuncBody = ref(`const validatPhone = phone.length > 0;
+const validatAge = age > 18 && age < 35;
+if(validatPhone && validatAge){
+  return {
+    result: true,
+    message: '校验通过'
+  };
+} else {
+  let message = '';
+  if(!validatPhone) message += '[手机号不能为空]';
+  if(!validatAge) message += '[年龄必须在18~35岁之间]';
+  return{
+    result: false,
+    message
+  };
+}`)
+    const formResult = ref({})
+
     function dragField(e, fieldName) {
       e.dataTransfer.setData('fieldName', fieldName)
     }
@@ -235,6 +306,51 @@ export default {
       }
     }
 
+    function addOne() {
+      formAdded.value = true
+      formField.value = ''
+    }
+
+    function blurAdd() {
+      const params = formParams.value
+      if (params.indexOf(formField.value) === -1) {
+        params.push(formField.value)
+      }
+      blurCancel()
+    }
+
+    function blurCancel() {
+      formAdded.value = false
+      formField.value = ''
+    }
+
+    function handleCloseTag(tag) {
+      formParams.value.splice(formParams.value.indexOf(tag), 1)
+    }
+
+    // 执行第一段函数代码
+    function runTest3() {
+      try {
+        const nFunc = formEditRef.value.getFunction()
+        const params = []
+        const obj = formParams.value
+        for (let i = 0; i < obj.length; i++) {
+          const user = JSON.parse(formObjStr.value)
+          const p = user[obj[i]]
+          params.push(p)
+        }
+        const res = nFunc(...params)
+        formResult.value = {
+          type: res.result ? 'success' : 'error',
+          message: res.message,
+        }
+        Message(formResult.value)
+      } catch (e) {
+        fieldsTitle.value = ''
+        Message.error('函数执行失败，请检查函数体和入参是否书写正确！')
+      }
+    }
+
     return {
       fieldsEditRef,
       goodsEditRef,
@@ -256,6 +372,18 @@ export default {
       goodsData,
       goodsFuncBody,
       handleSpan,
+      formObjStr,
+      formParams,
+      formAdded,
+      formField,
+      formFuncBody,
+      formEditRef,
+      formResult,
+      addOne,
+      blurAdd,
+      blurCancel,
+      handleCloseTag,
+      runTest3,
     }
   },
 }

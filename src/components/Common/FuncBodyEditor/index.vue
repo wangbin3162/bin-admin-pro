@@ -8,7 +8,7 @@
     <div>
       <b-ace-editor
         lang="javascript"
-        height="120"
+        :height="height"
         :model-value="modelValue"
         @change="changeValue"
       ></b-ace-editor>
@@ -32,6 +32,10 @@ export default {
     modelValue: {
       type: String,
       default: '',
+    },
+    height: {
+      type: String,
+      default: '120',
     },
   },
   emits: ['update:modelValue'],
