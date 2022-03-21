@@ -2,15 +2,15 @@ export default {
   namespaced: true,
   state: {
     visitedViews: [],
-    cachedViews: []
+    cachedViews: [],
   },
   mutations: {
     ADD_VISITED_VIEW: (state, view) => {
-      if (state.visitedViews.some(v => v.name === view.name)) return
+      if (state.visitedViews.some((v) => v.name === view.name)) return
       state.visitedViews.push(
         Object.assign({}, view, {
-          title: view.title || 'no-name'
-        })
+          title: view.title || 'no-name',
+        }),
       )
     },
     ADD_CACHED_VIEW: (state, view) => {
@@ -30,7 +30,7 @@ export default {
       index > -1 && state.cachedViews.splice(index, 1)
     },
     DEL_OTHERS_VISITED_VIEWS: (state, view) => {
-      state.visitedViews = state.visitedViews.filter(v => v.name === view.name)
+      state.visitedViews = state.visitedViews.filter((v) => v.name === view.name)
     },
     DEL_OTHERS_CACHED_VIEWS: (state, view) => {
       const index = state.cachedViews.indexOf(view.name)
@@ -41,11 +41,11 @@ export default {
         state.cachedViews = []
       }
     },
-    DEL_ALL_VISITED_VIEWS: state => {
+    DEL_ALL_VISITED_VIEWS: (state) => {
       // keep affix tags
       state.visitedViews = []
     },
-    DEL_ALL_CACHED_VIEWS: state => {
+    DEL_ALL_CACHED_VIEWS: (state) => {
       state.cachedViews = []
     },
     UPDATE_VISITED_VIEW: (state, view) => {
@@ -55,7 +55,7 @@ export default {
           break
         }
       }
-    }
+    },
   },
   actions: {
     addView({ commit }, view) {
@@ -65,38 +65,38 @@ export default {
       }
     },
     delView({ commit, state }, view) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         commit('DEL_VISITED_VIEW', view)
         commit('DEL_CACHED_VIEW', view)
         resolve({
           visitedViews: [...state.visitedViews],
-          cachedViews: [...state.cachedViews]
+          cachedViews: [...state.cachedViews],
         })
       })
     },
     delCachedView({ commit, state }, view) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         commit('DEL_CACHED_VIEW', view)
         resolve([...state.cachedViews])
       })
     },
     delOthersViews({ commit, state }, view) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         commit('DEL_OTHERS_VISITED_VIEWS', view)
         commit('DEL_OTHERS_CACHED_VIEWS', view)
         resolve({
           visitedViews: [...state.visitedViews],
-          cachedViews: [...state.cachedViews]
+          cachedViews: [...state.cachedViews],
         })
       })
     },
     delAllViews({ commit, state }) {
-      return new Promise(resolve => {
+      return new Promise((resolve) => {
         commit('DEL_ALL_VISITED_VIEWS')
         commit('DEL_ALL_CACHED_VIEWS')
         resolve({
           visitedViews: [...state.visitedViews],
-          cachedViews: [...state.cachedViews]
+          cachedViews: [...state.cachedViews],
         })
       })
     },
@@ -112,7 +112,8 @@ export default {
         await commit('DEL_CACHED_VIEW', { name })
         router.push({ path: `/redirect${path}` })
       } catch (e) {
+        throw new Error(e)
       }
-    }
-  }
+    },
+  },
 }
