@@ -21,8 +21,7 @@
     "build": "vite build",
     "serve": "vite preview",
     "lint": "eslint --ext .js,.vue src --max-warnings 0 && pretty-quick --check",
-    "lint:fix": "eslint --fix --ext .js,.vue src",
-    "pretty": "pretty-quick --check"
+    "lint:fix": "eslint --fix --ext .js,.vue src && pretty-quick"
   },
   "dependencies": {
     "axios": "^0.21.4",

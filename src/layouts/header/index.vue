@@ -1,8 +1,8 @@
 <template>
-  <header class="layout-header" :class="{'fixed-header':fixedHeader}" :style="fixedHeaderStyle">
-    <div v-show="!contentFull" class="global-header" :class="{'has-border':showTagsView}">
+  <header class="layout-header" :class="{ 'fixed-header': fixedHeader }" :style="fixedHeaderStyle">
+    <div v-show="!contentFull" class="global-header" :class="{ 'has-border': showTagsView }">
       <div class="global-header-left">
-        <header-trigger :icon="sidebar?'outdent':'indent'" size="18px" @click="toggleSidebar" />
+        <header-trigger :icon="sidebar ? 'outdent' : 'indent'" size="18px" @click="toggleSidebar" />
         <header-breadcrumb />
       </div>
       <div class="global-header-right">
@@ -30,7 +30,16 @@ import Weather from '@/components/Common/Weather/index.vue'
 
 export default {
   name: 'GlobalHeader',
-  components: { Weather, Message, Search, HeaderBreadcrumb, Setting, TagsView, UserAvatar, HeaderTrigger },
+  components: {
+    Weather,
+    Message,
+    Search,
+    HeaderBreadcrumb,
+    Setting,
+    TagsView,
+    UserAvatar,
+    HeaderTrigger,
+  },
   setup() {
     const {
       sidebar,
