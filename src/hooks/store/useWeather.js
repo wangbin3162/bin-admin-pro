@@ -89,7 +89,7 @@ export default function useWeather() {
       return { color: '#fa8c16', title: '轻度污染' }
     } else if (num <= 200) {
       return { color: '#f74e57', title: '中度污染' }
-    } else if (num <= 200) {
+    } else if (num <= 300) {
       return { color: '#dd1f29', title: '重度污染' }
     }
     return { color: '#93141b', title: '严重污染' }

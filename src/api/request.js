@@ -28,10 +28,10 @@ export async function fetchData(config) {
   }
 }
 
-const err = (error) => {
+const err = error => {
   if (error.response) {
     const data = error.response.data
-    const token = cookies.get(ACCESS_TOKEN)
+    // const token = cookies.get(ACCESS_TOKEN)
     // 响应时触发错误
     throwError('request/error', data)
   }
@@ -55,7 +55,8 @@ service.interceptors.response.use(
   response => response,
   error => {
     if (error.response) {
-      if (error.response.status >= 500) { // 如果是服务器端错误则跳转至服务错误页面
+      if (error.response.status >= 500) {
+        // 如果是服务器端错误则跳转至服务错误页面
         router.push({ path: 'error', query: { status: '500', message: error.message } })
       } else if (error.response.status === 404) {
         router.push({ path: 'error', query: { status: '404', message: error.message } })

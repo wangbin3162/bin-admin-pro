@@ -12,11 +12,12 @@ import { throwError } from '@/utils/util'
  * @description 创建路由
  * @param {Array} routes 路由设置
  */
-const initRouter = (routes = []) => createRouter({
-  history: createWebHashHistory(),
-  scrollBehavior,
-  routes,
-})
+const initRouter = (routes = []) =>
+  createRouter({
+    history: createWebHashHistory(),
+    scrollBehavior,
+    routes,
+  })
 
 const router = initRouter(constantRoutes)
 
@@ -39,7 +40,8 @@ export function setupRouter(app) {
 const whiteList = ['/login', ERROR_PATH_LIST.map(path => `/${path}`), '/error']
 router.beforeEach(async (to, from) => {
   // 没有登录的时候跳转到登录界面 // 携带上登陆成功之后需要跳转的页面完整路径
-  if (whiteList.indexOf(to.path) !== -1) { // 在免登陆白名单中
+  if (whiteList.indexOf(to.path) !== -1) {
+    // 在免登陆白名单中
     return true
   }
   LoadingBar.start()
@@ -49,7 +51,8 @@ router.beforeEach(async (to, from) => {
     const userInfo = store.state.user.userInfo
     if (userInfo) {
       return true
-    } else { // 否则就去拉取用户信息
+    } else {
+      // 否则就去拉取用户信息
       try {
         const user = await store.dispatch('user/getUserInfo')
         if (from.name === 'Login') {
@@ -79,10 +82,8 @@ router.beforeEach(async (to, from) => {
     return { name: 'Login', query: { redirect: to.fullPath } }
   }
 })
-router.afterEach((to) => {
-  if (whiteList.indexOf(to.path) === -1) { // 在免登陆白名单中
-    LoadingBar.done()
-  }
+router.afterEach(() => {
+  LoadingBar.done()
 })
 
 export default router

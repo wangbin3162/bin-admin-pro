@@ -3,7 +3,7 @@
     <div
       v-show="!contentFull"
       class="layout-aside"
-      :class="[{'fixed-aside':fixedAside},`layout-aside-${theme}`]"
+      :class="[{ 'fixed-aside': fixedAside }, `layout-aside-${theme}`]"
       :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
@@ -85,11 +85,13 @@ export default {
     })
 
     const headerHeight = computed(() => {
-      return contentFull.value ? { height: '32px' } : { height: showTagsView.value ? '80px' : '48px' }
+      return contentFull.value
+        ? { height: '32px' }
+        : { height: showTagsView.value ? '80px' : '48px' }
     })
 
     // ctrl + f 全局呼出搜索面板
-    const keydownEvent = (e) => {
+    const keydownEvent = e => {
       if (!showSearch.value) return
       const { ctrlKey, code } = e
       // 面板打开

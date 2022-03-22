@@ -9,12 +9,7 @@
           :multiple="multiple"
           :before-upload="handleUpload"
         >
-          <b-button
-            background
-            :size="size"
-            :loading="loadingStatus"
-          >{{ text }}
-          </b-button>
+          <b-button background :size="size" :loading="loadingStatus">{{ text }}</b-button>
         </b-upload>
         <!--多选模式需要手动触发上传事件-->
         <b-button
@@ -24,38 +19,33 @@
           icon="upload"
           :loading="loadingStatus"
           @click="doUpload"
-        >上传
+        >
+          上传
         </b-button>
       </b-space>
     </div>
     <div class="tip mb-8" v-if="tip">{{ tip }}</div>
     <ul class="file-list">
-      <li
-        v-for="(file,index) in fileList"
-        :key="index"
-        class="file-list-file"
-      >
+      <li v-for="(file, index) in fileList" :key="index" class="file-list-file">
         <div class="file-name">
           <i :class="`b-iconfont b-icon-${format(file.fileName)}`"></i>
           <span :title="file.name">{{ file.fileName }}</span>
         </div>
-        <i v-if="!onlyFiles"
-           class="b-iconfont b-icon-close file-list-remove"
-           @click.stop.prevent="handleRemove(index)"
+        <i
+          v-if="!onlyFiles"
+          class="b-iconfont b-icon-close file-list-remove"
+          @click.stop.prevent="handleRemove(index)"
         ></i>
-        <i v-if="file.id"
-           title="下载文件"
-           class="b-iconfont b-icon-vertical-align-botto file-list-download"
-           @click.stop.prevent="handleDownload(file,index)"
+        <i
+          v-if="file.id"
+          title="下载文件"
+          class="b-iconfont b-icon-vertical-align-botto file-list-download"
+          @click.stop.prevent="handleDownload(file, index)"
         ></i>
       </li>
-      <li
-        v-for="(file,index) in uploadFiles"
-        :key="index"
-        class="file-list-file"
-      >
-        <div class="file-name" style="color: #999;">
-          <span style="flex-shrink: 0;" class="mr-5">待上传</span>
+      <li v-for="(file, index) in uploadFiles" :key="index" class="file-list-file">
+        <div class="file-name" style="color: #999">
+          <span style="flex-shrink: 0" class="mr-5">待上传</span>
           <span :title="file.name">{{ file.name }}</span>
         </div>
         <i
@@ -118,9 +108,13 @@ export default {
     const uploadFiles = ref([]) // 实际上传的文件集合
     const loadingStatus = ref(false)
 
-    watch(() => props.modelValue, val => {
-      fileList.value = deepCopy(val)
-    }, { immediate: true })
+    watch(
+      () => props.modelValue,
+      val => {
+        fileList.value = deepCopy(val)
+      },
+      { immediate: true },
+    )
 
     // 获取文件后缀名
     function getFileLast(name) {
@@ -171,7 +165,8 @@ export default {
       }
       // 实际文件存储列表
       uploadFiles.value.push(file)
-      if (!props.multiple) { // 非多选则自动调用一次上传方式
+      if (!props.multiple) {
+        // 非多选则自动调用一次上传方式
         doUpload()
       }
 
@@ -184,10 +179,7 @@ export default {
       loadingStatus.value = true
       try {
         const list = await commonUpload(attachments)
-        fileList.value = [
-          ...fileList.value,
-          ...list,
-        ]
+        fileList.value = [...fileList.value, ...list]
         emitValue()
         Message.success('上传成功！')
       } catch (e) {
@@ -204,12 +196,12 @@ export default {
         title: '提示',
         message: `<p>确定要删除, 是否继续?</p>`,
         useHTML: true,
-      }).then(() => {
-        fileList.value.splice(index, 1)
-        emitValue()
-      }).catch(() => {
-
       })
+        .then(() => {
+          fileList.value.splice(index, 1)
+          emitValue()
+        })
+        .catch(() => {})
     }
 
     function handleRemoveFiles(index) {
@@ -218,10 +210,11 @@ export default {
         title: '提示',
         message: `<p>确定要删除, 是否继续?</p>`,
         useHTML: true,
-      }).then(() => {
-        uploadFiles.value.splice(index, 1)
-      }).catch(() => {
       })
+        .then(() => {
+          uploadFiles.value.splice(index, 1)
+        })
+        .catch(() => {})
     }
 
     async function handleDownload(file, index) {

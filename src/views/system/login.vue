@@ -20,12 +20,18 @@
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
           <div class="page-login--logo">
-            <img src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo">
+            <img src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo" />
             <span>BIN-ADMIN-PRO</span>
           </div>
           <!-- 表单 -->
           <div class="form">
-            <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
+            <b-form
+              ref="loginForm"
+              label-position="top"
+              :rules="rules"
+              :model="formLogin"
+              size="large"
+            >
               <b-form-item prop="username">
                 <b-input
                   type="text"
@@ -55,14 +61,16 @@
                   type="text"
                   v-model="formLogin.captcha"
                   placeholder="- - - -"
-                  style="width: 68%;"
+                  style="width: 68%"
                   @keydown.enter="submit"
                 >
                   <template #prefix>
                     <b-icon name="bulb" size="16"></b-icon>
                   </template>
                 </b-input>
-                <span class="login-code"><img src="@/assets/images/login-code.png" alt="code"></span>
+                <span class="login-code">
+                  <img src="@/assets/images/login-code.png" alt="code" />
+                </span>
               </b-form-item>
               <b-button
                 @click="submit"
@@ -113,7 +121,7 @@ export default {
   methods: {
     // 提交登录信息
     submit() {
-      this.$refs.loginForm.validate(async (valid) => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
           try {
             this.loading = true
@@ -341,6 +349,7 @@ export default {
     position: relative;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 
     & > div {
       position: absolute;
