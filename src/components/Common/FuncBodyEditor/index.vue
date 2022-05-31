@@ -1,20 +1,17 @@
 <template>
   <div class="func-body-editor">
     <div class="func func-top">
-      <b-tag type="primary" :tag-style="{fontSize: '14px'}">
-        function( <span class="params">{{ paramsStr }}</span> ) {
+      <b-tag type="primary" :tag-style="{ fontSize: '14px' }">
+        function(
+        <span class="params">{{ paramsStr }}</span>
+        ) {
       </b-tag>
     </div>
     <div>
-      <b-ace-editor
-        lang="javascript"
-        :height="height"
-        :model-value="modelValue"
-        @change="changeValue"
-      ></b-ace-editor>
+      <b-ace-editor lang="javascript" :height="height" :model-value="modelValue" @change="changeValue"></b-ace-editor>
     </div>
     <div class="func func-bottom">
-      <b-tag type="primary" :tag-style="{fontSize: '14px'}">}</b-tag>
+      <b-tag type="primary" :tag-style="{ fontSize: '14px' }">}</b-tag>
     </div>
   </div>
 </template>
@@ -27,7 +24,7 @@ export default {
   props: {
     augments: {
       type: Array,
-      default: () => ([]),
+      default: () => [],
     },
     modelValue: {
       type: String,
