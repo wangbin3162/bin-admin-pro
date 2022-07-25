@@ -32,7 +32,9 @@
       <global-footer></global-footer>
     </div>
   </div>
-  <b-back-top :height="200" :right="24" :bottom="60"></b-back-top>
+  <b-back-top :height="200" :right="40" :bottom="40">
+    <i class="b-iconfont b-icon-vertical-align-top back-top"></i>
+  </b-back-top>
 </template>
 
 <script>
@@ -85,9 +87,7 @@ export default {
     })
 
     const headerHeight = computed(() => {
-      return contentFull.value
-        ? { height: '32px' }
-        : { height: showTagsView.value ? '80px' : '48px' }
+      return contentFull.value ? { height: '32px' } : { height: showTagsView.value ? '80px' : '48px' }
     })
 
     // ctrl + f 全局呼出搜索面板
