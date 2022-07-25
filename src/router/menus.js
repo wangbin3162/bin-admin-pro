@@ -313,9 +313,5 @@ export const staticMenu = [
  * @param menus 接口返回的menus
  */
 export function getFilterMenus(menus = []) {
-  return [
-    ...DASHBOARD_MENUS,
-    ...menus,
-    ...staticMenu,
-  ]
+  return [...DASHBOARD_MENUS, ...menus, ...staticMenu]
 }

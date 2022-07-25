@@ -7,9 +7,9 @@
       </ul>
     </div>
     <div class="g-bg">
-      <div class="g-polygon g-polygon-1"></div>
-      <div class="g-polygon g-polygon-2"></div>
-      <div class="g-polygon g-polygon-3"></div>
+      <css-doodle>
+        {{ doodle }}
+      </css-doodle>
     </div>
     <!--登录框-->
     <div class="layer">
@@ -25,13 +25,7 @@
           </div>
           <!-- 表单 -->
           <div class="form">
-            <b-form
-              ref="loginForm"
-              label-position="top"
-              :rules="rules"
-              :model="formLogin"
-              size="large"
-            >
+            <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
               <b-form-item prop="username">
                 <b-input
                   type="text"
@@ -72,13 +66,7 @@
                   <img src="@/assets/images/login-code.png" alt="code" />
                 </span>
               </b-form-item>
-              <b-button
-                @click="submit"
-                :loading="loading"
-                type="primary"
-                class="button-login"
-                size="large"
-              >
+              <b-button @click="submit" :loading="loading" type="primary" class="button-login" size="large">
                 登录
               </b-button>
             </b-form>
@@ -98,6 +86,7 @@
 <script>
 import { login } from '@/api/modules/login.api'
 import { throwError } from '@/utils/util'
+import 'css-doodle'
 
 export default {
   name: 'Login',
@@ -116,6 +105,34 @@ export default {
         password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
         captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
       },
+      doodle: `:doodle {
+          @grid: 1x8 / 100vmin;
+        }
+        @place-cell: center;
+        width: @rand(40vmin, 80vmin);
+        height: @rand(40vmin, 80vmin);
+        transform: translate(@rand(-200%, 200%), @rand(-60%, 60%)) scale(@rand(.8, 1.8)) skew(@rand(45deg));
+        clip-path: polygon(
+          @r(0, 30%) @r(0, 50%),
+          @r(30%, 60%) @r(0%, 30%),
+          @r(60%, 100%) @r(0%, 50%),
+          @r(60%, 100%) @r(50%, 100%),
+          @r(30%, 60%) @r(60%, 100%),
+          @r(0, 30%) @r(60%, 100%)
+        );
+        background: @pick(#f44336, #e91e63, #9c27b0, #673ab7, #3f51b5, #60569e, #e6437d, #ebbf4d, #00bcd4, #03a9f4, #2196f3, #009688, #5ee463, #f8e645, #ffc107, #ff5722, #43f8bf);
+        opacity: @rand(.3, .8);
+        position: relative;
+        top: @rand(-80%, 80%);
+        left: @rand(-80%, 80%);
+        animation: colorChange @rand(6.1s, 16.1s) infinite @rand(-.5s, -2.5s) linear alternate;
+        @keyframes colorChange {
+          100% {
+            left: 0;
+            top: 0;
+            filter: hue-rotate(360deg);
+          }
+        }`,
     }
   },
   methods: {

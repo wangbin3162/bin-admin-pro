@@ -6,7 +6,7 @@ function pathResolve(dir) {
   return resolve(process.cwd(), '.', dir)
 }
 
-const proxyAddress = 'http://192.168.0.121:8850/'
+// const proxyAddress = 'http://192.168.0.121:8850/'
 // https://vitejs.dev/config/
 export default ({ mode }) => {
   const dirRoot = process.cwd()
@@ -15,7 +15,15 @@ export default ({ mode }) => {
 
   return defineConfig({
     base: process.env.NODE_ENV === 'production' ? env.VITE_PUBLIC_PATH : '',
-    plugins: [vue()],
+    plugins: [
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: tag => ['css-doodle'].includes(tag),
+          },
+        },
+      }),
+    ],
     server: {
       host: '0.0.0.0',
       port: 8090,
