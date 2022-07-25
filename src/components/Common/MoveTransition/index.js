@@ -16,8 +16,6 @@ export default {
         {
           name: props.name,
           appear: true,
-          mode: 'out-in',
-          duration: { enter: 500, leave: 250 },
           onBeforeLeave(el) {
             el.style.position = 'absolute'
             el.style.top = '0'

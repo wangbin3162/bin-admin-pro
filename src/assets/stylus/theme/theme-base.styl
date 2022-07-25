@@ -257,18 +257,22 @@
   background: #fff;
   border-radius: 50%;
   box-shadow: var(--bin-shadow-down);
+  transition: .25s;
+  &:hover{
+    color: var(--bin-color-primary);
+  }
 }
 
 
-.layout-main-leave-active,
+.layout-main-leave-active ,
 .layout-main-enter-active {
-  transition: opacity .3s, transform .3s;
+  transition: opacity .4s, transform .4s;
 }
 .layout-main-enter-from {
   opacity: 0;
-  transform: scale(0.98);
+  transform: translateX(-40px);
 }
 .layout-main-leave-to {
   opacity: 0;
-  transform: scale(1.02);
+  transform: translateX(40px);
 }
