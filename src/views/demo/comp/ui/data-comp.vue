@@ -3,7 +3,7 @@
     <theme-color-panel />
     <b-collapse-wrap title="Table 表格" shadow="none" class="mb-20">
       <div class="p10">
-        <b-table :columns="columns" :data="list"></b-table>
+        <b-table :columns="columns" :data="list" border></b-table>
       </div>
     </b-collapse-wrap>
     <b-collapse-wrap title="Page 分页器" shadow="none" class="mb-20">
@@ -86,18 +86,12 @@ export default {
             {
               title: '二级 1-1',
               expand: true,
-              children: [
-                { title: '三级 1-1-1' },
-                { title: '三级 1-1-2' },
-              ],
+              children: [{ title: '三级 1-1-1' }, { title: '三级 1-1-2' }],
             },
             {
               title: '二级 1-2',
               expand: true,
-              children: [
-                { title: '三级 1-2-1' },
-                { title: '三级 1-2-2' },
-              ],
+              children: [{ title: '三级 1-2-1' }, { title: '三级 1-2-2' }],
             },
           ],
         },

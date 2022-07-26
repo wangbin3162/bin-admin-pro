@@ -7,7 +7,7 @@ export default {
     setting: getAdminSetting(),
     searchVisible: false,
     settingVisible: false,
-    weather: {}
+    weather: {},
   },
   mutations: {
     SAVE_SETTING: (state, setting) => {
@@ -17,12 +17,12 @@ export default {
     SAVE_WEATHER: (state, weather) => {
       state.weather = { ...weather }
     },
-    TOGGLE_SEARCH: (state) => {
+    TOGGLE_SEARCH: state => {
       state.searchVisible = !state.searchVisible
     },
-    TOGGLE_SETTING: (state) => {
+    TOGGLE_SETTING: state => {
       state.settingVisible = !state.settingVisible
-    }
+    },
   },
   actions: {
     // 载入时加载本地存储数据和主题配置信息
@@ -42,7 +42,8 @@ export default {
     toggleContentFull: ({ commit, state }) => {
       const setting = { ...state.setting }
       setting.contentFull = !setting.contentFull
-      if (setting.contentFull) { // 如果内容区撑满全屏，则需要设置
+      if (setting.contentFull) {
+        // 如果内容区撑满全屏，则需要设置
         setting.tagsView = true
         setting.fixedHeader = true
       }
@@ -84,6 +85,11 @@ export default {
       setting.tagsView = !setting.tagsView
       commit('SAVE_SETTING', setting)
     },
+    setTagsType: ({ commit, state }, tagsType) => {
+      const setting = { ...state.setting }
+      setting.tagsType = tagsType
+      commit('SAVE_SETTING', setting)
+    },
     toggleFixedHeader: ({ commit, state }, isFixed) => {
       const setting = { ...state.setting }
       setting.fixedHeader = isFixed
@@ -117,6 +123,6 @@ export default {
     },
     setWeather: ({ commit }, weather) => {
       commit('SAVE_WEATHER', weather)
-    }
-  }
+    },
+  },
 }

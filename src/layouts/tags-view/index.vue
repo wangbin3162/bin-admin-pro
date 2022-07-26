@@ -1,5 +1,5 @@
 <template>
-  <div class="tags-view-container">
+  <div class="tags-view-container" :class="`tags-view-${tagsType}`">
     <b-tabs
       v-model="activeTag"
       :data="viewTags"
@@ -34,12 +34,7 @@
       <span class="trigger" title="刷新" @click="refreshCurrentPage">
         <i class="b-iconfont b-icon-reload" style="transform: rotate(90deg)"></i>
       </span>
-      <b-dropdown
-        trigger="click"
-        style="width: 32px; display: flex"
-        append-to-body
-        @command="handleCommand"
-      >
+      <b-dropdown trigger="click" style="width: 42px; display: flex" append-to-body @command="handleCommand">
         <span class="trigger"><i class="b-iconfont b-icon-down"></i></span>
         <template #dropdown>
           <b-dropdown-menu>
@@ -87,7 +82,7 @@ export default {
 
     const { navMenuItems, addRouters } = useMenu()
     const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
-    const { toggleContentFull, contentFull } = useSetting()
+    const { tagsType, toggleContentFull, contentFull } = useSetting()
 
     // 所有动态的路由表name 拼接
     const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
@@ -203,6 +198,7 @@ export default {
       currentHome,
       selectedTag,
       activeTag,
+      tagsType,
       visitedViews,
       viewTags,
       refreshCurrentPage,

@@ -20,6 +20,7 @@ export default function useSetting() {
   const sidebar = computed(() => setting.value.sidebar)
   const sidebarWidth = computed(() => setting.value.sidebarWidth)
   const showTagsView = computed(() => setting.value.tagsView)
+  const tagsType = computed(() => setting.value.tagsType)
   const fixedAside = computed(() => setting.value.fixedAside)
   const fixedHeader = computed(() => setting.value.fixedHeader)
   const contentFull = computed(() => setting.value.contentFull)
@@ -49,8 +50,8 @@ export default function useSetting() {
   // 固定头部样式
   const fixedHeaderStyle = computed(() => {
     return {
-      width: (!contentFull.value && fixedHeader.value)
-        ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
+      width:
+        !contentFull.value && fixedHeader.value ? `calc(100% - ${sidebar.value ? sidebarWidth.value : 64}px)` : '100%',
       padding: 0,
       zIndex: 10,
       right: fixedHeader.value ? 0 : null,
@@ -105,6 +106,11 @@ export default function useSetting() {
     }
   }
 
+  // toggle tagsView标签页
+  async function setTagsType(type) {
+    await store.dispatch('app/setTagsType', type)
+  }
+
   // 是否固定头部
   async function changeFixedHeader(val) {
     await store.dispatch('app/toggleFixedHeader', val)
@@ -144,6 +150,7 @@ export default function useSetting() {
     sidebarWidth,
     contentFull,
     showTagsView,
+    tagsType,
     fixedAside,
     fixedHeader,
     showSearch,
@@ -167,6 +174,7 @@ export default function useSetting() {
     toggleSidebar,
     changeSidebarWidth,
     toggleTagsView,
+    setTagsType,
     changeFixedHeader,
     changeFixedAside,
     toggleSearch,

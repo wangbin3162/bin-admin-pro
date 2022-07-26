@@ -9,7 +9,8 @@
             </template>
             <b-charts height="70px" :options="topCharts1" />
             <template #bottom>
-              <span>日注册数</span><span>343个</span>
+              <span>日注册数</span>
+              <span>343个</span>
             </template>
           </top-card>
         </b-col>
@@ -20,7 +21,8 @@
             </template>
             <b-charts height="70px" :options="topCharts2" />
             <template #bottom>
-              <span>日户反馈数</span><span>5</span>
+              <span>日户反馈数</span>
+              <span>5</span>
             </template>
           </top-card>
         </b-col>
@@ -31,7 +33,8 @@
             </template>
             <b-charts height="70px" :options="topCharts3" />
             <template #bottom>
-              <span>日反馈</span><span>34</span>
+              <span>日反馈</span>
+              <span>34</span>
             </template>
           </top-card>
         </b-col>
@@ -42,21 +45,23 @@
             </template>
             <b-charts height="70px" :options="topCharts4" />
             <template #bottom>
-              <span>日访问量</span><span>3242</span>
+              <span>日访问量</span>
+              <span>3242</span>
             </template>
           </top-card>
         </b-col>
       </b-row>
     </div>
     <div class="analysis-center">
-      <b-card :bordered="false" shadow="never" :body-style="{padding: '10px'}">
+      <b-card :bordered="false" shadow="never" :body-style="{ padding: '10px' }">
         <template #header>
-          <iconfont icon="linechart" color="primary" bg round></iconfont>&nbsp;
+          <iconfont icon="linechart" color="primary" bg round></iconfont>
+          &nbsp;
           <span>最近一周访问情况</span>
         </template>
         <b-skeleton :loading="loading" animation>
           <template #template>
-            <b-skeleton style="margin-bottom: 16px;" />
+            <b-skeleton style="margin-bottom: 16px" />
             <b-skeleton />
           </template>
           <template #default>
@@ -68,14 +73,15 @@
     <div class="analysis-bottom">
       <b-row :gutter="16">
         <b-col span="8">
-          <b-card :bordered="false" shadow="never" :body-style="{padding: '10px'}">
+          <b-card :bordered="false" shadow="never" :body-style="{ padding: '10px' }">
             <template #header>
-              <iconfont icon="smile" color="warning" bg round></iconfont>&nbsp;
+              <iconfont icon="smile" color="warning" bg round></iconfont>
+              &nbsp;
               <span>服务类别</span>
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton style="margin-bottom: 16px" />
                 <b-skeleton />
               </template>
               <template #default>
@@ -85,14 +91,15 @@
           </b-card>
         </b-col>
         <b-col span="8">
-          <b-card :bordered="false" shadow="never" :body-style="{padding: '10px'}">
+          <b-card :bordered="false" shadow="never" :body-style="{ padding: '10px' }">
             <template #header>
-              <iconfont icon="layout" color="info" bg round></iconfont>&nbsp;
+              <iconfont icon="layout" color="info" bg round></iconfont>
+              &nbsp;
               <span>页面堆叠</span>
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton style="margin-bottom: 16px" />
                 <b-skeleton />
               </template>
               <template #default>
@@ -102,14 +109,15 @@
           </b-card>
         </b-col>
         <b-col span="8">
-          <b-card :bordered="false" shadow="never" :body-style="{padding: '10px'}">
+          <b-card :bordered="false" shadow="never" :body-style="{ padding: '10px' }">
             <template #header>
-              <iconfont icon="flag" color="danger" bg round></iconfont>&nbsp;
+              <iconfont icon="flag" color="danger" bg round></iconfont>
+              &nbsp;
               <span>访问占比</span>
             </template>
             <b-skeleton :loading="loading" animation>
               <template #template>
-                <b-skeleton style="margin-bottom: 16px;" />
+                <b-skeleton style="margin-bottom: 16px" />
                 <b-skeleton />
               </template>
               <template #default>
@@ -139,7 +147,8 @@ export default {
       color,
       tooltip: {
         trigger: 'axis',
-        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
           type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
         },
       },
@@ -152,13 +161,15 @@ export default {
         type: 'value',
         show: false,
       },
-      series: [{
-        name: '用户注册数',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [22, 34, 11, 24, 22, 8, 12],
-      }],
+      series: [
+        {
+          name: '用户注册数',
+          type: 'bar',
+          stack: 'vistors',
+          barWidth: '60%',
+          data: [22, 34, 11, 24, 22, 8, 12],
+        },
+      ],
     })
     const topCharts2 = ref({
       color: ['#5B8FF9', '#9661BC'],
@@ -227,12 +238,14 @@ export default {
         data: ['7.1', '7.2', '7.3', '7.4', '7.5', '7.6', '7.7', '7.8', '7.9', '7.10'],
       },
       yAxis: { show: false },
-      series: [{
-        name: '访问数量',
-        type: 'bar',
-        data: [234, 634, 234, 764, 88, 235, 179, 152, 200, 334],
-        itemStyle: { color: '#fa6b9b', borderRadius: 3 },
-      }],
+      series: [
+        {
+          name: '访问数量',
+          type: 'bar',
+          data: [234, 634, 234, 764, 88, 235, 179, 152, 200, 334],
+          itemStyle: { color: '#fa6b9b', borderRadius: 3 },
+        },
+      ],
     })
     const centerChart = ref({
       xAxis: {
@@ -278,7 +291,7 @@ export default {
       tooltip: { trigger: 'axis' },
       radar: {
         radius: '66%',
-        center: ['50%', '42%'],
+        center: ['50%', '43%'],
         splitNumber: 8,
         splitArea: {
           areaStyle: {
@@ -291,12 +304,12 @@ export default {
           },
         },
         indicator: [
-          { name: '行政', max: 10000 },
-          { name: '管理', max: 20000 },
-          { name: '科技', max: 20000 },
-          { name: '服务', max: 20000 },
-          { name: '开发', max: 20000 },
-          { name: '市场', max: 20000 },
+          { name: '行政' },
+          { name: '管理' },
+          { name: '科技' },
+          { name: '服务' },
+          { name: '开发' },
+          { name: '市场' },
         ],
       },
       legend: {
@@ -304,33 +317,36 @@ export default {
         bottom: '10',
         data: ['北京', '上海'],
       },
-      series: [{
-        type: 'radar',
-        symbolSize: 0,
-        areaStyle: {
-          shadowBlur: 13,
-          shadowColor: 'rgba(0,0,0,.2)',
-          shadowOffsetX: 0,
-          shadowOffsetY: 10,
-          opacity: 1,
+      series: [
+        {
+          type: 'radar',
+          symbolSize: 0,
+          areaStyle: {
+            shadowBlur: 13,
+            shadowColor: 'rgba(0,0,0,.2)',
+            shadowOffsetX: 0,
+            shadowOffsetY: 10,
+            opacity: 1,
+          },
+          data: [
+            {
+              value: [6000, 12000, 14000, 11000, 15000, 14000],
+              name: '北京',
+            },
+            {
+              value: [4000, 9000, 15000, 15000, 13000, 11000],
+              name: '上海',
+            },
+          ],
         },
-        data: [
-          {
-            value: [6000, 12000, 14000, 11000, 15000, 14000],
-            name: '北京',
-          },
-          {
-            value: [4000, 9000, 15000, 15000, 13000, 11000],
-            name: '上海',
-          },
-        ],
-      }],
+      ],
     })
     const barOptions = ref({
       color,
       tooltip: {
         trigger: 'axis',
-        axisPointer: { // 坐标轴指示器，坐标轴触发有效
+        axisPointer: {
+          // 坐标轴指示器，坐标轴触发有效
           type: 'shadow', // 默认为直线，可选为：'line' | 'shadow'
         },
       },
@@ -341,36 +357,44 @@ export default {
         bottom: '3%',
         containLabel: true,
       },
-      xAxis: [{
-        type: 'category',
-        data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
-        axisTick: {
-          alignWithLabel: true,
+      xAxis: [
+        {
+          type: 'category',
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+          axisTick: {
+            alignWithLabel: true,
+          },
         },
-      }],
-      yAxis: [{
-        type: 'value',
-        axisTick: { show: false },
-      }],
-      series: [{
-        name: 'pageA',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [179, 52, 200, 334, 390, 330, 220],
-      }, {
-        name: 'pageB',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [80, 52, 200, 334, 390, 330, 220],
-      }, {
-        name: 'pageC',
-        type: 'bar',
-        stack: 'vistors',
-        barWidth: '60%',
-        data: [66, 52, 200, 334, 390, 330, 220],
-      }],
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisTick: { show: false },
+        },
+      ],
+      series: [
+        {
+          name: 'pageA',
+          type: 'bar',
+          stack: 'vistors',
+          barWidth: '60%',
+          data: [179, 52, 200, 334, 390, 330, 220],
+        },
+        {
+          name: 'pageB',
+          type: 'bar',
+          stack: 'vistors',
+          barWidth: '60%',
+          data: [80, 52, 200, 334, 390, 330, 220],
+        },
+        {
+          name: 'pageC',
+          type: 'bar',
+          stack: 'vistors',
+          barWidth: '60%',
+          data: [66, 52, 200, 334, 390, 330, 220],
+        },
+      ],
     })
     const roseOptions = ref({
       color,
