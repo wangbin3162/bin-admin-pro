@@ -87,7 +87,7 @@ export default {
     })
 
     const headerHeight = computed(() => {
-      return contentFull.value ? { height: '32px' } : { height: showTagsView.value ? '80px' : '48px' }
+      return contentFull.value ? { height: '42px' } : { height: showTagsView.value ? '90px' : '48px' }
     })
 
     // ctrl + f 全局呼出搜索面板

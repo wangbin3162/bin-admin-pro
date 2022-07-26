@@ -6,28 +6,7 @@
       <theme-panel />
       <h3 class="setting-title"><span>功能设置</span></h3>
       <div class="setting-list-item">
-        <span>多页签</span>
-        <b-switch :model-value="showTagsView" @change="toggleTagsView">
-          <template #open><span>开</span></template>
-          <template #close><span>关</span></template>
-        </b-switch>
-      </div>
-      <div class="setting-list-item">
-        <span>固定Header</span>
-        <b-switch :model-value="fixedHeader" @change="changeFixedHeader">
-          <template #open><span>开</span></template>
-          <template #close><span>关</span></template>
-        </b-switch>
-      </div>
-      <div class="setting-list-item">
-        <span>固定侧边栏</span>
-        <b-switch :model-value="fixedAside" @change="changeFixedAside">
-          <template #open><span>开</span></template>
-          <template #close><span>关</span></template>
-        </b-switch>
-      </div>
-      <div class="setting-list-item">
-        <span>菜单展开宽度</span>
+        <span>菜单宽度</span>
         <b-input-number
           size="small"
           :step="8"
@@ -35,7 +14,37 @@
           :max="256"
           :model-value="sidebarWidth"
           @change="changeSidebarWidth"
+          style="width: 150px"
         ></b-input-number>
+      </div>
+      <div class="setting-list-item">
+        <span>菜单固定</span>
+        <b-switch :model-value="fixedAside" @change="changeFixedAside">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item">
+        <span>头部固定</span>
+        <b-switch :model-value="fixedHeader" @change="changeFixedHeader">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item">
+        <span>多页签</span>
+        <b-switch :model-value="showTagsView" @change="toggleTagsView">
+          <template #open><span>开</span></template>
+          <template #close><span>关</span></template>
+        </b-switch>
+      </div>
+      <div class="setting-list-item" v-if="showTagsView">
+        <span>页签风格</span>
+        <b-select :model-value="tagsType" @change="setTagsType" size="small" style="width: 150px">
+          <b-option label="卡片" value="card"></b-option>
+          <b-option label="灵动" value="clever"></b-option>
+          <b-option label="圆滑" value="smooth"></b-option>
+        </b-select>
       </div>
       <h3 class="setting-title"><span>顶栏设置</span></h3>
       <div class="setting-list-item">
@@ -79,48 +88,8 @@ export default {
   name: 'Setting',
   components: { ThemePanel, HeaderTrigger },
   setup() {
-    const {
-      showTagsView,
-      sidebar,
-      sidebarWidth,
-      fixedHeader,
-      fixedAside,
-      toggleSidebar,
-      toggleTagsView,
-      changeFixedHeader,
-      changeFixedAside,
-      changeSidebarWidth,
-      settingVisible,
-      toggleSetting,
-      showSearch,
-      showMessage,
-      showWeather,
-      toggleSearch,
-      toggleSearchBtn,
-      toggleMessageBtn,
-      toggleWeatherBtn,
-    } = useSetting()
-
     return {
-      settingVisible,
-      sidebar,
-      showTagsView,
-      sidebarWidth,
-      fixedHeader,
-      fixedAside,
-      toggleSidebar,
-      toggleTagsView,
-      changeFixedHeader,
-      changeFixedAside,
-      changeSidebarWidth,
-      toggleSetting,
-      showSearch,
-      showMessage,
-      showWeather,
-      toggleSearch,
-      toggleSearchBtn,
-      toggleMessageBtn,
-      toggleWeatherBtn,
+      ...useSetting(),
     }
   },
 }
