@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="页面数据为Mock数据，操作时不会进行真实操作。仅为模拟实现。">
+  <div>
     <page-cube-wrapper>
       <template #left>
         <base-tree
@@ -9,8 +9,7 @@
           :fetch="getDepartTree"
           @select-change="handleSelect"
           width="240px"
-        >
-        </base-tree>
+        ></base-tree>
       </template>
       <div class="pl-16">
         <base-table>
@@ -21,7 +20,7 @@
               </b-form-item>
               <b-form-item label="用户角色">
                 <b-select v-model="query.roles" clearable>
-                  <b-option v-for="(val,key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+                  <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
                 </b-select>
               </b-form-item>
               <template v-if="expand">
@@ -41,11 +40,7 @@
               <b-form-item>
                 <b-button>重置</b-button>
                 <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
-                <b-button
-                  type="text"
-                  :icon="expand?'up':'down'"
-                  @click="expand = !expand"
-                >
+                <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
                   {{ expand ? '收起' : '展开' }}
                 </b-button>
               </b-form-item>
@@ -55,7 +50,7 @@
             <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
           </template>
           <template #actionRight>
-            <b-dropdown style="margin-left: 20px;">
+            <b-dropdown style="margin-left: 20px">
               <b-button>
                 更多操作
                 <b-icon name="down"></b-icon>
@@ -69,10 +64,10 @@
             </b-dropdown>
           </template>
           <b-table :columns="columns" :data="copyList" :loading="loading" border>
-            <template #roles="{row}">
+            <template #roles="{ row }">
               {{ roleMap[row.roles] }}
             </template>
-            <template #action="{row}">
+            <template #action="{ row }">
               <action-button
                 type="text"
                 icon="edit-square"
@@ -107,19 +102,9 @@
       </div>
     </page-cube-wrapper>
 
-    <b-modal
-      :model-value="modalVisible"
-      :title="`${pageStatus.isCreate?'新增':'修改'}角色`"
-      @closed="handleCancel"
-    >
+    <b-modal :model-value="modalVisible" :title="`${pageStatus.isCreate ? '新增' : '修改'}用户`" @closed="handleCancel">
       <div v-if="modalVisible">
-        <b-form
-          ref="formRef"
-          :model="user"
-          :rules="ruleValidate"
-          label-width="100px"
-          label-suffix=":"
-        >
+        <b-form ref="formRef" :model="user" :rules="ruleValidate" label-width="100px" label-suffix=":">
           <b-form-item label="所属部门">
             <b-tree-select v-model="user.depart" :data="deptTree" title-key="text"></b-tree-select>
           </b-form-item>
@@ -134,7 +119,7 @@
           </b-form-item>
           <b-form-item label="角色">
             <b-select v-model="user.roles" placeholder="选择角色" clearable>
-              <b-option v-for="(val,key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
             </b-select>
           </b-form-item>
         </b-form>
@@ -146,7 +131,7 @@
         </div>
       </template>
     </b-modal>
-  </page-wrapper>
+  </div>
 </template>
 
 <script>
@@ -184,14 +169,7 @@ export default {
 
     const { treeData: deptTree, getTreeData } = useTree(getDepartTree)
     getTreeData().then(() => console.log(deptTree.value))
-    const {
-      loading,
-      list,
-      total,
-      getListData,
-      pageChange,
-      pageSizeChange,
-    } = useTable(getUserList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
     const {
       formRef,
       editStatus,
@@ -205,7 +183,7 @@ export default {
       setBtnLoading,
       modalVisible,
     } = useForm()
-    watch(list, (val) => {
+    watch(list, val => {
       copyList.value = val.map(item => ({
         ...item,
         expand: false,

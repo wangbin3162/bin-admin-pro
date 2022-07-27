@@ -8,7 +8,7 @@
           </b-form-item>
           <b-form-item label="用户角色">
             <b-select v-model="query.roles" clearable>
-              <b-option v-for="(val,key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
             </b-select>
           </b-form-item>
           <template v-if="expand">
@@ -28,11 +28,7 @@
           <b-form-item>
             <b-button>重置</b-button>
             <b-button type="primary" :loading="loading">查询</b-button>
-            <b-button
-              type="text"
-              :icon="expand?'up':'down'"
-              @click="expand = !expand"
-            >
+            <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
               {{ expand ? '收起' : '展开' }}
             </b-button>
           </b-form-item>
@@ -42,7 +38,7 @@
         <b-button type="primary" icon="plus-circle">新增</b-button>
       </template>
       <template #actionRight>
-        <b-dropdown style="margin-left: 20px;">
+        <b-dropdown style="margin-left: 20px">
           <b-button>
             更多操作
             <b-icon name="down"></b-icon>
@@ -56,7 +52,7 @@
         </b-dropdown>
       </template>
       <b-table :columns="columns" :data="copyList" :loading="loading" border>
-        <template #roles="{row}">
+        <template #roles="{ row }">
           {{ roleMap[row.roles] }}
         </template>
         <template #action>
@@ -105,15 +101,8 @@ export default {
     })
     const expand = ref(false)
     const copyList = ref([])
-    const {
-      loading,
-      list,
-      total,
-      getListData,
-      pageChange,
-      pageSizeChange,
-    } = useTable(getUserList, query)
-    watch(list, (val) => {
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
+    watch(list, val => {
       copyList.value = val.map(item => ({
         ...item,
         expand: false,

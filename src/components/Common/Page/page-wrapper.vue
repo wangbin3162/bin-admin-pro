@@ -5,17 +5,18 @@
         <div class="page-header has-breadcrumb">
           <div class="page-header-heading">
             <b-popover trigger="hover" placement="right" width="" v-if="isBubbles">
-              <span class="page-header-heading-title">{{ normalTitle }}
-                 <b-icon  name="question-circle-fill"></b-icon>
+              <span class="page-header-heading-title">
+                {{ normalTitle }}
+                <b-icon name="question-circle-fill"></b-icon>
               </span>
-              <template #content >
-                <div>{{normalDesc}}</div>
+              <template #content>
+                <div>{{ normalDesc }}</div>
               </template>
             </b-popover>
             <span class="page-header-heading-title" v-if="!isBubbles">{{ normalTitle }}</span>
-              <slot name="right"></slot>
+            <slot name="right"></slot>
           </div>
-          <div class="page-header-desc" v-if="$slots.desc">
+          <div class="page-header-desc" v-if="$slots.desc || desc">
             <slot name="desc">{{ normalDesc }}</slot>
           </div>
           <b-icon v-if="showClose" name="close" type="button" @click="$emit('close')"></b-icon>
@@ -25,11 +26,10 @@
     <div class="grid-content">
       <div
         class="page-header-wrap-children-content"
-        :class="{'has-bg':bg}"
-        :style="{padding:bg?contentPadding:null}"
+        :class="{ 'has-bg': bg }"
+        :style="{ padding: bg ? contentPadding : null }"
       >
-        <slot>
-        </slot>
+        <slot></slot>
       </div>
     </div>
     <page-footer v-if="getShowFooter">
@@ -59,7 +59,7 @@ export default {
     bg: Boolean,
     isBubbles: {
       type: Boolean,
-      default: false
+      default: false,
     },
     contentPadding: {
       type: String,
@@ -70,8 +70,12 @@ export default {
   setup(props, { slots }) {
     const { showTagsView } = useSetting()
     const { getCurrentRouteMenu } = useMenu()
-    const normalTitle = computed(() => props.title ? props.title : (getCurrentRouteMenu() ? getCurrentRouteMenu().title : 'no-title'))
-    const normalDesc = computed(() => props.desc ? props.desc: (getCurrentRouteMenu() ? getCurrentRouteMenu().desc : ''))
+    const normalTitle = computed(() =>
+      props.title ? props.title : getCurrentRouteMenu() ? getCurrentRouteMenu().title : 'no-title',
+    )
+    const normalDesc = computed(() =>
+      props.desc ? props.desc : getCurrentRouteMenu() ? getCurrentRouteMenu().desc : '',
+    )
     const getShowFooter = ref(slots.leftFooter || slots.rightFooter)
 
     return {

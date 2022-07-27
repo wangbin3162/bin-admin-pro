@@ -26,7 +26,7 @@ export default ({ mode }) => {
     ],
     server: {
       host: '0.0.0.0',
-      port: 8090,
+      port: 8085,
       open: true,
       proxy: {
         // '/auth': { target: proxyAddress },

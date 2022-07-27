@@ -11,13 +11,9 @@
       </template>
       <template #default>
         <ul class="list-wrap">
-          <li
-            v-for="(item,index) in copyList"
-            :key="item.id"
-            class="user-list-item"
-          >
+          <li v-for="(item, index) in copyList" :key="item.id" class="user-list-item">
             <div class="list-item-meta">
-              <img :src="item.avatar" alt="" class="avatar">
+              <img :src="item.avatar" alt="" class="avatar" />
               <div class="list-item-meta-name">{{ item.realName }}</div>
             </div>
             <div class="list-item-id">
@@ -25,13 +21,13 @@
               <b-button size="mini" icon="file-copy" @click="handleCopy(item.id)">复制</b-button>
             </div>
             <div class="list-item-email mt-8">邮箱地址：{{ item.email }}</div>
-            <div class="list-item-action mt-8">
-              <b-tag :type="item.verify?'success':'danger'">{{ item.verify ? '已认证' : '未认证' }}</b-tag>
+            <div class="list-item-action mt-8" flex="cross:center">
+              <b-tag :type="item.verify ? 'success' : 'danger'">{{ item.verify ? '已认证' : '未认证' }}</b-tag>
               <b-tag :type="roleMapStyle[item.roles]">{{ roleMap[item.roles] }}</b-tag>
               <b-button
-                :icon="item.expand?'minus-square':'plus-square'"
-                size="mini"
-                style="margin-left: 16px;"
+                :icon="item.expand ? 'minus-square' : 'plus-square'"
+                size="small"
+                style="margin-left: 16px"
                 @click="item.expand = !item.expand"
               >
                 {{ item.expand ? '收起操作' : '展开操作' }}
@@ -39,8 +35,12 @@
             </div>
             <div class="list-item-action mt-8" v-if="item.expand">
               <action-button
-                :button-props="{type:item.roles !== 'admin'?'primary':null,size:'mini',disabled:item.roles === 'admin'}"
-                @click="setRole('admin',index)"
+                :button-props="{
+                  type: item.roles !== 'admin' ? 'primary' : null,
+                  size: 'mini',
+                  disabled: item.roles === 'admin',
+                }"
+                @click="setRole('admin', index)"
                 message="设置角色为管理员吗？"
                 confirm
               >
@@ -48,8 +48,12 @@
               </action-button>
               <b-divider type="vertical"></b-divider>
               <action-button
-                :button-props="{type:item.roles !== 'user'?'primary':null,size:'mini',disabled:item.roles === 'user'}"
-                @click="setRole('user',index)"
+                :button-props="{
+                  type: item.roles !== 'user' ? 'primary' : null,
+                  size: 'mini',
+                  disabled: item.roles === 'user',
+                }"
+                @click="setRole('user', index)"
                 message="设置角色为普通用户吗？"
                 confirm
               >
@@ -57,8 +61,12 @@
               </action-button>
               <b-divider type="vertical"></b-divider>
               <action-button
-                :button-props="{type:item.roles !== 'op'?'primary':null,size:'mini',disabled:item.roles === 'op'}"
-                @click="setRole('op',index)"
+                :button-props="{
+                  type: item.roles !== 'op' ? 'primary' : null,
+                  size: 'mini',
+                  disabled: item.roles === 'op',
+                }"
+                @click="setRole('op', index)"
                 message="设置角色为实施人员吗？"
                 confirm
               >
@@ -104,14 +112,7 @@ export default {
       size: 10,
     })
     const copyList = ref([])
-    const {
-      loading,
-      list,
-      total,
-      getListData,
-      pageChange,
-      pageSizeChange,
-    } = useTable(getUserList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
 
     function handleCopy(id) {
       Message.success(`复制ID：${id}成功！`)
@@ -121,12 +122,15 @@ export default {
       copyList.value[index].roles = role
     }
 
-    watch(() => list.value, (val) => {
-      copyList.value = val.map(item => ({
-        ...item,
-        expand: false,
-      }))
-    })
+    watch(
+      () => list.value,
+      val => {
+        copyList.value = val.map(item => ({
+          ...item,
+          expand: false,
+        }))
+      },
+    )
     // 执行一次内容
     getListData()
     return {
