@@ -1,35 +1,34 @@
 <template>
-  <page-wrapper bg>
-    <b-divider align="left">基本信息</b-divider>
-    <b-desc>
-      <b-desc-item label="姓名">王小五</b-desc-item>
-      <b-desc-item label="手机号">1769239****</b-desc-item>
-      <b-desc-item label="居住地">徐州市</b-desc-item>
-      <b-desc-item label="生日">2020-04-22</b-desc-item>
-      <b-desc-item label="地址">江苏省xx市吴中区吴中大道 1245 号</b-desc-item>
-    </b-desc>
-    <b-divider align="left">其他信息</b-divider>
-    <b-desc>
-      <b-desc-item label="姓名">王小五</b-desc-item>
-      <b-desc-item label="邮箱">bin-admin-pro@github.com</b-desc-item>
-      <b-desc-item label="地址">徐州市</b-desc-item>
-      <b-desc-item label="爱好">
-        <b-tag>打篮球</b-tag>
-        <b-tag>游戏</b-tag>
-        <b-tag>听歌</b-tag>
-      </b-desc-item>
-    </b-desc>
-    <b-divider align="left">表格信息</b-divider>
-    <b-table :columns="columns" :data="data"></b-table>
-  </page-wrapper>
+  <page-container>
+    <b-card shadow="never">
+      <b-divider align="left">基本信息</b-divider>
+      <b-desc>
+        <b-desc-item label="姓名">王小五</b-desc-item>
+        <b-desc-item label="手机号">1769239****</b-desc-item>
+        <b-desc-item label="居住地">徐州市</b-desc-item>
+        <b-desc-item label="生日">2020-04-22</b-desc-item>
+        <b-desc-item label="地址">江苏省xx市吴中区吴中大道 1245 号</b-desc-item>
+      </b-desc>
+      <b-divider align="left">其他信息</b-divider>
+      <b-desc>
+        <b-desc-item label="姓名">王小五</b-desc-item>
+        <b-desc-item label="邮箱">bin-admin-pro@github.com</b-desc-item>
+        <b-desc-item label="地址">徐州市</b-desc-item>
+        <b-desc-item label="爱好">
+          <b-tag>打篮球</b-tag>
+          <b-tag>游戏</b-tag>
+          <b-tag>听歌</b-tag>
+        </b-desc-item>
+      </b-desc>
+      <b-divider align="left">表格信息</b-divider>
+      <b-table :columns="columns" :data="data"></b-table>
+    </b-card>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-
 export default {
   name: 'BaseDetail',
-  components: { PageWrapper },
   data() {
     return {
       columns: [

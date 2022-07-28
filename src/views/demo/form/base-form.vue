@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="基础表单常见于数据项较少的表单场景。" bg>
+  <page-container desc="基础表单常见于数据项较少的表单场景。" bg>
     <b-row type="flex" justify="center">
       <b-col span="12">
         <b-form ref="formRef" :model="form" label-width="85px" :rules="ruleValidate">
@@ -12,7 +12,7 @@
           <b-row>
             <b-col :span="12">
               <b-form-item prop="age" label="年龄">
-                <b-input-number style="width: 100%;" v-model="form.age" :min="0" :editable="false"></b-input-number>
+                <b-input-number style="width: 100%" v-model="form.age" :min="0" :editable="false"></b-input-number>
               </b-form-item>
             </b-col>
             <b-col :span="12">
@@ -56,17 +56,14 @@
         </b-form>
       </b-col>
     </b-row>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
 import { ref } from 'vue'
 import { Message } from 'bin-ui-next'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-
 export default {
   name: 'BaseForm',
-  components: { PageWrapper },
   setup() {
     const formRef = ref(null)
     const form = ref({
@@ -81,7 +78,7 @@ export default {
     })
 
     function submitForm() {
-      formRef.value.validate((valid) => {
+      formRef.value.validate(valid => {
         if (valid) {
           Message.success('success submit!!')
         } else {

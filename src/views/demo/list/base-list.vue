@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="基础的列表，可以进行增删改查等操作。">
+  <page-container desc="基础的列表，可以进行增删改查等操作。">
     <b-card class="task-wrapper" :bordered="false" shadow="never">
       <b-row>
         <b-col span="8">
@@ -22,23 +22,19 @@
       </template>
       <div class="p16">
         <div class="create-btn mb-16">
-          <b-button dashed icon="plus" style="width: 100%;">添加</b-button>
+          <b-button dashed icon="plus" style="width: 100%">添加</b-button>
         </div>
         <ul class="list-wrap" v-loading="loading">
-          <li
-            v-for="item in list"
-            :key="item.id"
-            class="base-list-item"
-          >
+          <li v-for="item in list" :key="item.id" class="base-list-item">
             <div class="list-item-meta">
-              <img :src="item.avatar" alt="" class="avatar">
+              <img :src="item.avatar" alt="" class="avatar" />
               <div class="list-item-meta-content">
                 <div class="list-item-meta-title">{{ item.title }}</div>
                 <div class="list-item-meta-description">{{ item.desc }}</div>
               </div>
             </div>
             <div class="list-item-content">
-              <div class="list-item-content-item" style="width: 55px;">
+              <div class="list-item-content-item" style="width: 55px">
                 <span>负责人</span>
                 <p>{{ item.author }}</p>
               </div>
@@ -46,20 +42,15 @@
                 <span>开始时间</span>
                 <p>{{ item.time }}</p>
               </div>
-              <div class="list-item-content-item pt-10" style="width: 180px;">
-                <b-progress :percent="item.progress" :status="item.status" :active="item.status==='text'">
+              <div class="list-item-content-item pt-10" style="width: 180px">
+                <b-progress :percent="item.progress" :status="item.status" :active="item.status === 'text'">
                   <span>{{ item.progress }}%</span>
                 </b-progress>
               </div>
             </div>
             <div class="list-item-action">
               <action-button type="text" @click="handleEdit(item)">编辑</action-button>
-              <action-button
-                type="text"
-                color="danger"
-                @click="handleDelete(item)"
-                confirm>删除
-              </action-button>
+              <action-button type="text" color="danger" @click="handleDelete(item)" confirm>删除</action-button>
             </div>
           </li>
         </ul>
@@ -77,7 +68,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
@@ -85,29 +76,16 @@ import useTable from '@/hooks/service/useTable'
 import { getBaseList } from '@/api/modules/list.api'
 import { reactive, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
-import ActionButton from '@/components/Common/ActionButton/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'BaseList',
-  components: {
-    PageWrapper,
-    ActionButton,
-  },
   setup() {
     const query = reactive({
       name: '',
       page: 1,
       size: 10,
     })
-    const {
-      loading,
-      getListData,
-      list,
-      total,
-      pageChange,
-      pageSizeChange,
-    } = useTable(getBaseList, query)
+    const { loading, getListData, list, total, pageChange, pageSizeChange } = useTable(getBaseList, query)
 
     function handleSearch(val) {
       query.name = val

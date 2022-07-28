@@ -1,8 +1,8 @@
 <template>
-  <page-wrapper desc="当一次性提交大量数据时，可使用高级表单。">
+  <page-container desc="当一次性提交大量数据时，可使用高级表单。">
     <b-form :model="form" :rules="ruleValidate" status-icon label-width="85px" ref="formRef" label-position="top">
       <b-collapse-wrap title="基本信息" shadow="none">
-        <div style="padding: 10px 24px;">
+        <div style="padding: 10px 24px">
           <b-row :gutter="24">
             <b-col span="6">
               <b-form-item prop="name" label="姓名">
@@ -31,7 +31,7 @@
         </div>
       </b-collapse-wrap>
       <b-collapse-wrap title="任务信息" shadow="none">
-        <div style="padding: 10px 24px;">
+        <div style="padding: 10px 24px">
           <b-row :gutter="32">
             <b-col span="8">
               <b-form-item prop="taskName" label="任务名称">
@@ -79,17 +79,17 @@
         </div>
       </b-collapse-wrap>
       <b-collapse-wrap title="人员信息" shadow="none">
-        <div style="padding: 16px;">
+        <div style="padding: 16px">
           <b-table :columns="columns" :data="list">
-            <template #name="{index,row}">
+            <template #name="{ index, row }">
               <b-input type="text" v-model="editName" v-if="editIndex === index" size="small" clearable></b-input>
               <span v-else>{{ row.name }}</span>
             </template>
-            <template #age="{index,row}">
+            <template #age="{ index, row }">
               <b-input-number type="text" v-model="editAge" v-if="editIndex === index" size="small"></b-input-number>
               <span v-else>{{ row.age }}</span>
             </template>
-            <template #birthday="{index,row}">
+            <template #birthday="{ index, row }">
               <b-date-picker
                 v-if="editIndex === index"
                 size="small"
@@ -99,73 +99,51 @@
               ></b-date-picker>
               <span v-else>{{ row.birthday }}</span>
             </template>
-            <template #hobby="{index,row}">
+            <template #hobby="{ index, row }">
               <b-select v-model="editHobby" clearable v-if="editIndex === index" size="small">
-                <b-option v-for="(val,key) in hobbyMap" :key="key" :value="key" :label="val">{{ val }}</b-option>
+                <b-option v-for="(val, key) in hobbyMap" :key="key" :value="key" :label="val">{{ val }}</b-option>
               </b-select>
               <span v-else>{{ hobbyMap[row.hobby] }}</span>
             </template>
-            <template #address="{index,row}">
+            <template #address="{ index, row }">
               <b-input type="text" v-model="editAddress" v-if="editIndex === index" size="small"></b-input>
               <span v-else>{{ row.address }}</span>
             </template>
-            <template #action="{index,row}">
+            <template #action="{ index, row }">
               <div v-if="editIndex === index">
                 <template v-if="editIsCreate">
-                  <b-button
-                    @click="handleSave(index)"
-                    size="mini"
-                    type="success"
-                    transparent
-                  >新增
-                  </b-button>
-                  <b-button
-                    type="danger"
-                    size="mini"
-                    transparent
-                    @click="handleRemove(index)"
-                  >删除
-                  </b-button>
+                  <b-button @click="handleSave(index)" size="mini" type="success" transparent>新增</b-button>
+                  <b-button type="danger" size="mini" transparent @click="handleRemove(index)">删除</b-button>
                 </template>
                 <template v-else>
-                  <b-button
-                    size="mini"
-                    type="success"
-                    transparent
-                    @click="handleSave(index)"
-                  >保存
-                  </b-button>
-                  <b-button
-                    size="mini"
-                    type="primary"
-                    transparent
-                    @click="editIndex = -1"
-                  >取消
-                  </b-button>
+                  <b-button size="mini" type="success" transparent @click="handleSave(index)">保存</b-button>
+                  <b-button size="mini" type="primary" transparent @click="editIndex = -1">取消</b-button>
                 </template>
               </div>
               <div v-else>
                 <b-button
-                  :type="editIsCreate?'default':'primary'"
+                  :type="editIsCreate ? 'default' : 'primary'"
                   size="mini"
                   :transparent="!editIsCreate"
-                  @click="handleEdit(row,index)"
+                  @click="handleEdit(row, index)"
                   :disabled="editIsCreate"
-                >操作
+                >
+                  操作
                 </b-button>
                 <b-button
-                  :type="editIsCreate?'default':'danger'"
+                  :type="editIsCreate ? 'default' : 'danger'"
                   size="mini"
                   :transparent="!editIsCreate"
                   @click="handleRemove(index)"
                   :disabled="editIsCreate"
-                >删除
+                >
+                  删除
                 </b-button>
               </div>
             </template>
           </b-table>
           <div class="mt-8">
-            <b-button icon="plus" dashed style="width: 100%;" @click="handleAdd" :disabled="editIsCreate">新增</b-button>
+            <b-button icon="plus" dashed style="width: 100%" @click="handleAdd" :disabled="editIsCreate">新增</b-button>
           </div>
         </div>
       </b-collapse-wrap>
@@ -174,18 +152,16 @@
       <b-button @click="resetForm">重 置</b-button>
       <b-button type="primary" @click="submitForm">提 交</b-button>
     </template>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
 import { reactive, ref, toRefs } from 'vue'
 import { Message } from 'bin-ui-next'
 import dayjs from 'dayjs'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'AdvancedForm',
-  components: { PageWrapper },
   setup() {
     const formRef = ref(null)
     const form = ref({
@@ -290,7 +266,7 @@ export default {
     }
 
     function submitForm() {
-      formRef.value.validate((valid) => {
+      formRef.value.validate(valid => {
         if (valid) {
           Message.success('success submit!!')
         } else {

@@ -8,7 +8,7 @@
   &-has-aside {
     flex-direction: row;
     > .layout {
-      overflow-x: hidden;
+      overflow: hidden;
     }
   }
   &-aside {
@@ -45,12 +45,14 @@
     }
   }
   &-main {
+    position: relative;
     min-height: 100vh;
   }
   &-content-wrap {
     position: relative;
-    flex: auto;
+    flex: 1;
     min-height: 0;
+    overflow: hidden;
     .table-wrap {
       display: flex;
       .table-right {

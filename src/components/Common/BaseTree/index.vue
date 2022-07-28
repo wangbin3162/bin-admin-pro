@@ -1,5 +1,5 @@
 <template>
-  <div class="base-tree" :style="{width}" ref="treeEl">
+  <div class="base-tree" :style="{ width }" ref="treeEl">
     <div class="base-tree-header">
       <span class="base-title">{{ treeTitle }}</span>
       <div class="base-ctrl">
@@ -25,7 +25,12 @@
         </div>
       </div>
     </div>
-    <div class="tree-wrap" :class="{'has-bottom':$slots.bottom}" :style="{minHeight,maxHeight}" v-loading="loading">
+    <div
+      class="tree-wrap"
+      :class="{ 'has-bottom': $slots.bottom }"
+      :style="{ minHeight, maxHeight }"
+      v-loading="loading"
+    >
       <div class="tree-inner" v-if="$slots.inner">
         <slot name="inner"></slot>
       </div>
@@ -63,7 +68,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '280px',
+      default: '240px',
     },
     minHeight: {
       type: String,
@@ -156,18 +161,22 @@ export default {
       treeRef.value && treeRef.value.setSelected(props.selectedKeys)
     }
 
-    watch(() => props.fetch, async (val) => {
-      if (typeOf(val) === 'array') {
-        treeData.value = val
-        if (val.length > 0) {
-          await nextTick()
-          setDefault()
+    watch(
+      () => props.fetch,
+      async val => {
+        if (typeOf(val) === 'array') {
+          treeData.value = val
+          if (val.length > 0) {
+            await nextTick()
+            setDefault()
+          }
+          return true
         }
-        return true
-      }
-      await getTreeData()
-      setDefault()
-    }, { immediate: true })
+        await getTreeData()
+        setDefault()
+      },
+      { immediate: true },
+    )
     return {
       treeEl,
       showTopSearch,

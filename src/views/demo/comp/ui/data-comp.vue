@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="数据类别的组件（table/page/tree/desc/progress/circle），可验证不同主题色的正确性。">
+  <page-container desc="数据类别的组件（table/page/tree/desc/progress/circle），可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Table 表格" shadow="none" class="mb-20">
       <div class="p10">
@@ -16,16 +16,15 @@
         <b-tree :data="data" @select-change="handleSelect"></b-tree>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'DataComp',
-  components: { PageWrapper, ThemeColorPanel },
+  components: { ThemeColorPanel },
   data() {
     return {
       columns: [

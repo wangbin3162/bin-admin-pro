@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="将一个冗长或用户不熟悉的表单任务分成多个步骤，分布提交，确保用户操作面板的精简。" bg>
+  <page-container desc="将一个冗长或用户不熟悉的表单任务分成多个步骤，分布提交，确保用户操作面板的精简。" bg>
     <b-row type="flex" justify="center" class="mb-20">
       <b-col span="12">
         <b-steps :current="step">
@@ -9,7 +9,7 @@
         </b-steps>
       </b-col>
     </b-row>
-    <template v-if="step===0">
+    <template v-if="step === 0">
       <b-row type="flex" justify="center">
         <b-col span="12">
           <b-form :model="form1" :rules="rules1" ref="form1Ref" label-width="100px" label-suffix=":">
@@ -21,7 +21,7 @@
             <b-form-item prop="collection" label="收款账户">
               <b-input v-model="form1.collection">
                 <template #prepend>
-                  <b-select v-model="form1.collectionType" style="width: 100px;">
+                  <b-select v-model="form1.collectionType" style="width: 100px">
                     <b-option label="wechat" value="微信"></b-option>
                     <b-option label="alipay" value="支付宝"></b-option>
                   </b-select>
@@ -46,15 +46,23 @@
         </b-col>
       </b-row>
     </template>
-    <template v-if="step===1">
+    <template v-if="step === 1">
       <b-row type="flex" justify="center">
         <b-col span="12">
           <b-alert show-icon closable>确认支付后，资金会直接打入对方账户，无法退回。</b-alert>
           <b-form :model="form2" ref="form2Ref" label-width="100px" label-suffix=":">
-            <b-form-item label="付款账户"><label>{{ form1.payment }}</label></b-form-item>
-            <b-form-item label="收款账户"><label>{{ form1.collection }}</label></b-form-item>
-            <b-form-item label="收款人名称"><label>{{ form1.name }}</label></b-form-item>
-            <b-form-item label="金额"><label>¥ {{ form1.money }}</label></b-form-item>
+            <b-form-item label="付款账户">
+              <label>{{ form1.payment }}</label>
+            </b-form-item>
+            <b-form-item label="收款账户">
+              <label>{{ form1.collection }}</label>
+            </b-form-item>
+            <b-form-item label="收款人名称">
+              <label>{{ form1.name }}</label>
+            </b-form-item>
+            <b-form-item label="金额">
+              <label>¥ {{ form1.money }}</label>
+            </b-form-item>
             <b-divider></b-divider>
             <b-form-item
               label="支付密码"
@@ -71,15 +79,23 @@
         </b-col>
       </b-row>
     </template>
-    <template v-if="step===2">
+    <template v-if="step === 2">
       <result status="success">
         <template #desc>预计2小时内到账</template>
         <template #extra>
           <b-form label-width="100px" label-suffix=":">
-            <b-form-item label="付款账户"><label>{{ form1.payment }}</label></b-form-item>
-            <b-form-item label="收款账户"><label>{{ form1.collection }}</label></b-form-item>
-            <b-form-item label="收款人名称"><label>{{ form1.name }}</label></b-form-item>
-            <b-form-item label="金额"><label>¥ {{ form1.money }}</label></b-form-item>
+            <b-form-item label="付款账户">
+              <label>{{ form1.payment }}</label>
+            </b-form-item>
+            <b-form-item label="收款账户">
+              <label>{{ form1.collection }}</label>
+            </b-form-item>
+            <b-form-item label="收款人名称">
+              <label>{{ form1.name }}</label>
+            </b-form-item>
+            <b-form-item label="金额">
+              <label>¥ {{ form1.money }}</label>
+            </b-form-item>
           </b-form>
         </template>
         <template #actions>
@@ -90,7 +106,7 @@
     </template>
 
     <!--表单的说明信息等-->
-    <div v-if="step===0">
+    <div v-if="step === 0">
       <b-divider></b-divider>
       <b-alert>
         说明
@@ -100,17 +116,14 @@
         </template>
       </b-alert>
     </div>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
 import { ref } from 'vue'
-import Result from '@/components/Common/Result/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'StepForm',
-  components: { PageWrapper, Result },
   setup() {
     const step = ref(0)
     const form1Ref = ref(null)
@@ -129,7 +142,7 @@ export default {
 
     function next() {
       if (!form1Ref.value) return
-      form1Ref.value.validate((valid) => {
+      form1Ref.value.validate(valid => {
         if (valid) {
           step.value = 1
         }
@@ -142,7 +155,7 @@ export default {
 
     function submitForm() {
       if (!form2Ref.value) return
-      form2Ref.value.validate((valid) => {
+      form2Ref.value.validate(valid => {
         if (valid) {
           loading.value = true
           setTimeout(() => {

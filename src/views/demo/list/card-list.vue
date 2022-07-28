@@ -1,29 +1,22 @@
 <template>
-  <page-wrapper desc="卡片类型的列表，这里仅做示例，实际开发需根据业务进行调整开发。">
+  <page-container desc="卡片类型的列表，这里仅做示例，实际开发需根据业务进行调整开发。">
     <div class="card-list-wrap">
       <div class="card-item">
-        <b-button icon="plus" dashed style="height: 175px;width: 100%;">新增项目</b-button>
+        <b-button icon="plus" dashed style="height: 175px; width: 100%">新增项目</b-button>
       </div>
-      <div
-        v-for="item in list"
-        :key="item.id"
-        class="card-item"
-      >
-        <app-item :styles="{width:'100%',height: '175px',margin:'0'}" :item="item"></app-item>
+      <div v-for="item in list" :key="item.id" class="card-item">
+        <app-item :styles="{ width: '100%', height: '175px', margin: '0' }" :item="item"></app-item>
       </div>
     </div>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
 import useTable from '@/hooks/service/useTable'
 import { getProjectList } from '@/api/modules/list.api'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import AppItem from '@/components/Common/List/app-item.vue'
 
 export default {
   name: 'CardList',
-  components: { AppItem, PageWrapper },
   setup() {
     const { getListData, list } = useTable(getProjectList)
 

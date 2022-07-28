@@ -1,8 +1,8 @@
 <template>
-  <page-wrapper desc="数字动画组件，现已收录至bin-ui-next，此为示例">
+  <page-container desc="数字动画组件，现已收录至bin-ui-next，此为示例">
     <b-collapse-wrap title="数字动画" shadow="none">
       <div class="count-wrap p10">
-        <h1 style="font-size: 60px;">
+        <h1 style="font-size: 60px">
           <b-count-to
             :start-val="startVal"
             :end-val="endVal"
@@ -41,15 +41,12 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-
 export default {
   name: 'CompCountTo',
-  components: { PageWrapper },
   data() {
     return {
       startVal: 0,

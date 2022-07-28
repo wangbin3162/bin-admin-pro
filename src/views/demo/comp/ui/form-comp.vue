@@ -1,9 +1,9 @@
 <template>
-  <page-wrapper desc="表单类别的组件，可验证不同主题色的正确性。">
+  <page-container desc="表单类别的组件，可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Form 表单输入" shadow="none" class="mb-20">
       <div class="p20" flex="main:center">
-        <div style="width: 800px;">
+        <div style="width: 800px">
           <b-form ref="ruleForm" :model="form" label-width="85px" :rules="ruleValidate">
             <b-form-item prop="name" label="名称">
               <b-input v-model="form.name" placeholder="用户名"></b-input>
@@ -14,7 +14,7 @@
             <b-row>
               <b-col :span="12">
                 <b-form-item prop="age" label="年龄">
-                  <b-input-number style="width: 100%;" v-model="form.age" :min="0" :editable="false"></b-input-number>
+                  <b-input-number style="width: 100%" v-model="form.age" :min="0" :editable="false"></b-input-number>
                 </b-form-item>
               </b-col>
               <b-col :span="12">
@@ -33,16 +33,17 @@
             <b-row>
               <b-col :span="12">
                 <b-form-item label="出生日期" prop="birthday">
-                  <b-date-picker
-                    v-model="form.birthday"
-                    type="datetime"
-                  ></b-date-picker>
+                  <b-date-picker v-model="form.birthday" type="datetime"></b-date-picker>
                 </b-form-item>
               </b-col>
               <b-col :span="12">
                 <b-form-item label="出生日期" prop="birthday">
-                  <b-date-picker v-model="form.birthday" type="date" placeholder="出生日期"
-                                 :shortcuts="shortcuts"></b-date-picker>
+                  <b-date-picker
+                    v-model="form.birthday"
+                    type="date"
+                    placeholder="出生日期"
+                    :shortcuts="shortcuts"
+                  ></b-date-picker>
                 </b-form-item>
               </b-col>
             </b-row>
@@ -74,16 +75,15 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'FormComp',
-  components: { PageWrapper, ThemeColorPanel },
+  components: { ThemeColorPanel },
   data() {
     return {
       cityList: [
@@ -114,7 +114,8 @@ export default {
             date.setTime(date.getTime() - 3600 * 1000 * 24 * 7)
             return date
           })(),
-        }],
+        },
+      ],
       form: {
         name: '',
         age: null,
@@ -132,9 +133,7 @@ export default {
           { required: true, type: 'number', message: '年龄不为空', trigger: 'change' },
           { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' },
         ],
-        hobby: [
-          { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' },
-        ],
+        hobby: [{ type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }],
         sex: [{ required: true, message: '性别必选', trigger: 'change' }],
         birthday: [{ required: true, type: 'date', message: '出生日期必选', trigger: 'blur' }],
         mail: [
@@ -146,7 +145,7 @@ export default {
   },
   methods: {
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           alert('submit!')
         }

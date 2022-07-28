@@ -3,6 +3,7 @@ import avatar2 from '@/assets/images/avatar/avatar01.jpeg'
 import avatar3 from '@/assets/images/avatar/avatar02.jpeg'
 import avatar4 from '@/assets/images/avatar/avatar07.jpeg'
 import avatar5 from '@/assets/images/avatar/avatar12.jpeg'
+import avatar6 from '@/assets/images/avatar/avatar11.jpeg'
 
 /**
  * 用户列表
@@ -67,6 +68,18 @@ export default {
       verify: true, // 是否验证邮箱
       roles: 'user',
       avatar: avatar5,
+      status: '1', // 启用1，禁用0
+      createDate: '2021-07-01',
+    },
+    {
+      id: 10000006,
+      realName: '李霄',
+      username: 'lixiao',
+      password: '123456',
+      email: 'user@lixiao.admin',
+      verify: true, // 是否验证邮箱
+      roles: 'user',
+      avatar: avatar6,
       status: '1', // 启用1，禁用0
       createDate: '2021-07-01',
     },

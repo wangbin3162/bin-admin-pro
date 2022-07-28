@@ -1,11 +1,11 @@
 <template>
-  <page-wrapper>
+  <page-container>
     <template #desc>
       <div>动态编写执行函数体，执行获取返回数据。</div>
     </template>
     <b-collapse-wrap title="基础动态编码" shadow="none" class="mb-16">
       <div flex>
-        <div class="p10" style="width: 40%;">
+        <div class="p10" style="width: 40%">
           <b-alert show-icon>
             动态指定字段名称
             <template #desc>
@@ -15,30 +15,30 @@
           </b-alert>
           <div>
             字段候选
-            <b-tag type="primary" draggable="true" @dragstart="dragField($event,'name')">name</b-tag>
-            <b-tag type="info" draggable="true" @dragstart="dragField($event,'price')">price</b-tag>
-            <b-tag type="success" draggable="true" @dragstart="dragField($event,'num')">num</b-tag>
-            <b-tag type="warning" draggable="true" @dragstart="dragField($event,'discount')">discount</b-tag>
-            <b-tag type="danger" draggable="true" @dragstart="dragField($event,'breaks')">breaks</b-tag>
+            <b-tag type="primary" draggable="true" @dragstart="dragField($event, 'name')">name</b-tag>
+            <b-tag type="info" draggable="true" @dragstart="dragField($event, 'price')">price</b-tag>
+            <b-tag type="success" draggable="true" @dragstart="dragField($event, 'num')">num</b-tag>
+            <b-tag type="warning" draggable="true" @dragstart="dragField($event, 'discount')">discount</b-tag>
+            <b-tag type="danger" draggable="true" @dragstart="dragField($event, 'breaks')">breaks</b-tag>
           </div>
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
           <div class="drop-wrapper" @drop="dropField($event)" @dragover="allowDrop($event)">
-            <p class="tip" v-if="fieldsMapping.length===0">拖动字段到此处进行配置</p>
+            <p class="tip" v-if="fieldsMapping.length === 0">拖动字段到此处进行配置</p>
             <key-value-mapping v-model="fieldsMapping" :show-add="false"></key-value-mapping>
           </div>
 
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <b-button type="primary" @click="runTest1">执行计算</b-button>
 
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <b-alert type="success" v-if="fieldsTitle" show-icon>
             执行计算成功
             <template #desc>{{ fieldsTitle }}</template>
           </b-alert>
         </div>
-        <div class="p10" style="width: 60%;">
+        <div class="p10" style="width: 60%">
           <b-alert show-icon>
             <template #icon>
               <b-icon name="codelibrary"></b-icon>
@@ -52,24 +52,24 @@
           <func-body-editor
             ref="fieldsEditRef"
             v-model="fieldsFuncBody"
-            :augments="fieldsMapping.map(v=>v.key)"
+            :augments="fieldsMapping.map(v => v.key)"
           ></func-body-editor>
 
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <div class="example">
             示例代码：
             <p>拼接字符串：</p>
-            <p style="padding-left: 8px;">return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;</p>
+            <p style="padding-left: 8px">return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;</p>
             <p>返回布尔值：</p>
-            <p style="padding-left: 8px;">return (price * num) * discount >= 200</p>
+            <p style="padding-left: 8px">return (price * num) * discount >= 200</p>
             <p>复杂计算逻辑：</p>
-            <p style="padding-left: 8px;">// 如果有折扣则计算折扣后总价</p>
-            <p style="padding-left: 8px;">const total = discount? price * num * discount : price * num;</p>
-            <p style="padding-left: 8px;">// 判断是否符合满减政策，如满200-30</p>
-            <p style="padding-left: 8px;">const totalPrice = total >= 200&&breaks ? total - breaks : total;</p>
-            <p style="padding-left: 8px;">// 输出最终结果</p>
-            <p style="padding-left: 8px;">return `您购买了${name}，单价${price}，数量${num}，最终价格: ${totalPrice}`</p>
+            <p style="padding-left: 8px">// 如果有折扣则计算折扣后总价</p>
+            <p style="padding-left: 8px">const total = discount? price * num * discount : price * num;</p>
+            <p style="padding-left: 8px">// 判断是否符合满减政策，如满200-30</p>
+            <p style="padding-left: 8px">const totalPrice = total >= 200&&breaks ? total - breaks : total;</p>
+            <p style="padding-left: 8px">// 输出最终结果</p>
+            <p style="padding-left: 8px">return `您购买了${name}，单价${price}，数量${num}，最终价格: ${totalPrice}`</p>
           </div>
         </div>
       </div>
@@ -78,23 +78,13 @@
     <b-collapse-wrap title="表格类方式调用" shadow="none" class="mb-16">
       <div flex>
         <div class="p10" style="width: 70%">
-          <b-table
-            :columns="columns"
-            :data="goodsData"
-            border
-            :merge-method="handleSpan"
-            size="small"
-          ></b-table>
+          <b-table :columns="columns" :data="goodsData" border :merge-method="handleSpan" size="small"></b-table>
         </div>
-        <div class="p10" style="width: 30%;">
+        <div class="p10" style="width: 30%">
           <title-bar title="商品计算函数" tip-pos="left"></title-bar>
           tip: 这里采用对象传入的方式进行传参
-          <func-body-editor
-            ref="goodsEditRef"
-            v-model="goodsFuncBody"
-            :augments="['goods']"
-          ></func-body-editor>
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <func-body-editor ref="goodsEditRef" v-model="goodsFuncBody" :augments="['goods']"></func-body-editor>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <b-button type="primary" @click="runTest2">执行计算</b-button>
         </div>
@@ -106,23 +96,24 @@
         <div class="p10" style="width: 30%">
           <b-ace-editor v-model="formObjStr"></b-ace-editor>
         </div>
-        <div class="p10" style="width: 30%;">
+        <div class="p10" style="width: 30%">
           <title-bar title="校验函数" tip-pos="left" class="mb-10"></title-bar>
 
           <b-space>
             <b-button size="mini" @click="addOne">新增校验字段</b-button>
-            <b-tag
-              :key="tag"
-              v-for="tag in formParams"
-              type="primary"
-              closable
-              @close="handleCloseTag(tag)">
+            <b-tag :key="tag" v-for="tag in formParams" type="primary" closable @close="handleCloseTag(tag)">
               {{ tag }}
             </b-tag>
-            <b-input style="width: 100px;" v-if="formAdded" size="mini" v-model="formField" @keydown.enter="blurAdd"
-                     @blur="blurCancel" />
+            <b-input
+              style="width: 100px"
+              v-if="formAdded"
+              size="mini"
+              v-model="formField"
+              @keydown.enter="blurAdd"
+              @blur="blurCancel"
+            />
           </b-space>
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <func-body-editor
             ref="formEditRef"
@@ -130,11 +121,11 @@
             :augments="formParams"
             height="240"
           ></func-body-editor>
-          <b-divider style="margin: 10px 0;"></b-divider>
+          <b-divider style="margin: 10px 0"></b-divider>
 
           <b-button type="primary" @click="runTest3">执行校验</b-button>
         </div>
-        <div class="p10" style="width: 30%;" v-if="formResult.type">
+        <div class="p10" style="width: 30%" v-if="formResult.type">
           <b-alert :type="formResult.type" show-icon>
             {{ formResult.type === 'success' ? '验证成功' : '验证失败' }}
             <template #desc>{{ formResult.message }}</template>
@@ -142,20 +133,15 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import KeyValueMapping from '@/components/Common/KeyValueMapping/index.vue'
-import FuncBodyEditor from '@/components/Common/FuncBodyEditor/index.vue'
-import TitleBar from '@/components/Common/TitleBar/index.vue'
 import { ref } from 'vue'
 import { Message } from 'bin-ui-next'
 
 export default {
   name: 'FuncDynamicCode',
-  components: { TitleBar, FuncBodyEditor, KeyValueMapping, PageWrapper },
   setup() {
     const fieldsMapping = ref([
       { key: 'name', value: 'Akko pc75b plus' },
@@ -195,7 +181,7 @@ export default {
         name: '达尔优A84',
         price: 629,
         num: 2,
-        discount: 0.90,
+        discount: 0.9,
         total: null,
       },
       {
@@ -215,14 +201,15 @@ export default {
     ])
     const goodsFuncBody = ref('const { price, num, discount } = goods;\n return price * num * discount;')
 
-
     const formEditRef = ref(null)
-    const formObjStr = ref('{\n' +
-      '  "name": "张三",\n' +
-      '  "phone": "",\n' +
-      '  "age": 17,\n' +
-      '  "address": "江苏省徐州市云龙区"\n' +
-      '}')
+    const formObjStr = ref(
+      '{\n' +
+        '  "name": "张三",\n' +
+        '  "phone": "",\n' +
+        '  "age": 17,\n' +
+        '  "address": "江苏省徐州市云龙区"\n' +
+        '}',
+    )
     const formParams = ref(['phone', 'age'])
     const formField = ref('')
     const formAdded = ref(false)
@@ -266,7 +253,7 @@ if(validatPhone && validatAge){
       try {
         const nFunc = fieldsEditRef.value.getFunction()
         // 执行代码，进行计算
-        const params = fieldsMapping.value.map(v => v.key !== 'name' ? Number(v.value) : v.value)
+        const params = fieldsMapping.value.map(v => (v.key !== 'name' ? Number(v.value) : v.value))
         console.log(params)
         console.log(nFunc)
         const total = nFunc(...params)
@@ -282,7 +269,7 @@ if(validatPhone && validatAge){
     function handleSpan({ row, column, rowIndex, columnIndex }) {
       if (rowIndex === goodsData.value.length - 1 && columnIndex === 0) {
         return [1, 4]
-      } else if (rowIndex === goodsData.value.length - 1 && (columnIndex > 0 && columnIndex < 4)) {
+      } else if (rowIndex === goodsData.value.length - 1 && columnIndex > 0 && columnIndex < 4) {
         return [0, 0]
       }
     }

@@ -1,43 +1,39 @@
 <template>
   <div class="validator-wrap">
     <!--顶部操作栏-->
-    <div class="mb-10" style="padding: 0 4px;">
-      <div style="width: 100%;line-height:32px;" flex="main:justify">
+    <div class="mb-10" style="padding: 0 4px">
+      <div style="width: 100%; line-height: 32px" flex="main:justify">
         <div>
-          <b-checkbox v-model="isRequired" @change="requiredChange" style="margin-right: 0;">
-            必填项
-          </b-checkbox>
+          <b-checkbox v-model="isRequired" @change="requiredChange" style="margin-right: 0">必填项</b-checkbox>
           <b-divider type="vertical" />
           <b-dropdown @command="setRules">
-            <span style="cursor:pointer;color: #13c2c2;">
+            <span style="cursor: pointer; color: #13c2c2">
               静态规则
               <b-icon name="down"></b-icon>
             </span>
             <template #dropdown>
               <b-dropdown-menu>
                 <b-dropdown-item
-                  v-for="(name,key) in SIMPLE_RULE"
+                  v-for="(name, key) in SIMPLE_RULE"
                   :key="key"
                   :name="name"
                   :disabled="hasSameRule(name)"
-                >{{ RULE_NAME_MAP[name] }}
+                >
+                  {{ RULE_NAME_MAP[name] }}
                 </b-dropdown-item>
               </b-dropdown-menu>
             </template>
           </b-dropdown>
           <b-divider type="vertical" />
           <b-dropdown @command="setRules">
-            <span style="cursor:pointer;color: #52c41a;">
+            <span style="cursor: pointer; color: #52c41a">
               动态规则
               <b-icon name="down"></b-icon>
             </span>
             <template #dropdown>
               <b-dropdown-menu>
-                <b-dropdown-item
-                  v-for="(name,key) in MULTIPLE_RULE"
-                  :key="key"
-                  :name="name"
-                >{{ RULE_NAME_MAP[name] }}
+                <b-dropdown-item v-for="(name, key) in MULTIPLE_RULE" :key="key" :name="name">
+                  {{ RULE_NAME_MAP[name] }}
                 </b-dropdown-item>
               </b-dropdown-menu>
             </template>
@@ -59,11 +55,7 @@
     </div>
     <!--校验项列表-->
     <ul class="check-rules-wrap" ref="rulesRef">
-      <li
-        v-for="(rule,index) in checkRules"
-        :key="index"
-        class="rules-list-item"
-      >
+      <li v-for="(rule, index) in checkRules" :key="index" class="rules-list-item">
         <div class="rules-params">
           <b-space>
             <div class="role-name" :class="rulesClass(rule.name)">{{ RULE_NAME_MAP[rule.name] }}</div>
@@ -85,7 +77,7 @@
         </div>
         <div class="rules-cfg">
           <!--正则匹配-->
-          <template v-if="rule.name===RULE.regexp">
+          <template v-if="rule.name === RULE.regexp">
             <div class="title-box is-message" title="正则规则">
               <span>正则规则</span>
               <b-input
@@ -98,9 +90,9 @@
           </template>
           <b-space>
             <!--长度参数-->
-            <template v-if="rule.name===RULE.length">
+            <template v-if="rule.name === RULE.length">
               <div class="title-box" title="最小值">
-                <span style="width: 60px;">最小值</span>
+                <span style="width: 60px">最小值</span>
                 <b-input-number
                   v-model="checkRules[index].min"
                   :min="1"
@@ -111,7 +103,7 @@
                 ></b-input-number>
               </div>
               <div class="title-box" title="最大值">
-                <span style="width: 60px;">最大值</span>
+                <span style="width: 60px">最大值</span>
                 <b-input-number
                   v-model="checkRules[index].max"
                   :min="1"
@@ -123,10 +115,8 @@
               </div>
             </template>
             <!--身份证，统一社会信用代码，组织机构代码，工商注册号-->
-            <template v-if="[RULE.idCode,RULE.unifiedCode,RULE.orgInstCode,RULE.regNo].includes(rule.name)">
-              <div class="title-box" title="前置字段"
-                   @drop="onDrop($event,index)"
-                   @dragover="allowDrop($event)">
+            <template v-if="[RULE.idCode, RULE.unifiedCode, RULE.orgInstCode, RULE.regNo].includes(rule.name)">
+              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -135,15 +125,11 @@
                   @change="emitValue"
                 ></b-input>
               </div>
-              <b-checkbox v-model="checkRules[index].ignoreCase" @change="emitValue">
-                忽略大小写
-              </b-checkbox>
+              <b-checkbox v-model="checkRules[index].ignoreCase" @change="emitValue">忽略大小写</b-checkbox>
             </template>
             <!--条件必填，条件必不填-->
-            <template v-if="rule.name===RULE.conditionRequired||rule.name===RULE.conditionNotRequired">
-              <div class="title-box" title="前置字段"
-                   @drop="onDrop($event,index)"
-                   @dragover="allowDrop($event)">
+            <template v-if="rule.name === RULE.conditionRequired || rule.name === RULE.conditionNotRequired">
+              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -163,10 +149,8 @@
               </div>
             </template>
             <!--条件不为某值-->
-            <template v-if="rule.name===RULE.conditionNotBe">
-              <div class="title-box" title="前置字段"
-                   @drop="onDrop($event,index)"
-                   @dragover="allowDrop($event)">
+            <template v-if="rule.name === RULE.conditionNotBe">
+              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -195,10 +179,8 @@
               </div>
             </template>
             <!--值不能相同-->
-            <template v-if="rule.name===RULE.notSame">
-              <div class="title-box" title="前置字段"
-                   @drop="onDrop($event,index)"
-                   @dragover="allowDrop($event)">
+            <template v-if="rule.name === RULE.notSame">
+              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -209,7 +191,7 @@
               </div>
             </template>
             <!--日期区间-->
-            <template v-if="rule.name===RULE.timeBound">
+            <template v-if="rule.name === RULE.timeBound">
               <div class="title-box" title="比较模式">
                 <span>比较模式</span>
                 <b-select v-model="checkRules[index].compareMode" append-to-body size="small" @change="emitValue">
@@ -219,16 +201,9 @@
                   <b-option value="le" label="&le;"></b-option>
                 </b-select>
               </div>
-              <div class="title-box"
-                   @drop="onDrop($event,index)"
-                   @dragover="allowDrop($event)"
-              >
+              <div class="title-box" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
                 <span title="比较值(yyyy-MM-dd)，可以是字段名，也可以填写$now取得当前时间">比较取值</span>
-                <b-input
-                  v-model.trim="checkRules[index].time"
-                  size="small"
-                  @change="emitValue"
-                ></b-input>
+                <b-input v-model.trim="checkRules[index].time" size="small" @change="emitValue"></b-input>
               </div>
             </template>
           </b-space>
@@ -239,7 +214,8 @@
             <b-input
               v-model.trim="checkRules[index].message"
               size="small"
-              placeholder="错误提示" @change="emitValue"
+              placeholder="错误提示"
+              @change="emitValue"
             ></b-input>
           </div>
         </div>
@@ -258,7 +234,7 @@
     </ul>
     <!--log-->
     <div v-if="showLog">
-      <b-ace-editor :model-value="JSON.stringify(checkRules,null,2)" readonly></b-ace-editor>
+      <b-ace-editor :model-value="JSON.stringify(checkRules, null, 2)" readonly></b-ace-editor>
     </div>
   </div>
 </template>
@@ -283,7 +259,8 @@ export default {
       default: '',
     },
     dataLength: Number, // 当前字段的数据长度
-    originalRules: { // 存储原始配置校验参数，即保存时保存一个初始副本
+    originalRules: {
+      // 存储原始配置校验参数，即保存时保存一个初始副本
       type: String,
     },
     showLog: Boolean,
@@ -298,7 +275,7 @@ export default {
     const hasRequiredRule = computed(() => !!hasSameNameRule(RULE.required))
 
     // 是否存在相同名称的校验项
-    const hasSameNameRule = (name) => checkRules.value.find(item => item.name === name)
+    const hasSameNameRule = name => checkRules.value.find(item => item.name === name)
 
     // 是否有相同名称的校验项
     function hasSameRule(name) {
@@ -352,7 +329,7 @@ export default {
     // 增加校验，即增加默认参数配置
     function setRules(ruleType) {
       if (ruleType === RULE.required && hasRequiredRule.value) return
-      const normalCfg = (name) => ({ name, type: TYPE[0], trigger: TRIGGER[0] })
+      const normalCfg = name => ({ name, type: TYPE[0], trigger: TRIGGER[0] })
       // 根据不同的校验名增加不同的校验对象
       switch (ruleType) {
         case RULE.required:
@@ -495,19 +472,23 @@ export default {
     }
 
     // 初始value监听watch
-    watch(() => props.modelValue, val => {
-      if (val === '') {
-        refreshRules()
-        return
-      }
-      try {
-        checkRules.value = JSON.parse(val)
-        isRequired.value = hasRequiredRule.value
-      } catch (e) {
-        console.warn('async-validator: model-value is not a right json，rules is reset')
-        refreshRules()
-      }
-    }, { immediate: true })
+    watch(
+      () => props.modelValue,
+      val => {
+        if (val === '') {
+          refreshRules()
+          return
+        }
+        try {
+          checkRules.value = JSON.parse(val)
+          isRequired.value = hasRequiredRule.value
+        } catch (e) {
+          console.warn('async-validator: model-value is not a right json，rules is reset')
+          refreshRules()
+        }
+      },
+      { immediate: true },
+    )
     return {
       rulesRef,
       SIMPLE_RULE,

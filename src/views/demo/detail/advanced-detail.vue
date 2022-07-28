@@ -1,15 +1,30 @@
 <template>
-  <page-wrapper title="项目开发进度（编号：10000）">
-    <template #desc>
-      <b-desc>
-        <b-desc-item label="责任人">Wang</b-desc-item>
-        <b-desc-item label="审批人">Jack</b-desc-item>
-        <b-desc-item label="创建时间">2021-06-30</b-desc-item>
-        <b-desc-item label="当前状态">
-          <b-tag type="success" dot>开发</b-tag>
-        </b-desc-item>
-        <b-desc-item label="项目描述">当前项目的描述</b-desc-item>
-      </b-desc>
+  <page-container>
+    <template #header>
+      <div class="p16">
+        <h2>项目开发进度（编号：10000）</h2>
+        <br />
+        <b-desc>
+          <b-desc-item label="责任人">Wang</b-desc-item>
+          <b-desc-item label="审批人">Jack</b-desc-item>
+          <b-desc-item label="创建时间">2021-06-30</b-desc-item>
+          <b-desc-item label="当前状态">
+            <b-tag type="success" dot>开发</b-tag>
+          </b-desc-item>
+          <b-desc-item label="项目描述">当前项目的描述</b-desc-item>
+        </b-desc>
+
+        <b-tabs
+          v-model="activeTab"
+          type="tag"
+          :data="[
+            { key: 'tab0', title: '流程进度' },
+            { key: 'tab1', title: '基本信息' },
+            { key: 'tab2', title: '项目信息' },
+            { key: 'tab3', title: '项目人员' },
+          ]"
+        ></b-tabs>
+      </div>
     </template>
     <b-collapse-wrap title="流程进度" shadow="none">
       <div class="p20">
@@ -56,15 +71,12 @@
         <b-table :columns="columns" :data="data" size="small"></b-table>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-
 export default {
   name: 'AdvancedDetail',
-  components: { PageWrapper },
   data() {
     return {
       columns: [
@@ -79,6 +91,7 @@ export default {
         { name: '李小红', no: '004', dept: '后端组' },
         { name: '张小发', no: '005', dept: '测试组' },
       ],
+      activeTab: 'tab0',
     }
   },
 }

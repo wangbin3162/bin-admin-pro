@@ -1,14 +1,14 @@
 <template>
-  <page-wrapper desc="页面内容为Mock数据，仅作示例使用。">
-    <base-table>
-      <template #filter>
+  <div>
+    <page-container inner-scroll v-show="!modalVisible">
+      <template #header>
         <b-form label-width="95px">
           <b-form-item label="角色名称">
             <b-input v-model="query.roleName" clearable></b-input>
           </b-form-item>
           <b-form-item label="角色状态">
             <b-select v-model="query.status" clearable>
-              <b-option v-for="(val,key) in statusMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option v-for="(val, key) in statusMap" :key="key" :label="val" :value="key"></b-option>
             </b-select>
           </b-form-item>
           <b-form-item>
@@ -17,34 +17,7 @@
           </b-form-item>
         </b-form>
       </template>
-      <template #action>
-        <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
-      </template>
-      <b-table :columns="columns" :data="copyList" :loading="loading" border>
-        <template #status="{row}">
-          {{ statusMap[row.status] }}
-        </template>
-        <template #action="{row}">
-          <action-button
-            type="text"
-            icon="edit-square"
-            is-icon
-            tooltip="编辑"
-            @click="handleEdit(row)"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <action-button
-            type="text"
-            icon="delete"
-            color="danger"
-            is-icon
-            tooltip="删除"
-            confirm
-            @click="handleDelete(row)"
-          ></action-button>
-        </template>
-      </b-table>
-      <template #page>
+      <template #footer>
         <b-page
           :total="total"
           :current="query.page"
@@ -55,61 +28,85 @@
           @size-change="pageSizeChange"
         ></b-page>
       </template>
-    </base-table>
-    <b-modal
-      :model-value="modalVisible"
-      :title="`${pageStatus.isCreate?'新增':'修改'}角色`"
-      @closed="handleCancel"
+
+      <base-table>
+        <template #action>
+          <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
+        </template>
+        <b-table :columns="columns" :data="copyList" :loading="loading" border>
+          <template #status="{ row }">
+            {{ statusMap[row.status] }}
+          </template>
+          <template #action="{ row }">
+            <action-button
+              type="text"
+              icon="edit-square"
+              is-icon
+              tooltip="编辑"
+              @click="handleEdit(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <action-button
+              type="text"
+              icon="delete"
+              color="danger"
+              is-icon
+              tooltip="删除"
+              confirm
+              @click="handleDelete(row)"
+            ></action-button>
+          </template>
+        </b-table>
+      </base-table>
+    </page-container>
+
+    <page-container
+      inner-scroll
+      v-if="modalVisible"
+      :title="`${pageStatus.isCreate ? '新增' : '修改'}角色`"
+      show-back
+      @back="handleCancel"
+      show-close
+      @close="handleCancel"
     >
-      <div v-if="modalVisible">
-        <b-form
-          ref="formRef"
-          :model="role"
-          :rules="ruleValidate"
-          label-width="100px"
-          label-suffix=":"
-        >
-          <b-form-item label="角色名称" prop="roleName">
-            <b-input v-model="role.roleName" placeholder="输入角色名称" clearable></b-input>
-          </b-form-item>
-          <b-form-item label="角色编码" prop="roleCode">
-            <b-input v-model="role.roleCode" placeholder="输入角色编码" clearable></b-input>
-          </b-form-item>
-          <b-form-item label="角色状态">
-            <b-switch size="large" v-model="role.status" true-value="1" false-value="0">
-              <template #open><span>启用</span></template>
-              <template #close><span>禁用</span></template>
-            </b-switch>
-          </b-form-item>
-        </b-form>
-      </div>
       <template #footer>
-        <div>
+        <div flex="main:right">
           <b-button @click="handleCancel">取 消</b-button>
           <b-button type="primary" :loading="editLoading" @click="handleSubmit">确 定</b-button>
         </div>
       </template>
-    </b-modal>
-  </page-wrapper>
+
+      <b-form ref="formRef" :model="role" :rules="ruleValidate" label-width="100px" label-suffix=":">
+        <b-collapse-wrap title="基础信息" shadow="none">
+          <div class="p16">
+            <b-form-item label="角色名称" prop="roleName">
+              <b-input v-model="role.roleName" placeholder="输入角色名称" clearable></b-input>
+            </b-form-item>
+            <b-form-item label="角色编码" prop="roleCode">
+              <b-input v-model="role.roleCode" placeholder="输入角色编码" clearable></b-input>
+            </b-form-item>
+            <b-form-item label="角色状态">
+              <b-switch size="large" v-model="role.status" true-value="1" false-value="0">
+                <template #open><span>启用</span></template>
+                <template #close><span>禁用</span></template>
+              </b-switch>
+            </b-form-item>
+          </div>
+        </b-collapse-wrap>
+      </b-form>
+    </page-container>
+  </div>
 </template>
 
 <script>
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getRoleList } from '@/api/modules/role.api'
-import BaseTable from '@/components/Common/BaseTable/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import ActionButton from '@/components/Common/ActionButton/index.vue'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 
 export default {
   name: 'Role',
-  components: {
-    PageWrapper,
-    ActionButton,
-    BaseTable,
-  },
   setup() {
     const query = reactive({
       page: 1,
@@ -119,14 +116,7 @@ export default {
     })
     const copyList = ref([])
     const role = ref({})
-    const {
-      loading,
-      list,
-      total,
-      getListData,
-      pageChange,
-      pageSizeChange,
-    } = useTable(getRoleList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getRoleList, query)
     const {
       formRef,
       editStatus,
@@ -141,9 +131,12 @@ export default {
       modalVisible,
     } = useForm()
 
-    watch(() => list.value, (val) => {
-      copyList.value = val
-    })
+    watch(
+      () => list.value,
+      val => {
+        copyList.value = val
+      },
+    )
 
     // 执行一次内容
     getListData()

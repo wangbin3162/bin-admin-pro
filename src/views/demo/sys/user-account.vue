@@ -1,5 +1,50 @@
 <template>
-  <div>
+  <page-container inner-scroll>
+    <template #header>
+      <b-form label-width="95px" label-position="left">
+        <b-form-item label="用户名称">
+          <b-input v-model="query.name" clearable></b-input>
+        </b-form-item>
+        <b-form-item label="用户角色">
+          <b-select v-model="query.roles" clearable>
+            <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+          </b-select>
+        </b-form-item>
+        <template v-if="expand">
+          <b-form-item label="状态">
+            <b-select v-model="query.status" clearable>
+              <b-option label="启用" value="1"></b-option>
+              <b-option label="禁用" value="0"></b-option>
+            </b-select>
+          </b-form-item>
+          <b-form-item label="邮箱">
+            <b-input v-model="query.email" clearable></b-input>
+          </b-form-item>
+          <b-form-item label="日期">
+            <b-date-picker v-model="query.date" clearable></b-date-picker>
+          </b-form-item>
+        </template>
+        <b-form-item>
+          <b-button>重置</b-button>
+          <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
+          <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
+            {{ expand ? '收起' : '展开' }}
+          </b-button>
+        </b-form-item>
+      </b-form>
+    </template>
+    <template #footer>
+      <b-page
+        :total="total"
+        :current="query.page"
+        :page-size="query.size"
+        show-sizer
+        show-total
+        @change="pageChange"
+        @size-change="pageSizeChange"
+      ></b-page>
+    </template>
+
     <page-cube-wrapper>
       <template #left>
         <base-tree
@@ -11,95 +56,49 @@
           width="240px"
         ></base-tree>
       </template>
-      <div class="pl-16">
-        <base-table>
-          <template #filter>
-            <b-form label-width="95px">
-              <b-form-item label="用户名称">
-                <b-input v-model="query.name" clearable></b-input>
-              </b-form-item>
-              <b-form-item label="用户角色">
-                <b-select v-model="query.roles" clearable>
-                  <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
-                </b-select>
-              </b-form-item>
-              <template v-if="expand">
-                <b-form-item label="状态">
-                  <b-select v-model="query.status" clearable>
-                    <b-option label="启用" value="1"></b-option>
-                    <b-option label="禁用" value="0"></b-option>
-                  </b-select>
-                </b-form-item>
-                <b-form-item label="邮箱">
-                  <b-input v-model="query.email" clearable></b-input>
-                </b-form-item>
-                <b-form-item label="日期">
-                  <b-date-picker v-model="query.date" clearable></b-date-picker>
-                </b-form-item>
-              </template>
-              <b-form-item>
-                <b-button>重置</b-button>
-                <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
-                <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
-                  {{ expand ? '收起' : '展开' }}
-                </b-button>
-              </b-form-item>
-            </b-form>
-          </template>
-          <template #action>
-            <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
-          </template>
-          <template #actionRight>
-            <b-dropdown style="margin-left: 20px">
-              <b-button>
-                更多操作
-                <b-icon name="down"></b-icon>
-              </b-button>
-              <template #dropdown>
-                <b-dropdown-menu>
-                  <b-dropdown-item>刷新</b-dropdown-item>
-                  <b-dropdown-item>删除</b-dropdown-item>
-                </b-dropdown-menu>
-              </template>
-            </b-dropdown>
-          </template>
-          <b-table :columns="columns" :data="copyList" :loading="loading" border>
-            <template #roles="{ row }">
-              {{ roleMap[row.roles] }}
+      <base-table class="pl-16">
+        <template #action>
+          <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
+        </template>
+        <template #actionRight>
+          <b-dropdown style="margin-left: 20px">
+            <b-button>
+              更多操作
+              <b-icon name="down"></b-icon>
+            </b-button>
+            <template #dropdown>
+              <b-dropdown-menu>
+                <b-dropdown-item>刷新</b-dropdown-item>
+                <b-dropdown-item>删除</b-dropdown-item>
+              </b-dropdown-menu>
             </template>
-            <template #action="{ row }">
-              <action-button
-                type="text"
-                icon="edit-square"
-                is-icon
-                tooltip="编辑"
-                @click="handleEdit(row)"
-              ></action-button>
-              <b-divider type="vertical"></b-divider>
-              <action-button
-                type="text"
-                icon="delete"
-                color="danger"
-                is-icon
-                tooltip="删除"
-                confirm
-                @click="handleDelete(row)"
-              ></action-button>
-            </template>
-          </b-table>
-          <template #page>
-            <b-page
-              :total="total"
-              :current="query.page"
-              :page-size="query.size"
-              show-sizer
-              show-total
-              @change="pageChange"
-              @size-change="pageSizeChange"
-            ></b-page>
+          </b-dropdown>
+        </template>
+        <b-table :columns="columns" :data="copyList" :loading="loading" border>
+          <template #roles="{ row }">
+            {{ roleMap[row.roles] }}
           </template>
-        </base-table>
-      </div>
+          <template #action="{ row }">
+            <action-button
+              type="text"
+              icon="edit-square"
+              is-icon
+              tooltip="编辑"
+              @click="handleEdit(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <action-button
+              type="text"
+              icon="delete"
+              color="danger"
+              is-icon
+              tooltip="删除"
+              confirm
+              @click="handleDelete(row)"
+            ></action-button>
+          </template>
+        </b-table>
+      </base-table>
     </page-cube-wrapper>
 
     <b-modal :model-value="modalVisible" :title="`${pageStatus.isCreate ? '新增' : '修改'}用户`" @closed="handleCancel">
@@ -131,26 +130,20 @@
         </div>
       </template>
     </b-modal>
-  </div>
+  </page-container>
 </template>
 
 <script>
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
-import BaseTable from '@/components/Common/BaseTable/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import ActionButton from '@/components/Common/ActionButton/index.vue'
-import BaseTree from '@/components/Common/BaseTree/index.vue'
 import { getDepartTree } from '@/api/modules/depart.api'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 import useTree from '@/hooks/service/useTree'
-import PageCubeWrapper from '@/components/Common/Page/page-cube-wrapper.vue'
 
 export default {
   name: 'UserAccount',
-  components: { PageCubeWrapper, BaseTree, ActionButton, BaseTable, PageWrapper },
   setup() {
     const treeRef = ref(null)
     const currentTreeNode = ref({})
@@ -190,7 +183,7 @@ export default {
       }))
     })
 
-    function handleSelect(node, flatState) {
+    function handleSelect(node) {
       if (node.selected) {
         currentTreeNode.value = node
       }

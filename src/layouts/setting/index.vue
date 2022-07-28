@@ -17,20 +17,20 @@
           style="width: 150px"
         ></b-input-number>
       </div>
-      <div class="setting-list-item">
+      <!-- <div class="setting-list-item">
         <span>菜单固定</span>
         <b-switch :model-value="fixedAside" @change="changeFixedAside">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
-      </div>
-      <div class="setting-list-item">
+      </div> -->
+      <!-- <div class="setting-list-item">
         <span>头部固定</span>
         <b-switch :model-value="fixedHeader" @change="changeFixedHeader">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
-      </div>
+      </div> -->
       <div class="setting-list-item">
         <span>多页签</span>
         <b-switch :model-value="showTagsView" @change="toggleTagsView">

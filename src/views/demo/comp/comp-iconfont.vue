@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="图标字体组件，基于iconfont模式，扩展组件库图标显示，可设置颜色、背景色、中文名、大小等">
+  <page-container desc="图标字体组件，基于iconfont模式，扩展组件库图标显示，可设置颜色、背景色、中文名、大小等">
     <b-collapse-wrap title="基础图标" shadow="none">
       <div class="p10">
         <iconfont icon="appstore"></iconfont>
@@ -61,16 +61,12 @@
         <iconfont icon="smile" color="#25bbe3" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-
 export default {
   name: 'CompIconfont',
-  components: { PageWrapper, Iconfont },
   methods: {
     clickFunc(icon) {
       this.$message.info(`点击了图标:${icon}`)

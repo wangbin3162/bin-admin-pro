@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="Draggable 拖拽组件模块，依赖vuedraggable。">
+  <page-container desc="Draggable 拖拽组件模块，依赖vuedraggable。">
     <b-collapse-wrap title="Draggable 更通用的拖拽排序模块，无额外样式和默认值等配置" shadow="none">
       <div class="p16">
         <b-row :gutter="16">
@@ -8,11 +8,11 @@
               v-model="data"
               class="drag-area"
               item-key="element"
-              v-bind="{animation:0,group:'data',ghostClass:'ghost'}"
+              v-bind="{ animation: 0, group: 'data', ghostClass: 'ghost' }"
               @start="start"
               @end="end"
             >
-              <template #item="{element}">
+              <template #item="{ element }">
                 <div class="item">{{ element }}</div>
               </template>
             </draggable>
@@ -22,11 +22,11 @@
               v-model="data1"
               class="drag-area"
               item-key="element"
-              v-bind="{animation:200,group:'data1',ghostClass:'ghost',handle:'.drag-handle'}"
+              v-bind="{ animation: 200, group: 'data1', ghostClass: 'ghost', handle: '.drag-handle' }"
               @start="start"
               @end="end"
             >
-              <template #item="{element}">
+              <template #item="{ element }">
                 <div class="item">
                   <i class="b-iconfont b-icon-drag drag-handle"></i>
                   {{ element }}
@@ -45,9 +45,9 @@
               v-model="data2"
               class="drag-area"
               item-key="element"
-              v-bind="{animation:200,group:'group',ghostClass:'ghost'}"
+              v-bind="{ animation: 200, group: 'group', ghostClass: 'ghost' }"
             >
-              <template #item="{element}">
+              <template #item="{ element }">
                 <div class="item">{{ element }}</div>
               </template>
             </draggable>
@@ -57,9 +57,9 @@
               v-model="data3"
               class="drag-area"
               item-key="element"
-              v-bind="{animation:200,group:'group',ghostClass:'ghost'}"
+              v-bind="{ animation: 200, group: 'group', ghostClass: 'ghost' }"
             >
-              <template #item="{element}">
+              <template #item="{ element }">
                 <div class="item">{{ element }}</div>
               </template>
             </draggable>
@@ -69,50 +69,21 @@
         <p>data right:{{ data3 }}</p>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import draggable from 'vuedraggable'
 
 export default {
   name: 'FuncDraggable',
-  components: { draggable, PageWrapper },
+  components: { draggable },
   data() {
     return {
-      data: [
-        'item1',
-        'item2',
-        'item3',
-        'item4',
-        'item5',
-        'item6',
-      ],
-      data1: [
-        'item1',
-        'item2',
-        'item3',
-        'item4',
-        'item5',
-        'item6',
-      ],
-      data2: [
-        'item a1',
-        'item a2',
-        'item a3',
-        'item a4',
-        'item a5',
-        'item a6',
-      ],
-      data3: [
-        'item b1',
-        'item b2',
-        'item b3',
-        'item b4',
-        'item b5',
-        'item b6',
-      ],
+      data: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'],
+      data1: ['item1', 'item2', 'item3', 'item4', 'item5', 'item6'],
+      data2: ['item a1', 'item a2', 'item a3', 'item a4', 'item a5', 'item a6'],
+      data3: ['item b1', 'item b2', 'item b3', 'item b4', 'item b5', 'item b6'],
     }
   },
   methods: {

@@ -4,7 +4,7 @@
       <b-col span="7">
         <b-card class="info-pane" :bordered="false" shadow="never">
           <div class="avatar">
-            <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar">
+            <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar-img" alt="avatar" />
           </div>
           <h2>Wang</h2>
           <p>千里之行，始于足下。</p>
@@ -32,7 +32,7 @@
         </b-card>
       </b-col>
       <b-col span="17">
-        <b-card :bordered="false" shadow="never" :body-style="{padding: '8px 0 0'}">
+        <b-card :bordered="false" shadow="never" :body-style="{ padding: '8px 0 0' }">
           <b-tabs v-model="activeTab" :data="tabs"></b-tabs>
           <div v-if="activeTab === 'tab1'" class="p16">
             <b-skeleton :loading="loading" animation>
@@ -44,27 +44,15 @@
                 <b-skeleton />
               </template>
               <template #default>
-                <article-item
-                  v-for="(item,index) in articleList"
-                  :key="index"
-                  :item="item"
-                ></article-item>
+                <article-item v-for="(item, index) in articleList" :key="index" :item="item"></article-item>
               </template>
             </b-skeleton>
           </div>
           <div v-if="activeTab === 'tab2'" class="pt-16 pl-16">
-            <img-item
-              v-for="(item,index) in projectList"
-              :key="index"
-              :item="item"
-            ></img-item>
+            <img-item v-for="(item, index) in projectList" :key="index" :item="item"></img-item>
           </div>
           <div v-if="activeTab === 'tab3'" class="p16">
-            <app-item
-              v-for="(item,index) in projectList"
-              :key="index"
-              :item="item"
-            ></app-item>
+            <app-item v-for="(item, index) in projectList" :key="index" :item="item"></app-item>
           </div>
         </b-card>
       </b-col>
@@ -74,13 +62,9 @@
 
 <script>
 import { getArticleList, getProjectList } from '@/api/modules/list.api'
-import ArticleItem from '@/components/Common/List/article-item.vue'
-import ImgItem from '@/components/Common/List/img-item.vue'
-import AppItem from '@/components/Common/List/app-item.vue'
 
 export default {
   name: 'UserCenter',
-  components: { AppItem, ImgItem, ArticleItem },
   data() {
     return {
       tabs: [

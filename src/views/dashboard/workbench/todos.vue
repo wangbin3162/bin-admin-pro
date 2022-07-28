@@ -1,7 +1,7 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{padding: '0'}">
+  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '0' }">
     <template #header>
-      <div flex="main:justify cross:center" style="font-weight: normal;">
+      <div flex="main:justify cross:center" style="font-weight: normal">
         <div class="top">
           <iconfont icon="check-square" color="warning" bg round></iconfont>
           <span class="ml-5">待办事项</span>
@@ -13,31 +13,30 @@
     </template>
     <ul class="todo-list" ref="listRef">
       <li
-        v-for="(item,index) in list"
+        v-for="(item, index) in list"
         :key="index"
         class="todo"
-        :class="[{done:item.done},{edit: editIndex === index}]"
+        :class="[{ done: item.done }, { edit: editIndex === index }]"
       >
         <drag-handle type="icon" icon="menu" icon-font-size="16px"></drag-handle>
         <span class="toggle" @click="toggleCheck(index)">
           <b-icon name="check"></b-icon>
         </span>
         <label v-if="editIndex === index">
-          <b-input
-            ref="inputRef"
-            v-model="editText"
-            size="small"
-            @enter="inputBlur(index)"
-            @blur="inputBlur(index)"
-          ></b-input>
+          <b-input v-model="editText" size="small" @enter="inputBlur(index)" @blur="inputBlur(index)"></b-input>
         </label>
         <label v-else @dblclick="dbClickEdit(index)">{{ item.text }}</label>
         <i class="destroy b-iconfont b-icon-close" @click="removeOne(index)"></i>
       </li>
     </ul>
     <footer class="footer">
-      <span class="count"><strong>{{ leftCount }}</strong>项未完成</span>
-      <span class="count"><strong>{{ todoLabel }}</strong></span>
+      <span class="count">
+        <strong>{{ leftCount }}</strong>
+        项未完成
+      </span>
+      <span class="count">
+        <strong>{{ todoLabel }}</strong>
+      </span>
     </footer>
   </b-card>
 </template>
@@ -56,26 +55,24 @@ export default {
   setup() {
     const editIndex = ref(-1)
     const editText = ref('')
-    const inputRef = ref(null)
-    const {
-      todos,
-      todoLabel,
-      leftCount,
-      saveTodos,
-    } = useTodos()
+    const { todos, todoLabel, leftCount, saveTodos } = useTodos()
     const list = ref([])
     const { listRef } = useSortable(list, updateState, { ghostClass: 'ghost' })
 
     // 数据变化后更新操作mapping
-    watch(() => todos.value, (val) => {
-      list.value = deepCopy(val)
-    }, { immediate: true, deep: true })
+    watch(
+      () => todos.value,
+      val => {
+        list.value = deepCopy(val)
+      },
+      { immediate: true, deep: true },
+    )
 
     function updateState() {
       saveTodos(list.value)
     }
 
-    async function handleAdd() {
+    function handleAdd() {
       if (editIndex.value > -1) {
         editIndex.value = -1
         editText.value = ''
@@ -87,21 +84,18 @@ export default {
       })
       editIndex.value = list.value.length - 1
       editText.value = ''
-      await nextTick()
-      inputRef.value && inputRef.value.focus()
     }
 
-    async function dbClickEdit(index) {
+    function dbClickEdit(index) {
       editIndex.value = index
       editText.value = list.value[index].text
-      await nextTick()
-      inputRef.value && inputRef.value.focus()
     }
 
     function inputBlur(index) {
       const text = editText.value
       if (text === '') {
-        if (index > -1) { // 为空时候移除这个
+        if (index > -1) {
+          // 为空时候移除这个
           list.value.splice(index, 1)
         }
       } else {
@@ -128,7 +122,6 @@ export default {
       todos,
       todoLabel,
       leftCount,
-      inputRef,
       listRef,
       handleAdd,
       inputBlur,

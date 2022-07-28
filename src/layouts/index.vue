@@ -22,17 +22,19 @@
       <global-header />
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
-          <move-transition>
+          <b-move-transition>
+            <!-- <transition name="fade-scale" mode="out-in"> -->
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.path"></component>
             </keep-alive>
-          </move-transition>
+            <!-- </transition> -->
+          </b-move-transition>
         </router-view>
+        <global-footer></global-footer>
       </div>
-      <global-footer></global-footer>
     </div>
   </div>
-  <b-back-top :height="200" :right="40" :bottom="40">
+  <b-back-top :visible-height="200" :right="40" :bottom="55">
     <i class="b-iconfont b-icon-vertical-align-top back-top"></i>
   </b-back-top>
 </template>
@@ -45,12 +47,10 @@ import GlobalFooter from '@/layouts/footer/index.vue'
 import { computed, onBeforeUnmount, onMounted } from 'vue'
 import useTagsView from '@/hooks/store/useTagsView'
 import { on, off } from '@/utils/util'
-import MoveTransition from '@/components/Common/MoveTransition/index'
 
 export default {
   name: 'Layout',
   components: {
-    MoveTransition,
     GlobalHeader,
     GlobalFooter,
     AsideMenus,
@@ -74,7 +74,7 @@ export default {
 
     const mainStyle = computed(() => {
       if (contentFull.value) {
-        return { paddingLeft: 0 }
+        return { marginLeft: 0 }
       }
       let left = 0
       if (fixedAside.value) {
@@ -83,7 +83,7 @@ export default {
       if (!sidebar.value && fixedAside.value) {
         left = 64
       }
-      return { paddingLeft: `${left}px` }
+      return { marginLeft: `${left}px` }
     })
 
     const headerHeight = computed(() => {

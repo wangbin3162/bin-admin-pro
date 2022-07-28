@@ -1,35 +1,39 @@
 <template>
-  <page-wrapper desc="页面内容为Mock数据，仅作示例使用。">
-    <div class="table-depart">
-      <base-tree
-        ref="treeRef"
-        tree-title="部门列表"
-        show-filter
-        :fetch="getDepartTree"
-        @select-change="handleSelect"
-        @command="handleCommand"
-      >
-        <template #ctrl>
-          <b-dropdown-item name="root" divided>增加根节点</b-dropdown-item>
-          <b-dropdown-item name="child" :disabled="!currentNode">增加子节点</b-dropdown-item>
-        </template>
-      </base-tree>
-      <div class="table-depart-right">
+  <page-container hide-header inner-scroll>
+    <page-cube-wrapper>
+      <template #left>
+        <base-tree
+          ref="treeRef"
+          tree-title="部门列表"
+          show-filter
+          :fetch="getDepartTree"
+          @select-change="handleSelect"
+          @command="handleCommand"
+        >
+          <template #ctrl>
+            <b-dropdown-item name="root" divided>增加根节点</b-dropdown-item>
+            <b-dropdown-item name="child" :disabled="!currentNode">增加子节点</b-dropdown-item>
+          </template>
+        </base-tree>
+      </template>
+      <div class="pl-16">
         <b-card :bordered="false" class="card-panel" shadow="never">
           <template #header>
-            <div flex="main:justify cross:center" style="font-weight: normal;">
+            <div flex="main:justify cross:center" style="font-weight: normal">
               <div class="top">
                 <iconfont icon="apartment" color="primary" bg round></iconfont>
                 <span class="ml-5">编辑部门</span>
               </div>
               <div class="right">
-                <b-button v-if="currentNode" type="text" size="small" @click="handleCommand('child')">新增子部门</b-button>
+                <b-button v-if="currentNode" type="text" size="small" @click="handleCommand('child')">
+                  新增子部门
+                </b-button>
               </div>
             </div>
           </template>
-          <div style="position: relative;min-height: 100px;overflow:hidden;">
+          <div style="position: relative; min-height: 100px; overflow: hidden">
             <transition name="fade-in">
-              <div style="position:absolute;width: 100%;">
+              <div style="position: absolute; width: 100%">
                 <b-alert v-show="pageStatus.isNormal">点选左侧部门，进行编辑操作</b-alert>
               </div>
             </transition>
@@ -37,13 +41,7 @@
               <div class="pt-8" v-if="!pageStatus.isNormal">
                 <b-row>
                   <b-col span="14">
-                    <b-form
-                      ref="formRef"
-                      :model="copyNode"
-                      :rules="ruleValidate"
-                      label-width="100px"
-                      label-suffix=":"
-                    >
+                    <b-form ref="formRef" :model="copyNode" :rules="ruleValidate" label-width="100px" label-suffix=":">
                       <b-form-item label="父级组织">
                         <b-input v-model="copyNode.parentName" disabled></b-input>
                       </b-form-item>
@@ -63,11 +61,7 @@
                         <b-input v-model="copyNode.desc" type="textarea" placeholder="输入部门描述"></b-input>
                       </b-form-item>
                       <b-form-item>
-                        <b-button
-                          type="primary"
-                          @click="handleSubmit"
-                          :loading="editLoading"
-                        >
+                        <b-button type="primary" @click="handleSubmit" :loading="editLoading">
                           {{ pageStatus.isCreate ? '提交数据' : '更新数据' }}
                         </b-button>
                         <b-button @click="handleResetForm">重置</b-button>
@@ -80,8 +74,8 @@
           </div>
         </b-card>
       </div>
-    </div>
-  </page-wrapper>
+    </page-cube-wrapper>
+  </page-container>
 </template>
 
 <script>
@@ -90,17 +84,9 @@ import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
 import { Message } from 'bin-ui-next'
 import useForm from '@/hooks/service/useForm'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import BaseTree from '@/components/Common/BaseTree/index.vue'
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'Depart',
-  components: {
-    Iconfont,
-    BaseTree,
-    PageWrapper,
-  },
   setup() {
     const treeRef = ref(null)
     const currentNode = ref(null)
@@ -108,17 +94,8 @@ export default {
 
     const flatStateBuffer = ref({})
 
-    const {
-      formRef,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-    } = useForm()
+    const { formRef, editStatus, pageStatus, editLoading, openCreate, openEdit, backNormal, submitForm, resetForm } =
+      useForm()
 
     function handleSelect(node, flatState) {
       if (node.selected) {
@@ -147,12 +124,14 @@ export default {
         const flatState = flatStateBuffer.value
         const current = currentNode.value
         const parentKey = flatState[current.nodeKey].parent
-        const parentNode = (parentKey || parentKey === 0) ? flatState[parentKey].node : {}
-        copyNode.value = current ? {
-          ...deepCopy(current),
-          parentId: parentKey === 0 ? '' : parentNode.id,
-          parentName: parentNode.title,
-        } : {}
+        const parentNode = parentKey || parentKey === 0 ? flatState[parentKey].node : {}
+        copyNode.value = current
+          ? {
+              ...deepCopy(current),
+              parentId: parentKey === 0 ? '' : parentNode.id,
+              parentName: parentNode.title,
+            }
+          : {}
         return
       }
       // 创建模式
@@ -227,13 +206,3 @@ export default {
   },
 }
 </script>
-
-<style lang="stylus" scoped>
-.table-depart {
-  display: flex;
-  .table-depart-right {
-    flex: 1;
-    padding-left: 16px;
-  }
-}
-</style>

@@ -1,11 +1,7 @@
 <template>
   <div class="key-value-wrapper">
     <ul class="mapping-list" ref="listRef">
-      <li
-        v-for="(item,index) in list"
-        :key="index"
-        class="mapping-item"
-      >
+      <li v-for="(item, index) in list" :key="index" class="mapping-item">
         <drag-handle></drag-handle>
         <label>
           <b-input v-model="list[index].key" placeholder="key" clearable @input="inputChange"></b-input>
@@ -26,7 +22,7 @@
 import { ref, watch } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useSortable from '@/hooks/useSortable'
-import DragHandle from '@/components/Common/DragHandle/index.vue'
+import DragHandle from '../DragHandle/index.vue'
 
 export default {
   name: 'KeyValueMapping',
@@ -49,9 +45,13 @@ export default {
     const { listRef } = useSortable(list, emitValue)
 
     // 数据变化后更新操作mapping
-    watch(() => props.modelValue, (val) => {
-      list.value = deepCopy(val)
-    }, { immediate: true, deep: true })
+    watch(
+      () => props.modelValue,
+      val => {
+        list.value = deepCopy(val)
+      },
+      { immediate: true, deep: true },
+    )
 
     function inputChange() {
       emitValue()

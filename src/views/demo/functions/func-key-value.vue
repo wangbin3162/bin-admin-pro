@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="基础映射配置示例，可拖动排序，并封装了通用的hook钩子函数，可进行复用。">
+  <page-container desc="基础映射配置示例，可拖动排序，并封装了通用的hook钩子函数，可进行复用。">
     <b-row :gutter="16">
       <b-col span="12">
         <b-collapse-wrap title="映射配置" shadow="none">
@@ -23,12 +23,10 @@
         </b-collapse-wrap>
       </b-col>
     </b-row>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import KeyValueMapping from '@/components/Common/KeyValueMapping/index.vue'
 import { computed, ref } from 'vue'
 
 const STR = `import Sortable from 'sortablejs'
@@ -94,8 +92,7 @@ export default function useSortable(list, endFun, option = {}) {
 
 export default {
   name: 'FuncKeyValue',
-  components: { KeyValueMapping, PageWrapper },
-  setup(props) {
+  setup() {
     const mapping = ref([
       { key: '1', value: 'a' },
       { key: '2', value: 'b' },

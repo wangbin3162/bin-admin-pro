@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="导航类别的组件，可验证不同主题色的正确性。">
+  <page-container desc="导航类别的组件，可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Other 其他类型的显示组件" shadow="none" class="mb-20">
       <div class="p10">
@@ -8,7 +8,7 @@
           <template v-slot:header>
             <div flex="main:justify cross:center">
               <span>卡片名称</span>
-              <b-icon name="dropbox" size="20" style="cursor: pointer;"></b-icon>
+              <b-icon name="dropbox" size="20" style="cursor: pointer"></b-icon>
             </div>
           </template>
           <div v-for="o in 4" :key="o" class="text item">
@@ -55,26 +55,27 @@
           <template #desc>自定义icon描述</template>
         </b-alert>
         <b-divider align="left">日历</b-divider>
-        <div style="width: 300px;display: inline-block;">
+        <div style="width: 300px; display: inline-block">
           <b-calendar mini></b-calendar>
         </div>
-        <div style="width: 300px;display: inline-block;">
-          <b-calendar mini :body-style="{border:'none'}"
-                      :day-style="{border:'none',borderRadius:'4px'}">
-          </b-calendar>
+        <div style="width: 300px; display: inline-block">
+          <b-calendar
+            mini
+            :body-style="{ border: 'none' }"
+            :day-style="{ border: 'none', borderRadius: '4px' }"
+          ></b-calendar>
         </div>
       </div>
     </b-collapse-wrap>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
 
 export default {
   name: 'OtherComp',
-  components: { PageWrapper, ThemeColorPanel },
+  components: { ThemeColorPanel },
 }
 </script>
 

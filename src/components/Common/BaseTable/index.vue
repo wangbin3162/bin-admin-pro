@@ -4,18 +4,13 @@
       <slot name="filter"></slot>
     </div>
     <div class="base-table-box" :style="tableStyle">
-      <div class="base-table-action" v-if="$slots.action || $slots.actionRight">
-        <div class="left">
-          <slot name="action"></slot>
-        </div>
-        <div class="right">
-          <slot name="actionRight"></slot>
-        </div>
+      <div class="base-table-action">
+        <slot name="action"></slot>
       </div>
       <slot></slot>
-      <div class="base-table-pagination" v-if="$slots.page" :style="pageStyle">
-        <slot name="page"></slot>
-      </div>
+    </div>
+    <div class="base-table-pagination" v-if="$slots.page" :style="pageStyle">
+      <slot name="page"></slot>
     </div>
   </div>
 </template>
@@ -37,7 +32,6 @@ export default {
   .base-table-form {
     background: #fff;
     border-radius: 2px;
-    margin-bottom: 16px;
     padding: 10px 10px 0;
     :deep(.bin-form) {
       display: flex;
@@ -57,15 +51,15 @@ export default {
     border-radius: 2px;
     padding: 10px;
     .base-table-action {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      width: 100%;
       margin-bottom: 10px;
     }
   }
   .base-table-pagination {
-    text-align: right;
-    margin-top: 10px;
+    background: #fff;
+    border-radius: 2px;
+    padding: 10px;
+    text-align: left;
   }
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="基础表格的查询列表，带有常规操作。">
+  <page-container desc="基础表格的查询列表，带有常规操作。">
     <base-table>
       <template #filter>
         <b-form label-width="95px">
@@ -35,21 +35,21 @@
         </b-form>
       </template>
       <template #action>
-        <b-button type="primary" icon="plus-circle">新增</b-button>
-      </template>
-      <template #actionRight>
-        <b-dropdown style="margin-left: 20px">
-          <b-button>
-            更多操作
-            <b-icon name="down"></b-icon>
-          </b-button>
-          <template #dropdown>
-            <b-dropdown-menu>
-              <b-dropdown-item>刷新</b-dropdown-item>
-              <b-dropdown-item>删除</b-dropdown-item>
-            </b-dropdown-menu>
-          </template>
-        </b-dropdown>
+        <div flex="main:justify">
+          <b-button type="primary" icon="plus-circle">新增</b-button>
+          <b-dropdown style="margin-left: 20px">
+            <b-button>
+              更多操作
+              <b-icon name="down"></b-icon>
+            </b-button>
+            <template #dropdown>
+              <b-dropdown-menu>
+                <b-dropdown-item>刷新</b-dropdown-item>
+                <b-dropdown-item>删除</b-dropdown-item>
+              </b-dropdown-menu>
+            </template>
+          </b-dropdown>
+        </div>
       </template>
       <b-table :columns="columns" :data="copyList" :loading="loading" border>
         <template #roles="{ row }">
@@ -71,24 +71,16 @@
         ></b-page>
       </template>
     </base-table>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
 import { reactive, ref, watch } from 'vue'
 import { getUserList } from '@/api/modules/user.api'
 import useTable from '@/hooks/service/useTable'
-import BaseTable from '@/components/Common/BaseTable/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import ActionButton from '@/components/Common/ActionButton/index.vue'
 
 export default {
   name: 'SearchList',
-  components: {
-    ActionButton,
-    PageWrapper,
-    BaseTable,
-  },
   setup() {
     const query = reactive({
       page: 1,

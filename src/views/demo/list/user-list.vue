@@ -1,5 +1,5 @@
 <template>
-  <page-wrapper desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。" bg>
+  <page-container desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。" bg>
     <b-skeleton :loading="loading">
       <template #template>
         <b-skeleton animation />
@@ -89,7 +89,7 @@
         @size-change="pageSizeChange"
       ></b-page>
     </div>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
@@ -97,15 +97,9 @@ import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
 import { reactive, ref, watch } from 'vue'
 import { Message } from 'bin-ui-next'
-import ActionButton from '@/components/Common/ActionButton/index.vue'
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
 
 export default {
   name: 'UserList',
-  components: {
-    PageWrapper,
-    ActionButton,
-  },
   setup() {
     const query = reactive({
       page: 1,

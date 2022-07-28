@@ -1,17 +1,8 @@
 <template>
-  <page-wrapper desc="页面内容为Mock数据，仅作示例使用。">
+  <page-container desc="页面内容为Mock数据，仅作示例使用。">
     <b-space :size="16" alignment="flex-start">
-      <base-tree
-        tree-title="基础树"
-        :fetch="getDepartTree"
-        @select-change="handleSelect"
-      ></base-tree>
-      <base-tree
-        tree-title="可搜索"
-        :fetch="getDepartTree"
-        show-filter
-        @select-change="handleSelect"
-      ></base-tree>
+      <base-tree tree-title="基础树" :fetch="getDepartTree" @select-change="handleSelect"></base-tree>
+      <base-tree tree-title="可搜索" :fetch="getDepartTree" show-filter @select-change="handleSelect"></base-tree>
       <base-tree
         tree-title="搜索位置"
         :fetch="getDepartTree"
@@ -41,11 +32,7 @@
         :render="renderContent2"
         @select-change="handleSelect"
       ></base-tree>
-      <base-tree
-        tree-title="额外操作"
-        :fetch="getDepartTree"
-        @select-change="handleSelect"
-      >
+      <base-tree tree-title="额外操作" :fetch="getDepartTree" @select-change="handleSelect">
         <b-dropdown @command="handleCommand">
           <a href="javascript:void(0)">
             增加部门
@@ -59,33 +46,22 @@
           </template>
         </b-dropdown>
       </base-tree>
-      <base-tree
-        tree-title="插入操作"
-        :fetch="getDepartTree"
-        @select-change="handleSelect"
-        @command="handleCommand"
-      >
+      <base-tree tree-title="插入操作" :fetch="getDepartTree" @select-change="handleSelect" @command="handleCommand">
         <template #ctrl>
           <b-dropdown-item name="root" divided>增加根节点</b-dropdown-item>
           <b-dropdown-item name="child" :disabled="!currentNode">增加子节点</b-dropdown-item>
         </template>
       </base-tree>
     </b-space>
-  </page-wrapper>
+  </page-container>
 </template>
 
 <script>
-import PageWrapper from '@/components/Common/Page/page-wrapper.vue'
-import BaseTree from '@/components/Common/BaseTree/index.vue'
 import { getDepartTree } from '@/api/modules/depart.api'
 import { h } from 'vue'
 
 export default {
   name: 'FuncBaseTree',
-  components: {
-    BaseTree,
-    PageWrapper,
-  },
   data() {
     return {
       getDepartTree,
@@ -93,31 +69,32 @@ export default {
         {
           title: 'parent 1',
           expand: true,
-          render: ({ root, node, data }) => {
-            return h('span', {
-              style: {
-                display: 'inline-flex',
-                justifyContent: 'space-between',
-                width: '100%',
-              },
-            }, [
-              h('span', data.title),
-              h('i', {
-                class: ['b-iconfont', 'b-icon-plus-square'],
+          render: ({ data }) => {
+            return h(
+              'span',
+              {
                 style: {
-                  fontSize: '16px',
-                  color: '#1089ff',
+                  display: 'inline-flex',
+                  justifyContent: 'space-between',
+                  width: '100%',
                 },
-                onClick: () => {
-                  this.append(data)
-                },
-              }),
-            ])
+              },
+              [
+                h('span', data.title),
+                h('i', {
+                  class: ['b-iconfont', 'b-icon-plus-square'],
+                  style: {
+                    fontSize: '16px',
+                    color: '#1089ff',
+                  },
+                  onClick: () => {
+                    this.append(data)
+                  },
+                }),
+              ],
+            )
           },
-          children: [
-            { title: 'child 1-1' },
-            { title: 'child 1-2' },
-          ],
+          children: [{ title: 'child 1-1' }, { title: 'child 1-2' }],
         },
       ],
       currentNode: null,
@@ -125,62 +102,70 @@ export default {
   },
   methods: {
     renderContent({ root, node, data }) {
-      return h('span', {
-        style: {
-          display: 'inline-flex',
-          justifyContent: 'space-between',
-          width: '100%',
+      return h(
+        'span',
+        {
+          style: {
+            display: 'inline-flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          },
         },
-      }, [
-        h('span', data.title),
-        h('span', { style: { display: 'inline-block' } }, [
-          h('i', {
-            class: ['b-iconfont', 'b-icon-plus-circle'],
-            style: { fontSize: '16px', color: '#5d6d7e' },
-            onClick: (e) => {
-              e.stopPropagation()
-              this.append(data)
-            },
-          }),
-          h('i', {
-            class: ['b-iconfont', 'b-icon-minus-circle'],
-            style: { fontSize: '16px', color: '#f5222d' },
-            onClick: (e) => {
-              e.stopPropagation()
-              this.remove(root, node, data)
-            },
-          }),
-        ]),
-      ])
+        [
+          h('span', data.title),
+          h('span', { style: { display: 'inline-block' } }, [
+            h('i', {
+              class: ['b-iconfont', 'b-icon-plus-circle'],
+              style: { fontSize: '16px', color: '#5d6d7e' },
+              onClick: e => {
+                e.stopPropagation()
+                this.append(data)
+              },
+            }),
+            h('i', {
+              class: ['b-iconfont', 'b-icon-minus-circle'],
+              style: { fontSize: '16px', color: '#f5222d' },
+              onClick: e => {
+                e.stopPropagation()
+                this.remove(root, node, data)
+              },
+            }),
+          ]),
+        ],
+      )
     },
     renderContent2({ root, node, data }) {
-      return h('span', {
-        style: {
-          display: 'inline-flex',
-          justifyContent: 'space-between',
-          width: '100%',
+      return h(
+        'span',
+        {
+          style: {
+            display: 'inline-flex',
+            justifyContent: 'space-between',
+            width: '100%',
+          },
         },
-      }, [
-        h('span', data.text),
-        h('span', { style: { display: 'inline-block' } }, [
-          h('i', {
-            class: ['b-iconfont', 'b-icon-plus-square-fill'],
-            style: { fontSize: '18px', color: '#5d6d7e' },
-            onClick: (e) => {
-              e.stopPropagation()
-              this.$message(`给[${data.text}]增加子节点`)
-            },
-          }),
-          h('i', {
-            class: ['b-iconfont', 'b-icon-minus-square-fill'],
-            style: { fontSize: '18px', color: '#f5222d' },
-            onClick: (e) => {
-              e.stopPropagation()
-              this.$message(`移除[${data.text}]`)
-            },
-          }),
-        ]),
-      ])
+        [
+          h('span', data.text),
+          h('span', { style: { display: 'inline-block' } }, [
+            h('i', {
+              class: ['b-iconfont', 'b-icon-plus-square-fill'],
+              style: { fontSize: '18px', color: '#5d6d7e' },
+              onClick: e => {
+                e.stopPropagation()
+                this.$message(`给[${data.text}]增加子节点`)
+              },
+            }),
+            h('i', {
+              class: ['b-iconfont', 'b-icon-minus-square-fill'],
+              style: { fontSize: '18px', color: '#f5222d' },
+              onClick: e => {
+                e.stopPropagation()
+                this.$message(`移除[${data.text}]`)
+              },
+            }),
+          ]),
+        ],
+      )
     },
     append(data) {
       const children = data.children || []
