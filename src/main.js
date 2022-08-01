@@ -2,6 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router, { setupRouter } from '@/router'
 import { setupStore } from '@/store'
+import { setupStore1 } from '@/pinia'
 import { registerUI } from '@/plugins/bin-ui-next'
 import { registerCharts } from '@/plugins/bin-charts-next'
 import { registerEditor } from '@/plugins/bin-editor-next'
@@ -26,6 +27,7 @@ registerCharts(app)
 registerEditor(app)
 setupRouter(app)
 setupStore(app)
+setupStore1(app)
 registerCommonComps(app)
 // Mount when the route is ready
 router.isReady().then(() => {

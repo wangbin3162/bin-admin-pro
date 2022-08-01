@@ -3,12 +3,11 @@ import app from './modules/app'
 import user from './modules/user'
 import menu from './modules/menu'
 import tagsView from './modules/tagsView'
-import links from './modules/links'
 import todos from './modules/todos'
 
 const debug = false // process.env.NODE_ENV !== 'production'
 const store = createStore({
-  modules: { app, user, menu, tagsView, links, todos },
+  modules: { app, user, menu, tagsView, todos },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 })

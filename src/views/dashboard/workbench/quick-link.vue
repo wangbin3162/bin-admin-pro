@@ -1,7 +1,7 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{padding: '0'}" divider="no">
+  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '0' }" divider="no">
     <template #header>
-      <div style="font-weight: normal;">
+      <div style="font-weight: normal">
         <iconfont icon="block" color="primary" bg round></iconfont>
         <span class="ml-5">快捷操作</span>
       </div>
@@ -32,15 +32,12 @@
         <span>工具</span>
       </a>
       <div class="link-wrap">
-        <div class="link-item"
-             v-for="link in links"
-             :key="link.link"
-        >
-          <b-dropdown trigger="contextmenu" @command="closeLink" placement="bottom-start">
-            <a :href="link.link" :target="link.newTab ? '_blank':'_self'">{{ link.text }}</a>
+        <div class="link-item" v-for="link in linksStore.getLinks" :key="link.link">
+          <b-dropdown trigger="contextmenu" @command="linksStore.closeLink" placement="bottom-start">
+            <a :href="link.link" :target="link.newTab ? '_blank' : '_self'">{{ link.text }}</a>
             <template #dropdown>
               <b-dropdown-menu>
-                <b-dropdown-item :name="link.link" style="color: #ed4014;">移除</b-dropdown-item>
+                <b-dropdown-item :name="link.link" style="color: #ed4014">移除</b-dropdown-item>
               </b-dropdown-menu>
             </template>
           </b-dropdown>
@@ -76,9 +73,9 @@
 <script>
 import { ref, reactive } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
-import useLinks from '@/hooks/store/useLinks'
 import { Message } from 'bin-ui-next'
 import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
+import { useStore } from '@/pinia'
 
 export default {
   name: 'quick-link',
@@ -86,7 +83,8 @@ export default {
   setup() {
     const visible = ref(false)
     const { toggleSearch, toggleSetting } = useSetting()
-    const { links, addLink, closeLink } = useLinks()
+    const { linksStore } = useStore()
+
     const ruleFormRef = ref(null)
     const form = reactive({
       link: '',
@@ -107,15 +105,18 @@ export default {
     }
 
     function submitForm() {
-      ruleFormRef.value.validate((valid) => {
+      ruleFormRef.value.validate(valid => {
         if (valid) {
-          addLink(form).then(() => {
-            Message.success('添加成功!')
-            visible.value = false
-          }).catch(err => {
-            visible.value = false
-            Message.error(err.message)
-          })
+          linksStore
+            .addLink(form)
+            .then(() => {
+              Message.success('添加成功!')
+              visible.value = false
+            })
+            .catch(err => {
+              visible.value = false
+              Message.error(err.message)
+            })
         }
       })
     }
@@ -126,11 +127,10 @@ export default {
       toggleSetting,
       visible,
       handleAdd,
-      closeLink,
       submitForm,
       ruleValidate,
       form,
-      links,
+      linksStore,
     }
   },
 }
