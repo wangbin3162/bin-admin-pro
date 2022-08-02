@@ -45,8 +45,8 @@ import AsideMenus from '@/layouts/menus/index.vue'
 import GlobalHeader from '@/layouts/header/index.vue'
 import GlobalFooter from '@/layouts/footer/index.vue'
 import { computed, onBeforeUnmount, onMounted } from 'vue'
-import useTagsView from '@/hooks/store/useTagsView'
 import { on, off } from '@/utils/util'
+import { useStore } from '@/pinia'
 
 export default {
   name: 'Layout',
@@ -70,7 +70,8 @@ export default {
       searchVisible,
       toggleSearch,
     } = useSetting()
-    const { cachedViews } = useTagsView()
+    const { tagsStore, storeToRefs } = useStore()
+    const { cachedViews } = storeToRefs(tagsStore)
 
     const mainStyle = computed(() => {
       if (contentFull.value) {

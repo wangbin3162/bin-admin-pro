@@ -66,31 +66,34 @@
 
 <script>
 import { computed, nextTick, ref, watch } from 'vue'
-import useStoreRouter from '@/hooks/store/useStoreRouter'
 import { HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
-import useTagsView from '@/hooks/store/useTagsView'
 import useSetting from '@/hooks/store/useSetting'
+import { useStore } from '@/pinia'
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
   name: 'TagsView',
   setup() {
-    const { $store, $router, $route } = useStoreRouter()
+    const { tagsStore, storeToRefs } = useStore()
+    const { visitedViews, viewTags } = storeToRefs(tagsStore)
+    const route = useRoute()
+    const router = useRouter()
+
     const activeTag = ref('')
     const selectedTag = ref({})
     const tabsRef = ref(null)
 
     const { navMenuItems, addRouters } = useMenu()
-    const { visitedViews, viewTags, refreshCurrentPage } = useTagsView()
     const { tagsType, toggleContentFull, contentFull } = useSetting()
 
     // 所有动态的路由表name 拼接
     const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
     const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
-    const currentHome = computed(() => $route.name === HOME_PATH)
+    const currentHome = computed(() => route.name === HOME_PATH)
 
     watch(
-      () => $route.path,
+      () => route.path,
       () => {
         refresh()
       },
@@ -98,7 +101,7 @@ export default {
     )
 
     function refresh() {
-      const name = $route.name
+      const name = route.name
       // 如果是重定向或者错误页面则跳过
       if (addRoutersNames.value.includes(name) || currentHome.value) {
         addTags()
@@ -107,12 +110,12 @@ export default {
     }
 
     function addTags() {
-      const { name } = $route
+      const { name } = route
       if (currentHome.value) return
       const current = navMenuItems.value.find(item => item.name === name)
       const currentRoute = addRouters.value.find(item => item.name === name)
       if (current && currentRoute) {
-        $store.dispatch('tagsView/addView', {
+        tagsStore.addView({
           name: current.name,
           title: current.title,
           noCache: currentRoute.meta.noCache || false,
@@ -123,12 +126,12 @@ export default {
 
     async function moveToCurrentTag() {
       await nextTick()
-      activeTag.value = $route.name
+      activeTag.value = route.name
     }
 
     // 选中一个tag
     function handleSelect(tag) {
-      $router.push({ name: tag.key })
+      router.push({ name: tag.key })
     }
 
     function handleRightClick(tag) {
@@ -136,7 +139,7 @@ export default {
     }
 
     function handleCloseTag(tag) {
-      $store.dispatch('tagsView/delView', { name: tag.key, title: tag.title })
+      tagsStore.delView({ name: tag.key })
     }
 
     function closeSelected() {
@@ -151,15 +154,10 @@ export default {
 
     // 关闭其他tags
     function closeOthers() {
-      if (rightHome.value) {
-        return
-      }
+      if (rightHome.value) return
       const selectedTagVal = selectedTag.value
-      $router.push({ name: selectedTagVal.key })
-      $store.dispatch('tagsView/delOthersViews', {
-        name: selectedTagVal.key,
-        title: selectedTagVal.title,
-      })
+      router.push({ name: selectedTagVal.key })
+      tagsStore.delOthersViews({ name: selectedTagVal.key })
       tabsRef.value.moveToCurrentTab()
     }
 
@@ -168,10 +166,14 @@ export default {
       if (rightHome.value) {
         return
       }
-      await $store.dispatch('tagsView/delAllViews')
-      await $router.push({ name: HOME_PATH })
+      tagsStore.delAllViews()
+      await router.push({ name: HOME_PATH })
       await nextTick()
       tabsRef.value.moveToCurrentTab()
+    }
+
+    async function refreshCurrentPage() {
+      tagsStore.refreshCurrentPage(router)
     }
 
     function handleCommand(name) {

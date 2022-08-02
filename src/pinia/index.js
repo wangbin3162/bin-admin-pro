@@ -1,11 +1,12 @@
 import { createPinia, storeToRefs } from 'pinia'
-import useApp from './app'
-import useUser from './user'
-import useMenu from './menu'
-import useLinks from './links'
-import useTags from './tags'
-import useTodoList from './todolist'
 import piniaPlugin from './pinia-plugin'
+
+import useApp from './modules/app'
+import useUser from './modules/user'
+import useMenu from './modules/menu'
+import useLinks from './modules/links'
+import useTags from './modules/tags'
+import useTodoList from './modules/todolist'
 
 // 注册store及插件信息
 export function setupStore1(app) {
