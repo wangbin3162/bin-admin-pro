@@ -86,6 +86,9 @@
 <script>
 import { login } from '@/api/modules/login.api'
 import { throwError } from '@/utils/util'
+import { mapActions } from 'pinia'
+import userStore from '@/pinia/user'
+
 import 'css-doodle'
 
 export default {
@@ -136,6 +139,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(userStore, ['setToken']),
     // 提交登录信息
     submit() {
       this.$refs.loginForm.validate(async valid => {
@@ -154,7 +158,7 @@ export default {
     async loginSuccess(data) {
       if (data.code === '00') {
         const token = data.data.accessToken
-        await this.$store.dispatch('user/setToken', token)
+        await this.setToken(token)
         // 重定向对象不存在则返回顶层路径
         const redirect = this.$route.query.redirect || '/'
         await this.$router.push({ path: redirect })

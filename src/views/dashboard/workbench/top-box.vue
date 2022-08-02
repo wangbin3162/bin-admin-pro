@@ -44,16 +44,15 @@
 </template>
 
 <script>
-import useUser from '@/hooks/store/useUser'
 import useSetting from '@/hooks/store/useSetting'
 import { useStore } from '@/pinia'
 
 export default {
   name: 'top-box',
   setup() {
-    const { welcomeTitle, currentDate } = useUser()
-    const { todolistStore, storeToRefs } = useStore()
+    const { todolistStore, userStore, storeToRefs } = useStore()
     const { todoLabel } = storeToRefs(todolistStore)
+    const { welcomeTitle, currentDate } = storeToRefs(userStore)
     const { weather, showWeather } = useSetting()
 
     return {

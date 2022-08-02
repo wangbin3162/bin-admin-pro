@@ -3,6 +3,8 @@ import { LoadingBar, Notice } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import store from '@/store'
+import { useStore } from '@/pinia'
+
 import { ERROR_PATH_LIST, getFilterMenus } from './menus'
 import cookies from '../utils/util.cookies'
 import { ACCESS_TOKEN } from '@/config/token-const'
@@ -48,13 +50,14 @@ router.beforeEach(async (to, from) => {
   const token = cookies.get(ACCESS_TOKEN)
   if (token && token !== 'undefined') {
     // 确定用户是否通过getInfo获得了他的权限角色// 这里暂时默认获取了角色
-    const userInfo = store.state.user.userInfo
+    const { userStore } = useStore()
+    const userInfo = userStore.userInfo
     if (userInfo) {
       return true
     } else {
       // 否则就去拉取用户信息
       try {
-        const user = await store.dispatch('user/getUserInfo')
+        const user = await userStore.getUserInfo()
         if (from.name === 'Login') {
           Notice.success({
             title: '登录成功',
