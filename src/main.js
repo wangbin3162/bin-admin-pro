@@ -3,6 +3,7 @@ import App from './App.vue'
 import router, { setupRouter } from '@/router'
 import { setupStore } from '@/store'
 import { setupStore1 } from '@/pinia'
+import { registerDirectives } from '@/directives'
 import { registerUI } from '@/plugins/bin-ui-next'
 import { registerCharts } from '@/plugins/bin-charts-next'
 import { registerEditor } from '@/plugins/bin-editor-next'
@@ -22,6 +23,7 @@ import './mock'
 // }
 
 const app = createApp(App)
+registerDirectives(app)
 registerUI(app)
 registerCharts(app)
 registerEditor(app)

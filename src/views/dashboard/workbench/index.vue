@@ -10,9 +10,9 @@
         <b-col span="10">
           <quick-link />
           <div class="banner">
-            <img src="@/assets/images/bg/work.png" alt="work">
+            <img src="@/assets/images/bg/work.png" alt="work" />
           </div>
-          <todos />
+          <todo-list />
         </b-col>
       </b-row>
     </div>
@@ -24,11 +24,11 @@ import TopBox from './top-box.vue'
 import ProjectBox from './project-box.vue'
 import DynamicBox from './dynamic-box.vue'
 import QuickLink from './quick-link.vue'
-import Todos from './todos.vue'
+import TodoList from './todo-list.vue'
 
 export default {
-  name: 'Workbench',
-  components: { Todos, QuickLink, DynamicBox, TopBox, ProjectBox },
+  name: 'WorkBench',
+  components: { TodoList, QuickLink, DynamicBox, TopBox, ProjectBox },
 }
 </script>
 

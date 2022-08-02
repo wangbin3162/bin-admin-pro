@@ -1,7 +1,7 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{padding: '16px'}">
+  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '16px' }">
     <template #header>
-      <div flex="main:justify cross:center" style="font-weight: normal;">
+      <div flex="main:justify cross:center" style="font-weight: normal">
         <div class="top">
           <iconfont icon="bulb" color="#722ed1" bg round></iconfont>
           <span class="ml-5">最新动态</span>
@@ -10,13 +10,9 @@
       </div>
     </template>
     <div class="list-wrap">
-      <div
-        class="list-item"
-        v-for="item in list"
-        :key="item.id"
-      >
+      <div class="list-item" v-for="item in list" :key="item.id">
         <div class="avatar">
-          <img :src="item.avatar" alt="avatar">
+          <img :src="item.avatar" alt="avatar" />
         </div>
         <div class="content">
           <div class="title" v-html="item.title"></div>
@@ -28,7 +24,6 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 import avatar1 from '@/assets/images/avatar/avatar05.jpeg'
 import avatar2 from '@/assets/images/avatar/avatar04.jpeg'
 import avatar3 from '@/assets/images/avatar/avatar07.jpeg'
@@ -38,7 +33,6 @@ import avatar6 from '@/assets/images/avatar/avatar01.jpeg'
 
 export default {
   name: 'dynamic-box',
-  components: { Iconfont },
   data() {
     return {
       list: [

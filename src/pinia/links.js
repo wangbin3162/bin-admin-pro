@@ -10,11 +10,7 @@ const useLinks = defineStore('links', {
       { link: 'https://wangbin3162.gitee.io/bin-animation', text: 'bin-animation', newTab: true },
     ],
   }),
-  getters: {
-    getLinks(state) {
-      return state.links
-    },
-  },
+  getters: {},
   actions: {
     async addLink(link) {
       // 新增成功

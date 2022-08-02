@@ -3,7 +3,7 @@
     <div class="page-header-title">工作台</div>
     <div class="page-header-detail">
       <div class="avatar-img">
-        <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar">
+        <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar" />
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
@@ -44,17 +44,16 @@
 </template>
 
 <script>
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
-import useTodos from '@/hooks/store/useTodos'
 import useUser from '@/hooks/store/useUser'
 import useSetting from '@/hooks/store/useSetting'
+import { useStore } from '@/pinia'
 
 export default {
   name: 'top-box',
-  components: { Iconfont },
   setup() {
     const { welcomeTitle, currentDate } = useUser()
-    const { todoLabel } = useTodos()
+    const { todolistStore, storeToRefs } = useStore()
+    const { todoLabel } = storeToRefs(todolistStore)
     const { weather, showWeather } = useSetting()
 
     return {

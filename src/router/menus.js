@@ -281,7 +281,7 @@ export default [
 ]
 
 // 基础
-export const HOME_PATH = 'Workbench'
+export const HOME_PATH = 'WorkBench'
 export const HOME_NAME = '工作台'
 export const ERROR_PATH_LIST = ['403', '404', '500']
 export const DASHBOARD_MENUS = [

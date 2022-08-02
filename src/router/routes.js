@@ -10,7 +10,7 @@ export const asyncRouterMap = [
     path: 'analysis',
     name: 'Analysis',
     meta: { title: '分析页', noCache: true },
-    component: () => import( '@/views/dashboard/analysis/index.vue'),
+    component: () => import('@/views/dashboard/analysis/index.vue'),
   },
   ...modules,
   {
@@ -29,13 +29,13 @@ export function createRoutesInLayout(routes = []) {
   return [
     {
       path: '/',
-      redirect: { name: 'Workbench' },
+      redirect: { name: 'WorkBench' },
       name: 'Root',
       component: layout,
       children: [
         {
-          path: 'workbench',
-          name: 'Workbench',
+          path: 'workBench',
+          name: 'WorkBench',
           meta: { title: HOME_NAME },
           component: () => import('@/views/dashboard/workbench/index.vue'),
         },

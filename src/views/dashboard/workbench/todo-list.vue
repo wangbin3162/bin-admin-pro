@@ -11,24 +11,34 @@
         </b-tooltip>
       </div>
     </template>
-    <ul class="todo-list" ref="listRef">
-      <li
-        v-for="(item, index) in list"
-        :key="index"
-        class="todo"
-        :class="[{ done: item.done }, { edit: editIndex === index }]"
-      >
-        <drag-handle type="icon" icon="menu" icon-font-size="16px"></drag-handle>
-        <span class="toggle" @click="toggleCheck(index)">
-          <b-icon name="check"></b-icon>
-        </span>
-        <label v-if="editIndex === index">
-          <b-input v-model="editText" size="small" @enter="inputBlur(index)" @blur="inputBlur(index)"></b-input>
-        </label>
-        <label v-else @dblclick="dbClickEdit(index)">{{ item.text }}</label>
-        <i class="destroy b-iconfont b-icon-close" @click="removeOne(index)"></i>
-      </li>
-    </ul>
+
+    <draggable
+      v-model="todolist"
+      class="todo-list"
+      tag="ul"
+      item-key="element"
+      v-bind="{
+        animation: 200,
+        ghostClass: 'ghost',
+        dragClass: 'drag-item-class',
+        forceFallback: true,
+        handle: '.drag',
+      }"
+    >
+      <template #item="{ element, index }">
+        <li class="todo" :class="[{ done: element.done }, { edit: editIndex === index }]">
+          <i class="b-iconfont b-icon-menu drag"></i>
+          <span class="toggle" @click="toggleCheck(index)">
+            <b-icon name="check"></b-icon>
+          </span>
+          <label v-if="editIndex === index">
+            <b-input v-model="editText" size="small" v-focus @enter="inputBlur(index)" @blur="inputBlur(index)" />
+          </label>
+          <label v-else @dblclick="dbClickEdit(index)">{{ element.text }}</label>
+          <i class="destroy b-iconfont b-icon-close" @click="removeOne(index)"></i>
+        </li>
+      </template>
+    </draggable>
     <footer class="footer">
       <span class="count">
         <strong>{{ leftCount }}</strong>
@@ -42,87 +52,62 @@
 </template>
 
 <script>
-import useTodos from '@/hooks/store/useTodos'
-import { nextTick, ref, watch } from 'vue'
-import useSortable from '@/hooks/useSortable'
-import { deepCopy } from '@/utils/util'
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
-import DragHandle from '@/components/Common/DragHandle/index.vue'
+import { ref } from 'vue'
+import { useStore } from '@/pinia'
+import draggable from 'vuedraggable'
 
 export default {
-  name: 'todos',
-  components: { DragHandle, Iconfont },
+  components: { draggable },
   setup() {
     const editIndex = ref(-1)
     const editText = ref('')
-    const { todos, todoLabel, leftCount, saveTodos } = useTodos()
-    const list = ref([])
-    const { listRef } = useSortable(list, updateState, { ghostClass: 'ghost' })
 
-    // 数据变化后更新操作mapping
-    watch(
-      () => todos.value,
-      val => {
-        list.value = deepCopy(val)
-      },
-      { immediate: true, deep: true },
-    )
-
-    function updateState() {
-      saveTodos(list.value)
-    }
+    const { todolistStore, storeToRefs } = useStore()
+    const { todolist, leftCount, todoLabel } = storeToRefs(todolistStore)
 
     function handleAdd() {
+      console.log(todolist)
       if (editIndex.value > -1) {
         editIndex.value = -1
         editText.value = ''
         return
       }
-      list.value.push({
-        text: '',
-        done: false,
-      })
-      editIndex.value = list.value.length - 1
+      todolist.value.push({ text: '', done: false })
+      editIndex.value = todolist.value.length - 1
       editText.value = ''
     }
 
     function dbClickEdit(index) {
       editIndex.value = index
-      editText.value = list.value[index].text
+      editText.value = todolist.value[index].text
     }
 
     function inputBlur(index) {
       const text = editText.value
       if (text === '') {
         if (index > -1) {
-          // 为空时候移除这个
-          list.value.splice(index, 1)
+          removeOne(index)
         }
       } else {
-        list.value[index].text = text
+        todolist.value[index].text = text
         editIndex.value = -1
-        updateState()
       }
     }
 
     function toggleCheck(index) {
-      list.value[index].done = !list.value[index].done
-      updateState()
+      todolist.value[index].done = !todolist.value[index].done
     }
 
     function removeOne(index) {
-      list.value.splice(index, 1)
-      updateState()
+      todolist.value.splice(index, 1)
     }
 
     return {
       editIndex,
       editText,
-      list,
-      todos,
-      todoLabel,
+      todolist,
       leftCount,
-      listRef,
+      todoLabel,
       handleAdd,
       inputBlur,
       removeOne,
@@ -148,6 +133,8 @@ export default {
       position: absolute;
       top: 12px;
       left: 6px;
+      font-size: 16px;
+      cursor: grab;
       z-index: 1;
     }
     .toggle {

@@ -135,11 +135,10 @@
 import { onMounted, ref } from 'vue'
 import { useChartsColor } from '@/hooks/useCharts'
 import TopCard from '@/views/dashboard/analysis/top-card.vue'
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 
 export default {
   name: 'Analysis',
-  components: { Iconfont, TopCard },
+  components: { TopCard },
   setup() {
     const color = useChartsColor()
     const loading = ref(true)

@@ -1,4 +1,4 @@
-import { createPinia } from 'pinia'
+import { createPinia, storeToRefs } from 'pinia'
 import useApp from './app'
 import useUser from './user'
 import useMenu from './menu'
@@ -12,7 +12,7 @@ export function setupStore1(app) {
   const store = createPinia()
   store.use(
     piniaPlugin({
-      paths: ['links'],
+      paths: ['links', 'todolist'],
     }),
   )
   app.use(store)
@@ -21,11 +21,12 @@ export function setupStore1(app) {
 // 统一的store获取
 export function useStore() {
   return {
+    storeToRefs,
     appStore: useApp(),
     userStore: useUser(),
     menuStore: useMenu(),
-    linksStore: useLinks(),
     tagsStore: useTags(),
+    linksStore: useLinks(),
     todolistStore: useTodoList(),
   }
 }

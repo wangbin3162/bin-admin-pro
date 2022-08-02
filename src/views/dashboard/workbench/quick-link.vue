@@ -32,7 +32,7 @@
         <span>工具</span>
       </a>
       <div class="link-wrap">
-        <div class="link-item" v-for="link in linksStore.getLinks" :key="link.link">
+        <div class="link-item" v-for="link in linksStore.links" :key="link.link">
           <b-dropdown trigger="contextmenu" @command="linksStore.closeLink" placement="bottom-start">
             <a :href="link.link" :target="link.newTab ? '_blank' : '_self'">{{ link.text }}</a>
             <template #dropdown>
@@ -74,12 +74,10 @@
 import { ref, reactive } from 'vue'
 import useSetting from '@/hooks/store/useSetting'
 import { Message } from 'bin-ui-next'
-import Iconfont from '@/components/Common/Iconfont/iconfont.vue'
 import { useStore } from '@/pinia'
 
 export default {
   name: 'quick-link',
-  components: { Iconfont },
   setup() {
     const visible = ref(false)
     const { toggleSearch, toggleSetting } = useSetting()
