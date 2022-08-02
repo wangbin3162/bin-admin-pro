@@ -50,7 +50,7 @@ router.beforeEach(async (to, from) => {
   const token = cookies.get(ACCESS_TOKEN)
   if (token && token !== 'undefined') {
     // 确定用户是否通过getInfo获得了他的权限角色// 这里暂时默认获取了角色
-    const { userStore } = useStore()
+    const { userStore, menuStore } = useStore()
     const userInfo = userStore.userInfo
     if (userInfo) {
       return true
@@ -67,8 +67,8 @@ router.beforeEach(async (to, from) => {
         }
         const menus = getFilterMenus(user.functions || [])
         // console.log('menus: ', menus)
-        const { menuItems } = await store.dispatch('menu/setRouterMenu', menus)
-        const asyncRoute = await store.dispatch('menu/generateRoutes', menuItems)
+        const { menuItems } = menuStore.setRouterMenu(menus)
+        const asyncRoute = menuStore.generateRoutes(menuItems)
         // console.log('baseRoutes: ', router.getRoutes())
         // [ 路由 ] 计算路由
         // console.log('asyncRoutes: ', asyncRoute)

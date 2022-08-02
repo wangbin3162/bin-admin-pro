@@ -1,33 +1,12 @@
-import { useStore } from 'vuex'
 import { useRouter, useRoute } from 'vue-router'
-import { computed } from 'vue'
-import useTagsView from '@/hooks/store/useTagsView'
 import { HOME_PATH } from '@/router/menus'
+import { useStore } from '@/pinia'
 
 export default function useMenu() {
-  const $store = useStore()
+  const { menuStore, tagsStore, storeToRefs } = useStore()
+  const { navMenu, navMenuItems, addRouters, allMenuItems } = storeToRefs(menuStore)
   const $router = useRouter()
   const $route = useRoute()
-  const navMenu = computed(() => $store.state.menu.menu)
-  const navMenuItems = computed(() => $store.state.menu.menuItems)
-  const addRouters = computed(() => $store.state.menu.addRouters)
-  const allMenuItems = computed(() => {
-    const functions = navMenu.value
-    const all = []
-    const mapper = route => {
-      const mapperNode = { ...route }
-      mapperNode.children = (route.children && route.children.map(mapper)) || []
-      if (route.name) {
-        all.push(mapperNode)
-      }
-      return mapperNode
-    }
-    functions.forEach(item => {
-      mapper(item)
-    })
-    return all
-  })
-  const { refreshCurrentPage } = useTagsView()
 
   // 获取菜单项名称路径
   function getMenuItemNamePath(name) {
@@ -64,7 +43,7 @@ export default function useMenu() {
   // 选中路由名称
   function handleMenuSelect(name) {
     if (name === $route.name) {
-      refreshCurrentPage()
+      tagsStore.refreshCurrentPage($router)
       return
     }
     // 外链跳转

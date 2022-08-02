@@ -1,10 +1,9 @@
 import { createStore, createLogger } from 'vuex'
 import app from './modules/app'
-import menu from './modules/menu'
 
 const debug = false // process.env.NODE_ENV !== 'production'
 const store = createStore({
-  modules: { app, menu },
+  modules: { app },
   strict: debug,
   plugins: debug ? [createLogger()] : [],
 })

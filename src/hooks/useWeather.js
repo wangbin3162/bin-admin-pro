@@ -1,6 +1,5 @@
 import axios from 'axios'
-import { useStore } from 'vuex'
-import { computed } from 'vue'
+import { ref } from 'vue'
 import { Utils } from 'bin-ui-next'
 
 import img_xue from '@/assets/images/weather/xue.png'
@@ -62,10 +61,10 @@ const weaImgMapColor = {
  win_speed: "1级"
  */
 export default function useWeather() {
-  const store = useStore()
+  const weather = ref({})
   axios.get('https://www.tianqiapi.com/free/day?appid=78873955&appsecret=19VQ9LC5').then(res => {
     const data = res.data
-    const weather = {
+    weather.value = {
       city: data.city,
       icon: weaImgMap[data.wea_img],
       iconColor: weaImgMapColor[data.wea_img],
@@ -77,7 +76,6 @@ export default function useWeather() {
       airText: getAirObj(data.air).title,
       airColor: getAirObj(data.air).color,
     }
-    store.dispatch('app/setWeather', weather)
   })
 
   function getAirObj(num) {
@@ -95,7 +93,6 @@ export default function useWeather() {
     return { color: '#93141b', title: '严重污染' }
   }
 
-  const weather = computed(() => store.state.app.weather)
   return {
     weather,
     currentDate: Utils.util.parseTime(new Date(), '{y}-{m}-{d} 周{a}'),

@@ -1,7 +1,7 @@
 <template>
   <b-breadcrumb class="header-breadcrumb" separator="/">
     <b-breadcrumb-item v-for="item in levelList" :key="item.name">
-      <b-dropdown @command="handleMenuSelect" v-if="showDropdown && item.children.length">
+      <b-dropdown @command="handleMenuSelect" v-if="showDropdown && item.children?.length">
         <span class="breadcrumb-item">
           {{ item.title }}
           <i class="b-iconfont b-icon-down"></i>
