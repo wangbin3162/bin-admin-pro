@@ -57,7 +57,7 @@
 
 <script>
 import useApp from '@/hooks/store/useApp'
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 
 export default {
   name: 'top-box',

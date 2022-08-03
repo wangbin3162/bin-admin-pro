@@ -1,4 +1,4 @@
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 import { MENU_THEME_COLOR_LIST, SYSTEM_PRIMARY_COLOR_LIST } from '@/config/setting.cfg'
 
 export default function useApp() {

@@ -44,7 +44,7 @@ import GlobalHeader from '@/layouts/header/index.vue'
 import GlobalFooter from '@/layouts/footer/index.vue'
 import { computed, onBeforeUnmount, onMounted } from 'vue'
 import { on, off } from '@/utils/util'
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 
 export default {
   name: 'Layout',

@@ -73,7 +73,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import { HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
 import useApp from '@/hooks/store/useApp'
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 
 export default {

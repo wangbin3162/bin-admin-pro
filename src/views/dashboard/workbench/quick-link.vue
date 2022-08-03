@@ -74,7 +74,7 @@
 import { ref, reactive } from 'vue'
 import useApp from '@/hooks/store/useApp'
 import { Message } from 'bin-ui-next'
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 
 export default {
   name: 'quick-link',

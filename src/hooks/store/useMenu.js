@@ -1,6 +1,6 @@
 import { useRouter, useRoute } from 'vue-router'
 import { HOME_PATH } from '@/router/menus'
-import { useStore } from '@/pinia'
+import { useStore } from '@/store'
 
 export default function useMenu() {
   const { menuStore, tagsStore, storeToRefs } = useStore()
