@@ -72,7 +72,7 @@
 
 <script>
 import { ref, reactive } from 'vue'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import { Message } from 'bin-ui-next'
 import { useStore } from '@/pinia'
 
@@ -80,7 +80,7 @@ export default {
   name: 'quick-link',
   setup() {
     const visible = ref(false)
-    const { toggleSearch, toggleSetting } = useSetting()
+    const { toggleSearch, toggleSetting } = useApp()
     const { linksStore } = useStore()
 
     const ruleFormRef = ref(null)

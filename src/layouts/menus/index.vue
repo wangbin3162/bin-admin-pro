@@ -1,12 +1,12 @@
 <template>
-  <div class="aside-menu" :style="{ width: sidebarWidth }">
+  <div class="aside-menu" :style="{ width: setting.sidebarWidth }">
     <b-scrollbar>
       <b-menu
         :collapse-transition="false"
         :default-active="activeMenu"
         @select="handleMenuSelect"
         unique-opened
-        :collapse="!sidebar"
+        :collapse="!setting.sidebar"
       >
         <template v-for="(menu, menuIndex) in navMenu" :key="menuIndex">
           <menu-item v-if="!menu.children" :menu="menu"></menu-item>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import MenuItem from '@/layouts/menus/menu-item.vue'
 import Submenu from '@/layouts/menus/submenu.vue'
 import { ref, watch } from 'vue'
@@ -32,7 +32,7 @@ export default {
     const route = useRoute()
     const activeMenu = ref('')
     const openNames = ref([])
-    const { sidebar, menuTheme, sidebarWidth } = useSetting()
+    const { setting } = useApp()
     const { getMenuItemNamePath, handleMenuSelect, navMenu } = useMenu()
 
     watch(
@@ -46,9 +46,7 @@ export default {
     )
 
     return {
-      sidebar,
-      sidebarWidth,
-      menuTheme,
+      setting,
       navMenu,
       activeMenu,
       handleMenuSelect,

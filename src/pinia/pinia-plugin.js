@@ -14,13 +14,13 @@ const setStorage = async (key, value) => await localforage.setItem(key, deepCopy
 const piniaPlugin = options => {
   return async context => {
     const { store } = context
-    const storageKey = `${options?.key ?? __piniaKey}-${store.$id}`
+    const storageKey = `__${options?.key ?? __piniaKey}_${store.$id}__`
     const data = await getStorage(storageKey)
     if (data) {
       store.$state = toRaw(data)
     }
 
-    store.$subscribe(async (args, state) => {
+    store.$subscribe(async args => {
       let arrPaths = options.paths
       if (!arrPaths?.includes(args.storeId)) return
       await setStorage(storageKey, toRaw(store.$state))

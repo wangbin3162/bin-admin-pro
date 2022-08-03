@@ -87,7 +87,7 @@
 import { login } from '@/api/modules/login.api'
 import { throwError } from '@/utils/util'
 import { mapActions } from 'pinia'
-import userStore from '@/pinia/user'
+import userStore from '@/pinia/modules/user'
 
 import 'css-doodle'
 

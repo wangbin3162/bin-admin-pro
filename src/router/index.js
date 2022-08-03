@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import { LoadingBar, Notice } from 'bin-ui-next'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
-import store from '@/store'
 import { useStore } from '@/pinia'
 
 import { ERROR_PATH_LIST, getFilterMenus } from './menus'

@@ -1,24 +1,29 @@
 <template>
-  <header class="layout-header" :class="{ 'fixed-header': fixedHeader }" :style="fixedHeaderStyle">
-    <div v-show="!contentFull" class="global-header" :class="{ 'has-border': showTagsView }">
+  <header class="layout-header" :class="{ 'fixed-header': setting.fixedHeader }" :style="fixedHeaderStyle">
+    <div v-show="!setting.contentFull" class="global-header" :class="{ 'has-border': setting.tagsView }">
       <div class="global-header-left">
-        <header-trigger :icon="sidebar ? 'outdent' : 'indent'" size="18px" @click="toggleSidebar" />
+        <header-trigger
+          v-if="setting.showCollapse"
+          :icon="setting.sidebar ? 'outdent' : 'indent'"
+          size="18px"
+          @click="setting.sidebar = !setting.sidebar"
+        />
         <header-breadcrumb />
       </div>
       <div class="global-header-right">
-        <search v-if="showSearch" />
-        <message v-if="showMessage" />
-        <weather v-if="showWeather" />
+        <search v-if="setting.showSearch" />
+        <message v-if="setting.showMessage" />
+        <weather v-if="setting.showWeather" />
         <user-avatar />
         <setting />
       </div>
     </div>
-    <tags-view v-if="showTagsView" />
+    <tags-view v-if="setting.tagsView" />
   </header>
 </template>
 
 <script>
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import HeaderTrigger from '@/layouts/header-trigger/index.vue'
 import UserAvatar from '@/layouts/user/index.vue'
 import TagsView from '@/layouts/tags-view/index.vue'
@@ -41,28 +46,8 @@ export default {
     HeaderTrigger,
   },
   setup() {
-    const {
-      sidebar,
-      showTagsView,
-      contentFull,
-      fixedHeader,
-      fixedHeaderStyle,
-      toggleSidebar,
-      showSearch,
-      showMessage,
-      showWeather,
-    } = useSetting()
-    return {
-      sidebar,
-      showTagsView,
-      fixedHeader,
-      fixedHeaderStyle,
-      toggleSidebar,
-      showSearch,
-      showMessage,
-      showWeather,
-      contentFull,
-    }
+    const { setting, fixedHeaderStyle } = useApp()
+    return { setting, fixedHeaderStyle }
   },
 }
 </script>

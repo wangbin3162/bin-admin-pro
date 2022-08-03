@@ -13,12 +13,13 @@ export default {
   sidebar: true, // 侧边栏开启状态
   sidebarWidth: 256, // 侧边栏宽度
   tagsView: true, // 多页签开启状态
-  tagsType: 'card',
+  tagsType: 'clever', // card、clever、smooth
   fixedHeader: true,
   fixedAside: true,
   showWeather: true,
   showSearch: true,
-  showMessage: false,
+  showMessage: true,
+  showCollapse: true,
   contentFull: false, // 中间内容区域是否撑满
 }
 

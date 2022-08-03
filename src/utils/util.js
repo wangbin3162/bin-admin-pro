@@ -29,8 +29,10 @@ export const removeResizeListener = Utils.resize.removeResizeListener
  * @param data
  */
 export function arraybuffer2Base64(data) {
-  return 'data:image/png;base64,' +
+  return (
+    'data:image/png;base64,' +
     window.btoa(new Uint8Array(data).reduce((data, byte) => data + String.fromCharCode(byte), ''))
+  )
 }
 
 /**
@@ -56,9 +58,7 @@ export function throwError(callFun, e, title, log = true) {
   }
 }
 
-/**
- * 数组转对象值
- */
+// 数组转对象值
 export function arrToObj(arr = [], keyCode = 'key', valueCode = 'value') {
   const map = new Map()
   if (arr.length === 0) return {}
@@ -72,6 +72,7 @@ export function arrToObj(arr = [], keyCode = 'key', valueCode = 'value') {
   return obj
 }
 
+// 下载文件
 export function downloadFile(content, fileName) {
   // filename，摘取了常用的部分，其实还有其他一些
   const typeMap = {
@@ -90,7 +91,7 @@ export function downloadFile(content, fileName) {
     jpg: 'image/jpeg',
     png: 'image/png',
     txt: 'text/plain',
-    xml: 'image/text/xml'
+    xml: 'image/text/xml',
   }
   const hg = fileName.split('.').pop().toLocaleLowerCase() || ''
 
@@ -106,4 +107,9 @@ export function downloadFile(content, fileName) {
     document.body.removeChild(link)
     window.URL.revokeObjectURL(link.href)
   }
+}
+
+// 判断是否包含属性
+export function hasKey(obj, key) {
+  return Object.keys(obj).includes(key)
 }

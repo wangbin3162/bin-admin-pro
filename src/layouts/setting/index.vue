@@ -12,35 +12,34 @@
           :step="8"
           :min="200"
           :max="256"
-          :model-value="sidebarWidth"
-          @change="changeSidebarWidth"
+          v-model="setting.sidebarWidth"
           style="width: 150px"
         ></b-input-number>
       </div>
       <!-- <div class="setting-list-item">
         <span>菜单固定</span>
-        <b-switch :model-value="fixedAside" @change="changeFixedAside">
+        <b-switch v-model="setting.fixedAside">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
-      </div> -->
-      <!-- <div class="setting-list-item">
+      </div>
+      <div class="setting-list-item">
         <span>头部固定</span>
-        <b-switch :model-value="fixedHeader" @change="changeFixedHeader">
+        <b-switch v-model="setting.fixedHeader">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
       </div> -->
       <div class="setting-list-item">
         <span>多页签</span>
-        <b-switch :model-value="showTagsView" @change="toggleTagsView">
+        <b-switch :model-value="setting.tagsView" @change="toggleTagsView">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
       </div>
-      <div class="setting-list-item" v-if="showTagsView">
+      <div class="setting-list-item" v-if="setting.tagsView">
         <span>页签风格</span>
-        <b-select :model-value="tagsType" @change="setTagsType" size="small" style="width: 150px">
+        <b-select v-model="setting.tagsType" size="small" style="width: 150px">
           <b-option label="卡片" value="card"></b-option>
           <b-option label="灵动" value="clever"></b-option>
           <b-option label="圆滑" value="smooth"></b-option>
@@ -48,29 +47,30 @@
       </div>
       <h3 class="setting-title"><span>顶栏设置</span></h3>
       <div class="setting-list-item">
-        <span>折叠菜单</span>
-        <b-switch :model-value="sidebar" @change="toggleSidebar" :true-value="false" :false-value="true">
+        <span>菜单折叠</span>
+        <b-switch v-model="setting.showCollapse">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
       </div>
       <div class="setting-list-item">
         <span>菜单搜索</span>
-        <b-switch :model-value="showSearch" @change="toggleSearchBtn">
+        <b-switch v-model="setting.showSearch">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
       </div>
       <div class="setting-list-item">
         <span>消息通知</span>
-        <b-switch :model-value="showMessage" @change="toggleMessageBtn">
+        <b-switch v-model="setting.showMessage">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
       </div>
+
       <div class="setting-list-item">
         <span>城市天气</span>
-        <b-switch :model-value="showWeather" @change="toggleWeatherBtn">
+        <b-switch v-model="setting.showWeather">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>
@@ -81,15 +81,19 @@
 
 <script>
 import HeaderTrigger from '@/layouts/header-trigger/index.vue'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import ThemePanel from './theme-panel.vue'
 
 export default {
   name: 'Setting',
   components: { ThemePanel, HeaderTrigger },
   setup() {
+    const { setting, settingVisible, toggleSetting, toggleTagsView } = useApp()
     return {
-      ...useSetting(),
+      setting,
+      settingVisible,
+      toggleSetting,
+      toggleTagsView,
     }
   },
 }

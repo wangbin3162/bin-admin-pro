@@ -10,12 +10,8 @@
               </template>
             </b-input>
           </div>
-          <ul class="search-modal-list" v-no-data:[dataText]="filterList.length===0">
-            <li
-              v-for="item in filterList"
-              :key="item.name"
-              class="list-item"
-            >
+          <ul class="search-modal-list" v-no-data:[dataText]="filterList.length === 0">
+            <li v-for="item in filterList" :key="item.name" class="list-item">
               <a @click="handleClick(item.name)">
                 <i class="b-iconfont b-icon-group"></i>
                 <span>{{ item.display }}</span>
@@ -32,7 +28,7 @@
 <script>
 import { nextTick, ref, watch } from 'vue'
 import useMenu from '@/hooks/store/useMenu'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 
 export default {
   name: 'search-panel',
@@ -42,29 +38,36 @@ export default {
     const query = ref('')
     const filterList = ref([])
 
-    const { searchVisible, toggleSearch } = useSetting()
+    const { searchVisible, toggleSearch } = useApp()
     const { navMenuItems, getBreadcrumbData, handleMenuSelect } = useMenu()
 
-    watch(searchVisible, (val) => {
-      if (val) {
-        open()
-      }
-    })
+    watch(
+      () => searchVisible.value,
+      val => {
+        if (val) {
+          open()
+        }
+      },
+    )
 
-    watch(query, (val) => {
-      const list = []
-      const matchList = navMenuItems.value.filter(menu => {
-        return menu.title.includes(val) || menu.name.toUpperCase().includes(val.toUpperCase())
-      })
-      matchList.forEach((matchItem) => {
-        const data = getBreadcrumbData(matchItem.name)
-        list.push({
-          name: matchItem.name,
-          display: data.map(v => v.title).join(' > '),
+    watch(
+      query,
+      val => {
+        const list = []
+        const matchList = navMenuItems.value.filter(menu => {
+          return menu.title.includes(val) || menu.name.toUpperCase().includes(val.toUpperCase())
         })
-      })
-      filterList.value = list
-    }, { immediate: true })
+        matchList.forEach(matchItem => {
+          const data = getBreadcrumbData(matchItem.name)
+          list.push({
+            name: matchItem.name,
+            display: data.map(v => v.title).join(' > '),
+          })
+        })
+        filterList.value = list
+      },
+      { immediate: true },
+    )
 
     function open() {
       nextTick(() => {

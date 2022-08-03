@@ -6,13 +6,13 @@
 <script>
 import HeaderTrigger from '@/layouts/header-trigger/index.vue'
 import SearchPanel from '@/layouts/search/search-panel.vue'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 
 export default {
   name: 'Search',
   components: { SearchPanel, HeaderTrigger },
   setup() {
-    const { toggleSearch } = useSetting()
+    const { toggleSearch } = useApp()
 
     return {
       toggleSearch,

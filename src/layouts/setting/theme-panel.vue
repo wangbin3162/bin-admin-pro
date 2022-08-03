@@ -1,21 +1,21 @@
 <template>
-  <div class="theme-panel" :class="{'is-horizontal':mode==='horizontal'}">
+  <div class="theme-panel" :class="{ 'is-horizontal': mode === 'horizontal' }">
     <div class="theme-item" v-if="!onlyTheme">
       <h3 class="setting-title"><span>整体风格设置</span></h3>
       <div>
         <div class="theme-tab">
           <b-tooltip content="亮色主题风格" append-to-body>
             <span @click="themChange('light')">
-              <img src="@/assets/images/light.svg" alt="">
-              <i v-if="theme === 'light'" class="b-iconfont b-icon-check"></i>
+              <img src="@/assets/images/light.svg" alt="" />
+              <i v-if="setting.theme === 'light'" class="b-iconfont b-icon-check"></i>
             </span>
           </b-tooltip>
         </div>
         <div class="theme-tab">
           <b-tooltip content="暗色主题风格" append-to-body>
             <span @click="themChange('dark')">
-              <img src="@/assets/images/dark.svg" alt="">
-              <i v-if="theme === 'dark'" class="b-iconfont b-icon-check"></i>
+              <img src="@/assets/images/dark.svg" alt="" />
+              <i v-if="setting.theme === 'dark'" class="b-iconfont b-icon-check"></i>
             </span>
           </b-tooltip>
         </div>
@@ -28,8 +28,8 @@
           v-for="color in systemPrimaryColorList"
           :key="color"
           class="color-item"
-          :class="{active:isActiveColor(systemPrimary,color)}"
-          :style="{background:color}"
+          :class="{ active: isActiveColor(setting.systemPrimary, color) }"
+          :style="{ background: color }"
           @click="setSystemPrimary(color)"
         ></span>
       </div>
@@ -41,8 +41,8 @@
           v-for="color in menuThemeColorList"
           :key="color"
           class="color-item"
-          :class="{active:isActiveColor(menuTheme,color)}"
-          :style="{background:color}"
+          :class="{ active: isActiveColor(setting.menuTheme, color) }"
+          :style="{ background: color }"
           @click="setMenuTheme(color)"
         ></span>
       </div>
@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import { Utils } from 'bin-ui-next'
 
 const { isEqual } = Utils.color
@@ -63,29 +63,18 @@ export default {
     onlyTheme: Boolean,
   },
   setup() {
-    const {
-      theme,
-      menuTheme,
-      systemPrimary,
-      themChange,
-      setMenuTheme,
-      setSystemPrimary,
-      systemPrimaryColorList,
-      menuThemeColorList,
-    } = useSetting()
+    const { setting, themChange, setMenuTheme, setSystemPrimary, systemPrimaryColorList, menuThemeColorList } = useApp()
 
     function isActiveColor(color1, color2) {
       return isEqual(color1, color2)
     }
 
     return {
-      theme,
-      systemPrimary,
+      setting,
       themChange,
       systemPrimaryColorList,
       setSystemPrimary,
       menuThemeColorList,
-      menuTheme,
       setMenuTheme,
       isActiveColor,
     }

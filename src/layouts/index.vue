@@ -1,15 +1,15 @@
 <template>
   <div class="layout layout-has-aside">
     <div
-      v-show="!contentFull"
+      v-show="!setting.contentFull"
       class="layout-aside"
-      :class="[{ 'fixed-aside': fixedAside }, `layout-aside-${theme}`]"
+      :class="[{ 'fixed-aside': setting.fixedAside }, `layout-aside-${setting.theme}`]"
       :style="asideStyle"
     >
       <div class="logo" flex="cross:center">
         <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
         <transition name="zoom-in">
-          <h1 v-show="sidebar">BIN-ADMIN-PRO</h1>
+          <h1 v-show="setting.sidebar">BIN-ADMIN-PRO</h1>
         </transition>
       </div>
       <div class="layout-aside-children">
@@ -18,16 +18,14 @@
     </div>
     <div class="layout-main layout" :style="mainStyle">
       <!--占位顶部-->
-      <header class="layout-header" :style="headerHeight" v-if="fixedHeader"></header>
+      <header class="layout-header" :style="headerHeight" v-if="setting.fixedHeader"></header>
       <global-header />
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
           <b-move-transition>
-            <!-- <transition name="fade-scale" mode="out-in"> -->
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.path"></component>
             </keep-alive>
-            <!-- </transition> -->
           </b-move-transition>
         </router-view>
         <global-footer></global-footer>
@@ -40,7 +38,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import AsideMenus from '@/layouts/menus/index.vue'
 import GlobalHeader from '@/layouts/header/index.vue'
 import GlobalFooter from '@/layouts/footer/index.vue'
@@ -56,44 +54,33 @@ export default {
     AsideMenus,
   },
   setup() {
-    const {
-      theme,
-      sidebar,
-      contentFull,
-      toggleSidebar,
-      showTagsView,
-      sidebarWidth,
-      fixedAside,
-      asideStyle,
-      fixedHeader,
-      showSearch,
-      searchVisible,
-      toggleSearch,
-    } = useSetting()
+    const { setting, searchVisible, asideStyle, toggleSearch } = useApp()
     const { tagsStore, storeToRefs } = useStore()
     const { cachedViews } = storeToRefs(tagsStore)
 
     const mainStyle = computed(() => {
-      if (contentFull.value) {
+      const { contentFull, fixedAside, sidebarWidth, sidebar } = setting.value
+      if (contentFull) {
         return { marginLeft: 0 }
       }
       let left = 0
-      if (fixedAside.value) {
-        left = sidebarWidth.value
+      if (fixedAside) {
+        left = sidebarWidth
       }
-      if (!sidebar.value && fixedAside.value) {
+      if (!sidebar && fixedAside) {
         left = 64
       }
       return { marginLeft: `${left}px` }
     })
 
     const headerHeight = computed(() => {
-      return contentFull.value ? { height: '42px' } : { height: showTagsView.value ? '90px' : '48px' }
+      const { contentFull, tagsView } = setting.value
+      return contentFull ? { height: '42px' } : { height: tagsView ? '90px' : '48px' }
     })
 
     // ctrl + f 全局呼出搜索面板
     const keydownEvent = e => {
-      if (!showSearch.value) return
+      if (!setting.value.showSearch) return
       const { ctrlKey, code } = e
       // 面板打开
       if (searchVisible.value) {
@@ -109,33 +96,20 @@ export default {
       }
     }
 
-    const windowSizeChange = () => {
-      if (window.innerWidth <= 1200 && sidebar.value) {
-        toggleSidebar()
-      }
-    }
-
     onMounted(() => {
       on(document, 'keydown', keydownEvent)
-      on(window, 'resize', windowSizeChange)
-      windowSizeChange()
     })
 
     onBeforeUnmount(() => {
       off(document, 'keydown', keydownEvent)
-      off(window, 'resize', windowSizeChange)
     })
 
     return {
-      theme,
-      sidebar,
-      fixedAside,
+      setting,
       asideStyle,
       cachedViews,
       headerHeight,
-      fixedHeader,
       mainStyle,
-      contentFull,
     }
   },
 }

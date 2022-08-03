@@ -8,12 +8,24 @@
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
         <div class="welcome-weather">
-          <span class="mr-8">{{ currentDate }}</span>
-          <b-space v-if="showWeather">
-            <span>{{ weather.city }}</span>
-            <span>{{ weather.wea }}</span>
-            <span>{{ weather.tem }}</span>
+          <span>{{ currentDate }}</span>
+          <b-divider type="vertical" />
+          <b-space v-if="setting.showWeather">
+            <i :class="`qi-icon qi-${weather.icon}`" :title="weather.text"></i>
+            <span>{{ weather.temp }}°</span>
+            <span>{{ weather.text }}</span>
+            <span>{{ weather.windDir }} {{ weather.windScale }}级</span>
           </b-space>
+        </div>
+        <div class="pt-10">
+          <b-tag>搬砖者 👐</b-tag>
+          <b-tag>小有想法 😈</b-tag>
+          <b-tag>前端开发 ⛲</b-tag>
+          <b-tag>vue3 🍀</b-tag>
+          <b-tag>专注前端 🌟</b-tag>
+          <b-tag>大佬 🙋</b-tag>
+          <b-tag>懂点设计 💎</b-tag>
+          <b-tag>交互内容 🔖</b-tag>
         </div>
       </div>
       <div class="right-box">
@@ -44,7 +56,7 @@
 </template>
 
 <script>
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import { useStore } from '@/pinia'
 
 export default {
@@ -53,14 +65,14 @@ export default {
     const { todolistStore, userStore, storeToRefs } = useStore()
     const { todoLabel } = storeToRefs(todolistStore)
     const { welcomeTitle, currentDate } = storeToRefs(userStore)
-    const { weather, showWeather } = useSetting()
+    const { weather, setting } = useApp()
 
     return {
       welcomeTitle,
       currentDate,
       todoLabel,
       weather,
-      showWeather,
+      setting,
     }
   },
 }

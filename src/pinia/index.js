@@ -9,14 +9,16 @@ import useTags from './modules/tags'
 import useTodoList from './modules/todolist'
 
 // 注册store及插件信息
-export function setupStore1(app) {
+export function setupStore(app) {
   const store = createPinia()
   store.use(
     piniaPlugin({
+      key: 'store',
       paths: ['links', 'todolist'],
     }),
   )
   app.use(store)
+  useApp().loadApp()
 }
 
 // 统一的store获取

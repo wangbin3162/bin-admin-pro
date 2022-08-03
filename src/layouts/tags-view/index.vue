@@ -1,5 +1,5 @@
 <template>
-  <div class="tags-view-container" :class="`tags-view-${tagsType}`">
+  <div class="tags-view-container" :class="`tags-view-${setting.tagsType}`">
     <b-tabs
       v-model="activeTag"
       :data="viewTags"
@@ -57,8 +57,12 @@
           </b-dropdown-menu>
         </template>
       </b-dropdown>
-      <span class="trigger" :title="contentFull ? '收缩' : '全屏'" @click="toggleContentFull">
-        <i :class="`b-iconfont b-icon-${contentFull ? 'compress' : 'expend'}`"></i>
+      <span
+        class="trigger"
+        :title="setting.contentFull ? '收缩' : '全屏'"
+        @click="setting.contentFull = !setting.contentFull"
+      >
+        <i :class="`b-iconfont b-icon-${setting.contentFull ? 'compress' : 'expend'}`"></i>
       </span>
     </div>
   </div>
@@ -68,7 +72,7 @@
 import { computed, nextTick, ref, watch } from 'vue'
 import { HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import { useStore } from '@/pinia'
 import { useRoute, useRouter } from 'vue-router'
 
@@ -85,7 +89,7 @@ export default {
     const tabsRef = ref(null)
 
     const { navMenuItems, addRouters } = useMenu()
-    const { tagsType, toggleContentFull, contentFull } = useSetting()
+    const { setting } = useApp()
 
     // 所有动态的路由表name 拼接
     const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
@@ -200,7 +204,7 @@ export default {
       currentHome,
       selectedTag,
       activeTag,
-      tagsType,
+      setting,
       visitedViews,
       viewTags,
       refreshCurrentPage,
@@ -211,8 +215,6 @@ export default {
       closeOthers,
       closeAll,
       handleCommand,
-      contentFull,
-      toggleContentFull,
     }
   },
 }

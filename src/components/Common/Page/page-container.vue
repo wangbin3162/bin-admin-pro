@@ -52,7 +52,7 @@
 
 <script>
 import { computed } from 'vue'
-import useSetting from '@/hooks/store/useSetting'
+import useApp from '@/hooks/store/useApp'
 import useMenu from '@/hooks/store/useMenu'
 
 export default {
@@ -90,7 +90,7 @@ export default {
       props.desc ? props.desc : getCurrentRouteMenu() ? getCurrentRouteMenu().desc : '',
     )
 
-    const { contentFull, pageFooterWidth } = useSetting()
+    const { setting, pageFooterWidth } = useApp()
 
     const pageStyle = computed(() => {
       return props.innerScroll
@@ -98,7 +98,7 @@ export default {
             position: 'absolute',
             right: 0,
             width: '100%',
-            height: `calc(100vh - ${contentFull.value ? '42px' : '90px'})`,
+            height: `calc(100vh - ${setting.value.contentFull ? '42px' : '90px'})`,
           }
         : null
     })
