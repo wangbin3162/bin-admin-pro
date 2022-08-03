@@ -26,8 +26,8 @@ registerDirectives(app)
 registerUI(app)
 registerCharts(app)
 registerEditor(app)
-setupStore(app)
 setupRouter(app)
+setupStore(app)
 registerCommonComps(app)
 // Mount when the route is ready
 router.isReady().then(() => {

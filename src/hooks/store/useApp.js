@@ -2,9 +2,9 @@ import { useStore } from '@/store'
 import { MENU_THEME_COLOR_LIST, SYSTEM_PRIMARY_COLOR_LIST } from '@/config/setting.cfg'
 
 export default function useApp() {
-  const { appStore, tagsStore, storeToRefs } = useStore()
-  const { setting, weather, searchVisible, settingVisible, asideStyle, pageFooterWidth, fixedHeaderStyle } =
-    storeToRefs(appStore)
+  const { settingStore, globalStore, tagsStore, storeToRefs } = useStore()
+  const { setting, asideStyle, pageFooterWidth, fixedHeaderStyle } = storeToRefs(settingStore)
+  const { weather, searchVisible, settingVisible } = storeToRefs(globalStore)
 
   function toggleSearch() {
     searchVisible.value = !searchVisible.value
@@ -20,20 +20,20 @@ export default function useApp() {
 
   // 主要设置内容
   function themChange(theme) {
-    appStore.themChange(theme)
+    settingStore.themChange(theme)
   }
 
   // 菜单主题切换
   function setMenuTheme(color) {
     if (color !== setting.menuTheme) {
-      appStore.setMenuTheme(color)
+      settingStore.setMenuTheme(color)
     }
   }
 
   // 系统色切换
   function setSystemPrimary(color) {
     if (color !== setting.systemPrimary) {
-      appStore.setSystemPrimary(color)
+      settingStore.setSystemPrimary(color)
     }
   }
 

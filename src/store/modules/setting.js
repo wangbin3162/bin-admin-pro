@@ -2,12 +2,9 @@ import { defineStore } from 'pinia'
 import setting from '@/config/setting.cfg'
 import { MENU_THEME_COLOR_LIST, setMenuTheme, setPrimaryColor, setThemeMode } from '@/config/setting.cfg'
 
-const useApp = defineStore('app', {
+const useSetting = defineStore('setting', {
   state: () => ({
-    setting,
-    searchVisible: false,
-    settingVisible: false,
-    weather: {},
+    setting: { ...setting },
   }),
   getters: {
     asideStyle() {
@@ -67,4 +64,4 @@ const useApp = defineStore('app', {
   },
 })
 
-export default useApp
+export default useSetting
