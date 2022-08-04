@@ -18,7 +18,6 @@ specifiers:
   eslint: ^8.20.0
   eslint-plugin-import: ^2.26.0
   eslint-plugin-vue: ^9.3.0
-  good-storage: ^1.1.1
   javascript-natural-sort: ^0.7.1
   js-cookie: ^3.0.1
   localforage: ^1.10.0
@@ -36,7 +35,6 @@ specifiers:
   vue: ^3.2.37
   vue-router: ^4.1.2
   vuedraggable: ^4.1.0
-  vuex: ^4.0.2
 
 dependencies:
   axios: 0.21.4
@@ -47,7 +45,6 @@ dependencies:
   css-doodle: 0.29.0
   dayjs: 1.11.4
   echarts: 5.3.3
-  good-storage: 1.1.1
   javascript-natural-sort: 0.7.1
   js-cookie: 3.0.1
   localforage: 1.10.0
@@ -60,7 +57,6 @@ dependencies:
   vue: 3.2.37
   vue-router: 4.1.2_vue@3.2.37
   vuedraggable: 4.1.0_vue@3.2.37
-  vuex: 4.0.2_vue@3.2.37
 
 devDependencies:
   '@babel/core': 7.18.9
@@ -2532,10 +2528,6 @@ packages:
       slash: 3.0.0
     dev: true
 
-  /good-storage/1.1.1:
-    resolution: {integrity: sha512-+0UEpRT03fJgEJoeTVVz41ISC5+jaQrDIWatQ4BoDQfOiBBsjNanymi9sAtLFdEAADQN0FYR8mGpeqxSCe8oXQ==}
-    dev: false
-
   /grapheme-splitter/1.0.4:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
@@ -3632,15 +3624,6 @@ packages:
       vue: ^3.0.1
     dependencies:
       sortablejs: 1.14.0
-      vue: 3.2.37
-    dev: false
-
-  /vuex/4.0.2_vue@3.2.37:
-    resolution: {integrity: sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q==}
-    peerDependencies:
-      vue: ^3.0.2
-    dependencies:
-      '@vue/devtools-api': 6.2.1
       vue: 3.2.37
     dev: false
 
