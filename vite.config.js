@@ -42,7 +42,7 @@ export default ({ mode }) => {
         'axios',
         'vue',
         'vue-router',
-        'vuex',
+        'pinia',
         'dayjs',
         'echarts',
         'bin-ui-next',
