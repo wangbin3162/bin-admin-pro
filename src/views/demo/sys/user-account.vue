@@ -33,7 +33,7 @@
         </b-form-item>
       </b-form>
     </template>
-    <template #footer>
+    <template #rightFooter>
       <b-page
         :total="total"
         :current="query.page"
@@ -101,9 +101,19 @@
       </base-table>
     </page-cube-wrapper>
 
-    <b-modal :model-value="modalVisible" :title="`${pageStatus.isCreate ? '新增' : '修改'}用户`" @closed="handleCancel">
+    <b-modal
+      :model-value="modalVisible"
+      :title="`${pageStatus.isCreate ? '新增' : '修改'}用户`"
+      @closed="handleCancel"
+    >
       <div v-if="modalVisible">
-        <b-form ref="formRef" :model="user" :rules="ruleValidate" label-width="100px" label-suffix=":">
+        <b-form
+          ref="formRef"
+          :model="user"
+          :rules="ruleValidate"
+          label-width="100px"
+          label-suffix=":"
+        >
           <b-form-item label="所属部门">
             <b-tree-select v-model="user.depart" :data="deptTree" title-key="text"></b-tree-select>
           </b-form-item>
@@ -118,7 +128,12 @@
           </b-form-item>
           <b-form-item label="角色">
             <b-select v-model="user.roles" placeholder="选择角色" clearable>
-              <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option
+                v-for="(val, key) in roleMap"
+                :key="key"
+                :label="val"
+                :value="key"
+              ></b-option>
             </b-select>
           </b-form-item>
         </b-form>
@@ -162,7 +177,10 @@ export default {
 
     const { treeData: deptTree, getTreeData } = useTree(getDepartTree)
     getTreeData().then(() => console.log(deptTree.value))
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+      getUserList,
+      query,
+    )
     const {
       formRef,
       editStatus,

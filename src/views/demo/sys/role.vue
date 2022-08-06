@@ -8,7 +8,12 @@
           </b-form-item>
           <b-form-item label="角色状态">
             <b-select v-model="query.status" clearable>
-              <b-option v-for="(val, key) in statusMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option
+                v-for="(val, key) in statusMap"
+                :key="key"
+                :label="val"
+                :value="key"
+              ></b-option>
             </b-select>
           </b-form-item>
           <b-form-item>
@@ -17,7 +22,7 @@
           </b-form-item>
         </b-form>
       </template>
-      <template #footer>
+      <template #rightFooter>
         <b-page
           :total="total"
           :current="query.page"
@@ -76,7 +81,13 @@
         </div>
       </template>
 
-      <b-form ref="formRef" :model="role" :rules="ruleValidate" label-width="100px" label-suffix=":">
+      <b-form
+        ref="formRef"
+        :model="role"
+        :rules="ruleValidate"
+        label-width="100px"
+        label-suffix=":"
+      >
         <b-collapse-wrap title="基础信息" shadow="none">
           <div class="p16">
             <b-form-item label="角色名称" prop="roleName">
@@ -116,7 +127,10 @@ export default {
     })
     const copyList = ref([])
     const role = ref({})
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getRoleList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+      getRoleList,
+      query,
+    )
     const {
       formRef,
       editStatus,

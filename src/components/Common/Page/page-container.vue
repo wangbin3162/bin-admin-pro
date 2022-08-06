@@ -5,7 +5,12 @@
       <slot name="header">
         <div class="page-header-inner">
           <div class="page-header-heading" v-if="!hideTitle">
-            <i v-if="showBack" class="b-iconfont" :class="`b-icon-${backIcon} back-icon`" @click="$emit('back')"></i>
+            <i
+              v-if="showBack"
+              class="b-iconfont"
+              :class="`b-icon-${backIcon} back-icon`"
+              @click="$emit('back')"
+            ></i>
             <b-popover trigger="hover" placement="right" width="" v-if="isBubbles">
               <span class="page-header-heading-title">
                 {{ normalTitle }}
@@ -44,8 +49,11 @@
       </div>
     </div>
     <!-- 底部插槽 -->
-    <div class="page-footer" :style="footerStyle" v-if="$slots.footer">
+    <div class="page-footer" :style="footerStyle" v-if="$slots.footer || $slots.rightFooter">
       <slot name="footer" />
+      <div v-if="$slots.rightFooter" flex="dir:right">
+        <slot name="rightFooter" />
+      </div>
     </div>
   </div>
 </template>
@@ -191,7 +199,7 @@ export default {
     bottom: 0;
     z-index: 10;
     width: 100%;
-    padding: 10px 24px;
+    padding: 10px 16px;
     background: #fff;
     border-top: var(--bin-border-base);
     box-shadow: 0 -6px 8px -8px rgba(0, 0, 0, 0.08), 0 -9px 10px 0 rgba(0, 0, 0, 0.05);

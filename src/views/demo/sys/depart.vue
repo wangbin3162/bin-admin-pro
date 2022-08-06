@@ -25,7 +25,12 @@
                 <span class="ml-5">编辑部门</span>
               </div>
               <div class="right">
-                <b-button v-if="currentNode" type="text" size="small" @click="handleCommand('child')">
+                <b-button
+                  v-if="currentNode"
+                  type="text"
+                  size="small"
+                  @click="handleCommand('child')"
+                >
                   新增子部门
                 </b-button>
               </div>
@@ -41,24 +46,47 @@
               <div class="pt-8" v-if="!pageStatus.isNormal">
                 <b-row>
                   <b-col span="14">
-                    <b-form ref="formRef" :model="copyNode" :rules="ruleValidate" label-width="100px" label-suffix=":">
+                    <b-form
+                      ref="formRef"
+                      :model="copyNode"
+                      :rules="ruleValidate"
+                      label-width="100px"
+                      label-suffix=":"
+                    >
                       <b-form-item label="父级组织">
                         <b-input v-model="copyNode.parentName" disabled></b-input>
                       </b-form-item>
                       <b-form-item label="部门名称" prop="text">
-                        <b-input v-model="copyNode.text" placeholder="输入部门名称" clearable></b-input>
+                        <b-input
+                          v-model="copyNode.text"
+                          placeholder="输入部门名称"
+                          clearable
+                        ></b-input>
                       </b-form-item>
                       <b-form-item label="部门编码" prop="deptCode">
-                        <b-input v-model="copyNode.deptCode" placeholder="输入部门编码" clearable></b-input>
+                        <b-input
+                          v-model="copyNode.deptCode"
+                          placeholder="输入部门编码"
+                          clearable
+                        ></b-input>
                       </b-form-item>
                       <b-form-item label="部门状态">
-                        <b-switch size="large" v-model="copyNode.status" true-value="1" false-value="0">
+                        <b-switch
+                          size="large"
+                          v-model="copyNode.status"
+                          true-value="1"
+                          false-value="0"
+                        >
                           <template #open><span>启用</span></template>
                           <template #close><span>禁用</span></template>
                         </b-switch>
                       </b-form-item>
                       <b-form-item label="部门描述">
-                        <b-input v-model="copyNode.desc" type="textarea" placeholder="输入部门描述"></b-input>
+                        <b-input
+                          v-model="copyNode.desc"
+                          type="textarea"
+                          placeholder="输入部门描述"
+                        ></b-input>
                       </b-form-item>
                       <b-form-item>
                         <b-button type="primary" @click="handleSubmit" :loading="editLoading">
@@ -94,8 +122,17 @@ export default {
 
     const flatStateBuffer = ref({})
 
-    const { formRef, editStatus, pageStatus, editLoading, openCreate, openEdit, backNormal, submitForm, resetForm } =
-      useForm()
+    const {
+      formRef,
+      editStatus,
+      pageStatus,
+      editLoading,
+      openCreate,
+      openEdit,
+      backNormal,
+      submitForm,
+      resetForm,
+    } = useForm()
 
     function handleSelect(node, flatState) {
       if (node.selected) {
