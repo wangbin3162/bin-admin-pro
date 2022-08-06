@@ -32,7 +32,13 @@
             <b-icon name="check"></b-icon>
           </span>
           <label v-if="editIndex === index">
-            <b-input v-model="editText" size="small" v-focus @enter="inputBlur(index)" @blur="inputBlur(index)" />
+            <b-input
+              v-model="editText"
+              size="small"
+              v-focus
+              @enter="inputBlur(index)"
+              @blur="inputBlur(index)"
+            />
           </label>
           <label v-else @dblclick="dbClickEdit(index)">{{ element.text }}</label>
           <i class="destroy b-iconfont b-icon-close" @click="removeOne(index)"></i>

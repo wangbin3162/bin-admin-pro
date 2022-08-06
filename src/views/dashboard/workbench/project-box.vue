@@ -1,5 +1,11 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '0' }" divider="no">
+  <b-card
+    :bordered="false"
+    class="card-panel"
+    shadow="never"
+    :body-style="{ padding: '0' }"
+    divider="no"
+  >
     <template #header>
       <div flex="main:justify cross:center" style="font-weight: normal">
         <div class="top">

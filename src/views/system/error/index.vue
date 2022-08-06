@@ -3,8 +3,16 @@
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
         <img v-if="$route.path === '/403'" src="@/assets/images/default/auth.svg" alt="403" />
-        <img v-else-if="$route.path === '/500'" src="@/assets/images/default/error500.svg" alt="500" />
-        <img v-else-if="$route.path === '/error'" src="@/assets/images/default/file-max.svg" alt="error" />
+        <img
+          v-else-if="$route.path === '/500'"
+          src="@/assets/images/default/error500.svg"
+          alt="500"
+        />
+        <img
+          v-else-if="$route.path === '/error'"
+          src="@/assets/images/default/file-max.svg"
+          alt="error"
+        />
         <img v-else src="@/assets/images/default/error404.svg" alt="404" />
       </div>
       <div class="bin-result-title">{{ status }}</div>

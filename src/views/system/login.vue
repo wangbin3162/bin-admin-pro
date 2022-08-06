@@ -25,7 +25,13 @@
           </div>
           <!-- 表单 -->
           <div class="form">
-            <b-form ref="loginForm" label-position="top" :rules="rules" :model="formLogin" size="large">
+            <b-form
+              ref="loginForm"
+              label-position="top"
+              :rules="rules"
+              :model="formLogin"
+              size="large"
+            >
               <b-form-item prop="username">
                 <b-input
                   type="text"
@@ -66,7 +72,13 @@
                   <img src="@/assets/images/login-code.png" alt="code" />
                 </span>
               </b-form-item>
-              <b-button @click="submit" :loading="loading" type="primary" class="button-login" size="large">
+              <b-button
+                @click="submit"
+                :loading="loading"
+                type="primary"
+                class="button-login"
+                size="large"
+              >
                 登录
               </b-button>
             </b-form>

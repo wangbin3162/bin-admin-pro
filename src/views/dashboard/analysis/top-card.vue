@@ -1,5 +1,5 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{padding: '10px'}">
+  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '10px' }">
     <template #header>
       <div flex="main:justify cross:center">
         <span>{{ header }}</span>
@@ -9,13 +9,16 @@
     <b-skeleton :loading="loading" animation>
       <template #template>
         <div>
-          <b-skeleton-item variant="p" style="width: 30%;margin-bottom: 16px;" />
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
-          <b-skeleton-item variant="p" style="margin-bottom: 8px;" />
-          <div flex="main:justify cross:center" style="border-top:1px solid #e5e5e5;padding-top: 10px;">
-            <b-skeleton-item variant="text" style="width: 10%;" />
-            <b-skeleton-item variant="text" style="width: 10%;" />
+          <b-skeleton-item variant="p" style="width: 30%; margin-bottom: 16px" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px" />
+          <b-skeleton-item variant="p" style="margin-bottom: 8px" />
+          <div
+            flex="main:justify cross:center"
+            style="border-top: 1px solid #e5e5e5; padding-top: 10px"
+          >
+            <b-skeleton-item variant="text" style="width: 10%" />
+            <b-skeleton-item variant="text" style="width: 10%" />
           </div>
         </div>
       </template>

@@ -1,6 +1,11 @@
 import { defineStore } from 'pinia'
 import setting from '@/config/setting.cfg'
-import { MENU_THEME_COLOR_LIST, setMenuTheme, setPrimaryColor, setThemeMode } from '@/config/setting.cfg'
+import {
+  MENU_THEME_COLOR_LIST,
+  setMenuTheme,
+  setPrimaryColor,
+  setThemeMode,
+} from '@/config/setting.cfg'
 
 const useSetting = defineStore('setting', {
   state: () => ({
@@ -25,7 +30,8 @@ const useSetting = defineStore('setting', {
     fixedHeaderStyle() {
       const { contentFull, fixedHeader, sidebar, sidebarWidth } = this.setting
       return {
-        width: !contentFull && fixedHeader ? `calc(100% - ${sidebar ? sidebarWidth : 64}px)` : '100%',
+        width:
+          !contentFull && fixedHeader ? `calc(100% - ${sidebar ? sidebarWidth : 64}px)` : '100%',
         padding: 0,
         zIndex: 10,
         right: fixedHeader ? 0 : null,

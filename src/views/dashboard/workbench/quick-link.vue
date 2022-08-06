@@ -1,5 +1,11 @@
 <template>
-  <b-card :bordered="false" class="card-panel" shadow="never" :body-style="{ padding: '0' }" divider="no">
+  <b-card
+    :bordered="false"
+    class="card-panel"
+    shadow="never"
+    :body-style="{ padding: '0' }"
+    divider="no"
+  >
     <template #header>
       <div style="font-weight: normal">
         <iconfont icon="block" color="primary" bg round></iconfont>
@@ -7,11 +13,11 @@
       </div>
     </template>
     <div class="items-wrap">
-      <router-link to="/analysis" tag="a" class="hover-item">
+      <router-link to="/analysis" class="hover-item">
         <iconfont icon="linechart" color="success" :size="40" />
         <span>监控页</span>
       </router-link>
-      <router-link to="/colorVar" tag="a" class="hover-item">
+      <router-link to="/colorVar" class="hover-item">
         <iconfont icon="bg-colors" color="#eb2f96" :size="40" />
         <span>主题</span>
       </router-link>
@@ -33,7 +39,11 @@
       </a>
       <div class="link-wrap">
         <div class="link-item" v-for="link in linksStore.links" :key="link.link">
-          <b-dropdown trigger="contextmenu" @command="linksStore.closeLink" placement="bottom-start">
+          <b-dropdown
+            trigger="contextmenu"
+            @command="linksStore.closeLink"
+            placement="bottom-start"
+          >
             <a :href="link.link" :target="link.newTab ? '_blank' : '_self'">{{ link.text }}</a>
             <template #dropdown>
               <b-dropdown-menu>
@@ -43,7 +53,9 @@
           </b-dropdown>
         </div>
         <div class="link-item">
-          <b-button type="primary" icon="plus" transparent size="mini" @click="handleAdd">添加</b-button>
+          <b-button type="primary" icon="plus" transparent size="mini" @click="handleAdd">
+            添加
+          </b-button>
         </div>
       </div>
     </div>
