@@ -4,7 +4,14 @@
       <span class="base-title">{{ treeTitle }}</span>
       <div class="base-ctrl">
         <div class="search">
-          <b-input v-if="showTopSearch" size="small" search v-model="query" placeholder="搜索" @search="handleFilter" />
+          <b-input
+            v-if="showTopSearch"
+            size="small"
+            search
+            v-model="query"
+            placeholder="搜索"
+            @search="handleFilter"
+          />
           <slot></slot>
         </div>
         <div class="ctrl">
@@ -68,7 +75,7 @@ export default {
   props: {
     width: {
       type: String,
-      default: '240px',
+      default: '260px',
     },
     minHeight: {
       type: String,
@@ -266,7 +273,6 @@ export default {
     border-top: $border-base;
     display: flex;
     align-items: center;
-    justify-content: flex-end;
     padding: 0 8px;
     height: 32px;
   }

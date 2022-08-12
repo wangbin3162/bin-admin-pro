@@ -18,16 +18,36 @@
         class="page-cube-content"
         @mouseup="onResizeMouseUp"
         @mousemove="onResizeMouseMove"
-        :style="{ width: rightWidth, cursor: active ? 'col-resize' : '', userSelect: active ? 'none' : '' }"
+        :style="{
+          width: rightWidth,
+          cursor: active ? 'col-resize' : '',
+          userSelect: active ? 'none' : '',
+        }"
       >
         <div v-if="$slots.default" :style="{ height: $slots.draggable ? height + 'px' : '100%' }">
           <slot></slot>
         </div>
-        <div class="draggable-content" v-if="$slots.draggable" :style="{ height: `calc(100% - ${height}px)` }">
+        <div
+          class="draggable-content"
+          v-if="$slots.draggable"
+          :style="{ height: `calc(100% - ${height}px)` }"
+        >
           <div class="toggle">
-            <i class="b-iconfont b-icon-caret-up" title="展开" @click="changeDragStatus('maximum')" />
-            <i class="b-iconfont b-icon-caret-down" title="收起" @click="changeDragStatus('minimum')" />
-            <i class="b-iconfont b-icon-creditcard-fill" title="默认高度" @click="changeDragStatus('default')" />
+            <i
+              class="b-iconfont b-icon-caret-up"
+              title="展开"
+              @click="changeDragStatus('maximum')"
+            />
+            <i
+              class="b-iconfont b-icon-caret-down"
+              title="收起"
+              @click="changeDragStatus('minimum')"
+            />
+            <i
+              class="b-iconfont b-icon-creditcard-fill"
+              title="默认高度"
+              @click="changeDragStatus('default')"
+            />
           </div>
           <div class="drag-handler" draggable="true" @mousedown="onResizeMouseDown"></div>
           <slot name="draggable"></slot>
@@ -45,7 +65,7 @@ export default {
   props: {
     leftDefaultWidth: {
       type: String,
-      default: '240px',
+      default: '260px',
     },
     leftExpandText: {
       type: String,
@@ -126,7 +146,10 @@ export default {
         }
         const currentPage = e.pageY
         const height = currentPage - offset
-        if (height > props.defaultMinHeight && height < status.wrapHeight - props.draggableMinHeight) {
+        if (
+          height > props.defaultMinHeight &&
+          height < status.wrapHeight - props.draggableMinHeight
+        ) {
           status.height = height
         }
         status.hasMoved = true

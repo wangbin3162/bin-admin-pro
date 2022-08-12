@@ -51,7 +51,7 @@
     <!-- 底部插槽 -->
     <div class="page-footer" :style="footerStyle" v-if="$slots.footer || $slots.rightFooter">
       <slot name="footer" />
-      <div v-if="$slots.rightFooter" flex="dir:right">
+      <div v-if="$slots.rightFooter" flex="main:right">
         <slot name="rightFooter" />
       </div>
     </div>
@@ -121,6 +121,7 @@ export default {
 
 <style scoped lang="stylus">
 .page-container {
+  background: #edf1f7;
   .page-header {
     position: relative;
     box-sizing: border-box;

@@ -4,7 +4,7 @@
       <slot name="filter"></slot>
     </div>
     <div class="base-table-box" :style="tableStyle">
-      <div class="base-table-action">
+      <div class="base-table-action" v-if="$slots.action">
         <slot name="action"></slot>
       </div>
       <slot></slot>
