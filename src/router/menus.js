@@ -34,6 +34,10 @@ export default [
         title: '图标组件',
       },
       {
+        name: 'CompAutoInput',
+        title: '输入建议',
+      },
+      {
         name: 'CompSvgLoading',
         title: 'Svg Loading',
       },

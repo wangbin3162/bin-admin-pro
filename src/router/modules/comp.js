@@ -48,6 +48,12 @@ export default [
     meta: { title: '图标字体' },
   },
   {
+    path: 'compAutoInput',
+    name: 'CompAutoInput',
+    component: () => import('@/views/demo/comp/comp-auto-input.vue'),
+    meta: { title: '输入建议' },
+  },
+  {
     path: 'compSvgLoading',
     name: 'CompSvgLoading',
     component: () => import('@/views/demo/comp/comp-svg-loading.vue'),
