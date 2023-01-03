@@ -41,4 +41,10 @@ export default [
     component: () => import('@/views/demo/functions/func-dynamic-code.vue'),
     meta: { title: '动态编码' },
   },
+  {
+    path: 'funcGraphviz',
+    name: 'FuncGraphviz',
+    component: () => import('@/views/demo/functions/func-graphviz.vue'),
+    meta: { title: '绘图示例' },
+  },
 ]

@@ -9,6 +9,10 @@ import 'brace/mode/javascript'
 import 'brace/snippets/javascript'
 import 'brace/mode/stylus'
 import 'brace/snippets/stylus'
+
+import 'brace/mode/dot'
+import 'brace/snippets/dot'
+
 import 'brace/theme/chrome'
 import 'brace/theme/sqlserver'
 

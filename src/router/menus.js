@@ -76,6 +76,10 @@ export default [
         name: 'FuncDynamicCode',
         title: '动态编码',
       },
+      {
+        name: 'FuncGraphviz',
+        title: '绘图示例',
+      },
     ],
   },
   {
