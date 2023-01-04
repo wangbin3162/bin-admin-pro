@@ -1,6 +1,9 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@antv/x6': ^2.1.4
+  '@antv/x6-plugin-selection': ^2.1.5
+  '@antv/x6-vue-shape': ^2.0.9
   '@babel/core': ^7.20.7
   '@babel/preset-env': ^7.20.2
   '@types/node': ^18.11.18
@@ -39,6 +42,9 @@ specifiers:
   vuedraggable: ^4.1.0
 
 dependencies:
+  '@antv/x6': 2.1.4
+  '@antv/x6-plugin-selection': 2.1.5_@antv+x6@2.1.4
+  '@antv/x6-vue-shape': 2.0.9_@antv+x6@2.1.4+vue@3.2.45
   axios: 0.21.4
   bin-charts-next: 1.1.0_echarts@5.4.1+vue@3.2.45
   bin-editor-next: 1.1.0
@@ -87,6 +93,48 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.17
     dev: true
+
+  /@antv/x6-common/2.0.4:
+    resolution: {integrity: sha512-OeCMJUP2/fAbGLCfUuFU/p9oSdyG/RLNpDE4xUT8pBHfhhlKfoMDz9RkYr6+ZAg8F5hgN3zBkZDuLXhO6uN8hQ==}
+    dependencies:
+      lodash-es: 4.17.21
+      utility-types: 3.10.0
+    dev: false
+
+  /@antv/x6-geometry/2.0.4:
+    resolution: {integrity: sha512-dlsLNRRTiCw8TsJ/03j3y5IbbbK4Npf6zBH6kAx8nnW+edNT/TAOChvPRzizwD+vA7wY9Rp2AiRnp/vCdIYC5w==}
+    dev: false
+
+  /@antv/x6-plugin-selection/2.1.5_@antv+x6@2.1.4:
+    resolution: {integrity: sha512-Stxjw1WENURpgV4RAGnXW14q58X/ojxpAa3BIL1s2pVPn/xJWXgYzxg5YhiP+z+oJiqtWFTm4vk6S18aRCNOfg==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+    dependencies:
+      '@antv/x6': 2.1.4
+    dev: false
+
+  /@antv/x6-vue-shape/2.0.9_@antv+x6@2.1.4+vue@3.2.45:
+    resolution: {integrity: sha512-2cXNI2r4IyWxG9UjDCjnXcofgMpDbvBqvhlYWgeu/b69PzPF9NocgI1NXWKozJmyHRubNrgjJqGwC0X1P3ksug==}
+    peerDependencies:
+      '@antv/x6': ^2.x
+      '@vue/composition-api': ^1.0.0-rc.1
+      vue: ^2.0.0 || >=3.0.0
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    dependencies:
+      '@antv/x6': 2.1.4
+      vue: 3.2.45
+      vue-demi: 0.13.11_vue@3.2.45
+    dev: false
+
+  /@antv/x6/2.1.4:
+    resolution: {integrity: sha512-UZ7+zWwbrj0CGDt1bqStSppomvb2PB/QRERZA1TFnoNzs2YuDbR4P8dYhNHdUuMJBoF+THT0frDqsfLmwh6O8Q==}
+    dependencies:
+      '@antv/x6-common': 2.0.4
+      '@antv/x6-geometry': 2.0.4
+      utility-types: 3.10.0
+    dev: false
 
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}
@@ -3800,6 +3848,11 @@ packages:
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
+
+  /utility-types/3.10.0:
+    resolution: {integrity: sha512-O11mqxmi7wMKCo6HKFt5AhO4BwY3VV68YU07tgxfz8zJTIxr4BpsezN49Ffwy9j3ZpwwJp4fkRwjRzq3uWE6Rg==}
+    engines: {node: '>= 4'}
+    dev: false
 
   /vite/3.2.5_2kqj6ahvtabpbfjjgxaoei5t3m:
     resolution: {integrity: sha512-4mVEpXpSOgrssFZAOmGIr85wPHKvaDAcXqxVxVRZhljkJOMZi1ibLibzjLHzJvcok8BMguLc7g1W6W/GqZbLdQ==}

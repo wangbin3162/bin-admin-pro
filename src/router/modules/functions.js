@@ -47,4 +47,10 @@ export default [
     component: () => import('@/views/demo/functions/func-graphviz.vue'),
     meta: { title: '绘图示例' },
   },
+  {
+    path: 'funcX6',
+    name: 'FuncX6',
+    component: () => import('@/views/demo/functions/func-x6.vue'),
+    meta: { title: '阿里X6示例' },
+  },
 ]

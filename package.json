@@ -24,6 +24,9 @@
     "lint:fix": "eslint --fix --ext .js,.vue src && pretty-quick"
   },
   "dependencies": {
+    "@antv/x6": "^2.1.4",
+    "@antv/x6-plugin-selection": "^2.1.5",
+    "@antv/x6-vue-shape": "^2.0.9",
     "axios": "^0.21.4",
     "bin-charts-next": "^1.1.0",
     "bin-editor-next": "^1.1.0",

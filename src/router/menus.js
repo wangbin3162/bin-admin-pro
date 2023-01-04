@@ -80,6 +80,10 @@ export default [
         name: 'FuncGraphviz',
         title: '绘图示例',
       },
+      {
+        name: 'FuncX6',
+        title: '阿里X6示例',
+      },
     ],
   },
   {
