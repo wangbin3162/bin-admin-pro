@@ -1,7 +1,7 @@
 <template>
-  <page-container>
-    <easy-flow></easy-flow>
-  </page-container>
+  <div class="p16">
+    <easy-flow height="520px"></easy-flow>
+  </div>
 </template>
 
 <script setup></script>
