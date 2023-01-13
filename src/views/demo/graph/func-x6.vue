@@ -20,7 +20,7 @@ import { ref, onMounted, nextTick } from 'vue'
 import { Graph, Color } from '@antv/x6'
 import { register } from '@antv/x6-vue-shape'
 import { Selection } from '@antv/x6-plugin-selection'
-import DataNode from './components/data-node.vue'
+import DataNode from '../functions/components/data-node.vue'
 
 const dom1Ref = ref(null)
 let graph1

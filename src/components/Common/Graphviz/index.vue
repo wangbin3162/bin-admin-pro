@@ -10,8 +10,7 @@ export default { name: 'Graphviz' }
 
 <script setup>
 import * as d3 from 'd3'
-import * as d3Graphviz from 'd3-graphviz'
-import { onMounted, watch, ref } from 'vue'
+import { onMounted, watch } from 'vue'
 
 const props = defineProps({
   id: {
