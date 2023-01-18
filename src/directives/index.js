@@ -1,5 +1,8 @@
 import Focus from './focus'
-const directives = [Focus]
+import FlowDrag from './flow-drag'
+
+const directives = [Focus, FlowDrag]
+
 export function registerDirectives(app) {
   directives.forEach(plugin => {
     app.use(plugin)

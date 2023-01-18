@@ -25,6 +25,7 @@ specifiers:
   eslint-plugin-vue: ^9.8.0
   javascript-natural-sort: ^0.7.1
   js-cookie: ^3.0.1
+  jsplumb: ^2.15.6
   localforage: ^1.10.0
   lodash-es: ^4.17.21
   many-keys-map: ^1.0.3
@@ -57,6 +58,7 @@ dependencies:
   echarts: 5.4.1
   javascript-natural-sort: 0.7.1
   js-cookie: 3.0.1
+  jsplumb: 2.15.6
   localforage: 1.10.0
   lodash-es: 4.17.21
   many-keys-map: 1.0.3
@@ -3127,6 +3129,10 @@ packages:
     engines: {node: '>=6'}
     hasBin: true
     dev: true
+
+  /jsplumb/2.15.6:
+    resolution: {integrity: sha512-sIpbpz5eMVM+vV+MQzFCidlaa1RsknrQs6LOTKYDjYUDdTAi2AN2bFi94TxB33TifcIsRNV1jebcaxg0tCoPzg==}
+    dev: false
 
   /levn/0.4.1:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
