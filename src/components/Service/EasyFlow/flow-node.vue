@@ -151,7 +151,7 @@ function changeNodeSite() {
 }
 
 /*节点的几种状态样式*/
-.el-node-state-success {
+.b-icon-check-circle{
   line-height: 32px;
   position: absolute;
   right: 5px;

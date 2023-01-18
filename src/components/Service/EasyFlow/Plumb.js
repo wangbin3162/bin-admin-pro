@@ -1,9 +1,11 @@
 import { deepMerge, deepCopy } from '@/utils/util'
-import { jsPlumb } from 'jsplumb'
+// import { jsPlumb } from 'jsplumb'
+import './jsplumb'
 import setting from './setting' // 默认设置集合
 
 export default class Plumb {
   constructor(data) {
+    // eslint-disable-next-line no-undef
     this.jsplumb = jsPlumb.getInstance()
     this.init(data)
   }
@@ -67,5 +69,10 @@ export default class Plumb {
       source: from,
       target: to,
     })[0]
+  }
+
+  // 重画
+  repaint() {
+    this.jsplumb.repaint()
   }
 }

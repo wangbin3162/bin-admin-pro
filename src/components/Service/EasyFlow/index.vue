@@ -17,7 +17,7 @@
       <div class="move-grid" style="position: absolute; top: 2000px; left: 2000px">&nbsp;</div>
     </div>
     <div class="right-side">
-      <FlowForm ref="nodeFormRef" @setLineLabel="setLineLabel" />
+      <FlowForm ref="nodeFormRef" @setLineLabel="setLineLabel" @saveNode="saveNode" />
     </div>
 
     <FlowInfo v-model="infoVisible" :data="data" />
@@ -70,11 +70,9 @@ onMounted(() => {
 async function dataReload(flowData) {
   easyFlowVisible.value = false
   data.value = { nodeList: [], lineList: [] }
-  console.log('----------reset [visible data]----------')
   await nextTick()
   easyFlowVisible.value = true
   data.value = deepCopy(flowData)
-  console.log('----------set [visible data]----------')
   await nextTick()
   jsPlumbInit()
 }
@@ -85,6 +83,18 @@ function jsPlumbInit() {
   jp = new Plumb(data.value)
   // 单点击了连接线, https://www.cnblogs.com/ysx215/p/7615677.html
   jp.jsplumb.bind('click', clickLine)
+  // 连线
+  jp.jsplumb.bind('connection', evt => {})
+  // 删除连线回调
+  jp.jsplumb.bind('connectionDetached', evt => {})
+  // 改变线的连接节点
+  jp.jsplumb.bind('connectionMoved', evt => {})
+  // 连线右击
+  jp.jsplumb.bind('contextmenu', evt => {})
+  // 连线前
+  jp.jsplumb.bind('beforeDrop', evt => {})
+  // 移除线前
+  jp.jsplumb.bind('beforeDetach', evt => {})
   console.log('----------new plumb----------', jp)
 }
 
@@ -111,7 +121,6 @@ function changeNodeSite(nodeData) {
 
 // 连线点击事件
 function clickLine(conn) {
-  console.log(conn)
   activeElement.value.type = 'line'
   activeElement.value.sourceId = conn.sourceId
   activeElement.value.targetId = conn.targetId
@@ -125,18 +134,14 @@ function clickLine(conn) {
 // ------------------------右侧保存事件------------------------ //
 
 // 保存连线
-function setLineLabel(line) {
-  const { from, to, label } = line
+function setLineLabel({ from, to, label }) {
   let conn = jp.getConnections(from, to)
-  console.log(conn.el)
+
   if (!label || label === '') {
     conn.removeClass('flowLabel')
     conn.addClass('emptyFlowLabel')
   } else {
-    console.log('增加label')
     conn.addClass('flowLabel')
-
-    // jp.jsplumb.addClass(conn, 'flowLabel')
   }
   conn.setLabel({ label })
   data.value.lineList.forEach(line => {
@@ -144,6 +149,11 @@ function setLineLabel(line) {
       line.label = label
     }
   })
+}
+
+// 保存节点
+function saveNode() {
+  jp.repaint()
 }
 </script>
 
