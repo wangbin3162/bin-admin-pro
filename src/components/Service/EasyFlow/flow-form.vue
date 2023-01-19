@@ -3,7 +3,13 @@
     <div class="ef-node-form-header">编辑</div>
 
     <div class="ef-node-form-body">
-      <b-form :model="state.node" ref="dataForm" label-width="80px" v-show="state.type === 'node'">
+      <b-empty v-show="isEmpty">暂未选择元素</b-empty>
+      <b-form
+        :model="state.node"
+        ref="dataForm"
+        label-width="80px"
+        v-show="state.type === 'node' && state.node.type"
+      >
         <b-form-item label="类型">
           <b-input v-model="state.node.type" :disabled="true"></b-input>
         </b-form-item>
@@ -36,6 +42,9 @@
       </b-form>
 
       <b-form :model="state.line" ref="dataForm" label-width="80px" v-show="state.type === 'line'">
+        <b-form-item label="类型">
+          <b-input v-model="state.type" :disabled="true"></b-input>
+        </b-form-item>
         <b-form-item label="条件">
           <b-input v-model="state.line.label" clearable></b-input>
         </b-form-item>
@@ -51,7 +60,7 @@
 
 <script setup>
 import { deepCopy } from '@/utils/util'
-import { reactive } from 'vue'
+import { computed, reactive } from 'vue'
 
 const emit = defineEmits(['setLineLabel', 'saveNode'])
 
@@ -79,6 +88,10 @@ const state = reactive({
   node: {},
   line: {},
   data: {},
+})
+
+const isEmpty = computed(() => {
+  return Object.keys(state.node).length === 0 && Object.keys(state.line).length === 0
 })
 
 // 节点初始化

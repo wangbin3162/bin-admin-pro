@@ -5,6 +5,7 @@ import setting from './setting' // 默认设置集合
 
 export default class Plumb {
   constructor(data) {
+    this.loadEasyFlowFinish = false
     // eslint-disable-next-line no-undef
     this.jsplumb = jsPlumb.getInstance()
     this.init(data)
@@ -18,7 +19,7 @@ export default class Plumb {
       this.jsplumb.setSuspendDrawing(false, true)
       // 初始化节点
       this.loadEasyFlow(flowData)
-
+      this.loadEasyFlowFinish = true
       this.jsplumb.setContainer(document.querySelector('#efContainer'))
     })
   }
@@ -69,6 +70,17 @@ export default class Plumb {
       source: from,
       target: to,
     })[0]
+  }
+
+  // 删除线
+  deleteConnection(from, to) {
+    const conn = this.getConnections(from, to)
+    this.jsplumb.deleteConnection(conn)
+  }
+
+  // 删除节点及连线
+  removeAllEndpoints(nodeId) {
+    this.jsplumb.removeAllEndpoints(nodeId)
   }
 
   // 重画

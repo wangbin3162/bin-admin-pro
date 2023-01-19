@@ -5,6 +5,7 @@
     :class="nodeContainerClass"
     @click="clickNode"
     @mouseup="changeNodeSite"
+    @contextmenu.stop.prevent="openMenu($event)"
   >
     <!-- 最左侧的那条竖线 -->
     <div class="ef-node-left"></div>
@@ -29,7 +30,7 @@
 <script setup>
 import { computed, ref } from 'vue'
 
-const emit = defineEmits(['clickNode', 'changeNodeSite'])
+const emit = defineEmits(['clickNode', 'changeNodeSite', 'nodeRightMenu'])
 
 const props = defineProps({
   node: {
@@ -80,6 +81,10 @@ function changeNodeSite() {
   }
   emit('changeNodeSite', data)
 }
+
+function openMenu(ev) {
+  emit('nodeRightMenu', props.node.id, ev)
+}
 </script>
 
 <style lang="stylus">
@@ -118,8 +123,11 @@ function changeNodeSite() {
 
 /*节点左侧的图标*/
 .ef-node-left-ico {
-  line-height: 32px;
-  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
 }
 
 .ef-node-left-ico:hover {
@@ -131,10 +139,8 @@ function changeNodeSite() {
 .ef-node-text {
   color: #565758;
   font-size: 12px;
-  line-height: 32px;
-  margin-left: 8px;
+  line-height: 30px;
   width: 100px;
-  /* 设置超出宽度文本显示方式*/
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -143,43 +149,34 @@ function changeNodeSite() {
 
 /*节点右侧的图标*/
 .ef-node-right-ico {
-  line-height: 32px;
+  line-height: 30px;
   position: absolute;
-  right: 5px;
+  right: 4px;
   color: #84CF65;
   cursor: default;
-}
+  /*节点的几种状态样式*/
+  .b-icon-check-circle{
+    line-height: 32px;
+    position: absolute;
+    right: 5px;
+    color: #84CF65;
+    cursor: default;
+  }
 
-/*节点的几种状态样式*/
-.b-icon-check-circle{
-  line-height: 32px;
-  position: absolute;
-  right: 5px;
-  color: #84CF65;
-  cursor: default;
-}
+  .b-icon-error {
+    line-height: 32px;
+    position: absolute;
+    right: 5px;
+    color: #F56C6C;
+    cursor: default;
+  }
 
-.b-icon-error {
-  line-height: 32px;
-  position: absolute;
-  right: 5px;
-  color: #F56C6C;
-  cursor: default;
-}
-
-.b-icon-warning-circle {
-  line-height: 32px;
-  position: absolute;
-  right: 5px;
-  color: #E6A23C;
-  cursor: default;
-}
-
-.el-node-state-running {
-  line-height: 32px;
-  position: absolute;
-  right: 5px;
-  color: #84CF65;
-  cursor: default;
+  .b-icon-warning-circle {
+    line-height: 32px;
+    position: absolute;
+    right: 5px;
+    color: #E6A23C;
+    cursor: default;
+  }
 }
 </style>
