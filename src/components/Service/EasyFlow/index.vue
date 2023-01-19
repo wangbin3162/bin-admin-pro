@@ -30,7 +30,7 @@
     </div>
     <div class="easy-flow" v-if="easyFlowVisible">
       <div class="left-side">
-        <pre>{{ activeElement }}</pre>
+        <FlowMenu />
       </div>
       <div
         class="canvas-side"
@@ -38,6 +38,8 @@
         ref="efContainer"
         v-flow-drag
         @click.self="clickCanvas"
+        @dragover.prevent
+        @drop="nodeDrop"
       >
         <FlowNode
           v-for="node in data.nodeList"
@@ -75,12 +77,13 @@ export default {
 <script setup>
 import FlowNode from './flow-node.vue'
 import FlowInfo from './flow-info.vue'
+import FlowMenu from './flow-menu.vue'
 import FlowForm from './flow-form.vue'
 import ContextMenu from './context-menu.vue'
 import Plumb from './Plumb'
 import { ref, onMounted, nextTick, reactive, watch } from 'vue'
 import getMockData from './mock-data'
-import { deepCopy } from '@/utils/util'
+import { deepCopy, getUuid } from '@/utils/util'
 import './index.styl'
 import { Message, MessageBox } from 'bin-ui-next'
 
@@ -92,6 +95,7 @@ defineProps({
 })
 const easyFlowVisible = ref(false) // 流程dom渲染
 const nodeFormRef = ref(null)
+const efContainer = ref(null)
 const infoVisible = ref(false)
 const data = ref({ nodeList: [], lineList: [] })
 const activeElement = ref({
@@ -221,6 +225,59 @@ function deleteElement() {
     .catch(() => {})
 }
 
+// 画布放置事件
+function nodeDrop(ev) {
+  ev.preventDefault()
+  let json = ev.dataTransfer.getData('node')
+  const node = JSON.parse(json)
+
+  // 计算位置信息
+  const containerRect = efContainer.value.getBoundingClientRect()
+  const screenX = ev.clientX
+  const screenY = ev.clientY
+
+  const left = screenX - containerRect.x + efContainer.value.scrollLeft - 85
+  const top = screenY - containerRect.y + efContainer.value.scrollTop - 16
+
+  // 动态生成名字
+  let origName = node.name
+  let nodeName = origName
+
+  let index = 1
+  while (index < 10000) {
+    let repeat = false
+    for (let i = 0; i < data.value.nodeList.length; i++) {
+      let item = data.value.nodeList[i]
+      if (item.name === nodeName) {
+        nodeName = origName + index
+        repeat = true
+      }
+    }
+    if (repeat) {
+      index++
+      continue
+    }
+    break
+  }
+
+  // 新id
+  const nodeId = getUuid()
+  // 新的节点信息
+  const newNode = {
+    id: nodeId,
+    name: nodeName,
+    type: node.type,
+    left: left + 'px',
+    top: top + 'px',
+    ico: node.ico,
+  }
+
+  /**
+   * 这里可以进行业务判断、是否能够添加该节点
+   */
+  data.value.nodeList.push(newNode)
+  nextTick(() => jp.addNode(nodeId))
+}
 // ------------------------右键菜单------------------------ //
 
 // 节点右键菜单
@@ -243,7 +300,6 @@ function lineRightMenu(conn, evt) {
 
 function closeMenu() {
   menu.show = false
-  menu.type = ''
 }
 
 watch(

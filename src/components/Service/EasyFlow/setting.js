@@ -169,7 +169,7 @@ export default {
       // 线外边的宽，值越大，线的点击范围越大
       outlineWidth: 10,
     },
-    connectorHoverStyle: { stroke: 'red', strokeWidth: 2 },
+    connectorHoverStyle: { stroke: 'red', strokeWidth: 1.5 },
   },
   jsplumbTargetOptions: {
     // 设置可以拖拽的类名，只要鼠标移动到该类名上的DOM，就可以拖拽连线

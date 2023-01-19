@@ -83,6 +83,21 @@ export default class Plumb {
     this.jsplumb.removeAllEndpoints(nodeId)
   }
 
+  // 新增一个节点
+  addNode(nodeId) {
+    const sourceOptions = deepMerge(deepCopy(setting.jsplumbSourceOptions), {})
+    const targetOptions = deepMerge(deepCopy(setting.jsplumbTargetOptions), {})
+    this.jsplumb.makeSource(nodeId, sourceOptions)
+    this.jsplumb.makeTarget(nodeId, targetOptions)
+    this.jsplumb.draggable(nodeId, {
+      containment: 'parent',
+      // stop: function (el) {
+      //   // 拖拽节点结束后的对调
+      //   console.log('拖拽结束: ', el)
+      // },
+    })
+  }
+
   // 重画
   repaint() {
     this.jsplumb.repaint()

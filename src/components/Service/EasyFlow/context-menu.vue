@@ -3,7 +3,7 @@
     <ul class="contextmenu" v-show="visible" :style="style">
       <li @click="deleteElement">
         <b-icon name="delete"></b-icon>
-        删除
+        删除{{ data.type === 'line' ? '线' : '节点' }}
       </li>
     </ul>
   </transition>
