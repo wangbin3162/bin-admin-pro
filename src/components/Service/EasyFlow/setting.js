@@ -134,10 +134,21 @@ export default {
     anchor: 'Continuous',
     // 是否允许自己连接自己
     allowLoopback: false,
-    maxConnections: -1,
-    onMaxConnections: function (info, e) {
-      console.log(`超过了最大值连线: ${info.maxConnections}`)
+    // maxConnections: -1,
+    connectorStyle: {
+      // 线的颜色
+      stroke: '#b1b1b1',
+      // 线的粗细，值越大线越粗
+      strokeWidth: 1,
+      // 设置外边线的颜色，默认设置透明，这样别人就看不见了，点击线的时候可以不用精确点击，参考 https://blog.csdn.net/roymno2/article/details/72717101
+      outlineStroke: 'transparent',
+      // 线外边的宽，值越大，线的点击范围越大
+      outlineWidth: 10,
     },
+    connectorHoverStyle: { stroke: '#999999', strokeWidth: 2 },
+    // onMaxConnections: function (info, e) {
+    //   console.log(`超过了最大值连线: ${info.maxConnections}`)
+    // },
   },
   // 参考 https://www.cnblogs.com/mq0036/p/7942139.html
   jsplumbSourceOptions2: {

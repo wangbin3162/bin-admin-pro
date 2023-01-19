@@ -1,37 +1,69 @@
 <template>
-  <div class="easy-flow" :style="{ height }" v-if="easyFlowVisible">
-    <div class="left-side">
-      <b-button @click="infoVisible = true">流程信息</b-button>
+  <div class="easy-flow-container" :style="{ height }">
+    <div class="ef-toolbar">
+      <b-button type="text">{{ data.name }}</b-button>
+      <b-divider type="vertical"></b-divider>
+      <b-button
+        type="text"
+        icon="delete"
+        @click="deleteElement"
+        :disabled="!activeElement.type"
+      ></b-button>
 
-      <b-button icon="delete" @click="deleteElement" :disabled="!activeElement.type"></b-button>
+      <div style="float: right; margin-right: 5px">
+        <b-button size="small" type="info" plain icon="filedone" @click="infoVisible = true">
+          流程信息
+        </b-button>
+        <b-dropdown trigger="click" style="margin: 0 10px" @command="dataReload">
+          <b-button size="small" type="info" plain icon="database">数据源</b-button>
+          <template #dropdown>
+            <b-dropdown-menu>
+              <b-dropdown-item name="dataA">dataA</b-dropdown-item>
+              <b-dropdown-item name="dataB">dataB</b-dropdown-item>
+              <b-dropdown-item name="dataC">dataC</b-dropdown-item>
+              <b-dropdown-item name="dataD">dataD</b-dropdown-item>
+            </b-dropdown-menu>
+          </template>
+        </b-dropdown>
+        <b-button size="small" type="info" plain icon="book">帮助</b-button>
+      </div>
+    </div>
+    <div class="easy-flow" v-if="easyFlowVisible">
+      <div class="left-side">
+        <pre>{{ activeElement }}</pre>
+      </div>
+      <div
+        class="canvas-side"
+        id="efContainer"
+        ref="efContainer"
+        v-flow-drag
+        @click.self="clickCanvas"
+      >
+        <FlowNode
+          v-for="node in data.nodeList"
+          :key="node.id"
+          :id="node.id"
+          :node="node"
+          :activeElement="activeElement"
+          @clickNode="clickNode"
+          @changeNodeSite="changeNodeSite"
+          @nodeRightMenu="nodeRightMenu"
+        />
+        <!-- 给画布一个默认的宽度和高度 -->
+        <div class="move-grid" style="position: absolute; top: 2000px; left: 2000px">&nbsp;</div>
+      </div>
+      <div class="right-side">
+        <FlowForm
+          ref="nodeFormRef"
+          @setLineLabel="setLineLabel"
+          @saveNode="saveNode"
+          @cancelSelect="cancelSelect"
+        />
+      </div>
 
-      <pre>{{ menu }}</pre>
+      <FlowInfo v-model="infoVisible" :data="data" />
+      <ContextMenu :data="menu" @delete="deleteElement" />
     </div>
-    <div
-      class="canvas-side"
-      id="efContainer"
-      ref="efContainer"
-      v-flow-drag
-      @click.self="clickCanvas"
-    >
-      <FlowNode
-        v-for="node in data.nodeList"
-        :key="node.id"
-        :id="node.id"
-        :node="node"
-        :activeElement="activeElement"
-        @clickNode="clickNode"
-        @changeNodeSite="changeNodeSite"
-        @nodeRightMenu="nodeRightMenu"
-      />
-      <!-- 给画布一个默认的宽度和高度 -->
-      <div class="move-grid" style="position: absolute; top: 2000px; left: 2000px">&nbsp;</div>
-    </div>
-    <div class="right-side">
-      <FlowForm ref="nodeFormRef" @setLineLabel="setLineLabel" @saveNode="saveNode" />
-    </div>
-
-    <FlowInfo v-model="infoVisible" :data="data" />
   </div>
 </template>
 
@@ -44,6 +76,7 @@ export default {
 import FlowNode from './flow-node.vue'
 import FlowInfo from './flow-info.vue'
 import FlowForm from './flow-form.vue'
+import ContextMenu from './context-menu.vue'
 import Plumb from './Plumb'
 import { ref, onMounted, nextTick, reactive, watch } from 'vue'
 import getMockData from './mock-data'
@@ -81,8 +114,7 @@ const menu = reactive({
 let jp
 
 onMounted(() => {
-  const flowData = getMockData('dataB')
-  dataReload(flowData)
+  dataReload('dataB')
 })
 
 // ------------------------辅助判断函数------------------------ //
@@ -101,7 +133,8 @@ function hashOppositeLine(from, to) {
 // ------------------------绘图生成函数------------------------ //
 
 // 数据载入
-async function dataReload(flowData) {
+async function dataReload(dataName) {
+  const flowData = getMockData(dataName)
   easyFlowVisible.value = false
   data.value = { nodeList: [], lineList: [] }
   await nextTick()
@@ -126,8 +159,7 @@ function jsPlumbInit() {
   // 连线右击
   jp.jsplumb.bind('contextmenu', (conn, ev) => {
     ev.preventDefault()
-    clickLine(conn) // 先调用选中，再调出右键菜单
-    lineRightMenu(ev)
+    lineRightMenu(conn, ev)
   })
   // 连线前
   jp.jsplumb.bind('beforeDrop', beforeLineDrop)
@@ -196,23 +228,22 @@ function nodeRightMenu(nodeId, evt) {
   clickNode(nodeId)
   menu.show = true
   menu.type = 'node'
-  menu.left = evt.x + 'px'
-  menu.top = evt.y + 'px'
+  menu.left = evt.clientX + 'px'
+  menu.top = evt.clientY + 'px'
 }
 
 // 连线右键菜单
-function lineRightMenu(evt) {
+function lineRightMenu(conn, evt) {
+  clickLine(conn) // 先调用选中，再调出右键菜单
   menu.show = true
   menu.type = 'line'
-  menu.left = evt.x + 'px'
-  menu.top = evt.y + 'px'
+  menu.left = evt.clientX + 'px'
+  menu.top = evt.clientY + 'px'
 }
 
 function closeMenu() {
   menu.show = false
   menu.type = ''
-  menu.left = 0
-  menu.top = 0
 }
 
 watch(
@@ -305,11 +336,34 @@ function setLineLabel({ from, to, label }) {
 function saveNode() {
   jp.repaint()
 }
+
+// 取消选中节点
+function cancelSelect() {
+  activeElement.value = {
+    // 可选值 node 、line
+    type: undefined,
+    // 节点ID
+    nodeId: undefined,
+    // 连线ID
+    sourceId: undefined,
+    targetId: undefined,
+  }
+}
 </script>
 
 <style scoped lang="stylus">
+.ef-toolbar {
+  padding-left: 10px;
+  box-sizing: border-box;
+  height: 42px;
+  line-height: 42px;
+  z-index: 3;
+  border-bottom: 1px solid #DADCE0;
+  background: #fff;
+}
 .easy-flow {
   display: flex;
+  height: calc(100% - 42px);
   background-color: #fff;
   .left-side {
     width: 180px;

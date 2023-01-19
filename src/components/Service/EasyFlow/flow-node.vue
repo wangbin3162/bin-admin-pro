@@ -103,7 +103,7 @@ function openMenu(ev) {
   /* 设置移动样式*/
   cursor: move;
   background-color: #F0F7FF;
-  /*box-shadow: #1879FF 0px 0px 12px 0px;*/
+  // box-shadow: #1879FF 0px 0px 12px 0px;
   background-color: #F0F7FF;
   border: 1px dashed #1879FF;
 }
@@ -176,6 +176,13 @@ function openMenu(ev) {
     position: absolute;
     right: 5px;
     color: #E6A23C;
+    cursor: default;
+  }
+  .b-icon-loading {
+    line-height: 32px;
+    position: absolute;
+    right: 5px;
+    color: #1089ff;
     cursor: default;
   }
 }

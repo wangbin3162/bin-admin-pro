@@ -9,7 +9,7 @@ let dataA = {
       type: 'task',
       left: '26px',
       top: '161px',
-      ico: 'el-icon-user-solid',
+      ico: 'smile',
     },
     {
       id: 'nodeB',
@@ -17,7 +17,7 @@ let dataA = {
       type: 'task',
       left: '340px',
       top: '161px',
-      ico: 'el-icon-goods',
+      ico: 'smile',
     },
     {
       id: 'nodeC',
@@ -25,7 +25,7 @@ let dataA = {
       type: 'task',
       left: '739px',
       top: '161px',
-      ico: 'el-icon-present',
+      ico: 'smile',
     },
   ],
   lineList: [
@@ -112,7 +112,7 @@ let dataC = {
       type: 'task',
       left: '400px',
       top: '15px',
-      ico: 'el-icon-user-solid',
+      ico: 'smile',
     },
     {
       id: 'nodeB',
@@ -120,7 +120,7 @@ let dataC = {
       type: 'task',
       left: '400px',
       top: '200px',
-      ico: 'el-icon-goods',
+      ico: 'smile',
     },
     {
       id: 'nodeC',
@@ -128,7 +128,7 @@ let dataC = {
       type: 'task',
       left: '400px',
       top: '378px',
-      ico: 'el-icon-present',
+      ico: 'smile',
     },
   ],
   lineList: [
@@ -152,7 +152,7 @@ let dataD = {
       type: 'task',
       left: '18px',
       top: '223px',
-      ico: 'el-icon-user-solid',
+      ico: 'smile',
       state: 'success',
     },
     {
@@ -161,7 +161,7 @@ let dataD = {
       name: '流程D-节点B',
       left: '351px',
       top: '96px',
-      ico: 'el-icon-goods',
+      ico: 'smile',
       state: 'error',
     },
     {
@@ -170,7 +170,7 @@ let dataD = {
       type: 'task',
       left: '354px',
       top: '351px',
-      ico: 'el-icon-present',
+      ico: 'smile',
       state: 'warning',
     },
     {
@@ -179,7 +179,7 @@ let dataD = {
       type: 'task',
       left: '723px',
       top: '215px',
-      ico: 'el-icon-present',
+      ico: 'smile',
       state: 'running',
     },
   ],
@@ -202,12 +202,14 @@ let dataD = {
     {
       from: 'nodeB',
       to: 'nodeD',
-      label: '默认连线样式,动态锚点',
+      label: '流程图线,动态锚点',
+      connector: ['Flowchart', { curviness: 50 }],
     },
     {
       from: 'nodeC',
       to: 'nodeD',
-      label: '默认连线样式,动态锚点',
+      label: '状态机,动态锚点',
+      connector: ['StateMachine', { margin: 8, curviness: 10, proximityLimit: 80 }],
     },
     {
       from: 'nodeC',

@@ -3,7 +3,7 @@
     <div class="ef-node-form-header">编辑</div>
 
     <div class="ef-node-form-body">
-      <b-empty v-show="isEmpty">暂未选择元素</b-empty>
+      <div class="empty" v-show="isEmpty">暂未选择元素</div>
       <b-form
         :model="state.node"
         ref="dataForm"
@@ -36,7 +36,7 @@
           </b-select>
         </b-form-item>
         <b-form-item>
-          <b-button icon="close">重置</b-button>
+          <b-button icon="close" @click="cancel">取消</b-button>
           <b-button type="primary" icon="check" @click="save">保存</b-button>
         </b-form-item>
       </b-form>
@@ -49,11 +49,11 @@
           <b-input v-model="state.line.label" clearable></b-input>
         </b-form-item>
         <b-form-item>
-          <b-button icon="close">重置</b-button>
+          <b-button icon="close" @click="cancel">取消</b-button>
           <b-button type="primary" icon="check" @click="saveLine">保存</b-button>
         </b-form-item>
       </b-form>
-      <b-ace-editor :model-value="JSON.stringify(state, null, 2)" height="400px" />
+      <b-ace-editor :model-value="JSON.stringify(state, null, 2)" height="200px" />
     </div>
   </div>
 </template>
@@ -62,7 +62,7 @@
 import { deepCopy } from '@/utils/util'
 import { computed, reactive } from 'vue'
 
-const emit = defineEmits(['setLineLabel', 'saveNode'])
+const emit = defineEmits(['setLineLabel', 'saveNode', 'cancelSelect'])
 
 const stateList = [
   {
@@ -131,6 +131,14 @@ function save() {
   })
 }
 
+function cancel() {
+  state.type = 'node'
+  state.node = {}
+  state.line = {}
+  state.data = {}
+  emit('cancelSelect')
+}
+
 defineExpose({
   nodeInit,
   lineInit,
@@ -138,19 +146,27 @@ defineExpose({
 </script>
 
 <style scoped lang="stylus">
+.ef-node-form {
+  height: 100%;
+}
 .ef-node-form-header {
-    height: 32px;
-    border: 1px solid #dce3e8;
-    background: #F1F3F4;
-    color: #000;
-    line-height: 32px;
-    padding-left: 12px;
-    font-size: 14px;
+  height: 32px;
+  border-bottom: 1px solid #dce3e8;
+  background: #F1F3F4;
+  color: #000;
+  line-height: 32px;
+  padding-left: 12px;
+  font-size: 14px;
 }
 
 .ef-node-form-body {
-    margin-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 20px;
+  height: calc(100% - 32px);
+  padding: 10px;
+  overflow: auto;
+  .empty{
+    text-align:center;
+    color: #999;
+    padding: 20px;
+  }
 }
 </style>
