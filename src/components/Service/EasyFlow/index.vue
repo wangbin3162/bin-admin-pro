@@ -25,7 +25,9 @@
             </b-dropdown-menu>
           </template>
         </b-dropdown>
-        <b-button size="small" type="info" plain icon="book">帮助</b-button>
+        <b-button size="small" type="info" plain icon="book" @click="helpVisible = true">
+          帮助
+        </b-button>
       </div>
     </div>
     <div class="easy-flow" v-if="easyFlowVisible">
@@ -66,6 +68,7 @@
       <FlowInfo v-model="infoVisible" :data="data" />
       <ContextMenu :data="menu" @delete="deleteElement" />
     </div>
+    <Helper v-model="helpVisible" />
   </div>
 </template>
 
@@ -76,16 +79,17 @@ export default {
 </script>
 <script setup>
 import FlowNode from './flow-node.vue'
-import FlowInfo from './flow-info.vue'
 import FlowMenu from './flow-menu.vue'
 import FlowForm from './flow-form.vue'
 import ContextMenu from './context-menu.vue'
+import FlowInfo from './flow-info.vue'
+import Helper from './helper.vue'
 import Plumb from './Plumb'
 import { ref, onMounted, nextTick, reactive, watch } from 'vue'
 import getMockData from './mock-data'
 import { deepCopy, getUuid } from '@/utils/util'
-import './index.styl'
 import { Message, MessageBox } from 'bin-ui-next'
+import './index.styl'
 
 defineProps({
   height: {
@@ -97,6 +101,7 @@ const easyFlowVisible = ref(false) // 流程dom渲染
 const nodeFormRef = ref(null)
 const efContainer = ref(null)
 const infoVisible = ref(false)
+const helpVisible = ref(false)
 const data = ref({ nodeList: [], lineList: [] })
 const activeElement = ref({
   // 可选值 node 、line

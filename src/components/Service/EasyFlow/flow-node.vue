@@ -51,6 +51,7 @@ const nodeContainerClass = computed(() => ({
   'ef-node-container': true,
   'ef-node-active':
     props.activeElement.type === 'node' ? props.activeElement.nodeId === props.node.id : false,
+  'view-only': props.node.viewOnly,
 }))
 
 // 图标样式
@@ -99,14 +100,6 @@ function openMenu(ev) {
   background-color: #fff;
 }
 
-.ef-node-container:hover {
-  /* 设置移动样式*/
-  cursor: move;
-  background-color: #F0F7FF;
-  // box-shadow: #1879FF 0px 0px 12px 0px;
-  background-color: #F0F7FF;
-  border: 1px dashed #1879FF;
-}
 /*节点激活样式*/
 .ef-node-active {
   background-color: #F0F7FF;
@@ -130,9 +123,19 @@ function openMenu(ev) {
   height: 30px;
 }
 
-.ef-node-left-ico:hover {
-  /* 设置拖拽的样式 */
-  cursor: crosshair;
+.ef-node-container:not(.view-only){
+  &:hover {
+    /* 设置移动样式*/
+    cursor: move;
+    background-color: #F0F7FF;
+    // box-shadow: #1879FF 0px 0px 12px 0px;
+    background-color: #F0F7FF;
+    border: 1px dashed #1879FF;
+  }
+  .ef-node-left-ico:hover {
+    /* 设置拖拽的样式 */
+    cursor: crosshair;
+  }
 }
 
 /*节点显示的文字*/
