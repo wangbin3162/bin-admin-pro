@@ -10,15 +10,19 @@
     <!-- 最左侧的那条竖线 -->
     <div class="ef-node-left"></div>
     <!-- 节点类型的图标 -->
-    <div class="ef-node-left-ico flow-node-drag">
-      <i :class="nodeIcoClass"></i>
+    <div class="ef-node-left-ico" :class="{ ' flow-node-drag': !node.viewOnly }">
+      <i :class="nodeIcoClass" v-if="node.ico"></i>
+      <template v-else>
+        <img v-if="node.type === 'common'" src="../assets/node.svg" class="node-ico" />
+        <img v-if="node.type === 'switch'" src="../assets/switch.svg" class="switch-ico" />
+      </template>
     </div>
     <!-- 节点名称 -->
-    <div class="ef-node-text" show-overflow-tooltip>
+    <div class="ef-node-text" :title="node.name">
       {{ node.name }}
     </div>
     <!-- 节点状态图标 -->
-    <div class="ef-node-right-ico">
+    <div class="ef-node-right-ico" v-if="showState">
       <i class="b-iconfont b-icon-check-circle" v-show="node.state === 'success'"></i>
       <i class="b-iconfont b-icon-error" v-show="node.state === 'error'"></i>
       <i class="b-iconfont b-icon-warning-circle" v-show="node.state === 'warning'"></i>
@@ -37,6 +41,10 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
+  showState: {
+    type: Boolean,
+    default: true,
+  },
   activeElement: Object,
 })
 const nodeRef = ref(null)
@@ -46,20 +54,25 @@ const nodeContainerStyle = computed(() => ({
   top: props.node.top,
   left: props.node.left,
 }))
+const active = computed(
+  () => props.activeElement.type === 'node' && props.activeElement.nodeId === props.node.id,
+)
 // 容器样式class
-const nodeContainerClass = computed(() => ({
-  'ef-node-container': true,
-  'ef-node-active':
-    props.activeElement.type === 'node' ? props.activeElement.nodeId === props.node.id : false,
-  'view-only': props.node.viewOnly,
-}))
+const nodeContainerClass = computed(() => [
+  'ef-node-container',
+  `el-node-${props.node.type}`,
+  {
+    'ef-node-active': active.value,
+  },
+  { 'view-only': props.node.viewOnly },
+])
 
 // 图标样式
 const nodeIcoClass = computed(() => {
   const nodeIcon = {}
   nodeIcon[`b-iconfont b-icon-${props.node.ico}`] = true
   // 添加该class可以推拽连线出来，viewOnly 可以控制节点是否运行编辑
-  nodeIcon['flow-node-drag'] = props.node.viewOnly ? false : true
+  // nodeIcon['flow-node-drag'] = props.node.viewOnly ? false : true
   return nodeIcon
 })
 
@@ -88,7 +101,7 @@ function openMenu(ev) {
 }
 </script>
 
-<style lang="stylus">
+<style lang="stylus" scoped>
 /*节点的最外层容器*/
 .ef-node-container {
   position: absolute;
@@ -98,6 +111,42 @@ function openMenu(ev) {
   border: 1px solid #E0E3E7;
   border-radius: 5px;
   background-color: #fff;
+  .node-inner {
+    display: flex;
+  }
+  &:hover {
+    cursor: pointer;
+    border: 1px dashed #1879FF;
+  }
+  &:not(.view-only){
+    &:hover {
+      /* 设置移动样式*/
+      cursor: move;
+      background-color: #F0F7FF;
+      border: 1px dashed #1879FF;
+    }
+    .ef-node-left-ico:hover {
+      /* 设置拖拽的样式 */
+      cursor: crosshair;
+    }
+  }
+  // switch选择节点独有的样式
+  &.el-node-switch {
+    .ef-node-left {
+      background-color: #fa8c16;
+    }
+    &.ef-node-active {
+      background-color: #fff9f3;
+      background-color: #fff9f3;
+      border: 1px solid #fa8c16;
+    }
+    &:not(.view-only){
+      &:hover {
+        background-color: #fff9f3;
+        border: 1px dashed #fa8c16;
+      }
+    }
+  }
 }
 
 /*节点激活样式*/
@@ -110,7 +159,7 @@ function openMenu(ev) {
 /*节点左侧的竖线*/
 .ef-node-left {
   width: 4px;
-  background-color: #1879FF;
+  background-color: #1089ff;
   border-radius: 4px 0 0 4px;
 }
 
@@ -121,20 +170,20 @@ function openMenu(ev) {
   justify-content: center;
   width: 30px;
   height: 30px;
-}
-
-.ef-node-container:not(.view-only){
-  &:hover {
-    /* 设置移动样式*/
-    cursor: move;
-    background-color: #F0F7FF;
-    // box-shadow: #1879FF 0px 0px 12px 0px;
-    background-color: #F0F7FF;
-    border: 1px dashed #1879FF;
+  border-right: 1px solid #E0E3E7;
+  .node-ico {
+    pointer-events: none;
+    width: 24px;
+    height: 24px;
   }
-  .ef-node-left-ico:hover {
-    /* 设置拖拽的样式 */
-    cursor: crosshair;
+  .switch-ico {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
+  }
+  > i {
+    pointer-events: none;
+    font-size: 18px;
   }
 }
 
@@ -143,11 +192,11 @@ function openMenu(ev) {
   color: #565758;
   font-size: 12px;
   line-height: 30px;
-  width: 100px;
+  flex: 1;
+  padding: 0 8px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
 }
 
 /*节点右侧的图标*/

@@ -17,22 +17,30 @@
           <b-input v-model="state.node.name" clearable></b-input>
         </b-form-item>
         <b-form-item label="left坐标">
-          <b-input v-model="state.node.left" :disabled="true"></b-input>
+          <b-input v-model="state.node.left" disabled></b-input>
         </b-form-item>
         <b-form-item label="top坐标">
-          <b-input v-model="state.node.top" :disabled="true"></b-input>
+          <b-input v-model="state.node.top" disabled></b-input>
         </b-form-item>
-        <b-form-item label="ico图标">
+        <b-form-item label="ico图标" v-if="showIco">
           <b-icon-select v-model="state.node.ico"></b-icon-select>
         </b-form-item>
-        <b-form-item label="状态">
+        <b-form-item label="状态" v-if="showState">
           <b-select v-model="state.node.state" placeholder="请选择" clearable>
             <b-option
               v-for="item in stateList"
               :key="item.state"
               :label="item.label"
               :value="item.state"
-            ></b-option>
+            >
+              <span class="mr-8">
+                <i class="b-iconfont b-icon-check-circle" v-show="item.state === 'success'"></i>
+                <i class="b-iconfont b-icon-error" v-show="item.state === 'error'"></i>
+                <i class="b-iconfont b-icon-warning-circle" v-show="item.state === 'warning'"></i>
+                <i class="b-iconfont b-icon-loading" v-show="item.state === 'running'"></i>
+              </span>
+              <span>{{ item.label }}</span>
+            </b-option>
           </b-select>
         </b-form-item>
         <b-form-item>
@@ -63,6 +71,16 @@ import { deepCopy } from '@/utils/util'
 import { computed, reactive } from 'vue'
 
 const emit = defineEmits(['setLineLabel', 'saveNode', 'cancelSelect'])
+defineProps({
+  showIco: {
+    type: Boolean,
+    default: true,
+  },
+  showState: {
+    type: Boolean,
+    default: true,
+  },
+})
 
 const stateList = [
   {
@@ -126,7 +144,7 @@ function save() {
       node.top = state.node.top
       node.ico = state.node.ico
       node.state = state.node.state
-      emit('saveNode')
+      emit('saveNode', node)
     }
   })
 }

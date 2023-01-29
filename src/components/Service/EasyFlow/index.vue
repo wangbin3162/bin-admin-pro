@@ -78,13 +78,13 @@ export default {
 }
 </script>
 <script setup>
-import FlowNode from './flow-node.vue'
-import FlowMenu from './flow-menu.vue'
-import FlowForm from './flow-form.vue'
-import ContextMenu from './context-menu.vue'
-import FlowInfo from './flow-info.vue'
-import Helper from './helper.vue'
-import Plumb from './Plumb'
+import FlowNode from './components/flow-node.vue'
+import FlowMenu from './components/flow-menu.vue'
+import FlowForm from './components/flow-form.vue'
+import ContextMenu from './components/context-menu.vue'
+import FlowInfo from './components/flow-info.vue'
+import Helper from './components/helper.vue'
+import Plumb from './lib/Plumb'
 import { ref, onMounted, nextTick, reactive, watch } from 'vue'
 import getMockData from './mock-data'
 import { deepCopy, getUuid } from '@/utils/util'
@@ -123,7 +123,7 @@ const menu = reactive({
 let jp
 
 onMounted(() => {
-  dataReload('dataB')
+  dataReload('dataA')
 })
 
 // ------------------------辅助判断函数------------------------ //
@@ -144,6 +144,8 @@ function hashOppositeLine(from, to) {
 // 数据载入
 async function dataReload(dataName) {
   const flowData = getMockData(dataName)
+  activeElement.value.type = 'node'
+  activeElement.value.nodeId = ''
   easyFlowVisible.value = false
   data.value = { nodeList: [], lineList: [] }
   await nextTick()
@@ -427,13 +429,13 @@ function cancelSelect() {
   height: calc(100% - 42px);
   background-color: #fff;
   .left-side {
-    width: 180px;
+    width: 200px;
     border-right: 1px solid #eeeeee;
   }
   .canvas-side{
     position: relative;
     overflow: scroll;
-    width: calc(100% - 480px);
+    width: calc(100% - 500px);
     overflow: auto;
     background: url('@/assets/images/grid.svg');
   }

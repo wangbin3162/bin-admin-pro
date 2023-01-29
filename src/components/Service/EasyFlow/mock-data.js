@@ -6,26 +6,23 @@ let dataA = {
     {
       id: 'nodeA',
       name: '流程A-节点A',
-      type: 'task',
+      type: 'switch',
       left: '26px',
       top: '161px',
-      ico: 'smile',
     },
     {
       id: 'nodeB',
       name: '流程A-节点B',
-      type: 'task',
+      type: 'common',
       left: '340px',
       top: '161px',
-      ico: 'smile',
     },
     {
       id: 'nodeC',
       name: '流程A-节点C',
-      type: 'task',
+      type: 'common',
       left: '739px',
       top: '161px',
-      ico: 'smile',
     },
   ],
   lineList: [
@@ -46,7 +43,7 @@ let dataB = {
     {
       id: 'nodeA',
       name: '节点A-不可拖拽',
-      type: 'task',
+      type: 'common',
       left: '18px',
       top: '223px',
       ico: 'user',
@@ -55,7 +52,7 @@ let dataB = {
     },
     {
       id: 'nodeB',
-      type: 'task',
+      type: 'common',
       name: '流程B-节点B',
       left: '351px',
       top: '96px',
@@ -65,7 +62,7 @@ let dataB = {
     {
       id: 'nodeC',
       name: '流程B-节点C',
-      type: 'task',
+      type: 'common',
       left: '354px',
       top: '351px',
       ico: 'index',
@@ -74,7 +71,7 @@ let dataB = {
     {
       id: 'nodeD',
       name: '流程B-节点D',
-      type: 'task',
+      type: 'common',
       left: '723px',
       top: '215px',
       ico: 'printer',
@@ -109,7 +106,7 @@ let dataC = {
     {
       id: 'nodeA',
       name: '流程C-节点A',
-      type: 'task',
+      type: 'common',
       left: '400px',
       top: '15px',
       ico: 'smile',
@@ -117,7 +114,7 @@ let dataC = {
     {
       id: 'nodeB',
       name: '流程C-节点B',
-      type: 'task',
+      type: 'common',
       left: '400px',
       top: '200px',
       ico: 'smile',
@@ -125,7 +122,7 @@ let dataC = {
     {
       id: 'nodeC',
       name: '流程C-节点C',
-      type: 'task',
+      type: 'common',
       left: '400px',
       top: '378px',
       ico: 'smile',
@@ -149,7 +146,7 @@ let dataD = {
     {
       id: 'nodeA',
       name: '流程D-节点A',
-      type: 'task',
+      type: 'common',
       left: '18px',
       top: '223px',
       ico: 'smile',
@@ -157,7 +154,7 @@ let dataD = {
     },
     {
       id: 'nodeB',
-      type: 'task',
+      type: 'common',
       name: '流程D-节点B',
       left: '351px',
       top: '96px',
@@ -167,7 +164,7 @@ let dataD = {
     {
       id: 'nodeC',
       name: '流程D-节点C',
-      type: 'task',
+      type: 'common',
       left: '354px',
       top: '351px',
       ico: 'smile',
@@ -176,7 +173,7 @@ let dataD = {
     {
       id: 'nodeD',
       name: '流程D-节点D',
-      type: 'task',
+      type: 'common',
       left: '723px',
       top: '215px',
       ico: 'smile',

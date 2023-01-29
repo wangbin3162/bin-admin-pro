@@ -145,7 +145,7 @@ export default {
       // 线外边的宽，值越大，线的点击范围越大
       outlineWidth: 10,
     },
-    connectorHoverStyle: { stroke: '#999999', strokeWidth: 2 },
+    connectorHoverStyle: { stroke: '#999999', strokeWidth: 1.5 },
     // onMaxConnections: function (info, e) {
     //   console.log(`超过了最大值连线: ${info.maxConnections}`)
     // },
@@ -156,12 +156,11 @@ export default {
     filter: '.flow-node-drag',
     filterExclude: false,
     // anchor: 'Continuous',
-    // 是否允许自己连接自己
-    allowLoopback: true,
+    allowLoopback: true, // 是否允许自己连接自己
     connector: ['Flowchart', { curviness: 50 }],
     connectorStyle: {
       // 线的颜色
-      stroke: 'red',
+      stroke: '#1089ff',
       // 线的粗细，值越大线越粗
       strokeWidth: 1,
       // 设置外边线的颜色，默认设置透明，这样别人就看不见了，点击线的时候可以不用精确点击，参考 https://blog.csdn.net/roymno2/article/details/72717101
@@ -169,7 +168,7 @@ export default {
       // 线外边的宽，值越大，线的点击范围越大
       outlineWidth: 10,
     },
-    connectorHoverStyle: { stroke: 'red', strokeWidth: 1.5 },
+    connectorHoverStyle: { stroke: '#0d6ecc', strokeWidth: 1.5 },
   },
   jsplumbTargetOptions: {
     // 设置可以拖拽的类名，只要鼠标移动到该类名上的DOM，就可以拖拽连线
