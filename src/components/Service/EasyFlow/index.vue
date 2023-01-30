@@ -32,8 +32,9 @@
     </div>
     <div class="easy-flow" v-if="easyFlowVisible">
       <div class="left-side">
-        <FlowMenu />
+        <FlowMenu :repeat="repeat" :data="data" />
       </div>
+
       <div
         class="canvas-side"
         id="efContainer"
@@ -56,6 +57,7 @@
         <!-- 给画布一个默认的宽度和高度 -->
         <div class="move-grid" style="position: absolute; top: 2000px; left: 2000px">&nbsp;</div>
       </div>
+
       <div class="right-side">
         <FlowForm
           ref="nodeFormRef"
@@ -68,6 +70,7 @@
       <FlowInfo v-model="infoVisible" :data="data" />
       <ContextMenu :data="menu" @delete="deleteElement" />
     </div>
+
     <Helper v-model="helpVisible" />
   </div>
 </template>
@@ -91,10 +94,15 @@ import { deepCopy, getUuid } from '@/utils/util'
 import { Message, MessageBox } from 'bin-ui-next'
 import './index.styl'
 
-defineProps({
+const props = defineProps({
   height: {
     type: String,
     default: '100%',
+  },
+  // 是否可以重复拖入
+  repeat: {
+    type: Boolean,
+    default: true,
   },
 })
 const easyFlowVisible = ref(false) // 流程dom渲染
@@ -236,7 +244,13 @@ function deleteElement() {
 function nodeDrop(ev) {
   ev.preventDefault()
   let json = ev.dataTransfer.getData('node')
-  const node = JSON.parse(json)
+  let node = {}
+  try {
+    node = JSON.parse(json)
+  } catch (error) {
+    console.log('drag data is not right json!')
+    return
+  }
 
   // 计算位置信息
   const containerRect = efContainer.value.getBoundingClientRect()
@@ -250,25 +264,31 @@ function nodeDrop(ev) {
   let origName = node.name
   let nodeName = origName
 
-  let index = 1
-  while (index < 10000) {
-    let repeat = false
-    for (let i = 0; i < data.value.nodeList.length; i++) {
-      let item = data.value.nodeList[i]
-      if (item.name === nodeName) {
-        nodeName = origName + index
-        repeat = true
+  // nodeId
+  let nodeId = node.id
+
+  // 如果允许重复则可以动态改变名字和重新生成id
+  if (props.repeat) {
+    let index = 1
+    while (index < 10000) {
+      let repeat = false
+      for (let i = 0; i < data.value.nodeList.length; i++) {
+        let item = data.value.nodeList[i]
+        if (item.name === nodeName) {
+          nodeName = origName + index
+          repeat = true
+        }
       }
+      if (repeat) {
+        index++
+        continue
+      }
+      break
     }
-    if (repeat) {
-      index++
-      continue
-    }
-    break
+
+    nodeId = getUuid()
   }
 
-  // 新id
-  const nodeId = getUuid()
   // 新的节点信息
   const newNode = {
     id: nodeId,

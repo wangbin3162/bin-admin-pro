@@ -130,6 +130,9 @@ function openMenu(ev) {
       cursor: crosshair;
     }
   }
+  &.ef-drop-hover {
+    border: 1px dashed #1879FF;
+  }
   // switch选择节点独有的样式
   &.el-node-switch {
     .ef-node-left {
@@ -145,6 +148,10 @@ function openMenu(ev) {
         background-color: #fff9f3;
         border: 1px dashed #fa8c16;
       }
+    }
+
+    &.ef-drop-hover {
+      border: 1px dashed #fa8c16;
     }
   }
 }
