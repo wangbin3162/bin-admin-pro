@@ -14,7 +14,7 @@ export default ({ mode }) => {
   const env = loadEnv(mode, dirRoot)
 
   return defineConfig({
-    base: process.env.NODE_ENV === 'production' ? env.VITE_PUBLIC_PATH : '',
+    base: process.env.NODE_ENV === 'production' ? env.VITE_PUBLIC_PATH : '/',
     plugins: [
       vue({
         template: {
@@ -63,7 +63,18 @@ export default ({ mode }) => {
           manualChunks(id) {
             if (id.includes('/node_modules/')) {
               // 设置需要独立打包的npm包
-              const expansions = ['bin-ui-next', 'brace']
+              const expansions = [
+                'bin-ui-next',
+                'brace',
+                'mockjs',
+                'lodash-es',
+                'd3',
+                'd3-graphviz',
+                'css-doodle',
+                '@antv/x6',
+                '@antv/x6-plugin-selection',
+                '@antv/x6-vue-shape',
+              ]
               const c = expansions.find(exp => id.includes(`/node_modules/${exp}`))
               if (c) {
                 return `chunk-${c}`
@@ -74,8 +85,6 @@ export default ({ mode }) => {
           },
         },
       },
-      // Turning off brotliSize display can slightly reduce packaging time
-      brotliSize: false,
       chunkSizeWarningLimit: 2000,
     },
   })
