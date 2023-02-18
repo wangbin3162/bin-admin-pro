@@ -280,6 +280,10 @@ export default [
         name: 'CanvasDemo',
         title: 'Canvas绘图',
       },
+      {
+        name: 'SvgDemo',
+        title: 'Svg基础',
+      },
     ],
   },
   {

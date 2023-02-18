@@ -29,4 +29,10 @@ export default [
     component: () => import('@/views/demo/graph/canvas-demo/index.vue'),
     meta: { title: 'canvas绘图' },
   },
+  {
+    path: 'SvgDemo',
+    name: 'SvgDemo',
+    component: () => import('@/views/demo/graph/svg-demo/index.vue'),
+    meta: { title: 'Svg基础' },
+  },
 ]

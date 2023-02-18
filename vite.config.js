@@ -68,12 +68,12 @@ export default ({ mode }) => {
                 'brace',
                 'mockjs',
                 'lodash-es',
-                'd3',
-                'd3-graphviz',
-                'css-doodle',
-                '@antv/x6',
-                '@antv/x6-plugin-selection',
-                '@antv/x6-vue-shape',
+                // 'd3',
+                // 'd3-graphviz',
+                // 'css-doodle',
+                // '@antv/x6',
+                // '@antv/x6-plugin-selection',
+                // '@antv/x6-vue-shape',
               ]
               const c = expansions.find(exp => id.includes(`/node_modules/${exp}`))
               if (c) {
