@@ -23,4 +23,10 @@ export default [
     component: () => import('@/views/demo/graph/easy-flow/index.vue'),
     meta: { title: 'easy-flow' },
   },
+  {
+    path: 'CanvasDemo',
+    name: 'CanvasDemo',
+    component: () => import('@/views/demo/graph/canvas-demo/index.vue'),
+    meta: { title: 'canvas绘图' },
+  },
 ]

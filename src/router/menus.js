@@ -276,6 +276,10 @@ export default [
         name: 'EasyFlow',
         title: 'EasyFlow',
       },
+      {
+        name: 'CanvasDemo',
+        title: 'Canvas绘图',
+      },
     ],
   },
   {
