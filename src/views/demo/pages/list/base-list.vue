@@ -18,7 +18,13 @@
     </b-card>
     <b-collapse-wrap title="基础列表" shadow="none">
       <template #right>
-        <b-input :model-value="name" size="small" placeholder="请输入..." search @search="handleSearch"></b-input>
+        <b-input
+          :model-value="name"
+          size="small"
+          placeholder="请输入..."
+          search
+          @search="handleSearch"
+        ></b-input>
       </template>
       <div class="p16">
         <div class="create-btn mb-16">
@@ -43,14 +49,20 @@
                 <p>{{ item.time }}</p>
               </div>
               <div class="list-item-content-item pt-10" style="width: 180px">
-                <b-progress :percent="item.progress" :status="item.status" :active="item.status === 'text'">
+                <b-progress
+                  :percent="item.progress"
+                  :status="item.status"
+                  :active="item.status === 'text'"
+                >
                   <span>{{ item.progress }}%</span>
                 </b-progress>
               </div>
             </div>
             <div class="list-item-action">
               <action-button type="text" @click="handleEdit(item)">编辑</action-button>
-              <action-button type="text" color="danger" @click="handleDelete(item)" confirm>删除</action-button>
+              <action-button type="text" color="danger" @click="handleDelete(item)" confirm>
+                删除
+              </action-button>
             </div>
           </li>
         </ul>
@@ -85,7 +97,10 @@ export default {
       page: 1,
       size: 10,
     })
-    const { loading, getListData, list, total, pageChange, pageSizeChange } = useTable(getBaseList, query)
+    const { loading, getListData, list, total, pageChange, pageSizeChange } = useTable(
+      getBaseList,
+      query,
+    )
 
     function handleSearch(val) {
       query.name = val
@@ -119,7 +134,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+@import "../../../../assets/stylus/base/var.styl"
 .task-wrapper {
   text-align: center;
   margin-bottom: 16px;

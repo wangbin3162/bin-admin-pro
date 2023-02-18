@@ -16,7 +16,9 @@
       <router-link :to="{ path: 'error', query: { message: '我是错误消息！' } }">
         <b-button background>通用错误页面</b-button>
       </router-link>
-      <router-link :to="{ path: 'error', query: { status: '401', message: '调用失败，请检查请求接口！' } }">
+      <router-link
+        :to="{ path: 'error', query: { status: '401', message: '调用失败，请检查请求接口！' } }"
+      >
         <b-button background>通用错误页面附加状态码</b-button>
       </router-link>
       <router-link :to="{ path: 'sss' }">

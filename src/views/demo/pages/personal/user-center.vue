@@ -44,7 +44,11 @@
                 <b-skeleton />
               </template>
               <template #default>
-                <article-item v-for="(item, index) in articleList" :key="index" :item="item"></article-item>
+                <article-item
+                  v-for="(item, index) in articleList"
+                  :key="index"
+                  :item="item"
+                ></article-item>
               </template>
             </b-skeleton>
           </div>
@@ -93,8 +97,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+@import "../../../../assets/stylus/base/var.styl"
+@import "../../../../assets/stylus/base/mixins.styl"
 .center-wrap {
   margin: 16px;
   .info-pane {

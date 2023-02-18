@@ -79,112 +79,119 @@ export default [
     ],
   },
   {
-    name: 'Form',
-    title: '表单页面',
-    icon: 'reconciliation',
+    name: 'Pages',
+    title: '页面',
+    icon: 'creditcard',
     children: [
       {
-        name: 'BaseForm',
-        title: '基础表单',
+        name: 'Form',
+        title: '表单页面',
+        icon: 'reconciliation',
+        children: [
+          {
+            name: 'BaseForm',
+            title: '基础表单',
+          },
+          {
+            name: 'StepForm',
+            title: '分步表单',
+          },
+          {
+            name: 'AdvancedForm',
+            title: '高级表单',
+          },
+        ],
       },
       {
-        name: 'StepForm',
-        title: '分步表单',
+        name: 'List',
+        title: '列表页面',
+        icon: 'table',
+        children: [
+          {
+            name: 'BaseList',
+            title: '基础列表',
+          },
+          {
+            name: 'CardList',
+            title: '卡片列表',
+          },
+          {
+            name: 'UserList',
+            title: '用户列表',
+          },
+          {
+            name: 'SearchList',
+            title: '查询列表',
+          },
+        ],
       },
       {
-        name: 'AdvancedForm',
-        title: '高级表单',
-      },
-    ],
-  },
-  {
-    name: 'List',
-    title: '列表页面',
-    icon: 'table',
-    children: [
-      {
-        name: 'BaseList',
-        title: '基础列表',
-      },
-      {
-        name: 'CardList',
-        title: '卡片列表',
+        name: 'Detail',
+        title: '详情页面',
+        icon: 'filedone',
+        children: [
+          {
+            name: 'BaseDetail',
+            title: '基础详情',
+          },
+          {
+            name: 'AdvancedDetail',
+            title: '高级详情',
+          },
+        ],
       },
       {
-        name: 'UserList',
-        title: '用户列表',
+        name: 'Personal',
+        title: '个人页面',
+        icon: 'control',
+        children: [
+          {
+            name: 'UserCenter',
+            title: '个人中心',
+          },
+          {
+            name: 'UserSetting',
+            title: '个人设置',
+          },
+        ],
       },
       {
-        name: 'SearchList',
-        title: '查询列表',
-      },
-    ],
-  },
-  {
-    name: 'Detail',
-    title: '详情页面',
-    icon: 'filedone',
-    children: [
-      {
-        name: 'BaseDetail',
-        title: '基础详情',
-      },
-      {
-        name: 'AdvancedDetail',
-        title: '高级详情',
-      },
-    ],
-  },
-  {
-    name: 'Personal',
-    title: '个人页面',
-    icon: 'control',
-    children: [
-      {
-        name: 'UserCenter',
-        title: '个人中心',
+        name: 'Result',
+        title: '结果页面',
+        icon: 'check-circle',
+        children: [
+          {
+            name: 'Success',
+            title: '成功页',
+          },
+          {
+            name: 'Fail',
+            title: '失败页',
+          },
+        ],
       },
       {
-        name: 'UserSetting',
-        title: '个人设置',
-      },
-    ],
-  },
-  {
-    name: 'Result',
-    title: '结果页面',
-    icon: 'check-circle',
-    children: [
-      {
-        name: 'Success',
-        title: '成功页',
-      },
-      {
-        name: 'Fail',
-        title: '失败页',
-      },
-    ],
-  },
-  {
-    name: 'ErrorPage',
-    title: '异常页面',
-    icon: 'error',
-    children: [
-      {
-        name: 'Error403',
-        title: '异常页403',
-      },
-      {
-        name: 'Error404',
-        title: '异常页404',
-      },
-      {
-        name: 'Error500',
-        title: '异常页500',
-      },
-      {
-        name: 'ErrorDemo',
-        title: '异常触发',
+        name: 'ErrorPage',
+        title: '错误页面',
+        icon: 'error',
+        children: [
+          {
+            name: 'Error403',
+            title: '异常页403',
+          },
+          {
+            name: 'Error404',
+            title: '异常页404',
+          },
+          {
+            name: 'Error500',
+            title: '异常页500',
+          },
+          {
+            name: 'ErrorDemo',
+            title: '异常触发',
+          },
+        ],
       },
     ],
   },
@@ -214,29 +221,6 @@ export default [
       {
         name: 'Menu2',
         title: '菜单2',
-      },
-    ],
-  },
-  {
-    name: 'System',
-    title: '系统管理',
-    icon: 'setting',
-    children: [
-      {
-        name: 'UserAccount',
-        title: '用户管理',
-      },
-      {
-        name: 'Depart',
-        title: '部门管理',
-      },
-      {
-        name: 'Menu',
-        title: '菜单管理',
-      },
-      {
-        name: 'Role',
-        title: '角色管理',
       },
     ],
   },
@@ -280,17 +264,40 @@ export default [
         name: 'PivotDemo',
         title: '交叉表',
       },
-      {
-        name: 'FuncGraphviz',
-        title: '绘图示例',
-      },
-      {
-        name: 'FuncX6',
-        title: '阿里X6示例',
-      },
+      // {
+      //   name: 'FuncGraphviz',
+      //   title: '绘图示例',
+      // },
+      // {
+      //   name: 'FuncX6',
+      //   title: '阿里X6示例',
+      // },
       {
         name: 'EasyFlow',
         title: 'EasyFlow',
+      },
+    ],
+  },
+  {
+    name: 'System',
+    title: '系统管理',
+    icon: 'setting',
+    children: [
+      {
+        name: 'UserAccount',
+        title: '用户管理',
+      },
+      {
+        name: 'Depart',
+        title: '部门管理',
+      },
+      {
+        name: 'Menu',
+        title: '菜单管理',
+      },
+      {
+        name: 'Role',
+        title: '角色管理',
       },
     ],
   },

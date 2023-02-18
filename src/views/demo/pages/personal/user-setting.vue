@@ -2,7 +2,7 @@
   <div class="setting-wrap">
     <b-row :gutter="16">
       <b-col span="6">
-        <b-card class="ctrl-pane" :bordered="false" shadow="never" :body-style="{padding:0}">
+        <b-card class="ctrl-pane" :bordered="false" shadow="never" :body-style="{ padding: 0 }">
           <template v-slot:header>
             <div class="ctrl-header">
               <b-icon name="control" size="18" class="mr-5"></b-icon>
@@ -11,10 +11,10 @@
           </template>
           <ul class="pt-5 pb-5">
             <li
-              v-for="(item,key) in tabs"
+              v-for="(item, key) in tabs"
               :key="key"
               class="tab-item"
-              :class="{'active':key===active}"
+              :class="{ active: key === active }"
               @click="active = key"
             >
               <span class="tab-item-title">{{ item.title }}</span>
@@ -36,13 +36,25 @@
                     <b-input v-model="baseInfo.name" placeholder="请输入昵称" clearable></b-input>
                   </b-form-item>
                   <b-form-item label="个人简介">
-                    <b-input v-model="baseInfo.intro" placeholder="请输入个人简介" type="textarea"></b-input>
+                    <b-input
+                      v-model="baseInfo.intro"
+                      placeholder="请输入个人简介"
+                      type="textarea"
+                    ></b-input>
                   </b-form-item>
                   <b-form-item label="联系电话">
-                    <b-input v-model="baseInfo.phone" placeholder="请输入联系电话" clearable></b-input>
+                    <b-input
+                      v-model="baseInfo.phone"
+                      placeholder="请输入联系电话"
+                      clearable
+                    ></b-input>
                   </b-form-item>
                   <b-form-item label="所在地区">
-                    <b-input v-model="baseInfo.address" placeholder="请输入所在地区" clearable></b-input>
+                    <b-input
+                      v-model="baseInfo.address"
+                      placeholder="请输入所在地区"
+                      clearable
+                    ></b-input>
                   </b-form-item>
                   <b-form-item>
                     <b-button type="primary" @click="updateBase">更新信息</b-button>
@@ -52,7 +64,7 @@
                   <div class="avatar-wrap">
                     <div class="mb-8">头像</div>
                     <div class="avatar-img mb-8">
-                      <img src="@/assets/images/avatar/avatar05.jpeg" alt="logo">
+                      <img src="@/assets/images/avatar/avatar05.jpeg" alt="logo" />
                     </div>
                     <b-upload action="">
                       <b-button icon="cloud-upload">更换头像</b-button>
@@ -216,8 +228,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+@import "../../../../assets/stylus/base/var.styl"
+@import "../../../../assets/stylus/base/mixins.styl"
 .setting-wrap {
   margin: 16px;
   .ctrl-header {

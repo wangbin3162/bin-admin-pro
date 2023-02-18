@@ -98,7 +98,7 @@ export default {
       wrapHeight: 0,
     })
     const leftExpand = ref(true)
-    const leftWidth = computed(() => (leftExpand.value ? props.leftDefaultWidth : '12px'))
+    const leftWidth = computed(() => (leftExpand.value ? props.leftDefaultWidth : '0px'))
     const rightWidth = computed(() => {
       if (slots.left) {
         return leftExpand.value ? `calc(100% - ${props.leftDefaultWidth})` : '100%'
@@ -191,17 +191,17 @@ export default {
       .toggle {
         position: absolute;
         z-index: 100;
-        top: 16px;
-        transform: translateX(-10px);
+        top: 24px;
+        transform: translateX(-8px);
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 20px;
-        height: 40px;
+        width: 16px;
+        height: 44px;
         cursor: pointer;
         background-color: #fff;
         border: 1px solid #e8e8e8;
-        border-radius: 12px;
+        border-radius: 8px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
         transition: .15s ease;
         opacity: 0;

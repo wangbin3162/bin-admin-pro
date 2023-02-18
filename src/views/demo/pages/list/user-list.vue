@@ -1,5 +1,8 @@
 <template>
-  <page-container desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。" bg>
+  <page-container
+    desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。"
+    bg
+  >
     <b-skeleton :loading="loading">
       <template #template>
         <b-skeleton animation />
@@ -22,7 +25,9 @@
             </div>
             <div class="list-item-email mt-8">邮箱地址：{{ item.email }}</div>
             <div class="list-item-action mt-8" flex="cross:center">
-              <b-tag :type="item.verify ? 'success' : 'danger'">{{ item.verify ? '已认证' : '未认证' }}</b-tag>
+              <b-tag :type="item.verify ? 'success' : 'danger'">
+                {{ item.verify ? '已认证' : '未认证' }}
+              </b-tag>
               <b-tag :type="roleMapStyle[item.roles]">{{ roleMap[item.roles] }}</b-tag>
               <b-button
                 :icon="item.expand ? 'minus-square' : 'plus-square'"
@@ -106,7 +111,10 @@ export default {
       size: 10,
     })
     const copyList = ref([])
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+      getUserList,
+      query,
+    )
 
     function handleCopy(id) {
       Message.success(`复制ID：${id}成功！`)
@@ -153,7 +161,7 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+@import "../../../../assets/stylus/base/var.styl"
 .list-wrap {
   min-height: 200px;
   .user-list-item {

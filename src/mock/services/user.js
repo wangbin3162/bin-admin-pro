@@ -8,21 +8,23 @@ const username = ['admin', 'wang']
 const password = ['admin', '123456']
 const testMenu = menuList
 
-const login = (options) => {
+const login = options => {
   // 拼装请求体
   const body = getBody(options)
   if (username.includes(body.username) && password.includes(body.password)) {
-    return builder({ accessToken: '4291d7da9005377ec9aec4a71ea837f' }, '', '00', { 'Custom-Header': Mock.mock('@guid') })
+    return builder({ accessToken: '4291d7da9005377ec9aec4a71ea837f' }, '', '00', {
+      'Custom-Header': Mock.mock('@guid'),
+    })
   }
   return builder(false, '账户或密码错误', '401')
 }
 
-const info = (options) => {
+const info = options => {
   const userInfo = {
     departCode: '10000',
     departId: 'pre_ncloud_sys_depart_10000',
     departKind: 'DOMAIN',
-    departName: '信用办',
+    departName: 'root',
     functions: [...testMenu],
     permissions: {},
     realName: 'Wang',

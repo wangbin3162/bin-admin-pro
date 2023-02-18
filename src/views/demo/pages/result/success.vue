@@ -2,8 +2,9 @@
   <div class="success-page-wrap">
     <result status="success" extra-white>
       <template #desc>
-        提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message 全局提示反馈即可。
-        本文字区域可以展示简单的补充说明， 如果有额外的显示要求，下面extra插槽可以额外插入复杂内容，但不推荐太多内容。
+        提交结果页用于反馈一系列操作任务的处理结果， 如果仅是简单操作，使用 Message
+        全局提示反馈即可。 本文字区域可以展示简单的补充说明，
+        如果有额外的显示要求，下面extra插槽可以额外插入复杂内容，但不推荐太多内容。
       </template>
       <template #extra>
         <div style="font-size: 14px">

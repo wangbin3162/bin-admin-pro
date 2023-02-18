@@ -53,7 +53,6 @@
           show-filter
           :fetch="getDepartTree"
           @select-change="handleSelect"
-          width="240px"
         ></base-tree>
       </template>
       <base-table class="pl-16">
