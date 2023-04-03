@@ -63,18 +63,7 @@ export default ({ mode }) => {
           manualChunks(id) {
             if (id.includes('/node_modules/')) {
               // 设置需要独立打包的npm包
-              const expansions = [
-                'bin-ui-next',
-                'brace',
-                'mockjs',
-                'lodash-es',
-                // 'd3',
-                // 'd3-graphviz',
-                // 'css-doodle',
-                // '@antv/x6',
-                // '@antv/x6-plugin-selection',
-                // '@antv/x6-vue-shape',
-              ]
+              const expansions = ['bin-ui-next', 'brace', 'mockjs', 'lodash-es']
               const c = expansions.find(exp => id.includes(`/node_modules/${exp}`))
               if (c) {
                 return `chunk-${c}`
