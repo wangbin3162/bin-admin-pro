@@ -20,8 +20,6 @@ module.exports = {
     'space-before-function-paren': 'off',
     'template-curly-spacing': 'off',
     'comma-dangle': 'off',
-    'vue/multi-word-component-names': 'off',
-    'vue/no-reserved-component-names': 'off',
     eqeqeq: ['error', 'always'],
     indent: 'off',
   },

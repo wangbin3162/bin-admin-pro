@@ -1,5 +1,7 @@
 <template>
-  <page-container desc="图标字体组件，基于iconfont模式，扩展组件库图标显示，可设置颜色、背景色、中文名、大小等">
+  <page-container
+    desc="图标字体组件，基于iconfont模式，扩展组件库图标显示，可设置颜色、背景色、中文名、大小等"
+  >
     <b-collapse-wrap title="基础图标" shadow="none">
       <div class="p10">
         <iconfont icon="appstore"></iconfont>
@@ -53,12 +55,60 @@
     </b-collapse-wrap>
     <b-collapse-wrap title="可点击" shadow="none">
       <div class="p10">
-        <iconfont icon="appstore" color="primary" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
-        <iconfont icon="bulb" color="success" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
-        <iconfont icon="edit-square" color="warning" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
-        <iconfont icon="tags" color="info" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
-        <iconfont icon="heart" color="danger" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
-        <iconfont icon="smile" color="#25bbe3" :size="30" bg round @click="clickFunc" type="btn"></iconfont>
+        <iconfont
+          icon="appstore"
+          color="primary"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
+        <iconfont
+          icon="bulb"
+          color="success"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
+        <iconfont
+          icon="edit-square"
+          color="warning"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
+        <iconfont
+          icon="tags"
+          color="info"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
+        <iconfont
+          icon="heart"
+          color="danger"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
+        <iconfont
+          icon="smile"
+          color="#25bbe3"
+          :size="30"
+          bg
+          round
+          @click="clickFunc"
+          type="btn"
+        ></iconfont>
       </div>
     </b-collapse-wrap>
   </page-container>
