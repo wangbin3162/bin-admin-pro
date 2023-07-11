@@ -30,7 +30,7 @@
         <b-slider
           v-model="scale"
           :min="10"
-          :max="100"
+          :max="200"
           :step="1"
           :show-tooltip="false"
           @change="submitScale"
@@ -44,7 +44,7 @@
 import { ref, watch } from 'vue'
 import { canvas, autoCanvasScale, setCanvasScale } from '../useSchema'
 
-const scaleList = ref([100])
+const scaleList = ref([200, 175, 150, 125, 100])
 const inputScale = ref(20)
 const scale = ref(20)
 

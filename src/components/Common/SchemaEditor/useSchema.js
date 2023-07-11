@@ -1,51 +1,74 @@
 // 编辑器配置共享数据，需要注意状态的清空和初始化。
-import { ref, computed } from 'vue'
+import { deepCopy } from '@/utils/util'
+import { ref, computed, nextTick } from 'vue'
 
-const canvasDefaultSize = 2000
+const defaultCanvas = {
+  width: 2000,
+  height: 2000,
+  scale: 1,
+  pageWidth: 2000,
+  pageHeight: 2000,
+}
+const defaultBg = { url: null, width: 2000, height: 1 }
 
-const schemaState = ref({
-  canvas: {
-    width: 2000,
-    height: 2000,
-    scale: 1,
-  },
-  shortcuts: {
-    altKey: false,
-    ctrlKey: false,
-    shiftKey: false,
-    spaceKey: false,
-  },
-})
+// 画布信息
+const canvas = ref(deepCopy(defaultCanvas))
 
-const canvas = computed(() => schemaState.value.canvas)
+const bgInfo = ref(deepCopy(defaultBg))
+
+// 初始化store
+const initSchemaStore = () => {
+  canvas.value = deepCopy(defaultCanvas)
+  bgInfo.value = deepCopy(defaultBg)
+}
 
 // 设置缩放比例
 function setCanvasScale(scaleSetValue) {
   let width = document.querySelector('#canvas-wp').clientWidth
   let height = document.querySelector('#canvas-wp').clientHeight
-  const minScale = (width - 120) / canvasDefaultSize
+
+  const minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
 
   // 限制缩放比例为
-  const scale = Math.min(Math.max(scaleSetValue, minScale * 100), 100) / 100
+  const scale = Math.min(Math.max(scaleSetValue, minScale), 200) / 100
   // 方便计算滚动条 和 标尺
-  const deltaW = canvasDefaultSize * scale
-  const deltaH = canvasDefaultSize * scale
+  const deltaW = Math.floor(canvas.value.pageWidth * scale)
+
+  const deltaH = Math.floor(canvas.value.pageHeight * scale)
   if (width < deltaW) {
-    width = deltaW + 120
+    width = deltaW + 120 - 5
   }
   if (height < deltaH) {
     height = deltaH + 120
   }
-  schemaState.value.canvas = { scale, width, height }
+  canvas.value.scale = scale
+
+  canvas.value.width = width
+  canvas.value.height = height
 }
 
 // 自动适应缩放比例
 function autoCanvasScale() {
   let width = document.querySelector('#canvas-wp').clientWidth
   // let height = document.querySelector('#canvas-wp').clientHeight
-  const minScale = (width - 120) / canvasDefaultSize
-  const scale = parseFloat(minScale.toFixed(6)) * 100
-  setCanvasScale(scale)
+  const minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
+  setCanvasScale(minScale)
 }
 
-export { schemaState, canvas, autoCanvasScale, setCanvasScale }
+// 根据载入的背景图片信息，调整画布的大小
+function resizeCanvasPageByImgSize({ width, height }) {
+  canvas.value.pageWidth = width
+  canvas.value.pageHeight = height
+  nextTick(() => {
+    autoCanvasScale()
+  })
+}
+
+export {
+  initSchemaStore,
+  canvas,
+  autoCanvasScale,
+  setCanvasScale,
+  bgInfo,
+  resizeCanvasPageByImgSize,
+}

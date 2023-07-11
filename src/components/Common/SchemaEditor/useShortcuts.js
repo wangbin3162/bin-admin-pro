@@ -1,4 +1,35 @@
 import { canvas, setCanvasScale } from './useSchema'
+import { onBeforeUnmount, onMounted, ref, computed } from 'vue'
+import { off, on } from '@/utils/util'
+
+const shortcuts = ref({
+  altKey: false,
+  ctrlKey: false,
+  shiftKey: false,
+  spaceKey: false,
+})
+
+const spaceDown = computed(() => shortcuts.value.spaceKey)
+
+// 重置快捷键
+function resetKeyCode() {
+  shortcuts.value = {
+    altKey: false,
+    ctrlKey: false,
+    shiftKey: false,
+    spaceKey: false,
+  }
+}
+
+const keyDown = key => (shortcuts.value[key] = true)
+
+const addShortcuts = ev => {
+  // const target = ev.target
+  if (ev.keyCode === 32) {
+    keyDown('spaceKey')
+    ev.preventDefault()
+  }
+}
 
 // 鼠标滚轮缩放
 const ctrlMouseWheel = ev => {
@@ -9,4 +40,16 @@ const ctrlMouseWheel = ev => {
   setCanvasScale(next)
 }
 
-export { ctrlMouseWheel }
+// 初始化快捷键功能监听
+function initShortcuts() {
+  resetKeyCode()
+  onMounted(() => {
+    on(document, 'keydown', addShortcuts)
+    on(document, 'keyup', resetKeyCode)
+  })
+  onBeforeUnmount(() => {
+    off(document, 'keydown', addShortcuts)
+    off(document, 'keyup', resetKeyCode)
+  })
+}
+export { ctrlMouseWheel, shortcuts, spaceDown, initShortcuts }

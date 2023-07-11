@@ -3,7 +3,9 @@
     <Ruler />
     <div id="canvas-wp" ref="canvasWpRef" class="canvas-panel-wrap">
       <div class="screen-shot" :style="screenShotStyle">
-        <div id="canvas-components" class="canvas-panel" :style="canvasPanelStyle">容器画布</div>
+        <div id="canvas-components" class="canvas-panel" :style="canvasPanelStyle">
+          <div class="canvas-inner"></div>
+        </div>
       </div>
     </div>
     <FooterBox />
@@ -11,31 +13,40 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount, onMounted, computed } from 'vue'
+import { ref, onBeforeUnmount, onMounted, computed, nextTick } from 'vue'
 import Ruler from './ruler/index.vue'
 import FooterBox from './FooterBox.vue'
 import { on, off, debounce } from '@/utils/util'
 
-import { canvas, autoCanvasScale } from '../useSchema'
+import { canvas, autoCanvasScale, bgInfo } from '../useSchema'
+
+defineProps({
+  bgUrl: {
+    type: String,
+  },
+})
 
 const screenShotStyle = computed(() => ({
-  width: `${canvas.value.width}px`,
+  width: `${canvas.value.width - 5}px`,
   height: `${canvas.value.height}px`,
 }))
 
 const canvasPanelStyle = computed(() => ({
   position: 'absolute',
-  width: `${2000}px`,
-  height: `${2000}px`,
+  width: `${canvas.value.pageWidth}px`,
+  height: `${canvas.value.pageHeight}px`,
   transform: `scale(${canvas.value.scale}) translate(0px, 0px)`,
+  backgroundImage: `url(${bgInfo.value.url})`,
   backgroundColor: '#fff',
 }))
 
-const autoScale = debounce(autoCanvasScale, 50)
+const autoScale = debounce(autoCanvasScale, 20)
 
 onMounted(() => {
   on(window, 'resize', autoScale)
-  autoScale()
+  nextTick(() => {
+    autoCanvasScale()
+  })
 })
 
 onBeforeUnmount(() => {
@@ -63,8 +74,13 @@ onBeforeUnmount(() => {
       background-repeat: no-repeat, no-repeat;
       background-size: cover, contain;
       box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
-      transition: 0.2s all ease-in-out;
+      transition: 0.2s all ease-in;
       transform-origin: 0 0;
+    }
+    .canvas-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
     }
   }
 }
