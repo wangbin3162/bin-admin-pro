@@ -35,4 +35,10 @@ export default [
     component: () => import('@/views/demo/graph/svg-demo/index.vue'),
     meta: { title: 'Svg基础' },
   },
+  {
+    path: 'SchemaDemo',
+    name: 'SchemaDemo',
+    component: () => import('@/views/demo/graph/schema-demo/schema-demo.vue'),
+    meta: { title: '画布框选' },
+  },
 ]

@@ -264,6 +264,10 @@ export default [
         name: 'PivotDemo',
         title: '交叉表',
       },
+      {
+        name: 'SchemaDemo',
+        title: '画布框选',
+      },
       // {
       //   name: 'FuncGraphviz',
       //   title: '绘图示例',

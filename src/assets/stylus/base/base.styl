@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
 }
+
 body {
   margin: 0;
   height: 100%;
@@ -11,24 +12,29 @@ body {
   text-rendering: optimizeLegibility;
   color: #515a6e;
 }
+
 ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 ul li {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 a {
   cursor: pointer;
   color: getColor();
   text-decoration: none;
 }
+
 a:focus, a:hover {
   color: getHover();
 }
+
 #app {
   min-height: 100%;
 }
@@ -36,6 +42,7 @@ a:focus, a:hover {
 a:active, a:focus, button, div, span, svg {
   outline: 0 !important;
 }
+
 // =================================
 // ==============scrollbar==========
 // =================================
@@ -63,8 +70,19 @@ a:active, a:focus, button, div, span, svg {
   background: getColor();
   color: #fff;
 }
+
 /* mozilla firefox */
 ::-moz-selection {
   background: getColor();
   color: #fff;
+}
+
+[devbox] {
+  box-shadow: 0 0 0 1px red;
+}
+
+input {
+  &::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
 }
