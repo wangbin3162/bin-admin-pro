@@ -1,6 +1,7 @@
 // 编辑器配置共享数据，需要注意状态的清空和初始化。
-import { deepCopy } from '@/utils/util'
+import { deepCopy, on, off } from '@/utils/util'
 import { ref, nextTick } from 'vue'
+import { selectedCom } from './useCom'
 
 const defaultCanvas = {
   width: 2000,
@@ -15,6 +16,23 @@ const defaultBg = { url: null, width: 2000, height: 1 }
 const canvas = ref(deepCopy(defaultCanvas))
 
 const bgInfo = ref(deepCopy(defaultBg))
+
+const contextMenu = ref({ x: 0, y: 0, show: false }) // 右键菜单
+
+const showMenu = e => {
+  e.preventDefault()
+  if (selectedCom.value) {
+    contextMenu.value.x = e.clientX
+    contextMenu.value.y = e.clientY
+    contextMenu.value.show = true
+
+    on(document, 'click', hideMenu)
+  }
+}
+const hideMenu = () => {
+  off(document, 'click', hideMenu)
+  contextMenu.value.show = false
+}
 
 function setBgInfo(val) {
   bgInfo.value = val
@@ -76,4 +94,6 @@ export {
   autoCanvasScale,
   setCanvasScale,
   resizeCanvasPageByImgSize,
+  contextMenu,
+  showMenu,
 }

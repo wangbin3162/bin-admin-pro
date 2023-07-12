@@ -1,4 +1,5 @@
 import { canvas, setCanvasScale } from './useSchema'
+import { selectedCom, toDeleteCom } from './useCom'
 import { onBeforeUnmount, onMounted, ref, computed } from 'vue'
 import { off, on } from '@/utils/util'
 
@@ -25,9 +26,38 @@ const keyDown = key => (shortcuts.value[key] = true)
 
 const addShortcuts = ev => {
   // const target = ev.target
+  const com = selectedCom.value
+  const key = ev.key.toLowerCase()
+
+  if (key === 'delete') {
+    toDeleteCom()
+    ev.preventDefault()
+  }
+
+  if (ev.shiftKey) {
+    keyDown('shiftKey')
+  }
   if (ev.keyCode === 32) {
     keyDown('spaceKey')
     ev.preventDefault()
+  }
+
+  // 组件微调移动
+  const step = ev.shiftKey ? 10 : 1
+  if (com && !ev.altKey) {
+    if (key === 'arrowleft') {
+      com.attr.x -= step
+      ev.preventDefault()
+    } else if (key === 'arrowright') {
+      com.attr.x += step
+      ev.preventDefault()
+    } else if (key === 'arrowup') {
+      com.attr.y -= step
+      ev.preventDefault()
+    } else if (key === 'arrowdown') {
+      com.attr.y += step
+      ev.preventDefault()
+    }
   }
 }
 

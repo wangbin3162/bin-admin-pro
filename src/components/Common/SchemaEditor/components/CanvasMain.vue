@@ -14,7 +14,8 @@
           :style="canvasPanelStyle"
           @mousedown="handleMouseDown"
         >
-          <!-- <div class="canvas-inner"></div> -->
+          <DvTransform v-for="comp in comps" :key="comp.id" :data="comp" />
+
           <SelectArea v-bind="areaData" />
         </div>
       </div>
@@ -28,11 +29,12 @@ import { ref, reactive, onBeforeUnmount, onMounted, computed, nextTick } from 'v
 import Ruler from './ruler/index.vue'
 import FooterBox from './FooterBox.vue'
 import SelectArea from './select-area/index.vue'
+import DvTransform from './dv-transform/index.vue'
 import { on, off, debounce } from '@/utils/util'
 
 import { canvas, autoCanvasScale, bgInfo } from '../store/useSchema'
 import { spaceDown } from '../store/useShortcuts'
-import { selectedCom, selectCom, areaData } from '../store/useCom'
+import { selectedCom, selectCom, areaData, addNewCom, comps } from '../store/useCom'
 
 const screenShotStyle = computed(() => ({
   width: `${canvas.value.width - 5}px`,
@@ -101,6 +103,7 @@ function hideArea() {
 
 let editorX = 0
 let editorY = 0
+
 // 框选区域
 function handleMouseDown(e) {
   // 如果没有选中组件 在画布上点击时需要调用 e.preventDefault() 防止触发 drop 事件
@@ -143,7 +146,8 @@ function handleMouseDown(e) {
       hideArea()
       return
     }
-    // createGroup() // 打组内容
+    addNewCom() // 创建组件
+    hideArea()
   }
   on(document, 'mousemove', move)
   on(document, 'mouseup', up)

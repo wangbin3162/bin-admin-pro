@@ -4,6 +4,7 @@
     <div class="config-main">
       <StoreDev />
     </div>
+    <ContextMenu />
   </div>
 </template>
 
@@ -14,6 +15,7 @@ export default { name: 'SchemaEditor' }
 <script setup>
 import CanvasMain from './components/CanvasMain.vue'
 import StoreDev from './store/StoreDev.vue'
+import ContextMenu from './components/ContextMenu.vue'
 
 import { resetSchemaStatus, setBgInfo, resizeCanvasPageByImgSize } from './store/useSchema'
 import { initShortcuts, ctrlMouseWheel } from './store/useShortcuts'
@@ -46,6 +48,7 @@ defineExpose({ loadBgImage })
   height: 700px;
   background: #fff;
   overflow: hidden;
+  // cursor: url('@/components/Common/SchemaEditor/assets/cursor-default.png') 4 4, auto;
   .config-main {
     width: 300px;
     position: relative;
