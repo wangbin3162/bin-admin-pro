@@ -10,7 +10,9 @@
     >
       <div class="transform-handler" :class="handlerClass">
         <div class="dv-com">
-          <slot></slot>
+          <slot>
+            <div class="id-box">{{ data.name }}</div>
+          </slot>
           <div class="dv-event-disable" :style="disableEventStyle" @contextmenu="showMenu"></div>
         </div>
         <template v-for="(v, k) in points" :key="k">

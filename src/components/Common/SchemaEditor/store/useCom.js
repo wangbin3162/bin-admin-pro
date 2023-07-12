@@ -1,6 +1,7 @@
 import { generateId } from '@/utils/util'
 import { ref } from 'vue'
 import { MessageBox } from 'bin-ui-next'
+import { setActiveTab } from './useSchema'
 
 const findComIndex = (comps, id) => comps.findIndex(c => c.id === id)
 
@@ -49,6 +50,8 @@ function addNewCom() {
   }
 
   comps.value.push(newCom)
+  //  设置新增后选中
+  selectedCom.value = newCom
 }
 
 // 移除一个组件并清空选中，且记录操作
@@ -79,9 +82,12 @@ function hoverCom(id) {
 function selectCom(component) {
   if (!component) {
     selectedCom.value = null
+    setActiveTab(false)
     return
   }
   selectedCom.value = component
+
+  setActiveTab(true)
   areaData.value.showArea = false
 }
 

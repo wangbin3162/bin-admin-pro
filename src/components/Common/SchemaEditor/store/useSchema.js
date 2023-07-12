@@ -19,6 +19,13 @@ const bgInfo = ref(deepCopy(defaultBg))
 
 const contextMenu = ref({ x: 0, y: 0, show: false }) // 右键菜单
 
+const activeTab = ref('list') // list, com
+
+// 设置开启的配置面板，如果有选中，则为com
+function setActiveTab(compSelected = false) {
+  activeTab.value = compSelected ? 'com' : 'list'
+}
+
 const showMenu = e => {
   e.preventDefault()
   if (selectedCom.value) {
@@ -96,4 +103,6 @@ export {
   resizeCanvasPageByImgSize,
   contextMenu,
   showMenu,
+  activeTab,
+  setActiveTab,
 }
