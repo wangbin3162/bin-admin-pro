@@ -18,7 +18,7 @@
 import { onMounted, onUnmounted, ref, watchEffect } from 'vue'
 
 import { RulerBuilder } from './builder'
-import { canvas } from '../../useSchema'
+import { canvas } from '../../store/useSchema'
 
 let hRuler = null
 let vRuler = null

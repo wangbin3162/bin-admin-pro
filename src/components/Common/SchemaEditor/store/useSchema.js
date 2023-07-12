@@ -1,6 +1,6 @@
 // 编辑器配置共享数据，需要注意状态的清空和初始化。
 import { deepCopy } from '@/utils/util'
-import { ref, computed, nextTick } from 'vue'
+import { ref, nextTick } from 'vue'
 
 const defaultCanvas = {
   width: 2000,
@@ -16,8 +16,12 @@ const canvas = ref(deepCopy(defaultCanvas))
 
 const bgInfo = ref(deepCopy(defaultBg))
 
-// 初始化store
-const initSchemaStore = () => {
+function setBgInfo(val) {
+  bgInfo.value = val
+}
+
+// 重置状态
+const resetSchemaStatus = () => {
   canvas.value = deepCopy(defaultCanvas)
   bgInfo.value = deepCopy(defaultBg)
 }
@@ -65,10 +69,11 @@ function resizeCanvasPageByImgSize({ width, height }) {
 }
 
 export {
-  initSchemaStore,
   canvas,
+  bgInfo,
+  setBgInfo,
+  resetSchemaStatus,
   autoCanvasScale,
   setCanvasScale,
-  bgInfo,
   resizeCanvasPageByImgSize,
 }

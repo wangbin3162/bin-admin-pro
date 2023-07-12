@@ -42,7 +42,7 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { canvas, autoCanvasScale, setCanvasScale } from '../useSchema'
+import { canvas, autoCanvasScale, setCanvasScale } from '../store/useSchema'
 
 const scaleList = ref([200, 175, 150, 125, 100])
 const inputScale = ref(20)
