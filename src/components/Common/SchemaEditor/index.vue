@@ -7,15 +7,14 @@
           组件列表
         </div>
         <div class="tab" :class="{ active: activeTab === 'com' }" @click="activeTab = 'com'">
-          参数配置
+          组件配置
         </div>
       </div>
       <CompList v-if="activeTab === 'list'" />
-      <div v-else>
-        <b-empty v-if="!selectedCom">请选择一个区域</b-empty>
-      </div>
-      <!-- <StoreDev /> -->
+
+      <CompConfig v-else :config="selectedCom" />
     </div>
+    <ActionBar />
     <ContextMenu />
   </div>
 </template>
@@ -26,9 +25,12 @@ export default { name: 'SchemaEditor' }
 
 <script setup>
 import CanvasMain from './components/CanvasMain.vue'
-import StoreDev from './store/StoreDev.vue'
-import CompList from './components/CompList.vue'
 import ContextMenu from './components/ContextMenu.vue'
+import ActionBar from './components/action-bar/index.vue'
+import CompList from './components/CompList.vue'
+import CompConfig from './components/CompConfig.vue'
+
+import StoreDev from './store/StoreDev.vue'
 
 import {
   activeTab,
@@ -50,9 +52,10 @@ resetSchemaStatus()
 resetCompStatus()
 initShortcuts()
 
-// 载入北极光图片
+// 载入图片
 function loadBgImage(imageInfo) {
   setBgInfo(imageInfo)
+  resetCompStatus()
   // 根据背景图调整画布大小
   resizeCanvasPageByImgSize(imageInfo)
 }
@@ -62,6 +65,8 @@ defineExpose({ loadBgImage })
 
 <style lang="stylus" scoped>
 .schema-container {
+  position: relative;
+  user-select: none;
   display: flex;
   height: 700px;
   background: #fff;
@@ -71,7 +76,6 @@ defineExpose({ loadBgImage })
     width: 300px;
     height: 100%;
     position: relative;
-    z-index: 90;
     border: 1px solid #d9d9d9;
     border-left: none;
     .header-box {

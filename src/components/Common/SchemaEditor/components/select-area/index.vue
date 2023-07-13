@@ -25,6 +25,6 @@ defineProps({
 .select-area {
   position: absolute;
   border: 1px solid #0e7be6;
-  background-color: rgba(14, 123, 230, 0.1);
+  background-color: rgba(14, 123, 230, 0.2);
 }
 </style>

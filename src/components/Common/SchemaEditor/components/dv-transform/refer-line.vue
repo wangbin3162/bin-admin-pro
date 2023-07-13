@@ -70,5 +70,10 @@ $gui-primary-color = #1089ff;
   color: $gui-primary-color;
   white-space: nowrap;
   transform: translate(-100%, -100%);
+  background: #fff;
+  padding: 2px 4px;
+  font-size: 12px;
+  border-radius: 3px;
+  box-shadow:  0 2px 8px rgba(0,0,0,0.15);
 }
 </style>

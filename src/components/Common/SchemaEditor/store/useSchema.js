@@ -9,6 +9,7 @@ const defaultCanvas = {
   scale: 1,
   pageWidth: 2000,
   pageHeight: 2000,
+  minScale: 0,
 }
 const defaultBg = { url: null, width: 2000, height: 1 }
 
@@ -56,10 +57,10 @@ function setCanvasScale(scaleSetValue) {
   let width = document.querySelector('#canvas-wp').clientWidth
   let height = document.querySelector('#canvas-wp').clientHeight
 
-  const minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
+  canvas.value.minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
 
   // 限制缩放比例为
-  const scale = Math.min(Math.max(scaleSetValue, minScale), 200) / 100
+  const scale = Math.min(Math.max(scaleSetValue, canvas.value.minScale), 200) / 100
   // 方便计算滚动条 和 标尺
   const deltaW = Math.floor(canvas.value.pageWidth * scale)
 
@@ -80,8 +81,8 @@ function setCanvasScale(scaleSetValue) {
 function autoCanvasScale() {
   let width = document.querySelector('#canvas-wp').clientWidth
   // let height = document.querySelector('#canvas-wp').clientHeight
-  const minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
-  setCanvasScale(minScale)
+  canvas.value.minScale = Math.floor(((width - 120) / canvas.value.pageWidth) * 100)
+  setCanvasScale(canvas.value.minScale)
 }
 
 // 根据载入的背景图片信息，调整画布的大小

@@ -134,8 +134,8 @@ const onZoom = (e, dir) => {
 
 <style lang="stylus" scoped>
 $gui-primary-color = #1089ff;
-$background-color = rgba(14, 123, 230, 0.2);
-$background-hover-color = rgba(14, 123, 230, 0.3);
+$background-color = rgba(14, 123, 230, 0.3);
+$background-hover-color = rgba(14, 123, 230, 0.38);
 
 // dv-transform
 .dv-transform {

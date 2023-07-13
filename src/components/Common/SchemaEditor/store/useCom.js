@@ -88,7 +88,6 @@ function selectCom(component) {
   selectedCom.value = component
 
   setActiveTab(true)
-  areaData.value.showArea = false
 }
 
 export {

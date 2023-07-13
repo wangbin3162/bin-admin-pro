@@ -12,7 +12,7 @@
       ]"
       @mouseenter="onEnter(com.id)"
       @mouseleave="onLeave"
-      @click="selectCom(com.id)"
+      @click="selectCom(com)"
     >
       <span class="layer-item-span">
         <span class="layer-item-text" :title="com.alias">{{ com.alias }}</span>
