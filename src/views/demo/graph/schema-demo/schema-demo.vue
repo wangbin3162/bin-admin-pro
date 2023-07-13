@@ -3,6 +3,9 @@
     <div class="schema-demo-wrap">
       <div class="top-bar">
         <b-button @click="clickBtn">载入图片</b-button>
+        <b-button @click="checkConfig">查看配置</b-button>
+        <b-button @click="saveConfig">保存当前配置</b-button>
+        <b-button @click="loadData" :disabled="!saveData">载入上一次保存的配置</b-button>
         <input
           style="display: none"
           type="file"
@@ -15,16 +18,41 @@
       </div>
       <SchemaEditor ref="schemaRef" />
     </div>
+
+    <b-modal title="当前配置" v-model="configVisible" width="700px">
+      <b-ace-editor :model-value="JSON.stringify(config, null, 2)" height="400px" />
+    </b-modal>
   </page-container>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 import { fileToImageBase64 } from '@/utils/file-helper'
+import { Message } from 'bin-ui-next'
 const schemaRef = ref(null)
+const configVisible = ref(false)
+const config = ref({})
+
+const saveData = ref(null)
 
 function clickBtn() {
   document.getElementById('imgfile').click()
+}
+
+function checkConfig() {
+  config.value = schemaRef.value.getAllConfig()
+  configVisible.value = true
+}
+
+function saveConfig() {
+  saveData.value = schemaRef.value.getAllConfig()
+  console.log(saveData.value)
+  Message('保存成功')
+}
+
+function loadData() {
+  console.log(saveData.value)
+  schemaRef.value.setConfig(saveData.value)
 }
 
 function loadImage() {

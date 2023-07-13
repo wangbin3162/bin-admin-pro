@@ -11,7 +11,6 @@
         </div>
       </div>
       <CompList v-if="activeTab === 'list'" />
-
       <CompConfig v-else :config="selectedCom" />
     </div>
     <ActionBar />
@@ -30,16 +29,16 @@ import ActionBar from './components/action-bar/index.vue'
 import CompList from './components/CompList.vue'
 import CompConfig from './components/CompConfig.vue'
 
-import StoreDev from './store/StoreDev.vue'
-
 import {
+  canvas,
+  bgInfo,
   activeTab,
   resetSchemaStatus,
   setBgInfo,
   resizeCanvasPageByImgSize,
 } from './store/useSchema'
 import { initShortcuts, ctrlMouseWheel } from './store/useShortcuts'
-import { resetCompStatus, selectedCom } from './store/useCom'
+import { comps, resetCompStatus, selectedCom } from './store/useCom'
 
 defineProps({
   height: {
@@ -52,15 +51,27 @@ resetSchemaStatus()
 resetCompStatus()
 initShortcuts()
 
+function getAllConfig() {
+  return {
+    canvas: canvas.value,
+    bgInfo: bgInfo.value,
+    comps: comps.value,
+  }
+}
+
+function setConfig(data) {
+  loadBgImage(data.bgInfo)
+  comps.value = [...(data.comps ?? [])]
+}
+
 // 载入图片
 function loadBgImage(imageInfo) {
   setBgInfo(imageInfo)
-  resetCompStatus()
   // 根据背景图调整画布大小
   resizeCanvasPageByImgSize(imageInfo)
 }
 
-defineExpose({ loadBgImage })
+defineExpose({ loadBgImage, getAllConfig, setConfig })
 </script>
 
 <style lang="stylus" scoped>
