@@ -17,11 +17,16 @@
       <span class="layer-item-span">
         <span class="layer-item-text" :title="com.alias">{{ com.alias }}</span>
       </span>
-      <i
-        class="b-iconfont b-icon-delete show-toggle-btn"
-        title="删除"
-        @click.stop="onDelete(com.id)"
-      ></i>
+
+      <action-button
+        type="text"
+        icon="delete"
+        tooltip="删除"
+        confirm
+        color="danger"
+        message="确定删除当前组件吗？"
+        @click="onDelete(com.id)"
+      />
     </div>
   </div>
 </template>
@@ -82,24 +87,13 @@ const onDelete = id => deleteCom(id)
       line-height: 20px;
     }
   }
-  .show-toggle-btn {
-    padding: 0 2px;
-    font-size: 18px;
-    display: none;
-  }
   &.hovered {
     color: #1089ff;
     background: rgba(14, 123, 230, 0.1);
-    .show-toggle-btn {
-      display: block;
-    }
   }
   &.selected {
     color: #fff;
     background: #1089ff;
-    .show-toggle-btn {
-      display: block;
-    }
   }
 }
 </style>

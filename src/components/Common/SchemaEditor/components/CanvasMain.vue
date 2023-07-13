@@ -104,6 +104,9 @@ function hideArea() {
 let editorX = 0
 let editorY = 0
 
+// 最小值范围，宽高小雨这个值的则忽略这个元素
+let limitSize = 20
+
 // 框选区域
 function handleMouseDown(e) {
   // 如果没有选中组件 在画布上点击时需要调用 e.preventDefault() 防止触发 drop 事件
@@ -142,7 +145,12 @@ function handleMouseDown(e) {
   const up = e => {
     off(document, 'mousemove', move)
     off(document, 'mouseup', up)
-    if (e.clientX === startX && e.clientY === startY) {
+    if (
+      e.clientX === startX ||
+      e.clientY === startY ||
+      areaData.value.width < limitSize ||
+      areaData.value.height < limitSize
+    ) {
       hideArea()
       return
     }
