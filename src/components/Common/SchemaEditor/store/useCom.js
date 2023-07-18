@@ -16,19 +16,7 @@ const areaData = ref({ x: 0, y: 0, width: 0, height: 0, showArea: false })
 
 // 初始化控件状态
 function resetCompStatus() {
-  comps.value = [
-    {
-      id: 'comp_4455',
-      name: 'comp_4455',
-      alias: '区域_4455',
-      attr: {
-        x: 527,
-        y: 457,
-        w: 149,
-        h: 69,
-      },
-    },
-  ]
+  comps.value = []
   selectedCom.value = null
   hoveredComId.value = ''
 }

@@ -2,6 +2,14 @@
   <div class="setting-wrap">
     <b-empty v-if="!config">请选择一个区域</b-empty>
     <template v-else>
+      <b-divider align="left">基础信息</b-divider>
+      <g-field label="组件标识" tooltip="英文标识">
+        <g-input v-model="data.name" :disabled="readonly" />
+      </g-field>
+      <g-field label="组件名称" tooltip="中文别名">
+        <g-input v-model="data.alias" :disabled="readonly" />
+      </g-field>
+      <b-divider align="left">位置信息</b-divider>
       <g-field label="x 轴坐标">
         <g-input-number v-model="data.attr.x" inline suffix="px" :disabled="readonly" />
       </g-field>
@@ -27,12 +35,6 @@
           suffix="px"
           :disabled="readonly"
         />
-      </g-field>
-      <g-field label="组件标识" tooltip="英文标识">
-        <g-input v-model="data.name" :disabled="readonly" />
-      </g-field>
-      <g-field label="组件名称" tooltip="中文别名">
-        <g-input v-model="data.alias" :disabled="readonly" />
       </g-field>
     </template>
   </div>
