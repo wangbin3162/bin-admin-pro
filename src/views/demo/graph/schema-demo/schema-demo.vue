@@ -3,7 +3,7 @@
     <div class="schema-demo-wrap">
       <div class="top-bar">
         <b-button @click="clickBtn">载入图片</b-button>
-        <!-- <b-button @click="checkConfig">查看配置</b-button> -->
+        <b-button @click="checkConfig">查看配置</b-button>
         <b-button @click="saveConfig">保存</b-button>
         <b-button @click="loadData" :disabled="!saveData">打开</b-button>
         <input
