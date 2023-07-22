@@ -76,6 +76,10 @@ export default [
         name: 'FuncDynamicCode',
         title: '动态编码',
       },
+      {
+        name: 'FuncTiptap',
+        title: '富文本编辑器',
+      },
     ],
   },
   {

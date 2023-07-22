@@ -28,7 +28,7 @@
             </keep-alive>
           </b-move-transition>
         </router-view>
-        <global-footer></global-footer>
+        <!-- <global-footer></global-footer> -->
       </div>
     </div>
   </div>
