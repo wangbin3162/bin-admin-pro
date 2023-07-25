@@ -9,6 +9,8 @@ import 'brace/mode/javascript'
 import 'brace/snippets/javascript'
 import 'brace/mode/stylus'
 import 'brace/snippets/stylus'
+import 'brace/mode/groovy'
+import 'brace/snippets/groovy'
 
 import 'brace/mode/dot'
 import 'brace/snippets/dot'

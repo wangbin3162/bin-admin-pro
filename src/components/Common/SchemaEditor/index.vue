@@ -1,13 +1,13 @@
 <template>
-  <div class="schema-container" @wheel.ctrl.prevent="ctrlMouseWheel">
+  <div class="schema-container" @wheel.ctrl.prevent="ctrlMouseWheel" :style="{ height }">
     <CanvasMain />
     <div class="config-main">
       <div class="header-box">
         <div class="tab" :class="{ active: activeTab === 'list' }" @click="activeTab = 'list'">
-          组件列表
+          区域集合
         </div>
         <div class="tab" :class="{ active: activeTab === 'com' }" @click="activeTab = 'com'">
-          组件配置
+          区域配置
         </div>
       </div>
       <CompList v-if="activeTab === 'list'" />
@@ -39,6 +39,11 @@ import {
 } from './store/useSchema'
 import { initShortcuts, ctrlMouseWheel } from './store/useShortcuts'
 import { comps, resetCompStatus, selectedCom } from './store/useCom'
+import { emitter, SCHEMA_AUTO_SAVE } from './store/eventBus'
+
+const emit = defineEmits(['auto-save'])
+
+emitter.on(SCHEMA_AUTO_SAVE, () => emit('auto-save'))
 
 defineProps({
   height: {
@@ -60,6 +65,8 @@ function getAllConfig() {
 }
 
 function setConfig(data) {
+  resetSchemaStatus()
+  resetCompStatus()
   loadBgImage(data.bgInfo)
   comps.value = [...(data.comps ?? [])]
 }

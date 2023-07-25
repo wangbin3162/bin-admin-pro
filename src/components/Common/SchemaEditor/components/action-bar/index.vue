@@ -49,15 +49,11 @@
 
 <script setup>
 import { resetCompStatus } from '../../store/useCom'
-import { canvas, resetSchemaStatus, autoCanvasScale, setCanvasScale } from '../../store/useSchema'
-import { ref, nextTick, watch } from 'vue'
+import { canvas, autoCanvasScale, setCanvasScale } from '../../store/useSchema'
+import { ref, watch } from 'vue'
 
 function onClear() {
   resetCompStatus()
-  resetSchemaStatus()
-  nextTick(() => {
-    autoCanvasScale()
-  })
 }
 
 function calcScale(num = 5) {

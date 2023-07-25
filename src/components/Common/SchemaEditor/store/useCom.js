@@ -2,6 +2,7 @@ import { generateId } from '@/utils/util'
 import { ref } from 'vue'
 import { MessageBox } from 'bin-ui-next'
 import { setActiveTab } from './useSchema'
+import { emitter, SCHEMA_AUTO_SAVE } from './eventBus'
 
 const findComIndex = (comps, id) => comps.findIndex(c => c.id === id)
 
@@ -40,12 +41,14 @@ function addNewCom() {
   comps.value.push(newCom)
   //  设置新增后选中
   selectedCom.value = newCom
+  emitter.emit(SCHEMA_AUTO_SAVE)
 }
 
 // 移除一个组件并清空选中，且记录操作
 function deleteCom(id) {
   comps.value.splice(findComIndex(comps.value, id), 1)
   selectedCom.value = null
+  emitter.emit(SCHEMA_AUTO_SAVE)
 }
 
 function toDeleteCom() {
@@ -89,4 +92,5 @@ export {
   deleteCom,
   hoverCom,
   toDeleteCom,
+  emitter,
 }

@@ -50,6 +50,7 @@
     "localforage": "^1.10.0",
     "lodash-es": "^4.17.21",
     "many-keys-map": "^1.0.3",
+    "mitt": "^3.0.1",
     "mockjs": "^1.1.0",
     "pinia": "^2.1.4",
     "remixicon": "^3.4.0",

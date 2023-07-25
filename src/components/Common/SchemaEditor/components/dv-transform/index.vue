@@ -36,7 +36,7 @@ import ReferLine from './refer-line.vue'
 import { getCursors, handleMove, handleZoom } from './util'
 import { canvas, showMenu } from '../../store/useSchema'
 import { selectedCom, hoveredComId, hoverCom, selectCom } from '../../store/useCom'
-import { spaceDown } from '../../store/useShortcuts'
+import { ctrlDown } from '../../store/useShortcuts'
 
 const props = defineProps({
   data: {
@@ -118,7 +118,7 @@ const onLeave = () => hoverCom('')
 
 // 单击选中组件
 const onMove = e => {
-  if (spaceDown.value) return
+  if (ctrlDown.value) return
   e.stopPropagation()
   e.preventDefault()
   selectCom(props.data)

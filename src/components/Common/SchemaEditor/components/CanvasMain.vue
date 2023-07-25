@@ -33,7 +33,7 @@ import DvTransform from './dv-transform/index.vue'
 import { on, off, debounce } from '@/utils/util'
 
 import { canvas, autoCanvasScale, bgInfo } from '../store/useSchema'
-import { spaceDown } from '../store/useShortcuts'
+import { ctrlDown } from '../store/useShortcuts'
 import { selectedCom, selectCom, areaData, addNewCom, comps } from '../store/useCom'
 
 const screenShotStyle = computed(() => ({
@@ -59,8 +59,8 @@ const dragStatus = reactive({
 
 // canvas鼠标按下事件
 function canvasMouseDown(ev) {
-  // 如果空格按下，则可以拖动画布位置
-  if (spaceDown.value) {
+  // 如果ctrl按下，则可以拖动画布位置
+  if (ctrlDown.value) {
     const startX = ev.clientX
     const startY = ev.clientY
     const scale = canvas.value.scale
@@ -115,7 +115,7 @@ function handleMouseDown(e) {
   }
 
   // 如果空格按下移动或者是按下时触发了select-area
-  if (spaceDown.value || e.target.className === 'select-area') return
+  if (ctrlDown.value || e.target.className === 'select-area') return
 
   hideArea()
 

@@ -83,6 +83,9 @@ dependencies:
   many-keys-map:
     specifier: ^1.0.3
     version: 1.0.3
+  mitt:
+    specifier: ^3.0.1
+    version: 3.0.1
   mockjs:
     specifier: ^1.1.0
     version: 1.1.0

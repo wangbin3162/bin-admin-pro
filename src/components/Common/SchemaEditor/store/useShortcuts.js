@@ -10,6 +10,7 @@ const shortcuts = ref({
   spaceKey: false,
 })
 
+const ctrlDown = computed(() => shortcuts.value.ctrlKey)
 const spaceDown = computed(() => shortcuts.value.spaceKey)
 
 // 重置快捷键
@@ -37,10 +38,14 @@ const addShortcuts = ev => {
   if (ev.shiftKey) {
     keyDown('shiftKey')
   }
-  if (ev.keyCode === 32) {
-    keyDown('spaceKey')
-    ev.preventDefault()
+  if (ev.ctrlKey) {
+    keyDown('ctrlKey')
   }
+  // 暂时不能用空格
+  // if (ev.keyCode === 32) {
+  //   // keyDown('spaceKey')
+  //   // ev.preventDefault()
+  // }
 
   // 组件微调移动
   const step = ev.shiftKey ? 10 : 1
@@ -82,4 +87,4 @@ function initShortcuts() {
     off(document, 'keyup', resetKeyCode)
   })
 }
-export { ctrlMouseWheel, shortcuts, spaceDown, initShortcuts }
+export { ctrlMouseWheel, shortcuts, spaceDown, ctrlDown, initShortcuts }
