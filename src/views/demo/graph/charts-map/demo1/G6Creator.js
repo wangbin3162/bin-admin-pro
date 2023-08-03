@@ -6,10 +6,10 @@ export default class G6Creator {
   constructor(wrap, height) {
     if (!wrap) return
 
-    const container = document.getElementById(wrap)
+    this.container = document.getElementById(wrap)
     this.opts = {
-      width: container.scrollWidth,
-      height: container.scrollHeight || height,
+      width: this.container.scrollWidth,
+      height: this.container.scrollHeight || height,
       animateCfg: { duration: 200, easing: 'easeCubic' },
     }
     this.registerComps()
@@ -228,10 +228,11 @@ export default class G6Creator {
   }
   // 初始化工作
   init() {
+    const { width, height } = this.opts
     this.graph = new G6.Graph({
-      container: 'G6Demo01',
-      width: this.opts.width,
-      height: this.opts.height,
+      container: this.container,
+      width,
+      height,
       // 节点在默认状态下的样式配置（style）和其他配置
       defaultNode: { type: 'card-node' },
       plugins: [this.minimap, this.toolbar],

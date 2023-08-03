@@ -62,7 +62,6 @@ onBeforeUnmount(() => {
     left: 50%;
     width: 500px;
     height: 40px;
-    background: #fff;
     transform: translateX(-50%);
     z-index : 1;
     .item {
@@ -73,9 +72,6 @@ onBeforeUnmount(() => {
         width: 32px;
         height: 32px;
         margin-right: 8px;
-      }
-      > span {
-        font-size: 15px;
       }
     }
   }
