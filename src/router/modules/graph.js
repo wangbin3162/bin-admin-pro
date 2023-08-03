@@ -41,4 +41,10 @@ export default [
     component: () => import('@/views/demo/graph/schema-demo/schema-demo.vue'),
     meta: { title: '画布框选' },
   },
+  {
+    path: 'chartsMap',
+    name: 'ChartsMap',
+    component: () => import('@/views/demo/graph/charts-map/index.vue'),
+    meta: { title: '关系图' },
+  },
 ]

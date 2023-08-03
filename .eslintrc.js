@@ -22,5 +22,6 @@ module.exports = {
     'comma-dangle': 'off',
     eqeqeq: ['error', 'always'],
     indent: 'off',
+    'vue/multi-word-component-names': 'off',
   },
 }

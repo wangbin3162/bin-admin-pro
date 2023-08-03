@@ -272,6 +272,10 @@ export default [
         name: 'SchemaDemo',
         title: '画布框选',
       },
+      {
+        name: 'ChartsMap',
+        title: '关系图',
+      },
       // {
       //   name: 'FuncGraphviz',
       //   title: '绘图示例',
