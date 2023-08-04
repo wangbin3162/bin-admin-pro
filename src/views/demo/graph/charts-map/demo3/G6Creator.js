@@ -428,6 +428,7 @@ export default class G6Creator {
         model.x = this.opts.width / 2
         model.y = this.opts.height / 2
         // animatively hide the items which are going to disappear
+        //动画地隐藏将要消失的项目
         if (this.curShowEdges.length) {
           this.curShowEdges.forEach(csedge => {
             const item = this.graph.findById(csedge.id)
@@ -445,6 +446,7 @@ export default class G6Creator {
         this.curShowEdges = []
 
         // click on the same node which is the current focus node, hide the small nodes, change the layout parameters to roots view
+        //单击当前焦点节点的同一节点，隐藏小节点，将布局参数更改为根视图
         if (this.currentFocus && this.currentFocus.id === model.id) {
           this.currentFocus = undefined
           layoutController.layoutCfg.nodeStrength = 2500
@@ -452,8 +454,10 @@ export default class G6Creator {
           layoutController.layoutCfg.alphaDecay = 0.01
         } else {
           // click other focus node, hide the current small nodes and show the related nodes
+          //单击其他焦点节点，隐藏当前小节点，显示相关节点
           this.currentFocus = model
           // change data after the original items disappearing
+          //在原始项消失后更改数据
           const layoutController = this.graph.get('layoutController')
           layoutController.layoutCfg.nodeStrength = () => {
             return -80
@@ -469,7 +473,7 @@ export default class G6Creator {
           }
 
           this.curShowNodesMap = new Map()
-          // find the nodes which are the descendants of clicked model
+          //查找已单击模型的后代节点
           this.nodes.forEach(node => {
             if (!node.parents) return
             const parents = []
@@ -536,6 +540,7 @@ export default class G6Creator {
           })
 
           // find the edges whose target end source are in the curShowNodes
+          //查找目标端源在curShowNodes中的边
           this.curShowNodes.forEach((nu, i) => {
             const lu = nu.level
             this.curShowNodes.forEach((nv, j) => {
