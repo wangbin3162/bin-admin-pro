@@ -346,6 +346,62 @@ export default class G6Creator {
       },
       'circle',
     )
+
+    G6.registerEdge(
+      'animate-line',
+      {
+        drawShape(cfg, group) {
+          const self = this
+          let shapeStyle = self.getShapeStyle(cfg)
+          shapeStyle = Object.assign(shapeStyle, {
+            opacity: 0,
+            strokeOpacity: 0,
+          })
+          const keyShape = group.addShape('path', {
+            attrs: shapeStyle,
+            // must be assigned in G6 3.3 and later versions. it can be any string you want, but should be unique in a custom item type
+            name: 'path-shape',
+          })
+          return keyShape
+        },
+        afterDraw(cfg, group) {
+          const shape = group.get('children')[0]
+          shape.animate(
+            ratio => {
+              const opacity = ratio * cfg.style.opacity
+              const strokeOpacity = ratio * cfg.style.strokeOpacity
+              return {
+                opacity: ratio || opacity,
+                strokeOpacity: ratio || strokeOpacity,
+              }
+            },
+            {
+              duration: 300,
+            },
+          )
+        },
+        setState(name, value, item) {
+          const shape = item.get('keyShape')
+          if (name === 'disappearing' && value) {
+            shape.animate(
+              ratio => {
+                return {
+                  opacity: 1 - ratio,
+                  strokeOpacity: 1 - ratio,
+                }
+              },
+              {
+                duration: 200,
+              },
+            )
+          } else if (name === 'dark') {
+            if (value) shape.attr('opacity', 0.2)
+            else shape.attr('opacity', 1)
+          }
+        },
+      },
+      'line',
+    )
   }
   // 初始化工作
   init() {
