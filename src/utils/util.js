@@ -119,3 +119,38 @@ export function downloadFile(content, fileName) {
 export function hasKey(obj, key) {
   return Object.keys(obj).includes(key)
 }
+
+/**
+ * 处理拉平树结构
+ * @param stateTree
+ * @returns {*[]}
+ */
+export function compileFlatState(stateTree) {
+  let keyCounter = 0
+  let childrenKey = 'children'
+  const flatTree = []
+
+  const flattenChildren = (node, parent, parentKeys) => {
+    if (isEmpty(node)) return
+    node.nodeKey = keyCounter++
+    flatTree[node.nodeKey] = { node: node, nodeKey: node.nodeKey }
+    if (typeof parent !== 'undefined') {
+      flatTree[node.nodeKey].parent = parent.nodeKey
+      flatTree[parent.nodeKey][childrenKey].push(node.nodeKey)
+    }
+    let parents = parentKeys ? parentKeys.split(',').map(i => +i) : []
+    // 拼接parents
+    if (typeof parentKeys !== 'undefined') {
+      parents.push(parent.nodeKey)
+      flatTree[node.nodeKey].parents = parents
+    }
+
+    if (node[childrenKey]) {
+      flatTree[node.nodeKey][childrenKey] = []
+      node[childrenKey].forEach(child => flattenChildren(child, node, parents.join(',')))
+    }
+  }
+
+  stateTree.map(i => flattenChildren(i))
+  return flatTree
+}

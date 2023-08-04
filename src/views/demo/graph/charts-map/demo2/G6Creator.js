@@ -1,6 +1,5 @@
 import G6 from '@antv/g6'
 import insertCss from 'insert-css'
-const { getLabelPosition, transform } = G6.Util
 
 export default class G6Creator {
   constructor(wrap, height) {
@@ -91,6 +90,26 @@ export default class G6Creator {
         }
       },
     })
+
+    this.tooltip = new G6.Tooltip({
+      // offsetX and offsetY include the padding of the parent container
+      offsetX: 10,
+      offsetY: 10,
+      // the types of items that allow the tooltip show up
+      // 允许出现 tooltip 的 item 类型
+      itemTypes: ['node'],
+      // custom the tooltip's content
+      // 自定义 tooltip 内容
+      getContent: e => {
+        const outDiv = document.createElement('div')
+        const model = e.item.getModel()
+        const name = `${model.xlabel}`
+        outDiv.style.width = 'fit-content'
+        //outDiv.style.padding = '0px 0px 20px 0px';
+        outDiv.innerHTML = `<div>${name}</div>`
+        return outDiv
+      },
+    })
     // 注册minimap
     this.minimap = new G6.Minimap({
       className: 'g6-minimap-wrap',
@@ -128,7 +147,7 @@ export default class G6Creator {
       modes: {
         default: ['drag-canvas', 'zoom-canvas'],
       },
-      plugins: [this.minimap, this.toolbar],
+      plugins: [this.minimap, this.toolbar, this.tooltip],
       layout: {
         type: 'dendrogram',
         direction: 'LR',
