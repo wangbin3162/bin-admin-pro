@@ -28,19 +28,17 @@ const props = defineProps({
 
 const data = getMockData(mockData2.data)
 
+function nodeClick(item) {
+  let one = mockData2.data.nodeList.find(i => i.id === item.id)
+  if (!one) return
+  console.log(one)
+  Message(`点击了 [${one.groupName}] 中的 [${one.name}]`)
+}
+
 let gc
 onMounted(() => {
-  gc = new G6Creator('G6Demo02', props.height)
+  gc = new G6Creator('G6Demo02', props.height, nodeClick)
   gc.render(data)
-
-  gc.graph.on('node:click', evt => {
-    const id = evt.item._cfg.id
-
-    let one = mockData2.data.nodeList.find(i => i.id === id)
-    if (!one) return
-    console.log(one)
-    Message(`点击了 [${one.groupName}] 中的 [${one.name}]`)
-  })
 })
 
 onBeforeUnmount(() => {

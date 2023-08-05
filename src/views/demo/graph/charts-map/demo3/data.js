@@ -1,7 +1,7 @@
 import { compileFlatState, isEmpty } from '@/utils/util'
 
 // 资产概况图
-const mockData = {
+export const mockData = {
   code: '00',
   message: '操作成功',
   data: {
@@ -680,6 +680,22 @@ function tranformData(data) {
   // console.log(flatData)
   // console.log({ edges, nodes })
   return { edges, nodes }
+}
+
+export function fomatTreeData() {
+  const mapper = (node, disabled = false) => {
+    const mapperNode = {
+      id: node.id,
+      name: node.name,
+      disabled,
+    }
+    if (node.children && node.children.length) {
+      mapperNode.children = node.children.map(item => mapper(item, false))
+    }
+    return mapperNode
+  }
+
+  return mockData.data.children.map(item => mapper(item, true))
 }
 
 export function getMockData() {

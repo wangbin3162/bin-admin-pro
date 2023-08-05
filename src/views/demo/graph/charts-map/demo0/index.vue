@@ -449,17 +449,17 @@ function init() {
     model.fx = e.x
     model.fy = e.y
   }
-  // graph.on('node:dragstart', e => {
-  //   graph.layout()
-  //   refreshDragedNodePosition(e)
-  // })
-  // graph.on('node:drag', e => {
-  //   refreshDragedNodePosition(e)
-  // })
-  // graph.on('node:dragend', e => {
-  //   e.item.get('model').fx = null
-  //   e.item.get('model').fy = null
-  // })
+  graph.on('node:dragstart', e => {
+    graph.layout()
+    refreshDragedNodePosition(e)
+  })
+  graph.on('node:drag', e => {
+    refreshDragedNodePosition(e)
+  })
+  graph.on('node:dragend', e => {
+    e.item.get('model').fx = null
+    e.item.get('model').fy = null
+  })
 
   const loadData = data => {
     const layoutController = graph.get('layoutController')
@@ -530,88 +530,89 @@ function init() {
     graph.render()
   }
 
-  // graph.on('node:mouseenter', e => {
-  //   const item = e.item
-  //   const model = item.getModel()
-  //   if (model.level === 0) {
-  //     return
-  //   }
-  //   highlighting = true
-  //   graph.setAutoPaint(false)
-  //   const nodeItems = graph.getNodes()
-  //   const edgeItems = graph.getEdges()
-  //   nodeItems.forEach(node => {
-  //     graph.setItemState(node, 'dark', true)
-  //     node.getModel().light = false
-  //   })
-  //   graph.setItemState(item, 'dark', false)
-  //   model.light = true
-  //   const tags = model.tags
-  //   const findTagsMap = new Map()
-  //   let mid = 0
+  graph.on('node:mouseenter', e => {
+    const item = e.item
+    const model = item.getModel()
+    if (model.level === 0) {
+      return
+    }
+    highlighting = true
+    graph.setAutoPaint(false)
+    const nodeItems = graph.getNodes()
+    const edgeItems = graph.getEdges()
+    nodeItems.forEach(node => {
+      graph.setItemState(node, 'dark', true)
+      node.getModel().light = false
+    })
+    graph.setItemState(item, 'dark', false)
+    model.light = true
+    const tags = model.tags
+    const findTagsMap = new Map()
+    let mid = 0
 
-  //   let fTag = ''
-  //   // if the model is F node, find the leaves of it
-  //   if (!model.isLeaf && model.level !== 0) {
-  //     fTag = model.tag
-  //     nodeItems.forEach(item => {
-  //       const itemModel = item.getModel()
-  //       if (!itemModel.isLeaf) return
-  //       const modelTags = itemModel.tags
-  //       modelTags.forEach(mt => {
-  //         const mts = mt.split('-')
-  //         if (mts[1] === fTag) {
-  //           graph.setItemState(item, 'dark', false)
-  //           itemModel.light = true
-  //         }
-  //       })
-  //     })
-  //   }
+    let fTag = ''
+    // if the model is F node, find the leaves of it
+    if (!model.isLeaf && model.level !== 0) {
+      fTag = model.tag
+      console.log(fTag)
+      nodeItems.forEach(item => {
+        const itemModel = item.getModel()
+        if (!itemModel.isLeaf) return
+        const modelTags = itemModel.tags
+        modelTags.forEach(mt => {
+          const mts = mt.split('-')
+          if (mts[1] === fTag) {
+            graph.setItemState(item, 'dark', false)
+            itemModel.light = true
+          }
+        })
+      })
+    }
 
-  //   // find the tags
-  //   tags.forEach(t => {
-  //     const ts = t.split('-')
-  //     findTagsMap.set(ts[0], mid)
-  //     mid++
-  //     if (ts[1]) {
-  //       findTagsMap.set(ts[1], mid)
-  //       mid++
-  //     }
-  //   })
-  //   // find the nodes with tag === tags[?]
-  //   nodeItems.forEach(item => {
-  //     const node = item.getModel()
-  //     if (findTagsMap.get(node.tag) !== undefined) {
-  //       graph.setItemState(item, 'dark', false)
-  //       node.light = true
-  //     }
-  //   })
-  //   edgeItems.forEach(item => {
-  //     const source = item.getSource().getModel()
-  //     const target = item.getTarget().getModel()
-  //     if (source.light && target.light) {
-  //       graph.setItemState(item, 'dark', false)
-  //     } else {
-  //       graph.setItemState(item, 'dark', true)
-  //     }
-  //   })
-  //   graph.paint()
-  //   graph.setAutoPaint(true)
-  // })
+    // find the tags
+    tags.forEach(t => {
+      const ts = t.split('-')
+      findTagsMap.set(ts[0], mid)
+      mid++
+      if (ts[1]) {
+        findTagsMap.set(ts[1], mid)
+        mid++
+      }
+    })
+    // find the nodes with tag === tags[?]
+    nodeItems.forEach(item => {
+      const node = item.getModel()
+      if (findTagsMap.get(node.tag) !== undefined) {
+        graph.setItemState(item, 'dark', false)
+        node.light = true
+      }
+    })
+    edgeItems.forEach(item => {
+      const source = item.getSource().getModel()
+      const target = item.getTarget().getModel()
+      if (source.light && target.light) {
+        graph.setItemState(item, 'dark', false)
+      } else {
+        graph.setItemState(item, 'dark', true)
+      }
+    })
+    graph.paint()
+    graph.setAutoPaint(true)
+  })
 
-  // graph.on('node:mouseleave', () => {
-  //   if (highlighting) {
-  //     const nodeItems = graph.getNodes()
-  //     const edgeItems = graph.getEdges()
-  //     highlighting = false
-  //     nodeItems.forEach(item => {
-  //       graph.setItemState(item, 'dark', false)
-  //     })
-  //     edgeItems.forEach(item => {
-  //       graph.setItemState(item, 'dark', false)
-  //     })
-  //   }
-  // })
+  graph.on('node:mouseleave', () => {
+    if (highlighting) {
+      const nodeItems = graph.getNodes()
+      const edgeItems = graph.getEdges()
+      highlighting = false
+      nodeItems.forEach(item => {
+        graph.setItemState(item, 'dark', false)
+      })
+      edgeItems.forEach(item => {
+        graph.setItemState(item, 'dark', false)
+      })
+    }
+  })
 
   // setTimeout(() => {
   //   console.log(mockData)
@@ -710,6 +711,7 @@ function init() {
             parents.push(nodeMap.get(ts[0]))
           }
           if (isChild) {
+            console.log(parents)
             const randomAngle = Math.random() * 2 * Math.PI
             node.x = model.x + (Math.cos(randomAngle) * model.size) / 2 + 10
             node.y = model.y + (Math.sin(randomAngle) * model.size) / 2 + 10

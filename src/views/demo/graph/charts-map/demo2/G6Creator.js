@@ -2,8 +2,9 @@ import G6 from '@antv/g6'
 import insertCss from 'insert-css'
 
 export default class G6Creator {
-  constructor(wrap, height) {
+  constructor(wrap, height, nodeClickFun) {
     if (!wrap) return
+    this.onNodeClick = nodeClickFun
 
     this.container = document.getElementById(wrap)
     this.opts = {
@@ -192,6 +193,11 @@ export default class G6Creator {
     this.graph.on('node:mouseleave', e => {
       const node = e.item
       this.graph.setItemState(node, 'hover', false)
+    })
+
+    this.graph.on('node:click', e => {
+      const model = e.item.getModel()
+      this.onNodeClick && this.onNodeClick(model)
     })
   }
   render(data) {

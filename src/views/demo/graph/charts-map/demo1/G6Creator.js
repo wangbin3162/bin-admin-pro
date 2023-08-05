@@ -3,8 +3,9 @@ import insertCss from 'insert-css'
 const { getLabelPosition, transform } = G6.Util
 
 export default class G6Creator {
-  constructor(wrap, height) {
+  constructor(wrap, height, nodeClickFun) {
     if (!wrap) return
+    this.onNodeClick = nodeClickFun
 
     this.container = document.getElementById(wrap)
     this.opts = {
@@ -93,25 +94,25 @@ export default class G6Creator {
             name: 'name',
           })
           //  连接类型
+          // group.addShape('text', {
+          //   attrs: {
+          //     textBaseline: 'top',
+          //     y: 28,
+          //     x: 4,
+          //     fontSize: 11.5,
+          //     text: '连接类型',
+          //     fill: 'rgba(0, 0, 0, 0.85)',
+          //     cursor: 'pointer',
+          //   },
+          //   name: 'link-type-text',
+          // })
           group.addShape('text', {
             attrs: {
               textBaseline: 'top',
               y: 28,
-              x: 4,
-              fontSize: 11.5,
-              text: '连接类型',
-              fill: 'rgba(0, 0, 0, 0.85)',
-              cursor: 'pointer',
-            },
-            name: 'link-type-text',
-          })
-          group.addShape('text', {
-            attrs: {
-              textBaseline: 'top',
-              y: 28,
-              x: 54,
+              x: 6,
               text: cfg.linkType,
-              fontSize: 11.5,
+              fontSize: 11,
               fill: 'rgba(0, 0, 0, 0.65)',
               cursor: 'pointer',
             },
@@ -254,6 +255,11 @@ export default class G6Creator {
     this.graph.on('node:mouseleave', e => {
       const node = e.item
       this.graph.setItemState(node, 'hover', false)
+    })
+
+    this.graph.on('node:click', e => {
+      const model = e.item.getModel()
+      this.onNodeClick && this.onNodeClick(model)
     })
   }
   render(data) {

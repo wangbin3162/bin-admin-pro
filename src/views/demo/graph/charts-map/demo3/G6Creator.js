@@ -47,7 +47,9 @@ const uDarkColors = [
 ]
 
 const gColors = []
+
 const unlightColorMap = new Map()
+
 lightColors.forEach((lcolor, i) => {
   gColors.push('l(0) 0:' + lcolor + ' 1:' + darkColors[i])
   unlightColorMap.set(gColors[i], 'l(0) 0:' + uLightColors[i] + ' 1:' + uDarkColors[i])
@@ -68,9 +70,9 @@ const mapNodeSize = (nodes, propertyName, visualRange) => {
 }
 
 export default class G6Creator {
-  constructor(wrap, height) {
+  constructor(wrap, height, nodeClickFun) {
     if (!wrap) return
-
+    this.onNodeClick = nodeClickFun
     this.container = document.getElementById(wrap)
 
     this.showNodes = []
@@ -99,152 +101,76 @@ export default class G6Creator {
   }
   // 注册组件
   registerComps() {
+    // 插入css
+    insertCss(`
+      .g6-minimap-wrap {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #fff;
+        box-shadow: 0 0 0 1px #e2e2e2;
+      }
+      .g6-minimap-viewport {
+        border: 2px solid rgb(25, 128, 255);
+      }
+      .g6-component-toolbar li i {
+        font-size: 20px;
+      }
+      .g6-component-tooltip {
+        border: 1px solid #e2e2e2;
+        border-radius: 4px;
+        font-size: 12px;
+        color: #000;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 10px 8px;
+        box-shadow: rgb(174, 174, 174) 0px 0px 10px;
+      }
+    `)
+
+    // 注册minimap
+    this.minimap = new G6.Minimap({
+      className: 'g6-minimap-wrap',
+      size: [150, 100],
+    })
+    this.tooltip = new G6.Tooltip({
+      offsetX: 10,
+      offsetY: 10,
+      fixToNode: [1, 0.5],
+      // the types of items that allow the tooltip show up
+      // 允许出现 tooltip 的 item 类型
+      itemTypes: ['node'],
+      // custom the tooltip's content
+      // 自定义 tooltip 内容
+      getContent: e => {
+        const model = e.item.getModel()
+        const outDiv = document.createElement('div')
+        outDiv.style.width = 'fit-content'
+        outDiv.style.height = 'fit-content'
+
+        if (model.level > 0) {
+          outDiv.innerHTML = `表名：${model.name}`
+        } else {
+          outDiv.innerHTML = `${model.name} (${model.childrenNum})`
+        }
+        return outDiv
+      },
+    })
     G6.registerNode(
       'bubble',
       {
         drawShape(cfg, group) {
-          const self = this
           const r = cfg.size / 2
-          // a circle by path
-          const path = [
-            ['M', -r, 0],
-            ['C', -r, r / 2, -r / 2, r, 0, r],
-            ['C', r / 2, r, r, r / 2, r, 0],
-            ['C', r, -r / 2, r / 2, -r, 0, -r],
-            ['C', -r / 2, -r, -r, -r / 2, -r, 0],
-            ['Z'],
-          ]
-          const keyShape = group.addShape('path', {
+          const keyShape = group.addShape('circle', {
             attrs: {
               x: 0,
               y: 0,
-              path,
+              r,
               fill: cfg.color || 'steelblue',
+              cursor: 'pointer',
             },
-            // must be assigned in G6 3.3 and later versions. it can be any string you want, but should be unique in a custom item type
             name: 'path-shape',
           })
-          const mask = group.addShape('path', {
-            attrs: {
-              x: 0,
-              y: 0,
-              path,
-              opacity: 0.25,
-              fill: cfg.color || 'steelblue',
-              shadowColor: cfg.color.split(' ')[2].substr(2),
-              shadowBlur: 40,
-              shadowOffsetX: 0,
-              shadowOffsetY: 30,
-            },
-            // must be assigned in G6 3.3 and later versions. it can be any string you want, but should be unique in a custom item type
-            name: 'mask-shape',
-          })
-          const spNum = 10 // split points number
-          const directions = [],
-            rs = []
-          self.changeDirections(spNum, directions)
-          for (let i = 0; i < spNum; i++) {
-            const rr = r + directions[i] * ((Math.random() * r) / 1000) // +-r/6, the sign according to the directions
-            if (rs[i] < 0.97 * r) rs[i] = 0.97 * r
-            else if (rs[i] > 1.03 * r) rs[i] = 1.03 * r
-            rs.push(rr)
-          }
-          keyShape.animate(
-            () => {
-              const path = self.getBubblePath(r, spNum, directions, rs)
-              return { path }
-            },
-            {
-              repeat: true,
-              duration: 10000,
-            },
-          )
-          const directions2 = [],
-            rs2 = []
-          self.changeDirections(spNum, directions2)
-          for (let i = 0; i < spNum; i++) {
-            const rr = r + directions2[i] * ((Math.random() * r) / 1000) // +-r/6, the sign according to the directions
-            if (rs2[i] < 0.97 * r) rs2[i] = 0.97 * r
-            else if (rs2[i] > 1.03 * r) rs2[i] = 1.03 * r
-            rs2.push(rr)
-          }
-          mask.animate(
-            () => {
-              const path = self.getBubblePath(r, spNum, directions2, rs2)
-              return { path }
-            },
-            {
-              repeat: true,
-              duration: 10000,
-            },
-          )
           return keyShape
-        },
-        changeDirections(num, directions) {
-          for (let i = 0; i < num; i++) {
-            if (!directions[i]) {
-              const rand = Math.random()
-              const dire = rand > 0.5 ? 1 : -1
-              directions.push(dire)
-            } else {
-              directions[i] = -1 * directions[i]
-            }
-          }
-          return directions
-        },
-        getBubblePath(r, spNum, directions, rs) {
-          const path = []
-          const cpNum = spNum * 2 // control points number
-          const unitAngle = (Math.PI * 2) / spNum // base angle for split points
-          let angleSum = 0
-          const sps = []
-          const cps = []
-          for (let i = 0; i < spNum; i++) {
-            const speed = 0.001 * Math.random()
-            rs[i] = rs[i] + directions[i] * speed * r // +-r/6, the sign according to the directions
-            if (rs[i] < 0.97 * r) {
-              rs[i] = 0.97 * r
-              directions[i] = -1 * directions[i]
-            } else if (rs[i] > 1.03 * r) {
-              rs[i] = 1.03 * r
-              directions[i] = -1 * directions[i]
-            }
-            const spX = rs[i] * Math.cos(angleSum)
-            const spY = rs[i] * Math.sin(angleSum)
-            sps.push({ x: spX, y: spY })
-            for (let j = 0; j < 2; j++) {
-              const cpAngleRand = unitAngle / 3
-              const cpR = rs[i] / Math.cos(cpAngleRand)
-              const sign = j === 0 ? -1 : 1
-              const x = cpR * Math.cos(angleSum + sign * cpAngleRand)
-              const y = cpR * Math.sin(angleSum + sign * cpAngleRand)
-              cps.push({ x, y })
-            }
-            angleSum += unitAngle
-          }
-          path.push(['M', sps[0].x, sps[0].y])
-          for (let i = 1; i < spNum; i++) {
-            path.push([
-              'C',
-              cps[2 * i - 1].x,
-              cps[2 * i - 1].y,
-              cps[2 * i].x,
-              cps[2 * i].y,
-              sps[i].x,
-              sps[i].y,
-            ])
-          }
-          path.push([
-            'C',
-            cps[cpNum - 1].x,
-            cps[cpNum - 1].y,
-            cps[0].x,
-            cps[0].y,
-            sps[0].x,
-            sps[0].y,
-          ])
-          path.push(['Z'])
-          return path
         },
         setState(name, value, item) {
           const shape = item.get('keyShape')
@@ -274,6 +200,7 @@ export default class G6Creator {
       {
         setState(name, value, item) {
           const shape = item.get('keyShape')
+          shape.attr('cursor', 'pointer')
           const label = shape.get('parent').get('children')[1]
           if (name === 'disappearing' && value) {
             shape.animate(
@@ -341,12 +268,19 @@ export default class G6Creator {
                 label.attr('fill', '#697B8C')
               }
             }
+          } else if (name === 'selected') {
+            if (value) {
+              shape.attr('fill', shape.attrs.stroke)
+              shape.attr('fillOpacity', 0.3)
+            } else {
+              shape.attr('fill', '#fff')
+              shape.attr('fillOpacity', 1)
+            }
           }
         },
       },
       'circle',
     )
-
     G6.registerEdge(
       'animate-line',
       {
@@ -408,11 +342,11 @@ export default class G6Creator {
     const { width, height } = this.opts
     const layoutCfg = {
       type: 'force',
-      nodeSize: d => d.size / 2 + 10,
-      nodeStrength: 2500,
-      collideStrength: 0.8,
-      alphaDecay: 0.01,
-      preventOverlap: true,
+      nodeSize: d => d.size / 2 + 5,
+      preventOverlap: true, //是否防止重叠
+      nodeStrength: 2500, // 节点作用力，正数代表节点之间的引力作用，负数代表节点之间的斥力作用
+      collideStrength: 0.8, // 防止重叠的力强度，范围 [0, 1]
+      alphaDecay: 0.01, // 迭代阈值的衰减率。范围 [0, 1]。0.028 对应迭代数为 300
       onTick: () => {
         const nodeItems = this.graph.getNodes()
         const height = this.graph.get('height')
@@ -437,6 +371,7 @@ export default class G6Creator {
       modes: {
         default: ['drag-canvas'],
       },
+      plugins: [this.minimap, this.tooltip],
       defaultNode: {
         type: 'bubble',
         size: 95,
@@ -456,14 +391,22 @@ export default class G6Creator {
 
     this.graph.get('canvas').set('localRefresh', false)
   }
+  refreshDragedNodePosition(e) {
+    const model = e.item.get('model')
+    model.fx = e.x
+    model.fy = e.y
+  }
   addEvents() {
     // click root to expand
     this.graph.on('node:click', e => {
       this.curShowNodes = []
       this.curShowEdges = []
-      const item = e.item
-      const model = item.getModel()
-      if (!model.isLeaf && model.level !== 0) {
+      const model = e.item.getModel()
+      if (model.isLeaf) {
+        this.clickTable(e.item)
+        return
+      }
+      if (model.level > 0) {
         return
       }
       // 点击根节点，隐藏不相关的节点，展开相关节点
@@ -471,10 +414,11 @@ export default class G6Creator {
         const layoutController = this.graph.get('layoutController')
         const forceLayout = layoutController.layoutMethods[0]
         forceLayout.forceSimulation.stop()
-        // light the level 0 nodes
+        // 高亮根节点 light the level 0 nodes
         this.showNodes.forEach(snode => {
-          const item = this.graph.findById(snode.id)
-          this.graph.setItemState(item, 'dark', false)
+          // 先设置根元素dark模式为false
+          this.setStateByID(snode.id, 'dark', false)
+
           if (snode.x < 0.5 * this.opts.width) {
             snode.x = 300
           } else {
@@ -484,63 +428,53 @@ export default class G6Creator {
         model.x = this.opts.width / 2
         model.y = this.opts.height / 2
         // animatively hide the items which are going to disappear
-        //动画地隐藏将要消失的项目
+        // 如果有将要消失的 边线，则动画隐藏
         if (this.curShowEdges.length) {
-          this.curShowEdges.forEach(csedge => {
-            const item = this.graph.findById(csedge.id)
-            item && this.graph.setItemState(item, 'disappearing', true)
-          })
+          this.disappearingItem(this.curShowEdges)
         }
-        this.curShowNodes.forEach(csnode => {
-          const item = this.graph.findById(csnode.id)
-          item && this.graph.setItemState(item, 'disappearing', true)
-        })
+        // 如果有将要消失的节点
+        if (this.curShowNodes.length) {
+          this.disappearingItem(this.curShowNodes)
+        }
         this.graph.positionsAnimate()
 
-        // reset curShowNodes nad curShowEdges
+        // reset curShowNodes nad curShowEdges 隐藏完毕后充值两个集合
         this.curShowNodes = []
         this.curShowEdges = []
 
         // click on the same node which is the current focus node, hide the small nodes, change the layout parameters to roots view
         //单击当前焦点节点的同一节点，隐藏小节点，将布局参数更改为根视图
         if (this.currentFocus && this.currentFocus.id === model.id) {
-          this.currentFocus = undefined
-          layoutController.layoutCfg.nodeStrength = 2500
-          layoutController.layoutCfg.collideStrength = 0.8
-          layoutController.layoutCfg.alphaDecay = 0.01
+          this.setRootView()
         } else {
           // click other focus node, hide the current small nodes and show the related nodes
           //单击其他焦点节点，隐藏当前小节点，显示相关节点
           this.currentFocus = model
           // change data after the original items disappearing
-          //在原始项消失后更改数据
           const layoutController = this.graph.get('layoutController')
-          layoutController.layoutCfg.nodeStrength = () => {
-            return -80
-          }
+          layoutController.layoutCfg.nodeStrength = () => -80
           layoutController.layoutCfg.collideStrength = 0.2
-          layoutController.layoutCfg.linkDistance = d => {
-            if (d.source.level !== 0) return 120
-            const length = 250
-            return length
-          }
-          layoutController.layoutCfg.edgeStrength = () => {
-            return 2
-          }
+          layoutController.layoutCfg.edgeStrength = () => 2
+          layoutController.layoutCfg.linkDistance = () => 200
 
+          const mId = model.id
           this.curShowNodesMap = new Map()
-          //查找已单击模型的后代节点
+          // 查找已单击模型的后代节点
           this.nodes.forEach(node => {
             if (!node.parents) return
-            const parents = []
-            const ts = node.parents
-            parents.push(this.nodeMap.get(ts[0].id))
 
-            if (node.level > 0) {
+            const tlength = node.parents.length
+            let isChild = false
+            const parents = []
+            for (let i = 0; i < tlength; i++) {
+              const ts = node.parents[i]
+              if (ts.id === mId) isChild = true
+              parents.push(this.nodeMap.get(ts.id))
+            }
+            if (isChild) {
               const randomAngle = Math.random() * 2 * Math.PI
               node.x = model.x + (Math.cos(randomAngle) * model.size) / 2 + 10
               node.y = model.y + (Math.sin(randomAngle) * model.size) / 2 + 10
-
               if (!node.style) node.style = {}
               node.style.lineWidth = 0
               node.style.opacity = 1
@@ -556,10 +490,10 @@ export default class G6Creator {
                   color = model.color.split(' ')[1].substr(2)
                 }
                 node.color = color
-                node.style.fill = color
                 node.style.fill = '#fff'
                 node.style.lineWidth = 1
-                node.size = 60
+                node.size = 50
+                node.cursor = 'pointer'
                 node.labelCfg = {
                   style: {
                     fontSize: 11,
@@ -574,6 +508,7 @@ export default class G6Creator {
                 if (!node.style) node.style = {}
                 node.color = model.color
                 node.style.fill = model.color
+                node.cursor = 'pointer'
                 node.labelCfg = {
                   style: {
                     fill: '#fff',
@@ -584,7 +519,6 @@ export default class G6Creator {
               }
               this.curShowNodes.push(node)
               this.curShowNodesMap.set(node.id, node)
-
               // add the edge connect from model to node which exists in edges
               const edgeId = `${model.id}-${node.id}`
               const edge = this.edgesMap.get(edgeId)
@@ -596,7 +530,7 @@ export default class G6Creator {
           })
 
           // find the edges whose target end source are in the curShowNodes
-          //查找目标端源在curShowNodes中的边
+          // 查找目标端源在curShowNodes中的边
           this.curShowNodes.forEach((nu, i) => {
             const lu = nu.level
             this.curShowNodes.forEach((nv, j) => {
@@ -638,6 +572,8 @@ export default class G6Creator {
           })
         }, 400)
       }
+
+      // this._logStates()
     })
 
     this.graph.on('canvas:click', () => {
@@ -681,12 +617,174 @@ export default class G6Creator {
         }, 400)
       }
     })
+
+    this.graph.on('node:dragstart', e => {
+      this.graph.layout()
+      this.refreshDragedNodePosition(e)
+    })
+    this.graph.on('node:drag', e => {
+      this.refreshDragedNodePosition(e)
+    })
+    this.graph.on('node:dragend', e => {
+      e.item.get('model').fx = null
+      e.item.get('model').fy = null
+    })
+
+    this.graph.on('node:mouseenter', e => {
+      const item = e.item
+      const model = e.item.getModel()
+      const group = e.item.getContainer()
+      const label = group.find(element => element.get('className') === 'node-label')
+      if (label) {
+        label.attr('cursor', 'pointer')
+      }
+      if (model.level === 0) return
+
+      this.highlighting = true
+      this.graph.setAutoPaint(false)
+      const nodeItems = this.graph.getNodes()
+      const edgeItems = this.graph.getEdges()
+      nodeItems.forEach(node => {
+        this.graph.setItemState(node, 'dark', true)
+        node.getModel().light = false
+      })
+      this.graph.setItemState(item, 'dark', false)
+      model.light = true
+
+      const tags = model.parents
+      const findTagsMap = new Map()
+
+      let mid = 0
+      // find the tags
+      tags.forEach(t => {
+        findTagsMap.set(t.id, mid)
+        mid++
+      })
+      // find the nodes with tag === tags[?]
+      nodeItems.forEach(item => {
+        const node = item.getModel()
+        if (findTagsMap.get(node.id) !== undefined) {
+          this.graph.setItemState(item, 'dark', false)
+          node.light = true
+        }
+      })
+
+      edgeItems.forEach(item => {
+        const source = item.getSource().getModel()
+        const target = item.getTarget().getModel()
+        if (source.light && target.light) {
+          this.graph.setItemState(item, 'dark', false)
+        } else {
+          this.graph.setItemState(item, 'dark', true)
+        }
+      })
+      this.graph.paint()
+      this.graph.setAutoPaint(true)
+    })
+
+    this.graph.on('node:mouseleave', e => {
+      const group = e.item.getContainer()
+      const label = group.find(element => element.get('className') === 'node-label')
+      if (label) {
+        label.attr('cursor', 'default')
+      }
+      if (this.highlighting) {
+        const nodeItems = this.graph.getNodes()
+        const edgeItems = this.graph.getEdges()
+        this.highlighting = false
+        nodeItems.forEach(item => {
+          this.graph.setItemState(item, 'dark', false)
+        })
+        edgeItems.forEach(item => {
+          this.graph.setItemState(item, 'dark', false)
+        })
+      }
+    })
   }
-  render(data) {
+  // 打印当前状态
+  _logStates() {
+    const {
+      showNodes,
+      showEdges,
+      curShowNodes,
+      curShowEdges,
+      nodes,
+      edges,
+      nodeMap,
+      edgesMap,
+      curShowNodesMap,
+      highlighting,
+      currentFocus,
+    } = this
+    console.log({
+      showNodes,
+      showEdges,
+      curShowNodes,
+      curShowEdges,
+      nodes,
+      edges,
+      nodeMap,
+      edgesMap,
+      curShowNodesMap,
+      highlighting,
+      currentFocus,
+    })
+  }
+  // 根据id设置状态
+  setStateByID(id, state, value) {
+    const item = this.graph.findById(id)
+    item && this.graph.setItemState(item, state, value)
+  }
+  // 隐藏边线或者是节点
+  disappearingItem(list = []) {
+    list.forEach(csnode => {
+      const item = this.graph.findById(csnode.id)
+      item && this.graph.setItemState(item, 'disappearing', true)
+    })
+  }
+  // 设置根视图
+  setRootView() {
     const layoutController = this.graph.get('layoutController')
+    this.currentFocus = undefined
     layoutController.layoutCfg.nodeStrength = 2500
     layoutController.layoutCfg.collideStrength = 0.8
-    layoutController.layoutCfg.alphaDecay = 0.01
+    layoutController.layoutCfg.alphaDecay = 0.02
+  }
+  // 点击一个表的逻辑
+  clickTable(item) {
+    const model = item.getModel()
+
+    // 清除所有节点的选中状态
+    this.graph.getNodes().forEach(node => {
+      this.graph.setItemState(node, 'selected', false)
+    })
+
+    // 设置当前节点为选中状态
+    this.graph.setItemState(item, 'selected', true)
+
+    this.onNodeClick && this.onNodeClick(model)
+  }
+  // 根据id设置一个节点的点击状态
+  setSelected(id) {
+    if (this.currentFocus) return
+    const node = this.nodes.find(i => i.id === id)
+    // 获取父级节点的id
+    const parents = node.parents
+    if (parents && parents.length > 0) {
+      const parentId = parents[0].id
+
+      const parentItem = this.graph.findById(parentId)
+
+      // 手动触发一个点击事件
+      this.graph.emit('node:click', { item: parentItem })
+      setTimeout(() => {
+        const item = this.graph.findById(id)
+        item && this.clickTable(item)
+      }, 400)
+    }
+  }
+  render(data) {
+    this.setRootView()
 
     this.nodes = data.nodes
     this.edges = data.edges
@@ -707,9 +805,9 @@ export default class G6Creator {
         node.labelCfg = {
           size: 40,
           style: {
-            fontSize: 25,
+            fontSize: 14,
+            lineHeight: 20,
             fill: '#fff',
-            fontWeight: 300,
           },
         }
         node.x = Math.random() * 800
