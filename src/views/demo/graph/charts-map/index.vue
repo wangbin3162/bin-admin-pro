@@ -2,7 +2,7 @@
   <div class="panel">
     <b-tabs v-model="activeTab" :data="tabs" type="card"></b-tabs>
     <div class="content-box">
-      <Demo0 v-if="activeTab === 'tab0'" />
+      <!-- <Demo0 v-if="activeTab === 'tab0'" /> -->
       <Demo1 v-if="activeTab === 'tab1'" />
       <Demo2 v-if="activeTab === 'tab2'" />
       <Demo3 v-if="activeTab === 'tab3'" />
@@ -12,14 +12,14 @@
 
 <script setup>
 import { ref } from 'vue'
-import Demo0 from './demo0/index.vue'
+// import Demo0 from './demo0/index.vue'
 import Demo1 from './demo1/demo1.vue'
 import Demo2 from './demo2/demo2.vue'
 import Demo3 from './demo3/demo3.vue'
 
-const activeTab = ref('tab3')
+const activeTab = ref('tab1')
 const tabs = ref([
-  { key: 'tab0', title: '测试0' },
+  // { key: 'tab0', title: '测试0' },
   { key: 'tab1', title: '数据链路' },
   { key: 'tab2', title: '数据分组' },
   { key: 'tab3', title: '数据库概览' },
