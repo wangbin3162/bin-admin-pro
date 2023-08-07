@@ -27,7 +27,7 @@ export const LIBRAY_MAP = {
   QZ: '前置库',
   CS: '贴源库',
   ZX: '中心库',
-  OTHER: '其他库',
+  OTHER: '专题库',
 }
 
 export function getMockData(data) {
@@ -109,7 +109,7 @@ export function getMockData(data) {
     ],
   }
 
-  // 需要返回4个库,分别喂前置,贴源,中心,其他库
+  // 需要返回4个库,分别喂前置,贴源,中心,专题库
   // const all = [...relationMap.QZ, ...relationMap.CS, ...relationMap.ZX, ...relationMap.OTHER]
 
   // const mapData = {

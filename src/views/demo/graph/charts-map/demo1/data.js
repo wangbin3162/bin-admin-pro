@@ -26,7 +26,7 @@ export const LIBRAY_MAP = {
   QZ: '前置库',
   CS: '贴源库',
   ZX: '中心库',
-  OTHER: '其他库',
+  OTHER: '专题库',
 }
 
 // 扩展设置位置信息
