@@ -271,4 +271,9 @@ export default class G6Creator {
     this.graph.clear()
     this.graph.destroy()
   }
+  resize() {
+    if (!this.graph || this.graph.get('destroyed')) return
+    if (!this.container || !this.container.clientWidth || !this.container.clientHeight) return
+    this.graph.changeSize(this.container.clientWidth, this.container.clientHeight)
+  }
 }
