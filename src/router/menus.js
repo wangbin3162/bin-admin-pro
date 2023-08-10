@@ -80,6 +80,10 @@ export default [
         name: 'FuncTiptap',
         title: '富文本编辑器',
       },
+      {
+        name: 'DynamicEffect',
+        title: '动效',
+      },
     ],
   },
   {

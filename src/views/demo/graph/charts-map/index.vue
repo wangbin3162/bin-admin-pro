@@ -1,13 +1,15 @@
 <template>
-  <div class="panel">
-    <b-tabs v-model="activeTab" :data="tabs" type="card"></b-tabs>
-    <div class="content-box">
-      <!-- <Demo0 v-if="activeTab === 'tab0'" /> -->
-      <Demo1 v-if="activeTab === 'tab1'" />
-      <Demo2 v-if="activeTab === 'tab2'" />
-      <Demo3 v-if="activeTab === 'tab3'" />
+  <page-container desc="不同样式的关系图">
+    <div class="panel">
+      <b-tabs v-model="activeTab" :data="tabs" type="card"></b-tabs>
+      <div class="content-box">
+        <!-- <Demo0 v-if="activeTab === 'tab0'" /> -->
+        <Demo1 v-if="activeTab === 'tab1'" />
+        <Demo2 v-if="activeTab === 'tab2'" />
+        <Demo3 v-if="activeTab === 'tab3'" />
+      </div>
     </div>
-  </div>
+  </page-container>
 </template>
 
 <script setup>
@@ -28,7 +30,6 @@ const tabs = ref([
 
 <style lang="stylus" scoped>
 .panel {
-  padding: 16px;
   .content-box {
     background-color: #fff;
     padding: 10px;
