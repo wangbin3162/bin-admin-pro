@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia'
 import { addRoutes, asyncRouterMap } from '@/router/routes'
+import { deepCopy } from '@/utils/util'
+import { useSettingStoreWithOut } from './setting'
 
 const useMenu = defineStore('menu', {
   state: () => ({
     routes: [],
     addRouters: [], // 左侧菜单栏的缓存路由
     menu: [], // 原始菜单
-    menuItems: [], // 平铺菜单
+    menuItems: [], // 平铺菜单,
+    topNavActive: '', // 如果是mixed混合模式菜单，则需要保存顶部缓存的菜单
   }),
   getters: {
     navMenu() {
@@ -14,6 +17,25 @@ const useMenu = defineStore('menu', {
     },
     navMenuItems() {
       return this.menuItems
+    },
+    // 侧边菜单集合
+    sideMenus() {
+      const settingStore = useSettingStoreWithOut()
+
+      //  常规布局
+      if (settingStore.setting.menuType === 'default') {
+        return deepCopy(this.menu)
+      } else {
+        // 混合布局
+        const currentMenu = this.menu.find(i => i.name === this.topNavActive)
+        if (!currentMenu) return []
+        // 如果只有一个菜单，则返回自己即可
+        if (currentMenu.parents[0] === this.topNavActive && !currentMenu.children) {
+          return [currentMenu]
+        } else {
+          return deepCopy(currentMenu.children)
+        }
+      }
     },
     allMenuItems() {
       const functions = this.menu
@@ -46,6 +68,22 @@ const useMenu = defineStore('menu', {
       this.menu = setMenu(menus)
       this.menuItems = menuItems
       return { menu, menuItems }
+    },
+    // 根据一个菜单名字，设置顶部开启nav的值
+    setTopNavActive(name) {
+      if (name === 'Redirect') return
+      const currentMenu = this.menuItems.find(i => i.name === name)
+      if (!currentMenu) {
+        console.warn('setTopNavActive: currentMenu is null [name is ' + name + ' ]')
+      }
+      // 如果只是一个单独的组件，且父级0节点也是自身，标识这个菜单就是个孤独菜单，这时候设置为自己
+      if (currentMenu.parents[0] === name) {
+        this.topNavActive = name
+      } else {
+        if (currentMenu && currentMenu.parents[0]) {
+          this.topNavActive = currentMenu.parents[0]
+        }
+      }
     },
   },
 })

@@ -6,10 +6,11 @@ import {
   setPrimaryColor,
   setThemeMode,
 } from '@/config/setting.cfg'
+import { store } from '@/store'
 
 const useSetting = defineStore('setting', {
   state: () => ({
-    setting: { ...setting },
+    setting,
   }),
   getters: {
     asideStyle() {
@@ -71,3 +72,8 @@ const useSetting = defineStore('setting', {
 })
 
 export default useSetting
+
+// 是专门提供给外部文件使用的方法
+export function useSettingStoreWithOut() {
+  return useSetting(store)
+}

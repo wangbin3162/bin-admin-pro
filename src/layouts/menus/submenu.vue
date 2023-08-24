@@ -4,7 +4,7 @@
       <i v-if="menu.icon" :class="`b-iconfont b-icon-${menu.icon}`"></i>
       <span>{{ menu.title }}</span>
     </template>
-    <template v-for="(child,childIndex) in menu.children" :key="childIndex">
+    <template v-for="child in menu.children" :key="child.name">
       <menu-item v-if="!child.children" :menu="child"></menu-item>
       <submenu v-else :menu="child"></submenu>
     </template>
@@ -21,8 +21,7 @@ export default {
     menu: {
       type: Object,
       required: false,
-      default: () => {
-      },
+      default: () => {},
     },
   },
 }

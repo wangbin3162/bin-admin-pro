@@ -9,6 +9,7 @@ const { getPalette, mixBlack, alpha } = Utils.color
 export default {
   theme: 'dark',
   menuTheme: '#001529',
+  menuType: 'default', // default: 常规布局 mixed: 混合布局
   systemPrimary: '#3366ff',
   sidebar: true, // 侧边栏开启状态
   sidebarWidth: 256, // 侧边栏宽度
@@ -20,6 +21,7 @@ export default {
   showSearch: true,
   showMessage: true,
   showCollapse: true,
+  routerTransitionName: 'fade-transverse',
   contentFull: false, // 中间内容区域是否撑满
 }
 

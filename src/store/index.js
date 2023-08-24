@@ -9,9 +9,9 @@ import useLinks from './modules/links'
 import useTags from './modules/tags'
 import useTodoList from './modules/todolist'
 
+const store = createPinia()
 // 注册store及插件信息
 export function setupStore(app) {
-  const store = createPinia()
   store.use(
     piniaPlugin({
       key: 'store',
@@ -34,3 +34,5 @@ export function useStore() {
     globalStore: useGlobal(),
   }
 }
+
+export { store }

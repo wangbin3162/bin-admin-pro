@@ -5,6 +5,14 @@
     <div class="setting-panel">
       <theme-panel />
       <h3 class="setting-title"><span>功能设置</span></h3>
+
+      <div class="setting-list-item">
+        <span>菜单类型</span>
+        <b-select v-model="setting.menuType" size="small" style="width: 150px">
+          <b-option label="常规布局" value="default"></b-option>
+          <b-option label="混合布局" value="mixed"></b-option>
+        </b-select>
+      </div>
       <div class="setting-list-item">
         <span>菜单宽度</span>
         <b-input-number
@@ -45,10 +53,23 @@
           <b-option label="圆滑" value="smooth"></b-option>
         </b-select>
       </div>
+      <div class="setting-list-item" v-if="setting.routerTransitionName">
+        <span>路由动画</span>
+        <b-select v-model="setting.routerTransitionName" size="small" style="width: 150px">
+          <b-option label="fade-transverse" value="fade-transverse"></b-option>
+          <b-option label="fade-scale" value="fade-scale"></b-option>
+          <b-option label="fade-scale-move" value="fade-scale-move"></b-option>
+          <b-option label="fade-down" value="fade-down"></b-option>
+          <b-option label="zoom-in" value="zoom-in"></b-option>
+          <b-option label="zoom-in-center" value="zoom-in-center"></b-option>
+          <b-option label="move-left" value="move-left"></b-option>
+          <b-option label="move-right" value="move-right"></b-option>
+        </b-select>
+      </div>
       <h3 class="setting-title"><span>顶栏设置</span></h3>
       <div class="setting-list-item">
         <span>菜单折叠</span>
-        <b-switch v-model="setting.showCollapse">
+        <b-switch v-model="setting.showCollapse" :disabled="setting.menuType === 'mixed'">
           <template #open><span>开</span></template>
           <template #close><span>关</span></template>
         </b-switch>

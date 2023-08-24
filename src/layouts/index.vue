@@ -22,11 +22,11 @@
       <global-header />
       <div class="layout-content-wrap">
         <router-view v-slot="{ Component, route }">
-          <b-move-transition>
+          <Transition :name="setting.routerTransitionName" mode="out-in">
             <keep-alive :include="cachedViews">
               <component :is="Component" :key="route.path"></component>
             </keep-alive>
-          </b-move-transition>
+          </Transition>
         </router-view>
         <!-- <global-footer></global-footer> -->
       </div>

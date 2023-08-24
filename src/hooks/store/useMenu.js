@@ -1,17 +1,26 @@
 import { useRouter, useRoute } from 'vue-router'
 import { HOME_PATH } from '@/router/menus'
 import { useStore } from '@/store'
+import { computed } from 'vue'
+import { deepCopy } from '@/utils/util'
 
 export default function useMenu() {
   const { menuStore, tagsStore, storeToRefs } = useStore()
-  const { navMenu, navMenuItems, addRouters, allMenuItems } = storeToRefs(menuStore)
+  const { navMenu, navMenuItems, addRouters, allMenuItems, topNavActive, sideMenus } =
+    storeToRefs(menuStore)
   const $router = useRouter()
   const $route = useRoute()
+
+  const topMenuTabs = computed(() => deepCopy(navMenu.value))
 
   // 获取菜单项名称路径
   function getMenuItemNamePath(name) {
     const activeRoute = navMenuItems.value.find(item => item.name === name)
-    return activeRoute ? activeRoute.parents : []
+    return activeRoute
+      ? topNavActive.value
+        ? activeRoute.parents.slice(1)
+        : activeRoute.parents
+      : []
   }
 
   // 获取当前
@@ -64,8 +73,15 @@ export default function useMenu() {
     return getCurrentMenu($route.name)
   }
 
+  function setTopNavActive(name) {
+    menuStore.setTopNavActive(name)
+  }
+
   return {
+    topNavActive,
+    topMenuTabs,
     navMenu,
+    sideMenus,
     navMenuItems,
     addRouters,
     allMenuItems,
@@ -73,5 +89,6 @@ export default function useMenu() {
     getBreadcrumbData,
     getMenuItemNamePath,
     handleMenuSelect,
+    setTopNavActive,
   }
 }
