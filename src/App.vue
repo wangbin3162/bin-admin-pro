@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <b-config-provider themeName="dark" :theme="{ colorPrimary: 'rgb(22,293,255)' }">
+    <router-view />
+  </b-config-provider>
 </template>
 
 <script setup>
