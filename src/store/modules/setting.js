@@ -44,9 +44,9 @@ const useSetting = defineStore('setting', {
     loadApp() {
       // console.log('============ load app ==============')
       this.setting.contentFull = false
-      setThemeMode(this.setting.theme)
-      setPrimaryColor(this.setting.systemPrimary)
-      setMenuTheme(this.setting.menuTheme)
+      // setThemeMode(this.setting.theme)
+      // setPrimaryColor(this.setting.systemPrimary)
+      // setMenuTheme(this.setting.menuTheme)
     },
     themChange(theme) {
       // 设置默认浅色和主色时需要自定义menu色值

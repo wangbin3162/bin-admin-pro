@@ -1,7 +1,12 @@
-import { h, inject, computed, defineComponent, provide } from 'vue'
+import { h, inject, computed, defineComponent, provide, onMounted, watch } from 'vue'
 import { configProviderProps } from './types'
 import { configProviderInjectionKey } from './context'
 import { deepCopy, deepMerge } from '@/utils/util'
+import {
+  convertObjectPropsToCSSVariables,
+  setAttrVar,
+  setObjectPropsCSSVariables,
+} from '../../config-util'
 
 export default defineComponent({
   name: 'BConfigProvider',
@@ -37,7 +42,35 @@ export default defineComponent({
         return locale === undefined ? BConfigProvider?.mergedLocaleRef.value : locale
       }),
       mergedThemeRef,
+      mergedThemeNameRef,
     })
+
+    onMounted(() => {
+      setVariablesToDomNode()
+    })
+
+    function setVariablesToDomNode() {
+      const el = props.normalNodeId ? document.getElementById(props.normalNodeId) : document.body
+      // 如果是虚拟模式，则追加属性至dom节点
+      if (props.abstract && props.themeName) {
+        if (el) {
+          setAttrVar('theme-name', props.themeName, el)
+        }
+      }
+      // 如果禁用样式注入，则需要注入到html
+      if (props.inlineThemeDisabled || props.abstract) {
+        setObjectPropsCSSVariables(mergedThemeRef.value ?? {}, el)
+      }
+    }
+
+    watch(
+      () => props.themeName,
+      () => {
+        setVariablesToDomNode()
+      },
+      { flush: true },
+    )
+
     return {
       mergedThemeName: mergedThemeNameRef,
       mergedTheme: mergedThemeRef,
@@ -50,6 +83,9 @@ export default defineComponent({
           {
             class: 'b-config-provider',
             'theme-name': this.mergedThemeName,
+            style: this.inlineThemeDisabled
+              ? {}
+              : convertObjectPropsToCSSVariables(this.mergedTheme ?? {}),
           },
           this.$slots.default?.(),
         )
