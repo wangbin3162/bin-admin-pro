@@ -56,16 +56,16 @@
 </template>
 
 <script>
-import useApp from '@/hooks/store/useApp'
 import { useStore } from '@/store'
 
 export default {
   name: 'top-box',
   setup() {
-    const { todolistStore, userStore, storeToRefs } = useStore()
-    const { todoLabel } = storeToRefs(todolistStore)
+    const { userStore, settingStore, appStore, storeToRefs } = useStore()
+
     const { welcomeTitle, currentDate } = storeToRefs(userStore)
-    const { weather, setting } = useApp()
+    const { setting } = storeToRefs(settingStore)
+    const { todoLabel, weather } = storeToRefs(appStore)
 
     return {
       welcomeTitle,

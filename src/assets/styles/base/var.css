@@ -1,0 +1,16 @@
+:root {
+  /* 自定义主题变量，明明规范 v开头，类别首字母开头，定义变量时类似 vGTextColor */
+
+  /* 全局 global */
+  --v-g-text-color: #515a6e;
+  --v-g-primary-color: var(--bin-color-primary);
+  --v-g-bg-color: #fff;
+
+  /* 头部 header */
+  --v-h-height: 60px;
+
+  /* 侧边栏 sider */
+  --v-s-width: 220px;
+
+  /* 内容区域 content */
+}

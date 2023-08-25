@@ -5,11 +5,9 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
-import { useStore } from '@/store'
+// import { onMounted } from 'vue'
+// import { useStore } from '@/store'
 
-onMounted(() => {
-  const { settingStore } = useStore()
-  settingStore.loadApp()
-})
+// onMounted(() => {
+// })
 </script>

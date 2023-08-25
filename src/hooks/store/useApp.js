@@ -2,9 +2,9 @@ import { useStore } from '@/store'
 import { MENU_THEME_COLOR_LIST, SYSTEM_PRIMARY_COLOR_LIST } from '@/config/setting.cfg'
 
 export default function useApp() {
-  const { settingStore, globalStore, tagsStore, storeToRefs } = useStore()
+  const { settingStore, appStore, tagsStore, storeToRefs } = useStore()
   const { setting, asideStyle, pageFooterWidth, fixedHeaderStyle } = storeToRefs(settingStore)
-  const { weather, searchVisible, settingVisible } = storeToRefs(globalStore)
+  const { weather, searchVisible, settingVisible } = storeToRefs(appStore)
 
   function toggleSearch() {
     searchVisible.value = !searchVisible.value

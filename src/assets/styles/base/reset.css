@@ -1,0 +1,132 @@
+body {
+  color: var(--bin-color-text-primary);
+  font-size: var(--bin-base-font-size);
+  font-family: var(--bin-font-family);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+ul li {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+article,
+aside,
+blockquote,
+body,
+button,
+code,
+dd,
+details,
+div,
+dl,
+dt,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+header,
+hgroup,
+hr,
+input,
+legend,
+li,
+menu,
+nav,
+ol,
+p,
+pre,
+section,
+td,
+textarea,
+th,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: var(--bin-color-primary);
+  text-decoration: none;
+  &:hover {
+    color: var(--bin-color-primary-light1);
+    outline: none;
+  }
+
+  &:focus {
+    color: var(--bin-color-primary-light1);
+    outline: none;
+  }
+  &:active {
+    color: var(--bin-color-primary-active);
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--bin-color-text-primary);
+  font-weight: inherit;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1 {
+  font-size: calc(--bin-base-font-size + 6px);
+}
+
+h2 {
+  font-size: calc(--bin-base-font-size + 4px);
+}
+
+h3 {
+  font-size: calc(--bin-base-font-size + 2px);
+}
+
+h4,
+h5,
+h6,
+p {
+  font-size: inherit;
+}
+
+p {
+  line-height: 1.8;
+  &:first-child {
+    margin-top: 0;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+sup,
+sub {
+  font-size: calc(--bin-base-font-size - 1px);
+}
+
+small {
+  font-size: calc(--bin-base-font-size - 2px);
+}
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: var(--bin-border-base-light);
+}

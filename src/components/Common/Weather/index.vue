@@ -106,7 +106,9 @@ export default {
     // 获取城市Weather
     async function getCityWeather() {
       try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/24h', { params: PARAMS })
+        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/24h', {
+          params: PARAMS,
+        })
         const { hourly, code } = data
         if (code === '200') {
           weather.value = hourly.slice(0, 6).map(v => ({
@@ -123,7 +125,9 @@ export default {
     // 获取城市空气质量
     async function getCityAir() {
       try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/air/now', { params: PARAMS })
+        const { data } = await axios.get('https://devapi.qweather.com/v7/air/now', {
+          params: PARAMS,
+        })
         const { now, code } = data
         if (code === '200') {
           air.value = { ...now }
@@ -136,10 +140,13 @@ export default {
     // 三天天气预报
     async function get3DayWeather() {
       try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/3d', { params: PARAMS })
+        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/3d', {
+          params: PARAMS,
+        })
         if (data.code === '200') {
           daily.value = data.daily.map((i, index) => ({
-            date: index === 0 ? '今天' : index === 1 ? '明天' : Utils.util.parseTime(i.fxDate, '周{a}'),
+            date:
+              index === 0 ? '今天' : index === 1 ? '明天' : Utils.util.parseTime(i.fxDate, '周{a}'),
             icon: i.iconDay,
             text: i.textDay,
             temp: `${i.tempMin}°/${i.tempMax}°`,
@@ -153,7 +160,9 @@ export default {
     // 灾害预警
     async function getWarning() {
       try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/warning/now', { params: PARAMS })
+        const { data } = await axios.get('https://devapi.qweather.com/v7/warning/now', {
+          params: PARAMS,
+        })
         if (data.code === '200' && data.warning.length > 0) {
           const warn = data.warning[0]
           if (['蓝色', '黄色', '橙色', '红色'].includes(warn.level)) {
@@ -213,14 +222,15 @@ export default {
 }
 </script>
 
-<style lang="stylus">
-@import "../../../assets/stylus/base/qweather-icons.styl"
+<style>
+@import '../../../assets/styles/weather.css';
+
 .weather-content {
   font-size: 12px;
   .weather-desc {
     padding: 5px 0;
     display: flex;
-    border-bottom: 1px solid rgba(0, 0, 0, .4);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     > div {
       display: flex;
       flex-direction: column;

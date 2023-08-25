@@ -1,0 +1,10 @@
+.layout-sider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  height: 100%;
+  transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
+  width: var(--v-s-width);
+  padding-top: var(--v-h-height);
+}

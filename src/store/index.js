@@ -2,12 +2,10 @@ import { createPinia, storeToRefs } from 'pinia'
 import piniaPlugin from './pinia-plugin'
 
 import useSetting from './modules/setting'
-import useGlobal from './modules/global'
+import useApp from './modules/app'
 import useUser from './modules/user'
 import useMenu from './modules/menu'
-import useLinks from './modules/links'
 import useTags from './modules/tags'
-import useTodoList from './modules/todolist'
 
 const store = createPinia()
 // 注册store及插件信息
@@ -29,9 +27,7 @@ export function useStore() {
     userStore: useUser(),
     menuStore: useMenu(),
     tagsStore: useTags(),
-    linksStore: useLinks(),
-    todolistStore: useTodoList(),
-    globalStore: useGlobal(),
+    appStore: useApp(),
   }
 }
 

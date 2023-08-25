@@ -68,11 +68,11 @@ export default {
     const editIndex = ref(-1)
     const editText = ref('')
 
-    const { todolistStore, storeToRefs } = useStore()
-    const { todolist, leftCount, todoLabel } = storeToRefs(todolistStore)
+    const { appStore, storeToRefs } = useStore()
+
+    const { todolist, leftCount, todoLabel } = storeToRefs(appStore)
 
     function handleAdd() {
-      console.log(todolist)
       if (editIndex.value > -1) {
         editIndex.value = -1
         editText.value = ''

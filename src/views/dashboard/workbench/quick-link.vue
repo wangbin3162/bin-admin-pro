@@ -38,12 +38,8 @@
         <span>工具</span>
       </a>
       <div class="link-wrap">
-        <div class="link-item" v-for="link in linksStore.links" :key="link.link">
-          <b-dropdown
-            trigger="contextmenu"
-            @command="linksStore.closeLink"
-            placement="bottom-start"
-          >
+        <div class="link-item" v-for="link in appStore.links" :key="link.link">
+          <b-dropdown trigger="contextmenu" @command="appStore.closeLink" placement="bottom-start">
             <a :href="link.link" :target="link.newTab ? '_blank' : '_self'">{{ link.text }}</a>
             <template #dropdown>
               <b-dropdown-menu>
@@ -86,14 +82,14 @@
 import { ref, reactive } from 'vue'
 import useApp from '@/hooks/store/useApp'
 import { Message } from 'bin-ui-next'
-import { useStore } from '@/store'
+import { useAppStoreWithOut } from '@/store/modules/app'
 
 export default {
   name: 'quick-link',
   setup() {
     const visible = ref(false)
     const { toggleSearch, toggleSetting } = useApp()
-    const { linksStore } = useStore()
+    const appStore = useAppStoreWithOut()
 
     const ruleFormRef = ref(null)
     const form = reactive({
@@ -117,7 +113,7 @@ export default {
     function submitForm() {
       ruleFormRef.value.validate(valid => {
         if (valid) {
-          linksStore
+          appStore
             .addLink(form)
             .then(() => {
               Message.success('添加成功!')
@@ -140,7 +136,7 @@ export default {
       submitForm,
       ruleValidate,
       form,
-      linksStore,
+      appStore,
     }
   },
 }
