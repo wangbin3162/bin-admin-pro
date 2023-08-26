@@ -21,7 +21,7 @@
           <!-- 表单 -->
           <div class="form">
             <b-form
-              ref="loginForm"
+              ref="loginRef"
               label-position="top"
               :rules="rules"
               :model="formLogin"
@@ -90,60 +90,58 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { login } from '@/api/modules/login.api'
 import { throwError } from '@/utils/util'
-import { mapActions } from 'pinia'
-import userStore from '@/store/modules/user'
+import { useUserStoreWithOut } from '@/store/modules/user'
+import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 
-export default {
+defineOptions({
   name: 'Login',
-  data() {
-    return {
-      // 表单
-      formLogin: {
-        username: 'admin',
-        password: 'admin',
-        captcha: 'v9am',
-      },
-      loading: false,
-      // 校验
-      rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
-        captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
-      },
-    }
-  },
-  methods: {
-    ...mapActions(userStore, ['setToken']),
-    // 提交登录信息
-    submit() {
-      this.$refs.loginForm.validate(async valid => {
-        if (valid) {
-          try {
-            this.loading = true
-            const { data } = await login(this.formLogin)
-            await this.loginSuccess(data)
-          } catch (e) {
-            throwError('login/requestFailed', e)
-          }
-          this.loading = false
-        }
-      })
-    },
-    async loginSuccess(data) {
-      if (data.code === '00') {
-        const token = data.data.accessToken
-        await this.setToken(token)
-        // 重定向对象不存在则返回顶层路径
-        const redirect = this.$route.query.redirect || '/'
-        await this.$router.push({ path: redirect })
-      } else {
-        throwError('login/requestFailed', data)
+})
+
+const formLogin = ref({
+  username: 'admin',
+  password: 'admin',
+  captcha: 'v9am',
+})
+const loading = ref(false)
+const rules = {
+  username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+  password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
+  captcha: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
+}
+
+const userStore = useUserStoreWithOut()
+const router = useRouter()
+const route = useRoute()
+const loginRef = ref(null)
+// 提交登录信息
+function submit() {
+  loginRef.value.validate(async valid => {
+    if (valid) {
+      try {
+        loading.value = true
+        const { data } = await login(formLogin.value)
+        await loginSuccess(data)
+      } catch (e) {
+        throwError('login/requestFailed', e)
       }
-    },
-  },
+      loading.value = false
+    }
+  })
+}
+async function loginSuccess(data) {
+  if (data.code === '00') {
+    const token = data.data.accessToken
+    await userStore.setToken(token)
+    // 重定向对象不存在则返回顶层路径
+    const redirect = route.query.redirect || '/'
+    await router.push({ path: redirect })
+  } else {
+    throwError('login/requestFailed', data)
+  }
 }
 </script>
 

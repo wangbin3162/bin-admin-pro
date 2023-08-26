@@ -1,4 +1,6 @@
 <template>
+  <header-trigger icon="search" tooltip="搜索/ctrl+f" @click="toggleSearch" />
+
   <Teleport to="body">
     <transition name="zoom-in" mode="out-in" @after-leave="showScroll">
       <div class="search-modal" @click.stop v-if="searchVisible">
@@ -16,7 +18,7 @@
               </template>
             </b-input>
           </div>
-          <ul class="search-modal-list">
+          <ul class="search-modal-list" v-no-data:[dataText]="filterList.length === 0">
             <li v-for="item in filterList" :key="item.name" class="list-item">
               <a @click="handleClick(item.name)">
                 <i class="b-iconfont b-icon-group"></i>
@@ -24,7 +26,6 @@
                 <i class="b-iconfont b-icon-enter"></i>
               </a>
             </li>
-            <b-empty v-if="filterList.length === 0">暂无搜索结果</b-empty>
           </ul>
         </div>
       </div>
@@ -32,93 +33,82 @@
   </Teleport>
 </template>
 
-<script>
+<script setup>
+import HeaderTrigger from '../header-trigger/HeaderTrigger.vue'
+import { useStore } from '@/store'
 import { nextTick, ref, watch } from 'vue'
 import useMenu from '@/hooks/store/useMenu'
-import useApp from '@/hooks/store/useApp'
 
-export default {
-  name: 'search-panel',
-  setup() {
-    const inputRef = ref(null)
-    const query = ref('')
-    const filterList = ref([])
+const { appStore, storeToRefs } = useStore()
+const { searchVisible } = storeToRefs(appStore)
 
-    const { searchVisible, toggleSearch } = useApp()
-    const { navMenuItems, getBreadcrumbData, handleMenuSelect } = useMenu()
+const inputRef = ref(null)
+const dataText = ref('暂无搜索结果')
+const query = ref('')
+const filterList = ref([])
 
-    watch(
-      () => searchVisible.value,
-      val => {
-        if (val) {
-          open()
-        }
-      },
-    )
+const { navMenuItems, getBreadcrumbData, handleMenuSelect } = useMenu()
 
-    watch(
-      query,
-      val => {
-        const list = []
-        const matchList = navMenuItems.value.filter(menu => {
-          return menu.title.includes(val) || menu.name.toUpperCase().includes(val.toUpperCase())
-        })
-        matchList.forEach(matchItem => {
-          const data = getBreadcrumbData(matchItem.name)
-          list.push({
-            name: matchItem.name,
-            display: data.map(v => v.title).join(' > '),
-          })
-        })
-        filterList.value = list
-      },
-      { immediate: true },
-    )
-
-    function open() {
-      nextTick(() => {
-        hideScroll()
-        inputRef.value && inputRef.value.focus()
-      })
-    }
-
-    function handleClick(name) {
-      handleMenuSelect(name)
-      handleClose()
-    }
-
-    function handleClose() {
-      toggleSearch()
-    }
-
-    function hideScroll() {
-      document.body.classList.add('bin-popup-parent--hidden')
-      document.body.style.paddingRight = '6px'
-    }
-
-    function showScroll() {
-      query.value = ''
-      document.body.classList.remove('bin-popup-parent--hidden')
-      document.body.style = null
-    }
-
-    return {
-      searchVisible,
-      inputRef,
-      query,
-      filterList,
-      dataText,
-      open,
-      handleClose,
-      showScroll,
-      handleClick,
+function toggleSearch() {
+  searchVisible.value = !searchVisible.value
+}
+watch(
+  () => searchVisible.value,
+  val => {
+    if (val) {
+      open()
     }
   },
+)
+
+watch(
+  query,
+  val => {
+    const list = []
+    const matchList = navMenuItems.value.filter(menu => {
+      return menu.title.includes(val) || menu.name.toUpperCase().includes(val.toUpperCase())
+    })
+    matchList.forEach(matchItem => {
+      const data = getBreadcrumbData(matchItem.name)
+      list.push({
+        name: matchItem.name,
+        display: data.map(v => v.title).join(' > '),
+      })
+    })
+    filterList.value = list
+  },
+  { immediate: true },
+)
+
+function open() {
+  nextTick(() => {
+    hideScroll()
+    inputRef.value && inputRef.value?.focus()
+  })
+}
+
+function handleClick(name) {
+  handleMenuSelect(name)
+  handleClose()
+}
+
+function handleClose() {
+  toggleSearch()
+}
+
+function hideScroll() {
+  document.body.classList.add('bin-popup-parent--hidden')
+  document.body.style.paddingRight = '6px'
+}
+
+function showScroll() {
+  query.value = ''
+  document.body.classList.remove('bin-popup-parent--hidden')
+  document.body.style = null
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../assets/stylus/base/mixins.styl"
+<style scoped>
 .search-modal {
   position: fixed;
   top: 0;
@@ -128,8 +118,9 @@ export default {
   width: 100%;
   height: 100%;
   padding-top: 50px;
-  background-color: rgba(0, 0, 0, .25);
+  background-color: rgba(0, 0, 0, 0.25);
   justify-content: center;
+
   &-content {
     position: relative;
     width: 632px;
@@ -139,6 +130,7 @@ export default {
     box-shadow: inset 1px 1px 0 0 hsla(0, 0%, 100%, 0.5), 0 3px 8px 0 #555a64;
     flex-direction: column;
   }
+
   &-input__wrapper {
     display: flex;
     justify-content: space-between;
@@ -153,6 +145,7 @@ export default {
       left: 6px;
     }
   }
+
   &-list {
     max-height: 472px;
     padding: 8px 16px;
@@ -172,7 +165,7 @@ export default {
         height: 56px;
         box-shadow: 0 1px 3px 0 #d4d9e1;
         border-radius: 4px;
-        color: rgba(0, 0, 0, .85);
+        color: rgba(0, 0, 0, 0.85);
         padding: 0 6px;
         > span {
           flex: 1;
@@ -182,7 +175,7 @@ export default {
           margin: 0 8px;
         }
         &:hover {
-          background: getColor()
+          background: var(--bin-color-primary);
           color: #fff;
         }
       }

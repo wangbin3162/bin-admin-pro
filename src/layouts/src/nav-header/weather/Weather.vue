@@ -1,7 +1,9 @@
 <template>
   <b-popover placement="bottom-end" width="320px" popper-class="weather-box" trigger="hover">
-    <div class="global-header-trigger" flex="cross:center">
-      <i :class="`qi-${current.icon}`" style="font-size: 18px" :title="current.text"></i>
+    <div class="header-trigger" flex="cross:center">
+      <div class="trigger">
+        <i :class="`qi-${current.icon}`" :title="current.text"></i>
+      </div>
     </div>
     <template #content>
       <div class="weather-content">
@@ -47,7 +49,7 @@
             <div>{{ hour.temp }}℃</div>
           </div>
         </div>
-        <div class="weather-daily" v-if="daily.length > 0">
+        <div class="weather-daily" v-if="daily?.length > 0">
           <div v-for="(day, index) in daily" :key="index" class="daily-item">
             <div>{{ day.date }}</div>
             <div class="pl-20" flex="cross:center">
@@ -62,11 +64,11 @@
   </b-popover>
 </template>
 
-<script>
+<script setup>
 import { Utils } from 'bin-ui-next'
 import axios from 'axios'
 import { computed, ref } from 'vue'
-import useApp from '@/hooks/store/useApp'
+import { useAppStoreWithOut } from '@/store/modules/app'
 
 const KEY = '9ff1ccd697f149429674a860034faf66'
 const LOCATION = '101190801'
@@ -79,151 +81,135 @@ const PARAMS = { location: LOCATION, key: KEY }
  * 模糊查询地址：https://geoapi.qweather.com/v2/city/lookup?location=xuzhou&key=9ff1ccd697f149429674a860034faf66
  * 天气图标使用cdn地址，这里默认设置
  */
-export default {
-  name: 'Weather',
-  setup() {
-    const { setWeather } = useApp()
-    const weather = ref([])
-    const air = ref({
-      aqi: '', // 空气质量指数
-      level: '', // 空气质量指数
-      category: '', // 空气质量指数级别
-      primary: '', // 空气质量的主要污染物，空气质量为优时，返回值为NA
-      pm2p5: '', // PM2.5,
-    })
-    const daily = ref([]) // 3天预报 tempMax,tempMin,iconDay,textDay
-    const warning = ref({})
-    const current = computed(() => weather.value[0] || {})
+const currentDate = Utils.util.parseTime(new Date(), '{y}-{m}-{d} 周{a}')
+const appStore = useAppStoreWithOut()
+const weather = ref([])
+const air = ref({
+  aqi: '', // 空气质量指数
+  level: '', // 空气质量指数
+  category: '', // 空气质量指数级别
+  primary: '', // 空气质量的主要污染物，空气质量为优时，返回值为NA
+  pm2p5: '', // PM2.5,
+})
+const daily = ref([]) // 3天预报 tempMax,tempMin,iconDay,textDay
+const warning = ref({})
+const current = computed(() => weather.value[0] || {})
 
-    // 初始化城市及天气信息
-    async function initData() {
-      await getCityWeather()
-      await getCityAir()
-      await get3DayWeather()
-      await getWarning()
-    }
-
-    // 获取城市Weather
-    async function getCityWeather() {
-      try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/24h', {
-          params: PARAMS,
-        })
-        const { hourly, code } = data
-        if (code === '200') {
-          weather.value = hourly.slice(0, 6).map(v => ({
-            ...v,
-            fxTime: Utils.util.parseTime(new Date(v.fxTime), '{h}:{i}'),
-          }))
-          setWeather(current.value)
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
-
-    // 获取城市空气质量
-    async function getCityAir() {
-      try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/air/now', {
-          params: PARAMS,
-        })
-        const { now, code } = data
-        if (code === '200') {
-          air.value = { ...now }
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
-
-    // 三天天气预报
-    async function get3DayWeather() {
-      try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/weather/3d', {
-          params: PARAMS,
-        })
-        if (data.code === '200') {
-          daily.value = data.daily.map((i, index) => ({
-            date:
-              index === 0 ? '今天' : index === 1 ? '明天' : Utils.util.parseTime(i.fxDate, '周{a}'),
-            icon: i.iconDay,
-            text: i.textDay,
-            temp: `${i.tempMin}°/${i.tempMax}°`,
-          }))
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
-
-    // 灾害预警
-    async function getWarning() {
-      try {
-        const { data } = await axios.get('https://devapi.qweather.com/v7/warning/now', {
-          params: PARAMS,
-        })
-        if (data.code === '200' && data.warning.length > 0) {
-          const warn = data.warning[0]
-          if (['蓝色', '黄色', '橙色', '红色'].includes(warn.level)) {
-            warning.value = { ...data.warning[0] }
-          }
-        }
-      } catch (e) {
-        console.log(e)
-      }
-    }
-
-    // 获取空气质量颜色
-    function getAirColor(aqi) {
-      const num = +aqi
-      if (num <= 50) {
-        return { background: '#52c41a', color: '#fff' }
-      } else if (num <= 100) {
-        return { background: '#ffff00', color: '#666' }
-      } else if (num <= 150) {
-        return { background: '#fa8c16', color: '#fff' }
-      } else if (num <= 200) {
-        return { background: '#f5222d', color: '#fff' }
-      } else if (num <= 300) {
-        return { background: '#722ed1', color: '#fff' }
-      }
-      return { background: '#93141b', color: '#fff' }
-    }
-
-    // 根据预警颜色返回样式
-    function getWarningColor(level) {
-      if (level === '蓝色') {
-        return { background: 'rgba(64,161,255,0.8)', color: '#fff' }
-      } else if (level === '黄色') {
-        return { background: 'rgba(255,255,0,0.8)', color: '#666' }
-      } else if (level === '橙色') {
-        return { background: 'rgba(251,163,69,0.8)', color: '#fff' }
-      } else if (level === '红色') {
-        return { background: 'rgba(247,78,87,0.8)', color: '#fff' }
-      } else {
-        return { background: 'transparent', color: 'rgba(255,255,255,0.7)' }
-      }
-    }
-
-    initData()
-
-    return {
-      current,
-      weather,
-      air,
-      daily,
-      warning,
-      getAirColor,
-      getWarningColor,
-      currentDate: Utils.util.parseTime(new Date(), '{y}-{m}-{d} 周{a}'),
-    }
-  },
+// 初始化城市及天气信息
+async function initData() {
+  await getCityWeather()
+  await getCityAir()
+  await get3DayWeather()
+  await getWarning()
 }
+
+// 获取城市Weather
+async function getCityWeather() {
+  try {
+    const { data } = await axios.get('https://devapi.qweather.com/v7/weather/24h', {
+      params: PARAMS,
+    })
+    const { hourly, code } = data
+    if (code === '200') {
+      weather.value = hourly.slice(0, 6).map(v => ({
+        ...v,
+        fxTime: Utils.util.parseTime(new Date(v.fxTime), '{h}:{i}'),
+      }))
+      appStore.setWeather(current.value)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// 获取城市空气质量
+async function getCityAir() {
+  try {
+    const { data } = await axios.get('https://devapi.qweather.com/v7/air/now', {
+      params: PARAMS,
+    })
+    const { now, code } = data
+    if (code === '200') {
+      air.value = { ...now }
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// 三天天气预报
+async function get3DayWeather() {
+  try {
+    const { data } = await axios.get('https://devapi.qweather.com/v7/weather/3d', {
+      params: PARAMS,
+    })
+    if (data.code === '200') {
+      daily.value = data.daily.map((i, index) => ({
+        date: index === 0 ? '今天' : index === 1 ? '明天' : Utils.util.parseTime(i.fxDate, '周{a}'),
+        icon: i.iconDay,
+        text: i.textDay,
+        temp: `${i.tempMin}°/${i.tempMax}°`,
+      }))
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// 灾害预警
+async function getWarning() {
+  try {
+    const { data } = await axios.get('https://devapi.qweather.com/v7/warning/now', {
+      params: PARAMS,
+    })
+    if (data.code === '200' && data.warning?.length > 0) {
+      const warn = data.warning[0]
+      if (['蓝色', '黄色', '橙色', '红色'].includes(warn.level)) {
+        warning.value = { ...data.warning[0] }
+      }
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+// 获取空气质量颜色
+function getAirColor(aqi) {
+  const num = +aqi
+  if (num <= 50) {
+    return { background: '#52c41a', color: '#fff' }
+  } else if (num <= 100) {
+    return { background: '#ffff00', color: '#666' }
+  } else if (num <= 150) {
+    return { background: '#fa8c16', color: '#fff' }
+  } else if (num <= 200) {
+    return { background: '#f5222d', color: '#fff' }
+  } else if (num <= 300) {
+    return { background: '#722ed1', color: '#fff' }
+  }
+  return { background: '#93141b', color: '#fff' }
+}
+
+// 根据预警颜色返回样式
+function getWarningColor(level) {
+  if (level === '蓝色') {
+    return { background: 'rgba(64,161,255,0.8)', color: '#fff' }
+  } else if (level === '黄色') {
+    return { background: 'rgba(255,255,0,0.8)', color: '#666' }
+  } else if (level === '橙色') {
+    return { background: 'rgba(251,163,69,0.8)', color: '#fff' }
+  } else if (level === '红色') {
+    return { background: 'rgba(247,78,87,0.8)', color: '#fff' }
+  } else {
+    return { background: 'transparent', color: 'rgba(255,255,255,0.7)' }
+  }
+}
+
+initData()
 </script>
 
 <style>
-@import '../../../assets/styles/weather.css';
+@import './styles.css';
 
 .weather-content {
   font-size: 12px;

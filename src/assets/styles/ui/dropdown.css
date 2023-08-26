@@ -1,0 +1,19 @@
+.bin-select__popper.bin-popper {
+  padding: 4px 0;
+  .bin-select-dropdown {
+    padding: 0 4px;
+  }
+  .bin-select-dropdown__item {
+    border-radius: 4px;
+  }
+}
+
+.bin-dropdown__popper.bin-popper[role='tooltip'] {
+  padding: 4px 0;
+  .bin-dropdown-menu {
+    padding: 0 4px;
+  }
+  .bin-dropdown-item {
+    border-radius: 4px;
+  }
+}

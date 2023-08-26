@@ -1,0 +1,24 @@
+:root {
+  /* 自定义主题变量，明明规范 v开头，类别首字母开头，定义变量时类似 vGTextColor */
+
+  /* 全局 global */
+  --v-g-text-color: #515a6e;
+  --v-g-primary-color: var(--bin-color-primary);
+  --v-g-bg-color: #fff;
+  --v-g-border-color: #e5e6eb;
+  --v-g-hover-bg-color-1: #f2f3f5;
+
+  /* layout */
+  /* 头部 header */
+  --v-l-header-height: 60px;
+  --v-l-header-bg: var(--v-g-bg-color);
+  --v-l-header-border-color: var(--v-g-border-color);
+  --v-l-header-trigger-size: 28px;
+  --v-l-header-trigger-radius: 50%;
+  --v-l-header-trigger-border-color: var(--v-g-border-color);
+  /* 侧边栏 sider */
+  --v-l-sider-width: 220px;
+  --v-l-sider-bg: var(--v-g-bg-color);
+  /* 内容区域 content */
+  --v-l-content-bg: #f2f3f5;
+}

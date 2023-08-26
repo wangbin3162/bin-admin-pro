@@ -9,3 +9,63 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+a:active,
+a:focus,
+button,
+div,
+span,
+svg {
+  outline: 0 !important;
+}
+
+// =================================
+// ==============scrollbar==========
+// =================================
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #b6b7b9;
+}
+
+/* webkit, opera, IE9 */
+::selection {
+  background: var(--v-g-primary-color);
+  color: #fff;
+}
+
+/* mozilla firefox */
+::-moz-selection {
+  background: var(--v-g-primary-color);
+  color: #fff;
+}
+
+[devbox] {
+  box-shadow: 0 0 0 1px red;
+}
+
+input {
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+}

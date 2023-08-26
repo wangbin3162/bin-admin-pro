@@ -1,0 +1,21 @@
+/* ui 组件库相关的样式主题变量 */
+
+:root {
+  --colors: (primary: #165dff, success: #00c181, warning: #ffaa00, danger: #ff3d71, info: #0086e6);
+
+  @each $val, $color in var(--colors) {
+    --bin-color-$(val): $(color);
+    --bin-color-$(val)-light1: mix(#fff, $(color), 0.2);
+    --bin-color-$(val)-light2: mix(#fff, $(color), 0.4);
+    --bin-color-$(val)-light3: mix(#fff, $(color), 0.6);
+    --bin-color-$(val)-light4: mix(#fff, $(color), 0.8);
+    --bin-color-$(val)-light5: mix(#fff, $(color), 0.9);
+    --bin-color-$(val)-light6: mix(#fff, $(color), 0.95);
+    --bin-color-$(val)-active: mix(#000, $(color), 0.1);
+  }
+
+  --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
+  --bin-scrollbar-width: 5px;
+  --bin-scrollbar-radius: 5px;
+}
