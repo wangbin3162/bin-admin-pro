@@ -8,7 +8,7 @@
           :title="leftExpand ? leftCollapseText : leftExpandText"
           @click="toggleLeft"
         >
-          <b-icon :name="leftExpand ? 'left' : 'right'"></b-icon>
+          <b-icon :name="leftExpand ? 'caret-left' : 'caret-right'"></b-icon>
         </div>
         <div class="cube-left-content" v-show="leftExpand">
           <slot name="left"></slot>
@@ -65,7 +65,7 @@ export default {
   props: {
     leftDefaultWidth: {
       type: String,
-      default: '260px',
+      default: '240px',
     },
     leftExpandText: {
       type: String,
@@ -98,7 +98,7 @@ export default {
       wrapHeight: 0,
     })
     const leftExpand = ref(true)
-    const leftWidth = computed(() => (leftExpand.value ? props.leftDefaultWidth : '0px'))
+    const leftWidth = computed(() => (leftExpand.value ? props.leftDefaultWidth : '12px'))
     const rightWidth = computed(() => {
       if (slots.left) {
         return leftExpand.value ? `calc(100% - ${props.leftDefaultWidth})` : '100%'
@@ -172,7 +172,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/mixins.styl"
 .page-cube-wrapper {
   .page-cube {
     position: relative;
@@ -191,26 +190,24 @@ export default {
       .toggle {
         position: absolute;
         z-index: 100;
-        top: 24px;
-        transform: translateX(-8px);
+        top: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 16px;
-        height: 44px;
+        transform: translate(-50%, 0);
+        width: 8px;
+        height: 100px;
         cursor: pointer;
-        background-color: #fff;
-        border: 1px solid #e8e8e8;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, .12);
+        background-color: #fafafa;
         transition: .15s ease;
+        border-radius: 4px;
+        box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12);
         opacity: 0;
         > i {
           font-size: 12px;
         }
         &:hover {
-          border-color: var(--bin-color-primary);
-          color: var(--bin-color-primary);
+          background-color: #f3f3f3;
         }
       }
       &:hover {
@@ -225,12 +222,11 @@ export default {
       transition: width .15s ease;
       .draggable-content {
         position: relative;
-        z-index: 100;
+        z-index: 10;
         background-color: #fff;
-        border-top: 1px solid #eee;
         .toggle {
           position: absolute;
-          z-index: 100;
+          z-index: 10;
           top: 0;
           left: 50%;
           transform: translate(-50%, -50%);
@@ -253,7 +249,7 @@ export default {
             margin: 0 8px;
             font-size: 12px;
             &:hover {
-              color: getColor();
+              color: var(--bin-color-primary);
             }
           }
         }
