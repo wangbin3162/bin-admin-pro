@@ -4,10 +4,12 @@
   flex-direction: column;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 .layout {
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
 .layout-navbar {
@@ -50,7 +52,9 @@
   padding-left: var(--v-sider-width);
   padding-top: var(--v-header-height);
   .layout-content-inner {
+    position: relative;
     flex: 1;
+    overflow-x: hidden;
   }
 }
 

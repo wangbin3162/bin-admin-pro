@@ -5,7 +5,6 @@
 </template>
 
 <script>
-import useApp from '@/hooks/store/useApp'
 import { computed } from 'vue'
 import { Utils } from 'bin-ui-next'
 
@@ -31,13 +30,11 @@ export default {
   },
   emits: ['click'],
   setup(props, { emit }) {
-    const { setting } = useApp()
-
     const colorVar = computed(() => {
       const color = props.color
       if (!color) return null
       const colorMap = {
-        primary: setting.value.systemPrimary,
+        primary: '#1089ff',
         success: '#52c41a',
         info: '#35495E',
         warning: '#fea638',

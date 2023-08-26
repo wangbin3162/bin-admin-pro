@@ -121,7 +121,6 @@ export default {
 
 <style scoped lang="stylus">
 .page-container {
-  background: #edf1f7;
   .page-header {
     position: relative;
     box-sizing: border-box;

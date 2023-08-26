@@ -12,9 +12,15 @@
         <SiderMenu />
       </div>
       <div class="bin-layout layout-content" :style="{ paddingLeft: siderWidth }">
+        <TagsView v-if="setting.tagsView" />
         <div class="layout-content-inner">
-          <div style="background: #fff">aaa</div>
-          <!-- <div v-for="i in 100" :key="i">占位 行{{ i }}</div> -->
+          <router-view v-slot="{ Component, route }">
+            <Transition :name="setting.routerTransitionName" mode="out-in">
+              <keep-alive :include="cachedViews">
+                <component :is="Component" :key="route.path"></component>
+              </keep-alive>
+            </Transition>
+          </router-view>
         </div>
         <footer class="layout-footer">bin admin pro</footer>
       </div>
@@ -30,9 +36,11 @@
 import './index.css'
 import NavHeader from './src/nav-header/NavHeader.vue'
 import SiderMenu from './src/sider-menu/SiderMenu.vue'
+import TagsView from './src/tags-view/TagsView.vue'
 
 import { useStore } from '@/store'
 
-const { storeToRefs, settingStore } = useStore()
+const { storeToRefs, tagsStore, settingStore } = useStore()
 const { setting, siderWidth } = storeToRefs(settingStore)
+const { cachedViews } = storeToRefs(tagsStore)
 </script>

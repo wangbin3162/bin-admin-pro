@@ -120,7 +120,7 @@ onBeforeUnmount(() => {
         border-radius: var(--v-header-trigger-radius);
         border: 1px solid var(--v-header-trigger-border-color);
         &:hover {
-          background-color: var(--v-g-hover-bg-color-1);
+          background-color: var(--v-g-fill-color-2);
         }
       }
     }
