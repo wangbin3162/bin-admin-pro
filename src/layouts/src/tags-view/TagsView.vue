@@ -33,7 +33,7 @@
         </template>
       </b-tabs>
       <div class="tags-view-ctrl">
-        <b-dropdown style="width: 42px; display: flex" append-to-body @command="handleCommand">
+        <b-dropdown append-to-body @command="handleCommand">
           <span class="trigger" flex="main:center cross:center">
             <i class="b-iconfont b-icon-down"></i>
           </span>
@@ -272,7 +272,8 @@ watch(
   .tags-view-ctrl {
     display: flex;
     .trigger {
-      width: 32px;
+      width: var(--v-tags-height);
+      height: var(--v-tags-height);
       color: var(--v-tags-text-color);
       text-align: center;
       cursor: pointer;

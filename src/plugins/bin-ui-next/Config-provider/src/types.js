@@ -24,7 +24,7 @@ export const configProviderProps = {
   // 主题名称
   themeName: {
     type: String,
-    validate: val => ['dark'].includes(val),
+    validate: val => ['light', 'dark'].includes(val),
   },
   // 主题样式对象,这里可以存储js变量
   theme: {

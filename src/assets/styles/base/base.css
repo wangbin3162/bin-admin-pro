@@ -1,6 +1,5 @@
 html,
 body {
-  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -61,11 +60,4 @@ svg {
 
 [devbox] {
   box-shadow: 0 0 0 1px red;
-}
-
-input {
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-  }
 }

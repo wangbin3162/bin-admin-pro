@@ -21,7 +21,7 @@
   }
   .bin-submenu {
     &.is-active {
-      .bin-submenu__title {
+      > .bin-submenu__title {
         color: var(--v-menu-text-active-color);
       }
     }

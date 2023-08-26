@@ -45,4 +45,8 @@
   --v-tags-item-text-color: var(--bin-color-primary);
   /* 内容区域 content */
   --v-content-bg: var(--v-g-fill-color-2);
+
+  /* theme-panel */
+  --v-theme-panel-bg: var(--v-g-bg-color);
+  --v-theme-active-color: var(--bin-color-primary);
 }

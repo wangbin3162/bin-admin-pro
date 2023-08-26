@@ -5,7 +5,7 @@ const useSetting = defineStore('setting', {
   state: () => ({
     // 基础配置项，可供缓存
     setting: {
-      themeName: 'dark', // 主题名称
+      themeName: 'light', // 主题名称
       menuType: 'default', // default: 常规布局 mixed: 混合布局
       routerTransitionName: 'fade-in',
       sidebar: true, // 侧边栏开启状态
@@ -26,7 +26,7 @@ const useSetting = defineStore('setting', {
         position: 'fixed',
         top: 'var(--v-header-height)',
         left: `${this.siderWidth}px`,
-        width: `calc(100vw - ${this.siderWidth})`,
+        width: `calc(100% - ${this.siderWidth})`,
       }
     },
   },

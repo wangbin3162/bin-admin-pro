@@ -7,7 +7,15 @@
       </div>
     </div>
     <div class="center-side">
-      <Breadcrumb />
+      <div class="mixed-menu" v-if="setting.menuType === 'mixed'">
+        <b-tabs
+          v-model="topNavActive"
+          :data="tabs"
+          ref="tabsRef"
+          @change="topNavMenuChange"
+        ></b-tabs>
+      </div>
+      <Breadcrumb v-else />
     </div>
     <div class="right-side">
       <SearchTrigger v-if="setting.showSearch" />
@@ -20,7 +28,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted, onBeforeUnmount, computed, ref, watch } from 'vue'
 import { on, off } from '@/utils/util'
 import Breadcrumb from './breadcrumb/Breadcrumb.vue'
 import SearchTrigger from './search/Search.vue'
@@ -29,12 +37,54 @@ import MessageTrigger from './message/Message.vue'
 import UserTrigger from './user/User.vue'
 import SettingTrigger from './setting/Setting.vue'
 import { useStore } from '@/store'
+import useMenu from '@/hooks/store/useMenu'
+import { useRoute, useRouter } from 'vue-router'
+const route = useRoute()
+const router = useRouter()
 
-import { useTheme } from '@/hooks/theme'
-
-const { appStore, storeToRefs } = useStore()
+const { appStore, storeToRefs, settingStore } = useStore()
 const { searchVisible } = storeToRefs(appStore)
-const { setting } = useTheme()
+const { setting } = storeToRefs(settingStore)
+
+const { topMenuTabs, topNavActive, setTopNavActive, sideMenus } = useMenu()
+
+const tabs = computed(() =>
+  topMenuTabs.value.map(menu => ({
+    icon: menu.icon,
+    key: menu.name,
+    title: menu.title,
+  })),
+)
+
+const tabsRef = ref(null)
+
+onMounted(() => {
+  watch(
+    () => route.fullPath,
+    () => {
+      setTopNavActive(route.name)
+      // 调用移动至目标标签
+      tabsRef.value?.moveToCurrentTab()
+    },
+    { immediate: true, flush: true },
+  )
+})
+
+function topNavMenuChange() {
+  const one = sideMenus.value[0]
+  if (sideMenus.value && one) {
+    //  有子项
+    if (one.children?.length) {
+      if (!one.children.externalLink) {
+        router.push({ name: one.children[0].name })
+      }
+    } else {
+      if (!one.externalLink) {
+        router.push({ name: one.name })
+      }
+    }
+  }
+}
 
 function toggleSearch() {
   searchVisible.value = !searchVisible.value
@@ -97,6 +147,13 @@ onBeforeUnmount(() => {
     display: flex;
     align-items: center;
     flex: 1;
+    .mixed-menu {
+      padding: 0 24px;
+      width: 720px;
+      .bin-tabs-wrapper.default:after {
+        content: unset;
+      }
+    }
   }
   .right-side {
     display: flex;

@@ -1,13 +1,11 @@
 <template>
-  <b-config-provider>
+  <b-config-provider :themeName="themeName">
     <router-view />
   </b-config-provider>
 </template>
 
 <script setup>
-// import { onMounted } from 'vue'
-// import { useStore } from '@/store'
+import { useTheme } from '@/hooks/theme'
 
-// onMounted(() => {
-// })
+const { themeName } = useTheme()
 </script>
