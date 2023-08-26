@@ -72,10 +72,10 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   height: 100%;
-  background-color: var(--v-l-header-bg);
-  border-bottom: 1px solid var(--v-l-header-border-color);
+  background-color: var(--v-header-bg);
+  border-bottom: 1px solid var(--v-header-border-color);
   .left-side {
-    min-width: var(--v-l-sider-width);
+    min-width: var(--v-sider-width);
     .logo-wrap {
       height: 100%;
       display: flex;
@@ -115,10 +115,10 @@ onBeforeUnmount(() => {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: var(--v-l-header-trigger-size);
-        height: var(--v-l-header-trigger-size);
-        border-radius: var(--v-l-header-trigger-radius);
-        border: 1px solid var(--v-l-header-trigger-border-color);
+        width: var(--v-header-trigger-size);
+        height: var(--v-header-trigger-size);
+        border-radius: var(--v-header-trigger-radius);
+        border: 1px solid var(--v-header-trigger-border-color);
         &:hover {
           background-color: var(--v-g-hover-bg-color-1);
         }

@@ -3,7 +3,7 @@ import localforage from 'localforage'
 import { deepCopy } from '@/utils/util'
 
 const __piniaKey = '__BIN_ADMIN_PRO_PINIAKEY__'
-localforage.config({ name: __piniaKey, version: 1 })
+localforage.config({ name: __piniaKey, version: 1, driver: localforage.LOCALSTORAGE })
 
 // 取值
 const getStorage = async key => await localforage.getItem(key)

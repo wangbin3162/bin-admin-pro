@@ -16,7 +16,7 @@
   left: 0;
   z-index: 100;
   width: 100%;
-  height: var(--v-l-header-height);
+  height: var(--v-header-height);
 }
 
 .layout-sider {
@@ -26,22 +26,41 @@
   z-index: 99;
   height: 100%;
   transition: all 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
-  padding-top: var(--v-l-header-height);
-  width: var(--v-l-sider-width);
-  background-color: var(--v-l-sider-bg);
+  padding-top: var(--v-header-height);
+  width: var(--v-sider-width);
+  background-color: var(--v-sider-bg);
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -1px;
+    display: block;
+    width: 1px;
+    height: 100%;
+    background-color: var(--v-sider-border-color);
+  }
 }
 
 .layout-content {
   min-height: 100vh;
   overflow-y: hidden;
-  background-color: var(--v-l-content-bg);
+  background-color: var(--v-content-bg);
   transition: padding 0.2s cubic-bezier(0.34, 0.69, 0.1, 1);
   overflow-x: hidden;
-  padding-left: var(--v-l-sider-width);
-  padding-top: var(--v-l-header-height);
+  padding-left: var(--v-sider-width);
+  padding-top: var(--v-header-height);
   .layout-content-inner {
     flex: 1;
   }
+}
+
+.layout-footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  color: var(--v-g-text-color);
+  text-align: center;
 }
 
 .bin-back-top .back-top {

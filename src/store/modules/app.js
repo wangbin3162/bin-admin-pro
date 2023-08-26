@@ -54,6 +54,9 @@ const useApp = defineStore('app', {
     },
   },
   actions: {
+    setWeather(wea) {
+      this.weather = wea
+    },
     async addLink(link) {
       // 新增成功
       if (this.links.findIndex(v => v.link === link.link) === -1) {

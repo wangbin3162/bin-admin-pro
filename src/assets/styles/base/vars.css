@@ -10,15 +10,28 @@
 
   /* layout */
   /* 头部 header */
-  --v-l-header-height: 60px;
-  --v-l-header-bg: var(--v-g-bg-color);
-  --v-l-header-border-color: var(--v-g-border-color);
-  --v-l-header-trigger-size: 28px;
-  --v-l-header-trigger-radius: 50%;
-  --v-l-header-trigger-border-color: var(--v-g-border-color);
+  --v-header-height: 60px;
+  --v-header-bg: var(--v-g-bg-color);
+  --v-header-border-color: var(--v-g-border-color);
+  --v-header-trigger-size: 28px;
+  --v-header-trigger-radius: 50%;
+  --v-header-trigger-border-color: var(--v-g-border-color);
   /* 侧边栏 sider */
-  --v-l-sider-width: 220px;
-  --v-l-sider-bg: var(--v-g-bg-color);
+  --v-sider-width: 220px;
+  --v-sider-collapse-width: 48px;
+  --v-sider-bg: var(--v-g-bg-color);
+  --v-sider-border-color: var(--v-g-border-color);
+  --v-sider-collapse-btn-color: #86909c;
+  --v-sider-collapse-btn-bg: #f7f8fa;
+  --v-sider-collapse-btn-bg-hover: #e5e6eb;
+  /* 侧边栏 menu */
+  --v-menu-bg-color: #fff;
+  --v-menu-text-color: var(--v-g-text-color);
+  --v-menu-text-hover-color: var(--v-menu-text-color);
+  --v-menu-bg-hover-color: var(--bin-color-primary-light6);
+  --v-menu-text-active-color: var(--bin-color-primary);
+  --v-menu-bg-active-color: var(--bin-color-primary-light6);
+
   /* 内容区域 content */
-  --v-l-content-bg: #f2f3f5;
+  --v-content-bg: #f2f3f5;
 }

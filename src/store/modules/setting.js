@@ -9,7 +9,7 @@ const useSetting = defineStore('setting', {
       menuType: 'default', // default: 常规布局 mixed: 混合布局
       routerTransitionName: 'fade-transverse',
       sidebar: true, // 侧边栏开启状态
-      sidebarWidth: 256, // 侧边栏宽度
+      sidebarWidth: 220, // 侧边栏宽度
       tagsView: true, // 多页签开启状态
       tagsType: 'clever', // card、clever、smooth
       showWeather: true,
@@ -18,7 +18,11 @@ const useSetting = defineStore('setting', {
       showCollapse: true,
     },
   }),
-  getters: {},
+  getters: {
+    siderWidth() {
+      return this.setting.sidebar ? `${this.setting.sidebarWidth}px` : '48px'
+    },
+  },
   actions: {},
 })
 
