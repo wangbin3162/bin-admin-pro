@@ -3,7 +3,9 @@
     title="基础颜色"
     desc="基础颜色，系统主题会默认注入不同的主色和颜色，这里可以动态设置颜色查看效果"
   >
-    <theme-color-panel />
+    <b-collapse-wrap title="主题配置" shadow="none" class="mb-20">
+      <theme-config />
+    </b-collapse-wrap>
     <b-collapse-wrap title="颜色设置" shadow="none">
       <div class="p10">
         <b-alert>
@@ -30,11 +32,8 @@
 </template>
 
 <script>
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
-
 export default {
   name: 'FuncColorVar',
-  components: { ThemeColorPanel },
 }
 </script>
 

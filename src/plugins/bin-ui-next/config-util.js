@@ -24,7 +24,6 @@ export function convertToCSSVariableName(str) {
 export function convertObjectPropsToCSSVariables(obj) {
   const result = {}
   Object.keys(obj).forEach(key => {
-    console.log(key)
     // 转换实际css var变量 `--bin-color-primary`
     const cssVariableName = convertToCSSVariableName(key)
     result[cssVariableName] = obj[key]

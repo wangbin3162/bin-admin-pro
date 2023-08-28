@@ -1,6 +1,8 @@
 <template>
   <page-wrapper desc="表单类别的组件，可验证不同主题色的正确性。">
-    <theme-color-panel />
+    <b-collapse-wrap title="主题配置" shadow="none" class="mb-20">
+      <theme-config />
+    </b-collapse-wrap>
     <b-collapse-wrap title="Form 表单输入" shadow="none" class="mb-20">
       <div class="p20" flex="main:center">
         <div style="width: 800px">
@@ -89,11 +91,8 @@
 </template>
 
 <script>
-import ThemeColorPanel from '@/views/demo/comp/components/theme-color-panel.vue'
-
 export default {
   name: 'FormComp',
-  components: { ThemeColorPanel },
   data() {
     return {
       cityList: [

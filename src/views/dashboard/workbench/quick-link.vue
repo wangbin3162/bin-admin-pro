@@ -78,67 +78,56 @@
   </b-modal>
 </template>
 
-<script>
+<script setup>
 import { ref, reactive } from 'vue'
-import useApp from '@/hooks/store/useApp'
 import { Message } from 'bin-ui-next'
 import { useAppStoreWithOut } from '@/store/modules/app'
 
-export default {
-  name: 'quick-link',
-  setup() {
-    const visible = ref(false)
-    const { toggleSearch, toggleSetting } = useApp()
-    const appStore = useAppStoreWithOut()
+const visible = ref(false)
+const appStore = useAppStoreWithOut()
 
-    const ruleFormRef = ref(null)
-    const form = reactive({
-      link: '',
-      text: '',
-      newTab: true,
-    })
-    const ruleValidate = ref({
-      link: [{ required: true, message: '地址必填', trigger: 'blur' }],
-      text: [{ required: true, message: '名称必填', trigger: 'blur' }],
-    })
+const ruleFormRef = ref(null)
+const form = reactive({
+  link: '',
+  text: '',
+  newTab: true,
+})
+const ruleValidate = ref({
+  link: [{ required: true, message: '地址必填', trigger: 'blur' }],
+  text: [{ required: true, message: '名称必填', trigger: 'blur' }],
+})
 
-    function handleAdd() {
-      visible.value = true
-      form.link = ''
-      form.text = ''
-      form.newTab = true
-      ruleFormRef.value && ruleFormRef.value.resetFields()
+function handleAdd() {
+  visible.value = true
+  form.link = ''
+  form.text = ''
+  form.newTab = true
+  ruleFormRef.value && ruleFormRef.value.resetFields()
+}
+
+function submitForm() {
+  ruleFormRef.value.validate(valid => {
+    if (valid) {
+      appStore
+        .addLink(form)
+        .then(() => {
+          Message.success('添加成功!')
+          visible.value = false
+        })
+        .catch(err => {
+          visible.value = false
+          Message.error(err.message)
+        })
     }
+  })
+}
 
-    function submitForm() {
-      ruleFormRef.value.validate(valid => {
-        if (valid) {
-          appStore
-            .addLink(form)
-            .then(() => {
-              Message.success('添加成功!')
-              visible.value = false
-            })
-            .catch(err => {
-              visible.value = false
-              Message.error(err.message)
-            })
-        }
-      })
-    }
+function toggleSearch() {
+  appStore.searchVisible = !appStore.searchVisible
+}
 
-    return {
-      ruleFormRef,
-      toggleSearch,
-      toggleSetting,
-      visible,
-      handleAdd,
-      submitForm,
-      ruleValidate,
-      form,
-      appStore,
-    }
-  },
+function toggleSetting() {
+  appStore.settingVisible = !appStore.settingVisible
 }
 </script>
 

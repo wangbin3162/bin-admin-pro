@@ -50,7 +50,9 @@ export default defineComponent({
     })
 
     function setVariablesToDomNode() {
-      const el = props.normalNodeId ? document.getElementById(props.normalNodeId) : document.body
+      const el = props.normalNodeId
+        ? document.getElementById(props.normalNodeId)
+        : document.documentElement
       // 如果是虚拟模式，则追加属性至dom节点
       if (props.abstract && props.themeName) {
         if (el) {
