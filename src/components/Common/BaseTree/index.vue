@@ -11,6 +11,8 @@
             v-model="query"
             placeholder="搜索"
             @search="handleFilter"
+            clearable
+            @clear="handleReset"
           />
           <slot></slot>
         </div>
@@ -56,6 +58,7 @@
           ref="treeRef"
           @select-change="handleSelect"
           @check-change="handleChecked"
+          :empty-text="query ? '查询无结果' : '暂无数据'"
         ></b-tree>
       </div>
     </div>
@@ -65,148 +68,132 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import useTree from '@/hooks/service/useTree'
 import { computed, nextTick, ref, watch } from 'vue'
 import { typeOf } from '@/utils/util'
 
-export default {
+defineOptions({
   name: 'BaseTree',
-  props: {
-    width: {
-      type: String,
-      default: '260px',
-    },
-    minHeight: {
-      type: String,
-      default: '300px',
-    },
-    maxHeight: {
-      type: String,
-      default: '700px',
-    },
-    treeTitle: {
-      type: String,
-    },
-    filterPosition: {
-      type: String,
-      default: 'top',
-    },
-    lock: Boolean,
-    fetch: {
-      type: [Function, Array],
-    },
-    params: {
-      type: Object,
-    },
-    render: Function,
-    showCheckbox: {
-      type: Boolean,
-    },
-    checkStrictly: {
-      type: Boolean,
-    },
-    showFilter: {
-      type: Boolean,
-    },
-    titleKey: {
-      type: String,
-      default: 'text',
-    },
-    defaultExpand: {
-      type: Boolean,
-    },
-    expandKeys: {
-      type: Array,
-      default: () => [],
-    },
-    selectedKeys: {
-      type: Array,
-      default: () => [],
-    },
+})
+const emit = defineEmits(['select-change', 'check-change', 'command', 'init-success'])
+const props = defineProps({
+  width: {
+    type: String,
+    default: '100%',
   },
-  emits: ['select-change', 'check-change', 'command', 'init-success'],
-  setup(props, ctx) {
-    const treeEl = ref(null)
-    const showTopSearch = computed(() => props.showFilter && props.filterPosition === 'top')
-    const showInnerSearch = computed(() => props.showFilter && props.filterPosition === 'inner')
-    const {
-      treeRef,
-      loading,
-      query,
-      treeData,
-      getTreeData,
-      reloadTree,
-      reloadTreeWithCheck,
-      handleSelect,
-      handleChecked,
-      handleFilter,
-      filterNode,
-    } = useTree(props.fetch, props.params, ctx, props.titleKey)
-
-    // 右侧指令事件列表
-    function handleAction(name) {
-      switch (name) {
-        case 'expandAll':
-          treeRef.value && treeRef.value.expandAll()
-          break
-        case 'collapseAll':
-          treeRef.value && treeRef.value.collapseAll()
-          break
-        case 'checkAll':
-          treeRef.value && treeRef.value.checkAll()
-          break
-        case 'uncheckAll':
-          treeRef.value && treeRef.value.uncheckAll()
-          break
-      }
-      ctx.emit('command', name)
-    }
-
-    function setDefault() {
-      treeRef.value && treeRef.value.setExpand(props.expandKeys)
-      treeRef.value && treeRef.value.setSelected(props.selectedKeys)
-    }
-
-    watch(
-      () => props.fetch,
-      async val => {
-        if (typeOf(val) === 'array') {
-          treeData.value = val
-          if (val.length > 0) {
-            await nextTick()
-            setDefault()
-          }
-          return true
-        }
-        await getTreeData()
-        setDefault()
-      },
-      { immediate: true },
-    )
-    return {
-      treeEl,
-      showTopSearch,
-      showInnerSearch,
-      treeRef,
-      query,
-      loading,
-      treeData,
-      getTreeData,
-      reloadTree,
-      reloadTreeWithCheck,
-      handleSelect,
-      handleChecked,
-      handleAction,
-      handleFilter,
-      filterNode,
-    }
+  minHeight: {
+    type: String,
+    default: '300px',
   },
+  maxHeight: {
+    type: String,
+    default: '700px',
+  },
+  treeTitle: {
+    type: String,
+  },
+  filterPosition: {
+    type: String,
+    default: 'top',
+  },
+  lock: Boolean,
+  fetch: {
+    type: [Function, Array],
+  },
+  params: {
+    type: Object,
+  },
+  render: Function,
+  showCheckbox: {
+    type: Boolean,
+  },
+  checkStrictly: {
+    type: Boolean,
+  },
+  showFilter: {
+    type: Boolean,
+  },
+  titleKey: {
+    type: String,
+    default: 'text',
+  },
+  defaultExpand: {
+    type: Boolean,
+  },
+  expandKeys: {
+    type: Array,
+    default: () => [],
+  },
+  selectedKeys: {
+    type: Array,
+    default: () => [],
+  },
+})
+
+const treeEl = ref(null)
+const showTopSearch = computed(() => props.showFilter && props.filterPosition === 'top')
+const showInnerSearch = computed(() => props.showFilter && props.filterPosition === 'inner')
+const {
+  treeRef,
+  loading,
+  query,
+  treeData,
+  getTreeData,
+  handleSelect,
+  handleChecked,
+  handleFilter,
+  filterNode,
+  handleClear,
+} = useTree(props.fetch, props.params, emit, props.titleKey)
+
+// 右侧指令事件列表
+function handleAction(name) {
+  switch (name) {
+    case 'expandAll':
+      treeRef.value && treeRef.value.expandAll()
+      break
+    case 'collapseAll':
+      treeRef.value && treeRef.value.collapseAll()
+      break
+    case 'checkAll':
+      treeRef.value && treeRef.value.checkAll()
+      break
+    case 'uncheckAll':
+      treeRef.value && treeRef.value.uncheckAll()
+      break
+  }
+  emit('command', name)
 }
+
+function setDefault() {
+  treeRef.value && treeRef.value.setExpand(props.expandKeys)
+  treeRef.value && treeRef.value.setSelected(props.selectedKeys)
+}
+
+function handleReset() {
+  handleClear()
+  setDefault()
+}
+watch(
+  () => props.fetch,
+  async val => {
+    if (typeOf(val) === 'array') {
+      treeData.value = val
+      if (val.length > 0) {
+        await nextTick()
+        setDefault()
+      }
+      return true
+    }
+    await getTreeData()
+    setDefault()
+  },
+  { immediate: true },
+)
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+<style scoped>
 .base-tree {
   flex-shrink: 0;
   flex-grow: 0;
@@ -218,11 +205,11 @@ export default {
     justify-content: space-between;
     align-items: center;
     padding: 0 4px;
-    border-bottom: $border-base;
+    border-bottom: 1px solid var(--v-g-border-color);
     height: 45px;
     line-height: 1;
     .base-title {
-      color: $color-text-primary;
+      color: var(--v-g-text-color);
       width: 80px;
       padding-left: 6px;
     }
@@ -270,9 +257,10 @@ export default {
     padding: 0 6px 6px;
   }
   .tree-bottom {
-    border-top: $border-base;
+    border-top: 1px solid var(--v-g-border-color);
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     padding: 0 8px;
     height: 32px;
   }
@@ -284,6 +272,12 @@ export default {
         margin-left: 0;
       }
     }
+  }
+  :deep(.bin-input-wrapper.bin-input-group-with-append .bin-input-icon-clear) {
+    right: 20px;
+  }
+  :deep(.search .bin-input-icon-clear .b-iconfont) {
+    font-size: 14px;
   }
 }
 </style>

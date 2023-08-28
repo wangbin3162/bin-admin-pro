@@ -1,11 +1,15 @@
 <template>
-  <page-container desc="导航类别的组件，可验证不同主题色的正确性。">
+  <page-wrapper desc="导航类别的组件，可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Menu 导航菜单" shadow="none" class="mb-20">
       <div class="p10">
         <b-button-group v-model="isCollapse" style="margin-bottom: 20px">
-          <b-button :type="isCollapse ? 'default' : 'primary'" @click="isCollapse = false">展开</b-button>
-          <b-button :type="isCollapse ? 'primary' : 'default'" @click="isCollapse = true">收起</b-button>
+          <b-button :type="isCollapse ? 'default' : 'primary'" @click="isCollapse = false">
+            展开
+          </b-button>
+          <b-button :type="isCollapse ? 'primary' : 'default'" @click="isCollapse = true">
+            收起
+          </b-button>
         </b-button-group>
         <div flex="main:justify">
           <div style="width: 220px">
@@ -133,7 +137,7 @@
         <b-button type="primary" @click="next">下一步</b-button>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

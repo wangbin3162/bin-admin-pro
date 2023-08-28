@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <b-collapse-wrap title="svg css 描边动画" shadow="none" class="mb-16">
       <div class="p10">
         <Demo1 />
@@ -25,7 +25,7 @@
         <Demo5 />
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>

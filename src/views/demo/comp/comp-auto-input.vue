@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="输入建议/自动填充控件">
+  <page-wrapper desc="输入建议/自动填充控件">
     <b-collapse-wrap title="输入建议基本用法" shadow="none">
       <div class="p24" style="min-height: 500px">
         <b-autocomplete
@@ -22,7 +22,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

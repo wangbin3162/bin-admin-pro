@@ -1,5 +1,5 @@
 <template>
-  <page-container
+  <page-wrapper
     desc="包含信息的列表，带有常规操作。本页面也用作示例，实际操作以业务需求自行编写。"
     bg
   >
@@ -94,7 +94,7 @@
         @size-change="pageSizeChange"
       ></b-page>
     </div>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

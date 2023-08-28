@@ -1,5 +1,8 @@
 <template>
-  <page-container desc="将一个冗长或用户不熟悉的表单任务分成多个步骤，分布提交，确保用户操作面板的精简。" bg>
+  <page-wrapper
+    desc="将一个冗长或用户不熟悉的表单任务分成多个步骤，分布提交，确保用户操作面板的精简。"
+    bg
+  >
     <b-row type="flex" justify="center" class="mb-20">
       <b-col span="12">
         <b-steps :current="step">
@@ -12,7 +15,13 @@
     <template v-if="step === 0">
       <b-row type="flex" justify="center">
         <b-col span="12">
-          <b-form :model="form1" :rules="rules1" ref="form1Ref" label-width="100px" label-suffix=":">
+          <b-form
+            :model="form1"
+            :rules="rules1"
+            ref="form1Ref"
+            label-width="100px"
+            label-suffix=":"
+          >
             <b-form-item prop="payment" label="付款账户">
               <b-select v-model="form1.payment" placeholder="请选择付款账户" clearable>
                 <b-option label="wangbin3162@qq.com" value="wangbin3162@qq.com"></b-option>
@@ -116,7 +125,7 @@
         </template>
       </b-alert>
     </div>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

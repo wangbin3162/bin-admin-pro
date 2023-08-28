@@ -1,9 +1,9 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <b-collapse-wrap title="canvas绘制折线路径动画" shadow="none" class="mb-16">
       <LinePath />
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>

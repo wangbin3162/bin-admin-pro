@@ -1,4 +1,4 @@
-.bin-layout {
+.app-layout {
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -12,7 +12,7 @@
   overflow-x: hidden;
 }
 
-.layout-navbar {
+.app-layout-navbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -21,7 +21,7 @@
   height: var(--v-header-height);
 }
 
-.layout-sider {
+.app-layout-sider {
   position: fixed;
   top: 0;
   left: 0;
@@ -43,7 +43,7 @@
   }
 }
 
-.layout-content {
+.app-layout-content {
   min-height: 100vh;
   overflow-y: hidden;
   background-color: var(--v-content-bg);
@@ -51,14 +51,14 @@
   overflow-x: hidden;
   padding-left: var(--v-sider-width);
   padding-top: var(--v-header-height);
-  .layout-content-inner {
+  .app-layout-content-inner {
     position: relative;
     flex: 1;
     overflow-x: hidden;
   }
 }
 
-.layout-footer {
+.app-layout-footer {
   display: flex;
   align-items: center;
   justify-content: center;

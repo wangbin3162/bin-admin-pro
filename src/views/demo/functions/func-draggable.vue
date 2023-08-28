@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="Draggable 拖拽组件模块，依赖vuedraggable。">
+  <page-wrapper desc="Draggable 拖拽组件模块，依赖vuedraggable。">
     <b-collapse-wrap title="Draggable 更通用的拖拽排序模块，无额外样式和默认值等配置" shadow="none">
       <div class="p16">
         <b-row :gutter="16">
@@ -22,7 +22,12 @@
               v-model="data1"
               class="drag-area"
               item-key="element"
-              v-bind="{ animation: 200, group: 'data1', ghostClass: 'ghost', handle: '.drag-handle' }"
+              v-bind="{
+                animation: 200,
+                group: 'data1',
+                ghostClass: 'ghost',
+                handle: '.drag-handle',
+              }"
               @start="start"
               @end="end"
             >
@@ -69,7 +74,7 @@
         <p>data right:{{ data3 }}</p>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

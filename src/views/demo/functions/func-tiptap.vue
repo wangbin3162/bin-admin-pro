@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="当前富文本基于tiptap，目前封装的功能较弱，仅供学习使用，后续需要继续完善。">
+  <page-wrapper desc="当前富文本基于tiptap，目前封装的功能较弱，仅供学习使用，后续需要继续完善。">
     <BinTiptap v-model="content" />
     <div class="pt-16"></div>
     <b-collapse-wrap title="Content" shadow="none">
@@ -7,7 +7,7 @@
         <pre><code>{{ content }}</code></pre>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

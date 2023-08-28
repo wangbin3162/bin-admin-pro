@@ -1,19 +1,19 @@
 <template>
-  <section class="bin-layout layout">
-    <section class="layout-navbar">
+  <section class="app-layout layout">
+    <section class="app-layout-navbar">
       <NavHeader />
     </section>
-    <section class="bin-layout layout-main">
+    <section class="app-layout layout-main">
       <div
-        class="layout-sider"
+        class="app-layout-sider"
         :class="{ 'sider-collapsed': !setting.sidebar }"
         :style="{ width: siderWidth }"
       >
         <SiderMenu />
       </div>
-      <div class="bin-layout layout-content" :style="{ paddingLeft: siderWidth }">
+      <div class="app-layout app-layout-content" :style="{ paddingLeft: siderWidth }">
         <TagsView v-if="setting.tagsView" />
-        <div class="layout-content-inner">
+        <div class="app-layout-content-inner">
           <router-view v-slot="{ Component, route }">
             <Transition :name="setting.routerTransitionName" mode="out-in">
               <keep-alive :include="cachedViews">
@@ -22,7 +22,7 @@
             </Transition>
           </router-view>
         </div>
-        <footer class="layout-footer">bin admin pro</footer>
+        <footer class="app-layout-footer">bin admin pro</footer>
       </div>
     </section>
   </section>

@@ -1,44 +1,32 @@
 <template>
   <div>
-    <page-container inner-scroll v-show="!modalVisible">
-      <template #header>
-        <b-form label-width="95px">
-          <b-form-item label="角色名称">
-            <b-input v-model="query.roleName" clearable></b-input>
-          </b-form-item>
-          <b-form-item label="角色状态">
-            <b-select v-model="query.status" clearable>
-              <b-option
-                v-for="(val, key) in statusMap"
-                :key="key"
-                :label="val"
-                :value="key"
-              ></b-option>
-            </b-select>
-          </b-form-item>
-          <b-form-item>
-            <b-button>重置</b-button>
-            <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
-          </b-form-item>
-        </b-form>
-      </template>
-      <template #rightFooter>
-        <b-page
-          :total="total"
-          :current="query.page"
-          :page-size="query.size"
-          show-sizer
-          show-total
-          @change="pageChange"
-          @size-change="pageSizeChange"
-        ></b-page>
-      </template>
-
+    <page-wrapper v-show="!modalVisible">
       <base-table>
+        <template #filter>
+          <b-form label-width="95px">
+            <b-form-item label="角色名称">
+              <b-input v-model="query.roleName" clearable></b-input>
+            </b-form-item>
+            <b-form-item label="角色状态">
+              <b-select v-model="query.status" clearable>
+                <b-option
+                  v-for="(val, key) in statusMap"
+                  :key="key"
+                  :label="val"
+                  :value="key"
+                ></b-option>
+              </b-select>
+            </b-form-item>
+            <b-form-item label-width="16px">
+              <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
+              <b-button>重置</b-button>
+            </b-form-item>
+          </b-form>
+        </template>
         <template #action>
           <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
         </template>
-        <b-table :columns="columns" :data="copyList" :loading="loading" border>
+        <b-table :columns="columns" :data="copyList" :loading="loading" size="small">
           <template #status="{ row }">
             {{ statusMap[row.status] }}
           </template>
@@ -62,19 +50,25 @@
             ></action-button>
           </template>
         </b-table>
+        <template #page>
+          <b-page
+            :total="total"
+            :current="query.page"
+            :page-size="query.size"
+            show-total
+            @change="pageChange"
+          ></b-page>
+        </template>
       </base-table>
-    </page-container>
+    </page-wrapper>
 
-    <page-container
-      inner-scroll
+    <page-wrapper
       v-if="modalVisible"
       :title="`${pageStatus.isCreate ? '新增' : '修改'}角色`"
-      show-back
-      @back="handleCancel"
       show-close
       @close="handleCancel"
     >
-      <template #footer>
+      <template #rightFooter>
         <div flex="main:right">
           <b-button @click="handleCancel">取 消</b-button>
           <b-button type="primary" :loading="editLoading" @click="handleSubmit">确 定</b-button>
@@ -105,7 +99,7 @@
           </div>
         </b-collapse-wrap>
       </b-form>
-    </page-container>
+    </page-wrapper>
   </div>
 </template>
 

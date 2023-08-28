@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="数字动画组件，现已收录至bin-ui-next，此为示例">
+  <page-wrapper desc="数字动画组件，现已收录至bin-ui-next，此为示例">
     <b-collapse-wrap title="数字动画" shadow="none">
       <div class="count-wrap p10">
         <h1 style="font-size: 60px">
@@ -41,7 +41,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <page-container
+  <page-wrapper
     desc="多种动效使用方案，实际使用的时候根据实际需求进行不同方案的选择。以达到最好的动效方案。"
   >
     <div class="panel">
@@ -11,7 +11,7 @@
         <pag v-if="activeTab === 'tab4'" :url="getImageUrl('pag_test.pag')" />
       </div>
     </div>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>

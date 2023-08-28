@@ -1,5 +1,7 @@
 @import './vars.css';
 @import 'button.css';
 @import 'tag.css';
+@import 'menu.css';
 @import 'table.css';
+@import 'page.css';
 @import 'dropdown.css';

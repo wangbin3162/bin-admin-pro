@@ -13,9 +13,33 @@
     --bin-color-$(val)-light6: mix(#fff, $(color), 0.95);
     --bin-color-$(val)-active: mix(#000, $(color), 0.1);
   }
-
+  --bin-border-color-base: var(--v-g-border-color);
   --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
   --bin-scrollbar-width: 5px;
   --bin-scrollbar-radius: 5px;
+  /* card */
+  --b-card-border-color: var(--v-g-border-color);
+  /* menu */
+  --b-menu-item-height: 40px;
+  --b-menu-item-border-radius: 4px;
+  --b-menu-bg-color: #fff;
+  --b-menu-text-color: var(--v-g-text-color);
+  --b-menu-text-hover-color: var(--v-menu-text-color);
+  --b-menu-bg-hover-color: var(--bin-color-primary-light6);
+  --b-menu-text-active-color: var(--bin-color-primary);
+  --b-menu-bg-active-color: var(--bin-color-primary-light6);
+
+  /* popper */
+  --b-popper-padding: 4px;
+  --b-popper-radius: 4px;
+  --b-popper-item-margin-bottom: 4px;
+  /* table */
+  --b-table-header-bg: var(--v-g-fill-color-2);
+  --b-table-header-text: #1d2129;
+  /* page */
+  --b-page-border-color: transparent;
+  --b-page-bg: var(--v-g-bg-color);
+  --b-page-hover-bg: var(--v-g-fill-color-2);
+  --b-page-active-bg: var(--bin-color-primary-light5);
 }

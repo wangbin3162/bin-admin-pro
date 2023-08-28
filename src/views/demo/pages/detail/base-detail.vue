@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <b-card shadow="never">
       <b-divider align="left">基本信息</b-divider>
       <b-desc>
@@ -23,7 +23,7 @@
       <b-divider align="left">表格信息</b-divider>
       <b-table :columns="columns" :data="data"></b-table>
     </b-card>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

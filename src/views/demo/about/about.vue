@@ -1,11 +1,12 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <template #desc>
       <p>
         <a href="https://github.com/wangbin3162/bin-admin-pro" target="_blank">bin-admin-pro</a>
         &nbsp; 是一个基于Vue3.0、
         <a href="https://github.com/wangbin3162/bin-ui-next" target="_blank">bin-ui-next</a>
-        &nbsp; 的后台解决方案，目标是提供简单快速的开箱解决方案，提供部分示例和更多实用工具以便快速进行后台开发。
+        &nbsp;
+        的后台解决方案，目标是提供简单快速的开箱解决方案，提供部分示例和更多实用工具以便快速进行后台开发。
       </p>
     </template>
     <b-collapse-wrap title="项目信息" shadow="none">
@@ -50,7 +51,7 @@
         </b-desc>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

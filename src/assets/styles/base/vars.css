@@ -27,13 +27,6 @@
   --v-sider-collapse-btn-color: #86909c;
   --v-sider-collapse-btn-bg: var(--v-g-fill-color-1);
   --v-sider-collapse-btn-bg-hover: var(--v-g-fill-color-3);
-  /* 侧边栏 menu */
-  --v-menu-bg-color: #fff;
-  --v-menu-text-color: var(--v-g-text-color);
-  --v-menu-text-hover-color: var(--v-menu-text-color);
-  --v-menu-bg-hover-color: var(--bin-color-primary-light6);
-  --v-menu-text-active-color: var(--bin-color-primary);
-  --v-menu-bg-active-color: var(--bin-color-primary-light6);
   /* tags-view */
   --v-tags-height: 32px;
   --v-tags-border-color: var(--v-g-border-color);

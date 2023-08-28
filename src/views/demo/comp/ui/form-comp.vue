@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="表单类别的组件，可验证不同主题色的正确性。">
+  <page-wrapper desc="表单类别的组件，可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Form 表单输入" shadow="none" class="mb-20">
       <div class="p20" flex="main:center">
@@ -14,7 +14,12 @@
             <b-row>
               <b-col :span="12">
                 <b-form-item prop="age" label="年龄">
-                  <b-input-number style="width: 100%" v-model="form.age" :min="0" :editable="false"></b-input-number>
+                  <b-input-number
+                    style="width: 100%"
+                    v-model="form.age"
+                    :min="0"
+                    :editable="false"
+                  ></b-input-number>
                 </b-form-item>
               </b-col>
               <b-col :span="12">
@@ -62,7 +67,12 @@
               </b-radio-group>
             </b-form-item>
             <b-form-item label="状态" prop="status">
-              <b-switch v-model="form.status" true-value="enable" false-value="disable" size="large">
+              <b-switch
+                v-model="form.status"
+                true-value="enable"
+                false-value="disable"
+                size="large"
+              >
                 <template #open><span>启用</span></template>
                 <template #close><span>禁用</span></template>
               </b-switch>
@@ -75,7 +85,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -133,7 +143,9 @@ export default {
           { required: true, type: 'number', message: '年龄不为空', trigger: 'change' },
           { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' },
         ],
-        hobby: [{ type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }],
+        hobby: [
+          { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' },
+        ],
         sex: [{ required: true, message: '性别必选', trigger: 'change' }],
         birthday: [{ required: true, type: 'date', message: '出生日期必选', trigger: 'blur' }],
         mail: [

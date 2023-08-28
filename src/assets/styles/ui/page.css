@@ -1,0 +1,26 @@
+.bin-page {
+  .bin-page-item {
+    border-color: var(--b-page-border-color);
+    background-color: var(--b-page-bg);
+    &:hover {
+      --b-page-bg: var(--b-page-hover-bg);
+    }
+    &.bin-page-item-active {
+      --b-page-bg: var(--b-page-active-bg);
+    }
+  }
+
+  .bin-page-item-jump-next,
+  .bin-page-item-jump-prev,
+  .bin-page-next,
+  .bin-page-prev {
+    border-color: var(--b-page-border-color);
+    background-color: var(--b-page-bg);
+    &:hover {
+      --b-page-bg: var(--b-page-hover-bg);
+    }
+  }
+  .bin-page-total {
+    font-size: 12px;
+  }
+}

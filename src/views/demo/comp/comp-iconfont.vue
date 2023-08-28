@@ -1,5 +1,5 @@
 <template>
-  <page-container
+  <page-wrapper
     desc="图标字体组件，基于iconfont模式，扩展组件库图标显示，可设置颜色、背景色、中文名、大小等"
   >
     <b-collapse-wrap title="基础图标" shadow="none">
@@ -111,7 +111,7 @@
         ></iconfont>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

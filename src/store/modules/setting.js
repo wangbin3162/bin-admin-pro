@@ -29,6 +29,14 @@ const useSetting = defineStore('setting', {
         width: `calc(100% - ${this.siderWidth})`,
       }
     },
+    pageFooterStyle() {
+      return {
+        position: 'fixed',
+        bottom: 0,
+        left: `${this.siderWidth}px`,
+        width: `calc(100% - ${this.siderWidth})`,
+      }
+    },
   },
   actions: {},
 })

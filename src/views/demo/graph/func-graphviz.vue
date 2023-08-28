@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <b-collapse-wrap title="基础用法" shadow="none" class="mb-16">
       <div class="p10">
         <b-row :gutter="20">
@@ -75,7 +75,7 @@
         </b-row>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 <script setup>
 import { onMounted, ref } from 'vue'

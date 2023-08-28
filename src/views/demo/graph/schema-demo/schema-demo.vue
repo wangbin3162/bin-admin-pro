@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <div class="preview-panel" flex>
       <div class="left-images">
         <div class="top-bar image-list">
@@ -92,7 +92,7 @@
     <b-modal title="当前配置" v-model="configVisible" width="700px">
       <b-ace-editor :model-value="JSON.stringify(config, null, 2)" height="400px" />
     </b-modal>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>

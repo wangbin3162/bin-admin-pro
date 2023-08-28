@@ -1,6 +1,6 @@
-.bin-button {
-  letter-spacing: 0.02857em;
-}
 .bin-card .bin-card__header {
   padding: 8px 16px;
+  &.has-divider {
+    border-bottom: 1px solid var(--bin-card-border-color);
+  }
 }

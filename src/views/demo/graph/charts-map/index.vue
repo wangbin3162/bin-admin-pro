@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="不同样式的关系图">
+  <page-wrapper desc="不同样式的关系图">
     <div class="panel">
       <b-tabs v-model="activeTab" :data="tabs" type="card"></b-tabs>
       <div class="content-box">
@@ -9,7 +9,7 @@
         <Demo3 v-if="activeTab === 'tab3'" />
       </div>
     </div>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>

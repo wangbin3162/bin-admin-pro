@@ -1,5 +1,7 @@
 <template>
-  <page-container desc="业务相关的独立组件，包含通用校验配置，字段样式配置等，可参考进行扩展或实现新的业务组件。">
+  <page-wrapper
+    desc="业务相关的独立组件，包含通用校验配置，字段样式配置等，可参考进行扩展或实现新的业务组件。"
+  >
     <b-row :gutter="16">
       <b-col span="12">
         <b-collapse-wrap title="表单校验" shadow="none">
@@ -16,7 +18,7 @@
         </b-collapse-wrap>
       </b-col>
     </b-row>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

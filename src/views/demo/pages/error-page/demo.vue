@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="通用异常处理，可以根据错误列表进行触发，也可以自定义错误跳转" bg>
+  <page-wrapper desc="通用异常处理，可以根据错误列表进行触发，也可以自定义错误跳转" bg>
     <b-space>
       <router-link :to="{ path: '403' }">
         <b-button background>触发403</b-button>
@@ -25,7 +25,7 @@
         <b-button background>随机不存在菜单路由</b-button>
       </router-link>
     </b-space>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

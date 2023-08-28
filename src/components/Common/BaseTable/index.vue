@@ -4,44 +4,50 @@
       <slot name="filter"></slot>
     </div>
     <div class="base-table-box" :style="tableStyle">
-      <div class="base-table-action" v-if="$slots.action">
-        <slot name="action"></slot>
+      <div class="base-table-action" v-if="$slots.action || $slots.actionRight">
+        <div class="left">
+          <slot name="action"></slot>
+        </div>
+        <div class="right">
+          <slot name="actionRight"></slot>
+        </div>
       </div>
       <slot></slot>
-    </div>
-    <div class="base-table-pagination" v-if="$slots.page" :style="pageStyle">
-      <slot name="page"></slot>
+      <div class="base-table-pagination" v-if="$slots.page" :style="pageStyle">
+        <slot name="page"></slot>
+      </div>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script setup>
+defineOptions({
   name: 'BaseTable',
-  props: {
-    filterStyle: Object,
-    tableStyle: Object,
-    pageStyle: Object,
-  },
-}
+})
+defineProps({
+  filterStyle: Object,
+  tableStyle: Object,
+  pageStyle: Object,
+})
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .base-table {
   width: 100%;
   .base-table-form {
     background: #fff;
     border-radius: 2px;
-    padding: 10px 10px 0;
+    padding: 20px 20px 0;
+    border-bottom: 1px solid var(--v-g-border-color);
     :deep(.bin-form) {
       display: flex;
       flex-wrap: wrap;
       .bin-form-item {
         margin-right: 0;
-        margin-bottom: 10px;
+        margin-bottom: 16px;
         width: 33.33333333%;
         .bin-form-item__label {
-          padding-left: 6px;
+          padding-left: 8px;
         }
       }
     }
@@ -49,17 +55,17 @@ export default {
   .base-table-box {
     background: #fff;
     border-radius: 2px;
-    padding: 10px;
+    padding: 20px;
     .base-table-action {
-      width: 100%;
-      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
     }
   }
   .base-table-pagination {
-    background: #fff;
-    border-radius: 2px;
-    padding: 10px;
-    text-align: left;
+    text-align: right;
+    margin-top: 20px;
   }
 }
 </style>

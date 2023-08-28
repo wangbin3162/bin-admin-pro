@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="基础映射配置示例，可拖动排序，并封装了通用的hook钩子函数，可进行复用。">
+  <page-wrapper desc="基础映射配置示例，可拖动排序，并封装了通用的hook钩子函数，可进行复用。">
     <b-row :gutter="16">
       <b-col span="12">
         <b-collapse-wrap title="映射配置" shadow="none">
@@ -23,7 +23,7 @@
         </b-collapse-wrap>
       </b-col>
     </b-row>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

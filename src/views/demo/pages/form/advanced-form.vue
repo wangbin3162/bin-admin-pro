@@ -1,6 +1,13 @@
 <template>
-  <page-container desc="当一次性提交大量数据时，可使用高级表单。">
-    <b-form :model="form" :rules="ruleValidate" status-icon label-width="85px" ref="formRef" label-position="top">
+  <page-wrapper desc="当一次性提交大量数据时，可使用高级表单。">
+    <b-form
+      :model="form"
+      :rules="ruleValidate"
+      status-icon
+      label-width="85px"
+      ref="formRef"
+      label-position="top"
+    >
       <b-collapse-wrap title="基本信息" shadow="none">
         <div style="padding: 10px 24px">
           <b-row :gutter="24">
@@ -24,7 +31,11 @@
             </b-col>
             <b-col span="6">
               <b-form-item label="出生日期" prop="birthday">
-                <b-date-picker v-model="form.birthday" type="date" placeholder="出生日期"></b-date-picker>
+                <b-date-picker
+                  v-model="form.birthday"
+                  type="date"
+                  placeholder="出生日期"
+                ></b-date-picker>
               </b-form-item>
             </b-col>
           </b-row>
@@ -82,11 +93,22 @@
         <div style="padding: 16px">
           <b-table :columns="columns" :data="list">
             <template #name="{ index, row }">
-              <b-input type="text" v-model="editName" v-if="editIndex === index" size="small" clearable></b-input>
+              <b-input
+                type="text"
+                v-model="editName"
+                v-if="editIndex === index"
+                size="small"
+                clearable
+              ></b-input>
               <span v-else>{{ row.name }}</span>
             </template>
             <template #age="{ index, row }">
-              <b-input-number type="text" v-model="editAge" v-if="editIndex === index" size="small"></b-input-number>
+              <b-input-number
+                type="text"
+                v-model="editAge"
+                v-if="editIndex === index"
+                size="small"
+              ></b-input-number>
               <span v-else>{{ row.age }}</span>
             </template>
             <template #birthday="{ index, row }">
@@ -101,23 +123,38 @@
             </template>
             <template #hobby="{ index, row }">
               <b-select v-model="editHobby" clearable v-if="editIndex === index" size="small">
-                <b-option v-for="(val, key) in hobbyMap" :key="key" :value="key" :label="val">{{ val }}</b-option>
+                <b-option v-for="(val, key) in hobbyMap" :key="key" :value="key" :label="val">
+                  {{ val }}
+                </b-option>
               </b-select>
               <span v-else>{{ hobbyMap[row.hobby] }}</span>
             </template>
             <template #address="{ index, row }">
-              <b-input type="text" v-model="editAddress" v-if="editIndex === index" size="small"></b-input>
+              <b-input
+                type="text"
+                v-model="editAddress"
+                v-if="editIndex === index"
+                size="small"
+              ></b-input>
               <span v-else>{{ row.address }}</span>
             </template>
             <template #action="{ index, row }">
               <div v-if="editIndex === index">
                 <template v-if="editIsCreate">
-                  <b-button @click="handleSave(index)" size="mini" type="success" transparent>新增</b-button>
-                  <b-button type="danger" size="mini" transparent @click="handleRemove(index)">删除</b-button>
+                  <b-button @click="handleSave(index)" size="mini" type="success" transparent>
+                    新增
+                  </b-button>
+                  <b-button type="danger" size="mini" transparent @click="handleRemove(index)">
+                    删除
+                  </b-button>
                 </template>
                 <template v-else>
-                  <b-button size="mini" type="success" transparent @click="handleSave(index)">保存</b-button>
-                  <b-button size="mini" type="primary" transparent @click="editIndex = -1">取消</b-button>
+                  <b-button size="mini" type="success" transparent @click="handleSave(index)">
+                    保存
+                  </b-button>
+                  <b-button size="mini" type="primary" transparent @click="editIndex = -1">
+                    取消
+                  </b-button>
                 </template>
               </div>
               <div v-else>
@@ -143,7 +180,15 @@
             </template>
           </b-table>
           <div class="mt-8">
-            <b-button icon="plus" dashed style="width: 100%" @click="handleAdd" :disabled="editIsCreate">新增</b-button>
+            <b-button
+              icon="plus"
+              dashed
+              style="width: 100%"
+              @click="handleAdd"
+              :disabled="editIsCreate"
+            >
+              新增
+            </b-button>
           </div>
         </div>
       </b-collapse-wrap>
@@ -152,7 +197,7 @@
       <b-button @click="resetForm">重 置</b-button>
       <b-button type="primary" @click="submitForm">提 交</b-button>
     </template>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -234,7 +279,13 @@ export default {
 
     function handleSave(index) {
       const { editName, editAge, editBirthday, editHobby, editAddress } = edit
-      if (editName === '' || !editAge || editBirthday === '' || editHobby === '' || editAddress === '') {
+      if (
+        editName === '' ||
+        !editAge ||
+        editBirthday === '' ||
+        editHobby === '' ||
+        editAddress === ''
+      ) {
         Message.error('请填写完整的信息！')
         return
       }

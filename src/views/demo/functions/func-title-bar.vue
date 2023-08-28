@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="标题组件，全局的内置标题组件，附带不同的效果">
+  <page-wrapper desc="标题组件，全局的内置标题组件，附带不同的效果">
     <b-collapse-wrap title="基础标题，title参数 或 默认插槽显示标题" shadow="none">
       <div class="p10">
         <title-bar title="Title标题"></title-bar>
@@ -23,7 +23,7 @@
         </title-bar>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

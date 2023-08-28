@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="基础表单常见于数据项较少的表单场景。" bg>
+  <page-wrapper desc="基础表单常见于数据项较少的表单场景。" bg>
     <b-row type="flex" justify="center">
       <b-col span="12">
         <b-form ref="formRef" :model="form" label-width="85px" :rules="ruleValidate">
@@ -12,7 +12,12 @@
           <b-row>
             <b-col :span="12">
               <b-form-item prop="age" label="年龄">
-                <b-input-number style="width: 100%" v-model="form.age" :min="0" :editable="false"></b-input-number>
+                <b-input-number
+                  style="width: 100%"
+                  v-model="form.age"
+                  :min="0"
+                  :editable="false"
+                ></b-input-number>
               </b-form-item>
             </b-col>
             <b-col :span="12">
@@ -27,7 +32,11 @@
             </b-col>
           </b-row>
           <b-form-item label="出生日期" prop="birthday">
-            <b-date-picker v-model="form.birthday" type="date" placeholder="出生日期"></b-date-picker>
+            <b-date-picker
+              v-model="form.birthday"
+              type="date"
+              placeholder="出生日期"
+            ></b-date-picker>
           </b-form-item>
           <b-form-item label="爱好" prop="hobby">
             <b-checkbox-group v-model="form.hobby">
@@ -56,7 +65,7 @@
         </b-form>
       </b-col>
     </b-row>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -104,7 +113,9 @@ export default {
           { required: true, type: 'number', message: '年龄不为空', trigger: 'change' },
           { type: 'number', min: 18, trigger: 'change', message: '年龄必须在18以上' },
         ],
-        hobby: [{ type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' }],
+        hobby: [
+          { type: 'array', required: true, message: '请至少选择一个爱好', trigger: 'change' },
+        ],
         sex: [{ required: true, message: '性别必选', trigger: 'change' }],
         birthday: [{ required: true, type: 'date', message: '出生日期必选', trigger: 'blur' }],
         mail: [

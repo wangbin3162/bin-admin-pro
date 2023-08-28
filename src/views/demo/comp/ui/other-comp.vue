@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="导航类别的组件，可验证不同主题色的正确性。">
+  <page-wrapper desc="导航类别的组件，可验证不同主题色的正确性。">
     <theme-color-panel />
     <b-collapse-wrap title="Other 其他类型的显示组件" shadow="none" class="mb-20">
       <div class="p10">
@@ -67,7 +67,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

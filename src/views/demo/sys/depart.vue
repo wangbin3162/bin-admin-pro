@@ -1,7 +1,7 @@
 <template>
-  <page-container hide-header inner-scroll>
-    <page-cube-wrapper>
-      <template #left>
+  <page-wrapper>
+    <b-layout has-sider>
+      <template #sider>
         <base-tree
           ref="treeRef"
           tree-title="部门列表"
@@ -16,7 +16,7 @@
           </template>
         </base-tree>
       </template>
-      <div class="pl-16">
+      <div>
         <b-card :bordered="false" class="card-panel" shadow="never">
           <template #header>
             <div flex="main:justify cross:center" style="font-weight: normal">
@@ -102,144 +102,125 @@
           </div>
         </b-card>
       </div>
-    </page-cube-wrapper>
-  </page-container>
+    </b-layout>
+  </page-wrapper>
 </template>
 
-<script>
+<script setup>
 import { getDepartTree } from '@/api/modules/depart.api'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
 import { Message } from 'bin-ui-next'
 import useForm from '@/hooks/service/useForm'
 
-export default {
+defineOptions({
   name: 'Depart',
-  setup() {
-    const treeRef = ref(null)
-    const currentNode = ref(null)
-    const copyNode = ref({})
+})
 
-    const flatStateBuffer = ref({})
+const treeRef = ref(null)
+const currentNode = ref(null)
+const copyNode = ref({})
 
-    const {
-      formRef,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-    } = useForm()
+const flatStateBuffer = ref({})
 
-    function handleSelect(node, flatState) {
-      if (node.selected) {
-        currentNode.value = node
-        flatStateBuffer.value = flatState
-        handleEdit()
-      } else {
-        cancel()
-      }
-    }
+const {
+  formRef,
+  editStatus,
+  pageStatus,
+  editLoading,
+  openCreate,
+  openEdit,
+  backNormal,
+  submitForm,
+  resetForm,
+} = useForm()
 
-    function handleCommand(name) {
-      if (name === 'root') {
-        handleCreate()
-      }
-      if (name === 'child') {
-        handleCreate()
-        const current = currentNode.value
-        copyNode.value.parentId = current.id
-        copyNode.value.parentName = current.text
-      }
-    }
+function handleSelect(node, flatState) {
+  if (node.selected) {
+    currentNode.value = node
+    flatStateBuffer.value = flatState
+    handleEdit()
+  } else {
+    cancel()
+  }
+}
 
-    function resetFormData(edit = 'edit') {
-      if (edit === 'edit') {
-        const flatState = flatStateBuffer.value
-        const current = currentNode.value
-        const parentKey = flatState[current.nodeKey].parent
-        const parentNode = parentKey || parentKey === 0 ? flatState[parentKey].node : {}
-        copyNode.value = current
-          ? {
-              ...deepCopy(current),
-              parentId: parentKey === 0 ? '' : parentNode.id,
-              parentName: parentNode.title,
-            }
-          : {}
-        return
-      }
-      // 创建模式
-      copyNode.value = {
-        text: '',
-        deptCode: '',
-        status: '1',
-        desc: '',
-        parentId: '',
-        parentName: undefined,
-      }
-    }
+function handleCommand(name) {
+  if (name === 'root') {
+    handleCreate()
+  }
+  if (name === 'child') {
+    handleCreate()
+    const current = currentNode.value
+    copyNode.value.parentId = current.id
+    copyNode.value.parentName = current.text
+  }
+}
 
-    function cancel() {
-      currentNode.value = null
-      flatStateBuffer.value = null
-      copyNode.value = {}
+function resetFormData(edit = 'edit') {
+  if (edit === 'edit') {
+    const flatState = flatStateBuffer.value
+    const current = currentNode.value
+    const parentKey = flatState[current.nodeKey].parent
+    const parentNode = parentKey || parentKey === 0 ? flatState[parentKey].node : {}
+    copyNode.value = current
+      ? {
+          ...deepCopy(current),
+          parentId: parentKey === 0 ? '' : parentNode.id,
+          parentName: parentNode.text,
+        }
+      : {}
+    return
+  }
+  // 创建模式
+  copyNode.value = {
+    text: '',
+    deptCode: '',
+    status: '1',
+    desc: '',
+    parentId: '',
+    parentName: undefined,
+  }
+}
+
+function cancel() {
+  currentNode.value = null
+  flatStateBuffer.value = null
+  copyNode.value = {}
+  backNormal()
+}
+
+function handleCreate() {
+  resetFormData('create')
+  openCreate()
+}
+
+function handleEdit() {
+  resetFormData('edit')
+  openEdit()
+}
+
+function handleSubmit() {
+  submitForm(() => {
+    editLoading.value = true
+    const status = pageStatus.value
+    setTimeout(() => {
+      Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
       backNormal()
-    }
+      const keys = currentNode.value ? [currentNode.value.nodeKey] : []
+      treeRef.value && treeRef.value.reloadTree(keys)
+      editLoading.value = false
+    }, 1000)
+  })
+}
 
-    function handleCreate() {
-      resetFormData('create')
-      openCreate()
-    }
+function handleResetForm() {
+  resetFormData(editStatus.value)
+  resetForm()
+}
 
-    function handleEdit() {
-      resetFormData('edit')
-      openEdit()
-    }
-
-    function handleSubmit() {
-      submitForm(() => {
-        editLoading.value = true
-        const status = pageStatus.value
-        setTimeout(() => {
-          Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
-          backNormal()
-          const keys = currentNode.value ? [currentNode.value.nodeKey] : []
-          treeRef.value && treeRef.value.reloadTree(keys)
-          editLoading.value = false
-        }, 1000)
-      })
-    }
-
-    function handleResetForm() {
-      resetFormData(editStatus.value)
-      resetForm()
-    }
-
-    return {
-      // tree
-      treeRef,
-      getDepartTree,
-      currentNode,
-      copyNode,
-      handleSelect,
-      handleSubmit,
-      handleResetForm,
-      handleCommand,
-
-      // form
-      formRef,
-      pageStatus,
-      editLoading,
-      submitForm,
-      resetForm,
-      ruleValidate: {
-        text: [{ required: true, message: '部门名称必填', trigger: 'blur' }],
-        deptCode: [{ required: true, message: '部门编码必填', trigger: 'blur' }],
-      },
-    }
-  },
+const ruleValidate = {
+  text: [{ required: true, message: '部门名称必填', trigger: 'blur' }],
+  deptCode: [{ required: true, message: '部门编码必填', trigger: 'blur' }],
 }
 </script>

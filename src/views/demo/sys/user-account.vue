@@ -1,52 +1,7 @@
 <template>
-  <page-container inner-scroll>
-    <template #header>
-      <b-form label-width="95px" label-position="left">
-        <b-form-item label="用户名称">
-          <b-input v-model="query.name" clearable></b-input>
-        </b-form-item>
-        <b-form-item label="用户角色">
-          <b-select v-model="query.roles" clearable>
-            <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
-          </b-select>
-        </b-form-item>
-        <template v-if="expand">
-          <b-form-item label="状态">
-            <b-select v-model="query.status" clearable>
-              <b-option label="启用" value="1"></b-option>
-              <b-option label="禁用" value="0"></b-option>
-            </b-select>
-          </b-form-item>
-          <b-form-item label="邮箱">
-            <b-input v-model="query.email" clearable></b-input>
-          </b-form-item>
-          <b-form-item label="日期">
-            <b-date-picker v-model="query.date" clearable></b-date-picker>
-          </b-form-item>
-        </template>
-        <b-form-item>
-          <b-button>重置</b-button>
-          <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
-          <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
-            {{ expand ? '收起' : '展开' }}
-          </b-button>
-        </b-form-item>
-      </b-form>
-    </template>
-    <template #rightFooter>
-      <b-page
-        :total="total"
-        :current="query.page"
-        :page-size="query.size"
-        show-sizer
-        show-total
-        @change="pageChange"
-        @size-change="pageSizeChange"
-      ></b-page>
-    </template>
-
-    <page-cube-wrapper>
-      <template #left>
+  <page-wrapper>
+    <b-layout has-sider>
+      <template #sider>
         <base-tree
           ref="treeRef"
           tree-title="部门列表"
@@ -55,9 +10,48 @@
           @select-change="handleSelect"
         ></base-tree>
       </template>
-      <base-table class="pl-16">
+
+      <base-table>
+        <template #filter>
+          <b-form label-width="95px">
+            <b-form-item label="用户名称">
+              <b-input v-model="query.name" clearable></b-input>
+            </b-form-item>
+            <b-form-item label="用户角色">
+              <b-select v-model="query.roles" clearable>
+                <b-option
+                  v-for="(val, key) in roleMap"
+                  :key="key"
+                  :label="val"
+                  :value="key"
+                ></b-option>
+              </b-select>
+            </b-form-item>
+            <template v-if="expand">
+              <b-form-item label="状态">
+                <b-select v-model="query.status" clearable>
+                  <b-option label="启用" value="1"></b-option>
+                  <b-option label="禁用" value="0"></b-option>
+                </b-select>
+              </b-form-item>
+              <b-form-item label="邮箱">
+                <b-input v-model="query.email" clearable></b-input>
+              </b-form-item>
+              <b-form-item label="日期">
+                <b-date-picker v-model="query.date" clearable></b-date-picker>
+              </b-form-item>
+            </template>
+            <b-form-item>
+              <b-button type="primary" :loading="loading" @click="getListData">查询</b-button>
+              <b-button>重置</b-button>
+              <b-button type="text" :icon="expand ? 'up' : 'down'" @click="expand = !expand">
+                {{ expand ? '收起' : '展开' }}
+              </b-button>
+            </b-form-item>
+          </b-form>
+        </template>
         <template #action>
-          <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
+          <b-button type="primary" icon="plus" @click="handleCreate">新增</b-button>
         </template>
         <template #actionRight>
           <b-dropdown style="margin-left: 20px">
@@ -73,7 +67,7 @@
             </template>
           </b-dropdown>
         </template>
-        <b-table :columns="columns" :data="copyList" :loading="loading" border>
+        <b-table :columns="columns" :data="copyList" :loading="loading" size="small">
           <template #roles="{ row }">
             {{ roleMap[row.roles] }}
           </template>
@@ -97,8 +91,18 @@
             ></action-button>
           </template>
         </b-table>
+        <template #page>
+          <b-page
+            :total="total"
+            :current="query.page"
+            :page-size="query.size"
+            show-total
+            @change="pageChange"
+            @size-change="pageSizeChange"
+          ></b-page>
+        </template>
       </base-table>
-    </page-cube-wrapper>
+    </b-layout>
 
     <b-modal
       :model-value="modalVisible"
@@ -144,10 +148,10 @@
         </div>
       </template>
     </b-modal>
-  </page-container>
+  </page-wrapper>
 </template>
 
-<script>
+<script setup>
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
@@ -156,152 +160,116 @@ import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 import useTree from '@/hooks/service/useTree'
 
-export default {
+defineOptions({
   name: 'UserAccount',
-  setup() {
-    const treeRef = ref(null)
-    const currentTreeNode = ref({})
-    const query = reactive({
-      page: 1,
-      size: 10,
-      name: '',
-      roles: '',
-      status: '',
-      date: '',
-      email: '',
-    })
-    const expand = ref(false)
-    const copyList = ref([])
-    const user = ref({})
+})
 
-    const { treeData: deptTree, getTreeData } = useTree(getDepartTree)
-    getTreeData().then(() => console.log(deptTree.value))
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
-      getUserList,
-      query,
-    )
-    const {
-      formRef,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-      setBtnLoading,
-      modalVisible,
-    } = useForm()
-    watch(list, val => {
-      copyList.value = val.map(item => ({
-        ...item,
-        expand: false,
-      }))
-    })
+const treeRef = ref(null)
+const currentTreeNode = ref({})
+const query = reactive({
+  page: 1,
+  size: 10,
+  name: '',
+  roles: '',
+  status: '',
+  date: '',
+  email: '',
+})
+const expand = ref(false)
+const copyList = ref([])
+const user = ref({})
 
-    function handleSelect(node) {
-      if (node.selected) {
-        currentTreeNode.value = node
-      }
-    }
+const { treeData: deptTree, getTreeData } = useTree(getDepartTree)
+getTreeData().then(() => console.log(deptTree.value))
+const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+  getUserList,
+  query,
+)
+const {
+  formRef,
+  pageStatus,
+  editLoading,
+  openCreate,
+  openEdit,
+  backNormal,
+  submitForm,
+  setBtnLoading,
+  modalVisible,
+} = useForm()
+watch(list, val => {
+  copyList.value = val.map(item => ({
+    ...item,
+    expand: false,
+  }))
+})
 
-    function handleCreate() {
-      user.value = {
-        realName: '',
-        username: '',
-        email: '',
-        roles: '',
-        depart: '',
-      }
-      openCreate()
-    }
+function handleSelect(node) {
+  if (node.selected) {
+    currentTreeNode.value = node
+  }
+}
 
-    function handleEdit(row) {
-      user.value = {
-        ...row,
-        depart: '',
-      }
-      openEdit()
-    }
+function handleCreate() {
+  user.value = {
+    realName: '',
+    username: '',
+    email: '',
+    roles: '',
+    depart: '',
+  }
+  openCreate()
+}
 
-    function handleCancel() {
-      user.value = {}
+function handleEdit(row) {
+  user.value = {
+    ...row,
+    depart: '',
+  }
+  openEdit()
+}
+
+function handleCancel() {
+  user.value = {}
+  backNormal()
+}
+
+function handleDelete() {
+  Message.success('删除成功！')
+  getListData()
+}
+
+function handleSubmit() {
+  submitForm(() => {
+    setBtnLoading(true)
+    const status = pageStatus.value
+    setTimeout(() => {
+      Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
+      setBtnLoading(false)
       backNormal()
-    }
-
-    function handleDelete() {
-      Message.success('删除成功！')
       getListData()
-    }
+    }, 1000)
+  })
+}
 
-    function handleSubmit() {
-      submitForm(() => {
-        setBtnLoading(true)
-        const status = pageStatus.value
-        setTimeout(() => {
-          Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
-          setBtnLoading(false)
-          backNormal()
-          getListData()
-        }, 1000)
-      })
-    }
+// 执行一次内容
+getListData()
 
-    // 执行一次内容
-    getListData()
+const roleMap = {
+  admin: '管理员',
+  user: '普通用户',
+  op: '实施人员',
+}
+const columns = [
+  { title: '姓名', key: 'realName' },
+  { title: '登录名', key: 'username' },
+  { title: '邮箱', key: 'email' },
+  { title: '角色', slot: 'roles' },
+  { title: '出生日期', key: 'createDate' },
+  { title: '操作', width: 100, align: 'center', slot: 'action' },
+]
 
-    return {
-      // tree,
-      treeRef,
-      currentTreeNode,
-      handleSelect,
-      getDepartTree,
-      deptTree,
-      // list
-      expand,
-      query,
-      loading,
-      roleMap: {
-        admin: '管理员',
-        user: '普通用户',
-        op: '实施人员',
-      },
-      total,
-      copyList,
-      getListData,
-      pageChange,
-      pageSizeChange,
-      columns: [
-        { title: '姓名', key: 'realName' },
-        { title: '登录名', key: 'username' },
-        { title: '邮箱', key: 'email' },
-        { title: '角色', slot: 'roles' },
-        { title: '出生日期', key: 'createDate' },
-        { title: '操作', width: 100, align: 'center', slot: 'action' },
-      ],
-      // form
-      user,
-      formRef,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-      ruleValidate: {
-        realName: [{ required: true, message: '真实名称必填', trigger: 'blur' }],
-        username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
-      },
-      modalVisible,
-      handleCreate,
-      handleCancel,
-      handleEdit,
-      handleSubmit,
-      handleDelete,
-    }
-  },
+const ruleValidate = {
+  realName: [{ required: true, message: '真实名称必填', trigger: 'blur' }],
+  username: [{ required: true, message: '用户名必填', trigger: 'blur' }],
 }
 </script>

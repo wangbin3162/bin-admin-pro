@@ -8,7 +8,7 @@ import { throwError, typeOf } from '@/utils/util'
  * @param ctx setup ctx
  * @param titleKey
  */
-export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
+export default function useTree(fetch, params = {}, emit, titleKey = 'text') {
   const treeRef = ref(null)
   // 树节点原始数据
   const treeData = ref([])
@@ -28,7 +28,7 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
       } else {
         treeData.value = data
       }
-      ctx && ctx.emit('init-success')
+      emit && emit('init-success')
     } catch (e) {
       // 响应时触发错误
       throwError('useTree/getTreeData', e)
@@ -61,17 +61,17 @@ export default function useTree(fetch, params = {}, ctx, titleKey = 'text') {
   }
 
   const handleSelect = (selected, node, flatState) => {
-    ctx && ctx.emit('select-change', node, flatState)
+    emit && emit('select-change', node, flatState)
   }
 
   const handleChecked = (checked, node, indeterminate) => {
     hasChecked.value = checked.length > 0
     // 包含半选节点
-    ctx && ctx.emit('check-change', checked, node, indeterminate)
+    emit && emit('check-change', checked, node, indeterminate)
   }
 
   // 过滤树节点
-  const handleFilter = (value) => {
+  const handleFilter = value => {
     treeRef.value && treeRef.value.filter(value)
   }
   // 过滤函数

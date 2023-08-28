@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="基础的列表，可以进行增删改查等操作。">
+  <page-wrapper desc="基础的列表，可以进行增删改查等操作。">
     <b-card class="task-wrapper" :bordered="false" shadow="never">
       <b-row>
         <b-col span="8">
@@ -80,7 +80,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

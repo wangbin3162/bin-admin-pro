@@ -1,5 +1,5 @@
 <template>
-  <page-container title="Pivot Table" desc="交叉表，根据不同配置动态获取不同的表格显示。">
+  <page-wrapper title="Pivot Table" desc="交叉表，根据不同配置动态获取不同的表格显示。">
     <b-collapse-wrap title="Pivot (drag & drop UI + PivotTable)" shadow="none" collapse>
       <div class="p16" style="--bin-border-base-radius: 0">
         <pivot
@@ -12,7 +12,9 @@
         >
           <template #value="{ value }">{{ value.toLocaleString() }}</template>
           <template #countryFlagHeader="{ value }">{{ countryEmoji(value) }}</template>
-          <template #countryNameHeader="{ value }">{{ value.replace(/\b\w/g, l => l.toUpperCase()) }}</template>
+          <template #countryNameHeader="{ value }">
+            {{ value.replace(/\b\w/g, l => l.toUpperCase()) }}
+          </template>
           <template #genderHeader="{ value }">
             <svg
               v-if="value === 'female'"
@@ -65,7 +67,9 @@
         >
           <template #value="{ value }">{{ value.toLocaleString() }}</template>
           <template #countryFlagHeader="{ value }">{{ countryEmoji(value) }}</template>
-          <template #countryNameHeader="{ value }">{{ value.replace(/\b\w/g, l => l.toUpperCase()) }}</template>
+          <template #countryNameHeader="{ value }">
+            {{ value.replace(/\b\w/g, l => l.toUpperCase()) }}
+          </template>
           <template #genderHeader="{ value }">
             <svg
               v-if="value === 'female'"
@@ -106,7 +110,12 @@
         </pivot-table>
       </div>
     </b-collapse-wrap>
-    <b-collapse-wrap title="Pivot with advanced reducer" shadow="none" :model-value="false" collapse>
+    <b-collapse-wrap
+      title="Pivot with advanced reducer"
+      shadow="none"
+      :model-value="false"
+      collapse
+    >
       <div class="p16">
         <pivot
           :data="dataGdpFlattened"
@@ -123,7 +132,9 @@
             <div v-if="value.gdp">{{ value.gdp.toLocaleString() }}</div>
           </template>
           <template #countryFlagHeader="{ value }">{{ countryEmoji(value) }}</template>
-          <template #countryNameHeader="{ value }">{{ value.replace(/\b\w/g, l => l.toUpperCase()) }}</template>
+          <template #countryNameHeader="{ value }">
+            {{ value.replace(/\b\w/g, l => l.toUpperCase()) }}
+          </template>
           <template #typeHeader="{ value }">
             <template v-if="value === 'count'">Population</template>
             <template v-if="value === 'gdp'">GDP</template>
@@ -173,7 +184,7 @@
         <pivot-doc></pivot-doc>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -185,7 +196,12 @@ import dataGdp from './data-gdp'
 
 const dataGdpFlattened = []
 dataGdp.forEach(item => {
-  dataGdpFlattened.push({ country: item.country, year: item.year, type: 'count', count: item.count })
+  dataGdpFlattened.push({
+    country: item.country,
+    year: item.year,
+    type: 'count',
+    count: item.count,
+  })
   dataGdpFlattened.push({ country: item.country, year: item.year, type: 'gdp', gdp: item.gdp })
 })
 

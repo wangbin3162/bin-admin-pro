@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <template #desc>
       <div>动态编写执行函数体，执行获取返回数据。</div>
     </template>
@@ -15,11 +15,19 @@
           </b-alert>
           <div>
             字段候选
-            <b-tag type="primary" draggable="true" @dragstart="dragField($event, 'name')">name</b-tag>
-            <b-tag type="info" draggable="true" @dragstart="dragField($event, 'price')">price</b-tag>
+            <b-tag type="primary" draggable="true" @dragstart="dragField($event, 'name')">
+              name
+            </b-tag>
+            <b-tag type="info" draggable="true" @dragstart="dragField($event, 'price')">
+              price
+            </b-tag>
             <b-tag type="success" draggable="true" @dragstart="dragField($event, 'num')">num</b-tag>
-            <b-tag type="warning" draggable="true" @dragstart="dragField($event, 'discount')">discount</b-tag>
-            <b-tag type="danger" draggable="true" @dragstart="dragField($event, 'breaks')">breaks</b-tag>
+            <b-tag type="warning" draggable="true" @dragstart="dragField($event, 'discount')">
+              discount
+            </b-tag>
+            <b-tag type="danger" draggable="true" @dragstart="dragField($event, 'breaks')">
+              breaks
+            </b-tag>
           </div>
           <b-divider style="margin: 10px 0"></b-divider>
           <div class="drop-wrapper" @drop="dropField($event)" @dragover="allowDrop($event)">
@@ -60,16 +68,24 @@
           <div class="example">
             示例代码：
             <p>拼接字符串：</p>
-            <p style="padding-left: 8px">return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;</p>
+            <p style="padding-left: 8px">
+              return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;
+            </p>
             <p>返回布尔值：</p>
             <p style="padding-left: 8px">return (price * num) * discount >= 200</p>
             <p>复杂计算逻辑：</p>
             <p style="padding-left: 8px">// 如果有折扣则计算折扣后总价</p>
-            <p style="padding-left: 8px">const total = discount? price * num * discount : price * num;</p>
+            <p style="padding-left: 8px">
+              const total = discount? price * num * discount : price * num;
+            </p>
             <p style="padding-left: 8px">// 判断是否符合满减政策，如满200-30</p>
-            <p style="padding-left: 8px">const totalPrice = total >= 200&&breaks ? total - breaks : total;</p>
+            <p style="padding-left: 8px">
+              const totalPrice = total >= 200&&breaks ? total - breaks : total;
+            </p>
             <p style="padding-left: 8px">// 输出最终结果</p>
-            <p style="padding-left: 8px">return `您购买了${name}，单价${price}，数量${num}，最终价格: ${totalPrice}`</p>
+            <p style="padding-left: 8px">
+              return `您购买了${name}，单价${price}，数量${num}，最终价格: ${totalPrice}`
+            </p>
           </div>
         </div>
       </div>
@@ -78,12 +94,22 @@
     <b-collapse-wrap title="表格类方式调用" shadow="none" class="mb-16">
       <div flex>
         <div class="p10" style="width: 70%">
-          <b-table :columns="columns" :data="goodsData" border :merge-method="handleSpan" size="small"></b-table>
+          <b-table
+            :columns="columns"
+            :data="goodsData"
+            border
+            :merge-method="handleSpan"
+            size="small"
+          ></b-table>
         </div>
         <div class="p10" style="width: 30%">
           <title-bar title="商品计算函数" tip-pos="left"></title-bar>
           tip: 这里采用对象传入的方式进行传参
-          <func-body-editor ref="goodsEditRef" v-model="goodsFuncBody" :augments="['goods']"></func-body-editor>
+          <func-body-editor
+            ref="goodsEditRef"
+            v-model="goodsFuncBody"
+            :augments="['goods']"
+          ></func-body-editor>
           <b-divider style="margin: 10px 0"></b-divider>
 
           <b-button type="primary" @click="runTest2">执行计算</b-button>
@@ -101,7 +127,13 @@
 
           <b-space>
             <b-button size="mini" @click="addOne">新增校验字段</b-button>
-            <b-tag :key="tag" v-for="tag in formParams" type="primary" closable @close="handleCloseTag(tag)">
+            <b-tag
+              :key="tag"
+              v-for="tag in formParams"
+              type="primary"
+              closable
+              @close="handleCloseTag(tag)"
+            >
               {{ tag }}
             </b-tag>
             <b-input
@@ -133,7 +165,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -150,7 +182,9 @@ export default {
       { key: 'discount', value: 0.98 },
       { key: 'breaks', value: 30 },
     ])
-    const fieldsFuncBody = ref('return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;')
+    const fieldsFuncBody = ref(
+      'return `${name} 商品 ，单价${price} ，数量${num} ，总价: ${price*num}`;',
+    )
     const fieldsEditRef = ref(null)
     const fieldsTitle = ref('')
 
@@ -199,7 +233,9 @@ export default {
         total: null,
       },
     ])
-    const goodsFuncBody = ref('const { price, num, discount } = goods;\n return price * num * discount;')
+    const goodsFuncBody = ref(
+      'const { price, num, discount } = goods;\n return price * num * discount;',
+    )
 
     const formEditRef = ref(null)
     const formObjStr = ref(

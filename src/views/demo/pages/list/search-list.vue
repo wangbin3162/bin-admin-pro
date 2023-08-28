@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="基础表格的查询列表，带有常规操作。">
+  <page-wrapper desc="基础表格的查询列表，带有常规操作。">
     <base-table>
       <template #filter>
         <b-form label-width="95px">
@@ -8,7 +8,12 @@
           </b-form-item>
           <b-form-item label="用户角色">
             <b-select v-model="query.roles" clearable>
-              <b-option v-for="(val, key) in roleMap" :key="key" :label="val" :value="key"></b-option>
+              <b-option
+                v-for="(val, key) in roleMap"
+                :key="key"
+                :label="val"
+                :value="key"
+              ></b-option>
             </b-select>
           </b-form-item>
           <template v-if="expand">
@@ -71,7 +76,7 @@
         ></b-page>
       </template>
     </base-table>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>
@@ -93,7 +98,10 @@ export default {
     })
     const expand = ref(false)
     const copyList = ref([])
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(getUserList, query)
+    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+      getUserList,
+      query,
+    )
     watch(list, val => {
       copyList.value = val.map(item => ({
         ...item,

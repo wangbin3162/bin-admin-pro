@@ -1,5 +1,5 @@
 <template>
-  <page-container desc="svg loading 组件，提供若干自定义配置">
+  <page-wrapper desc="svg loading 组件，提供若干自定义配置">
     <b-collapse-wrap title="基础的loading" shadow="none">
       <ul class="loading-wrapper">
         <li v-for="i in 12" :key="i">
@@ -39,7 +39,7 @@
         </div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

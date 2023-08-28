@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <template #header>
       <div class="p16">
         <h2>项目开发进度（编号：10000）</h2>
@@ -71,7 +71,7 @@
         <b-table :columns="columns" :data="data" size="small"></b-table>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script>

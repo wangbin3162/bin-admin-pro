@@ -1,5 +1,5 @@
 <template>
-  <page-container>
+  <page-wrapper>
     <b-collapse-wrap title="基础用法" shadow="none" class="mb-16">
       <div class="p10">
         <div ref="dom1Ref"></div>
@@ -12,7 +12,7 @@
         <div ref="dom2Ref"></div>
       </div>
     </b-collapse-wrap>
-  </page-container>
+  </page-wrapper>
 </template>
 
 <script setup>
