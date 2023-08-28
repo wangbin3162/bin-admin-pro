@@ -1,13 +1,13 @@
 <template>
-  <b-card class="image-item" :body-style="{padding:0}">
+  <b-card class="image-item" :body-style="{ padding: 0 }">
     <a :href="item.url" target="_blank">
-      <img :src="item.banner" alt="">
+      <img :src="item.banner" alt="" />
       <div class="p8">
         <div class="item-title">{{ item.title }}</div>
         <div class="item-desc">一套基于 Vue.js 的企业级 UI 组件库，内含 50+ 常用基础组件</div>
         <div class="item-extra">
           <span class="item-time">{{ item.time }}</span>
-          <img :src="item.avatar" alt="">
+          <img :src="item.avatar" alt="" />
         </div>
       </div>
     </a>
@@ -22,15 +22,13 @@ export default {
       type: Object,
       default() {
         return {}
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .image-item {
   display: inline-block;
   width: 48%;
@@ -42,14 +40,16 @@ export default {
   }
   .item-title {
     font-weight: 600;
-    color: $color-text-primary;
+
+    color: var(--v-g-text-color-dark);
     margin-bottom: 8px;
   }
-  .item-desc, .item-extra {
-    color: $color-text-default;
+  .item-desc,
+  .item-extra {
+    color: var(--v-g-text-color);
   }
   .item-time {
-    color: $color-text-secondary;
+    color: var(--v-g-text-color-dark);
   }
   .item-extra {
     margin-top: 8px;

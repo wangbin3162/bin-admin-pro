@@ -3,7 +3,7 @@
     <div class="page-header-title">工作台</div>
     <div class="page-header-detail">
       <div class="avatar-img">
-        <img src="@/assets/images/avatar/avatar05.jpeg" class="avatar" alt="avatar" />
+        <img src="@/assets/images/avatar/avatar11.jpeg" class="avatar" alt="avatar" />
       </div>
       <div class="welcome">
         <div class="welcome-title">{{ welcomeTitle }}</div>
@@ -78,15 +78,14 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+<style scoped>
 .page-header {
   padding: 16px 32px 0 32px;
   background: #fff;
-  border-bottom: $border-base
+  border-bottom: 1px solid var(--v-g-border-color);
   &-title {
     display: inline-block;
-    color: $color-text-primary;
+    color: var(--v-g-text-color);
     font-weight: 500;
     font-size: 20px;
     margin-bottom: 16px;
@@ -99,7 +98,7 @@ export default {
         width: 64px;
         border-radius: 50%;
         font-size: 0;
-        box-shadow: 0 0 2px rgba(0, 0, 0, .1);
+        box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
       }
     }
     .welcome {
@@ -111,7 +110,7 @@ export default {
         margin-bottom: 12px;
       }
       &-weather {
-        color: $color-text-secondary;
+        color: var(--v-g-text-color);
       }
     }
     .right-box {

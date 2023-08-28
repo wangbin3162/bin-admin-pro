@@ -102,8 +102,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .drag-area {
   .item {
     position: relative;
@@ -112,7 +111,7 @@ export default {
     padding: 0 24px;
     margin-bottom: -1px;
     background-color: #fff;
-    border: 1px solid rgba(0, 0, 0, .125);
+    border: 1px solid rgba(0, 0, 0, 0.125);
     height: 46px;
     .drag-handle {
       font-size: 22px;
@@ -123,7 +122,11 @@ export default {
   }
   .ghost {
     background: #fff !important;
-    background-image: linear-gradient(getLighten5(), getLighten3(), getLighten5()) !important;
+    background-image: linear-gradient(
+      var(--bin-color-primary-light5),
+      var(--bin-color-primary-light3),
+      var(--bin-color-primary-light5)
+    ) !important;
   }
 }
 </style>

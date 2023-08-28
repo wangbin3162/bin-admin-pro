@@ -50,7 +50,6 @@ onMounted(() => {
     easing: 'easeInOutCubic',
     duration: letterTime,
     delay: function (el, i) {
-      console.log(i)
       return letterTime * i
     },
     begin: function (anim) {

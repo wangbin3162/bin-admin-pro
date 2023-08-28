@@ -1,14 +1,24 @@
 :root {
-  /* 自定义主题变量，明明规范 v开头，类别首字母开头，定义变量时类似 vGTextColor */
+  /* 自定义主题变量，以 v开头，类别首字母开头，定义变量时类似 vGTextColor */
 
   /* 全局 global */
-  --v-g-text-color: #515a6e;
-  --v-g-primary-color: var(--bin-color-primary);
-  --v-g-bg-color: #fff;
+  --v-g-text-color-1: #1d2129;
+  --v-g-text-color-2: #4e5969;
+  --v-g-text-color-3: #86909c;
+  --v-g-text-color-4: #c9cdd4;
+
   --v-g-fill-color-1: #f7f8fa;
   --v-g-fill-color-2: #f2f3f5;
   --v-g-fill-color-3: #e5e6eb;
   --v-g-fill-color-4: #c9cdd4;
+
+  --v-g-text-color-dark: var(--v-g-text-color-1);
+  --v-g-text-color: var(--v-g-text-color-2);
+  --v-g-text-color-light: var(--v-g-text-color-3);
+
+  --v-g-primary-color: var(--bin-color-primary);
+
+  --v-g-bg-color: #fff;
   --v-g-border-color: var(--v-g-fill-color-3);
 
   /* layout */

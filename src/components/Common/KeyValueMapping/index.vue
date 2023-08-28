@@ -4,10 +4,20 @@
       <li v-for="(item, index) in list" :key="index" class="mapping-item">
         <drag-handle></drag-handle>
         <label>
-          <b-input v-model="list[index].key" placeholder="key" clearable @input="inputChange"></b-input>
+          <b-input
+            v-model="list[index].key"
+            placeholder="key"
+            clearable
+            @input="inputChange"
+          ></b-input>
         </label>
         <label>
-          <b-input v-model="list[index].value" placeholder="value" clearable @input="inputChange"></b-input>
+          <b-input
+            v-model="list[index].value"
+            placeholder="value"
+            clearable
+            @input="inputChange"
+          ></b-input>
         </label>
         <i class="destroy b-iconfont b-icon-delete" @click="handleRemove(index)"></i>
       </li>
@@ -82,8 +92,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .key-value-wrapper {
   .mapping-list {
     margin: 0;
@@ -101,7 +110,7 @@ export default {
         line-height: 1;
         flex: 1;
         font-size: 14px;
-        transition: color .4s;
+        transition: color 0.4s;
         padding-left: 8px;
       }
       i {
@@ -112,7 +121,7 @@ export default {
         width: 24px;
         font-size: 18px;
         color: #f5222d;
-        transition: color .2s ease-out;
+        transition: color 0.2s ease-out;
         cursor: pointer;
         &:hover {
           color: #f74e57;
@@ -123,7 +132,7 @@ export default {
   .blue-background-class {
     position: relative;
     font-size: 0;
-    border: 1px dashed getColor() !important;
+    border: 1px dashed var(--bin-color-primary) !important;
     &::after {
       position: absolute;
       content: '';
@@ -133,12 +142,16 @@ export default {
       right: 0;
       bottom: 0;
       background: #fff !important;
-      background-image: linear-gradient(getLighten5(), getLighten3(), getLighten5()) !important;
+      background-image: linear-gradient(
+        var(--bin-color-primary-light5),
+        var(--bin-color-primary-light3),
+        var(--bin-color-primary-light5)
+      ) !important;
     }
   }
   .drag-item-class {
     background: #fff !important;
-    border: 1px solid getColor() !important;
+    border: 1px solid var(--bin-color-primary) !important;
   }
 }
 </style>

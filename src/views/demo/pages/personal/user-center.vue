@@ -96,9 +96,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../../assets/stylus/base/var.styl"
-@import "../../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .center-wrap {
   margin: 16px;
   .info-pane {

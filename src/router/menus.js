@@ -269,35 +269,27 @@ export default [
     icon: 'pointmap',
     children: [
       {
-        name: 'PivotDemo',
+        name: 'GraphPivotDemo',
         title: '交叉表',
       },
       {
-        name: 'SchemaDemo',
+        name: 'GraphSchemaDemo',
         title: '画布框选',
       },
       {
-        name: 'ChartsMap',
+        name: 'GraphChartsMap',
         title: '关系图',
       },
-      // {
-      //   name: 'FuncGraphviz',
-      //   title: '绘图示例',
-      // },
-      // {
-      //   name: 'FuncX6',
-      //   title: '阿里X6示例',
-      // },
       {
-        name: 'EasyFlow',
+        name: 'GraphEasyFlow',
         title: 'EasyFlow',
       },
       {
-        name: 'CanvasDemo',
+        name: 'GraphCanvasDemo',
         title: 'Canvas绘图',
       },
       {
-        name: 'SvgDemo',
+        name: 'GraphSvgDemo',
         title: 'Svg基础',
       },
     ],
@@ -308,19 +300,19 @@ export default [
     icon: 'setting',
     children: [
       {
-        name: 'UserAccount',
+        name: 'SysUserAccount',
         title: '用户管理',
       },
       {
-        name: 'Depart',
+        name: 'SysDepart',
         title: '部门管理',
       },
       {
-        name: 'Menu',
+        name: 'SysMenu',
         title: '菜单管理',
       },
       {
-        name: 'Role',
+        name: 'SysRole',
         title: '角色管理',
       },
     ],

@@ -443,12 +443,11 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+<style scoped>
 .analysis-wrap {
   padding: 16px;
   :deep(.bin-card__header) {
-    color: $color-text-primary;
+    color: var(--v-g-text-color);
   }
 }
 .analysis-center {

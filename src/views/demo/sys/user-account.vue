@@ -161,7 +161,7 @@ import { Message } from 'bin-ui-next'
 import useTree from '@/hooks/service/useTree'
 
 defineOptions({
-  name: 'UserAccount',
+  name: 'SysUserAccount',
 })
 
 const treeRef = ref(null)

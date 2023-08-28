@@ -67,11 +67,10 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .count-wrap {
   h1 {
-    color: getColor();
+    color: var(--bin-color-primary);
   }
 }
 .input-item {
@@ -79,7 +78,8 @@ export default {
   align-items: center;
   margin-right: 8px;
   margin-bottom: 8px;
-  :deep(.bin-input), :deep(.bin-input-number) {
+  :deep(.bin-input),
+  :deep(.bin-input-number) {
     width: 140px;
     margin-left: 6px;
   }

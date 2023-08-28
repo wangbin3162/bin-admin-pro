@@ -1,8 +1,8 @@
 <template>
-  <b-card class="app-item" :style="styles" :body-style="{padding:0}" shadow="never">
+  <b-card class="app-item" :style="styles" :body-style="{ padding: 0 }" shadow="never">
     <div class="p16">
       <div flex="cross:center">
-        <img :src="item.avatar" class="avatar-img" alt="">
+        <img :src="item.avatar" class="avatar-img" alt="" />
         <div class="item-title">{{ item.title }}</div>
       </div>
     </div>
@@ -49,18 +49,16 @@ export default {
       type: Object,
       default() {
         return {}
-      }
+      },
     },
     styles: {
-      type: Object
-    }
-  }
+      type: Object,
+    },
+  },
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .app-item {
   display: inline-block;
   width: 48%;
@@ -72,11 +70,12 @@ export default {
   }
   .item-title {
     font-weight: 600;
-    color: $color-text-primary;
+    color: var(--v-g-text-color-dark);
     margin-left: 6px;
   }
-  .item-desc, .item-author {
-    color: $color-text-default;
+  .item-desc,
+  .item-author {
+    color: var(--v-g-text-color);
     padding: 0 24px;
     margin-bottom: 6px;
   }
@@ -99,7 +98,7 @@ export default {
     a {
       display: inline-block;
       line-height: 32px;
-      color: $color-text-default;
+      color: var(--v-g-text-color);
     }
   }
 }

@@ -1,7 +1,9 @@
 <template>
-  <div class="title-wrap" :class="{'no-border':noBorder}">
+  <div class="title-wrap" :class="{ 'no-border': noBorder }">
     <div class="title" :class="`tip-${tipPos}`" :style="titleStyle">
-      <slot><span>{{ title }}</span></slot>
+      <slot>
+        <span>{{ title }}</span>
+      </slot>
     </div>
     <div class="right" v-if="$slots.default">
       <slot name="right"></slot>
@@ -30,8 +32,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .title-wrap {
   display: flex;
   justify-content: space-between;
@@ -53,7 +54,7 @@ export default {
     &:after {
       content: '';
       position: absolute;
-      background-color: getColor();
+      background-color: var(--bin-color-primary);
     }
 
     &.tip-left {

@@ -160,13 +160,12 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../../assets/stylus/base/var.styl"
+<style scoped>
 .list-wrap {
   min-height: 200px;
   .user-list-item {
     padding: 12px 0;
-    border-bottom: $border-base;
+    border-bottom: 1px solid var(--v-g-border-color);
     .list-item-meta {
       display: flex;
       width: 45%;
@@ -181,7 +180,7 @@ export default {
       .list-item-meta-name {
         font-weight: 500;
         margin-bottom: 4px;
-        color: $color-text-default;
+        color: var(--v-g-text-color);
         font-size: 16px;
         line-height: 22px;
       }

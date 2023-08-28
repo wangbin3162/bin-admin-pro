@@ -92,8 +92,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
+<style scoped>
 .card-panel {
   margin-bottom: 16px;
 }
@@ -106,15 +105,16 @@ export default {
   padding: 20px;
   border: 0;
   border-radius: 0;
-  box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, 1px 0 0 0 #f0f0f0 inset, 0 1px 0 0 #f0f0f0 inset;
-  transition: all .3s;
+  box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, 1px 0 0 0 #f0f0f0 inset,
+    0 1px 0 0 #f0f0f0 inset;
+  transition: all 0.3s;
   &:hover {
     position: relative;
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
   .title {
-    color: $color-text-primary;
+    color: var(--v-g-text-color-dark);
     font-size: 18px;
     padding-bottom: 4px;
     > span {
@@ -122,7 +122,7 @@ export default {
     }
   }
   .desc {
-    color: $color-text-secondary;
+    color: var(--v-g-text-color);
     margin-top: 12px;
   }
 }

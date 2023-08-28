@@ -133,8 +133,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../../assets/stylus/base/var.styl"
+<style scoped>
 .task-wrapper {
   text-align: center;
   margin-bottom: 16px;
@@ -155,7 +154,7 @@ export default {
   display: flex;
   align-items: center;
   padding: 12px 0;
-  border-bottom: $border-base;
+  border-bottom: 1px solid var(--v-g-border-color);
   .list-item-meta {
     display: flex;
     width: 45%;
@@ -172,12 +171,12 @@ export default {
       .list-item-meta-title {
         font-weight: 500;
         margin-bottom: 4px;
-        color: $color-text-default;
+        color: var(--v-g-text-color);
         font-size: 14px;
         line-height: 22px;
       }
       .list-item-meta-description {
-        color: $color-text-secondary;
+        color: var(--v-g-text-color-light);
         font-size: 14px;
         line-height: 22px;
       }
@@ -189,7 +188,7 @@ export default {
     &-item {
       display: inline-block;
       margin-left: 32px;
-      color: $color-text-secondary;
+      color: var(--v-g-text-color-light);
       font-size: 14px;
       vertical-align: middle;
     }

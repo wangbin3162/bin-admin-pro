@@ -114,7 +114,7 @@ import { Message } from 'bin-ui-next'
 import useForm from '@/hooks/service/useForm'
 
 defineOptions({
-  name: 'Depart',
+  name: 'SysDepart',
 })
 
 const treeRef = ref(null)

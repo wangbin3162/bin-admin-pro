@@ -89,7 +89,7 @@ import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 
 defineOptions({
-  name: 'Menu',
+  name: 'SysMenu',
 })
 
 const treeRef = ref(null)

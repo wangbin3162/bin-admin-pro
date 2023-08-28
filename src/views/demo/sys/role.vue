@@ -103,150 +103,120 @@
   </div>
 </template>
 
-<script>
+<script setup>
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getRoleList } from '@/api/modules/role.api'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-next'
 
-export default {
-  name: 'Role',
-  setup() {
-    const query = reactive({
-      page: 1,
-      size: 10,
-      roleName: '',
-      status: '',
-    })
-    const copyList = ref([])
-    const role = ref({})
-    const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
-      getRoleList,
-      query,
-    )
-    const {
-      formRef,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-      setBtnLoading,
-      modalVisible,
-    } = useForm()
+defineOptions({
+  name: 'SysRole',
+})
 
-    watch(
-      () => list.value,
-      val => {
-        copyList.value = val
-      },
-    )
+const query = reactive({
+  page: 1,
+  size: 10,
+  roleName: '',
+  status: '',
+})
+const copyList = ref([])
+const role = ref({})
+const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
+  getRoleList,
+  query,
+)
+const {
+  formRef,
+  pageStatus,
+  editLoading,
+  openCreate,
+  openEdit,
+  backNormal,
+  submitForm,
+  setBtnLoading,
+  modalVisible,
+} = useForm()
 
-    // 执行一次内容
-    getListData()
-
-    function handleCreate() {
-      role.value = {
-        roleName: '',
-        roleCode: '',
-        status: '1',
-      }
-      openCreate()
-    }
-
-    function handleEdit(row) {
-      role.value = {
-        ...row,
-      }
-      openEdit()
-    }
-
-    function handleCancel() {
-      role.value = {}
-      backNormal()
-    }
-
-    function handleDelete() {
-      Message.success('删除成功！')
-      getListData()
-    }
-
-    function handleSubmit() {
-      submitForm(() => {
-        setBtnLoading(true)
-        const status = pageStatus.value
-        setTimeout(() => {
-          Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
-          setBtnLoading(false)
-          backNormal()
-          getListData()
-        }, 1000)
-      })
-    }
-
-    return {
-      statusMap: {
-        0: '禁用',
-        1: '启用',
-      },
-      columns: [
-        {
-          title: '角色名称',
-          key: 'roleName',
-        },
-        {
-          title: '角色编码',
-          key: 'roleCode',
-        },
-        {
-          title: '状态',
-          slot: 'status',
-        },
-        {
-          title: '创建日期',
-          key: 'createDate',
-        },
-        {
-          title: '操作',
-          width: 100,
-          align: 'center',
-          slot: 'action',
-        },
-      ],
-      // form
-      formRef,
-      role,
-      editStatus,
-      pageStatus,
-      editLoading,
-      openCreate,
-      openEdit,
-      backNormal,
-      submitForm,
-      resetForm,
-      ruleValidate: {
-        roleName: [{ required: true, message: '角色名称必填', trigger: 'blur' }],
-        roleCode: [{ required: true, message: '角色编码必填', trigger: 'blur' }],
-      },
-      // list
-      query,
-      loading,
-      total,
-      copyList,
-      getListData,
-      pageChange,
-      pageSizeChange,
-      modalVisible,
-      handleCreate,
-      handleCancel,
-      handleEdit,
-      handleSubmit,
-      handleDelete,
-    }
+watch(
+  () => list.value,
+  val => {
+    copyList.value = val
   },
+)
+
+// 执行一次内容
+getListData()
+
+function handleCreate() {
+  role.value = {
+    roleName: '',
+    roleCode: '',
+    status: '1',
+  }
+  openCreate()
+}
+
+function handleEdit(row) {
+  role.value = {
+    ...row,
+  }
+  openEdit()
+}
+
+function handleCancel() {
+  role.value = {}
+  backNormal()
+}
+
+function handleDelete() {
+  Message.success('删除成功！')
+  getListData()
+}
+
+function handleSubmit() {
+  submitForm(() => {
+    setBtnLoading(true)
+    const status = pageStatus.value
+    setTimeout(() => {
+      Message.success(`${status.isCreate ? '新增' : '修改'}成功！`)
+      setBtnLoading(false)
+      backNormal()
+      getListData()
+    }, 1000)
+  })
+}
+
+const statusMap = {
+  0: '禁用',
+  1: '启用',
+}
+const columns = [
+  {
+    title: '角色名称',
+    key: 'roleName',
+  },
+  {
+    title: '角色编码',
+    key: 'roleCode',
+  },
+  {
+    title: '状态',
+    slot: 'status',
+  },
+  {
+    title: '创建日期',
+    key: 'createDate',
+  },
+  {
+    title: '操作',
+    width: 100,
+    align: 'center',
+    slot: 'action',
+  },
+]
+const ruleValidate = {
+  roleName: [{ required: true, message: '角色名称必填', trigger: 'blur' }],
+  roleCode: [{ required: true, message: '角色编码必填', trigger: 'blur' }],
 }
 </script>

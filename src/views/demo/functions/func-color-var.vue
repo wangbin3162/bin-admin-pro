@@ -38,8 +38,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .block {
   display: inline-flex;
   align-items: center;
@@ -50,29 +49,29 @@ export default {
   border-radius: 4px;
   margin: 0 20px 0 0;
 }
-[data-theme=light] .block.menu {
+[data-theme='light'] .block.menu {
   color: #333;
 }
 .primary-color {
-  background: getColor();
+  background: var(--bin-color-primary);
 }
 .primary-hover-color {
-  background: getHover();
+  background: var(--bin-color-primary-light1);
 }
 .primary-active-color {
-  background: getActive();
+  background: var(--bin-color-primary-active);
 }
 .primary-lighten3-color {
   color: #333;
-  background: getLighten3();
+  background: var(--bin-color-primary-light3);
 }
 .primary-lighten5-color {
   color: #333;
-  background: getLighten5();
+  background: var(--bin-color-primary-light5);
 }
 .primary-lighten-hover-color {
   color: #333;
-  background: getLightenHover();
+  background: var(--bin-color-primary-light6);
 }
 .menu-bg-color {
   box-shadow: 0 0 3px #d4d4d4;

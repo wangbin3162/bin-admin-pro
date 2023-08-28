@@ -3,7 +3,9 @@
     <!-- Top row -->
     <div class="top-row">
       <div class="left-col">
-        <b-button type="primary" animation-type="waves" @click="toggleShowSettings">{{ hideSettingsText }}</b-button>
+        <b-button type="primary" animation-type="waves" @click="toggleShowSettings">
+          {{ hideSettingsText }}
+        </b-button>
       </div>
       <div class="right-col" v-if="showSettings">
         <div class="drag-area" :class="dragAreaClass">
@@ -12,13 +14,22 @@
             v-model="internal.availableFieldKeys"
             class="drag-area-zone"
             item-key="key"
-            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
+            v-bind="{
+              animation: 200,
+              group: 'fields',
+              ghostClass: 'sortable-ghost',
+              handle: '.btn-draggable',
+            }"
             @start="dragStart"
             @end="dragEnd"
           >
-            <template #item="{element}">
+            <template #item="{ element }">
               <div class="field">
-                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]" variant="warning">
+                <field-label
+                  :field-values="fieldValues[element]"
+                  :field="fieldsWithValues[element]"
+                  variant="warning"
+                >
                   <!-- pass down scoped slots -->
                   <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                     <slot :name="slot" v-bind="scope" />
@@ -43,13 +54,21 @@
             v-model="internal.colFieldKeys"
             class="drag-area-zone"
             item-key="key"
-            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
+            v-bind="{
+              animation: 200,
+              group: 'fields',
+              ghostClass: 'sortable-ghost',
+              handle: '.btn-draggable',
+            }"
             @start="dragStart"
             @end="dragEnd"
           >
-            <template #item="{element}">
+            <template #item="{ element }">
               <div class="field">
-                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]">
+                <field-label
+                  :field-values="fieldValues[element]"
+                  :field="fieldsWithValues[element]"
+                >
                   <!-- pass down scoped slots -->
                   <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                     <slot :name="slot" v-bind="scope" />
@@ -72,13 +91,21 @@
             v-model="internal.rowFieldKeys"
             class="drag-area-zone"
             item-key="key"
-            v-bind="{animation:200,group:'fields',ghostClass:'sortable-ghost',handle:'.btn-draggable'}"
+            v-bind="{
+              animation: 200,
+              group: 'fields',
+              ghostClass: 'sortable-ghost',
+              handle: '.btn-draggable',
+            }"
             @start="dragStart"
             @end="dragEnd"
           >
-            <template #item="{element}">
+            <template #item="{ element }">
               <div class="field">
-                <field-label :field-values="fieldValues[element]" :field="fieldsWithValues[element]">
+                <field-label
+                  :field-values="fieldValues[element]"
+                  :field="fieldsWithValues[element]"
+                >
                   <!-- pass down scoped slots -->
                   <template v-for="(_, slot) of $slots" v-slot:[slot]="scope">
                     <slot :name="slot" v-bind="scope" />
@@ -231,7 +258,9 @@ export default {
       })
       // Creates values sorted from valuesSet
       valueFilterableFields.forEach(field => {
-        widthValues[field.key].values = Array.from(widthValues[field.key].valuesSet).sort(field.sort || naturalSort)
+        widthValues[field.key].values = Array.from(widthValues[field.key].valuesSet).sort(
+          field.sort || naturalSort,
+        )
       })
       return widthValues
     })
@@ -250,7 +279,7 @@ export default {
 
     // *********** drag *********** //
     const dragging = ref(false)
-    const dragAreaClass = computed(() => dragging.value ? 'drag-area-highlight' : null)
+    const dragAreaClass = computed(() => (dragging.value ? 'drag-area-highlight' : null))
 
     function dragStart() {
       dragging.value = true
@@ -261,7 +290,9 @@ export default {
     }
 
     // *********** table *********** //
-    const tableWrapperStyle = computed(() => ({ width: showSettings.value ? 'calc(100% - 200px - 2rem)' : '100%' }))
+    const tableWrapperStyle = computed(() => ({
+      width: showSettings.value ? 'calc(100% - 200px - 2rem)' : '100%',
+    }))
 
     // field value过滤去重后的值，返回{key,set()}
     const valuesFiltered = computed(() => {
@@ -321,18 +352,26 @@ export default {
       return _cols
     })
 
+    watch(
+      () => props.fields,
+      val => {
+        // 过滤是否需要转换value的字段并初始化
+        val
+          .filter(field => field.valueFilter)
+          .forEach(field => {
+            fieldValues.value[field.key] = {}
+          })
+        updateFieldValues()
+      },
+      { immediate: true },
+    )
 
-    watch(() => props.fields, val => {
-      // 过滤是否需要转换value的字段并初始化
-      val.filter(field => field.valueFilter).forEach(field => {
-        fieldValues.value[field.key] = {}
-      })
-      updateFieldValues()
-    }, { immediate: true })
-
-    watch(() => props.data, () => {
-      updateFieldValues()
-    })
+    watch(
+      () => props.data,
+      () => {
+        updateFieldValues()
+      },
+    )
 
     return {
       internal,
@@ -356,9 +395,9 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/mixins.styl"
-.top-row, .bottom-row {
+<style scoped>
+.top-row,
+.bottom-row {
   display: flex;
   .left-col {
     width: 220px;
@@ -370,9 +409,9 @@ export default {
   .drag-area {
     border: 1px dashed #ccc;
     padding: 14px;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     &.border-primary {
-      border-color: getColor();
+      border-color: var(--bin-color-primary);
     }
     &-title {
       line-height: 1;
@@ -411,5 +450,4 @@ export default {
 .sortable-ghost {
   opacity: 0.4;
 }
-
 </style>

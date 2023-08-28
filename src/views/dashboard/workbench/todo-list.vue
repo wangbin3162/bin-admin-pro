@@ -124,8 +124,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .todo-list {
   margin: 0;
   padding: 0;
@@ -167,7 +166,7 @@ export default {
       display: block;
       line-height: 1;
       font-size: 14px;
-      transition: color .4s;
+      transition: color 0.4s;
     }
     .destroy {
       display: none;
@@ -179,7 +178,7 @@ export default {
       height: 40px;
       font-size: 18px;
       color: #fba7ab;
-      transition: color .2s ease-out;
+      transition: color 0.2s ease-out;
       cursor: pointer;
       &:hover {
         color: #f74e57;
@@ -226,18 +225,16 @@ export default {
   text-align: left;
   border-top: 1px solid #e6e6e6;
   font-size: 12px;
-  .count {
-
-  }
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
     height: 40px;
     overflow: hidden;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 8px 0 -3px #f6f6f6, 0 9px 1px -3px rgba(0, 0, 0, .2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, .2);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2), 0 8px 0 -3px #f6f6f6,
+      0 9px 1px -3px rgba(0, 0, 0, 0.2), 0 16px 0 -6px #f6f6f6, 0 17px 2px -6px rgba(0, 0, 0, 0.2);
   }
 }
 .ghost {

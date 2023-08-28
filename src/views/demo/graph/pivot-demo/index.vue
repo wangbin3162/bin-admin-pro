@@ -206,7 +206,7 @@ dataGdp.forEach(item => {
 })
 
 export default {
-  name: 'PivotDemo',
+  name: 'GraphPivotDemo',
   components: { PivotDoc, PivotTable, Pivot },
   data() {
     return {

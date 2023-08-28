@@ -12,9 +12,10 @@
     </div>
     <div class="list-item-meta-desc" v-html="item.desc"></div>
     <div class="list-item-author">
-        <span class="avatar">
-          <img :src="item.avatar" alt="">
-        </span> {{ item.author }} 发表于 {{ item.time }}
+      <span class="avatar">
+        <img :src="item.avatar" alt="" />
+      </span>
+      {{ item.author }} 发表于 {{ item.time }}
     </div>
     <ul class="list-item-action">
       <slot name="action">
@@ -46,17 +47,15 @@ export default {
       type: Object,
       default() {
         return {}
-      }
-    }
-  }
+      },
+    },
+  },
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .list-item {
-  padding 16px 0;
+  padding: 16px 0;
   border-bottom: 1px solid #e8eaec;
   &:last-child {
     border-bottom: none;
@@ -66,7 +65,7 @@ export default {
     &-title {
       margin-bottom: 16px;
       a {
-        color: $color-text-primary;
+        color: var(--v-g-text-color-dark);
         font-size: 16px;
         line-height: 24px;
         font-weight: 500;
@@ -95,7 +94,7 @@ export default {
       position: relative;
       display: inline-block;
       padding: 0 16px;
-      color: $color-text-secondary;
+      color: var(--v-g-text-color);
       font-size: 14px;
       line-height: 22px;
       text-align: center;
@@ -109,7 +108,7 @@ export default {
         }
       }
       &:after {
-        content: "";
+        content: '';
         position: absolute;
         top: 50%;
         right: 0;

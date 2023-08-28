@@ -227,16 +227,14 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../../assets/stylus/base/var.styl"
-@import "../../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .setting-wrap {
   margin: 16px;
   .ctrl-header {
     display: flex;
     align-items: center;
     font-weight: 500;
-    color: $color-text-primary;
+    color: var(--v-g-text-color-dark);
   }
   .ctrl-pane {
     .tab-item {
@@ -244,15 +242,15 @@ export default {
       line-height: normal;
       padding: 7px 16px;
       clear: both;
-      color: $color-text-default
+      color: var(--v-g-text-color);
       font-size: 14px;
       list-style: none;
       cursor: pointer;
-      transition: background .2s ease-in-out;
+      transition: background 0.2s ease-in-out;
       > span {
         display: inline-block;
         width: 100%;
-        line-height 1.2;
+        line-height: 1.2;
       }
       &-title {
         line-height: 24px;
@@ -260,16 +258,16 @@ export default {
       }
       &-desc {
         font-size: 12px;
-        color: $color-text-secondary;
+        color: var(--v-g-text-color-light);
       }
       &:hover {
         background: #f3f3f3;
       }
       &.active {
-        background: getLighten5();
-        color: getColor();
+        background: var(--bin-color-primary-light5);
+        color: var(--v-g-primary-color);
         .tab-item-desc {
-          color: getColor();
+          color: var(--v-g-primary-color);
         }
       }
     }
@@ -294,7 +292,7 @@ export default {
       }
       p {
         margin-top: 8px;
-        color: $color-text-secondary;
+        color: var(--v-g-text-color-light);
       }
     }
   }

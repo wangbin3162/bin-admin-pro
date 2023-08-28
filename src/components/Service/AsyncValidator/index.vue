@@ -4,7 +4,9 @@
     <div class="mb-10" style="padding: 0 4px">
       <div style="width: 100%; line-height: 32px" flex="main:justify">
         <div>
-          <b-checkbox v-model="isRequired" @change="requiredChange" style="margin-right: 0">必填项</b-checkbox>
+          <b-checkbox v-model="isRequired" @change="requiredChange" style="margin-right: 0">
+            必填项
+          </b-checkbox>
           <b-divider type="vertical" />
           <b-dropdown @command="setRules">
             <span style="cursor: pointer; color: #13c2c2">
@@ -58,17 +60,29 @@
       <li v-for="(rule, index) in checkRules" :key="index" class="rules-list-item">
         <div class="rules-params">
           <b-space>
-            <div class="role-name" :class="rulesClass(rule.name)">{{ RULE_NAME_MAP[rule.name] }}</div>
+            <div class="role-name" :class="rulesClass(rule.name)">
+              {{ RULE_NAME_MAP[rule.name] }}
+            </div>
             <div class="title-box" title="触发条件">
               <span title="输入框为失焦事件，其余控件为改变事件">触发条件</span>
-              <b-select v-model="checkRules[index].trigger" size="small" append-to-body @change="emitValue">
+              <b-select
+                v-model="checkRules[index].trigger"
+                size="small"
+                append-to-body
+                @change="emitValue"
+              >
                 <b-option label="失焦" value="blur"></b-option>
                 <b-option label="改变" value="change"></b-option>
               </b-select>
             </div>
             <div class="title-box" title="取值类型">
               <span title="非数字类型选择字符">取值类型</span>
-              <b-select v-model="checkRules[index].type" size="small" append-to-body @change="emitValue">
+              <b-select
+                v-model="checkRules[index].type"
+                size="small"
+                append-to-body
+                @change="emitValue"
+              >
                 <b-option label="字符" value="string"></b-option>
                 <b-option label="数字" value="number"></b-option>
               </b-select>
@@ -115,8 +129,17 @@
               </div>
             </template>
             <!--身份证，统一社会信用代码，组织机构代码，工商注册号-->
-            <template v-if="[RULE.idCode, RULE.unifiedCode, RULE.orgInstCode, RULE.regNo].includes(rule.name)">
-              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
+            <template
+              v-if="
+                [RULE.idCode, RULE.unifiedCode, RULE.orgInstCode, RULE.regNo].includes(rule.name)
+              "
+            >
+              <div
+                class="title-box"
+                title="前置字段"
+                @drop="onDrop($event, index)"
+                @dragover="allowDrop($event)"
+              >
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -125,11 +148,20 @@
                   @change="emitValue"
                 ></b-input>
               </div>
-              <b-checkbox v-model="checkRules[index].ignoreCase" @change="emitValue">忽略大小写</b-checkbox>
+              <b-checkbox v-model="checkRules[index].ignoreCase" @change="emitValue">
+                忽略大小写
+              </b-checkbox>
             </template>
             <!--条件必填，条件必不填-->
-            <template v-if="rule.name === RULE.conditionRequired || rule.name === RULE.conditionNotRequired">
-              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
+            <template
+              v-if="rule.name === RULE.conditionRequired || rule.name === RULE.conditionNotRequired"
+            >
+              <div
+                class="title-box"
+                title="前置字段"
+                @drop="onDrop($event, index)"
+                @dragover="allowDrop($event)"
+              >
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -150,7 +182,12 @@
             </template>
             <!--条件不为某值-->
             <template v-if="rule.name === RULE.conditionNotBe">
-              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
+              <div
+                class="title-box"
+                title="前置字段"
+                @drop="onDrop($event, index)"
+                @dragover="allowDrop($event)"
+              >
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -180,7 +217,12 @@
             </template>
             <!--值不能相同-->
             <template v-if="rule.name === RULE.notSame">
-              <div class="title-box" title="前置字段" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
+              <div
+                class="title-box"
+                title="前置字段"
+                @drop="onDrop($event, index)"
+                @dragover="allowDrop($event)"
+              >
                 <span>前置字段</span>
                 <b-input
                   v-model.trim="checkRules[index].preField"
@@ -194,7 +236,12 @@
             <template v-if="rule.name === RULE.timeBound">
               <div class="title-box" title="比较模式">
                 <span>比较模式</span>
-                <b-select v-model="checkRules[index].compareMode" append-to-body size="small" @change="emitValue">
+                <b-select
+                  v-model="checkRules[index].compareMode"
+                  append-to-body
+                  size="small"
+                  @change="emitValue"
+                >
                   <b-option value="gt" label="&gt;"></b-option>
                   <b-option value="ge" label="&ge;"></b-option>
                   <b-option value="lt" label="&lt;"></b-option>
@@ -202,8 +249,14 @@
                 </b-select>
               </div>
               <div class="title-box" @drop="onDrop($event, index)" @dragover="allowDrop($event)">
-                <span title="比较值(yyyy-MM-dd)，可以是字段名，也可以填写$now取得当前时间">比较取值</span>
-                <b-input v-model.trim="checkRules[index].time" size="small" @change="emitValue"></b-input>
+                <span title="比较值(yyyy-MM-dd)，可以是字段名，也可以填写$now取得当前时间">
+                  比较取值
+                </span>
+                <b-input
+                  v-model.trim="checkRules[index].time"
+                  size="small"
+                  @change="emitValue"
+                ></b-input>
               </div>
             </template>
           </b-space>
@@ -515,9 +568,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .validator-wrap {
   width: 100%;
   overflow-x: auto;
@@ -526,7 +577,7 @@ export default {
     min-width: 600px;
   }
   .rules-list-item {
-    position relative;
+    position: relative;
     margin-bottom: -1px;
     background-color: #fff;
     border: 1px dashed rgba(0, 0, 0, 0.1);
@@ -552,7 +603,8 @@ export default {
         }
       }
     }
-    .rules-cfg, .rules-message {
+    .rules-cfg,
+    .rules-message {
       margin-top: 6px;
     }
     .title-box {
@@ -597,7 +649,7 @@ export default {
   .blue-background-class {
     position: relative;
     font-size: 0;
-    border: 1px dashed getColor() !important;
+    border: 1px dashed var(--v-g-primary-color) !important;
     z-index: 1;
     &::after {
       position: absolute;
@@ -609,12 +661,16 @@ export default {
       bottom: 0;
       z-index: 10;
       background: #fff !important;
-      background-image: linear-gradient(getLighten5(), getLighten3(), getLighten5()) !important;
+      background-image: linear-gradient(
+        var(--bin-color-primary-light5),
+        var(--bin-color-primary-light3),
+        var(--bin-color-primary-light5)
+      ) !important;
     }
   }
   .drag-item-class {
     background: #fff !important;
-    border: 1px solid getColor() !important;
+    border: 1px solid var(--v-g-primary-color) !important;
   }
 }
 </style>

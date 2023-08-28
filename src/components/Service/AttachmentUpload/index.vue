@@ -246,15 +246,13 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
+<style scoped>
 .attachment-upload-wrap {
   display: inline-block;
   width: 100%;
   .tip {
     font-size: 12px;
-    color: $color-text-secondary;
+    color: var(--v-g-text-color);
   }
   .file-list {
     &-file {
@@ -263,7 +261,7 @@ export default {
       border-radius: 4px;
       font-size: 14px;
       height: 34px;
-      transition: background-color .2s ease-in-out;
+      transition: background-color 0.2s ease-in-out;
       overflow: hidden;
       position: relative;
       .file-name {
@@ -285,12 +283,14 @@ export default {
       }
       &:hover {
         background: #f3f3f3;
-        .file-list-download, .file-list-remove {
+        .file-list-download,
+        .file-list-remove {
           display: block;
         }
       }
     }
-    &-download, &-remove {
+    &-download,
+    &-remove {
       display: none;
       font-size: 16px;
       cursor: pointer;
@@ -303,7 +303,7 @@ export default {
     }
     &-download {
       &:hover {
-        color: getColor()
+        color: var(--v-g-primary-color);
       }
     }
   }

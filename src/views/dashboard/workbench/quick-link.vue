@@ -143,8 +143,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-@import "../../../assets/stylus/base/var.styl"
-@import "../../../assets/stylus/base/mixins.styl"
 .card-panel {
   margin-bottom: 16px;
 }
@@ -171,7 +169,7 @@ export default {
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     span {
-      color: getColor();
+      color: var(--v-g-primary-color);
     }
   }
 }
@@ -185,12 +183,12 @@ export default {
   margin-top: 16px;
   padding-left: 24px;
   a {
-    color: $color-text-default;
+    color: var(--v-g-text-color);
     i {
       display: none;
     }
     &:hover {
-      color: getHover();
+      color: var(--v-g-primary-color);
       i {
         display: inline-block;
       }
