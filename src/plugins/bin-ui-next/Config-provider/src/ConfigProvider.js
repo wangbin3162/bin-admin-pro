@@ -50,18 +50,13 @@ export default defineComponent({
     })
 
     function setVariablesToDomNode() {
-      const el = props.normalNodeId
-        ? document.getElementById(props.normalNodeId)
-        : document.documentElement
       // 如果是虚拟模式，则追加属性至dom节点
       if (props.abstract && props.themeName) {
-        if (el) {
-          setAttrVar('theme-name', props.themeName, el)
-        }
+        setAttrVar('theme-name', props.themeName)
       }
       // 如果禁用样式注入，则需要注入到html
       if (props.inlineThemeDisabled || props.abstract) {
-        setObjectPropsCSSVariables(mergedThemeRef.value ?? {}, el)
+        setObjectPropsCSSVariables(mergedThemeRef.value ?? {})
       }
     }
 
@@ -70,7 +65,7 @@ export default defineComponent({
       () => {
         setVariablesToDomNode()
       },
-      { flush: true },
+      { deep: true },
     )
 
     return {

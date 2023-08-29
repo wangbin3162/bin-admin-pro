@@ -1,11 +1,11 @@
 <template>
-  <b-config-provider :themeName="themeName" :theme="themeConfigRef">
+  <b-config-provider abstract :themeName="themeName" :theme="themeConfigRef">
     <router-view />
   </b-config-provider>
 </template>
 
 <script setup>
-import { useTheme } from '@/hooks/theme'
+import { useThemeInit, themeConfigRef } from '@/hooks/theme'
 
-const { themeName, themeConfigRef } = useTheme()
+const { themeName } = useThemeInit()
 </script>

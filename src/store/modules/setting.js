@@ -5,7 +5,7 @@ const useSetting = defineStore('setting', {
   state: () => ({
     // 基础配置项，可供缓存
     setting: {
-      themeName: 'light', // 主题名称
+      themeName: '', // 主题名称
       menuType: 'default', // default: 常规布局 mixed: 混合布局
       routerTransitionName: 'fade-in',
       sidebar: true, // 侧边栏开启状态

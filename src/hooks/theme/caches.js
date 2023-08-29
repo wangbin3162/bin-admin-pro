@@ -1,0 +1,21 @@
+import { Theme } from './default-theme'
+/**
+ * 缓存读取器
+ * @param {*} key
+ */
+export default function useCaches(key = '__BIN_ADMIN_PRO_THEME__') {
+  function getVal() {
+    let value = { ...Theme.libTheme, ...Theme.sysTheme }
+    let val = localStorage.getItem(key)
+    if (!val) return value
+    try {
+      return JSON.parse(val)
+    } catch (error) {
+      return value
+    }
+  }
+  function setVal(val) {
+    localStorage.setItem(key, JSON.stringify(val))
+  }
+  return { getVal, setVal }
+}

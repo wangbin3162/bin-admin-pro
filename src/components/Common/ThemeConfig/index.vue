@@ -3,10 +3,10 @@
     <div class="group-panel">
       <div class="title">系统主题颜色</div>
       <div class="content">
-        {{ libThemeCfg }}
+        {{ themeConfigRef }}
         <b-color-picker
           size="small"
-          v-model="libThemeCfg.binColorPrimary"
+          v-model="themeConfigRef.binColorPrimary"
           show-label
           :colors="ThemeMainColors"
         />
@@ -16,14 +16,11 @@
 </template>
 
 <script setup>
-// @ts-ignore
-import { ThemeMainColors, libThemeCfg } from '@/hooks/theme'
+import { ThemeMainColors, themeConfigRef } from '@/hooks/theme'
 
-// @ts-ignore
 defineOptions({
   name: 'ThemeConfig',
 })
-// @ts-ignore
 </script>
 
 <style>

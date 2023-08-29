@@ -3,7 +3,6 @@ export const configProviderProps = {
   // 是否是抽象的
   abstract: {
     type: Boolean,
-    default: true,
   },
   tag: {
     type: String,
@@ -13,9 +12,6 @@ export const configProviderProps = {
   inlineThemeDisabled: {
     type: Boolean,
   },
-  normalNodeId: {
-    type: String,
-  },
   // 语言包
   locale: {
     type: String,
@@ -24,7 +20,7 @@ export const configProviderProps = {
   // 主题名称
   themeName: {
     type: String,
-    validate: val => ['light', 'dark'].includes(val),
+    validate: val => ['dark'].includes(val),
   },
   // 主题样式对象,这里可以存储js变量
   theme: {
