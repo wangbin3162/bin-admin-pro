@@ -1,7 +1,7 @@
 /* ui 组件库相关的样式主题变量 */
 
 :root {
-  --colors: (primary: #165dff, success: #00c181, warning: #ffaa00, danger: #ff3d71, info: #0086e6);
+  --colors: (primary: #165dff, success: #00c181, warning: #ffaa00, danger: #ff3d71);
 
   @each $val, $color in var(--colors) {
     --bin-color-$(val): $(color);
@@ -14,8 +14,6 @@
     --bin-color-$(val)-active: mix(#000, $(color), 0.1);
   }
   --bin-border-color-base: var(--v-g-border-color);
-  --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 9px 28px 8px rgba(0, 0, 0, 0.05);
   --bin-scrollbar-width: 5px;
   --bin-scrollbar-radius: 5px;
   /* card */
@@ -23,14 +21,16 @@
   /* menu */
   --b-menu-item-height: 40px;
   --b-menu-item-border-radius: 4px;
-  --b-menu-bg-color: #fff;
   --b-menu-text-color: var(--v-g-text-color);
-  --b-menu-text-hover-color: var(--v-menu-text-color);
-  --b-menu-bg-hover-color: var(--bin-color-primary-light6);
+  --b-menu-text-hover-color: var(--b-menu-text-color);
   --b-menu-text-active-color: var(--bin-color-primary);
+  --b-menu-bg-color: var(--v-sider-bg);
+  --b-menu-bg-hover-color: var(--bin-color-primary-light6);
   --b-menu-bg-active-color: var(--bin-color-primary-light6);
 
   /* popper */
+  --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
+    0 9px 28px 8px rgba(0, 0, 0, 0.05);
   --b-popper-padding: 4px;
   --b-popper-radius: 4px;
   --b-popper-item-margin-bottom: 4px;

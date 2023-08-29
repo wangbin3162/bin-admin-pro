@@ -2,6 +2,12 @@
   /* 自定义主题变量，以 v开头，类别首字母开头，定义变量时类似 vGTextColor */
 
   /* 全局 global */
+
+  --v-g-bg-color-1: #17171a;
+  --v-g-bg-color-2: #232324;
+  --v-g-bg-color-3: #2a2a2b;
+  --v-g-bg-color-4: #313132;
+
   --v-g-text-color-1: #1d2129;
   --v-g-text-color-2: #4e5969;
   --v-g-text-color-3: #86909c;
@@ -15,8 +21,6 @@
   --v-g-text-color-dark: var(--v-g-text-color-1);
   --v-g-text-color: var(--v-g-text-color-2);
   --v-g-text-color-light: var(--v-g-text-color-3);
-
-  --v-g-primary-color: var(--bin-color-primary);
 
   --v-g-bg-color: #fff;
   --v-g-border-color: var(--v-g-fill-color-3);
@@ -34,7 +38,7 @@
   --v-sider-collapse-width: 48px;
   --v-sider-bg: var(--v-g-bg-color);
   --v-sider-border-color: var(--v-g-border-color);
-  --v-sider-collapse-btn-color: #86909c;
+  --v-sider-collapse-btn-color: var(--v-g-text-color-3);
   --v-sider-collapse-btn-bg: var(--v-g-fill-color-1);
   --v-sider-collapse-btn-bg-hover: var(--v-g-fill-color-3);
   /* tags-view */
@@ -42,13 +46,12 @@
   --v-tags-border-color: var(--v-g-border-color);
   --v-tags-font-size: 12px;
   --v-tags-text-color: var(--v-g-text-color);
-  --v-tags-text-hover-color: var(--v-menu-text-color);
+  --v-tags-text-hover-color: var(--v-tags-text-color);
   --v-tags-bg-color: var(--v-g-bg-color);
   --v-tags-item-bg-color: var(--v-g-fill-color-2);
   --v-tags-item-text-color: var(--bin-color-primary);
   /* 内容区域 content */
   --v-content-bg: var(--v-g-fill-color-2);
-
   /* theme-panel */
   --v-theme-panel-bg: var(--v-g-bg-color);
   --v-theme-active-color: var(--bin-color-primary);

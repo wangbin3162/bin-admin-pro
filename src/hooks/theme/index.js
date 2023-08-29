@@ -1,5 +1,5 @@
 import { useStore } from '@/store'
-import { Theme, ThemeMainColors, ThemeMenuColors } from './default-theme'
+import { Theme } from './default-theme'
 import { computed, watch, ref } from 'vue'
 import useCaches from './caches'
 
@@ -9,7 +9,7 @@ const { getVal, setVal } = useCaches()
 // 是否从缓存取值
 const loadCache = true
 
-const themeConfigRef = loadCache ? ref(getVal()) : ref({ ...Theme.libTheme, ...Theme.sysTheme })
+export const themeConfigRef = loadCache ? ref(getVal()) : ref({ ...Theme })
 
 // 获取主题名称
 export function getThemeName() {
@@ -34,4 +34,4 @@ export function useThemeInit() {
   return { themeName }
 }
 
-export { Theme, ThemeMainColors, ThemeMenuColors, themeConfigRef }
+export * from './default-theme'

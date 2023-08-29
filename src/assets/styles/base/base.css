@@ -48,13 +48,13 @@ svg {
 
 /* webkit, opera, IE9 */
 ::selection {
-  background: var(--v-g-primary-color);
+  background: var(--bin-color-primary);
   color: #fff;
 }
 
 /* mozilla firefox */
 ::-moz-selection {
-  background: var(--v-g-primary-color);
+  background: var(--bin-color-primary);
   color: #fff;
 }
 

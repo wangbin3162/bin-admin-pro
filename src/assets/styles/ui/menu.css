@@ -40,3 +40,19 @@
     }
   }
 }
+
+.bin-menu--popup {
+  background: var(--b-menu-bg-color);
+  .bin-menu-item,
+  .bin-submenu__title {
+    &:hover {
+      color: var(--b-menu-text-hover-color);
+      background: var(--b-menu-bg-hover-color);
+    }
+
+    &.is-active {
+      color: var(--b-menu-text-active-color);
+      background: var(--b-menu-bg-active-color);
+    }
+  }
+}

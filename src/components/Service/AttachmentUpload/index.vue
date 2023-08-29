@@ -303,7 +303,7 @@ export default {
     }
     &-download {
       &:hover {
-        color: var(--v-g-primary-color);
+        color: var(--bin-color-primary);
       }
     }
   }

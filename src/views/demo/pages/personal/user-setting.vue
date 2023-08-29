@@ -265,9 +265,9 @@ export default {
       }
       &.active {
         background: var(--bin-color-primary-light5);
-        color: var(--v-g-primary-color);
+        color: var(--bin-color-primary);
         .tab-item-desc {
-          color: var(--v-g-primary-color);
+          color: var(--bin-color-primary);
         }
       }
     }

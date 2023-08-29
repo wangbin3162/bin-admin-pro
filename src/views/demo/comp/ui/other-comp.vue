@@ -1,8 +1,5 @@
 <template>
   <page-wrapper desc="导航类别的组件，可验证不同主题色的正确性。">
-    <b-collapse-wrap title="主题配置" shadow="none" class="mb-20">
-      <theme-config />
-    </b-collapse-wrap>
     <b-collapse-wrap title="Other 其他类型的显示组件" shadow="none" class="mb-20">
       <div class="p10">
         <b-divider align="left">卡片</b-divider>

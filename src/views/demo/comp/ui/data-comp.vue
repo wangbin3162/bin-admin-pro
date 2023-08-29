@@ -2,9 +2,6 @@
   <page-wrapper
     desc="数据类别的组件（table/page/tree/desc/progress/circle），可验证不同主题色的正确性。"
   >
-    <b-collapse-wrap title="主题配置" shadow="none" class="mb-20">
-      <theme-config />
-    </b-collapse-wrap>
     <b-collapse-wrap title="Table 表格" shadow="none" class="mb-20">
       <div class="p10">
         <b-table :columns="columns" :data="list" border></b-table>

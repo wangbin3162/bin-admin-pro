@@ -5,7 +5,7 @@ import { Theme } from './default-theme'
  */
 export default function useCaches(key = '__BIN_ADMIN_PRO_THEME__') {
   function getVal() {
-    let value = { ...Theme.libTheme, ...Theme.sysTheme }
+    let value = { ...Theme }
     let val = localStorage.getItem(key)
     if (!val) return value
     try {

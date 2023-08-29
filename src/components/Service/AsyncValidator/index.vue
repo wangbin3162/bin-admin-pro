@@ -649,7 +649,7 @@ export default {
   .blue-background-class {
     position: relative;
     font-size: 0;
-    border: 1px dashed var(--v-g-primary-color) !important;
+    border: 1px dashed var(--bin-color-primary) !important;
     z-index: 1;
     &::after {
       position: absolute;
@@ -670,7 +670,7 @@ export default {
   }
   .drag-item-class {
     background: #fff !important;
-    border: 1px solid var(--v-g-primary-color) !important;
+    border: 1px solid var(--bin-color-primary) !important;
   }
 }
 </style>

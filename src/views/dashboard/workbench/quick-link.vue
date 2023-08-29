@@ -158,7 +158,7 @@ function toggleSetting() {
     z-index: 1;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     span {
-      color: var(--v-g-primary-color);
+      color: var(--bin-color-primary);
     }
   }
 }
@@ -177,7 +177,7 @@ function toggleSetting() {
       display: none;
     }
     &:hover {
-      color: var(--v-g-primary-color);
+      color: var(--bin-color-primary);
       i {
         display: inline-block;
       }
