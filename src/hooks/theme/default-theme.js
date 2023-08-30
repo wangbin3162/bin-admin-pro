@@ -13,15 +13,6 @@ export const Theme = {
   binBorderColorBase: 'var(--v-g-border-color)',
   binScrollbarWidth: '5px',
   binScrollbarRadius: '5px',
-  // menu
-  bMenuItemHeight: '40px',
-  bMenuItemBorderRadius: '4px',
-  bMenuTextColor: 'var(--v-g-text-color)',
-  bMenuTextHoverColor: 'var(--b-menu-text-color)',
-  bMenuTextActiveColor: 'var(--bin-color-primary)',
-  bMenuBgColor: 'var(--v-sider-bg)',
-  bMenuBgHoverColor: 'var(--bin-color-primary-light6)',
-  bMenuBgActiveColor: 'var(--bin-color-primary-light6)',
   // popper
   bPopperPadding: '4px',
   bPopperRadius: '4px',
@@ -58,12 +49,14 @@ export const Theme = {
   vGTextColorLight: 'var(--v-g-text-color-3)',
   vGBorderColor: 'var(--v-g-fill-color-3)',
   // header
-  vHeaderHeight: '56px',
+  vHeaderHeight: '60px',
   vHeaderBg: 'var(--v-g-bg-color)',
+  vHeaderTextColor: 'var(--v-g-text-color-dark)',
   vHeaderBorderColor: 'var(--v-g-border-color)',
   vHeaderTriggerSize: '28px',
   vHeaderTriggerRadius: '50%',
-  vHeaderTrigggerBorderColor: 'var(--v-g-border-color)',
+  vHeaderTriggerBorderColor: 'var(--v-g-border-color)',
+  vHeaderTriggerHoverBgColor: 'var(--v-g-border-color)',
   // 侧边栏
   // vSiderWidth: '220px', // 侧边栏宽度使用setting设置
   // vSiderCollapseWidth: '48px', // 侧边栏宽度使用setting设置
@@ -72,15 +65,26 @@ export const Theme = {
   vSiderCollapseBtnColor: 'var(--v-g-text-color-3)',
   vSiderCollapseBtnBg: 'var(--v-g-fill-color-1)',
   vSiderCollapseBtnBgHover: 'var(--v-g-fill-color-3)',
+
+  // menu
+  vMenuItemHeight: '40px',
+  vMenuItemBorderRadius: '4px',
+  vMenuTextColor: 'var(--v-g-text-color)',
+  vMenuTextHoverColor: 'var(--b-menu-text-color)',
+  vMenuTextActiveColor: 'var(--bin-color-primary)',
+  vMenuBgColor: 'var(--v-sider-bg)',
+  vMenuBgHoverColor: 'var(--bin-color-primary-light6)',
+  vMenuBgActiveColor: 'var(--bin-color-primary-light6)',
+
   // tags-view
-  vTagsHeight: '32px',
+  vTagsBgColor: 'var(--v-g-bg-color)',
   vTagsBorderColor: 'var(--v-g-border-color)',
+  vTagsHeight: '32px',
   vTagsFontSize: '12px',
+  vTagsItemBgColor: 'var(--v-g-fill-color-2)',
   vTagsTextColor: 'var(--v-g-text-color)',
   vTagsTextHoverColor: 'var(--v-tags-text-color)',
-  vTagsBgColor: 'var(--v-g-bg-color)',
-  vTagsItemBgColor: 'var(--v-g-fill-color-2)',
-  vTagsItemTextColor: 'var(--bin-color-primary)',
+  vTagsTextActiveColor: 'var(--bin-color-primary)',
   // 内容区域
   vContentBg: 'var(--v-g-fill-color-2)',
 }
@@ -111,7 +115,7 @@ export const ThemeMenuColors = [
   '#ffffff',
 ]
 // 背景颜色
-export const ThemeBGColors = [
+export const ThemeBgColors = [
   '#17171a',
   '#232324',
   '#2a2a2b',

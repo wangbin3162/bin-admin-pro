@@ -15,6 +15,7 @@ const useSetting = defineStore('setting', {
       showSearch: true,
       showMessage: true,
       showCollapse: true,
+      showHeaderBreadcrumb: true,
     },
   }),
   getters: {

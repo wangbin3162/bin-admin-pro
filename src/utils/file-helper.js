@@ -35,3 +35,25 @@ export async function fileToImageBase64(file, maxWait = 2500) {
     }
   })
 }
+
+// 读取文件转换为json
+export function fileToJson(file) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader()
+    // 文件读取载入后
+    reader.onload = readerEvent => {
+      let content = readerEvent.target.result
+      try {
+        let jsonData = JSON.parse(content)
+        resolve(jsonData)
+      } catch (error) {
+        reject('文件不是json格式!', error)
+      }
+    }
+    if (file) {
+      reader.readAsText(file, 'UTF-8')
+    } else {
+      reject('文件不存在！')
+    }
+  })
+}

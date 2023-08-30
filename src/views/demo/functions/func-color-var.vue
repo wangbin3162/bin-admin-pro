@@ -12,13 +12,17 @@
 </template>
 
 <script setup>
-import { exportJson } from '@/hooks/theme/export-file'
+import { exportJson, loadJsonFile } from '@/hooks/theme/export-file'
 import { themeConfigRef } from '@/hooks/theme/index'
 defineOptions({
   name: 'FuncColorVar',
 })
 
-function loadConfig() {}
+function loadConfig() {
+  loadJsonFile().then(data => {
+    console.log(data)
+  })
+}
 
 function saveConfig() {
   exportJson(themeConfigRef.value)

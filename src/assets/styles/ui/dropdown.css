@@ -1,3 +1,7 @@
+.bin-dropdown {
+  color: var(--v-g-text-color);
+}
+
 .bin-select__popper {
   &.bin-popper {
     padding: var(--b-popper-padding) 0;

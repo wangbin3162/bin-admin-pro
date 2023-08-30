@@ -12,9 +12,17 @@
       <div class="content-inner" flex :class="type">
         <b-color-picker
           v-model="value"
-          v-if="type === 'mixed' || type === 'color'"
+          v-if="(type === 'mixed' || type === 'color') && isColor"
           :colors="colors"
           :showAlpha="showAlpha"
+        />
+        <!-- 替换颜色控制器 -->
+        <b-color-picker
+          v-model="notColorStr"
+          v-if="(type === 'mixed' || type === 'color') && !isColor"
+          :colors="colors"
+          :showAlpha="showAlpha"
+          @change="val => (value = val)"
         />
         <b-input
           v-model="value"
@@ -28,8 +36,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { copyText } from '@/utils/util'
+import { computed, ref, watch } from 'vue'
+import { copyText, isColorValue } from '@/utils/util'
 
 defineOptions({
   name: 'GroupPanel',
@@ -67,6 +75,19 @@ const value = computed({
     emit('change', val)
   },
 })
+
+const notColorStr = ref('#ffffff')
+
+const isColor = computed(() => isColorValue(props.modelValue))
+
+watch(
+  () => props.modelValue,
+  () => {
+    if (!isColor.value) {
+      notColorStr.value = '#ffffff'
+    }
+  },
+)
 
 function resetValue() {
   value.value = props.defaultVal

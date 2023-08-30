@@ -27,7 +27,7 @@
     </section>
   </section>
 
-  <b-back-top :visible-height="200" :right="30" :bottom="40">
+  <b-back-top :visible-height="200" :right="30" :bottom="60">
     <i class="b-iconfont b-icon-vertical-align-top back-top"></i>
   </b-back-top>
 </template>

@@ -70,6 +70,10 @@
         <b-switch v-model="setting.tagsView" size="small" />
       </div>
       <div class="setting-list-item">
+        <span>头部面包屑</span>
+        <b-switch v-model="setting.showHeaderBreadcrumb" size="small" />
+      </div>
+      <div class="setting-list-item">
         <span>菜单搜索</span>
         <b-switch v-model="setting.showSearch" size="small" />
       </div>

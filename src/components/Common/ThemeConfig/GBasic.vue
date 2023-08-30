@@ -1,5 +1,5 @@
 <template>
-  <b-collapse-wrap title="基础配置" shadow="none" collapse>
+  <b-collapse-wrap title="基础配置" shadow="none" collapse :model-value="false">
     <div class="theme-config-panel">
       <b-row :gutter="16">
         <b-col span="6"></b-col>
@@ -94,7 +94,7 @@
             label="背景颜色[vGBgColor-1]"
             :defaultVal="Theme['vGBgColor-1']"
             v-model="themeConfigRef['vGBgColor-1']"
-            :colors="ThemeBGColors"
+            :colors="ThemeBgColors"
             type="color"
           ></GroupPanel>
         </b-col>
@@ -103,7 +103,7 @@
             label="背景颜色[vGBgColor-2]"
             :defaultVal="Theme['vGBgColor-2']"
             v-model="themeConfigRef['vGBgColor-2']"
-            :colors="ThemeBGColors"
+            :colors="ThemeBgColors"
             type="color"
           ></GroupPanel>
         </b-col>
@@ -112,7 +112,7 @@
             label="背景颜色[vGBgColor-3]"
             :defaultVal="Theme['vGBgColor-3']"
             v-model="themeConfigRef['vGBgColor-3']"
-            :colors="ThemeBGColors"
+            :colors="ThemeBgColors"
             type="color"
           ></GroupPanel>
         </b-col>
@@ -121,7 +121,7 @@
             label="背景颜色[vGBgColor-4]"
             :defaultVal="Theme['vGBgColor-4']"
             v-model="themeConfigRef['vGBgColor-4']"
-            :colors="ThemeBGColors"
+            :colors="ThemeBgColors"
             type="color"
           ></GroupPanel>
         </b-col>
@@ -133,7 +133,7 @@
             label="系统背景色[vGBgColor]"
             :defaultVal="Theme.vGBgColor"
             v-model="themeConfigRef.vGBgColor"
-            type="color"
+            :colors="ThemeBgColors"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
@@ -141,6 +141,7 @@
             label="系统主文字颜色[vGTextColor]"
             :defaultVal="Theme.vGTextColor"
             v-model="themeConfigRef.vGTextColor"
+            :colors="ThemeTextColors"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
@@ -148,6 +149,15 @@
             label="边框颜色[vGBorderColor]"
             :defaultVal="Theme.vGBorderColor"
             v-model="themeConfigRef.vGBorderColor"
+            :colors="ThemeBorderColors"
+          ></GroupPanel>
+        </b-col>
+        <b-col span="6">
+          <GroupPanel
+            label="content内容区域背景色[vContentBg]"
+            :defaultVal="Theme.vContentBg"
+            v-model="themeConfigRef.vContentBg"
+            :colors="ThemeBgColors"
           ></GroupPanel>
         </b-col>
       </b-row>
@@ -159,7 +169,8 @@
 import {
   Theme,
   ThemeFillColors,
-  ThemeBGColors,
+  ThemeBorderColors,
+  ThemeBgColors,
   ThemeTextColors,
   themeConfigRef,
 } from '@/hooks/theme'
@@ -170,6 +181,6 @@ defineOptions({
 
 <style scoped>
 .theme-config-panel {
-  padding: 20px 20px 0;
+  padding: 20px 8px 0;
 }
 </style>

@@ -27,12 +27,14 @@
 
   /* layout */
   /* 头部 header */
-  --v-header-height: 56px;
+  --v-header-height: 60px;
   --v-header-bg: var(--v-g-bg-color);
+  --v-header-text-color: var(--v-g-text-color);
   --v-header-border-color: var(--v-g-border-color);
   --v-header-trigger-size: 28px;
   --v-header-trigger-radius: 50%;
   --v-header-trigger-border-color: var(--v-g-border-color);
+  --v-header-trigger-hover-bg-color: var(--v-g-fill-color-3);
   /* 侧边栏 sider */
   --v-sider-width: 220px;
   --v-sider-collapse-width: 48px;
@@ -41,15 +43,24 @@
   --v-sider-collapse-btn-color: var(--v-g-text-color-3);
   --v-sider-collapse-btn-bg: var(--v-g-fill-color-1);
   --v-sider-collapse-btn-bg-hover: var(--v-g-fill-color-3);
+  /* 侧边菜单 */
+  --v-menu-item-height: 40px;
+  --v-menu-item-border-radius: 4px;
+  --v-menu-text-color: var(--v-g-text-color);
+  --v-menu-text-hover-color: var(--v-menu-text-color);
+  --v-menu-text-active-color: var(--bin-color-primary);
+  --v-menu-bg-color: var(--v-sider-bg);
+  --v-menu-bg-hover-color: var(--bin-color-primary-light6);
+  --v-menu-bg-active-color: var(--bin-color-primary-light6);
   /* tags-view */
-  --v-tags-height: 32px;
+  --v-tags-bg-color: var(--v-g-bg-color);
   --v-tags-border-color: var(--v-g-border-color);
+  --v-tags-height: 32px;
   --v-tags-font-size: 12px;
+  --v-tags-item-bg-color: var(--v-g-fill-color-2);
   --v-tags-text-color: var(--v-g-text-color);
   --v-tags-text-hover-color: var(--v-tags-text-color);
-  --v-tags-bg-color: var(--v-g-bg-color);
-  --v-tags-item-bg-color: var(--v-g-fill-color-2);
-  --v-tags-item-text-color: var(--bin-color-primary);
+  --v-tags-text-active-color: var(--bin-color-primary);
   /* 内容区域 content */
   --v-content-bg: var(--v-g-fill-color-2);
   /* theme-panel */

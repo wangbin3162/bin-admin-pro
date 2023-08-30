@@ -198,7 +198,7 @@ watch(
     box-sizing: content-box;
     display: flex;
     background-color: var(--v-tags-bg-color);
-    height: 32px;
+    height: var(--v-tags-height);
     position: fixed;
     z-index: 90;
     &:after {
@@ -214,6 +214,7 @@ watch(
   .bin-tabs-wrapper {
     margin: 0 12px;
     width: calc(100% - 33px);
+    height: var(--v-tags-height);
     .nav-wrapper {
       height: var(--v-tags-height);
       .tab-list {
@@ -234,21 +235,21 @@ watch(
           content: unset;
         }
         &:hover {
-          color: var(--v-tags-item-text-color);
+          color: var(--v-tags-text-hover-color);
         }
         .b-icon-close {
           margin-left: 0;
         }
         &.active {
           background: var(--v-tags-item-bg-color);
-          color: var(--v-tags-item-text-color) !important;
+          color: var(--v-tags-text-active-color) !important;
           &.no-close {
             padding: 0 8px;
           }
           .b-icon-close {
             width: 14px;
             margin-left: 0;
-            color: var(--v-tags-item-text-color);
+            color: var(--v-tags-text-active-color);
           }
           .b-icon-close:hover {
             color: var(--bin-color-danger-light2);

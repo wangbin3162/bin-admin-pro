@@ -1,6 +1,5 @@
 .bin-color-picker {
   position: relative;
-  .bin-color-picker__trigger {
-    padding: 2px;
-  }
+  font-size: 0;
+  width: 100%;
 }

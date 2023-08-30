@@ -17,7 +17,7 @@
         <iconfont icon="linechart" color="success" :size="40" />
         <span>监控页</span>
       </router-link>
-      <router-link to="/colorVar" class="hover-item">
+      <router-link to="/funcColorVar" class="hover-item">
         <iconfont icon="bg-colors" color="#eb2f96" :size="40" />
         <span>主题</span>
       </router-link>

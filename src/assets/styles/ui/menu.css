@@ -1,4 +1,13 @@
 .bin-menu {
+  --b-menu-item-height: var(--v-menu-item-height);
+  --b-menu-item-border-radius: var(--v-menu-item-border-radius);
+  --b-menu-text-color: var(--v-menu-text-color);
+  --b-menu-text-hover-color: var(--v-menu-text-hover-color);
+  --b-menu-text-active-color: var(--v-menu-text-active-color);
+  --b-menu-bg-color: var(--v-menu-bg-color);
+  --b-menu-bg-hover-color: var(--v-menu-bg-hover-color);
+  --b-menu-bg-active-color: var(--v-menu-bg-active-color);
+
   .bin-menu-item,
   .bin-submenu__title {
     display: flex;
@@ -42,6 +51,15 @@
 }
 
 .bin-menu--popup {
+  --b-menu-item-height: var(--v-menu-item-height);
+  --b-menu-item-border-radius: var(--v-menu-item-border-radius);
+  --b-menu-text-color: var(--v-menu-text-color);
+  --b-menu-text-hover-color: var(--v-menu-text-hover-color);
+  --b-menu-text-active-color: var(--v-menu-text-active-color);
+  --b-menu-bg-color: var(--v-menu-bg-color);
+  --b-menu-bg-hover-color: var(--v-menu-bg-hover-color);
+  --b-menu-bg-active-color: var(--v-menu-bg-active-color);
+
   background: var(--b-menu-bg-color);
   .bin-menu-item,
   .bin-submenu__title {

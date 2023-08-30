@@ -51,23 +51,23 @@ watch(
 .header-breadcrumb {
   display: inline-block;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.45);
+  color: var(--v-header-text-color);
   padding-left: 20px;
   .breadcrumb-item {
     font-weight: normal;
-    color: rgba(0, 0, 0, 0.65);
+    color: var(--v-header-text-color);
     outline: none;
     .b-icon-down {
       margin-left: 4px;
       font-size: 12px;
     }
     &:hover {
-      color: getColor();
+      color: var(--bin-color-primary);
     }
   }
   .no-redirect {
     font-weight: normal;
-    color: rgba(0, 0, 0, 0.45);
+    color: var(--v-header-text-color);
     cursor: text;
   }
 }

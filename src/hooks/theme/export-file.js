@@ -1,3 +1,5 @@
+import { fileToJson } from '@/utils/file-helper'
+
 // 导出全部json
 export function exportJson(configStr) {
   const link = document.createElement('a')
@@ -9,4 +11,19 @@ export function exportJson(configStr) {
   document.body.appendChild(link)
   link.click()
   document.body.removeChild(document.getElementById('b-link-temp'))
+}
+
+// readJson
+export function loadJsonFile() {
+  return new Promise(resolve => {
+    let input = document.createElement('input')
+    input.type = 'file'
+
+    input.onchange = function (e) {
+      let file = e.target.files[0]
+      fileToJson(file).then(data => resolve(data))
+    }
+
+    input.click()
+  })
 }

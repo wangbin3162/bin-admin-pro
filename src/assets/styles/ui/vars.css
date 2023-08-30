@@ -16,21 +16,10 @@
   --bin-border-color-base: var(--v-g-border-color);
   --bin-scrollbar-width: 5px;
   --bin-scrollbar-radius: 5px;
-  /* card */
-  --b-card-border-color: var(--v-g-border-color);
-  /* menu */
-  --b-menu-item-height: 40px;
-  --b-menu-item-border-radius: 4px;
-  --b-menu-text-color: var(--v-g-text-color);
-  --b-menu-text-hover-color: var(--b-menu-text-color);
-  --b-menu-text-active-color: var(--bin-color-primary);
-  --b-menu-bg-color: var(--v-sider-bg);
-  --b-menu-bg-hover-color: var(--bin-color-primary-light6);
-  --b-menu-bg-active-color: var(--bin-color-primary-light6);
-
-  /* popper */
   --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
     0 9px 28px 8px rgba(0, 0, 0, 0.05);
+
+  /* popper */
   --b-popper-padding: 4px;
   --b-popper-radius: 4px;
   --b-popper-item-margin-bottom: 4px;

@@ -1,5 +1,5 @@
 <template>
-  <b-collapse-wrap title="侧边栏配置" shadow="none" collapse>
+  <b-collapse-wrap title="侧边栏配置" shadow="none" collapse :model-value="false">
     <div class="theme-config-panel">
       <b-row :gutter="16">
         <b-col span="6"></b-col>
@@ -29,17 +29,17 @@
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="菜单项高度[bMenuItemHeight]"
-            :defaultVal="Theme.bMenuItemHeight"
-            v-model="themeConfigRef.bMenuItemHeight"
+            label="菜单项高度[vMenuItemHeight]"
+            :defaultVal="Theme.vMenuItemHeight"
+            v-model="themeConfigRef.vMenuItemHeight"
             type="input"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="菜单项圆角[bMenuItemBorderRadius]"
-            :defaultVal="Theme.bMenuItemBorderRadius"
-            v-model="themeConfigRef.bMenuItemBorderRadius"
+            label="菜单项圆角[vMenuItemBorderRadius]"
+            :defaultVal="Theme.vMenuItemBorderRadius"
+            v-model="themeConfigRef.vMenuItemBorderRadius"
             type="input"
           ></GroupPanel>
         </b-col>
@@ -48,27 +48,27 @@
       <b-row :gutter="16">
         <b-col span="6">
           <GroupPanel
-            label="文字颜色[bMenuTextColor]"
-            :defaultVal="Theme.bMenuTextColor"
-            v-model="themeConfigRef.bMenuTextColor"
+            label="文字颜色[vMenuTextColor]"
+            :defaultVal="Theme.vMenuTextColor"
+            v-model="themeConfigRef.vMenuTextColor"
             :colors="ThemeTextColors"
             type="mixed"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="文字悬停颜色[bMenuTextHoverColor]"
-            :defaultVal="Theme.bMenuTextHoverColor"
-            v-model="themeConfigRef.bMenuTextHoverColor"
+            label="文字悬停颜色[vMenuTextHoverColor]"
+            :defaultVal="Theme.vMenuTextHoverColor"
+            v-model="themeConfigRef.vMenuTextHoverColor"
             :colors="ThemeTextColors"
             type="mixed"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="文字active颜色[bMenuTextActiveColor]"
-            :defaultVal="Theme.bMenuTextActiveColor"
-            v-model="themeConfigRef.bMenuTextActiveColor"
+            label="文字active颜色[vMenuTextActiveColor]"
+            :defaultVal="Theme.vMenuTextActiveColor"
+            v-model="themeConfigRef.vMenuTextActiveColor"
             :colors="ThemeTextColors"
             type="mixed"
           ></GroupPanel>
@@ -79,27 +79,27 @@
       <b-row :gutter="16">
         <b-col span="6">
           <GroupPanel
-            label="菜单项背景颜色[bMenuBgColor]"
-            :defaultVal="Theme.bMenuBgColor"
-            v-model="themeConfigRef.bMenuBgColor"
+            label="菜单项背景颜色[vMenuBgColor]"
+            :defaultVal="Theme.vMenuBgColor"
+            v-model="themeConfigRef.vMenuBgColor"
             :colors="ThemeMenuColors"
             type="mixed"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="菜单项悬停背景颜色[bMenuBgHoverColor]"
-            :defaultVal="Theme.bMenuBgHoverColor"
-            v-model="themeConfigRef.bMenuBgHoverColor"
+            label="菜单项悬停背景颜色[vMenuBgHoverColor]"
+            :defaultVal="Theme.vMenuBgHoverColor"
+            v-model="themeConfigRef.vMenuBgHoverColor"
             :colors="ThemeMenuColors"
             type="mixed"
           ></GroupPanel>
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="菜单项active背景颜色[bMenuBgActiveColor]"
-            :defaultVal="Theme.bMenuBgActiveColor"
-            v-model="themeConfigRef.bMenuBgActiveColor"
+            label="菜单项active背景颜色[vMenuBgActiveColor]"
+            :defaultVal="Theme.vMenuBgActiveColor"
+            v-model="themeConfigRef.vMenuBgActiveColor"
             :colors="ThemeMenuColors"
             type="mixed"
           ></GroupPanel>

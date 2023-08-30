@@ -30,6 +30,16 @@ export const addResizeListener = Utils.resize.addResizeListener
 
 export const removeResizeListener = Utils.resize.removeResizeListener
 
+export function isColorValue(str) {
+  // 使用正则表达式判断是否为颜色值或者 RGB/RGBA 值
+  let colorRegex =
+    // eslint-disable-next-line no-useless-escape
+    /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^rgba?\([\d]+\s*,\s*[\d]+\s*,\s*[\d]+(,\s*[\d\.]+)?\)$/i
+
+  // 检查字符串是否匹配颜色值或者 RGB/RGBA 值的正则表达式
+  return colorRegex.test(str)
+}
+
 /**
  * arraybuffer 流文件转换为base64图像
  * @param data

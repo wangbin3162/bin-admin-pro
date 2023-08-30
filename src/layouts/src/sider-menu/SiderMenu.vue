@@ -72,7 +72,7 @@ const { getMenuItemNamePath, handleMenuSelect, sideMenus } = useMenu()
     width: 100%;
     height: 100%;
     overflow: auto;
-    padding: 4px 8px;
+    padding: 8px;
   }
   &.sider-menu-collapsed {
     width: var(--v-sider-collapse-width);

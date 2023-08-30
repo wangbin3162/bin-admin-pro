@@ -1,6 +1,9 @@
-.bin-card .bin-card__header {
-  padding: 8px 16px;
-  &.has-divider {
-    border-bottom: 1px solid var(--bin-card-border-color);
+.bin-card {
+  --b-card-border-color: var(--v-g-border-color);
+  .bin-card__header {
+    padding: 8px 16px;
+    &.has-divider {
+      border-bottom: 1px solid var(--bin-card-border-color);
+    }
   }
 }

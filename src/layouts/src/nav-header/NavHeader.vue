@@ -15,7 +15,7 @@
           @change="topNavMenuChange"
         ></b-tabs>
       </div>
-      <Breadcrumb v-else />
+      <Breadcrumb v-if="setting.showHeaderBreadcrumb && setting.menuType === 'default'" />
     </div>
     <div class="right-side">
       <SearchTrigger v-if="setting.showSearch" />
@@ -124,6 +124,7 @@ onBeforeUnmount(() => {
   height: 100%;
   background-color: var(--v-header-bg);
   border-bottom: 1px solid var(--v-header-border-color);
+  color: var(--v-header-text-color);
   .left-side {
     min-width: var(--v-sider-width);
     .logo-wrap {
@@ -140,6 +141,7 @@ onBeforeUnmount(() => {
         line-height: 1.4;
         margin: 0;
         font-weight: 500;
+        color: var(--v-header-text-color);
       }
     }
   }
@@ -150,8 +152,25 @@ onBeforeUnmount(() => {
     .mixed-menu {
       padding: 0 24px;
       width: 720px;
-      .bin-tabs-wrapper.default:after {
-        content: unset;
+      .bin-tabs-wrapper {
+        .nav-wrapper {
+          .tab-item {
+            color: var(--v-header-text-color);
+            .b-iconfont:not(.b-icon-close) {
+              color: var(--v-header-text-color);
+            }
+            &:hover,
+            &.active {
+              color: var(--bin-color-primary);
+              .b-iconfont:not(.b-icon-close) {
+                color: var(--bin-color-primary);
+              }
+            }
+          }
+        }
+        &.default:after {
+          content: unset;
+        }
       }
     }
   }
@@ -177,7 +196,7 @@ onBeforeUnmount(() => {
         border-radius: var(--v-header-trigger-radius);
         border: 1px solid var(--v-header-trigger-border-color);
         &:hover {
-          background-color: var(--v-g-fill-color-2);
+          background-color: var(--v-header-trigger-hover-bg-color);
         }
       }
     }

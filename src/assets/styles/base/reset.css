@@ -76,7 +76,7 @@ h3,
 h4,
 h5,
 h6 {
-  color: var(--bin-color-text-primary);
+  color: var(--v-g-text-color);
   font-weight: inherit;
   &:first-child {
     margin-top: 0;
