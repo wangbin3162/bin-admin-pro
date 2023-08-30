@@ -101,7 +101,6 @@ function copyVar() {
 <style scoped>
 .group-panel {
   position: relative;
-  /* display: inline-flex; */
   padding: 24px 16px;
   border-radius: 4px;
   border: 1px solid var(--v-g-border-color);

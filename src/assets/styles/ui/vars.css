@@ -16,19 +16,4 @@
   --bin-border-color-base: var(--v-g-border-color);
   --bin-scrollbar-width: 5px;
   --bin-scrollbar-radius: 5px;
-  --bin-shadow-popper: 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),
-    0 9px 28px 8px rgba(0, 0, 0, 0.05);
-
-  /* popper */
-  --b-popper-padding: 4px;
-  --b-popper-radius: 4px;
-  --b-popper-item-margin-bottom: 4px;
-  /* table */
-  --b-table-header-bg: var(--v-g-fill-color-2);
-  --b-table-header-text: #1d2129;
-  /* page */
-  --b-page-border-color: transparent;
-  --b-page-bg: var(--v-g-bg-color);
-  --b-page-hover-bg: var(--v-g-fill-color-2);
-  --b-page-active-bg: var(--bin-color-primary-light5);
 }

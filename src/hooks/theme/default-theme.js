@@ -13,20 +13,6 @@ export const Theme = {
   binBorderColorBase: 'var(--v-g-border-color)',
   binScrollbarWidth: '5px',
   binScrollbarRadius: '5px',
-  // popper
-  bPopperPadding: '4px',
-  bPopperRadius: '4px',
-  bPopperItemMarginBottom: '4px',
-  bShadowPopper:
-    '0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.08),0 9px 28px 8px rgba(0, 0, 0, 0.05)',
-  // table
-  bTableHeaderBg: 'var(--v-g-fill-color-2)',
-  bTableHeaderText: '#1d2129',
-  // page
-  bPageBorderColor: 'transparent',
-  bPageBg: 'var(--v-g-bg-color)',
-  bPageHoverBg: 'var(--v-g-fill-color-2)',
-  bPageActiveBg: 'var(--bin-color-primary-light5)',
 
   // -----------------system---------------------//
   'vGBgColor-1': '#17171a',
@@ -43,6 +29,7 @@ export const Theme = {
   'vGFillColor-2': '#f2f3f5',
   'vGFillColor-3': '#e5e6eb',
   'vGFillColor-4': '#c9cdd4',
+
   vGBgColor: '#fff',
   vGTextColorDark: 'var(--v-g-text-color-1)',
   vGTextColor: 'var(--v-g-text-color-2)',
@@ -65,7 +52,6 @@ export const Theme = {
   vSiderCollapseBtnColor: 'var(--v-g-text-color-3)',
   vSiderCollapseBtnBg: 'var(--v-g-fill-color-1)',
   vSiderCollapseBtnBgHover: 'var(--v-g-fill-color-3)',
-
   // menu
   vMenuItemHeight: '40px',
   vMenuItemBorderRadius: '4px',
@@ -75,7 +61,6 @@ export const Theme = {
   vMenuBgColor: 'var(--v-sider-bg)',
   vMenuBgHoverColor: 'var(--bin-color-primary-light6)',
   vMenuBgActiveColor: 'var(--bin-color-primary-light6)',
-
   // tags-view
   vTagsBgColor: 'var(--v-g-bg-color)',
   vTagsBorderColor: 'var(--v-g-border-color)',
@@ -87,6 +72,19 @@ export const Theme = {
   vTagsTextActiveColor: 'var(--bin-color-primary)',
   // 内容区域
   vContentBg: 'var(--v-g-fill-color-2)',
+  // popper
+  vPopperPadding: '4px',
+  vPopperTooltipPadding: '4px',
+  vPopperRadius: '4px',
+  vPopperItemMarginBottom: '4px',
+  // table
+  vTableHeaderBg: 'var(--v-g-fill-color-2)',
+  vTableHeaderText: '#1d2129',
+  // page
+  vPageBorderColor: 'transparent',
+  vPageBg: 'var(--v-g-bg-color)',
+  vPageHoverBg: 'var(--v-g-fill-color-2)',
+  vPageActiveBg: 'var(--bin-color-primary-light5)',
 }
 
 // 主题颜色面板

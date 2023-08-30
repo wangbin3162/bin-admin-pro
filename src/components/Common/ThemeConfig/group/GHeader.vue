@@ -1,5 +1,5 @@
 <template>
-  <b-collapse-wrap title="导航栏配置" shadow="none" collapse :model-value="false">
+  <b-collapse-wrap title="导航栏" shadow="none" collapse :model-value="false">
     <div class="theme-config-panel">
       <b-row :gutter="16">
         <b-col span="6"></b-col>
@@ -95,6 +95,7 @@ import {
   themeConfigRef,
   ThemeBgColors,
 } from '@/hooks/theme'
+import GroupPanel from '../src/GroupPanel.vue'
 
 defineOptions({
   name: 'GHeader',

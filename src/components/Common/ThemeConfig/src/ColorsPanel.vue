@@ -85,6 +85,7 @@
 
 <script setup>
 import { Theme, ThemeMainColors, themeConfigRef } from '@/hooks/theme'
+import GroupPanel from './GroupPanel.vue'
 // 主题颜色配置面板
 defineOptions({
   name: 'ColorsPanel',

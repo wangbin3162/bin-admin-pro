@@ -1,4 +1,9 @@
 .bin-page {
+  --b-page-border-color: var(--v-page-border-color);
+  --b-page-bg: var(--v-page-bg);
+  --b-page-hover-bg: var(--v-page-hover-bg);
+  --b-page-active-bg: var(--v-page-active-bg);
+
   .bin-page-item {
     border-color: var(--b-page-border-color);
     background-color: var(--b-page-bg);

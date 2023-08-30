@@ -1,4 +1,7 @@
 .bin-table {
+  --b-table-header-bg: var(--v-table-header-bg);
+  --b-table-header-text: var(--v-table-header-text);
+
   .bin-table-header {
     th {
       background-color: var(--b-table-header-bg);

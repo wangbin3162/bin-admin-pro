@@ -66,4 +66,20 @@
   /* theme-panel */
   --v-theme-panel-bg: var(--v-g-bg-color);
   --v-theme-active-color: var(--bin-color-primary);
+
+  /* popper */
+  --v-popper-padding: 4px;
+  --v-popper-tooltip-padding: 8px;
+  --v-popper-radius: 4px;
+  --v-popper-item-margin-bottom: 4px;
+
+  /* table */
+  --v-table-header-bg: var(--v-g-fill-color-2);
+  --v-table-header-text: #1d2129;
+
+  /* page */
+  --v-page-border-color: transparent;
+  --v-page-bg: var(--v-g-bg-color);
+  --v-page-hover-bg: var(--v-g-fill-color-2);
+  --v-page-active-bg: var(--bin-color-primary-light5);
 }

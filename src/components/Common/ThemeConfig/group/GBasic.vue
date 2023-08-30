@@ -174,6 +174,10 @@ import {
   ThemeTextColors,
   themeConfigRef,
 } from '@/hooks/theme'
+
+import GroupPanel from '../src/GroupPanel.vue'
+import ColorsPanel from '../src/ColorsPanel.vue'
+
 defineOptions({
   name: 'GBasic',
 })
@@ -181,6 +185,6 @@ defineOptions({
 
 <style scoped>
 .theme-config-panel {
-  padding: 20px 8px 0;
+  padding: 20px 20px 0;
 }
 </style>
