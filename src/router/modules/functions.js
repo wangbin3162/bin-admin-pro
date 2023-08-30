@@ -1,11 +1,5 @@
 export default [
   {
-    path: 'funcColorVar',
-    name: 'FuncColorVar',
-    component: () => import('@/views/demo/functions/func-color-var.vue'),
-    meta: { title: '主题颜色' },
-  },
-  {
     path: 'funcTitleBar',
     name: 'FuncTitleBar',
     component: () => import('@/views/demo/functions/func-title-bar.vue'),

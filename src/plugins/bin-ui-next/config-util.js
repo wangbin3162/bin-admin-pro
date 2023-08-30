@@ -70,6 +70,16 @@ export function setAttrVar(prop, val, dom = document.documentElement) {
   dom.setAttribute(prop, val)
 }
 
+/**
+ * 移除css属性
+ * @param {} prop
+ * @param {*} val
+ * @param {*} dom
+ */
+export function removeAttrVar(prop, dom = document.documentElement) {
+  dom.removeAttribute(prop)
+}
+
 // 根据变量名称获取扩展名称色板对象 这里是为了扩充计算色板使用
 function getExtensionVariables(key, color) {
   const mateProps = ['primary', 'success', 'warning', 'danger', 'info'].map(v => `--bin-color-${v}`)

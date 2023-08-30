@@ -7,9 +7,9 @@
       <h3 class="setting-title"><span>主题设置</span></h3>
       <div class="p20">
         <div class="theme-tab">
-          <span @click="setting.themeName = 'light'">
+          <span @click="setting.themeName = ''">
             <img src="@/assets/images/light.svg" alt="" />
-            <i v-if="setting.themeName === 'light'" class="b-iconfont b-icon-check"></i>
+            <i v-if="setting.themeName === ''" class="b-iconfont b-icon-check"></i>
           </span>
           明亮
         </div>

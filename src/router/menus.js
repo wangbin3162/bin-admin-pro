@@ -49,10 +49,6 @@ export default [
     icon: 'codepen',
     children: [
       {
-        name: 'FuncColorVar',
-        title: '主题颜色',
-      },
-      {
         name: 'FuncDraggable',
         title: '拖拽排序',
       },

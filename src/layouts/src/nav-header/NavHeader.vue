@@ -22,6 +22,7 @@
       <MessageTrigger v-if="setting.showMessage" />
       <WeatherTrigger v-if="setting.showWeather" />
       <SettingTrigger />
+      <ThemeTrigger />
       <UserTrigger />
     </div>
   </div>
@@ -34,8 +35,9 @@ import Breadcrumb from './breadcrumb/Breadcrumb.vue'
 import SearchTrigger from './search/Search.vue'
 import WeatherTrigger from './weather/Weather.vue'
 import MessageTrigger from './message/Message.vue'
-import UserTrigger from './user/User.vue'
 import SettingTrigger from './setting/Setting.vue'
+import ThemeTrigger from './theme/Theme.vue'
+import UserTrigger from './user/User.vue'
 import { useStore } from '@/store'
 import useMenu from '@/hooks/store/useMenu'
 import { useRoute, useRouter } from 'vue-router'

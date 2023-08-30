@@ -4,6 +4,7 @@ import { configProviderInjectionKey } from './context'
 import { deepCopy, deepMerge } from '@/utils/util'
 import {
   convertObjectPropsToCSSVariables,
+  removeAttrVar,
   setAttrVar,
   setObjectPropsCSSVariables,
 } from '../../config-util'
@@ -51,8 +52,12 @@ export default defineComponent({
 
     function setVariablesToDomNode() {
       // 如果是虚拟模式，则追加属性至dom节点
-      if (props.abstract && props.themeName) {
-        setAttrVar('theme-name', props.themeName)
+      if (props.abstract) {
+        if (props.themeName) {
+          setAttrVar('theme-name', props.themeName)
+        } else {
+          removeAttrVar('theme-name')
+        }
       }
       // 如果禁用样式注入，则需要注入到html
       if (props.inlineThemeDisabled || props.abstract) {

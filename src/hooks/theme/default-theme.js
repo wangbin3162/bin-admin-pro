@@ -38,7 +38,7 @@ export const Theme = {
   // header
   vHeaderHeight: '60px',
   vHeaderBg: 'var(--v-g-bg-color)',
-  vHeaderTextColor: 'var(--v-g-text-color-dark)',
+  vHeaderTextColor: 'var(--v-g-text-color)',
   vHeaderBorderColor: 'var(--v-g-border-color)',
   vHeaderTriggerSize: '28px',
   vHeaderTriggerRadius: '50%',
@@ -74,7 +74,7 @@ export const Theme = {
   vContentBg: 'var(--v-g-fill-color-2)',
   // popper
   vPopperPadding: '4px',
-  vPopperTooltipPadding: '4px',
+  vPopperTooltipPadding: '4px 8px',
   vPopperRadius: '4px',
   vPopperItemMarginBottom: '4px',
   // table
@@ -88,7 +88,13 @@ export const Theme = {
 }
 
 // 主题颜色面板
+
 export const ThemeMainColors = [
+  '#1089ff',
+  '#165dff',
+  '#00c181',
+  '#ffaa00',
+  '#ff3d71',
   '#3366ff',
   '#009688',
   '#1976d2',

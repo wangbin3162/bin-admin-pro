@@ -17,10 +17,10 @@
         <iconfont icon="linechart" color="success" :size="40" />
         <span>监控页</span>
       </router-link>
-      <router-link to="/funcColorVar" class="hover-item">
-        <iconfont icon="bg-colors" color="#eb2f96" :size="40" />
-        <span>主题</span>
-      </router-link>
+      <a class="hover-item">
+        <iconfont icon="shopping" color="#a0d911" :size="40" />
+        <span>工具</span>
+      </a>
       <a class="hover-item">
         <iconfont icon="table" color="#fa541c" :size="40" />
         <span>列表</span>
@@ -33,10 +33,12 @@
         <iconfont icon="setting" color="#42cece" :size="40" />
         <span>设置</span>
       </a>
-      <a class="hover-item">
-        <iconfont icon="shopping" color="#a0d911" :size="40" />
-        <span>工具</span>
+
+      <a class="hover-item" @click.stop="toggleTheme">
+        <iconfont icon="bg-colors" color="#eb2f96" :size="40" />
+        <span>主题</span>
       </a>
+
       <div class="link-wrap">
         <div class="link-item" v-for="link in appStore.links" :key="link.link">
           <b-dropdown trigger="contextmenu" @command="appStore.closeLink" placement="bottom-start">
@@ -129,9 +131,13 @@ function toggleSearch() {
 function toggleSetting() {
   appStore.settingVisible = !appStore.settingVisible
 }
+
+function toggleTheme() {
+  appStore.themeVisible = !appStore.themeVisible
+}
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .card-panel {
   margin-bottom: 16px;
 }
@@ -148,8 +154,10 @@ function toggleSetting() {
   padding: 10px 10px 16px;
   border: 0;
   border-radius: 0;
-  box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, 1px 0 0 0 #f0f0f0 inset, 0 1px 0 0 #f0f0f0 inset;
-  transition: all .3s;
+  box-shadow: 1px 0 0 0 #f0f0f0, 0 1px 0 0 #f0f0f0, 1px 1px 0 0 #f0f0f0, 1px 0 0 0 #f0f0f0 inset,
+    0 1px 0 0 #f0f0f0 inset;
+  transition: all 0.3s;
+  cursor: pointer;
   span {
     color: rgb(81, 90, 110);
   }
@@ -172,6 +180,7 @@ function toggleSetting() {
   margin-top: 16px;
   padding-left: 24px;
   a {
+    cursor: pointer;
     color: var(--v-g-text-color);
     i {
       display: none;
