@@ -1,5 +1,5 @@
 <template>
-  <b-collapse-wrap title="基础配置" shadow="none" collapse :model-value="true">
+  <b-collapse-wrap title="主色调" shadow="none" collapse :model-value="false">
     <div class="theme-config-panel">
       <b-row :gutter="16">
         <b-col span="6"></b-col>

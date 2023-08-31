@@ -13,18 +13,23 @@
     --bin-color-$(val)-light6: mix(#fff, $(color), 0.95);
     --bin-color-$(val)-active: mix(#000, $(color), 0.1);
   }
+
   /* 以下不需要进行变量覆盖，根据实际情况调节即可 */
-  --bin-border-color-base: var(--v-g-border-color);
-  --bin-color-text-primary: var(--v-g-text-color-dark);
-  --bin-color-text-default: var(--v-g-text-color);
-  --bin-color-text-secondary: var(--v-g-text-color-light);
+  /* 背景色 */
+  --bin-bg-color-1: var(--v-g-bg-color-1);
+  --bin-bg-color-2: var(--v-g-bg-color-2);
+  --bin-bg-color-3: var(--v-g-bg-color-3);
+  --bin-bg-color-4: var(--v-g-bg-color-4);
 
-  --v-g-text-color-dark: var(--v-g-text-color-1);
-  --v-g-text-color: var(--v-g-text-color-2);
-  --v-g-text-color-light: var(--v-g-text-color-3);
+  /* 文字色 */
+  --bin-text-color-1: var(--v-g-text-color-1);
+  --bin-text-color-2: var(--v-g-text-color-2);
+  --bin-text-color-3: var(--v-g-text-color-3);
+  --bin-text-color-4: var(--v-g-text-color-4);
 
-  --bin-color-white: var(--v-g-bg-color);
-  --bin-dark-bg: var(--v-g-bg-color-1);
-  --bin-scrollbar-width: 5px;
-  --bin-scrollbar-radius: 5px;
+  /* 填充色 */
+  --bin-fill-color-1: var(--v-g-fill-color-1);
+  --bin-fill-color-2: var(--v-g-fill-color-2);
+  --bin-fill-color-3: var(--v-g-fill-color-3);
+  --bin-fill-color-4: var(--v-g-fill-color-4);
 }

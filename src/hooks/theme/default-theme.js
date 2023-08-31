@@ -80,84 +80,93 @@ export const Theme = {
 }
 
 // 主题颜色面板
-
 export const ThemeMainColors = [
-  '#1089ff',
-  '#165dff',
-  '#00c181',
-  '#ffaa00',
-  '#ff3d71',
-  '#3366ff',
-  '#009688',
-  '#1976d2',
-  '#536def',
-  '#ff5c93',
-  '#ee4f12',
-  '#0096c7',
-  '#9c27b0',
-  '#ff9800',
+  '#165DFF',
+  '#3491FA',
+  '#14C9C9',
+  '#00B42A',
+  '#722ED1',
+  '#D91AD9',
+  '#F53F3F',
+  '#F77234',
+  '#FF9800',
+  '#F5319D',
+]
+
+export const ThemeMainColorsText = [
+  '极致蓝',
+  '海蔚蓝',
+  '碧涛青',
+  '仙野绿',
+  '暗夜紫',
+  '青春紫',
+  '浪漫红',
+  '活力橙',
+  '黄昏',
+  '玫瑰红',
 ]
 
 // 菜单背景颜色
 export const ThemeMenuColors = [
   '#001529',
   '#273352',
-  '#191b24',
+  '#191B24',
   '#304156',
-  '#031d21',
+  '#031D21',
   '#28333E',
-  '#292c37',
-  '#383f45',
-  '#ffffff',
+  '#292C37',
+  '#383F45',
+  '#FFFFFF',
 ]
+
 // 背景颜色
 export const ThemeBgColors = [
-  '#17171a',
+  '#17171A',
   '#232324',
-  '#2a2a2b',
+  '#2A2A2B',
   '#313132',
   '#373739',
-  '#fafafa',
-  '#ffffff',
+  '#FAFAFA',
+  '#FFFFFF',
 ]
 
 // 文字颜色
 export const ThemeTextColors = [
-  '#1d2129',
-  '#4e5969',
-  '#86909c',
-  '#c9cdd4',
-  '#17233d',
-  '#515a6e',
+  '#1D2129',
+  '#4E5969',
+  '#86909C',
+  '#C9CDD4',
+  '#17233D',
+  '#515A6E',
   '#808695',
-  '#c5c8ce',
+  '#C5C8CE',
   '#C0C4CC',
-  '#ffffff',
+  '#FFFFFF',
 ]
 
 // 填充颜色
 export const ThemeFillColors = [
-  '#f7f8fa',
-  '#f2f3f5',
-  '#e5e6eb',
-  '#c9cdd4',
-  '#f0f0f0',
-  '#f5f5f5',
-  '#fafafa',
-  '#ffffff',
+  '#F7F8FA',
+  '#F2F3F5',
+  '#E5E6EB',
+  '#C9CDD4',
+  '#F0F0F0',
+  '#F5F5F5',
+  '#FAFAFA',
+  '#FFFFFF',
 ]
 
 // 边框颜色
 export const ThemeBorderColors = [
-  '#2e2e30',
+  '#2E2E30',
   '#484849',
-  '#5f5f60',
+  '#5F5F60',
   '#929293',
-  '#f7f8fa',
-  '#f2f3f5',
-  '#e5e6eb',
-  '#c9cdd4',
-  '#fafafa',
-  '#eeeeee',
-  '#dddddd',
+  '#F7F8FA',
+  '#F2F3F5',
+  '#E5E6EB',
+  '#C9CDD4',
+  '#FAFAFA',
+  '#EEEEEE',
+  '#DDDDDD',
 ]

@@ -1,35 +1,52 @@
 <template>
   <div class="group-panel">
-    <div class="title">{{ title }}</div>
-    <div class="reset-default" :title="`重置默认：${defaultVal}`" @click="resetValue">
-      <b-icon name="rollback"></b-icon>
-    </div>
-    <div class="copy-var" :title="`复制属性值：${realVar}`" @click="copyVar">
-      <b-icon name="file-copy"></b-icon>
-    </div>
+    <div class="title">{{ simple ? label : title }}</div>
+
+    <template v-if="!simple">
+      <div class="reset-default" :title="`重置默认：${defaultVal}`" @click="resetValue">
+        <b-icon name="rollback"></b-icon>
+      </div>
+      <div class="copy-var" :title="`复制属性值：${realVar}`" @click="copyVar">
+        <b-icon name="file-copy"></b-icon>
+      </div>
+    </template>
 
     <div class="content">
-      <div class="content-inner" flex :class="type">
-        <b-color-picker
-          v-model="value"
-          v-if="(type === 'mixed' || type === 'color') && isColor"
-          :colors="colors"
-          :showAlpha="showAlpha"
-        />
-        <!-- 替换颜色控制器 -->
-        <b-color-picker
-          v-model="notColorStr"
-          v-if="(type === 'mixed' || type === 'color') && !isColor"
-          :colors="colors"
-          :showAlpha="showAlpha"
-          @change="val => (value = val)"
-        />
-        <b-input
-          v-model="value"
-          v-if="type === 'mixed' || type === 'input'"
-          :placeholder="defaultVal"
-        />
-      </div>
+      <template v-if="!simple">
+        <div class="content-inner" flex :class="type">
+          <b-color-picker
+            v-model="value"
+            v-if="(type === 'mixed' || type === 'color') && isColor"
+            :colors="colors"
+            :showAlpha="showAlpha"
+          />
+          <!-- 替换颜色控制器 -->
+          <b-color-picker
+            v-model="notColorStr"
+            v-if="(type === 'mixed' || type === 'color') && !isColor"
+            :colors="colors"
+            :showAlpha="showAlpha"
+            @change="val => (value = val)"
+          />
+          <b-input
+            v-model="value"
+            v-if="type === 'mixed' || type === 'input'"
+            :placeholder="defaultVal"
+          />
+        </div>
+
+        <!-- 色板工具 -->
+        <ul class="color-list" v-if="(type === 'mixed' || type === 'color') && isColor">
+          <li
+            v-for="(color, index) in colorList"
+            :key="index"
+            :style="{ backgroundColor: color }"
+            :title="`点击设置颜色[ ${color} ]`"
+            :class="{ active: color === value.toLowerCase() }"
+            @click="setColor(color)"
+          />
+        </ul>
+      </template>
       <slot></slot>
     </div>
   </div>
@@ -38,6 +55,9 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { copyText, isColorValue } from '@/utils/util'
+import { Utils } from 'bin-ui-next'
+
+const { getPalette } = Utils.color
 
 defineOptions({
   name: 'GroupPanel',
@@ -59,6 +79,7 @@ const props = defineProps({
     validate: val => ['input', 'color', 'mixed'].includes(val),
     default: 'mixed',
   },
+  simple: Boolean,
 })
 
 const title = computed(() => props.label.substring(0, props.label.indexOf('[')))
@@ -82,6 +103,8 @@ const notColorStr = ref('')
 
 const isColor = computed(() => isColorValue(props.modelValue))
 
+const colorList = computed(() => (isColor.value ? getPalette(props.modelValue) : []))
+
 watch(
   () => props.modelValue,
   () => {
@@ -90,6 +113,10 @@ watch(
     }
   },
 )
+
+function setColor(color) {
+  value.value = color
+}
 
 function resetValue() {
   value.value = props.defaultVal
@@ -125,7 +152,6 @@ function copyVar() {
     bottom: 0;
     right: 2px;
     cursor: pointer;
-    opacity: 0;
     > i {
       font-size: 14px;
     }
@@ -142,13 +168,54 @@ function copyVar() {
     bottom: 0;
     right: 20px;
     cursor: pointer;
-    opacity: 0;
     > i {
       font-size: 14px;
     }
     &:hover {
       > i {
         color: var(--bin-color-primary);
+      }
+    }
+  }
+
+  .color-list {
+    position: absolute;
+    height: 20px;
+    top: 58px;
+    left: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    height: 20px;
+    padding: 2px;
+    background-color: var(--v-g-fill-color-2);
+    > li {
+      position: relative;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      border-radius: var(--bin-border-radius-default);
+      transition: transform 0.2s;
+      + li {
+        margin-left: 4px;
+      }
+      &:hover {
+        transform: scale(1.05);
+        box-shadow: 0 12px 16px rgba(0, 0, 0, 0.15);
+      }
+      &.active {
+        &:hover {
+          transform: scale(1);
+        }
+        &::after {
+          content: '';
+          position: absolute;
+          left: -1px;
+          top: -1px;
+          width: 18px;
+          height: 18px;
+          box-shadow: 0 0 0 1px var(--bin-color-primary);
+        }
       }
     }
   }
