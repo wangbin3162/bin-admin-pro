@@ -10,9 +10,6 @@ export const Theme = {
   binColorSuccess: '#00c181',
   binColorWarning: '#ffaa00',
   binColorDanger: '#ff3d71',
-  binBorderColorBase: 'var(--v-g-border-color)',
-  binScrollbarWidth: '5px',
-  binScrollbarRadius: '5px',
 
   // -----------------system---------------------//
   'vGBgColor-1': '#17171a',
@@ -72,11 +69,6 @@ export const Theme = {
   vTagsTextActiveColor: 'var(--bin-color-primary)',
   // 内容区域
   vContentBg: 'var(--v-g-fill-color-2)',
-  // popper
-  vPopperPadding: '4px',
-  vPopperTooltipPadding: '4px 8px',
-  vPopperRadius: '4px',
-  vPopperItemMarginBottom: '4px',
   // table
   vTableHeaderBg: 'var(--v-g-fill-color-2)',
   vTableHeaderText: '#1d2129',

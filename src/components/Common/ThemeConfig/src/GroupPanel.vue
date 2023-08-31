@@ -1,6 +1,6 @@
 <template>
   <div class="group-panel">
-    <div class="title">{{ label }}</div>
+    <div class="title">{{ title }}</div>
     <div class="reset-default" :title="`重置默认：${defaultVal}`" @click="resetValue">
       <b-icon name="rollback"></b-icon>
     </div>
@@ -61,6 +61,8 @@ const props = defineProps({
   },
 })
 
+const title = computed(() => props.label.substring(0, props.label.indexOf('[')))
+
 const realVar = computed(() => {
   const match = props.label.match(/\[(.+)\]/)
   const str = match ? match[1] : ''
@@ -76,7 +78,7 @@ const value = computed({
   },
 })
 
-const notColorStr = ref('#ffffff')
+const notColorStr = ref('')
 
 const isColor = computed(() => isColorValue(props.modelValue))
 
@@ -156,15 +158,16 @@ function copyVar() {
       width: 100%;
     }
     .content-inner {
+      position: relative;
       width: 100%;
       font-size: 0;
       &.mixed {
         :deep(.bin-input-wrapper) {
-          width: calc(100% - 32px);
+          position: absolute;
+          left: 0;
+          width: calc(100% - 64px);
         }
         :deep(.bin-color-picker) {
-          position: relative;
-          width: 32px;
         }
       }
     }

@@ -134,6 +134,7 @@
             :defaultVal="Theme.vGBgColor"
             v-model="themeConfigRef.vGBgColor"
             :colors="ThemeBgColors"
+            type="color"
           ></GroupPanel>
         </b-col>
         <b-col span="6">

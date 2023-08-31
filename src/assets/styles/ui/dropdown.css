@@ -1,38 +1,3 @@
 .bin-dropdown {
   color: var(--v-g-text-color);
 }
-
-/* popper */
-.bin-popper {
-  --b-popper-padding: var(--v-popper-padding);
-  --b-popper-tooltip-padding: var(--v-popper-tooltip-padding);
-  --b-popper-radius: var(--v-popper-radius);
-  --b-popper-item-margin-bottom: var(--v-popper-item-margin-bottom);
-
-  &[role='tooltip'] {
-    padding: var(--b-popper-tooltip-padding);
-    .bin-dropdown-menu {
-      padding: 0 var(--b-popper-padding);
-    }
-    .bin-dropdown-item {
-      border-radius: var(--b-popper-radius);
-      margin-bottom: var(--b-popper-item-margin-bottom);
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-  &.bin-select__popper {
-    padding: var(--b-popper-padding) 0;
-    .bin-select-dropdown {
-      padding: 0 var(--b-popper-padding);
-    }
-    .bin-select-dropdown__item {
-      border-radius: var(--b-popper-radius);
-      margin-bottom: var(--b-popper-item-margin-bottom);
-      &:last-child {
-        margin-bottom: 0;
-      }
-    }
-  }
-}

@@ -13,7 +13,18 @@
     --bin-color-$(val)-light6: mix(#fff, $(color), 0.95);
     --bin-color-$(val)-active: mix(#000, $(color), 0.1);
   }
+  /* 以下不需要进行变量覆盖，根据实际情况调节即可 */
   --bin-border-color-base: var(--v-g-border-color);
+  --bin-color-text-primary: var(--v-g-text-color-dark);
+  --bin-color-text-default: var(--v-g-text-color);
+  --bin-color-text-secondary: var(--v-g-text-color-light);
+
+  --v-g-text-color-dark: var(--v-g-text-color-1);
+  --v-g-text-color: var(--v-g-text-color-2);
+  --v-g-text-color-light: var(--v-g-text-color-3);
+
+  --bin-color-white: var(--v-g-bg-color);
+  --bin-dark-bg: var(--v-g-bg-color-1);
   --bin-scrollbar-width: 5px;
   --bin-scrollbar-radius: 5px;
 }

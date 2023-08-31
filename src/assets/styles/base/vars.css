@@ -2,7 +2,6 @@
   /* 自定义主题变量，以 v开头，类别首字母开头，定义变量时类似 vGTextColor */
 
   /* 全局 global */
-
   --v-g-bg-color-1: #17171a;
   --v-g-bg-color-2: #232324;
   --v-g-bg-color-3: #2a2a2b;
@@ -66,12 +65,6 @@
   /* theme-panel */
   --v-theme-panel-bg: var(--v-g-bg-color);
   --v-theme-active-color: var(--bin-color-primary);
-
-  /* popper */
-  --v-popper-padding: 4px;
-  --v-popper-tooltip-padding: 8px;
-  --v-popper-radius: 4px;
-  --v-popper-item-margin-bottom: 4px;
 
   /* table */
   --v-table-header-bg: var(--v-g-fill-color-2);

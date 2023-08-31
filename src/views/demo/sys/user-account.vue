@@ -1,6 +1,6 @@
 <template>
   <page-wrapper>
-    <b-layout has-sider>
+    <b-layout has-sider :collapsedWidth="24">
       <template #sider>
         <base-tree
           ref="treeRef"

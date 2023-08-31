@@ -1,14 +1,13 @@
 <template>
   <div class="sider-menu" :class="{ 'sider-menu-collapsed': !setting.sidebar }">
     <div class="sider-menu-inner">
-      <b-scrollbar native>
+      <b-scrollbar>
         <b-menu
-          :collapse-transition="false"
+          unique-opened
           :default-active="route.name"
           :default-openeds="getMenuItemNamePath(route.name)"
-          @select="handleMenuSelect"
-          unique-opened
           :collapse="!setting.sidebar"
+          @select="handleMenuSelect"
         >
           <template v-for="menu in sideMenus" :key="menu.name">
             <MenuItem v-if="!menu.children" :menu="menu" />
@@ -72,7 +71,6 @@ const { getMenuItemNamePath, handleMenuSelect, sideMenus } = useMenu()
     width: 100%;
     height: 100%;
     overflow: auto;
-    padding: 8px;
   }
   &.sider-menu-collapsed {
     width: var(--v-sider-collapse-width);
