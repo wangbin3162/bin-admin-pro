@@ -7,9 +7,9 @@
 export const Theme = {
   // -----------------system---------------------//
   binColorPrimary: '#165dff',
-  binColorSuccess: '#00c181',
-  binColorWarning: '#ffaa00',
-  binColorDanger: '#ff3d71',
+  binColorSuccess: '#52c41a',
+  binColorWarning: '#fa8c16',
+  binColorDanger: '#f5222d',
 
   // -----------------system---------------------//
   'vGBgColor-1': '#17171a',
@@ -63,10 +63,15 @@ export const Theme = {
   vTagsBorderColor: 'var(--v-g-border-color)',
   vTagsHeight: '32px',
   vTagsFontSize: '12px',
-  vTagsItemBgColor: 'var(--v-g-fill-color-2)',
   vTagsTextColor: 'var(--v-g-text-color)',
   vTagsTextHoverColor: 'var(--v-tags-text-color)',
   vTagsTextActiveColor: 'var(--bin-color-primary)',
+  vTagsItemBorderRadius: '2px',
+  vTagsItemBgColor: 'var(--v-g-fill-color-2)',
+  vTagsItemBorderColor: 'var(--v-g-fill-color-2)',
+  vTagsItemBorderHoverColor: 'var(--v-g-fill-color-2)',
+  vTagsItemBorderActiveColor: 'var(--v-g-fill-color-2)',
+
   // 内容区域
   vContentBg: 'var(--v-g-fill-color-2)',
   // table

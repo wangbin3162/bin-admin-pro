@@ -41,11 +41,18 @@
       <g-tags-view></g-tags-view>
       <g-table></g-table>
       <g-page></g-page>
-      <div class="t-center pt-16">
-        <b-button @click="loadConfig">载入主题文件</b-button>
-        <b-button type="primary" @click="saveConfig">保存主题文件</b-button>
-      </div>
     </div>
+
+    <template #footer>
+      <div style="width: 100%" flex="main:justify">
+        <b-button icon="close" type="danger" @click="resetConfig">重置主题</b-button>
+        <div>
+          <b-button icon="reload" @click="loadConfig">载入主题文件</b-button>
+          <b-button type="primary" icon="file-copy" @click="copyConfig">复制主题配置</b-button>
+          <b-button type="primary" icon="save" @click="saveConfig">保存主题文件</b-button>
+        </div>
+      </div>
+    </template>
   </b-modal>
 </template>
 
@@ -63,6 +70,8 @@ import GTable from './group/GTable.vue'
 import GPage from './group/GPage.vue'
 import { exportJson, loadJsonFile, getChangedProperties } from '@/hooks/theme/utils'
 import { themeConfigRef, Theme } from '@/hooks/theme'
+import { Message, MessageBox } from 'bin-ui-next'
+import { copyText } from '@/utils/util'
 
 defineOptions({
   name: 'ThemeConfig',
@@ -88,10 +97,32 @@ watch(
   },
 )
 
+// 重置主题
+function resetConfig() {
+  MessageBox.confirm({
+    type: 'error',
+    title: '提示',
+    message: '<p>确认<span style="color:red;">重置</span>主题么?</p>',
+    useHTML: true,
+  })
+    .then(() => {
+      themeConfigRef.value = { ...Theme }
+      Message.success('重置成功!')
+    })
+    .catch(() => {})
+}
+
 function loadConfig() {
   loadJsonFile().then(data => {
-    themeConfigRef.value = { ...Theme, data }
+    themeConfigRef.value = { ...themeConfigRef.value, ...data }
   })
+}
+
+function copyConfig() {
+  const obj = getChangedProperties(Theme, themeConfigRef.value)
+  const jsonStr = JSON.stringify(obj, null, 2)
+  copyText(jsonStr)
+  Message.success('已复制配置至剪切板！')
 }
 
 function saveConfig() {

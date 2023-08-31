@@ -1,7 +1,7 @@
 /* ui 组件库相关的样式主题变量 */
 
 :root {
-  --colors: (primary: #165dff, success: #00c181, warning: #ffaa00, danger: #ff3d71);
+  --colors: (primary: #165dff, success: #52c41a, warning: #fa8c16, danger: #f5222d);
 
   @each $val, $color in var(--colors) {
     --bin-color-$(val): $(color);

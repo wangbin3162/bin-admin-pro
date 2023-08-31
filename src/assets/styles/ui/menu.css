@@ -7,4 +7,11 @@
   --b-menu-bg-color: var(--v-menu-bg-color);
   --b-menu-bg-hover-color: var(--v-menu-bg-hover-color);
   --b-menu-bg-active-color: var(--v-menu-bg-active-color);
+
+  .bin-menu-item:last-child:not(:first-child) {
+    margin-bottom: 4px;
+  }
+  .bin-submenu__title:last-child {
+    margin-bottom: 4px;
+  }
 }

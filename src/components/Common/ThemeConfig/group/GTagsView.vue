@@ -38,9 +38,9 @@
         </b-col>
         <b-col span="6">
           <GroupPanel
-            label="多页签字号[vTagsFontSize]"
-            :defaultVal="Theme.vTagsFontSize"
-            v-model="themeConfigRef.vTagsFontSize"
+            label="标签圆角[vTagsItemBorderRadius]"
+            :defaultVal="Theme.vTagsItemBorderRadius"
+            v-model="themeConfigRef.vTagsItemBorderRadius"
             type="input"
           ></GroupPanel>
         </b-col>
@@ -49,16 +49,7 @@
       <b-row :gutter="16">
         <b-col span="6">
           <GroupPanel
-            label="标签项背景色[vTagsItemBgColor]"
-            :defaultVal="Theme.vTagsItemBgColor"
-            v-model="themeConfigRef.vTagsItemBgColor"
-            :colors="ThemeBgColors"
-            type="mixed"
-          ></GroupPanel>
-        </b-col>
-        <b-col span="6">
-          <GroupPanel
-            label="多页签文字颜色[vTagsTextColor]"
+            label="标签项文字颜色[vTagsTextColor]"
             :defaultVal="Theme.vTagsTextColor"
             v-model="themeConfigRef.vTagsTextColor"
             :colors="ThemeTextColors"
@@ -78,6 +69,56 @@
             :defaultVal="Theme.vTagsTextActiveColor"
             v-model="themeConfigRef.vTagsTextActiveColor"
             :colors="ThemeTextColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+        <b-col span="6">
+          <GroupPanel
+            label="标签项字号[vTagsFontSize]"
+            :defaultVal="Theme.vTagsFontSize"
+            v-model="themeConfigRef.vTagsFontSize"
+            type="input"
+          ></GroupPanel>
+        </b-col>
+      </b-row>
+
+      <b-row :gutter="16">
+        <b-col span="6">
+          <GroupPanel
+            label="标签项背景色[vTagsItemBgColor]"
+            :defaultVal="Theme.vTagsItemBgColor"
+            v-model="themeConfigRef.vTagsItemBgColor"
+            :colors="ThemeBgColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+
+        <b-col span="6">
+          <GroupPanel
+            label="标签项边框色[vTagsItemBorderColor]"
+            :defaultVal="Theme.vTagsItemBorderColor"
+            v-model="themeConfigRef.vTagsItemBorderColor"
+            :colors="ThemeBorderColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+
+        <b-col span="6">
+          <GroupPanel
+            label="标签项悬停边框色[vTagsItemBorderHoverColor]"
+            :defaultVal="Theme.vTagsItemBorderHoverColor"
+            v-model="themeConfigRef.vTagsItemBorderHoverColor"
+            :colors="ThemeBorderColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+
+        <b-col span="6">
+          <GroupPanel
+            label="标签项active边框色[vTagsItemBorderActiveColor]"
+            :defaultVal="Theme.vTagsItemBorderActiveColor"
+            v-model="themeConfigRef.vTagsItemBorderActiveColor"
+            :colors="ThemeBorderColors"
             type="mixed"
           ></GroupPanel>
         </b-col>

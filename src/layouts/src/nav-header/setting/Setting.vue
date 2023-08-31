@@ -4,7 +4,7 @@
   <!--设置抽屉-->
   <b-drawer :model-value="settingVisible" append-to-body @close="toggleSetting">
     <div class="setting-panel">
-      <h3 class="setting-title"><span>主题设置</span></h3>
+      <!-- <h3 class="setting-title"><span>主题设置</span></h3>
       <div class="p20">
         <div class="theme-tab">
           <span @click="setting.themeName = ''">
@@ -20,7 +20,7 @@
           </span>
           暗黑
         </div>
-      </div>
+      </div> -->
 
       <h3 class="setting-title"><span>菜单设置</span></h3>
       <div class="setting-list-item">

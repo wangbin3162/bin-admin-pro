@@ -60,6 +60,11 @@
   --v-tags-text-color: var(--v-g-text-color);
   --v-tags-text-hover-color: var(--v-tags-text-color);
   --v-tags-text-active-color: var(--bin-color-primary);
+
+  --v-tags-item-border-radius: 2px;
+  --v-tags-item-border-color: var(--v-g-fill-color-2);
+  --v-tags-item-border-hover-color: var(--v-g-fill-color-2);
+  --v-tags-item-border-active-color: var(--v-g-fill-color-2);
   /* 内容区域 content */
   --v-content-bg: var(--v-g-fill-color-2);
   /* theme-panel */
