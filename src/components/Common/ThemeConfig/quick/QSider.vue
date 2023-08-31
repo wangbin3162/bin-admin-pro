@@ -37,8 +37,7 @@ function loadConfig(cfg) {
 .theme-list {
   display: flex;
   flex-wrap: wrap;
-  height: 395px;
-  padding-top: 10px;
+  height: 376px;
   .theme-item {
     display: flex;
     justify-content: center;

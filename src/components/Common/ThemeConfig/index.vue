@@ -5,7 +5,7 @@
     draggable
     width="1400px"
     append-to-body
-    :body-styles="{ backgroundColor: 'var(--v-content-bg)', maxHeight: '580px', overflowY: 'auto' }"
+    :body-styles="{ backgroundColor: 'var(--v-content-bg)', maxHeight: '600px', overflowY: 'auto' }"
   >
     <div class="top-tab">
       <b-radio-group v-model="activeTab" type="capsule" size="large">
@@ -134,7 +134,7 @@ function saveConfig() {
 <style scoped>
 .top-tab {
   background-color: var(--v-g-bg-color);
-  padding: 8px;
+  padding: 4px;
   text-align: center;
   :deep(.bin-radio-group-capsule) {
     width: 100%;
@@ -145,7 +145,7 @@ function saveConfig() {
 }
 .config-content {
   background-color: var(--v-content-bg);
-  padding: 8px 0;
+  padding: 8px 0 0;
 }
 .advanced-config {
   :deep(.bin-collapse-wrap) {

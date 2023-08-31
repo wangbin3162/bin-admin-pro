@@ -38,8 +38,8 @@ function setColor(color) {
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    height: 34px;
-    line-height: 34px;
+    height: 32px;
+    line-height: 32px;
     padding: 0 12px;
     transition: transform 0.2s;
     color: var(--v-g-fill-color-1);
