@@ -24,9 +24,6 @@ svg {
   outline: 0 !important;
 }
 
-// =================================
-// ==============scrollbar==========
-// =================================
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
