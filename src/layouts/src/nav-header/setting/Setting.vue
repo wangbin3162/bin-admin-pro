@@ -106,7 +106,7 @@ function toggleSetting() {
 .setting-panel {
   width: 100%;
   padding: 0 4px;
-  background-color: var(--v-theme-panel-bg);
+  background-color: var(--v-g-bg-color);
   .setting-title {
     position: relative;
     display: block;
@@ -146,7 +146,7 @@ function toggleSetting() {
       right: 30px;
       bottom: 18px;
       font-size: 18px;
-      color: var(--v-theme-active-color);
+      color: var(--bin-color-primary);
     }
   }
 }

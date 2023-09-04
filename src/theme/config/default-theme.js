@@ -73,7 +73,6 @@ export const Theme = {
   vTagsItemBorderColor: 'var(--v-g-fill-color-2)',
   vTagsItemBorderHoverColor: 'var(--v-g-fill-color-2)',
   vTagsItemBorderActiveColor: 'var(--v-g-fill-color-2)',
-
   // 内容区域
   vContentBg: 'var(--v-g-fill-color-2)',
   // table

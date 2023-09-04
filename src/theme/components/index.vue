@@ -49,11 +49,43 @@
         <b-button icon="close" type="danger" @click="resetConfig">重置主题</b-button>
         <div>
           <b-button icon="reload" @click="loadConfig">载入主题文件</b-button>
-          <b-button type="primary" icon="file-copy" @click="copyConfig">复制主题配置</b-button>
-          <b-button type="primary" icon="save" @click="saveConfig">保存主题文件</b-button>
+          <b-button icon="filedone" @click="checkConfig">查看主题配置</b-button>
+          <b-button type="primary" icon="save" @click="saveConfig">保存配置文件</b-button>
         </div>
       </div>
     </template>
+
+    <b-drawer
+      v-model="checkVisible"
+      title="主题变量"
+      :show-close="false"
+      append-to-body
+      width="680"
+    >
+      <div class="top-tab" style="padding: 0">
+        <b-radio-group v-model="checkTab" type="capsule" size="large">
+          <b-radio label="css">css变量</b-radio>
+          <b-radio label="js">js变量</b-radio>
+        </b-radio-group>
+      </div>
+      <div class="pt-16">
+        <div v-if="checkTab === 'css'">
+          <b-alert show-icon>
+            css变量可根据实际需求，复制相应参数，替换工程中`src/assets/styles/base/vars.css`中的变量。
+          </b-alert>
+          <b-ace-editor :modelValue="cssStr" lang="stylus" height="500px" readonly />
+        </div>
+        <div v-else>
+          <b-alert show-icon>
+            js变量，可以根据需求，查找替换`src/theme/config/default-theme.js`中的变量。
+          </b-alert>
+          <b-ace-editor :modelValue="jsonStr" lang="json" height="500px" readonly />
+        </div>
+      </div>
+      <template #footer>
+        <b-button type="primary" icon="save" @click="saveConfig">保存 {{ checkTab }} 变量</b-button>
+      </template>
+    </b-drawer>
   </b-modal>
 </template>
 
@@ -70,9 +102,14 @@ import GTagsView from './group/GTagsView.vue'
 import GTable from './group/GTable.vue'
 import GPage from './group/GPage.vue'
 import { Message, MessageBox } from 'bin-ui-next'
-import { copyText } from '@/utils/util'
 import { themeConfigRef, Theme } from '@/theme'
-import { exportJson, loadJsonFile, getChangedProperties } from '@/theme/utils/utils'
+import {
+  exportJson,
+  saveFile,
+  getCssVars,
+  loadJsonFile,
+  getChangedProperties,
+} from '@/theme/utils/utils'
 
 defineOptions({
   name: 'ThemeConfig',
@@ -90,6 +127,10 @@ const visible = computed({
   set: val => emit('update:modelValue', val),
 })
 const activeTab = ref('basic')
+const checkVisible = ref(false)
+const checkTab = ref('css') // css / js
+const jsonStr = ref('')
+const cssStr = ref('')
 
 watch(
   () => props.modelValue,
@@ -119,16 +160,20 @@ function loadConfig() {
   })
 }
 
-function copyConfig() {
-  const obj = getChangedProperties(Theme, themeConfigRef.value)
-  const jsonStr = JSON.stringify(obj, null, 2)
-  copyText(jsonStr)
-  Message.success('已复制配置至剪切板！')
+function checkConfig() {
+  jsonStr.value = JSON.stringify(themeConfigRef.value, null, 2)
+  cssStr.value = getCssVars(themeConfigRef.value)
+  checkVisible.value = true
+  checkTab.value = 'css'
 }
 
 function saveConfig() {
-  const obj = getChangedProperties(Theme, themeConfigRef.value)
-  exportJson(obj)
+  if (checkTab.value === 'css') {
+    saveFile(cssStr.value, 'vars.css')
+  } else {
+    const obj = getChangedProperties(Theme, themeConfigRef.value)
+    exportJson(obj)
+  }
 }
 </script>
 
