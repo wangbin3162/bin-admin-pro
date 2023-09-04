@@ -92,7 +92,26 @@
             type="mixed"
           ></GroupPanel>
         </b-col>
-
+        <b-col span="6">
+          <GroupPanel
+            label="标签项悬停背景色[vTagsItemBgHoverColor]"
+            :defaultVal="Theme.vTagsItemBgHoverColor"
+            v-model="themeConfigRef.vTagsItemBgHoverColor"
+            :colors="ThemeBgColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+        <b-col span="6">
+          <GroupPanel
+            label="标签项激活背景色[vTagsItemBgActiveColor]"
+            :defaultVal="Theme.vTagsItemBgActiveColor"
+            v-model="themeConfigRef.vTagsItemBgActiveColor"
+            :colors="ThemeBgColors"
+            type="mixed"
+          ></GroupPanel>
+        </b-col>
+      </b-row>
+      <b-row :gutter="16">
         <b-col span="6">
           <GroupPanel
             label="标签项边框色[vTagsItemBorderColor]"
@@ -135,7 +154,7 @@ import {
   ThemeBorderColors,
   themeConfigRef,
   ThemeBgColors,
-} from '@/hooks/theme'
+} from '@/theme'
 import GroupPanel from '../src/GroupPanel.vue'
 
 defineOptions({

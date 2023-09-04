@@ -54,7 +54,8 @@
 
 <script setup>
 import { computed, ref, watch } from 'vue'
-import { copyText, isColorValue } from '@/utils/util'
+import { copyText } from '@/utils/util'
+import { isColorValue } from '@/theme/utils/utils'
 import { Utils } from 'bin-ui-next'
 
 const { getPalette } = Utils.color
@@ -233,8 +234,6 @@ function copyVar() {
           position: absolute;
           left: 0;
           width: calc(100% - 64px);
-        }
-        :deep(.bin-color-picker) {
         }
       }
     }

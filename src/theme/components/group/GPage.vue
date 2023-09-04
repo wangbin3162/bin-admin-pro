@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import { Theme, themeConfigRef, ThemeBorderColors, ThemeBgColors } from '@/hooks/theme'
+import { Theme, themeConfigRef, ThemeBorderColors, ThemeBgColors } from '@/theme'
 import GroupPanel from '../src/GroupPanel.vue'
 
 defineOptions({

@@ -207,7 +207,7 @@ watch(
       left: 0;
       right: 0;
       height: 1px;
-      bottom: 0;
+      bottom: -1px;
       background-color: var(--v-tags-border-color);
     }
   }
@@ -223,26 +223,31 @@ watch(
         height: var(--v-tags-height);
       }
       .tab-item {
+        display: inline-flex;
+        align-items: center;
         height: calc(var(--v-tags-height) - 8px);
-        line-height: calc(var(--v-tags-height) - 8px);
         margin-right: 6px;
-        font-size: var(--v-tags-font-size);
-        color: var(--v-tags-text-color);
         padding: 0 8px;
+        font-size: var(--v-tags-font-size);
+        border-radius: var(--v-tags-item-border-radius);
+        color: var(--v-tags-text-color);
         background-color: var(--v-tags-item-bg-color);
-        border: 1px solid var(--v-tags-item-bg-color);
+        border: 1px solid var(--v-tags-item-border-color);
         &::before {
           content: unset;
         }
         &:hover {
           color: var(--v-tags-text-hover-color);
+          background-color: var(--v-tags-item-bg-hover-color);
+          border-color: var(--v-tags-item-border-hover-color);
         }
         .b-icon-close {
           margin-left: 0;
         }
         &.active {
-          background: var(--v-tags-item-bg-color);
+          background-color: var(--v-tags-item-bg-active-color);
           color: var(--v-tags-text-active-color) !important;
+          border-color: var(--v-tags-item-border-active-color);
           &.no-close {
             padding: 0 8px;
           }
@@ -278,7 +283,7 @@ watch(
       color: var(--v-tags-text-color);
       text-align: center;
       cursor: pointer;
-      border-left: 1px solid #eee;
+      border-left: 1px solid var(--v-tags-border-color);
       &:hover i {
         color: var(--v-tags-text-hover-color);
       }

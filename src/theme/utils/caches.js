@@ -1,4 +1,4 @@
-import { Theme } from './default-theme'
+import { Theme } from '../config/default-theme'
 /**
  * 缓存读取器
  * @param {*} key
@@ -18,4 +18,8 @@ export default function useCaches(key = '__BIN_ADMIN_PRO_THEME__') {
     localStorage.setItem(key, JSON.stringify(val))
   }
   return { getVal, setVal }
+}
+
+export function removeThemeCaches(key = '__BIN_ADMIN_PRO_THEME__') {
+  localStorage.removeItem(key)
 }

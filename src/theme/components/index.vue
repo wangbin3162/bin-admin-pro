@@ -3,6 +3,7 @@
     v-model="visible"
     title="主题配置"
     draggable
+    top="90px"
     width="1400px"
     append-to-body
     :body-styles="{ backgroundColor: 'var(--v-content-bg)', maxHeight: '600px', overflowY: 'auto' }"
@@ -68,10 +69,10 @@ import GSider from './group/GSider.vue'
 import GTagsView from './group/GTagsView.vue'
 import GTable from './group/GTable.vue'
 import GPage from './group/GPage.vue'
-import { exportJson, loadJsonFile, getChangedProperties } from '@/hooks/theme/utils'
-import { themeConfigRef, Theme } from '@/hooks/theme'
 import { Message, MessageBox } from 'bin-ui-next'
 import { copyText } from '@/utils/util'
+import { themeConfigRef, Theme } from '@/theme'
+import { exportJson, loadJsonFile, getChangedProperties } from '@/theme/utils/utils'
 
 defineOptions({
   name: 'ThemeConfig',

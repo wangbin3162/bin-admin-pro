@@ -174,7 +174,7 @@ import {
   ThemeBgColors,
   ThemeTextColors,
   themeConfigRef,
-} from '@/hooks/theme'
+} from '@/theme'
 
 import GroupPanel from '../src/GroupPanel.vue'
 import ColorsPanel from '../src/ColorsPanel.vue'

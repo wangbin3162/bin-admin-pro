@@ -1,4 +1,24 @@
-import { fileToJson } from '@/utils/file-helper'
+// 读取文件转换为json
+export function fileToJson(file) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader()
+    // 文件读取载入后
+    reader.onload = readerEvent => {
+      let content = readerEvent.target.result
+      try {
+        let jsonData = JSON.parse(content)
+        resolve(jsonData)
+      } catch (error) {
+        reject('文件不是json格式!', error)
+      }
+    }
+    if (file) {
+      reader.readAsText(file, 'UTF-8')
+    } else {
+      reject('文件不存在！')
+    }
+  })
+}
 
 // 导出全部json
 export function exportJson(configStr) {
@@ -46,4 +66,15 @@ export function getChangedProperties(obj1, obj2) {
   }
   compareObjects(obj1, obj2, '')
   return changedProperties
+}
+
+// 是否是颜色值
+export function isColorValue(str) {
+  // 使用正则表达式判断是否为颜色值或者 RGB/RGBA 值
+  let colorRegex =
+    // eslint-disable-next-line no-useless-escape
+    /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$|^rgba?\([\d]+\s*,\s*[\d]+\s*,\s*[\d]+(,\s*[\d\.]+)?\)$/i
+
+  // 检查字符串是否匹配颜色值或者 RGB/RGBA 值的正则表达式
+  return colorRegex.test(str)
 }

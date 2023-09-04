@@ -63,11 +63,13 @@ export const Theme = {
   vTagsBorderColor: 'var(--v-g-border-color)',
   vTagsHeight: '32px',
   vTagsFontSize: '12px',
-  vTagsTextColor: 'var(--v-g-text-color)',
-  vTagsTextHoverColor: 'var(--v-tags-text-color)',
-  vTagsTextActiveColor: 'var(--bin-color-primary)',
   vTagsItemBorderRadius: '2px',
+  vTagsTextColor: 'var(--v-g-text-color)',
+  vTagsTextHoverColor: 'var(--v-g-text-color)',
+  vTagsTextActiveColor: 'var(--bin-color-primary)',
   vTagsItemBgColor: 'var(--v-g-fill-color-2)',
+  vTagsItemBgHoverColor: 'var(--v-g-fill-color-2)',
+  vTagsItemBgActiveColor: 'var(--v-g-fill-color-2)',
   vTagsItemBorderColor: 'var(--v-g-fill-color-2)',
   vTagsItemBorderHoverColor: 'var(--v-g-fill-color-2)',
   vTagsItemBorderActiveColor: 'var(--v-g-fill-color-2)',
@@ -98,6 +100,7 @@ export const ThemeMainColors = [
   '#F5319D',
 ]
 
+// 主题颜色对应的文字
 export const ThemeMainColorsText = [
   '极致蓝',
   '海蔚蓝',

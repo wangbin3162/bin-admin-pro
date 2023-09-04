@@ -40,7 +40,7 @@
 </template>
 
 <script setup>
-import { Theme, ThemeMainColors, themeConfigRef } from '@/hooks/theme'
+import { Theme, ThemeMainColors, themeConfigRef } from '@/theme'
 import GroupPanel from './GroupPanel.vue'
 // 主题颜色配置面板
 defineOptions({

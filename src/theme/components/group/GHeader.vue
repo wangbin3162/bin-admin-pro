@@ -94,7 +94,7 @@ import {
   ThemeBorderColors,
   themeConfigRef,
   ThemeBgColors,
-} from '@/hooks/theme'
+} from '@/theme'
 import GroupPanel from '../src/GroupPanel.vue'
 
 defineOptions({

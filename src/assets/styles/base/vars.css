@@ -23,6 +23,7 @@
 
   --v-g-bg-color: #fff;
   --v-g-border-color: var(--v-g-fill-color-3);
+  --v-g-border-color-dark: #333335;
 
   /* layout */
   /* 头部 header */
@@ -56,12 +57,15 @@
   --v-tags-border-color: var(--v-g-border-color);
   --v-tags-height: 32px;
   --v-tags-font-size: 12px;
-  --v-tags-item-bg-color: var(--v-g-fill-color-2);
+  --v-tags-item-border-radius: 2px;
   --v-tags-text-color: var(--v-g-text-color);
-  --v-tags-text-hover-color: var(--v-tags-text-color);
+  --v-tags-text-hover-color: var(--v-g-text-color);
   --v-tags-text-active-color: var(--bin-color-primary);
 
-  --v-tags-item-border-radius: 2px;
+  --v-tags-item-bg-color: var(--v-g-fill-color-2);
+  --v-tags-item-bg-hover-color: var(--v-g-fill-color-2);
+  --v-tags-item-bg-active-color: var(--v-g-fill-color-2);
+
   --v-tags-item-border-color: var(--v-g-fill-color-2);
   --v-tags-item-border-hover-color: var(--v-g-fill-color-2);
   --v-tags-item-border-active-color: var(--v-g-fill-color-2);

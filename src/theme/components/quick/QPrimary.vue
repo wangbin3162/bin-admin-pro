@@ -14,6 +14,10 @@
         :style="{ backgroundColor: color }"
         @click="setColor(color)"
       >
+        <i
+          v-show="themeConfigRef.binColorPrimary.toLowerCase() === color.toLowerCase()"
+          class="b-iconfont b-icon-check"
+        ></i>
         <span>{{ ThemeMainColorsText[index] }}</span>
         <span>{{ ThemeMainColors[index] }}</span>
       </li>
@@ -22,7 +26,7 @@
 </template>
 
 <script setup>
-import { Theme, ThemeMainColors, ThemeMainColorsText, themeConfigRef } from '@/hooks/theme'
+import { Theme, ThemeMainColors, ThemeMainColorsText, themeConfigRef } from '@/theme'
 
 import GroupPanel from '../src/GroupPanel.vue'
 
@@ -35,6 +39,7 @@ function setColor(color) {
 .color-quick-list {
   margin-top: 8px;
   > li {
+    position: relative;
     cursor: pointer;
     display: flex;
     justify-content: space-between;
@@ -62,6 +67,10 @@ function setColor(color) {
       > span {
         opacity: 1;
       }
+    }
+    i.b-icon-check {
+      position: absolute;
+      left: 60px;
     }
   }
 }

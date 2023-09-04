@@ -70,5 +70,9 @@ watch(
     color: var(--v-header-text-color);
     cursor: text;
   }
+  :deep(.bin-separator) {
+    margin: 0 6px;
+    color: var(--v-header-text-color);
+  }
 }
 </style>

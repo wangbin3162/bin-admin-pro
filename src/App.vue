@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { useThemeInit, themeConfigRef } from '@/hooks/theme'
+import { useThemeInit, themeConfigRef } from '@/theme'
 
 const { themeName } = useThemeInit()
 </script>

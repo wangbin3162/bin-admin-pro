@@ -1,7 +1,7 @@
 import { useStore } from '@/store'
-import { Theme } from './default-theme'
 import { computed, watch, ref } from 'vue'
-import useCaches from './caches'
+import { Theme } from '../config/default-theme'
+import useCaches from '../utils/caches'
 
 // 缓存读取器
 const { getVal, setVal } = useCaches()
@@ -34,4 +34,19 @@ export function useThemeInit() {
   return { themeName }
 }
 
-export * from './default-theme'
+// 判断一个配置文件是否匹配当前配置
+export function isThemeActive(cfg) {
+  let flag = true
+  Object.keys(cfg).forEach(key => {
+    if (cfg[key].toLowerCase() !== themeConfigRef.value[key].toLowerCase()) {
+      flag = false
+      return
+    }
+  })
+  return flag
+}
+
+// 载入一个配置文件
+export function loadConfig(cfg) {
+  themeConfigRef.value = { ...themeConfigRef.value, ...cfg }
+}

@@ -5,6 +5,7 @@
 
 <script setup>
 import HeaderTrigger from '../header-trigger/HeaderTrigger.vue'
+import { ThemeConfig } from '@/theme'
 import { useStore } from '@/store'
 
 const { appStore, storeToRefs } = useStore()

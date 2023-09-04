@@ -5,6 +5,7 @@
         <example
           :label="theme.name"
           :primaryColor="theme.config.binColorPrimary"
+          :topColor="themeConfigRef.vHeaderBg"
           :leftColor="theme.config.vSiderBg"
           :class="{ active: isThemeActive(theme.config) }"
           @click="loadConfig(theme.config)"
@@ -15,34 +16,21 @@
 </template>
 
 <script setup>
-import { themeConfigRef } from '@/hooks/theme'
+import { ThemeSiderPrefabs, themeConfigRef, isThemeActive, loadConfig } from '@/theme'
 import Example from '../src/Example.vue'
 import GroupPanel from '../src/GroupPanel.vue'
-import { ThemeSiderPrefabs } from '../prefabs/theme-sider'
-
-// 判断当前的主题是否启用
-function isThemeActive(cfg) {
-  return (
-    themeConfigRef.value.vSiderBg === cfg.vSiderBg &&
-    themeConfigRef.value.binColorPrimary === cfg.binColorPrimary
-  )
-}
-
-function loadConfig(cfg) {
-  themeConfigRef.value = { ...themeConfigRef.value, ...cfg }
-}
 </script>
 
 <style scoped>
 .theme-list {
-  display: flex;
-  flex-wrap: wrap;
   height: 376px;
   .theme-item {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
-    margin-bottom: 16px;
+    align-items: flex-start;
+    margin-bottom: 8px;
     width: 25%;
+    height: 64px;
   }
 }
 </style>

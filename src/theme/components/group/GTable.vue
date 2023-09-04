@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import { Theme, themeConfigRef, ThemeFillColors, ThemeTextColors } from '@/hooks/theme'
+import { Theme, themeConfigRef, ThemeFillColors, ThemeTextColors } from '@/theme'
 import GroupPanel from '../src/GroupPanel.vue'
 
 defineOptions({
