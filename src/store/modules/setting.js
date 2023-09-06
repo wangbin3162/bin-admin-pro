@@ -40,6 +40,7 @@ const useSetting = defineStore('setting', {
     },
   },
   actions: {},
+  persist: true,
 })
 
 export default useSetting

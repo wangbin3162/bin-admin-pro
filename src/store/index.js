@@ -10,12 +10,7 @@ import useTags from './modules/tags'
 const store = createPinia()
 // 注册store及插件信息
 export function setupStore(app) {
-  store.use(
-    piniaPlugin({
-      key: 'store',
-      paths: ['links', 'todolist', 'setting'],
-    }),
-  )
+  store.use(piniaPlugin)
   app.use(store)
 }
 
