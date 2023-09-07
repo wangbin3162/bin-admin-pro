@@ -1,26 +1,15 @@
 <template>
   <page-wrapper>
-    <div class="iframe-con">inline</div>
+    <div class="iframe-con">params: {{ params }}</div>
   </page-wrapper>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import useMenu from '@/hooks/store/useMenu'
 
-const loading = ref(true)
 const $route = useRoute()
-const { allMenuItems } = useMenu()
-const src = computed(() => {
-  const name = $route.path.substring(1)
-  const curMenu = allMenuItems.value.find(item => item.name === name)
-  return curMenu?.url + '?_usageMode=inline' || ''
-})
-
-function handleLoad() {
-  loading.value = false
-}
+const params = computed(() => $route.params)
 </script>
 
 <style lang="stylus" scoped>
