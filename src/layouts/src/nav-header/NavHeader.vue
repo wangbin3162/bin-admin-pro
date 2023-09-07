@@ -38,17 +38,16 @@ import MessageTrigger from './message/Message.vue'
 import SettingTrigger from './setting/Setting.vue'
 import ThemeTrigger from './theme/Theme.vue'
 import UserTrigger from './user/User.vue'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import useMenu from '@/hooks/store/useMenu'
-import { useRoute, useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 const route = useRoute()
-const router = useRouter()
 
 const { appStore, storeToRefs, settingStore } = useStore()
 const { searchVisible } = storeToRefs(appStore)
 const { setting } = storeToRefs(settingStore)
 
-const { topMenuTabs, topNavActive, setTopNavActive, sideMenus } = useMenu()
+const { topMenuTabs, topNavActive, setTopNavActive, sideMenus, handleMenuSelect } = useMenu()
 
 const tabs = computed(() =>
   topMenuTabs.value.map(menu => ({
@@ -64,7 +63,7 @@ onMounted(() => {
   watch(
     () => route.fullPath,
     () => {
-      setTopNavActive(route.name)
+      setTopNavActive(route.path.substring(1))
       // 调用移动至目标标签
       tabsRef.value?.moveToCurrentTab()
     },
@@ -78,11 +77,11 @@ function topNavMenuChange() {
     //  有子项
     if (one.children?.length) {
       if (!one.children.externalLink) {
-        router.push({ name: one.children[0].name })
+        handleMenuSelect(one.children[0].name)
       }
     } else {
       if (!one.externalLink) {
-        router.push({ name: one.name })
+        handleMenuSelect(one.name)
       }
     }
   }

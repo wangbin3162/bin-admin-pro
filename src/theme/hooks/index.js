@@ -1,4 +1,4 @@
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import { computed, watch, ref } from 'vue'
 import { Theme } from '../config/default-theme'
 import useCaches from '../utils/caches'

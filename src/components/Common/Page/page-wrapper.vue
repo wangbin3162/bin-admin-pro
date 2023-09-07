@@ -48,7 +48,6 @@
 import PageFooter from './page-footer.vue'
 import { computed } from 'vue'
 import useMenu from '@/hooks/store/useMenu'
-
 defineOptions({
   name: 'PageWrapper',
 })
@@ -78,7 +77,7 @@ const normalDesc = computed(() =>
 )
 </script>
 
-<style>
+<style scoped>
 .page-header-wrap {
   .page-header {
     position: relative;

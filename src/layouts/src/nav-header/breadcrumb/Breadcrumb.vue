@@ -39,8 +39,9 @@ const { getBreadcrumbData, handleMenuSelect } = useMenu()
 const showDropdown = computed(() => !props.simple)
 
 watch(
-  () => route.name,
-  name => {
+  () => route.path,
+  path => {
+    const name = path.substring(1)
     levelList.value = getBreadcrumbData(name)
   },
   { immediate: true },

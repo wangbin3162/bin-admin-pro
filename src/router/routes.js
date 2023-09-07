@@ -1,24 +1,32 @@
 import layout from '@/layouts/index.vue'
-import modules from './modules'
-import { HOME_NAME } from '@/router/menus'
+import { flatMenus, HOME_NAME } from './menus'
+
+// 获取实际存储的路由
+export const realRoutes = flatMenus
+  .filter(i => i.node && i.node.component)
+  .map(i => {
+    const temp = {
+      path: i.node.path ?? i.node.name,
+      name: i.node.name,
+      meta: { title: i.node.title },
+      component: i.node.component,
+    }
+    // 外链
+    if (i.node.externalLink) temp.externalLink = i.node.externalLink
+    return temp
+  })
 
 /**
  * meta 为附带参数，title为默认路由标题，noCache为缓存标识，为true时开启tag-view时不缓存
  */
 export const asyncRouterMap = [
   {
-    path: 'analysis',
+    path: 'Analysis',
     name: 'Analysis',
     meta: { title: '分析页', noCache: true },
     component: () => import('@/views/dashboard/analysis/index.vue'),
   },
-  ...modules,
-  {
-    path: 'about',
-    name: 'About',
-    component: () => import('@/views/demo/about/about.vue'),
-    meta: { title: '关于' },
-  },
+  ...realRoutes,
 ]
 
 /**
@@ -34,7 +42,7 @@ export function createRoutesInLayout(routes = []) {
       component: layout,
       children: [
         {
-          path: 'workBench',
+          path: 'WorkBench',
           name: 'WorkBench',
           meta: { title: HOME_NAME },
           component: () => import('@/views/dashboard/workbench/index.vue'),
@@ -50,6 +58,12 @@ export function createRoutesInLayout(routes = []) {
           path: '/:path(.*)*',
           name: 'ErrorPage',
           component: () => import('@/views/system/error/index.vue'),
+        },
+        // 动态路由组件
+        {
+          path: 'Inline/:params',
+          name: 'Inline',
+          component: () => import('@/views/demo/inline/index.vue'),
         },
         ...routes,
       ],

@@ -24,7 +24,7 @@
 
 <script setup>
 import { MessageBox } from 'bin-ui-next'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import { useRouter, useRoute } from 'vue-router'
 
 const { userStore, storeToRefs } = useStore()

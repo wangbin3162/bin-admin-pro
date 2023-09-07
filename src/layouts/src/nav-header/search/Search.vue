@@ -35,7 +35,7 @@
 
 <script setup>
 import HeaderTrigger from '../header-trigger/HeaderTrigger.vue'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import { nextTick, ref, watch } from 'vue'
 import useMenu from '@/hooks/store/useMenu'
 

@@ -83,7 +83,7 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import { Message } from 'bin-ui-next'
-import { useAppStoreWithOut } from '@/store/modules/app'
+import { useAppStoreWithOut } from '@/pinia/modules/app'
 
 const visible = ref(false)
 const appStore = useAppStoreWithOut()

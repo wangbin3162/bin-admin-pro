@@ -59,7 +59,7 @@
 
 <script>
 import { ref } from 'vue'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import draggable from 'vuedraggable'
 
 export default {

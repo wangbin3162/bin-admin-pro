@@ -44,3 +44,9 @@ assets/styles 文件目录，在 main.js 中进行追加引入样式
 ```js
 
 ```
+
+# 二、更迁移 pinia 版本
+
+## 1、新建 pinia 文件夹，编写 index 和 plugins
+
+pinia-plugin 根据实际需求选取字段进行本地缓存，一般用于 setting 使用。

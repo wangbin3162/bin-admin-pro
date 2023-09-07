@@ -93,7 +93,7 @@
 <script setup>
 import { login } from '@/api/modules/login.api'
 import { throwError } from '@/utils/util'
-import { useUserStoreWithOut } from '@/store/modules/user'
+import { useUserStoreWithOut } from '@/pinia/modules/user'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 

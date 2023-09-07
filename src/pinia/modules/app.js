@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { store } from '@/store'
+import { store } from '@/pinia'
 
 const useApp = defineStore('app', {
   state: () => ({

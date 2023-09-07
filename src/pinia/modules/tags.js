@@ -1,5 +1,17 @@
 import { defineStore } from 'pinia'
 import { HOME_NAME, HOME_PATH } from '@/router/menus'
+import { strToUnicode, unicodeToStr } from '@/utils/util'
+
+// 为了适配tabs组件内使用的querySelector api，此处进行unicode编码，用于去除特殊字符
+// 并且拼接id字符串，以满足html的id属性值的规范要求
+export function encodeName(name) {
+  return 'id' + strToUnicode(name)
+}
+
+// 解码处理后的name
+export function decodeName(name) {
+  return unicodeToStr(name.replace('id', ''))
+}
 
 const useTags = defineStore('tags', {
   state: () => ({
@@ -8,8 +20,24 @@ const useTags = defineStore('tags', {
   }),
   getters: {
     viewTags() {
-      const visitedTabs = this.visitedViews.map(i => ({ key: i.name, title: i.title }))
-      return [{ key: HOME_PATH, title: HOME_NAME, noClose: true, icon: '' }, ...visitedTabs]
+      // const visitedTabs = this.visitedViews.map(i => ({ key: i.name, title: i.title }))
+      // return [{ key: HOME_PATH, title: HOME_NAME, noClose: true, icon: '' }, ...visitedTabs]
+      // 由于i.name内可能含有特殊字符/，例如page/1之类的形式，因此这里需要使用encodeName函数进行处理
+      const visitedTabs = this.visitedViews.map(i => ({
+        key: encodeName(i.name), // tabs组件使用，因此需要特殊处理
+        title: i.title,
+        name: i.name, // 后续业务使用，故不做编码，方便读取
+      }))
+      return [
+        {
+          key: encodeName(HOME_PATH),
+          title: HOME_NAME,
+          noClose: true,
+          icon: '',
+          name: HOME_PATH,
+        },
+        ...visitedTabs,
+      ]
     },
   },
   actions: {

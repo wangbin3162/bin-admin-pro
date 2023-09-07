@@ -68,7 +68,7 @@
 import { Utils } from 'bin-ui-next'
 import axios from 'axios'
 import { computed, ref } from 'vue'
-import { useAppStoreWithOut } from '@/store/modules/app'
+import { useAppStoreWithOut } from '@/pinia/modules/app'
 
 const KEY = '9ff1ccd697f149429674a860034faf66'
 const LOCATION = '101190801'

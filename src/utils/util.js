@@ -154,3 +154,17 @@ export function compileFlatState(stateTree) {
   stateTree.map(i => flattenChildren(i))
   return flatTree
 }
+
+// 字符串转为unicode编码后的字符串
+export function strToUnicode(str) {
+  const arr = []
+  for (let i = 0; i < str.length; i++) {
+    arr.push(str.charCodeAt(i))
+  }
+  return arr.join('-')
+}
+
+// unicode转为字符串
+export function unicodeToStr(str) {
+  return String.fromCharCode(...str.split('-'))
+}

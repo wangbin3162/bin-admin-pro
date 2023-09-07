@@ -4,8 +4,7 @@
       <b-scrollbar>
         <b-menu
           unique-opened
-          :default-active="route.name"
-          :default-openeds="getMenuItemNamePath(route.name)"
+          :default-active="activeMenu"
           :collapse="!setting.sidebar"
           @select="handleMenuSelect"
         >
@@ -27,7 +26,8 @@
 </template>
 
 <script setup>
-import { useStore } from '@/store'
+import { ref, watch } from 'vue'
+import { useStore } from '@/pinia'
 import MenuItem from './MenuItem.vue'
 import Submenu from './Submenu.vue'
 import { useRoute } from 'vue-router'
@@ -36,7 +36,23 @@ import useMenu from '@/hooks/store/useMenu'
 const route = useRoute()
 const { storeToRefs, settingStore } = useStore()
 const { setting } = storeToRefs(settingStore)
-const { getMenuItemNamePath, handleMenuSelect, sideMenus } = useMenu()
+const { allMenuItems, handleMenuSelect, sideMenus } = useMenu()
+const activeMenu = ref('')
+
+watch(
+  () => route.path,
+  path => {
+    // 其实这里提出的要求就是期望根据url的变动通过path去索引到对应的name
+    // 那么，前端的路由表内，name和path根据约定其实本质上是一样的，只不过可能大小写不同
+    // 当然，动态参数的路由除外，不过在对应地方会有特殊处理
+    // 因此可以根据当前allMenuItems与path, 统一他们的大小写既可以索引到对应的项目.
+    const name = allMenuItems.value.find(
+      item => item.name.toUpperCase() === path.substring(1).toUpperCase(),
+    )?.name
+    activeMenu.value = name
+  },
+  { immediate: true },
+)
 </script>
 
 <style>

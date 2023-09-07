@@ -6,7 +6,7 @@
 <script setup>
 import HeaderTrigger from '../header-trigger/HeaderTrigger.vue'
 import { ThemeConfig } from '@/theme'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 
 const { appStore, storeToRefs } = useStore()
 const { themeVisible } = storeToRefs(appStore)

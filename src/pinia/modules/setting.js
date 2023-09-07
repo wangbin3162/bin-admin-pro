@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { store } from '@/store'
+import { store } from '@/pinia'
 
 const useSetting = defineStore('setting', {
   state: () => ({
@@ -10,11 +10,12 @@ const useSetting = defineStore('setting', {
       routerTransitionName: 'fade-in',
       sidebar: true, // 侧边栏开启状态
       sidebarWidth: 220, // 侧边栏宽度
+      showCollapse: true,
+
       tagsView: true, // 多页签开启状态
       showWeather: true,
       showSearch: true,
       showMessage: true,
-      showCollapse: true,
       showHeaderBreadcrumb: true,
     },
   }),

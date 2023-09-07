@@ -71,10 +71,11 @@ const useMenu = defineStore('menu', {
     },
     // 根据一个菜单名字，设置顶部开启nav的值
     setTopNavActive(name) {
-      if (name === 'Redirect') return
+      if (name.split('/')[0] === 'redirect') return
       const currentMenu = this.menuItems.find(i => i.name === name)
       if (!currentMenu) {
         console.warn('setTopNavActive: currentMenu is null [name is ' + name + ' ]')
+        return
       }
       // 如果只是一个单独的组件，且父级0节点也是自身，标识这个菜单就是个孤独菜单，这时候设置为自己
       if (currentMenu.parents[0] === name) {
@@ -97,14 +98,19 @@ export default useMenu
  * @returns {[]}
  */
 function filterAsyncRoutes(routes, menuItems) {
-  const all = []
+  const routeMap = new Map()
   menuItems.forEach(menu => {
-    const matchIndex = routes.findIndex(item => item.name.toUpperCase() === menu.name.toUpperCase())
+    const matchIndex = routes.findIndex(item => {
+      // 针对形如page/id、form/id之类的做特殊处理，只获取/之前的字符串作为匹配条件
+      const [name] = menu.name.split('/')
+      return item.name.toUpperCase() === name.toUpperCase()
+    })
     if (matchIndex > -1) {
-      all.push(routes[matchIndex])
+      // 用于对应用的动态菜单做去重处理，例如：page/1、page/2之类的其实只需添加一次对应的vue路由配置对象
+      routeMap.set(matchIndex, routes[matchIndex])
     }
   })
-  return all
+  return [...routeMap.values()]
 }
 
 // 菜单树拼接子父级关系

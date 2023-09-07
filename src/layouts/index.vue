@@ -38,7 +38,7 @@ import NavHeader from './src/nav-header/NavHeader.vue'
 import SiderMenu from './src/sider-menu/SiderMenu.vue'
 import TagsView from './src/tags-view/TagsView.vue'
 
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 
 const { storeToRefs, tagsStore, settingStore } = useStore()
 const { setting, siderWidth } = storeToRefs(settingStore)

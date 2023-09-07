@@ -1,11 +1,25 @@
-const files = import.meta.globEager('./*.js')
+import comps from './comps'
+import func from './func'
+import pages from './pages'
+import nested from './nested'
+import dynamicRoute from './dynamic-route'
+import links from './links'
+import graph from './graph'
+import sys from './sys'
+import about from './about'
 
-const modules = []
+// 动态载入，无顺序
+// const files = import.meta.globEager('./*.js')
+// const modules = Object.keys(files).map(key => [...files[key].default])
 
-Object.keys(files).forEach(key => {
-  modules.push(...files[key].default)
-})
-
-const routes = [...modules]
-
-export default routes
+export default [
+  ...comps,
+  ...func,
+  ...pages,
+  ...nested,
+  ...dynamicRoute,
+  ...links,
+  ...graph,
+  ...sys,
+  ...about,
+]

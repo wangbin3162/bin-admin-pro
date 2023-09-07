@@ -1,6 +1,6 @@
 import { useRouter, useRoute } from 'vue-router'
 import { HOME_PATH } from '@/router/menus'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 import { computed } from 'vue'
 import { deepCopy } from '@/utils/util'
 
@@ -30,12 +30,13 @@ export default function useMenu() {
   }
 
   // 获取当前菜单结构数组
-  function getBreadcrumbData(name) {
+  function getBreadcrumbData(oriName) {
     const list = []
-    const current = getCurrentMenu(name)
+    const current = getCurrentMenu(oriName)
     if (!current) return []
+
     const parents = current.parents
-    if (parents.length === 1 && !current.children.length) {
+    if (parents.length === 1 && !current.children?.length) {
       list.push(current)
     } else {
       // 如果有多级层级，则需要遍历查询父级菜单集合
@@ -50,27 +51,32 @@ export default function useMenu() {
   }
 
   // 选中路由名称
-  function handleMenuSelect(name) {
-    if (name === $route.name) {
+  function handleMenuSelect(oriName) {
+    const [name, params] = oriName.split('/')
+    if ('/' + oriName === $route.path) {
       tagsStore.refreshCurrentPage($router)
       return
     }
     // 外链跳转
-    const curMenu = allMenuItems.value.find(item => item.name === name)
+    const curMenu = allMenuItems.value.find(item => item.name === oriName)
     if (curMenu && curMenu.externalLink) {
       window.open(curMenu.externalLink, '_blank')
       return
     }
     // 路由跳转
-    if (addRouters.value.find(item => item.name === name) || name === HOME_PATH) {
-      $router.push({ name })
+    if (
+      addRouters.value.find(item => item.name === name) ||
+      name === HOME_PATH ||
+      name === 'Inline'
+    ) {
+      $router.push({ name, params: { params } })
     } else {
       $router.push('/404')
     }
   }
 
   function getCurrentRouteMenu() {
-    return getCurrentMenu($route.name)
+    return getCurrentMenu($route.path.substring(1))
   }
 
   function setTopNavActive(name) {

@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import cookies from '@/utils/util.cookies'
 import { getInfo } from '@/api/modules/login.api'
 import { ACCESS_TOKEN } from '@/config/token-const'
-import { store } from '@/store'
+import { store } from '@/pinia'
 
 const useUser = defineStore('user', {
   state: () => ({

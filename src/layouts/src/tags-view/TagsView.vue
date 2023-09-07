@@ -65,10 +65,11 @@
 
 <script setup>
 import { computed, nextTick, ref, watch } from 'vue'
-import { useStore } from '@/store'
 import { useRoute, useRouter } from 'vue-router'
 import { HOME_PATH } from '@/router/menus'
 import useMenu from '@/hooks/store/useMenu'
+import { useStore } from '@/pinia'
+import { encodeName, decodeName } from '@/pinia/modules/tags'
 
 const { storeToRefs, tagsStore, settingStore } = useStore()
 const { tagsViewStyle } = storeToRefs(settingStore)
@@ -81,23 +82,25 @@ const activeTag = ref('')
 const selectedTag = ref({})
 const tabsRef = ref(null)
 
-const { navMenuItems, addRouters } = useMenu()
+const { navMenuItems } = useMenu()
 
 // 所有动态的路由表name 拼接
-const addRoutersNames = computed(() => addRouters.value.map(v => v.name))
-const rightHome = computed(() => selectedTag.value.key === HOME_PATH)
+const rightHome = computed(() => selectedTag.value.name === HOME_PATH)
 const currentHome = computed(() => route.name === HOME_PATH)
 
+// 需要追加至viewTags的一些非接口返回的额外路由
+const otherTags = []
+
 function addTags() {
-  const { name } = route
+  const { path } = route
   if (currentHome.value) return
-  const current = navMenuItems.value.find(item => item.name === name)
-  const currentRoute = addRouters.value.find(item => item.name === name)
-  if (current && currentRoute) {
+  const current = [...otherTags, ...navMenuItems.value].find(i => i.name === path.substring(1))
+
+  if (current) {
     tagsStore.addView({
       name: current.name,
       title: current.title,
-      noCache: currentRoute.meta.noCache || false,
+      noCache: current.noCache || false, // noCache暂时并不存在于接口返回值中，此处可用于后续扩展
     })
   }
   return false
@@ -105,12 +108,12 @@ function addTags() {
 
 async function moveToCurrentTag() {
   await nextTick()
-  activeTag.value = route.name
+  activeTag.value = encodeName(route.path.substring(1))
 }
 
 // 选中一个tag
 function handleSelect(tag) {
-  router.push({ name: tag.key })
+  router.push('/' + tag.name)
 }
 
 function handleRightClick(tag) {
@@ -118,35 +121,38 @@ function handleRightClick(tag) {
 }
 
 function handleCloseTag(tag) {
-  tagsStore.delView({ name: tag.key })
+  tagsStore.delView({ name: decodeName(tag.key), title: tag.title })
 }
 
 function closeSelected() {
-  if (rightHome.value) {
-    return
-  }
+  if (rightHome.value) return
+
   const selectedTagVal = selectedTag.value
-  if (selectedTagVal.key === HOME_PATH) return
+  if (selectedTagVal.name === HOME_PATH) return
   // 这里需要调用组件的关闭选择的tag
   tabsRef.value.closeSelectedTab(selectedTagVal)
 }
 
 // 关闭其他tags
-function closeOthers() {
+async function closeOthers() {
   if (rightHome.value) return
+
   const selectedTagVal = selectedTag.value
-  router.push({ name: selectedTagVal.key })
-  tagsStore.delOthersViews({ name: selectedTagVal.key })
+
+  tagsStore.delOthersViews({
+    name: decodeName(selectedTagVal.key),
+    title: selectedTagVal.title,
+  })
+
+  await router.push('/' + decodeName(selectedTagVal.key))
   tabsRef.value.moveToCurrentTab()
 }
 
 // 关闭所有
 async function closeAll() {
-  if (rightHome.value) {
-    return
-  }
+  if (rightHome.value) return
   tagsStore.delAllViews()
-  await router.push({ name: HOME_PATH })
+  await router.push('/')
   await nextTick()
   tabsRef.value.moveToCurrentTab()
 }
@@ -174,9 +180,17 @@ function handleCommand(name) {
 }
 
 function refresh() {
-  const name = route.name
+  const name = route.path.substring(1)
   // 如果是重定向或者错误页面则跳过
-  if (addRoutersNames.value.includes(name) || currentHome.value) {
+  // 这里之前使用的addRoutersNames做判断，需要明确为什么使用路由表进行这种处理
+  // addRoutersNames获取的只是拼接后的路由表内的路由name字段
+  // navMenuItems为菜单接口返回，路由表根据navMenuItems进行拼接
+  // 因此基于addRoutersNames的包含判断，理论上应该等同于基于navMenuItems的包含判断
+  if (
+    [...otherTags, ...navMenuItems.value].some(item => item.name === name) ||
+    currentHome.value ||
+    route.name === 'Inline'
+  ) {
     addTags()
     moveToCurrentTag()
   }
@@ -271,6 +285,14 @@ watch(
       align-items: center;
       i {
         margin-right: 4px;
+      }
+      &.disabled {
+        opacity: 1;
+        cursor: not-allowed;
+        color: var(--bin-color-text-disabled);
+        &:hover {
+          background: var(--bin-white-color);
+        }
       }
     }
   }

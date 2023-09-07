@@ -91,7 +91,7 @@
 
 <script setup>
 import HeaderTrigger from '../header-trigger/HeaderTrigger.vue'
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 
 const { appStore, storeToRefs, settingStore } = useStore()
 const { settingVisible } = storeToRefs(appStore)
@@ -141,6 +141,9 @@ function toggleSetting() {
     width: 50%;
     height: 45px;
     cursor: pointer;
+    img {
+      cursor: pointer;
+    }
     .b-icon-check {
       position: absolute;
       right: 30px;

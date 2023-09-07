@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import { useStore } from '@/store'
+import { useStore } from '@/pinia'
 
 export default {
   name: 'top-box',
