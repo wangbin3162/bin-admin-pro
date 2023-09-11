@@ -44,6 +44,11 @@ export default [
         title: '动效',
         component: () => import('@/views/demo/functions/dynamic-effect/index.vue'),
       },
+      {
+        name: 'FuncLuckysheet',
+        title: 'Excel编辑',
+        component: () => import('@/views/demo/functions/luckysheet/index.vue'),
+      },
     ],
   },
 ]
