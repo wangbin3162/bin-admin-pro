@@ -53,6 +53,8 @@ export default function useMenu() {
   // 选中路由名称
   function handleMenuSelect(oriName) {
     const [name, params] = oriName.split('/')
+
+    // 根据path判断是否为点击相同的菜单
     if ('/' + oriName === $route.path) {
       tagsStore.refreshCurrentPage($router)
       return

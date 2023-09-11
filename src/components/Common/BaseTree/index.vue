@@ -1,5 +1,5 @@
 <template>
-  <div class="base-tree" :style="{ width }" ref="treeEl">
+  <div class="base-tree" :style="{ maxWidth: width }" ref="treeEl">
     <div class="base-tree-header">
       <span class="base-title">{{ treeTitle }}</span>
       <div class="base-ctrl">
@@ -80,7 +80,7 @@ const emit = defineEmits(['select-change', 'check-change', 'command', 'init-succ
 const props = defineProps({
   width: {
     type: String,
-    default: '100%',
+    default: '280px',
   },
   minHeight: {
     type: String,
@@ -200,6 +200,7 @@ watch(
   background: #fff;
   border-radius: 2px;
   overflow: hidden;
+  width: 100%;
   &-header {
     display: flex;
     justify-content: space-between;

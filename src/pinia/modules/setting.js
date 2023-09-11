@@ -7,6 +7,7 @@ const useSetting = defineStore('setting', {
     setting: {
       themeName: '', // 主题名称
       menuType: 'default', // default: 常规布局 mixed: 混合布局
+
       routerTransitionName: 'fade-in',
       sidebar: true, // 侧边栏开启状态
       sidebarWidth: 220, // 侧边栏宽度

@@ -55,7 +55,7 @@ defineProps({
   .base-table-box {
     background: #fff;
     border-radius: 2px;
-    padding: 20px;
+    padding: 16px 20px;
     .base-table-action {
       display: flex;
       justify-content: space-between;
