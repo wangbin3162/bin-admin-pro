@@ -24,7 +24,7 @@
     "lint:fix": "eslint --fix --ext .js,.vue src && pretty-quick"
   },
   "dependencies": {
-    "@antv/g6": "^4.8.21",
+    "@antv/g6": "^4.8.22",
     "@tiptap/extension-color": "^2.1.8",
     "@tiptap/extension-highlight": "^2.1.8",
     "@tiptap/extension-image": "^2.1.8",
@@ -42,7 +42,7 @@
     "bin-charts-next": "^1.1.0",
     "bin-editor-next": "^1.1.0",
     "bin-keyframe-animation": "^1.0.0",
-    "bin-ui-next": "^2.0.1",
+    "bin-ui-next": "^2.0.3",
     "brace": "^0.11.1",
     "dayjs": "^1.11.9",
     "echarts": "^5.4.3",
@@ -66,13 +66,13 @@
     "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.15",
+    "@babel/core": "^7.22.17",
     "@babel/preset-env": "^7.22.15",
-    "@types/node": "^18.17.14",
+    "@types/node": "^18.17.15",
     "@vitejs/plugin-vue": "^3.2.0",
     "@vue/compiler-sfc": "^3.3.4",
     "cross-env": "^7.0.3",
-    "eslint": "^8.48.0",
+    "eslint": "^8.49.0",
     "eslint-plugin-import": "^2.28.1",
     "eslint-plugin-vue": "^9.17.0",
     "postcss-color-mix": "^1.1.0",

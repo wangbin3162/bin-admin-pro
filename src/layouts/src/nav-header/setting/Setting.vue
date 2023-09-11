@@ -31,9 +31,9 @@
         </b-select>
       </div>
       <div class="setting-list-item" v-if="setting.routerTransitionName">
-        <span>动画效果</span>
+        <span>过度动画</span>
         <b-select v-model="setting.routerTransitionName" size="small" style="width: 150px">
-          <b-option label="fade-in" value="fade-transverse"></b-option>
+          <b-option label="fade-in" value="fade-in"></b-option>
           <b-option label="fade-transverse" value="fade-transverse"></b-option>
           <b-option label="fade-scale" value="fade-scale"></b-option>
           <b-option label="fade-scale-move" value="fade-scale-move"></b-option>
