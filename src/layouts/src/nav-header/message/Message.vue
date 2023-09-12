@@ -105,7 +105,7 @@ tabs.value[0].count = messageCount.value
         }
       }
       &:hover {
-        color: getHover();
+        color: var(--bin-color-primary-light1);
       }
     }
     &::after {

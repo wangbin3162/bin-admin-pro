@@ -7,6 +7,7 @@
 <script>
 import { computed } from 'vue'
 import { Utils } from 'bin-ui-next'
+import { themeConfigRef } from '@/theme'
 
 const { mixWhite } = Utils.color
 
@@ -34,11 +35,11 @@ export default {
       const color = props.color
       if (!color) return null
       const colorMap = {
-        primary: '#1089ff',
-        success: '#52c41a',
+        primary: themeConfigRef.value.binColorPrimary,
+        success: themeConfigRef.value.binColorSuccess,
+        warning: themeConfigRef.value.binColorWarning,
+        danger: themeConfigRef.value.binColorDanger,
         info: '#35495E',
-        warning: '#fea638',
-        danger: '#ff4d4f',
       }
       return colorMap[color] ? colorMap[color] : color
     })
