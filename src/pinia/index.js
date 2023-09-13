@@ -6,6 +6,7 @@ import useApp from './modules/app'
 import useUser from './modules/user'
 import useMenu from './modules/menu'
 import useTags from './modules/tags'
+import useExcel from './modules/excel'
 
 const store = createPinia()
 // 注册store及插件信息
@@ -23,6 +24,7 @@ export function useStore() {
     menuStore: useMenu(),
     tagsStore: useTags(),
     appStore: useApp(),
+    excelStore: useExcel(),
   }
 }
 

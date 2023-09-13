@@ -84,6 +84,12 @@ export const routesOutLayout = [
     name: 'Login',
     component: () => import('@/views/system/login.vue'),
   },
+  // excel模板编辑
+  {
+    path: '/excel-edit',
+    name: 'ExcelEdit',
+    component: () => import('@/views/pages/ExcelEdit/index.vue'),
+  },
 ]
 
 /**

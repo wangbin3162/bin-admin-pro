@@ -5,6 +5,7 @@ import nested from './nested'
 import dynamicRoute from './dynamic-route'
 import links from './links'
 import graph from './graph'
+import excel from './excel'
 import sys from './sys'
 import about from './about'
 
@@ -20,6 +21,7 @@ export default [
   ...dynamicRoute,
   ...links,
   ...graph,
+  ...excel,
   ...sys,
   ...about,
 ]

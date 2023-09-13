@@ -122,10 +122,7 @@ const query = reactive({
 })
 const copyList = ref([])
 const role = ref({})
-const { loading, list, total, getListData, pageChange, pageSizeChange } = useTable(
-  getRoleList,
-  query,
-)
+const { loading, list, total, getListData, pageChange } = useTable(getRoleList, query)
 const {
   formRef,
   pageStatus,

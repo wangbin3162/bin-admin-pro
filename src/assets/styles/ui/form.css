@@ -1,0 +1,10 @@
+.bin-form-item__content {
+  .bin-tree-select {
+    width: 100%;
+  }
+  .bin-form-item__content-flex {
+    > div {
+      width: 100%;
+    }
+  }
+}

@@ -60,8 +60,8 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   bin-ui-next:
-    specifier: ^2.0.3
-    version: 2.0.3
+    specifier: ^2.0.7
+    version: 2.0.7
   brace:
     specifier: ^0.11.1
     version: 0.11.1
@@ -2788,8 +2788,8 @@ packages:
       - webpack-command
     dev: false
 
-  /bin-ui-next@2.0.3:
-    resolution: {integrity: sha512-CCw4O9sJtEfCnj4KL6SYJY3NuwOjbFZmN1NmDG8FAouwIm3W1G8WpIp45ZY3I+LJniXoBQi/853zjAH3LnWTgQ==}
+  /bin-ui-next@2.0.7:
+    resolution: {integrity: sha512-8a1d6mLp8I2F2ZmjYozvXcTzROoWelNqwGAP2pwACP7z4insIiSCL01GukULb+YISpAaW4RK6yILnzU8X1UbMA==}
     dependencies:
       '@popperjs/core': 2.11.8
       async-validator: 4.2.5
