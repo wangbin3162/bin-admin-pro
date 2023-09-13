@@ -45,6 +45,9 @@ const useExcel = defineStore('excel', {
         this.excelList.splice(index, 1)
       }
     },
+    addOne(data) {
+      console.log(data)
+    },
   },
   persist: true,
 })

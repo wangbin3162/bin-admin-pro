@@ -11,13 +11,21 @@
       <div class="right">
         <b-button type="danger" icon="bug" @click="debug" />
         <b-button type="primary" plain @click="downloadExcel">下载excel</b-button>
-        <b-button type="primary" @click="getCurrentCell">获取当前单元格</b-button>
-        <b-button type="primary" @click="getSheetData">保存</b-button>
+        <b-button type="primary" @click="saveSheetData">保存</b-button>
+        <b-button type="danger" @click="closePage">关闭</b-button>
       </div>
     </div>
     <div id="SheetConfig" class="sheet-excel has-config"></div>
     <div class="right-config">
-      <div>右侧配置</div>
+      <div class="right-top">
+        <b-button type="primary" size="small" dashed @click="getCurrentCell">设为数据项</b-button>
+      </div>
+      <div class="right-content">
+        <b-scrollbar>
+          <b-divider align="left">实际存储值</b-divider>
+          <b-ace-editor :model-value="JSON.stringify(excelData, null, 2)" readonly></b-ace-editor>
+        </b-scrollbar>
+      </div>
     </div>
 
     <div v-show="isMaskShow" class="mask">Downloading</div>
@@ -25,37 +33,37 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { deepMerge, deepCopy } from '@/utils/util'
-import { Message } from 'bin-ui-next'
 import LuckyExcel from 'luckyexcel'
-import defaultOpts from './utils/default-options'
-import { defaultSheetInfo } from './utils/data-tmp'
-import { isFunction } from './utils/is'
-import { exportExcel } from './utils/export'
+import { computed, onBeforeUnmount, onMounted, ref, inject, toRaw } from 'vue'
+import { deepMerge, deepCopy } from '@/utils/util'
+import { Message, MessageBox } from 'bin-ui-next'
+import defaultOpts from '@/views/pages/LuckySheet/utils/default-options'
+import { defaultSheetInfo } from '@/views/pages/LuckySheet/utils/data-tmp'
+import { isFunction } from '@/views/pages/LuckySheet/utils/is'
+import { exportExcel } from '@/views/pages/LuckySheet/utils/export'
+import { excelDataKey } from './context'
+import * as api from '@/api/modules/excel.api'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
-
-defineOptions({
-  name: 'SheetConfig',
-})
-
-const emit = defineEmits(['update:name'])
 
 const props = defineProps({
   cfg: {
     type: Object,
     default: () => ({}),
   },
-  name: {
-    type: String,
-  },
+})
+
+const Provider = inject(excelDataKey, {})
+
+const excelData = computed({
+  get: () => Provider?.excelData.value,
+  set: val => (Provider.excelData.value = val),
 })
 
 const title = computed({
-  get: () => props.name,
-  set: val => emit('update:name', val),
+  get: () => excelData.value.name,
+  set: val => (excelData.value.name = val),
 })
 
 const hook = {
@@ -69,7 +77,7 @@ const options = computed(() => {
     deepCopy({
       ...defaultOpts,
       container: 'SheetConfig',
-      title: props.title, // 设定表格名称
+      title: title.value, // 设定表格名称
       data: [{ name: 'Sheet1', index: 0 }],
     }),
     deepCopy(props.cfg),
@@ -112,7 +120,7 @@ function loadExcel() {
       return
     }
     // 更新info信息
-    info.value.name = title.value = file.name
+    info.value.name = file.name
 
     isMaskShow.value = true
 
@@ -147,9 +155,20 @@ function downloadExcel() {
   exportExcel(LuckySheet.getAllSheets(), title.value)
 }
 
-function getSheetData() {
+// 保存sheetData
+function saveSheetData() {
+  info.value.name = title.value
+  // 更新info信息
   const sheets = LuckySheet.getAllSheets()
-  console.log(sheets)
+  jsonData.value = {
+    info: toRaw(info.value),
+    sheets,
+  }
+  // excelData.value.jsonData = {
+  //   info: toRaw(info.value),
+  //   sheets,
+  // }
+  console.log(jsonData.value)
 }
 
 function getCurrentCell() {
@@ -157,6 +176,21 @@ function getCurrentCell() {
   console.log(range)
 }
 
+// 关闭
+function closePage() {
+  MessageBox.confirm({
+    type: 'warning',
+    title: '提示',
+    message: '关闭当前页面会丢失没有保存的操作, 是否继续?',
+  })
+    .then(() => {
+      // 关闭当前页面
+      window.close()
+    })
+    .catch(() => {})
+}
+
+// 销毁工作表
 function destroy() {
   isFunction(LuckySheet?.destroy) && LuckySheet.destroy()
 }
@@ -172,24 +206,52 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .sheet-wrapper {
+  --v-right-width: 360px;
   position: relative;
   width: 100%;
   height: 100vh;
   .sheet-header {
+    position: relative;
     height: 50px;
     display: flex;
     padding: 0 16px;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #e5e5e5;
   }
   .sheet-excel {
+    position: absolute;
     margin: 0px;
     padding: 0px;
-    position: absolute;
-    width: 100%;
+    width: calc(100% - var(--v-right-width));
     left: 0px;
     top: 50px;
     bottom: 0px;
+    :deep(.luckysheet) {
+      border: none;
+    }
+  }
+  .right-config {
+    position: absolute;
+    width: var(--v-right-width);
+    top: 50px;
+    bottom: 0;
+    right: 0;
+    border-left: 1px solid #e5e5e5;
+    display: flex;
+    flex-direction: column;
+    .right-top {
+      height: 41px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      padding: 5px 0 3px 15px;
+      border-bottom: 1px solid #d4d4d4;
+    }
+    .right-content {
+      flex: 1;
+      padding: 8px;
+    }
   }
   .mask {
     position: absolute;

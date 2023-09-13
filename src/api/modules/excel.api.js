@@ -9,6 +9,12 @@ export async function getExcelList(query) {
 }
 
 // 获取填报列表（excel模板列表）
+export async function addTemplate(data) {
+  const store = useExcelStoreWithOut()
+  store.addOne(data)
+}
+
+// 获取填报列表（excel模板列表）
 export async function remove(id) {
   const store = useExcelStoreWithOut()
   store.removeOne(id)

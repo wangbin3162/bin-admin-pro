@@ -1,10 +1,12 @@
 <template>
-  <SheetConfig v-if="render" v-model:name="excelData.name" />
+  <SheetConfig v-if="render" />
 </template>
 
 <script setup>
 import { useRoute } from 'vue-router'
-import { nextTick, watch, ref, provide } from 'vue'
+import { watch, ref, provide } from 'vue'
+import SheetConfig from './SheetConfig.vue'
+import { excelDataKey } from './context'
 
 defineOptions({
   name: 'ExcelEdit',
@@ -12,10 +14,17 @@ defineOptions({
 
 const route = useRoute()
 const render = ref(false)
+
 // 当前一条模板数据
 const excelData = ref({
   id: '',
   name: '', // 模板名称，也就是保存时的文件名称
+  jsonData: [],
+  mapping: [],
+})
+
+provide(excelDataKey, {
+  excelData,
 })
 
 watch(
