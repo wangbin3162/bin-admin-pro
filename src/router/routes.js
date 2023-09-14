@@ -90,6 +90,12 @@ export const routesOutLayout = [
     name: 'ExcelEdit',
     component: () => import('@/views/pages/ExcelEdit/index.vue'),
   },
+  // excel数据填报
+  {
+    path: '/data-edit',
+    name: 'DataEdit',
+    component: () => import('@/views/pages/DataEdit/index.vue'),
+  },
 ]
 
 /**

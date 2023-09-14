@@ -1,5 +1,5 @@
 import DatasourceCreate from '@/utils/datasource-create'
-import { copyText, deepCopy, getUuid } from '@/utils/util'
+import { deepCopy, getUuid } from '@/utils/util'
 import { defaultTemps } from '@/utils/luckysheet-util/data-tmp'
 
 const Ds = new DatasourceCreate('__EXCEL_DATASOURCE__')
@@ -8,6 +8,7 @@ const storeKey = '__excel_data__'
 // 默认状态
 const states = {
   excelList: deepCopy(defaultTemps),
+  dataList: [],
 }
 
 // 获取datasource
@@ -25,7 +26,7 @@ async function setStoreData(value, key = storeKey) {
   return await Ds.setStorage(key, value)
 }
 
-// --------------------------------实际api--------------------------------//
+// --------------------------------template api-------------------------------- //
 
 // 获取填报列表（excel模板列表）
 export async function getExcelList(query) {
@@ -122,6 +123,33 @@ export async function getTempDetail(id) {
     setTimeout(() => {
       const data = index > -1 ? deepCopy(store.excelList[index]) : null
       resolve(data)
+    }, 200)
+  })
+}
+
+// --------------------------------data api-------------------------------- //
+export async function addSheetData(data) {
+  const store = await getDataSource()
+  if (!store.dataList) {
+    store.dataList = []
+  }
+  return new Promise(resolve => {
+    // 新增一个填报数据
+    const obj = deepCopy(data)
+    obj.id = getUuid()
+    store.dataList.unshift(obj)
+
+    // 新增一个之后，更新一下当前tempId的记录
+    const index = store.excelList.findIndex(i => i.id === obj.tempId)
+    if (index > -1) {
+      const count = store.dataList.filter(i => i.tempId === obj.tempId).length
+      store.excelList[index].reportCount = store.excelList[index].records = count
+      console.log(store)
+    }
+
+    setStoreData(store) // 设置store
+    setTimeout(() => {
+      resolve(obj.id)
     }, 200)
   })
 }

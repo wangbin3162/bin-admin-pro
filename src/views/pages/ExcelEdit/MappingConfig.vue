@@ -27,7 +27,7 @@
               <b-tag style="width: 38px; justify-content: center; padding: 0 4px">
                 {{ element.cellPosition.start }}
               </b-tag>
-              <b-input v-model="mapping[index].filedName" size="small" placeholder="字段标识" />
+              <b-input v-model="mapping[index].fieldName" size="small" placeholder="字段标识" />
               <b-input v-model="mapping[index].filedTitle" size="small" placeholder="字段名称" />
               <b-select v-model="mapping[index].dataType" size="small" style="width: 70px">
                 <b-option label="文本" value="string"></b-option>

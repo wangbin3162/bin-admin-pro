@@ -47,6 +47,7 @@
             color="warning"
             is-icon
             tooltip="填报链接"
+            @click="handleWriteData(row)"
           ></action-button>
           <b-divider type="vertical"></b-divider>
           <action-button
@@ -119,11 +120,13 @@ const { loading, list, total, handleSearch, getListData, pageChange } = useTable
 
 handleSearch()
 
+// 重置查询
 function handleReset() {
   query.name = ''
   handleSearch()
 }
 
+// 新增模板
 function handleCreate() {
   let routeData = router.resolve({
     path: '/excel-edit',
@@ -132,6 +135,7 @@ function handleCreate() {
   window.open(routeData.href, '_blank')
 }
 
+// 编辑模板
 function handleEdit({ id }) {
   let routeData = router.resolve({
     path: '/excel-edit',
@@ -140,6 +144,7 @@ function handleEdit({ id }) {
   window.open(routeData.href, '_blank')
 }
 
+// 发布模板
 function handlePublish({ id }) {
   api.publishTemplate(id).then(() => {
     Message.success('发布成功！')
@@ -147,6 +152,7 @@ function handlePublish({ id }) {
   })
 }
 
+// 删除模板
 function handleDelete({ id }) {
   api.removeTemplate(id).then(() => {
     Message.success('删除成功！')
@@ -154,6 +160,16 @@ function handleDelete({ id }) {
   })
 }
 
+// 数据填报链接跳转
+function handleWriteData({ id }) {
+  let routeData = router.resolve({
+    path: '/data-edit',
+    query: { tempId: id },
+  })
+  window.open(routeData.href, '_blank')
+}
+
+// 监听跨tab页签消息
 const cancelListen = listenMsg(getListData)
 onBeforeUnmount(cancelListen)
 </script>

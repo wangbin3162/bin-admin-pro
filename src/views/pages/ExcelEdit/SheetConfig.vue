@@ -8,7 +8,14 @@
         </b-space>
       </div>
       <div class="right">
-        <b-button type="text" icon="bug" text-color="danger" title="打印调试" @click="debug" />
+        <b-button
+          type="text"
+          icon="bug"
+          text-color="danger"
+          title="打印调试"
+          v-if="IS_DEV"
+          @click="debug"
+        />
         <b-button type="primary" size="small" icon="vertical-align-botto" plain @click="loadExcel">
           导入
         </b-button>
@@ -38,17 +45,19 @@
         <b-scrollbar>
           <MappingConfig />
 
-          <!-- <b-divider align="left">实际存储值</b-divider>
-          <b-ace-editor
-            :model-value="
-              JSON.stringify(
-                { id: excelData.id, name: excelData.name, mapping: excelData.mapping },
-                null,
-                2,
-              )
-            "
-            readonly
-          ></b-ace-editor> -->
+          <template v-if="IS_DEV">
+            <b-divider align="left">实际存储值</b-divider>
+            <b-ace-editor
+              :model-value="
+                JSON.stringify(
+                  { id: excelData.id, name: excelData.name, mapping: excelData.mapping },
+                  null,
+                  2,
+                )
+              "
+              readonly
+            ></b-ace-editor>
+          </template>
         </b-scrollbar>
       </div>
     </div>
@@ -62,6 +71,7 @@ import LuckyExcel from 'luckyexcel'
 import { Message, MessageBox } from 'bin-ui-next'
 import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
 import { deepMerge, deepCopy, isEqual } from '@/utils/util'
+import { IS_DEV } from '@/utils/env'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import defaultOpts from '@/utils/luckysheet-util/default-options'
 import { isFunction } from '@/utils/luckysheet-util/is'
@@ -109,9 +119,9 @@ const isMaskShow = ref(false)
 
 // debug
 function debug() {
+  if (!IS_DEV) return
   console.log('-------------------------------------debug--------------------------------------')
   console.log('excelData', excelData.value)
-  console.log('info', info.value)
   console.log('-----------------------------------debug end------------------------------------')
 }
 
@@ -230,7 +240,7 @@ function setCellToMapping() {
   // 追加一个映射值
   excelData.value.mapping.push({
     ...formatRange,
-    filedName: '', // 字段名称
+    fieldName: '', // 字段名称
     filedTitle: '', // 字段标题
     dataType: 'string', // string,number,date
   })
