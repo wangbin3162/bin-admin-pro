@@ -1,27 +1,13 @@
 import DatasourceCreate from '@/utils/datasource-create'
-import { deepCopy, getUuid } from '@/utils/util'
+import { copyText, deepCopy, getUuid } from '@/utils/util'
+import { defaultTemps } from '@/utils/luckysheet-util/data-tmp'
 
 const Ds = new DatasourceCreate('__EXCEL_DATASOURCE__')
 const storeKey = '__excel_data__'
 
 // 默认状态
 const states = {
-  excelList: [
-    {
-      id: '0001',
-      name: '工资数据上报',
-      isPublish: '1',
-      reportCount: 10,
-      records: 10,
-      jsonData: {
-        info: {
-          name: '测试工资模板',
-        },
-        sheets: [],
-      },
-      mapping: [],
-    },
-  ],
+  excelList: deepCopy(defaultTemps),
 }
 
 // 获取datasource
@@ -118,6 +104,13 @@ export async function removeTemplate(id) {
       resolve(true)
     }, 200)
   })
+}
+
+// 发布当前报表
+export async function publishTemplate(id) {
+  const data = await getTempDetail(id)
+  data.isPublish = '1'
+  return modifyTemplate(data)
 }
 
 // 根据一个id，来获取一个已有的内容

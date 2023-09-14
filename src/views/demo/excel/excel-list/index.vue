@@ -38,6 +38,7 @@
             tooltip="发布"
             message="确定发布当前报表么?"
             confirm
+            @click="handlePublish(row)"
           ></action-button>
           <b-divider type="vertical"></b-divider>
           <action-button
@@ -137,6 +138,13 @@ function handleEdit({ id }) {
     query: { id },
   })
   window.open(routeData.href, '_blank')
+}
+
+function handlePublish({ id }) {
+  api.publishTemplate(id).then(() => {
+    Message.success('发布成功！')
+    getListData()
+  })
 }
 
 function handleDelete({ id }) {
