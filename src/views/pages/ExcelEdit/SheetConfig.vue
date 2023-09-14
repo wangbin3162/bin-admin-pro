@@ -27,14 +27,18 @@
         <b-button type="danger" size="small" icon="close" @click="closePage">关闭</b-button>
       </div>
     </div>
+
     <div id="SheetConfig" class="sheet-excel has-config"></div>
+
     <div class="right-config">
       <div class="right-top">
-        <b-button type="primary" size="small" dashed @click="getCurrentCell">设为数据项</b-button>
+        <b-button type="primary" size="small" dashed @click="setCellToMapping">设为数据项</b-button>
       </div>
       <div class="right-content">
         <b-scrollbar>
-          <b-divider align="left">实际存储值</b-divider>
+          <MappingConfig />
+
+          <!-- <b-divider align="left">实际存储值</b-divider>
           <b-ace-editor
             :model-value="
               JSON.stringify(
@@ -44,7 +48,7 @@
               )
             "
             readonly
-          ></b-ace-editor>
+          ></b-ace-editor> -->
         </b-scrollbar>
       </div>
     </div>
@@ -57,14 +61,16 @@
 import LuckyExcel from 'luckyexcel'
 import { Message, MessageBox } from 'bin-ui-next'
 import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
-import { deepMerge, deepCopy } from '@/utils/util'
+import { deepMerge, deepCopy, isEqual } from '@/utils/util'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import defaultOpts from '@/utils/luckysheet-util/default-options'
 import { isFunction } from '@/utils/luckysheet-util/is'
 import { exportExcel } from '@/utils/luckysheet-util/export'
-import { defaultSheetInfo } from '@/utils/luckysheet-util/data-tmp'
+import { defaultSheetInfo, formateCellRange } from '@/utils/luckysheet-util/data-tmp'
 import { excelData } from './useData'
+import MappingConfig from './MappingConfig.vue'
 import * as api from '@/api/modules/excel.api'
+import { useRouter } from 'vue-router'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -94,6 +100,7 @@ const options = computed(() => {
 
   return opt
 })
+const router = useRouter()
 
 const info = ref({ ...defaultSheetInfo, ...excelData.value?.jsonData?.info })
 const jsonData = ref({})
@@ -180,7 +187,6 @@ async function saveSheetData() {
         sheets,
       },
     }
-    console.log(data)
     btnLoading.value = true
     // 判断是修改还是新增
     const isCreate = data.id === ''
@@ -190,6 +196,13 @@ async function saveSheetData() {
       if (id) {
         Message.success('新增成功!')
         sendMsg('add-temp', { ...data })
+        excelData.value.id = id
+        let routeData = router.resolve({
+          path: '/excel-edit',
+          query: { id },
+        })
+        window.location.replace(routeData.href)
+        document.title = '修改模板'
       }
     } else {
       // 修改
@@ -203,9 +216,24 @@ async function saveSheetData() {
   btnLoading.value = false
 }
 
-function getCurrentCell() {
-  const range = LuckySheet.getRange()
-  console.log(range)
+// 设置为数据项
+function setCellToMapping() {
+  const range = LuckySheet.getRange()[0] // 取第一个选区
+
+  const formatRange = formateCellRange(range)
+  // 判断是否有相同的cellRange
+  const index = excelData.value.mapping.findIndex(item => isEqual(item.cellRange, range))
+  if (index > -1) {
+    Message.warning('已存在相同位置的单元格数据项！')
+    return
+  }
+  // 追加一个映射值
+  excelData.value.mapping.push({
+    ...formatRange,
+    filedName: '', // 字段名称
+    filedTitle: '', // 字段标题
+    dataType: 'string', // string,number,date
+  })
 }
 
 // 关闭

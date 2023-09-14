@@ -16,6 +16,8 @@ export const throttle = Utils.util.throttle
 
 export const debounce = Utils.util.debounce
 
+export const isEqual = Utils.util.isEqual
+
 export const isEmpty = Utils.helper.isEmpty
 
 export const on = Utils.dom.on
