@@ -76,11 +76,12 @@
 </template>
 
 <script setup>
-import { reactive, ref } from 'vue'
+import { reactive, onBeforeUnmount } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import * as api from '@/api/modules/excel.api'
 import { Message } from 'bin-ui-next'
 import { useRouter } from 'vue-router'
+import { listenMsg } from '@/utils/cross-tab-msg'
 
 defineOptions({
   name: 'ExcelList',
@@ -130,4 +131,7 @@ function handleDelete(row) {
     getListData()
   })
 }
+
+const cancelListen = listenMsg(getListData)
+onBeforeUnmount(cancelListen)
 </script>

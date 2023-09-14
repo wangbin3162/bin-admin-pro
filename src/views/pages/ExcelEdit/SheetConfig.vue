@@ -11,7 +11,7 @@
       <div class="right">
         <b-button type="danger" icon="bug" @click="debug" />
         <b-button type="primary" plain @click="downloadExcel">下载excel</b-button>
-        <b-button type="primary" @click="saveSheetData">保存</b-button>
+        <b-button type="primary" :loading="btnLoading" @click="saveSheetData">保存</b-button>
         <b-button type="danger" @click="closePage">关闭</b-button>
       </div>
     </div>
@@ -28,21 +28,22 @@
       </div>
     </div>
 
-    <div v-show="isMaskShow" class="mask">Downloading</div>
+    <div v-show="isMaskShow" class="mask">loading</div>
   </div>
 </template>
 
 <script setup>
 import LuckyExcel from 'luckyexcel'
-import { computed, onBeforeUnmount, onMounted, ref, inject, toRaw } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
 import { deepMerge, deepCopy } from '@/utils/util'
 import { Message, MessageBox } from 'bin-ui-next'
 import defaultOpts from '@/views/pages/LuckySheet/utils/default-options'
 import { defaultSheetInfo } from '@/views/pages/LuckySheet/utils/data-tmp'
 import { isFunction } from '@/views/pages/LuckySheet/utils/is'
 import { exportExcel } from '@/views/pages/LuckySheet/utils/export'
-import { excelDataKey } from './context'
+import { excelData } from './useData'
 import * as api from '@/api/modules/excel.api'
+import { sendMsg } from '@/utils/cross-tab-msg'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -52,13 +53,6 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-})
-
-const Provider = inject(excelDataKey, {})
-
-const excelData = computed({
-  get: () => Provider?.excelData.value,
-  set: val => (Provider.excelData.value = val),
 })
 
 const title = computed({
@@ -88,6 +82,7 @@ const options = computed(() => {
 
 const info = ref({ ...defaultSheetInfo })
 const jsonData = ref({})
+const btnLoading = ref(false)
 const isMaskShow = ref(false)
 
 // debug
@@ -156,19 +151,30 @@ function downloadExcel() {
 }
 
 // 保存sheetData
-function saveSheetData() {
-  info.value.name = title.value
-  // 更新info信息
-  const sheets = LuckySheet.getAllSheets()
-  jsonData.value = {
-    info: toRaw(info.value),
-    sheets,
+async function saveSheetData() {
+  try {
+    info.value.name = title.value
+    // 更新info信息
+    const sheets = LuckySheet.getAllSheets()
+    const data = {
+      ...toRaw(excelData.value),
+      jsonData: {
+        info: toRaw(info.value),
+        sheets,
+      },
+    }
+    console.log(data)
+    btnLoading.value = true
+    const id = await api.addTemplate(data)
+    if (id) {
+      Message.success('保存成功!')
+      sendMsg('add-temp', { ...data })
+    }
+    console.log(id)
+  } catch (error) {
+    console.log(error)
   }
-  // excelData.value.jsonData = {
-  //   info: toRaw(info.value),
-  //   sheets,
-  // }
-  console.log(jsonData.value)
+  btnLoading.value = false
 }
 
 function getCurrentCell() {
