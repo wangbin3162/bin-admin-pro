@@ -36,7 +36,7 @@
 
 <script setup>
 import { Message, MessageBox } from 'bin-ui-next'
-import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 import { deepMerge, deepCopy } from '@/utils/util'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import defaultOpts from '@/utils/luckysheet-util/default-options'
@@ -176,7 +176,6 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .sheet-wrapper {
-  --v-right-width: 360px;
   position: relative;
   width: 100%;
   height: 100vh;
@@ -193,34 +192,12 @@ onBeforeUnmount(() => {
     position: absolute;
     margin: 0px;
     padding: 0px;
-    width: calc(100% - var(--v-right-width));
+    width: 100%;
     left: 0px;
     top: 50px;
     bottom: 0px;
     :deep(.luckysheet) {
       border: none;
-    }
-  }
-  .right-config {
-    position: absolute;
-    width: var(--v-right-width);
-    top: 50px;
-    bottom: 0;
-    right: 0;
-    border-left: 1px solid #e5e5e5;
-    display: flex;
-    flex-direction: column;
-    .right-top {
-      height: 41px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      padding: 5px 0 3px 15px;
-      border-bottom: 1px solid #d4d4d4;
-    }
-    .right-content {
-      flex: 1;
-      padding: 8px;
     }
   }
   .mask {

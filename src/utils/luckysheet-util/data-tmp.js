@@ -612,7 +612,7 @@ export const defaultTemps = [
           end: 'C1',
         },
         fieldName: 'name',
-        filedTitle: '姓名',
+        fieldTitle: '姓名',
         dataType: 'string',
       },
       {
@@ -629,7 +629,7 @@ export const defaultTemps = [
           end: 'F1',
         },
         fieldName: 'age',
-        filedTitle: '年龄',
+        fieldTitle: '年龄',
         dataType: 'number',
       },
       {
@@ -646,7 +646,7 @@ export const defaultTemps = [
           end: 'C2',
         },
         fieldName: 'gongzi',
-        filedTitle: '工资',
+        fieldTitle: '工资',
         dataType: 'number',
       },
       {
@@ -663,7 +663,7 @@ export const defaultTemps = [
           end: 'F2',
         },
         fieldName: 'sex',
-        filedTitle: '性别',
+        fieldTitle: '性别',
         dataType: 'string',
       },
     ],

@@ -241,7 +241,7 @@ function setCellToMapping() {
   excelData.value.mapping.push({
     ...formatRange,
     fieldName: '', // 字段名称
-    filedTitle: '', // 字段标题
+    fieldTitle: '', // 字段标题
     dataType: 'string', // string,number,date
   })
 }

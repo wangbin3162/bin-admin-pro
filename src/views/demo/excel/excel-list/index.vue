@@ -43,23 +43,6 @@
           <b-divider type="vertical"></b-divider>
           <action-button
             type="text"
-            icon="link"
-            color="warning"
-            is-icon
-            tooltip="填报链接"
-            @click="handleWriteData(row)"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <action-button
-            type="text"
-            icon="filedone"
-            color="info"
-            is-icon
-            tooltip="数据"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <action-button
-            type="text"
             icon="delete"
             color="danger"
             is-icon
@@ -67,6 +50,28 @@
             confirm
             @click="handleDelete(row)"
           ></action-button>
+          <b-divider type="vertical"></b-divider>
+          <b-dropdown trigger="click" append-to-body>
+            <a href="javascript:void(0)">
+              <b-icon name="down"></b-icon>
+            </a>
+            <template #dropdown>
+              <b-dropdown-menu>
+                <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
+                  <b-icon name="file-add" />
+                  普通填报
+                </b-dropdown-item>
+                <b-dropdown-item @click="handleWriteData(row, '/data-edit')">
+                  <b-icon name="link" />
+                  报表链接
+                </b-dropdown-item>
+                <b-dropdown-item>
+                  <b-icon name="file-add" />
+                  查看数据
+                </b-dropdown-item>
+              </b-dropdown-menu>
+            </template>
+          </b-dropdown>
         </template>
       </b-table>
 
@@ -110,7 +115,7 @@ const columns = [
   { title: '是否发布', slot: 'isPublish' },
   { title: '上报数量', key: 'reportCount' },
   { title: '记录个数', key: 'records' },
-  { title: '操作', width: 220, align: 'center', slot: 'action' },
+  { title: '操作', width: 200, align: 'center', slot: 'action' },
 ]
 
 const { loading, list, total, handleSearch, getListData, pageChange } = useTable(
@@ -161,9 +166,9 @@ function handleDelete({ id }) {
 }
 
 // 数据填报链接跳转
-function handleWriteData({ id }) {
+function handleWriteData({ id }, path = '/data-edit') {
   let routeData = router.resolve({
-    path: '/data-edit',
+    path,
     query: { tempId: id },
   })
   window.open(routeData.href, '_blank')
