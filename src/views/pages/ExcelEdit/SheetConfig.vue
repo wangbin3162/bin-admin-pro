@@ -5,14 +5,26 @@
         <b-space>
           <h3>模板名称</h3>
           <b-input v-model="title" placeholder="模板名称" />
-          <b-button type="primary" @click="loadExcel">导入</b-button>
         </b-space>
       </div>
       <div class="right">
-        <b-button type="danger" icon="bug" @click="debug" />
-        <b-button type="primary" plain @click="downloadExcel">下载excel</b-button>
-        <b-button type="primary" :loading="btnLoading" @click="saveSheetData">保存</b-button>
-        <b-button type="danger" @click="closePage">关闭</b-button>
+        <b-button type="text" icon="bug" text-color="danger" title="打印调试" @click="debug" />
+        <b-button type="primary" size="small" icon="vertical-align-botto" plain @click="loadExcel">
+          导入
+        </b-button>
+        <b-button type="primary" size="small" icon="totop" plain @click="downloadExcel">
+          导出
+        </b-button>
+        <b-button
+          type="primary"
+          size="small"
+          icon="save"
+          :loading="btnLoading"
+          @click="saveSheetData"
+        >
+          保存
+        </b-button>
+        <b-button type="danger" size="small" icon="close" @click="closePage">关闭</b-button>
       </div>
     </div>
     <div id="SheetConfig" class="sheet-excel has-config"></div>
@@ -23,7 +35,16 @@
       <div class="right-content">
         <b-scrollbar>
           <b-divider align="left">实际存储值</b-divider>
-          <b-ace-editor :model-value="JSON.stringify(excelData, null, 2)" readonly></b-ace-editor>
+          <b-ace-editor
+            :model-value="
+              JSON.stringify(
+                { id: excelData.id, name: excelData.name, mapping: excelData.mapping },
+                null,
+                2,
+              )
+            "
+            readonly
+          ></b-ace-editor>
         </b-scrollbar>
       </div>
     </div>
@@ -34,16 +55,16 @@
 
 <script setup>
 import LuckyExcel from 'luckyexcel'
+import { Message, MessageBox } from 'bin-ui-next'
 import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
 import { deepMerge, deepCopy } from '@/utils/util'
-import { Message, MessageBox } from 'bin-ui-next'
-import defaultOpts from '@/views/pages/LuckySheet/utils/default-options'
-import { defaultSheetInfo } from '@/views/pages/LuckySheet/utils/data-tmp'
-import { isFunction } from '@/views/pages/LuckySheet/utils/is'
-import { exportExcel } from '@/views/pages/LuckySheet/utils/export'
+import { sendMsg } from '@/utils/cross-tab-msg'
+import defaultOpts from '@/utils/luckysheet-util/default-options'
+import { isFunction } from '@/utils/luckysheet-util/is'
+import { exportExcel } from '@/utils/luckysheet-util/export'
+import { defaultSheetInfo } from '@/utils/luckysheet-util/data-tmp'
 import { excelData } from './useData'
 import * as api from '@/api/modules/excel.api'
-import { sendMsg } from '@/utils/cross-tab-msg'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -60,12 +81,6 @@ const title = computed({
   set: val => (excelData.value.name = val),
 })
 
-const hook = {
-  cellMousedown: (cel, position, sheet, ctx) => {
-    console.log({ cel, position, sheet, ctx })
-  },
-}
-
 const options = computed(() => {
   const opt = deepMerge(
     deepCopy({
@@ -80,17 +95,17 @@ const options = computed(() => {
   return opt
 })
 
-const info = ref({ ...defaultSheetInfo })
+const info = ref({ ...defaultSheetInfo, ...excelData.value?.jsonData?.info })
 const jsonData = ref({})
 const btnLoading = ref(false)
 const isMaskShow = ref(false)
 
 // debug
 function debug() {
-  console.log('--------------------debug--------------------')
-  console.log('props.name', props.name)
+  console.log('-------------------------------------debug--------------------------------------')
+  console.log('excelData', excelData.value)
   console.log('info', info.value)
-  console.log('------------------debug end------------------')
+  console.log('-----------------------------------debug end------------------------------------')
 }
 
 // 载入excel行程模板
@@ -147,10 +162,12 @@ function loadExcel() {
 
 // 下载当前excel模板
 function downloadExcel() {
-  exportExcel(LuckySheet.getAllSheets(), title.value)
+  exportExcel(LuckySheet.getAllSheets(), title.value).then(() => {
+    Message.success('导出成功!')
+  })
 }
 
-// 保存sheetData
+// 保存
 async function saveSheetData() {
   try {
     info.value.name = title.value
@@ -165,12 +182,21 @@ async function saveSheetData() {
     }
     console.log(data)
     btnLoading.value = true
-    const id = await api.addTemplate(data)
-    if (id) {
-      Message.success('保存成功!')
-      sendMsg('add-temp', { ...data })
+    // 判断是修改还是新增
+    const isCreate = data.id === ''
+    // 新增
+    if (isCreate) {
+      const id = await api.addTemplate(data)
+      if (id) {
+        Message.success('新增成功!')
+        sendMsg('add-temp', { ...data })
+      }
+    } else {
+      // 修改
+      await api.modifyTemplate(data)
+      Message.success('修改成功!')
+      sendMsg('modify-temp', { ...data })
     }
-    console.log(id)
   } catch (error) {
     console.log(error)
   }
@@ -202,7 +228,14 @@ function destroy() {
 }
 
 onMounted(() => {
-  LuckySheet.create(options.value)
+  debug()
+  const id = excelData.value.id
+  const opts = { ...options.value }
+  if (id) {
+    opts.data = excelData.value.jsonData?.sheets
+    opts.title = excelData.value.jsonData?.info.name
+  }
+  LuckySheet.create(opts)
 })
 
 onBeforeUnmount(() => {

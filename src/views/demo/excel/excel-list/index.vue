@@ -22,7 +22,13 @@
           {{ publishMap[row.isPublish] }}
         </template>
         <template #action="{ row }">
-          <action-button type="text" icon="edit-square" is-icon tooltip="编辑"></action-button>
+          <action-button
+            type="text"
+            icon="edit-square"
+            is-icon
+            tooltip="编辑"
+            @click="handleEdit(row)"
+          ></action-button>
           <b-divider type="vertical"></b-divider>
           <action-button
             type="text"
@@ -125,8 +131,16 @@ function handleCreate() {
   window.open(routeData.href, '_blank')
 }
 
-function handleDelete(row) {
-  api.remove(row.id).then(() => {
+function handleEdit({ id }) {
+  let routeData = router.resolve({
+    path: '/excel-edit',
+    query: { id },
+  })
+  window.open(routeData.href, '_blank')
+}
+
+function handleDelete({ id }) {
+  api.removeTemplate(id).then(() => {
     Message.success('删除成功！')
     getListData()
   })

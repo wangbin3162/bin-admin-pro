@@ -7,6 +7,7 @@ import { useRoute } from 'vue-router'
 import { watch, ref } from 'vue'
 import SheetConfig from './SheetConfig.vue'
 import { excelData, initData } from './useData'
+import * as api from '@/api/modules/excel.api'
 
 defineOptions({
   name: 'ExcelEdit',
@@ -19,12 +20,12 @@ watch(
   () => route.path,
   async () => {
     const { id } = route.query
+    document.title = id ? '修改模板' : '新增模板'
     if (id) {
       // 如果是有id表示为修改，无id则获取创建对象来进行设置
-      // await getBaseInfo(id)
+      const detail = await api.getTempDetail(id)
+      excelData.value = { ...detail }
     } else {
-      console.log('------当前是新增------')
-      document.title = '新增模板'
       initData()
       excelData.value.name = '新模板'
     }
