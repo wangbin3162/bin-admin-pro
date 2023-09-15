@@ -94,7 +94,7 @@ export default ({ mode }) => {
         targets: [
           {
             src: './node_modules/libpag/lib/libpag.wasm',
-            dest: isProd ? 'dist/' : 'public/',
+            dest: isProd ? 'docs/' : 'public/',
           },
         ],
         hook: isProd ? 'writeBundle' : 'buildStart',
