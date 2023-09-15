@@ -1,0 +1,1 @@
+import{o as t}from"./index-f676c4c8.js";function r(){return t({url:"/list/base",method:"get"})}function s(){return t({url:"/list/articles",method:"get"})}function i(){return t({url:"/list/projects",method:"get"})}export{i as a,s as b,r as g};
