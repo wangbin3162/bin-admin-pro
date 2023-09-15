@@ -13,8 +13,6 @@
 
     <div class="sheet-excel">
       <div class="form-box">
-        {{ formData }}
-
         <b-form label-width="100px" :model="formData">
           <b-form-item
             v-for="(item, index) in excelData.mapping"

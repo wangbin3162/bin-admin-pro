@@ -16,12 +16,13 @@
           v-if="IS_DEV"
           @click="debug"
         />
-        <b-button type="primary" size="small" icon="vertical-align-botto" plain @click="loadExcel">
-          导入
+        <b-button type="primary" size="small" icon="login" plain @click="loadExcel">
+          导入模板
         </b-button>
-        <b-button type="primary" size="small" icon="totop" plain @click="downloadExcel">
-          导出
+        <b-button type="primary" size="small" icon="download" plain @click="downloadExcel">
+          下载模板
         </b-button>
+        <b-divider type="vertical"></b-divider>
         <b-button
           type="primary"
           size="small"
@@ -35,7 +36,7 @@
       </div>
     </div>
 
-    <div id="SheetConfig" class="sheet-excel has-config"></div>
+    <div id="SheetContainer" class="sheet-excel has-config"></div>
 
     <div class="right-config">
       <div class="right-top">
@@ -67,17 +68,13 @@
 </template>
 
 <script setup>
-import LuckyExcel from 'luckyexcel'
-import { Message, MessageBox } from 'bin-ui-next'
-import { computed, onBeforeUnmount, onMounted, ref, toRaw } from 'vue'
-import { deepMerge, deepCopy, isEqual } from '@/utils/util'
+import { Message } from 'bin-ui-next'
+import { toRaw } from 'vue'
+import { isEqual } from '@/utils/util'
 import { IS_DEV } from '@/utils/env'
 import { sendMsg } from '@/utils/cross-tab-msg'
-import defaultOpts from '@/utils/luckysheet-util/default-options'
-import { isFunction } from '@/utils/luckysheet-util/is'
-import { exportExcel } from '@/utils/luckysheet-util/export'
-import { defaultSheetInfo, formateCellRange } from '@/utils/luckysheet-util/data-tmp'
-import { excelData } from './useData'
+import { formateCellRange } from '@/utils/luckysheet-util/data-tmp'
+import { excelData, debug, useData } from './useData'
 import MappingConfig from './MappingConfig.vue'
 import * as api from '@/api/modules/excel.api'
 import { useRouter } from 'vue-router'
@@ -91,98 +88,8 @@ const props = defineProps({
     default: () => ({}),
   },
 })
-
-const title = computed({
-  get: () => excelData.value.name,
-  set: val => (excelData.value.name = val),
-})
-
-const options = computed(() => {
-  const opt = deepMerge(
-    deepCopy({
-      ...defaultOpts,
-      container: 'SheetConfig',
-      title: title.value, // 设定表格名称
-      data: [{ name: 'Sheet1', index: 0 }],
-    }),
-    deepCopy(props.cfg),
-  )
-
-  return opt
-})
+const { info, title, btnLoading, isMaskShow, closePage, loadExcel, downloadExcel } = useData(props)
 const router = useRouter()
-
-const info = ref({ ...defaultSheetInfo, ...excelData.value?.jsonData?.info })
-const jsonData = ref({})
-const btnLoading = ref(false)
-const isMaskShow = ref(false)
-
-// debug
-function debug() {
-  if (!IS_DEV) return
-  console.log('-------------------------------------debug--------------------------------------')
-  console.log('excelData', excelData.value)
-  console.log('-----------------------------------debug end------------------------------------')
-}
-
-// 载入excel行程模板
-function loadExcel() {
-  let input = document.createElement('input')
-  input.type = 'file'
-
-  input.onchange = e => {
-    const files = e.target.files
-    if (!files || files.length === 0) {
-      Message.error('No files wait for import')
-      return
-    }
-    let file = files[0]
-    const name = file.name
-
-    let suffixArr = name.split('.'),
-      suffix = suffixArr[suffixArr.length - 1]
-
-    if (suffix !== 'xlsx') {
-      Message.error('Currently only supports the import of xlsx files')
-      return
-    }
-    // 更新info信息
-    info.value.name = file.name
-
-    isMaskShow.value = true
-
-    LuckyExcel.transformExcelToLucky(files[0], exportJson => {
-      if (!exportJson.sheets || exportJson.sheets.length === 0) {
-        Message.error(
-          'Failed to read the content of the excel file, currently does not support xls files!',
-        )
-        return
-      }
-      console.log('exportJson', exportJson)
-      jsonData.value = exportJson
-
-      isMaskShow.value = false
-
-      destroy() // 销毁重建
-
-      LuckySheet.create({
-        ...options.value,
-        data: exportJson.sheets,
-        title: exportJson.info.name,
-        userInfo: exportJson.info.name.creator,
-      })
-    })
-  }
-
-  input.click()
-}
-
-// 下载当前excel模板
-function downloadExcel() {
-  exportExcel(LuckySheet.getAllSheets(), title.value).then(() => {
-    Message.success('导出成功!')
-  })
-}
 
 // 保存
 async function saveSheetData() {
@@ -245,40 +152,6 @@ function setCellToMapping() {
     dataType: 'string', // string,number,date
   })
 }
-
-// 关闭
-function closePage() {
-  MessageBox.confirm({
-    type: 'warning',
-    title: '提示',
-    message: '关闭当前页面会丢失没有保存的操作, 是否继续?',
-  })
-    .then(() => {
-      // 关闭当前页面
-      window.close()
-    })
-    .catch(() => {})
-}
-
-// 销毁工作表
-function destroy() {
-  isFunction(LuckySheet?.destroy) && LuckySheet.destroy()
-}
-
-onMounted(() => {
-  debug()
-  const id = excelData.value.id
-  const opts = { ...options.value }
-  if (id) {
-    opts.data = excelData.value.jsonData?.sheets
-    opts.title = excelData.value.jsonData?.info.name
-  }
-  LuckySheet.create(opts)
-})
-
-onBeforeUnmount(() => {
-  destroy()
-})
 </script>
 
 <style scoped>

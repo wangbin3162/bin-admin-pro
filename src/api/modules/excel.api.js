@@ -32,8 +32,10 @@ async function setStoreData(value, key = storeKey) {
 export async function getExcelList(query) {
   const { excelList } = await getDataSource()
   return new Promise(resolve => {
-    const { page, size, name } = query
-    const filterList = excelList.filter(i => i.name.includes(name))
+    const { page, size, name, isPublish } = query
+    const filterList = excelList.filter(
+      i => i.name.includes(name) && (i.isPublish === isPublish || isPublish === ''),
+    )
     const result = []
     let pageCount = Math.ceil(filterList.length / size)
 

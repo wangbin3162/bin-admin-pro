@@ -15,6 +15,9 @@
           v-if="IS_DEV"
           @click="debug"
         />
+        <b-button type="primary" size="small" icon="download" plain @click="downloadExcel">
+          下载模板
+        </b-button>
         <b-button
           type="primary"
           size="small"
@@ -28,21 +31,18 @@
       </div>
     </div>
 
-    <div id="SheetEdit" class="sheet-excel has-config"></div>
+    <div id="SheetContainer" class="sheet-excel has-config"></div>
 
     <div v-show="isMaskShow" class="mask">loading</div>
   </div>
 </template>
 
 <script setup>
-import { Message, MessageBox } from 'bin-ui-next'
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-import { deepMerge, deepCopy } from '@/utils/util'
+import { Message } from 'bin-ui-next'
+import { deepCopy } from '@/utils/util'
 import { sendMsg } from '@/utils/cross-tab-msg'
-import defaultOpts from '@/utils/luckysheet-util/default-options'
-import { isFunction } from '@/utils/luckysheet-util/is'
-import { excelData } from '../ExcelEdit/useData'
-import { useRouter, useRoute } from 'vue-router'
+import { excelData, debug, useData } from '../ExcelEdit/useData'
+import { useRoute } from 'vue-router'
 import { IS_DEV } from '@/utils/env'
 import * as api from '@/api/modules/excel.api'
 
@@ -56,37 +56,8 @@ const props = defineProps({
   },
 })
 
-const title = computed({
-  get: () => excelData.value.name,
-  set: val => (excelData.value.name = val),
-})
-
-const options = computed(() => {
-  const opt = deepMerge(
-    deepCopy({
-      ...defaultOpts,
-      container: 'SheetEdit',
-      title: title.value, // 设定表格名称
-      data: [{ name: 'Sheet1', index: 0 }],
-    }),
-    deepCopy(props.cfg),
-  )
-
-  return opt
-})
-const router = useRouter()
+const { title, btnLoading, isMaskShow, closePage, downloadExcel } = useData(props)
 const route = useRoute()
-
-const btnLoading = ref(false)
-const isMaskShow = ref(false)
-
-// debug
-function debug() {
-  if (!IS_DEV) return
-  console.log('-------------------------------------debug--------------------------------------')
-  console.log('excelData', excelData.value)
-  console.log('-----------------------------------debug end------------------------------------')
-}
 
 // 保存
 async function saveSheetData() {
@@ -138,40 +109,6 @@ function resetSheetData() {
   }
   btnLoading.value = false
 }
-
-// 关闭
-function closePage() {
-  MessageBox.confirm({
-    type: 'warning',
-    title: '提示',
-    message: '关闭当前页面会丢失没有保存的操作, 是否继续?',
-  })
-    .then(() => {
-      // 关闭当前页面
-      window.close()
-    })
-    .catch(() => {})
-}
-
-// 销毁工作表
-function destroy() {
-  isFunction(LuckySheet?.destroy) && LuckySheet.destroy()
-}
-
-onMounted(() => {
-  debug()
-  const id = excelData.value.id
-  const opts = { ...options.value }
-  if (id) {
-    opts.data = excelData.value.jsonData?.sheets
-    opts.title = excelData.value.jsonData?.info.name
-  }
-  LuckySheet.create(opts)
-})
-
-onBeforeUnmount(() => {
-  destroy()
-})
 </script>
 
 <style scoped>

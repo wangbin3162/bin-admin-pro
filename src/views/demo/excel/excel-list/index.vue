@@ -57,16 +57,16 @@
             </a>
             <template #dropdown>
               <b-dropdown-menu>
-                <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
-                  <b-icon name="file-add" />
-                  普通填报
-                </b-dropdown-item>
                 <b-dropdown-item @click="handleWriteData(row, '/data-edit')">
-                  <b-icon name="link" />
+                  <b-icon name="link" color="#1089ff" />
                   报表链接
                 </b-dropdown-item>
+                <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
+                  <b-icon name="file-add" color="#fa8c16" />
+                  表单填报
+                </b-dropdown-item>
                 <b-dropdown-item>
-                  <b-icon name="file-add" />
+                  <b-icon name="filesearch" color="#13c2c2" />
                   查看数据
                 </b-dropdown-item>
               </b-dropdown-menu>
@@ -104,6 +104,7 @@ const query = reactive({
   page: 1,
   size: 10,
   name: '',
+  isPublish: '',
 })
 const router = useRouter()
 
