@@ -57,6 +57,7 @@ const btnLoading = ref(false)
 const isMaskShow = ref(false)
 
 const formData = ref({})
+const sheets = ref(null)
 
 // 关闭
 function closePage() {
@@ -69,6 +70,9 @@ function initFormData(detail) {
     const { fieldName } = item
     formData.value[fieldName] = detail ? detail.data[fieldName] : ''
   })
+  if (detail && detail.sheets) {
+    sheets.value = deepCopy(detail.sheets)
+  }
 }
 
 // 保存
@@ -81,6 +85,25 @@ async function saveSheetData() {
       tempId: excelData.value.id,
       tempName: excelData.value.name,
       data: toRaw(formData.value),
+    }
+    if (sheets.value && sheets.value[0]) {
+      data.sheets = toRaw(sheets.value)
+
+      // 根据mapping的映射，将对象中的值填充到celldata中去
+      const mapping = deepCopy(excelData.value.mapping)
+      const celldata = data.sheets[0].celldata || []
+      // 从celldata中查找mapping中的cellIndex 的位置，并填充相关数据
+      mapping.forEach(item => {
+        const { cellIndex, fieldName } = item
+        const { column, row } = cellIndex
+        const cIndex = celldata.findIndex(i => i.c === column && i.r === row)
+        const value = formData.value[fieldName]
+        // 如果存在当前这个单元格，则单元格内容给扩展两个属性
+        if (cIndex > -1) {
+          celldata[cIndex].v.v = celldata[cIndex].v.m = value
+          data.sheets[0].data[row][column].v = data.sheets[0].data[row][column].m = value
+        }
+      })
     }
 
     // 如果是新增报表，则调用新增

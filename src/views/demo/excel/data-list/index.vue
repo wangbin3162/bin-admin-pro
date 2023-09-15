@@ -38,35 +38,27 @@
               </div>
               <div class="item-extra">
                 <b-row>
-                  <b-col span="8">
-                    <b-tooltip content="新增填报">
-                      <b-icon
-                        name="plus-circle"
-                        color="#1089ff"
-                        type="button"
-                        @click="handleWriteData(item, '/data-edit')"
-                      ></b-icon>
-                    </b-tooltip>
+                  <b-col span="12">
+                    <b-button
+                      type="text"
+                      text-color="warning"
+                      icon="file-add"
+                      :icon-style="{ fontSize: '18px' }"
+                      @click="handleWriteData(item)"
+                    >
+                      数据填报
+                    </b-button>
                   </b-col>
-                  <b-col span="8">
-                    <b-tooltip content="表单填报">
-                      <b-icon
-                        name="file-add"
-                        type="button"
-                        color="#fa8c16"
-                        @click="handleWriteData(item, '/data-edit-simple')"
-                      ></b-icon>
-                    </b-tooltip>
-                  </b-col>
-                  <b-col span="8">
-                    <b-tooltip content="查看数据">
-                      <b-icon
-                        name="filesearch"
-                        type="button"
-                        color="#13c2c2"
-                        @click="handleCheckData(item)"
-                      ></b-icon>
-                    </b-tooltip>
+                  <b-col span="12">
+                    <b-button
+                      type="text"
+                      text-color="primary"
+                      icon="filesearch"
+                      :icon-style="{ fontSize: '18px' }"
+                      @click="handleCheckData(item)"
+                    >
+                      查看数据
+                    </b-button>
                   </b-col>
                 </b-row>
               </div>
@@ -117,9 +109,9 @@ function handleReset() {
 }
 
 // 数据填报链接跳转
-function handleWriteData({ id }, path = '/data-edit') {
+function handleWriteData({ id }) {
   let routeData = router.resolve({
-    path,
+    path: '/data-edit',
     query: { tempId: id },
   })
   window.open(routeData.href, '_blank')
@@ -189,7 +181,7 @@ onBeforeUnmount(cancelListen)
       .item-extra {
         margin-top: 16px;
         border-top: 1px solid #f0f0f0;
-        padding: 8px 0;
+        padding: 10px 0;
         text-align: center;
         :deep(.bin-col) {
           border-right: 1px solid #e8eaec;

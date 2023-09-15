@@ -70,7 +70,7 @@
 <script setup>
 import { Message } from 'bin-ui-next'
 import { toRaw } from 'vue'
-import { isEqual } from '@/utils/util'
+import { deepCopy, isEqual } from '@/utils/util'
 import { IS_DEV } from '@/utils/env'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import { formateCellRange } from '@/utils/luckysheet-util/data-tmp'
@@ -95,15 +95,8 @@ const router = useRouter()
 async function saveSheetData() {
   try {
     info.value.name = title.value
-    // 更新info信息
-    const sheets = LuckySheet.getAllSheets()
-    const data = {
-      ...toRaw(excelData.value),
-      jsonData: {
-        info: toRaw(info.value),
-        sheets,
-      },
-    }
+    const data = formatData()
+
     btnLoading.value = true
     // 判断是修改还是新增
     const isCreate = data.id === ''
@@ -114,6 +107,8 @@ async function saveSheetData() {
         Message.success('新增成功!')
         sendMsg('add-temp', { ...data })
         excelData.value.id = id
+        excelData.value.reportCount = excelData.value.records = 0
+        excelData.value.isPublish = '0'
         let routeData = router.resolve({
           path: '/excel-edit',
           query: { id },
@@ -133,6 +128,19 @@ async function saveSheetData() {
   btnLoading.value = false
 }
 
+function formatData() {
+  // 更新info信息
+  const sheets = LuckySheet.getAllSheets()
+  const data = {
+    ...toRaw(excelData.value),
+    jsonData: {
+      info: toRaw(info.value),
+      sheets,
+    },
+  }
+  return data
+}
+
 // 设置为数据项
 function setCellToMapping() {
   const range = LuckySheet.getRange()[0] // 取第一个选区
@@ -144,6 +152,7 @@ function setCellToMapping() {
     Message.warning('已存在相同位置的单元格数据项！')
     return
   }
+
   // 追加一个映射值
   excelData.value.mapping.push({
     ...formatRange,

@@ -74,11 +74,13 @@ async function saveSheetData() {
       obj[fieldName] = value
     })
 
+    const sheets = LuckySheet.getAllSheets()
     const data = {
       id: route.query.id ?? '',
       tempId: excelData.value.id,
       tempName: excelData.value.name,
       data: obj,
+      sheets,
     }
 
     // 如果是新增报表，则调用新增
@@ -87,6 +89,10 @@ async function saveSheetData() {
       Message.success('新增成功!')
       sendMsg('add-sheet-data', { ...data })
       resetSheetData()
+    } else {
+      await api.modifySheetData(data)
+      Message.success('修改成功!')
+      sendMsg('modify-sheet-data', { ...data })
     }
   } catch (error) {
     console.log(error)

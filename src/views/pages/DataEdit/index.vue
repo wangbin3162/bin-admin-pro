@@ -19,6 +19,10 @@ const render = ref(false)
 
 // 初始化表格数据
 function initSheetData(detail) {
+  if (detail.sheets) {
+    excelData.value.jsonData.sheets = deepCopy(detail.sheets)
+    return
+  }
   const mapping = deepCopy(excelData.value.mapping)
   const sheet0 = excelData.value.jsonData?.sheets[0]
   if (sheet0) {
@@ -28,9 +32,10 @@ function initSheetData(detail) {
       const { cellIndex, fieldName } = item
       const { column, row } = cellIndex
       const cIndex = celldata.findIndex(i => i.c === column && i.r === row)
+      const value = detail.data[fieldName]
       // 如果存在当前这个单元格，则单元格内容给扩展两个属性
       if (cIndex > -1) {
-        celldata[cIndex].v.v = celldata[cIndex].v.m = detail.data[fieldName]
+        celldata[cIndex].v.v = celldata[cIndex].v.m = value
       }
     })
   }

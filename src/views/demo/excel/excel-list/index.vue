@@ -20,7 +20,17 @@
 
         <b-table :columns="columns" :data="list" :loading="loading" size="small">
           <template #isPublish="{ row }">
-            {{ publishMap[row.isPublish] }}
+            <action-button
+              type="text"
+              icon="play-circle"
+              color="success"
+              is-icon
+              tooltip="发布"
+              message="确定发布当前报表么?"
+              confirm
+              :disabled="row.isPublish === '1'"
+              @click="handlePublish(row)"
+            ></action-button>
           </template>
           <template #action="{ row }">
             <action-button
@@ -33,13 +43,20 @@
             <b-divider type="vertical"></b-divider>
             <action-button
               type="text"
-              icon="play-circle"
-              color="success"
+              icon="file-add"
+              color="#fa8c16"
               is-icon
-              tooltip="发布"
-              message="确定发布当前报表么?"
-              confirm
-              @click="handlePublish(row)"
+              tooltip="数据填报"
+              @click="handleWriteData(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <action-button
+              type="text"
+              icon="filesearch"
+              color="#13c2c2"
+              is-icon
+              tooltip="查看数据"
+              @click="handleCheckData(row)"
             ></action-button>
             <b-divider type="vertical"></b-divider>
             <action-button
@@ -51,28 +68,6 @@
               confirm
               @click="handleDelete(row)"
             ></action-button>
-            <b-divider type="vertical"></b-divider>
-            <b-dropdown trigger="click" append-to-body>
-              <a href="javascript:void(0)">
-                <b-icon name="down"></b-icon>
-              </a>
-              <template #dropdown>
-                <b-dropdown-menu>
-                  <b-dropdown-item @click="handleWriteData(row, '/data-edit')">
-                    <b-icon name="link" color="#1089ff" />
-                    报表链接
-                  </b-dropdown-item>
-                  <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
-                    <b-icon name="file-add" color="#fa8c16" />
-                    表单填报
-                  </b-dropdown-item>
-                  <b-dropdown-item @click="handleCheckData(row)">
-                    <b-icon name="filesearch" color="#13c2c2" />
-                    查看数据
-                  </b-dropdown-item>
-                </b-dropdown-menu>
-              </template>
-            </b-dropdown>
           </template>
         </b-table>
 
@@ -115,14 +110,12 @@ const dataTableRef = ref(null)
 const dataTableShow = ref(false)
 const router = useRouter()
 
-const publishMap = { 0: '否', 1: '是' }
-
 const columns = [
   { title: '序号', width: 70, align: 'center', type: 'index' },
   { title: '表单名称', key: 'name' },
-  { title: '是否发布', slot: 'isPublish' },
   { title: '上报数量', key: 'reportCount' },
   { title: '记录个数', key: 'records' },
+  { title: '发布', width: 100, align: 'center', slot: 'isPublish' },
   { title: '操作', width: 200, align: 'center', slot: 'action' },
 ]
 
@@ -186,9 +179,9 @@ function handleCancel() {
 }
 
 // 数据填报链接跳转
-function handleWriteData({ id }, path = '/data-edit') {
+function handleWriteData({ id }) {
   let routeData = router.resolve({
-    path,
+    path: '/data-edit',
     query: { tempId: id },
   })
   window.open(routeData.href, '_blank')

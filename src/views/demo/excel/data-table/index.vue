@@ -75,7 +75,6 @@ function initColumns() {
 
   mapping.forEach((item, index) => {
     if (index < 5) {
-      console.log(item)
       columns.value.push({
         title: item.fieldTitle,
         key: item.fieldName,
