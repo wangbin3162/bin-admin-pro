@@ -1,100 +1,105 @@
 <template>
-  <page-wrapper>
-    <base-table>
-      <template #filter>
-        <b-form label-width="95px">
-          <b-form-item label="报表名称">
-            <b-input v-model="query.name" clearable></b-input>
-          </b-form-item>
-          <b-form-item label-width="16px">
-            <b-button type="primary" :loading="loading" @click="handleSearch">查询</b-button>
-            <b-button @click="handleReset">重置</b-button>
-          </b-form-item>
-        </b-form>
-      </template>
-
-      <template #action>
-        <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
-      </template>
-
-      <b-table :columns="columns" :data="list" :loading="loading" size="small">
-        <template #isPublish="{ row }">
-          {{ publishMap[row.isPublish] }}
+  <div>
+    <page-wrapper v-show="!dataTableShow">
+      <base-table>
+        <template #filter>
+          <b-form label-width="95px">
+            <b-form-item label="报表名称">
+              <b-input v-model="query.name" clearable></b-input>
+            </b-form-item>
+            <b-form-item label-width="16px">
+              <b-button type="primary" :loading="loading" @click="handleSearch">查询</b-button>
+              <b-button @click="handleReset">重置</b-button>
+            </b-form-item>
+          </b-form>
         </template>
-        <template #action="{ row }">
-          <action-button
-            type="text"
-            icon="edit-square"
-            is-icon
-            tooltip="编辑"
-            @click="handleEdit(row)"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <action-button
-            type="text"
-            icon="play-circle"
-            color="success"
-            is-icon
-            tooltip="发布"
-            message="确定发布当前报表么?"
-            confirm
-            @click="handlePublish(row)"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <action-button
-            type="text"
-            icon="delete"
-            color="danger"
-            is-icon
-            tooltip="删除"
-            confirm
-            @click="handleDelete(row)"
-          ></action-button>
-          <b-divider type="vertical"></b-divider>
-          <b-dropdown trigger="click" append-to-body>
-            <a href="javascript:void(0)">
-              <b-icon name="down"></b-icon>
-            </a>
-            <template #dropdown>
-              <b-dropdown-menu>
-                <b-dropdown-item @click="handleWriteData(row, '/data-edit')">
-                  <b-icon name="link" color="#1089ff" />
-                  报表链接
-                </b-dropdown-item>
-                <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
-                  <b-icon name="file-add" color="#fa8c16" />
-                  表单填报
-                </b-dropdown-item>
-                <b-dropdown-item>
-                  <b-icon name="filesearch" color="#13c2c2" />
-                  查看数据
-                </b-dropdown-item>
-              </b-dropdown-menu>
-            </template>
-          </b-dropdown>
-        </template>
-      </b-table>
 
-      <template #page>
-        <b-page
-          :total="total"
-          :current="query.page"
-          :page-size="query.size"
-          show-total
-          @change="pageChange"
-        ></b-page>
-      </template>
-    </base-table>
-  </page-wrapper>
+        <template #action>
+          <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
+        </template>
+
+        <b-table :columns="columns" :data="list" :loading="loading" size="small">
+          <template #isPublish="{ row }">
+            {{ publishMap[row.isPublish] }}
+          </template>
+          <template #action="{ row }">
+            <action-button
+              type="text"
+              icon="edit-square"
+              is-icon
+              tooltip="编辑"
+              @click="handleEdit(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <action-button
+              type="text"
+              icon="play-circle"
+              color="success"
+              is-icon
+              tooltip="发布"
+              message="确定发布当前报表么?"
+              confirm
+              @click="handlePublish(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <action-button
+              type="text"
+              icon="delete"
+              color="danger"
+              is-icon
+              tooltip="删除"
+              confirm
+              @click="handleDelete(row)"
+            ></action-button>
+            <b-divider type="vertical"></b-divider>
+            <b-dropdown trigger="click" append-to-body>
+              <a href="javascript:void(0)">
+                <b-icon name="down"></b-icon>
+              </a>
+              <template #dropdown>
+                <b-dropdown-menu>
+                  <b-dropdown-item @click="handleWriteData(row, '/data-edit')">
+                    <b-icon name="link" color="#1089ff" />
+                    报表链接
+                  </b-dropdown-item>
+                  <b-dropdown-item @click="handleWriteData(row, '/data-edit-simple')">
+                    <b-icon name="file-add" color="#fa8c16" />
+                    表单填报
+                  </b-dropdown-item>
+                  <b-dropdown-item @click="handleCheckData(row)">
+                    <b-icon name="filesearch" color="#13c2c2" />
+                    查看数据
+                  </b-dropdown-item>
+                </b-dropdown-menu>
+              </template>
+            </b-dropdown>
+          </template>
+        </b-table>
+
+        <template #page>
+          <b-page
+            :total="total"
+            :current="query.page"
+            :page-size="query.size"
+            show-total
+            @change="pageChange"
+          ></b-page>
+        </template>
+      </base-table>
+    </page-wrapper>
+
+    <DataTable ref="dataTableRef" v-if="dataTableShow" @close="handleCancel" />
+  </div>
 </template>
 
 <script setup>
-import { reactive, onBeforeUnmount } from 'vue'
+import { reactive, onBeforeUnmount, ref, nextTick } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import * as api from '@/api/modules/excel.api'
 import { Message } from 'bin-ui-next'
 import { useRouter } from 'vue-router'
 import { listenMsg } from '@/utils/cross-tab-msg'
+import DataTable from '../data-table/index.vue'
 
 defineOptions({
   name: 'ExcelList',
@@ -106,6 +111,8 @@ const query = reactive({
   name: '',
   isPublish: '',
 })
+const dataTableRef = ref(null)
+const dataTableShow = ref(false)
 const router = useRouter()
 
 const publishMap = { 0: '否', 1: '是' }
@@ -164,6 +171,18 @@ function handleDelete({ id }) {
     Message.success('删除成功！')
     getListData()
   })
+}
+
+// 查看数据
+async function handleCheckData({ id }) {
+  const detail = await api.getTempDetail(id)
+  dataTableShow.value = true
+  await nextTick()
+  dataTableRef.value.open(detail)
+}
+
+function handleCancel() {
+  dataTableShow.value = false
 }
 
 // 数据填报链接跳转

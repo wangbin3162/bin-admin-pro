@@ -1,86 +1,94 @@
 <template>
-  <page-wrapper desc="卡片类型的列表，这里仅做示例，实际开发需根据业务进行调整开发。">
-    <div class="filter-wrap">
-      <b-form label-width="95px" inline>
-        <b-form-item label="报表名称">
-          <b-input v-model="query.name" clearable></b-input>
-        </b-form-item>
-        <b-form-item label-width="16px">
-          <b-button type="primary" :loading="loading" @click="handleSearch">查询</b-button>
-          <b-button @click="handleReset">重置</b-button>
-        </b-form-item>
-      </b-form>
-    </div>
-
-    <div class="list-wrapper">
-      <TransitionGroup tag="div" name="fade" class="card-list-wrap">
-        <div class="card-item" key="add">
-          <b-button icon="plus" dashed style="height: 175px; width: 100%">新增填报</b-button>
-        </div>
-        <div v-for="item in list" :key="item.id" class="card-item">
-          <b-card
-            class="app-item"
-            :style="{ width: '100%', height: '175px', margin: '0' }"
-            :body-style="{ padding: 0 }"
-            shadow="never"
-          >
-            <div class="p16">
-              <div flex="cross:center">
-                <div class="item-title">{{ item.name }}</div>
-              </div>
-            </div>
-            <div>
-              <div class="item-author">上报数量：{{ item.reportCount }}</div>
-              <div class="item-desc">字段数量：{{ item.mapping.length }}</div>
-            </div>
-            <div class="item-extra">
-              <b-row>
-                <b-col span="8">
-                  <b-tooltip content="新增填报">
-                    <b-icon
-                      name="plus-circle"
-                      color="#1089ff"
-                      type="button"
-                      @click="handleWriteData(item, '/data-edit')"
-                    ></b-icon>
-                  </b-tooltip>
-                </b-col>
-                <b-col span="8">
-                  <b-tooltip content="表单填报">
-                    <b-icon
-                      name="file-add"
-                      type="button"
-                      color="#fa8c16"
-                      @click="handleWriteData(item, '/data-edit-simple')"
-                    ></b-icon>
-                  </b-tooltip>
-                </b-col>
-                <b-col span="8">
-                  <b-tooltip content="查看数据">
-                    <b-icon name="filesearch" color="#13c2c2"></b-icon>
-                  </b-tooltip>
-                </b-col>
-              </b-row>
-            </div>
-          </b-card>
-        </div>
-      </TransitionGroup>
-      <div v-if="loading" style="height: 175px">
-        <b-loading style="background: transparent"></b-loading>
+  <div>
+    <page-wrapper v-show="!dataTableShow">
+      <div class="filter-wrap">
+        <b-form label-width="95px" inline>
+          <b-form-item label="报表名称">
+            <b-input v-model="query.name" clearable></b-input>
+          </b-form-item>
+          <b-form-item label-width="16px">
+            <b-button type="primary" :loading="loading" @click="handleSearch">查询</b-button>
+            <b-button @click="handleReset">重置</b-button>
+          </b-form-item>
+        </b-form>
       </div>
-      <b-empty v-if="list.length === 0">暂无已发布填报</b-empty>
-    </div>
-  </page-wrapper>
+
+      <div class="list-wrapper">
+        <TransitionGroup tag="div" name="fade" class="card-list-wrap">
+          <div class="card-item" key="add">
+            <b-button icon="plus" dashed style="height: 175px; width: 100%">新增填报</b-button>
+          </div>
+          <div v-for="item in list" :key="item.id" class="card-item">
+            <b-card
+              class="app-item"
+              :style="{ width: '100%', height: '175px', margin: '0' }"
+              :body-style="{ padding: 0 }"
+              shadow="never"
+            >
+              <div class="p16">
+                <div flex="cross:center">
+                  <div class="item-title">{{ item.name }}</div>
+                </div>
+              </div>
+              <div>
+                <div class="item-author">上报数量：{{ item.reportCount }}</div>
+                <div class="item-desc">字段数量：{{ item.mapping.length }}</div>
+              </div>
+              <div class="item-extra">
+                <b-row>
+                  <b-col span="8">
+                    <b-tooltip content="新增填报">
+                      <b-icon
+                        name="plus-circle"
+                        color="#1089ff"
+                        type="button"
+                        @click="handleWriteData(item, '/data-edit')"
+                      ></b-icon>
+                    </b-tooltip>
+                  </b-col>
+                  <b-col span="8">
+                    <b-tooltip content="表单填报">
+                      <b-icon
+                        name="file-add"
+                        type="button"
+                        color="#fa8c16"
+                        @click="handleWriteData(item, '/data-edit-simple')"
+                      ></b-icon>
+                    </b-tooltip>
+                  </b-col>
+                  <b-col span="8">
+                    <b-tooltip content="查看数据">
+                      <b-icon
+                        name="filesearch"
+                        type="button"
+                        color="#13c2c2"
+                        @click="handleCheckData(item)"
+                      ></b-icon>
+                    </b-tooltip>
+                  </b-col>
+                </b-row>
+              </div>
+            </b-card>
+          </div>
+        </TransitionGroup>
+        <div v-if="loading" style="height: 175px">
+          <b-loading style="background: transparent"></b-loading>
+        </div>
+        <b-empty v-if="list.length === 0">暂无已发布填报</b-empty>
+      </div>
+    </page-wrapper>
+
+    <DataTable ref="dataTableRef" v-if="dataTableShow" @close="handleCancel" />
+  </div>
 </template>
 
 <script setup>
-import { reactive, onBeforeUnmount } from 'vue'
+import { reactive, onBeforeUnmount, ref, nextTick } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import * as api from '@/api/modules/excel.api'
-import { Message } from 'bin-ui-next'
 import { useRouter } from 'vue-router'
 import { listenMsg } from '@/utils/cross-tab-msg'
-import { downloadExcel } from '@/utils/luckysheet-util/downloadExcel'
+import DataTable from '../data-table/index.vue'
 
 defineOptions({
   name: 'ExcelList',
@@ -93,11 +101,10 @@ const query = reactive({
   isPublish: '1',
 })
 const router = useRouter()
+const dataTableRef = ref(null)
+const dataTableShow = ref(false)
 
-const { loading, list, total, handleSearch, getListData, pageChange } = useTable(
-  api.getExcelList,
-  query,
-)
+const { loading, list, handleSearch, getListData } = useTable(api.getExcelList, query)
 
 handleSearch()
 
@@ -116,6 +123,17 @@ function handleWriteData({ id }, path = '/data-edit') {
   window.open(routeData.href, '_blank')
 }
 
+// 查看数据
+async function handleCheckData({ id }) {
+  const detail = await api.getTempDetail(id)
+  dataTableShow.value = true
+  await nextTick()
+  dataTableRef.value.open(detail)
+}
+
+function handleCancel() {
+  dataTableShow.value = false
+}
 // 监听跨tab页签消息
 const cancelListen = listenMsg(getListData)
 onBeforeUnmount(cancelListen)
