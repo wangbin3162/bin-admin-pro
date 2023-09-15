@@ -16,7 +16,9 @@
       <div class="list-wrapper">
         <TransitionGroup tag="div" name="fade" class="card-list-wrap">
           <div class="card-item" key="add">
-            <b-button icon="plus" dashed style="height: 175px; width: 100%">新增填报</b-button>
+            <b-button icon="plus" dashed style="height: 175px; width: 100%" @click="handleCreate">
+              新增表单
+            </b-button>
           </div>
           <div v-for="item in list" :key="item.id" class="card-item">
             <b-card
@@ -119,6 +121,15 @@ function handleWriteData({ id }, path = '/data-edit') {
   let routeData = router.resolve({
     path,
     query: { tempId: id },
+  })
+  window.open(routeData.href, '_blank')
+}
+
+// 新增模板
+function handleCreate() {
+  let routeData = router.resolve({
+    path: '/excel-edit',
+    query: {},
   })
   window.open(routeData.href, '_blank')
 }

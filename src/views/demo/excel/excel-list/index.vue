@@ -4,7 +4,7 @@
       <base-table>
         <template #filter>
           <b-form label-width="95px">
-            <b-form-item label="报表名称">
+            <b-form-item label="表单名称">
               <b-input v-model="query.name" clearable></b-input>
             </b-form-item>
             <b-form-item label-width="16px">
@@ -15,7 +15,7 @@
         </template>
 
         <template #action>
-          <b-button type="primary" icon="plus-circle" @click="handleCreate">新增</b-button>
+          <b-button type="primary" icon="plus" @click="handleCreate">新增</b-button>
         </template>
 
         <b-table :columns="columns" :data="list" :loading="loading" size="small">
@@ -119,7 +119,7 @@ const publishMap = { 0: '否', 1: '是' }
 
 const columns = [
   { title: '序号', width: 70, align: 'center', type: 'index' },
-  { title: '报表名称', key: 'name' },
+  { title: '表单名称', key: 'name' },
   { title: '是否发布', slot: 'isPublish' },
   { title: '上报数量', key: 'reportCount' },
   { title: '记录个数', key: 'records' },

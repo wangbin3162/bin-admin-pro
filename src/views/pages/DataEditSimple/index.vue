@@ -12,7 +12,7 @@
     </div>
 
     <div class="sheet-excel">
-      <div class="form-box">
+      <div class="form-box" v-if="render">
         <b-form label-width="100px" :model="formData">
           <b-form-item
             v-for="(item, index) in excelData.mapping"
@@ -63,11 +63,11 @@ function closePage() {
   window.close()
 }
 
-function initFormData() {
+function initFormData(detail) {
   const mapping = deepCopy(excelData.value.mapping)
   mapping.forEach(item => {
     const { fieldName } = item
-    formData.value[fieldName] = ''
+    formData.value[fieldName] = detail ? detail.data[fieldName] : ''
   })
 }
 
@@ -89,6 +89,10 @@ async function saveSheetData() {
       Message.success('新增成功!')
       sendMsg('add-sheet-data', { ...data })
       initFormData()
+    } else {
+      await api.modifySheetData(data)
+      Message.success('修改成功!')
+      sendMsg('modify-sheet-data', { ...data })
     }
   } catch (error) {
     console.log(error)
@@ -99,7 +103,7 @@ async function saveSheetData() {
 watch(
   () => route.path,
   async () => {
-    const { tempId } = route.query
+    const { tempId, id } = route.query
     document.title = '数据填报'
     if (tempId) {
       initData()
@@ -108,6 +112,12 @@ watch(
       excelData.value = { ...detail }
 
       initFormData()
+
+      // 如果id存在，则获取当前这条数据的详情
+      if (id) {
+        const row = await api.getSheetDataDetail(id)
+        initFormData(row)
+      }
     }
     render.value = true
   },

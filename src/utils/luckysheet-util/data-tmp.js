@@ -15,8 +15,8 @@ export const defaultTemps = [
     id: '0001',
     name: '工资填报',
     isPublish: '1',
-    reportCount: 0,
-    records: 0,
+    reportCount: 1,
+    records: 1,
     jsonData: {
       info: {
         name: '工资填报',

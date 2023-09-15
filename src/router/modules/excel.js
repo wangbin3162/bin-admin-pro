@@ -11,7 +11,7 @@ export default [
       },
       {
         name: 'ExcelList',
-        title: '填报列表',
+        title: '表单设计',
         component: () => import('@/views/demo/excel/excel-list/index.vue'),
       },
     ],

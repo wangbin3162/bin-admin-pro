@@ -8,7 +8,19 @@ const storeKey = '__excel_data__'
 // 默认状态
 const states = {
   excelList: deepCopy(defaultTemps),
-  dataList: [],
+  dataList: [
+    {
+      id: '8452b2e4f3124589b13e14a658099f9a',
+      tempId: '0001',
+      tempName: '工资填报',
+      data: {
+        name: '李雷',
+        age: 26,
+        gongzi: 234523,
+        sex: '男',
+      },
+    },
+  ],
 }
 
 // 获取datasource
@@ -27,7 +39,6 @@ async function setStoreData(value, key = storeKey) {
 }
 
 // --------------------------------template api-------------------------------- //
-
 // 获取填报列表（excel模板列表）
 export async function getExcelList(query) {
   const { excelList } = await getDataSource()
@@ -152,6 +163,68 @@ export async function addSheetData(data) {
     setStoreData(store) // 设置store
     setTimeout(() => {
       resolve(obj.id)
+    }, 200)
+  })
+}
+
+// 获取填报列表（excel模板列表）
+export async function getSheetDataList(query) {
+  const { dataList } = await getDataSource()
+  return new Promise(resolve => {
+    const { tempId } = query
+    const filterList = dataList.filter(i => i.tempId === tempId)
+    setTimeout(() => {
+      resolve({
+        rows: filterList,
+        total: filterList.length,
+      })
+    }, 200)
+  })
+}
+
+// 获取填报列表（excel模板列表）
+export async function removeSheetData(id) {
+  const store = await getDataSource()
+
+  return new Promise(resolve => {
+    const index = store.dataList.findIndex(i => i.id === id)
+    if (index > -1) {
+      store.dataList.splice(index, 1)
+    }
+
+    setStoreData(store) // 设置store
+    setTimeout(() => {
+      resolve(true)
+    }, 200)
+  })
+}
+
+// 获取一个填报信息
+export async function getSheetDataDetail(id) {
+  const store = await getDataSource()
+
+  return new Promise(resolve => {
+    const index = store.dataList.findIndex(i => i.id === id)
+    setTimeout(() => {
+      const data = index > -1 ? deepCopy(store.dataList[index]) : null
+      resolve(data)
+    }, 200)
+  })
+}
+
+// 修改一个填报信息
+export async function modifySheetData(data) {
+  const store = await getDataSource()
+
+  return new Promise(resolve => {
+    const index = store.dataList.findIndex(i => i.id === data.id)
+    if (index > -1) {
+      store.dataList.splice(index, 1, data)
+    }
+
+    setStoreData(store) // 设置store
+    setTimeout(() => {
+      resolve(true)
     }, 200)
   })
 }
