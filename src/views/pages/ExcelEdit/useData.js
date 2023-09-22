@@ -46,6 +46,33 @@ function useData(props) {
     get: () => excelData.value.name,
     set: val => (excelData.value.name = val),
   })
+
+  // 事件调用系统
+  const cellUpdated = (r, c, oldvalue, newValue) => {
+    // 判断当前修改的单元格，是否存在在mapping映射中
+    const mapping = deepCopy(excelData.value.mapping)
+    const enableEvents = mapping.filter(i => i.dataType === 'select' && i.events?.enable)
+    const index = enableEvents.findIndex(i => i.cellIndex.row === r && i.cellIndex.column === c)
+
+    if (index < 0) return
+    const cellValue = { r, c, oldvalue, newValue }
+    const currentEvents = mapping[index].events
+    if (!currentEvents) return
+    console.log('--------[cellUpdated]---------')
+    console.log('--------[events]:', currentEvents)
+    console.log('--------[cellValue]:', cellValue)
+    console.log('--------[mapping]:', mapping)
+
+    excuteFunc(mapping[index].events, cellValue, mapping)
+  }
+
+  // 执行事件
+  const excuteFunc = (events, cellValue, mapping) => {
+    const { augments, funcBody } = events
+    const fun = new Function(...augments, funcBody)
+    fun(LuckySheet, cellValue, mapping)
+  }
+
   const options = computed(() => {
     const opt = deepMerge(
       deepCopy({
@@ -53,6 +80,9 @@ function useData(props) {
         container: 'SheetContainer',
         title: title.value, // 设定表格名称
         data: [{ name: 'Sheet1', index: 0 }],
+        hook: {
+          cellUpdated,
+        },
       }),
       deepCopy(props.cfg),
     )

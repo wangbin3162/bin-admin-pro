@@ -20,8 +20,8 @@
             :prop="item.fieldName"
             :label="item.fieldTitle"
           >
-            <b-input v-if="item.dataType === 'string'" v-model="formData[item.fieldName]" />
             <b-input-number v-if="item.dataType === 'number'" v-model="formData[item.fieldName]" />
+            <b-input v-else v-model="formData[item.fieldName]" />
           </b-form-item>
           <b-form-item>
             <b-button type="primary" :loading="btnLoading" @click="saveSheetData">保 存</b-button>

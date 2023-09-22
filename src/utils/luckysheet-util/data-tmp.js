@@ -1,3 +1,4 @@
+import { example1 } from './example'
 // 默认sheetInfo信息
 export const defaultSheetInfo = {
   appversion: '',
@@ -614,6 +615,11 @@ export const defaultTemps = [
         fieldName: 'name',
         fieldTitle: '姓名',
         dataType: 'string',
+        events: {
+          enable: false,
+          augments: ['LuckySheet', 'cellValue', 'mapping'],
+          funcBody: '',
+        },
       },
       {
         cellIndex: {
@@ -631,6 +637,11 @@ export const defaultTemps = [
         fieldName: 'age',
         fieldTitle: '年龄',
         dataType: 'number',
+        events: {
+          enable: false,
+          augments: ['LuckySheet', 'cellValue', 'mapping'],
+          funcBody: '',
+        },
       },
       {
         cellIndex: {
@@ -648,6 +659,11 @@ export const defaultTemps = [
         fieldName: 'gongzi',
         fieldTitle: '工资',
         dataType: 'number',
+        events: {
+          enable: false,
+          augments: ['LuckySheet', 'cellValue', 'mapping'],
+          funcBody: '',
+        },
       },
       {
         cellIndex: {
@@ -665,9 +681,15 @@ export const defaultTemps = [
         fieldName: 'sex',
         fieldTitle: '性别',
         dataType: 'string',
+        events: {
+          enable: false,
+          augments: ['LuckySheet', 'cellValue', 'mapping'],
+          funcBody: '',
+        },
       },
     ],
   },
+  example1,
 ]
 /**
  * 根据range值显示当前位置信息

@@ -48,6 +48,7 @@
 
           <template v-if="IS_DEV">
             <b-divider align="left">实际存储值</b-divider>
+            <b-button type="text" icon="file-copy" @click="copyConfigStr">复制配置项</b-button>
             <b-ace-editor
               :model-value="
                 JSON.stringify(
@@ -70,7 +71,7 @@
 <script setup>
 import { Message } from 'bin-ui-next'
 import { toRaw } from 'vue'
-import { deepCopy, isEqual } from '@/utils/util'
+import { copyText, isEqual } from '@/utils/util'
 import { IS_DEV } from '@/utils/env'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import { formateCellRange } from '@/utils/luckysheet-util/data-tmp'
@@ -158,14 +159,25 @@ function setCellToMapping() {
     ...formatRange,
     fieldName: '', // 字段名称
     fieldTitle: '', // 字段标题
-    dataType: 'string', // string,number,date
+    dataType: 'string', // string,number,date,select,
+    events: {
+      enable: false,
+      augments: ['LuckySheet', 'cellValue', 'mapping'],
+      funcBody: '',
+    },
   })
+}
+
+function copyConfigStr() {
+  console.log(excelData.value)
+  const str = JSON.stringify(excelData.value)
+  copyText(str)
 }
 </script>
 
 <style scoped>
 .sheet-wrapper {
-  --v-right-width: 360px;
+  --v-right-width: 460px;
   position: relative;
   width: 100%;
   height: 100vh;

@@ -8,7 +8,13 @@
       </b-tag>
     </div>
     <div>
-      <b-ace-editor lang="javascript" :height="height" :model-value="modelValue" @change="changeValue"></b-ace-editor>
+      <b-ace-editor
+        lang="javascript"
+        :height="height"
+        :model-value="modelValue"
+        :readonly="readonly"
+        @change="changeValue"
+      ></b-ace-editor>
     </div>
     <div class="func func-bottom">
       <b-tag type="primary" :tag-style="{ fontSize: '14px' }">}</b-tag>
@@ -33,6 +39,10 @@ export default {
     height: {
       type: String,
       default: '120',
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['update:modelValue'],
