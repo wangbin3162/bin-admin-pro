@@ -144,7 +144,10 @@ const {
   handleChecked,
   handleFilter,
   filterNode,
+  reloadTree,
+  reloadTreeWithCheck,
   handleClear,
+  getFlatState,
 } = useTree(props.fetch, props.params, emit, props.titleKey)
 
 // 右侧指令事件列表
@@ -191,6 +194,26 @@ watch(
   },
   { immediate: true },
 )
+
+defineExpose({
+  treeEl,
+  showTopSearch,
+  showInnerSearch,
+  treeRef,
+  query,
+  loading,
+  treeData,
+  getTreeData,
+  reloadTree,
+  reloadTreeWithCheck,
+  handleSelect,
+  handleChecked,
+  handleAction,
+  handleFilter,
+  filterNode,
+  handleReset,
+  getFlatState,
+})
 </script>
 
 <style scoped>
