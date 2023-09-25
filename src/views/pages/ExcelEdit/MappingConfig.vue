@@ -5,7 +5,8 @@
       <span class="l2">字段标识</span>
       <span class="l3">字段名称</span>
       <span class="l4">类型</span>
-      <span class="l5">事件</span>
+      <span class="l5">数据源</span>
+      <span class="l6">事件</span>
     </div>
     <b-empty v-if="mapping.length === 0">暂无映射</b-empty>
     <draggable
@@ -39,20 +40,41 @@
               </b-tag>
               <b-input v-model="mapping[index].fieldName" size="small" placeholder="字段标识" />
               <b-input v-model="mapping[index].fieldTitle" size="small" placeholder="字段名称" />
-              <b-select v-model="mapping[index].dataType" size="small" style="width: 70px">
-                <b-option label="文本" value="string"></b-option>
-                <b-option label="数值" value="number"></b-option>
-                <b-option label="日期" value="date"></b-option>
-                <b-option label="下拉" value="select"></b-option>
+              <b-select
+                v-model="mapping[index].dataType"
+                size="small"
+                style="width: 70px"
+                @change="() => dataTypeChange(index)"
+              >
+                <b-option
+                  v-for="(label, key) in MappingItem.DataType.mapping"
+                  :key="key"
+                  :value="key"
+                  :label="label"
+                />
               </b-select>
-              <div flex="cross:center">
-                <b-checkbox v-model="mapping[index].events.enable"></b-checkbox>
+              <div flex="main:center cross:center" style="width: 44px">
+                <b-button
+                  :disabled="element.dataType !== 'select'"
+                  type="text"
+                  title="数据源配置"
+                  @click="handleDatasourceEdit(index)"
+                >
+                  <b-icon name="database" size="18"></b-icon>
+                </b-button>
+              </div>
+              <div flex="main:center cross:center" style="width: 60px">
+                <b-checkbox
+                  v-model="mapping[index].events.enable"
+                  style="line-height: 1"
+                ></b-checkbox>
                 <b-button
                   :disabled="!mapping[index].events.enable"
                   type="text"
+                  title="事件脚本"
                   @click="handleEditScript(index)"
                 >
-                  脚本
+                  <b-icon name="code" size="20"></b-icon>
                 </b-button>
               </div>
             </b-space>
@@ -60,6 +82,8 @@
         </div>
       </template>
     </draggable>
+
+    <SourceModal ref="sourceConfigRef" @save="handleSourceSave" />
 
     <FuncBodyEditorModal
       :augments="funcAugments"
@@ -74,6 +98,11 @@
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
 import { mapping } from './useData'
+import { MappingItem, OptionItem } from '@/utils/luckysheet-util/default-data'
+import SourceModal from './SourceModal.vue'
+
+// @ts-ignore
+const LuckySheet = window.luckysheet
 
 function handleRemove(index) {
   mapping.value.splice(index, 1)
@@ -116,7 +145,8 @@ LuckySheet.setCellValue(1, 1, '独立办公')
 `,
   `/**
  * 示例三：根据当前单元格变更做级联更新，更新 B2 单元格的数据验证为下拉
- * 当前单元格为 党政机关/事业单位,教育机构,医院,文化体育场
+ * 如依赖的单元格数据源是  党政机关/事业单位,教育机构,医院,文化体育场
+ * 当前的数据源级联对象是 {"党政机关/事业单位":"独立办公,集中办公","教育机构":"高等学校,中小学校","医院":"三级,二级以下","文化体育场":"/"}
  * 更新映射后 为一下对应选项
  * API: setDataVerification(optionItem, [setting])
  */
@@ -159,6 +189,7 @@ LuckySheet.setCellValue(1, 1, '')
 const funcAugments = ref([])
 const editIndex = ref(-1)
 const funcEditorRef = ref(null)
+const sourceConfigRef = ref(null)
 
 function handleEditScript(index) {
   if (index > -1 && mapping.value[index] && mapping.value[index].events) {
@@ -177,6 +208,52 @@ function handleScriptSave(val) {
     editIndex.value = -1
   }
 }
+
+// 数据源配置
+function handleDatasourceEdit(index) {
+  if (index > -1 && mapping.value[index] && mapping.value[index].datasource) {
+    editIndex.value = index
+    sourceConfigRef.value?.open(mapping.value[index].datasource)
+  }
+}
+// 数据源 保存
+function handleSourceSave(val) {
+  const index = editIndex.value
+  if (index > -1 && mapping.value[index] && mapping.value[index].datasource) {
+    mapping.value[index].datasource = val
+
+    editIndex.value = -1
+
+    setSheetData(mapping.value[index])
+  }
+}
+
+//  根据不同的类别来填充对应的 数据项
+function setSheetData({ cellRange: range, datasource }) {
+  const type = datasource.type
+  const value = datasource[type]
+  if (type === 'normal') {
+    const optionItem = new OptionItem().getMerge({ value1: value })
+    if (value.length > 0) LuckySheet.setDataVerification(optionItem, { range })
+    else LuckySheet.deleteDataVerification({ range })
+  }
+}
+
+// 数据类型改变事件
+function dataTypeChange(index) {
+  if (index > -1 && mapping.value[index]) {
+    const item = mapping.value[index]
+    const { cellIndex } = item
+    if (item.dataType === 'select') {
+      setSheetData(item)
+    } else {
+      // 如果不是下拉，则需要清空当前的数据验证
+      LuckySheet.deleteDataVerification({ range: { ...item.cellRange } })
+    }
+    // 清空单元格内容
+    LuckySheet.setCellValue(cellIndex.row, cellIndex.column, '')
+  }
+}
 </script>
 
 <style scoped>
@@ -187,24 +264,26 @@ function handleScriptSave(val) {
     padding: 8px 0 8px 50px;
     background-color: var(--v-g-fill-color-2);
     .l1 {
-      width: 40px;
-      text-align: center;
+      width: 42px;
     }
     .l2 {
-      width: 105px;
+      width: 92px;
       padding-left: 8px;
     }
     .l3 {
-      width: 105px;
+      width: 92px;
       padding-left: 8px;
     }
     .l4 {
-      width: 78px;
-      padding-left: 4px;
+      width: 76px;
+      padding-left: 6px;
     }
     .l5 {
+      width: 44px;
+    }
+    .l6 {
       width: 55px;
-      padding-left: 4px;
+      padding-left: 6px;
     }
   }
   .mapping-list {
@@ -217,15 +296,6 @@ function handleScriptSave(val) {
       justify-content: space-between;
       height: 44px;
       font-size: 14px;
-      label {
-        word-break: break-all;
-        display: block;
-        line-height: 1;
-        flex: 1;
-        font-size: 14px;
-        transition: color 0.4s;
-        padding-left: 8px;
-      }
       i {
         flex-shrink: 0;
       }

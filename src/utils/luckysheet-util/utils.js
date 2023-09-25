@@ -1,6 +1,6 @@
 /**
  * 根据range值显示当前位置信息
- * @param {{row:[],columns:[]}} range
+ * @param {{row:[],column:[]}} range
  */
 export function formateCellRange(range, dev = true) {
   const rowStart = range['row'][0]
@@ -9,6 +9,7 @@ export function formateCellRange(range, dev = true) {
   const colEnd = range['column'][1]
 
   if (dev) {
+    console.log('------------------------ 选区log -------------------------')
     const log1 = `开始单元格：row：${rowStart + 1} col：${colStart + 1}`
     const log2 = `结束单元格：row：${rowEnd + 1} col：${colEnd + 1}`
     const log3 = `选中单元格数量：${rowEnd - rowStart + 1}行 ${colEnd - colStart + 1}列`

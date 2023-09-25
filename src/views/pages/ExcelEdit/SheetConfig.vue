@@ -174,7 +174,7 @@ function copyConfigStr() {
 
 <style scoped>
 .sheet-wrapper {
-  --v-right-width: 460px;
+  --v-right-width: 480px;
   position: relative;
   width: 100%;
   height: 100vh;

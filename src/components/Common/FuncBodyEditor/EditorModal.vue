@@ -1,13 +1,15 @@
 <template>
-  <div class="editor-modal">
-    <b-modal
-      title="事件配置"
-      v-model="visible"
-      width="1500px"
-      draggable
-      esc-closable
-      @opened="render = true"
-    >
+  <b-modal
+    title="事件配置"
+    v-model="visible"
+    width="1500px"
+    draggable
+    top="80px"
+    esc-closable
+    append-to-body
+    @opened="render = true"
+  >
+    <div class="editor-modal">
       <b-row :gutter="20" v-if="render">
         <b-col span="12">
           <div>
@@ -35,17 +37,15 @@
           </div>
         </b-col>
       </b-row>
-
       <div v-else style="height: 414px">
         <b-loading></b-loading>
       </div>
-
-      <template #footer>
-        <b-button @click="visible = false">关闭</b-button>
-        <b-button type="primary" @click="handleSave">保存</b-button>
-      </template>
-    </b-modal>
-  </div>
+    </div>
+    <template #footer>
+      <b-button @click="visible = false">关闭</b-button>
+      <b-button type="primary" @click="handleSave">保存</b-button>
+    </template>
+  </b-modal>
 </template>
 
 <script setup>
