@@ -44,22 +44,24 @@
       </div>
       <div class="right-content">
         <b-scrollbar>
-          <MappingConfig />
+          <div class="p8">
+            <MappingConfig />
 
-          <template v-if="IS_DEV">
-            <b-divider align="left">实际存储值</b-divider>
-            <b-button type="text" icon="file-copy" @click="copyConfigStr">复制配置项</b-button>
-            <b-ace-editor
-              :model-value="
-                JSON.stringify(
-                  { id: excelData.id, name: excelData.name, mapping: excelData.mapping },
-                  null,
-                  2,
-                )
-              "
-              readonly
-            ></b-ace-editor>
-          </template>
+            <template v-if="IS_DEV">
+              <b-divider align="left">实际存储值</b-divider>
+              <b-button type="text" icon="file-copy" @click="copyConfigStr">复制配置项</b-button>
+              <b-ace-editor
+                :model-value="
+                  JSON.stringify(
+                    { id: excelData.id, name: excelData.name, mapping: excelData.mapping },
+                    null,
+                    2,
+                  )
+                "
+                readonly
+              ></b-ace-editor>
+            </template>
+          </div>
         </b-scrollbar>
       </div>
     </div>
@@ -74,8 +76,9 @@ import { toRaw } from 'vue'
 import { copyText, isEqual } from '@/utils/util'
 import { IS_DEV } from '@/utils/env'
 import { sendMsg } from '@/utils/cross-tab-msg'
-import { formateCellRange } from '@/utils/luckysheet-util/data-tmp'
+import { formateCellRange } from '@/utils/luckysheet-util/utils'
 import { excelData, debug, useData } from './useData'
+import { MappingItem } from '@/utils/luckysheet-util/default-data'
 import MappingConfig from './MappingConfig.vue'
 import * as api from '@/api/modules/excel.api'
 import { useRouter } from 'vue-router'
@@ -155,17 +158,11 @@ function setCellToMapping() {
   }
 
   // 追加一个映射值
-  excelData.value.mapping.push({
-    ...formatRange,
-    fieldName: '', // 字段名称
-    fieldTitle: '', // 字段标题
-    dataType: 'string', // string,number,date,select,
-    events: {
-      enable: false,
-      augments: ['LuckySheet', 'cellValue', 'mapping'],
-      funcBody: '',
-    },
-  })
+  excelData.value.mapping.push(
+    new MappingItem().getMerge({
+      ...formatRange,
+    }),
+  )
 }
 
 function copyConfigStr() {
@@ -220,8 +217,7 @@ function copyConfigStr() {
       border-bottom: 1px solid #d4d4d4;
     }
     .right-content {
-      flex: 1;
-      padding: 8px;
+      height: calc(100% - 41px);
     }
   }
   .mask {

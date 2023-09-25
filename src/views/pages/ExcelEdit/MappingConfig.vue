@@ -71,14 +71,9 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import draggable from 'vuedraggable'
-import { excelData } from './useData'
-
-const mapping = computed({
-  get: () => excelData.value.mapping,
-  set: val => (excelData.value.mapping = val),
-})
+import { mapping } from './useData'
 
 function handleRemove(index) {
   mapping.value.splice(index, 1)

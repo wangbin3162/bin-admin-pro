@@ -1,6 +1,6 @@
 import DatasourceCreate from '@/utils/datasource-create'
 import { deepCopy, getUuid } from '@/utils/util'
-import { defaultTemps } from '@/utils/luckysheet-util/data-tmp'
+import { defaultTemps } from '@/utils/luckysheet-util/example'
 
 const Ds = new DatasourceCreate('__EXCEL_DATASOURCE__')
 const storeKey = '__excel_data__'

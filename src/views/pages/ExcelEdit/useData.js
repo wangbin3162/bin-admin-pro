@@ -6,7 +6,7 @@ import { isFunction } from '@/utils/luckysheet-util/is'
 import { exportExcel } from '@/utils/luckysheet-util/export'
 import { deepMerge, deepCopy } from '@/utils/util'
 import defaultOpts from '@/utils/luckysheet-util/default-options'
-import { defaultSheetInfo } from '@/utils/luckysheet-util/data-tmp'
+import { defaultSheetInfo } from '@/utils/luckysheet-util/default-data'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -17,6 +17,11 @@ const excelData = ref({
   name: '', // 模板名称，也就是保存时的文件名称
   jsonData: [],
   mapping: [],
+})
+
+const mapping = computed({
+  get: () => excelData.value.mapping,
+  set: val => (excelData.value.mapping = val),
 })
 
 function initData() {
@@ -32,7 +37,9 @@ function initData() {
 function debug() {
   if (!IS_DEV) return
   console.log('-------------------------------------debug--------------------------------------')
-  console.log('excelData', excelData.value)
+  // console.log('excelData', excelData.value)
+  console.log('jsonData', excelData.value.jsonData)
+  console.log('mapping', mapping.value)
   console.log('-----------------------------------debug end------------------------------------')
 }
 
@@ -184,4 +191,4 @@ function useData(props) {
   return { info, title, options, btnLoading, isMaskShow, closePage, loadExcel, downloadExcel }
 }
 
-export { excelData, initData, debug, useData }
+export { excelData, mapping, initData, debug, useData }
