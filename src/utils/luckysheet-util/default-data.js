@@ -24,6 +24,7 @@ export class MappingItem {
       // 数据源
       datasource: {
         type: 'normal', //  DatasourceType 类型 数据源类型normal为普通模式， 普通模式 直接使用逗号分割
+        dependOn: '', // 依赖前置单元格，类似B2这种
         normal: '', // 普通模式取值
         cascade: '', //  级联模式取值
         fx: '', //  函数 模式取值

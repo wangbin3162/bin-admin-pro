@@ -2,11 +2,12 @@ import LuckyExcel from 'luckyexcel'
 import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
 import { Message, MessageBox } from 'bin-ui-next'
 import { IS_DEV } from '@/utils/env'
-import { isFunction } from '@/utils/luckysheet-util/is'
-import { exportExcel } from '@/utils/luckysheet-util/export'
 import { deepMerge, deepCopy } from '@/utils/util'
+import { isFunction } from '@/utils/luckysheet-util/is'
+import { convertToRowColumn, convertFxStr } from '@/utils/luckysheet-util/utils'
+import { exportExcel } from '@/utils/luckysheet-util/export'
+import { defaultSheetInfo, OptionItem } from '@/utils/luckysheet-util/default-data'
 import defaultOpts from '@/utils/luckysheet-util/default-options'
-import { defaultSheetInfo } from '@/utils/luckysheet-util/default-data'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -58,24 +59,91 @@ function useData(props) {
   const cellUpdated = (r, c, oldvalue, newValue) => {
     // 判断当前修改的单元格，是否存在在mapping映射中
     const mapping = deepCopy(excelData.value.mapping)
-    const enableEvents = mapping.filter(i => i.dataType === 'select' && i.events?.enable)
-    const index = enableEvents.findIndex(i => i.cellIndex.row === r && i.cellIndex.column === c)
-
-    if (index < 0) return
     const cellValue = { r, c, oldvalue, newValue }
-    const currentEvents = mapping[index].events
+
+    excuteDatasource(cellValue, mapping)
+    excuteFunc(cellValue, mapping)
+  }
+
+  // 数据源事件
+  const excuteDatasource = (cellValue, mapping) => {
+    // 非normal类型的 数据源事件
+    const sourceEvents = mapping.filter(
+      i => i.dataType === 'select' && i.datasource?.type !== 'normal',
+    )
+    sourceEvents.forEach(cell => {
+      const sourceType = cell.datasource.type
+      const value = cell.datasource[sourceType]
+      // 如果是级联模式，则需要获取对应单元格内容的值
+      if (sourceType === 'cascade') {
+        const { dependOn } = cell.datasource
+        const dependOnRange = convertToRowColumn(dependOn)
+        if (dependOnRange) {
+          // 如果可以获取row和column值，则获取单元格内容值
+          // console.log(dependOnRange)
+          const { row, column } = dependOnRange
+          const cellValue = LuckySheet.getCellValue(row, column)
+          // console.log(cellValue)
+          const currentOptions = JSON.parse(value)[cellValue]
+          if (currentOptions) {
+            const optionItem = new OptionItem().getMerge({ value1: currentOptions })
+            if (currentOptions.length > 0) {
+              LuckySheet.setDataVerification(optionItem, { range: cell.cellRange })
+            } else {
+              LuckySheet.deleteDataVerification({ range: cell.cellRange })
+            }
+          }
+        }
+      }
+      // 如果是函数模式
+      else if (sourceType === 'fx') {
+        // 获取转换
+        const { matchCellRange, orderIndex, countIf } = convertFxStr(value)
+        if (countIf) {
+          const map = {}
+          for (let i = 0; i < countIf.keysList.length; i++) {
+            const keyRang = countIf.keysList[i]
+            const valueRang = countIf.valuesList[i]
+            const key = LuckySheet.getCellValue(keyRang.row, keyRang.column, { order: orderIndex })
+            const value = LuckySheet.getCellValue(valueRang.row, valueRang.column, {
+              order: orderIndex,
+            })
+            if (!map[key]) map[key] = value
+            else map[key] += ',' + value
+          }
+          // 判断当前的匹配matchcell是否存在值
+          const matchValue = LuckySheet.getCellValue(matchCellRange.row, matchCellRange.column, {
+            order: orderIndex,
+          })
+          if (matchValue && map[matchValue]) {
+            const verificat = map[matchValue]
+            const optionItem = new OptionItem().getMerge({ value1: verificat })
+            if (verificat.length > 0) {
+              LuckySheet.setDataVerification(optionItem, { range: cell.cellRange })
+            } else {
+              LuckySheet.deleteDataVerification({ range: cell.cellRange })
+            }
+          }
+        }
+      }
+    })
+  }
+
+  // 执行事件
+  const excuteFunc = (cellValue, mapping) => {
+    const enableEvents = mapping.filter(i => i.dataType === 'select' && i.events?.enable)
+    const eventIndex = enableEvents.findIndex(
+      i => i.cellIndex.row === cellValue.r && i.cellIndex.column === cellValue.c,
+    )
+    if (eventIndex < 0) return
+    const currentEvents = mapping[eventIndex].events
     if (!currentEvents) return
     console.log('--------[cellUpdated]---------')
     console.log('--------[events]:', currentEvents)
     console.log('--------[cellValue]:', cellValue)
     console.log('--------[mapping]:', mapping)
 
-    excuteFunc(mapping[index].events, cellValue, mapping)
-  }
-
-  // 执行事件
-  const excuteFunc = (events, cellValue, mapping) => {
-    const { augments, funcBody } = events
+    const { augments, funcBody } = mapping[eventIndex].events
     const fun = new Function(...augments, funcBody)
     fun(LuckySheet, cellValue, mapping)
   }

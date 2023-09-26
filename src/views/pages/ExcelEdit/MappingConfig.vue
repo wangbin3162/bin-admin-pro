@@ -100,6 +100,7 @@ import draggable from 'vuedraggable'
 import { mapping } from './useData'
 import { MappingItem, OptionItem } from '@/utils/luckysheet-util/default-data'
 import SourceModal from './SourceModal.vue'
+import { convertFxStr } from '@/utils/luckysheet-util/utils'
 
 // @ts-ignore
 const LuckySheet = window.luckysheet
@@ -235,6 +236,43 @@ function setSheetData({ cellRange: range, datasource }) {
   if (type === 'normal') {
     const optionItem = new OptionItem().getMerge({ value1: value })
     if (value.length > 0) LuckySheet.setDataVerification(optionItem, { range })
+    else LuckySheet.deleteDataVerification({ range })
+  } else if (type === 'fx') {
+    const { matchCellRange, sourceList, orderIndex, countIf } = convertFxStr(value)
+    // 如果是条件渲染
+    if (countIf) {
+      // 获取数据项map映射
+      const map = {}
+      for (let i = 0; i < countIf.keysList.length; i++) {
+        const keyRang = countIf.keysList[i]
+        const valueRang = countIf.valuesList[i]
+        const key = LuckySheet.getCellValue(keyRang.row, keyRang.column, { order: orderIndex })
+        const value = LuckySheet.getCellValue(valueRang.row, valueRang.column, {
+          order: orderIndex,
+        })
+        if (!map[key]) map[key] = value
+        else map[key] += ',' + value
+      }
+      // 判断当前的匹配matchcell是否存在值
+      const matchValue = LuckySheet.getCellValue(matchCellRange.row, matchCellRange.column, {
+        order: orderIndex,
+      })
+      if (matchValue && map[matchValue]) {
+        const verificat = map[matchValue]
+        const optionItem = new OptionItem().getMerge({ value1: verificat })
+        if (verificat.length > 0) LuckySheet.setDataVerification(optionItem, { range })
+        else LuckySheet.deleteDataVerification({ range })
+      }
+
+      return
+    }
+    // 拼装数据项文本
+    const verificat = sourceList
+      .map(i => LuckySheet.getCellValue(i.row, i.column, { order: orderIndex }))
+      .join(',')
+    // 组装数据项
+    const optionItem = new OptionItem().getMerge({ value1: verificat })
+    if (verificat.length > 0) LuckySheet.setDataVerification(optionItem, { range })
     else LuckySheet.deleteDataVerification({ range })
   }
 }
