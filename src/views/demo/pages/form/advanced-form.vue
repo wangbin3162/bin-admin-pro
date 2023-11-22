@@ -202,7 +202,7 @@
 
 <script>
 import { reactive, ref, toRefs } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import dayjs from 'dayjs'
 
 export default {

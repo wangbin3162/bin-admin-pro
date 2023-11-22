@@ -65,7 +65,7 @@
 </template>
 
 <script setup>
-import { Utils } from 'bin-ui-next'
+import { Utils } from 'bin-ui-design'
 import axios from 'axios'
 import { computed, ref } from 'vue'
 import { useAppStoreWithOut } from '@/pinia/modules/app'

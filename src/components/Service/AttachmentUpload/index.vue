@@ -59,7 +59,7 @@
 
 <script>
 import { ref, watch } from 'vue'
-import { Message, MessageBox } from 'bin-ui-next'
+import { Message, MessageBox } from 'bin-ui-design'
 import { deepCopy, downloadFile, throwError } from '@/utils/util'
 import { commonDownload, commonUpload } from '@/api/common.api'
 

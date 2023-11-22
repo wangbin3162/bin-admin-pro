@@ -71,7 +71,7 @@
 </template>
 
 <script setup>
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { toRaw } from 'vue'
 import { copyText, isEqual } from '@/utils/util'
 import { IS_DEV } from '@/utils/env'

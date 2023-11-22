@@ -3,13 +3,12 @@ import App from './App.vue'
 import router, { setupRouter } from '@/router'
 import { setupStore } from '@/pinia'
 import { registerDirectives } from '@/directives'
-import { registerUI } from '@/plugins/bin-ui-next'
+import { registerUI } from '@/plugins/bin-ui-design'
 import { registerCharts } from '@/plugins/bin-charts-next'
 import { registerEditor } from '@/plugins/bin-editor-next'
 import { registerCommonComps } from '@/components/Common/index'
 
-import 'bin-ui-next/lib/styles/index.css' // 组件库样式
-import 'bin-ui-next/lib/styles/scrollbar.css' // 滚动条样式
+import 'bin-ui-design/dist/styles/index.css'
 import '@/assets/styles/index.css' // 项目样式
 
 /**

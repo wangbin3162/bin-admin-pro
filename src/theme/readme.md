@@ -8,7 +8,7 @@
 
 ## 1、使用依赖。
 
-全局样式系统重构，使用 postcss 进行编写。同时依赖 bin-ui-next 2.0.0+版本，因此需要优先安装相关依赖。
+全局样式系统重构，使用 postcss 进行编写。同时依赖 bin-ui-design 2.0.0+版本，因此需要优先安装相关依赖。
 
 同时，新的工程推荐使用 pinia 来进行全局状态管理，因此，也需要迁移原有 vuex 内容至 pinia
 
@@ -17,7 +17,7 @@ pnpm update
 
 pnpm add postcss-color-mix postcss-each postcss-each-variables postcss-import postcss-nested -D
 
-pnpm add bin-ui-next pinia
+pnpm add bin-ui-design pinia
 ```
 
 ## 2、移除部分内容。

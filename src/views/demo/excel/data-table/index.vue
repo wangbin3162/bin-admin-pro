@@ -47,7 +47,7 @@ import { reactive, ref, onBeforeUnmount } from 'vue'
 import { deepCopy } from '@/utils/util'
 import * as api from '@/api/modules/excel.api'
 import { useRouter } from 'vue-router'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { listenMsg } from '@/utils/cross-tab-msg'
 
 defineOptions({

@@ -82,7 +82,7 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { useAppStoreWithOut } from '@/pinia/modules/app'
 
 const visible = ref(false)

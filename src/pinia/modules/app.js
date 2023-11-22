@@ -10,8 +10,8 @@ const useApp = defineStore('app', {
     // 快捷链接
     links: [
       {
-        link: 'https://wangbin3162.gitee.io/bin-ui-next',
-        text: 'bin-ui-next',
+        link: 'https://wangbin3162.gitee.io/bin-ui-design',
+        text: 'bin-ui-design',
         newTab: true,
       },
       {

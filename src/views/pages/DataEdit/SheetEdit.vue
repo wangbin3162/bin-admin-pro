@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { deepCopy } from '@/utils/util'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import { excelData, debug, useData } from '../ExcelEdit/useData'

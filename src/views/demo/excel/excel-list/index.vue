@@ -91,7 +91,7 @@
 import { reactive, onBeforeUnmount, ref, nextTick } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import * as api from '@/api/modules/excel.api'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { useRouter } from 'vue-router'
 import { listenMsg } from '@/utils/cross-tab-msg'
 import DataTable from '../data-table/index.vue'

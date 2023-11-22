@@ -108,7 +108,7 @@ import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
 import { getRoleList } from '@/api/modules/role.api'
 import useForm from '@/hooks/service/useForm'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 
 defineOptions({
   name: 'SysRole',

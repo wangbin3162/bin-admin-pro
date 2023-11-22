@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { LoadingBar, Notice } from 'bin-ui-next'
+import { LoadingBar, Notice } from 'bin-ui-design'
 import { scrollBehavior } from './scrollBehavior'
 import { constantRoutes } from './routes'
 import { useStore } from '@/pinia'

@@ -1,5 +1,5 @@
 import { computed, ref, watch } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 
 /**
  * 表单操作、状态内容定义
@@ -19,9 +19,12 @@ export default function useForm() {
   // 给弹窗使用的visible
   const modalVisible = computed(() => pageStatus.value.isCreate || pageStatus.value.isEdit)
 
-  watch(() => editStatus.value, () => {
-    window.scrollTo(0, 0)
-  })
+  watch(
+    () => editStatus.value,
+    () => {
+      window.scrollTo(0, 0)
+    },
+  )
 
   function openDetail() {
     editStatus.value = 'detail'
@@ -43,7 +46,7 @@ export default function useForm() {
 
   function submitForm(doneFun, validateErrMsg = '表单校验错误，请填写正确后再次提交！') {
     if (!formRef.value) return
-    formRef.value.validate((valid) => {
+    formRef.value.validate(valid => {
       if (valid) {
         if (typeof doneFun === 'function') {
           doneFun()

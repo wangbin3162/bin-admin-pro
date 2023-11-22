@@ -50,7 +50,7 @@ export default ({ mode }) => {
         'pinia',
         'dayjs',
         'echarts',
-        'bin-ui-next',
+        'bin-ui-design',
         'js-cookie',
         'mockjs',
         'brace',
@@ -68,7 +68,7 @@ export default ({ mode }) => {
           manualChunks(id) {
             if (id.includes('/node_modules/')) {
               // 设置需要独立打包的npm包
-              const expansions = ['bin-ui-next', 'brace', 'mockjs', 'lodash-es']
+              const expansions = ['bin-ui-design', 'brace', 'mockjs', 'lodash-es']
               const c = expansions.find(exp => id.includes(`/node_modules/${exp}`))
               if (c) {
                 return `chunk-${c}`

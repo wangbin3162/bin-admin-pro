@@ -1,6 +1,6 @@
 import LuckyExcel from 'luckyexcel'
 import { ref, computed, onBeforeUnmount, onMounted } from 'vue'
-import { Message, MessageBox } from 'bin-ui-next'
+import { Message, MessageBox } from 'bin-ui-design'
 import { IS_DEV } from '@/utils/env'
 import { deepMerge, deepCopy } from '@/utils/util'
 import { isFunction } from '@/utils/luckysheet-util/is'

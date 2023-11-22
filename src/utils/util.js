@@ -1,4 +1,4 @@
-import { Utils, Notice } from 'bin-ui-next'
+import { Utils, Notice } from 'bin-ui-design'
 
 export const generateId = Utils.helper.generateId
 

@@ -1,12 +1,12 @@
 # bin-admin-pro
 
-默认分支已更换为vite搭建，cli版本详见第二分支。
+默认分支已更换为 vite 搭建，cli 版本详见第二分支。
 
-工程已全面升级为vue3.2+版本，组件库插件等也会定期更新vue版本依赖。
+工程已全面升级为 vue3.2+版本，组件库插件等也会定期更新 vue 版本依赖。
 
 [预览](https://wangbin3162.github.io/bin-admin-pro/)
 
-全新的admin-pro基于 Vue3，配合使用最新支持vue3的组件库 [bin-ui-next](https://github.com/wangbin3162/bin-ui-next/) 
+全新的 admin-pro 基于 Vue3，配合使用最新支持 vue3 的组件库 [bin-ui-design](https://github.com/wangbin3162/bin-ui-design/)
 
 组件库提供了全新的主题系统和配置参数，增加了系统的个性化功能，并提供了多个自定义组件用于日常开发，配合组件库以及示例，可以快速的
 搭建自己的业务管理模块。
@@ -48,7 +48,7 @@
     │   ├── mock                   // mock server 数据
     │   ├── plugins                // 自定义插件
     │   ├── router                 // 路由
-    │   ├── store                  // 全局 store 
+    │   ├── store                  // 全局 store
     │   ├── utils                  // 工具函数模块
     │   ├── views                  // views 视图显示（system文件夹为系统默认必带的试图显示）
     │   ├── App.vue                // 入口页面
@@ -58,7 +58,6 @@
     ├── babel.config.js            // babel 配置项
     ├── vite.config.js             // vite配置项
     └── package.json               // package.json
-
 
 ## 安装
 

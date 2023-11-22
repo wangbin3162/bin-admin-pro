@@ -35,7 +35,7 @@
 </template>
 
 <script setup>
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { sendMsg } from '@/utils/cross-tab-msg'
 import { useRoute } from 'vue-router'
 import { watch, ref, computed, toRaw } from 'vue'

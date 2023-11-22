@@ -1,6 +1,6 @@
 <template>
   <page-wrapper
-    desc="基础组件依赖于bin-ui-next，主要用于验证不同组件的主色颜色主题。主题样式默认只覆盖default和primary主色"
+    desc="基础组件依赖于bin-ui-design，主要用于验证不同组件的主色颜色主题。主题样式默认只覆盖default和primary主色"
   >
     <b-collapse-wrap title="default" shadow="none" class="mb-20">
       <div class="p10">

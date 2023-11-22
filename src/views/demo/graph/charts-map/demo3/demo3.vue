@@ -18,7 +18,7 @@
 
 <script setup>
 import { onMounted, ref, onBeforeUnmount } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import { fomatTreeData, getMockData } from './data'
 import G6Creator from './G6Creator'
 

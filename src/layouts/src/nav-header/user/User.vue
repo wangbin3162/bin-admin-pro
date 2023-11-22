@@ -23,7 +23,7 @@
 </template>
 
 <script setup>
-import { MessageBox } from 'bin-ui-next'
+import { MessageBox } from 'bin-ui-design'
 import { useStore } from '@/pinia'
 import { useRouter, useRoute } from 'vue-router'
 

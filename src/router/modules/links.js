@@ -8,13 +8,13 @@ export default [
         name: 'CompDoc',
         title: '组件文档',
         icon: 'link',
-        externalLink: 'https://wangbin3162.gitee.io/bin-ui-next/',
+        externalLink: 'https://wangbin3162.gitee.io/bin-ui-design/',
       },
       {
         name: 'Github',
         title: '仓库地址',
         icon: 'link',
-        externalLink: 'https://github.com/wangbin3162/bin-ui-next',
+        externalLink: 'https://github.com/wangbin3162/bin-ui-design',
       },
       {
         name: 'DataV',

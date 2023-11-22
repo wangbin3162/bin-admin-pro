@@ -114,7 +114,7 @@ import { computed, ref } from 'vue'
 import { MappingItem } from '@/utils/luckysheet-util/default-data'
 import { convertToRowColumn } from '@/utils/luckysheet-util/utils'
 import { deepCopy } from '@/utils/util'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 const emit = defineEmits(['save'])
 
 const visible = ref(false)

@@ -101,7 +101,7 @@ import GSider from './group/GSider.vue'
 import GTagsView from './group/GTagsView.vue'
 import GTable from './group/GTable.vue'
 import GPage from './group/GPage.vue'
-import { Message, MessageBox } from 'bin-ui-next'
+import { Message, MessageBox } from 'bin-ui-design'
 import { themeConfigRef, Theme } from '@/theme'
 import {
   exportJson,

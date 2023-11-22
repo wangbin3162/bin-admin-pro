@@ -2,7 +2,7 @@
   <div class="navbar-header">
     <div class="left-side">
       <div class="logo-wrap">
-        <img class="icon" src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo-small" />
+        <img class="icon" src="@/assets/images/logo/logo.svg" alt="logo-small" />
         <h5>ADMIN-PRO</h5>
       </div>
     </div>

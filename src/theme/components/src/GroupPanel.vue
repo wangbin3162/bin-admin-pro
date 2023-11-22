@@ -56,7 +56,7 @@
 import { computed, ref, watch } from 'vue'
 import { copyText } from '@/utils/util'
 import { isColorValue } from '@/theme/utils/utils'
-import { Utils } from 'bin-ui-next'
+import { Utils } from 'bin-ui-design'
 
 const { getPalette } = Utils.color
 

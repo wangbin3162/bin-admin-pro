@@ -15,7 +15,7 @@
         <div class="main" flex="dir:top main:center cross:center">
           <!-- logo -->
           <div class="page-login--logo">
-            <img src="@/assets/images/logo/bin-ui-next-02.svg" alt="logo" />
+            <img src="@/assets/images/logo/logo.svg" alt="logo" />
             <span>BIN-ADMIN-PRO</span>
           </div>
           <!-- 表单 -->

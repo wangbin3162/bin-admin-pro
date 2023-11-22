@@ -10,7 +10,7 @@ export default {
     {
       id: '001',
       title: 'Bin UI Next',
-      url: 'https://wangbin3162.gitee.io/bin-ui-next/#/guide',
+      url: 'https://wangbin3162.gitee.io/bin-ui-design/#/guide',
       desc: '基于vue3的ui组件库，内涵60+组件',
       banner: banner1,
       author: 'wangbin',
@@ -21,7 +21,7 @@ export default {
       id: '002',
       title: 'Bin Admin Pro',
       url: 'https://wangbin3162.gitee.io/bin-ace-editor/#/guide',
-      desc: '基于vue3,bin-ui-next的企业级后台管理框架',
+      desc: '基于vue3,bin-ui-design的企业级后台管理框架',
       banner: banner2,
       author: 'wangbin',
       avatar,

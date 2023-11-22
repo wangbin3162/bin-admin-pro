@@ -70,7 +70,7 @@
 
 <script>
 import { ref } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 export default {
   name: 'BaseForm',
   setup() {

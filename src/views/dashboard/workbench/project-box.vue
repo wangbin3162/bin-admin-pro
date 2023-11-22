@@ -16,7 +16,7 @@
       </div>
     </template>
     <div class="items-wrap">
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ui-next" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ui-design" target="_blank">
         <div class="title">
           <iconfont icon="appstore" color="#25bbe3" :size="36" bg round />
           <span class="ml-15">Bin UI Next</span>

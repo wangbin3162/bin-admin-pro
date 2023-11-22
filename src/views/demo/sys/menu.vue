@@ -86,7 +86,7 @@ import { getMenuTree } from '@/api/modules/menu.api'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useForm from '@/hooks/service/useForm'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 
 defineOptions({
   name: 'SysMenu',

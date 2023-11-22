@@ -110,7 +110,7 @@
 import { getDepartTree } from '@/api/modules/depart.api'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 import useForm from '@/hooks/service/useForm'
 
 defineOptions({

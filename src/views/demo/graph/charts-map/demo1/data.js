@@ -2,7 +2,7 @@ import img1 from '@/assets/images/db/001.png'
 import img2 from '@/assets/images/db/002.png'
 import img3 from '@/assets/images/db/003.png'
 import img4 from '@/assets/images/db/004.png'
-import { Utils } from 'bin-ui-next'
+import { Utils } from 'bin-ui-design'
 
 const { alpha } = Utils.color
 

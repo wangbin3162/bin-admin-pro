@@ -101,7 +101,7 @@
 import useTable from '@/hooks/service/useTable'
 import { getUserList } from '@/api/modules/user.api'
 import { reactive, ref, watch } from 'vue'
-import { Message } from 'bin-ui-next'
+import { Message } from 'bin-ui-design'
 
 export default {
   name: 'UserList',

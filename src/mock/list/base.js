@@ -20,7 +20,7 @@ export default {
     {
       id: '002',
       title: 'Bin Admin Pro',
-      desc: '基于vue3,bin-ui-next的企业级后台管理框架',
+      desc: '基于vue3,bin-ui-design的企业级后台管理框架',
       author: 'wangbin',
       avatar: avatar2,
       time: '2021-06-04 12:00:00',

@@ -6,7 +6,7 @@
 
 <script>
 import { computed } from 'vue'
-import { Utils } from 'bin-ui-next'
+import { Utils } from 'bin-ui-design'
 import { themeConfigRef } from '@/theme'
 
 const { mixWhite } = Utils.color
