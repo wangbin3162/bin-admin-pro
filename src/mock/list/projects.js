@@ -9,7 +9,7 @@ export default {
   rows: [
     {
       id: '001',
-      title: 'Bin UI Next',
+      title: 'Bin UI Design',
       url: 'https://wangbin3162.gitee.io/bin-ui-design/#/guide',
       desc: '基于vue3的ui组件库，内涵60+组件',
       banner: banner1,

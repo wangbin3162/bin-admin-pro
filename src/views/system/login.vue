@@ -82,7 +82,7 @@
         <div class="footer">
           <p class="footer-copyright">
             bin admin pro 简版后台管理系统vue3 重构版
-            <a href="https://github.com/wangbin3162/bin-admin-pro" target="_blank">github</a>
+            <a href="https://gitee.com/wangbin3162/bin-admin-pro" target="_blank">github</a>
           </p>
         </div>
       </div>

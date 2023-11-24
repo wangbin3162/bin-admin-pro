@@ -4,9 +4,9 @@
 
 工程已全面升级为 vue3.2+版本，组件库插件等也会定期更新 vue 版本依赖。
 
-[预览](https://wangbin3162.github.io/bin-admin-pro/)
+[预览](https://wangbin3162.gitee.io/bin-admin-pro/)
 
-全新的 admin-pro 基于 Vue3，配合使用最新支持 vue3 的组件库 [bin-ui-design](https://github.com/wangbin3162/bin-ui-design/)
+全新的 admin-pro 基于 Vue3，配合使用最新支持 vue3 的组件库 [bin-ui-design](https://gitee.com/wangbin3162/bin-ui-design/)
 
 组件库提供了全新的主题系统和配置参数，增加了系统的个性化功能，并提供了多个自定义组件用于日常开发，配合组件库以及示例，可以快速的
 搭建自己的业务管理模块。
@@ -63,7 +63,7 @@
 
 ```bash
 # 克隆项目
-git clone https://github.com/wangbin3162/bin-admin-pro.git
+git clone https://gitee.com/wangbin3162/bin-admin-pro.git
 
 # 安装依赖
 npm install or yarn install

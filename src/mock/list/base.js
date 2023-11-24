@@ -9,7 +9,7 @@ export default {
   rows: [
     {
       id: '001',
-      title: 'Bin UI Next',
+      title: 'Bin UI Design',
       desc: '基于vue3的ui组件库，内涵60+组件',
       author: 'wangbin',
       avatar: avatar1,

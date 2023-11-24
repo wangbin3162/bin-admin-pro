@@ -44,7 +44,7 @@ export default {
       { value: 'vue-router', link: 'https://github.com/vuejs/vue-router' },
       { value: 'babel', link: 'https://github.com/babel/babel' },
       { value: 'bin-ui', link: 'https://github.com/wangbin3162/bin-ui' },
-      { value: 'bin-ui-design', link: 'https://github.com/wangbin3162/bin-ui-design' },
+      { value: 'bin-ui-design', link: 'https://gitee.com/wangbin3162/bin-ui-design' },
     ]
 
     const handleSelect = item => {

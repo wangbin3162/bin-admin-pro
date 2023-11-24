@@ -19,7 +19,7 @@
       <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ui-design" target="_blank">
         <div class="title">
           <iconfont icon="appstore" color="#25bbe3" :size="36" bg round />
-          <span class="ml-15">Bin UI Next</span>
+          <span class="ml-15">Bin UI Design</span>
         </div>
         <div class="desc">一个基于 vue3 的组件库</div>
         <div class="desc" flex="main:justify">

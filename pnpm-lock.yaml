@@ -60,8 +60,8 @@ dependencies:
     specifier: ^1.0.0
     version: 1.0.0
   bin-ui-design:
-    specifier: ^0.2.0
-    version: 0.2.0
+    specifier: ^0.3.0
+    version: 0.3.0
   brace:
     specifier: ^0.11.1
     version: 0.11.1
@@ -2806,8 +2806,8 @@ packages:
       - webpack-command
     dev: false
 
-  /bin-ui-design@0.2.0:
-    resolution: {integrity: sha512-a2XT2gYWcQMMMRZvm5a5gkHYC8eoE8ugMVoQdaBJVgEvVqV2a66TLoQ650rOv1BhMGwev8ZeDF5K8ylyV2NBDA==}
+  /bin-ui-design@0.3.0:
+    resolution: {integrity: sha512-cjk67uI9C/LlR8tqCl2svV3LYiLk0w6TNDyfpDomWHAlyocyyU+Csm8MLcqTiKJ6PEsYhSyCHaY3dmM/WrQK8A==}
     dependencies:
       '@popperjs/core': 2.11.8
       async-validator: 4.2.5

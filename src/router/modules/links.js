@@ -14,7 +14,7 @@ export default [
         name: 'Github',
         title: '仓库地址',
         icon: 'link',
-        externalLink: 'https://github.com/wangbin3162/bin-ui-design',
+        externalLink: 'https://gitee.com/wangbin3162/bin-ui-design',
       },
       {
         name: 'DataV',
