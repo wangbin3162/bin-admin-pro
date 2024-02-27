@@ -66,7 +66,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .func-body-editor {
   .func {
     padding: 2px 0;

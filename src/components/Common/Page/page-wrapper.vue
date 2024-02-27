@@ -16,7 +16,7 @@
             <span class="page-header-heading-title" v-if="!isBubbles">{{ normalTitle }}</span>
             <slot name="right"></slot>
           </div>
-          <div class="page-header-desc" v-if="$slots.desc">
+          <div class="page-header-desc" v-if="$slots.desc || props.desc">
             <slot name="desc">{{ normalDesc }}</slot>
           </div>
           <b-icon v-if="showClose" name="close" type="button" @click="$emit('close')"></b-icon>

@@ -32,7 +32,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .work-center {
   margin: 16px;
   .banner {

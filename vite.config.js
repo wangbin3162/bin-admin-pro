@@ -33,9 +33,6 @@ export default ({ mode }) => {
       host: '0.0.0.0',
       port: 8085,
       open: true,
-      proxy: {
-        // '/auth': { target: proxyAddress },
-      },
     },
     resolve: {
       alias: {
@@ -55,7 +52,7 @@ export default ({ mode }) => {
         'mockjs',
         'brace',
       ],
-      exclude: [],
+      exclude: ['@vue/repl'],
     },
     build: {
       sourcemap: false,
@@ -80,6 +77,10 @@ export default ({ mode }) => {
         },
       },
       chunkSizeWarningLimit: 2000,
+    },
+    define: {
+      // enable hydration mismatch details in production build
+      __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
     },
   })
 }

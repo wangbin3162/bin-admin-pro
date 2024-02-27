@@ -32,7 +32,7 @@ function deleteElement() {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .contextmenu {
   margin: 0;
   background: #fff;
@@ -46,8 +46,7 @@ function deleteElement() {
   font-size: var(--bin-base-font-size);
   color: var(--bin-color-text-default);
   border: 1px solid var(--bin-border-color-light);
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, .1)
-  li {
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1) li {
     margin: 0;
     padding: 8px 16px;
     cursor: pointer;

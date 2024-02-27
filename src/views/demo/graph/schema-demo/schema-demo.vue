@@ -250,7 +250,7 @@ onMounted(async () => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .preview-panel {
   display: flex;
   background: #fff;

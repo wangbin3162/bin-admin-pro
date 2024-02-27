@@ -101,14 +101,14 @@ function openMenu(ev) {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 /*节点的最外层容器*/
 .ef-node-container {
   position: absolute;
   display: flex;
   width: 170px;
   height: 32px;
-  border: 1px solid #E0E3E7;
+  border: 1px solid #e0e3e7;
   border-radius: 5px;
   background-color: #fff;
   .node-inner {
@@ -116,14 +116,14 @@ function openMenu(ev) {
   }
   &:hover {
     cursor: pointer;
-    border: 1px dashed #1879FF;
+    border: 1px dashed #1879ff;
   }
-  &:not(.view-only){
+  &:not(.view-only) {
     &:hover {
       /* 设置移动样式*/
       cursor: move;
-      background-color: #F0F7FF;
-      border: 1px dashed #1879FF;
+      background-color: #f0f7ff;
+      border: 1px dashed #1879ff;
     }
     .ef-node-left-ico:hover {
       /* 设置拖拽的样式 */
@@ -131,9 +131,8 @@ function openMenu(ev) {
     }
   }
   &.ef-drop-hover {
-    border: 1px dashed #1879FF;
+    border: 1px dashed #1879ff;
   }
-  // switch选择节点独有的样式
   &.el-node-switch {
     .ef-node-left {
       background-color: #fa8c16;
@@ -143,7 +142,7 @@ function openMenu(ev) {
       background-color: #fff9f3;
       border: 1px solid #fa8c16;
     }
-    &:not(.view-only){
+    &:not(.view-only) {
       &:hover {
         background-color: #fff9f3;
         border: 1px dashed #fa8c16;
@@ -158,9 +157,9 @@ function openMenu(ev) {
 
 /*节点激活样式*/
 .ef-node-active {
-  background-color: #F0F7FF;
-  background-color: #F0F7FF;
-  border: 1px solid #1879FF;
+  background-color: #f0f7ff;
+  background-color: #f0f7ff;
+  border: 1px solid #1879ff;
 }
 
 /*节点左侧的竖线*/
@@ -177,7 +176,7 @@ function openMenu(ev) {
   justify-content: center;
   width: 30px;
   height: 30px;
-  border-right: 1px solid #E0E3E7;
+  border-right: 1px solid #e0e3e7;
   .node-ico {
     pointer-events: none;
     width: 24px;
@@ -211,14 +210,14 @@ function openMenu(ev) {
   line-height: 30px;
   position: absolute;
   right: 4px;
-  color: #84CF65;
+  color: #84cf65;
   cursor: default;
   /*节点的几种状态样式*/
-  .b-icon-check-circle{
+  .b-icon-check-circle {
     line-height: 32px;
     position: absolute;
     right: 5px;
-    color: #84CF65;
+    color: #84cf65;
     cursor: default;
   }
 
@@ -226,7 +225,7 @@ function openMenu(ev) {
     line-height: 32px;
     position: absolute;
     right: 5px;
-    color: #F56C6C;
+    color: #f56c6c;
     cursor: default;
   }
 
@@ -234,7 +233,7 @@ function openMenu(ev) {
     line-height: 32px;
     position: absolute;
     right: 5px;
-    color: #E6A23C;
+    color: #e6a23c;
     cursor: default;
   }
   .b-icon-loading {

@@ -40,7 +40,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .dev-click-pos-wrapper {
   position: relative;
   font-size: 0;

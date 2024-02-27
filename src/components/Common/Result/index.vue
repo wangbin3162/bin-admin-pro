@@ -7,7 +7,7 @@
     <div class="bin-result-desc" v-if="$slots.desc">
       <slot name="desc"></slot>
     </div>
-    <div class="bin-result-extra" :class="{'is-white-bg':extraWhite}" v-if="$slots.extra">
+    <div class="bin-result-extra" :class="{ 'is-white-bg': extraWhite }" v-if="$slots.extra">
       <slot name="extra"></slot>
     </div>
     <div class="bin-result-actions" v-if="$slots.actions">
@@ -22,7 +22,7 @@ export default {
   props: {
     status: {
       type: String,
-      validator: (val) => ['success', 'error'].includes(val),
+      validator: val => ['success', 'error'].includes(val),
       default: 'success',
     },
     statusMap: {
@@ -54,7 +54,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .bin-result {
   width: 70%;
   margin: 0 auto;
@@ -96,7 +96,7 @@ export default {
     &.is-white-bg {
       background: #fff;
       border: 1px solid #f8f8f9;
-      box-shadow: 0 0 4px rgba(0, 0, 0, .1);
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     }
   }
   .bin-result-actions {

@@ -79,19 +79,19 @@ onMounted(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .line-draw {
   display: flex;
   background-color: #000;
   position: relative;
-  width:600px;
+  width: 600px;
   height: 400px;
-  text-align:center;
+  text-align: center;
 }
 
 svg {
-   width: 600px;
-   height: 400px;
-   padding: 10px;
+  width: 600px;
+  height: 400px;
+  padding: 10px;
 }
 </style>

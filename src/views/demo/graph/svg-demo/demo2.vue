@@ -45,4 +45,4 @@ function toggle() {
 }
 </script>
 
-<style lang="stylus" scoped></style>
+<style scoped></style>

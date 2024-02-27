@@ -97,7 +97,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .g-slider {
   position: relative;
   width: 100%;
@@ -109,7 +109,7 @@ export default {
       }
     }
   }
-  :deep(.bin-slider ) {
+  :deep(.bin-slider) {
     .bin-slider__runway {
       width: 154px;
       margin: 12px 0;

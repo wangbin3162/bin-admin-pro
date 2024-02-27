@@ -75,7 +75,7 @@ watch(
 )
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .action-bar-wrap-line {
   position: absolute;
   height: 24px;
@@ -101,7 +101,7 @@ watch(
   background-color: #fff;
   display: flex;
   flex-direction: column;
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
   :deep(.bin-button-group) {
     display: flex;
     flex-direction: column;
@@ -110,7 +110,7 @@ watch(
       border-radius: 0;
       height: 28px;
     }
-    button+button {
+    button + button {
       margin-top: -1px;
       margin-left: 0;
     }

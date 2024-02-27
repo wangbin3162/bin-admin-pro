@@ -67,7 +67,7 @@ watch(
 )
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .footer-panel {
   display: flex;
   width: 100%;
@@ -122,7 +122,6 @@ watch(
     width: 190px;
   }
 
-    // slider滑动条
   :deep(.bin-slider) {
     .bin-slider__runway {
       height: 2px;
@@ -144,7 +143,8 @@ watch(
       .bin-slider__button {
         width: 9px;
         height: 9px;
-        &:focus, &:hover {
+        &:focus,
+        &:hover {
           transform: scale(1.2);
         }
       }

@@ -29,7 +29,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .card-list-wrap {
   display: flex;
   flex-wrap: wrap;

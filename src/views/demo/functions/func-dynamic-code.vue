@@ -412,7 +412,7 @@ if(validatPhone && validatAge){
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .drop-wrapper {
   padding: 10px;
   border: 1px dashed var(--bin-color-primary);
@@ -424,7 +424,7 @@ if(validatPhone && validatAge){
 }
 .example {
   font-size: 12px;
-  color #5d6d7e;
+  color: #5d6d7e;
   > p {
     line-height: 20px;
   }

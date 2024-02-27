@@ -122,7 +122,7 @@ function dragStart(evt, item) {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .flow-menu {
   display: flex;
   height: 100%;

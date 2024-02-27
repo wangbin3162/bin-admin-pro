@@ -20,7 +20,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style>
 .data-node {
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ export default {
   height: 100%;
   background-color: #fff;
   border: 1px solid #c2c8d5;
-  border-left: 4px solid #5F95FF;
+  border-left: 4px solid #5f95ff;
   border-radius: 4px;
   box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.06);
   .label {

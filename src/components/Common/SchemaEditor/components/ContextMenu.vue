@@ -28,7 +28,7 @@ const contextMenuStyle = computed(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .context-menu-wrap {
   position: fixed;
   z-index: 9999;
@@ -38,7 +38,7 @@ const contextMenuStyle = computed(() => {
   background: #fff;
   user-select: none;
   padding: 5px 0;
-  box-shadow:  0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .context-menu-item {

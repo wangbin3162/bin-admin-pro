@@ -15,6 +15,11 @@ export default [
         component: () => import('@/views/demo/functions/func-key-value.vue'),
       },
       {
+        name: 'FuncVueRepl',
+        title: '线上解释交互器',
+        component: () => import('@/views/demo/functions/func-vue-repl.vue'),
+      },
+      {
         name: 'FuncTitleBar',
         title: '标题组件',
         component: () => import('@/views/demo/functions/func-title-bar.vue'),
@@ -33,11 +38,6 @@ export default [
         name: 'FuncDynamicCode',
         title: '动态编码',
         component: () => import('@/views/demo/functions/func-dynamic-code.vue'),
-      },
-      {
-        name: 'FuncTiptap',
-        title: '富文本编辑器',
-        component: () => import('@/views/demo/functions/func-tiptap.vue'),
       },
       {
         name: 'DynamicEffect',

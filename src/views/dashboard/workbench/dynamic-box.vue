@@ -78,7 +78,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .list-wrap {
   .list-item {
     display: flex;

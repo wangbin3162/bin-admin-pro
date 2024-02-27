@@ -175,7 +175,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .canvas-main {
   position: relative;
   width: calc(100% - 300px);

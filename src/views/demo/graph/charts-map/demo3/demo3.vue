@@ -56,7 +56,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .demo-wrap {
   position: relative;
   .container {

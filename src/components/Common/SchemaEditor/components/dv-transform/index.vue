@@ -132,12 +132,7 @@ const onZoom = (e, dir) => {
 }
 </script>
 
-<style lang="stylus" scoped>
-$gui-primary-color = #1089ff;
-$background-color = rgba(14, 123, 230, 0.3);
-$background-hover-color = rgba(14, 123, 230, 0.38);
-
-// dv-transform
+<style scoped>
 .dv-transform {
   position: absolute;
   will-change: transform;
@@ -146,7 +141,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     z-index: 1;
 
     .dv-com {
-      background: $background-hover-color;
+      background: #1089ff;
     }
 
     .dv-scale::after {
@@ -157,7 +152,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
       bottom: 0;
       left: 0;
       z-index: -1;
-      border: 1px dashed $gui-primary-color;
+      border: 1px dashed var(--bin-color-primary);
     }
   }
   .b-icon-lock {
@@ -169,7 +164,6 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
   }
 }
 
-// dv-scale
 .dv-scale {
   position: absolute;
   width: 100%;
@@ -184,7 +178,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     transform-origin: 50% 50%;
     transform: scaleX(1) scaleY(1);
     overflow: hidden;
-    background: $background-color;
+    background: rgba(14, 123, 230, 0.3);
     .dv-event-disable {
       position: absolute;
       top: 0;
@@ -193,10 +187,13 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
 
   &.hovered {
     .dv-com {
-      background: $background-hover-color;
+      background: #1089ff;
     }
 
-    .bottom-handler, .left-handler, .right-handler, .top-handler {
+    .bottom-handler,
+    .left-handler,
+    .right-handler,
+    .top-handler {
       display: flex !important;
     }
   }
@@ -211,10 +208,10 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
   cursor: move;
   box-sizing: border-box;
   cursor: url('@/components/Common/SchemaEditor/assets/cursor-move.png') 4 4, auto;
-  // cursor: move;
 
   &.is-hide {
-    .transform-bg, i[class$='-handler'] {
+    .transform-bg,
+    i[class$='-handler'] {
       display: none;
     }
   }
@@ -242,7 +239,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     &::after {
       content: '';
       height: 1px;
-      background: $gui-primary-color;
+      background: var(--bin-color-primary);
       width: 100%;
       position: absolute;
       z-index: 1;
@@ -261,7 +258,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     &::after {
       content: '';
       height: 1px;
-      background: $gui-primary-color;
+      background: var(--bin-color-primary);
       width: 100%;
       position: absolute;
       z-index: 1;
@@ -281,7 +278,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     &::after {
       content: '';
       width: 1px;
-      background: $gui-primary-color;
+      background: var(--bin-color-primary);
       height: 100%;
       position: absolute;
       z-index: 1;
@@ -301,7 +298,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
     &::after {
       content: '';
       width: 1px;
-      background: $gui-primary-color;
+      background: var(--bin-color-primary);
       height: 100%;
       position: absolute;
       z-index: 1;
@@ -364,7 +361,7 @@ $background-hover-color = rgba(14, 123, 230, 0.38);
       width: 6px;
       height: 6px;
       background: #fff;
-      border: 1px solid $gui-primary-color;
+      border: 1px solid var(--bin-color-primary);
       border-radius: 100%;
       content: '';
     }

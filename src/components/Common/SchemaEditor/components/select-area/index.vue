@@ -21,7 +21,7 @@ defineProps({
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .select-area {
   position: absolute;
   border: 1px solid #0e7be6;

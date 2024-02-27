@@ -171,7 +171,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .page-cube-wrapper {
   .page-cube {
     position: relative;
@@ -182,7 +182,7 @@ export default {
       width: 240px;
       height: 100%;
       border-right: 1px solid #eee;
-      transition: width .15s ease;
+      transition: width 0.15s ease;
       .cube-left-content {
         width: 100%;
         height: 100%;
@@ -199,7 +199,7 @@ export default {
         height: 100px;
         cursor: pointer;
         background-color: #fafafa;
-        transition: .15s ease;
+        transition: 0.15s ease;
         border-radius: 4px;
         box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12);
         opacity: 0;
@@ -219,7 +219,7 @@ export default {
     &-content {
       width: calc(100% - 240px);
       height: 100%;
-      transition: width .15s ease;
+      transition: width 0.15s ease;
       .draggable-content {
         position: relative;
         z-index: 10;
@@ -236,7 +236,7 @@ export default {
           width: 100px;
           height: 14px;
           border-radius: 10px;
-          transition: .15s ease;
+          transition: 0.15s ease;
           background-color: #fafafa;
           box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.12);
           opacity: 0;

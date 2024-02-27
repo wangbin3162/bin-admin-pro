@@ -46,7 +46,7 @@ onBeforeUnmount(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .demo-wrap {
   position: relative;
   .container {
@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
     width: 500px;
     height: 40px;
     transform: translateX(-50%);
-    z-index : 1;
+    z-index: 1;
     .item {
       display: inline-flex;
       align-items: center;

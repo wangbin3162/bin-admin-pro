@@ -72,7 +72,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .g-input-number {
   width: 100%;
   &.has-suffix {

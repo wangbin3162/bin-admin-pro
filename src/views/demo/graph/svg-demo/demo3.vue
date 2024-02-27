@@ -54,4 +54,4 @@
 
 <script setup></script>
 
-<style lang="stylus" scoped></style>
+<style scoped></style>

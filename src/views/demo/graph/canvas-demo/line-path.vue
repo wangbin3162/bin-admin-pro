@@ -149,8 +149,8 @@ onMounted(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
-.canvas{
+<style scoped>
+.canvas {
   border: 1px solid #eee;
 }
 </style>

@@ -434,14 +434,14 @@ function cancelSelect() {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .ef-toolbar {
   padding-left: 10px;
   box-sizing: border-box;
   height: 42px;
   line-height: 42px;
   z-index: 3;
-  border-bottom: 1px solid #DADCE0;
+  border-bottom: 1px solid #dadce0;
   background: #fff;
 }
 .easy-flow {
@@ -452,7 +452,7 @@ function cancelSelect() {
     width: 200px;
     border-right: 1px solid #eeeeee;
   }
-  .canvas-side{
+  .canvas-side {
     position: relative;
     overflow: scroll;
     width: calc(100% - 500px);

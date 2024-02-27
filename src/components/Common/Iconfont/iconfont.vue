@@ -79,7 +79,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .icon-wrapper {
   display: inline-flex;
   align-items: center;

@@ -42,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .g-field-wrap {
   flex-wrap: wrap;
   display: flex;
@@ -51,7 +51,8 @@ export default {
     padding-left: 16px;
     height: 28px;
     line-height: 28px;
-    .g-field-title, .g-field-tooltip-title {
+    .g-field-title,
+    .g-field-tooltip-title {
       height: 30px;
       line-height: 30px;
       font-weight: normal;
@@ -78,7 +79,7 @@ export default {
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      :deep(.bin-button-group){
+      :deep(.bin-button-group) {
         display: flex;
         width: 100%;
         align-items: center;
@@ -87,7 +88,7 @@ export default {
           flex: 1;
         }
       }
-      :deep(.bin-radio-group){
+      :deep(.bin-radio-group) {
         display: flex;
         width: 100%;
         align-items: center;
@@ -109,13 +110,12 @@ export default {
         &.inline {
           width: 50%;
         }
-        &:not(.inline):last-child{
+        &:not(.inline):last-child {
           margin-bottom: 4px;
         }
       }
     }
 
-    // 内部组件标签的样式
     :deep(.g-input__caption) {
       display: block;
       width: 100%;

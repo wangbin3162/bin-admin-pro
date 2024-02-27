@@ -81,7 +81,7 @@ function loadBgImage(imageInfo) {
 defineExpose({ loadBgImage, getAllConfig, setConfig })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .schema-container {
   position: relative;
   user-select: none;
@@ -89,7 +89,6 @@ defineExpose({ loadBgImage, getAllConfig, setConfig })
   height: 700px;
   background: #fff;
   overflow: hidden;
-  // cursor: url('@/components/Common/SchemaEditor/assets/cursor-default.png') 4 4, auto;
   .config-main {
     width: 300px;
     height: 100%;

@@ -25,20 +25,19 @@
 // })
 </script>
 
-<style lang="stylus" scoped>
-
+<style scoped>
 .svg1 line {
-  stroke-dasharray:300,300;
-  stroke-dashoffset:300;
+  stroke-dasharray: 300, 300;
+  stroke-dashoffset: 300;
   animation: move 2s ease-in-out infinite forwards;
 }
 
 @keyframes move {
   0% {
-    stroke-dashoffset:300;
+    stroke-dashoffset: 300;
   }
   100% {
-    stroke-dashoffset:0;
+    stroke-dashoffset: 0;
   }
 }
 .checkmark__circle {
@@ -59,7 +58,7 @@
   stroke: #fff;
   margin: 16px;
   box-shadow: inset 0px 0px 0px #7ac142;
-  animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  animation: fill 0.4s ease-in-out 0.4s forwards, scale 0.3s ease-in-out 0.9s both;
 }
 
 .checkmark__check {
@@ -75,7 +74,8 @@
   }
 }
 @keyframes scale {
-  0%, 100% {
+  0%,
+  100% {
     transform: none;
   }
   50% {

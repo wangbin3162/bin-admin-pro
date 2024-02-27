@@ -130,7 +130,7 @@ onMounted(() => {
 `
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .rabbit {
   display: block;
   width: 400px;

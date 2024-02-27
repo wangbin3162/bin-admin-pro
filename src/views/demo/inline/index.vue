@@ -12,7 +12,7 @@ const $route = useRoute()
 const params = computed(() => $route.params)
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .iframe-con {
   height: 100%;
   padding: 20px;

@@ -2,14 +2,14 @@
   <div class="system-error-page">
     <div class="bin-result">
       <div class="bin-result-icon bin-result-image">
-        <img src="@/assets/images/default/error500.svg" alt="500">
+        <img src="@/assets/images/default/error500.svg" alt="500" />
       </div>
       <div class="bin-result-title">{{ status }}</div>
       <div class="bin-result-subtitle">{{ errorMessage }}</div>
       <div class="bin-result-extra">
         <b-space>
           <b-button background @click="$router.back()">返回上级</b-button>
-          <router-link :to="{path:HOME_PATH}">
+          <router-link :to="{ path: HOME_PATH }">
             <b-button type="primary">返回首页</b-button>
           </router-link>
         </b-space>
@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style>
 .system-error-page {
   .bin-result {
     padding: 32px;
@@ -87,7 +87,6 @@ export default {
     animation-delay: 0.3s;
     animation-fill-mode: forwards;
   }
-
 }
 @keyframes slideUp {
   0% {

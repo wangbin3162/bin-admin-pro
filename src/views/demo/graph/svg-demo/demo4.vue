@@ -16,9 +16,9 @@ onMounted(() => {
 })
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .box {
-  width:100px;
+  width: 100px;
   height: 100px;
   background-color: rgb(251, 21, 90);
 }

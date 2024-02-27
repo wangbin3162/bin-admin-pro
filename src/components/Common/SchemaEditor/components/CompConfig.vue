@@ -59,11 +59,11 @@ const props = defineProps({
 const data = computed(() => props.config)
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .setting-wrap {
   width: 100%;
   height: calc(100% - 45px);
   overflow-y: auto;
-  color: rgba(0, 0, 0, .65);
+  color: rgba(0, 0, 0, 0.65);
 }
 </style>

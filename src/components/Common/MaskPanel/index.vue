@@ -16,7 +16,7 @@ export default {
     },
     theme: {
       type: String,
-      validate: (val) => ['light', 'dark'].includes(val),
+      validate: val => ['light', 'dark'].includes(val),
       default: 'light',
     },
     opacity: {
@@ -36,14 +36,14 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .disable-modify-mask {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 10;
 }
 </style>

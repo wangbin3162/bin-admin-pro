@@ -70,7 +70,7 @@ onUnmounted(() => {
 })
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .canvas-ruler-wp {
   position: absolute;
   z-index: 1;

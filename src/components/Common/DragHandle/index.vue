@@ -1,7 +1,7 @@
 <template>
   <div class="handle" :class="customClass" :style="styles" title="Drag sort">
-    <img v-if="type==='svg'" :src="svgImg[icon]" alt="move" />
-    <i v-else :class="`b-iconfont b-icon-${icon}`" :style="{fontSize:iconFontSize}"></i>
+    <img v-if="type === 'svg'" :src="svgImg[icon]" alt="move" />
+    <i v-else :class="`b-iconfont b-icon-${icon}`" :style="{ fontSize: iconFontSize }"></i>
   </div>
 </template>
 
@@ -58,7 +58,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .handle {
   cursor: grab;
   display: inline-flex;
@@ -70,14 +70,14 @@ export default {
   > img {
     width: 100%;
     opacity: 0.7;
-    transition: .2s;
+    transition: 0.2s;
     &:hover {
       opacity: 1;
     }
   }
   > i {
     opacity: 0.8;
-    transition: .2s;
+    transition: 0.2s;
     &:hover {
       opacity: 1;
     }

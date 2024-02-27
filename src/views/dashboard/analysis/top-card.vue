@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .card-panel {
   .top {
     color: var(--v-g-text-color);

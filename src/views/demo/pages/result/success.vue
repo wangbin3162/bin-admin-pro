@@ -31,7 +31,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .success-page-wrap {
   margin: 16px;
   padding: 40px;

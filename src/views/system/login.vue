@@ -145,10 +145,10 @@ async function loginSuccess(data) {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .page-login {
   user-select: none;
-  background-color: #F0F2F5;
+  background-color: #f0f2f5;
   height: 100vh;
   position: relative;
   background-image: url('@/assets/images/login-background.svg');
@@ -249,7 +249,7 @@ async function loginSuccess(data) {
       list-style: none;
       width: 20px;
       height: 20px;
-      background: #FFF;
+      background: #fff;
       animation: animate 25s linear infinite;
       bottom: -200px;
       @keyframes animate {
@@ -349,11 +349,11 @@ async function loginSuccess(data) {
 
     & > div {
       position: absolute;
-      opacity: .4;
+      opacity: 0.4;
     }
 
     &::before {
-      content: "";
+      content: '';
       position: absolute;
       top: 0;
       left: 0;
@@ -379,7 +379,7 @@ async function loginSuccess(data) {
     transform: translate(-50%, 0);
     width: 1000px;
     height: 450px;
-    background: linear-gradient(-36deg, #E950D1, #f980D9);
+    background: linear-gradient(-36deg, #e950d1, #f980d9);
     clip-path: polygon(10% 0, 100% 70%, 100% 100%, 20% 90%);
   }
 

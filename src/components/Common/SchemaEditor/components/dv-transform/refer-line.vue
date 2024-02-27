@@ -36,9 +36,7 @@ const accountStyle = computed(() => ({
 }))
 </script>
 
-<style lang="stylus" scoped>
-$gui-primary-color = #1089ff;
-
+<style scoped>
 .nav-line {
   position: absolute;
   top: 0;
@@ -53,7 +51,7 @@ $gui-primary-color = #1089ff;
   position: absolute;
   left: 0;
   width: 0;
-  border-left: 1px dashed $gui-primary-color;
+  border-left: 1px dashed var(--bin-color-primary);
   transform: translateY(-100%);
 }
 
@@ -61,19 +59,19 @@ $gui-primary-color = #1089ff;
   position: absolute;
   top: 0;
   height: 0;
-  border-top: 1px dashed $gui-primary-color;
+  border-top: 1px dashed var(--bin-color-primary);
   transform: translateX(-100%);
 }
 
 .nav-line-account {
   position: absolute;
-  color: $gui-primary-color;
+  color: var(--bin-color-primary);
   white-space: nowrap;
   transform: translate(-100%, -100%);
   background: #fff;
   padding: 2px 4px;
   font-size: 12px;
   border-radius: 3px;
-  box-shadow:  0 2px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 </style>

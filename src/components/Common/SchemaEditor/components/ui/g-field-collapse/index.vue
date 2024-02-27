@@ -80,7 +80,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .g-field-toggle {
   position: relative;
   .g-field-header {
@@ -102,12 +102,12 @@ export default {
         top: 8px;
       }
       .wrap-arrow {
-        transition: .2s;
+        transition: 0.2s;
         position: absolute;
         right: 10px;
         top: 12px;
         &.show {
-          transform: rotate(90deg)
+          transform: rotate(90deg);
         }
         &.simple {
           cursor: pointer;

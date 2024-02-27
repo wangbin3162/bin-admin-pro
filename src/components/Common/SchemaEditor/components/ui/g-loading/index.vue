@@ -75,7 +75,7 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .g-nested-loading {
   position: relative;
   height: 100%;
@@ -186,8 +186,7 @@ export default defineComponent({
   }
 }
 
-
-for $i in (1..60) {
+for $i in (10.6) {
   .dna-ele:nth-of-type({$i}),
   .dna-ele:nth-of-type({$i}) .dna-dot:before {
     animation-delay: -0.16 * $i s;

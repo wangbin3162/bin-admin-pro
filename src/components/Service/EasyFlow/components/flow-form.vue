@@ -163,14 +163,14 @@ defineExpose({
 })
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .ef-node-form {
   height: 100%;
 }
 .ef-node-form-header {
   height: 32px;
   border-bottom: 1px solid #dce3e8;
-  background: #F1F3F4;
+  background: #f1f3f4;
   color: #000;
   line-height: 32px;
   padding-left: 12px;
@@ -181,8 +181,8 @@ defineExpose({
   height: calc(100% - 32px);
   padding: 10px;
   overflow: auto;
-  .empty{
-    text-align:center;
+  .empty {
+    text-align: center;
     color: #999;
     padding: 20px;
   }

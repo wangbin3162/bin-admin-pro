@@ -44,7 +44,7 @@ export default {
 }
 </script>
 
-<style lang="stylus">
+<style>
 .system-error-page {
   .bin-result {
     padding: 32px;
@@ -87,7 +87,6 @@ export default {
     animation-delay: 0.3s;
     animation-fill-mode: forwards;
   }
-
 }
 @keyframes slideUp {
   0% {

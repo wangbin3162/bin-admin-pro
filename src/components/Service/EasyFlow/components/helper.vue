@@ -84,9 +84,9 @@ watch(
 )
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .scroll-box {
-  position:relative;
+  position: relative;
   padding: 0 20px;
   width: 70%;
   height: 400px;

@@ -45,7 +45,7 @@ const onLeave = () => hoverCom('')
 const onDelete = id => deleteCom(id)
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .layer-manager-wrap {
   position: relative;
   display: flex;
@@ -53,7 +53,7 @@ const onDelete = id => deleteCom(id)
   height: calc(100% - 45px);
   overflow-y: auto;
   line-height: 2;
-  color: rgba(0, 0, 0, .65);
+  color: rgba(0, 0, 0, 0.65);
   list-style: none;
   user-select: none;
   flex: auto;

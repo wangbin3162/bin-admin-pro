@@ -32,7 +32,7 @@ const tabs = ref([
 ])
 </script>
 
-<style lang="stylus" scoped>
+<style scoped>
 .panel {
   .content-box {
     background-color: #fff;

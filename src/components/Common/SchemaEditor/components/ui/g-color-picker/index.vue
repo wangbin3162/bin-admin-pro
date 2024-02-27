@@ -95,7 +95,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .g-color-picker {
   width: 100%;
   :deep(.bin-color-picker) {

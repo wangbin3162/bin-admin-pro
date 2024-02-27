@@ -107,20 +107,27 @@ export default {
     }
 
     // 初始value监听watch
-    watch(() => props.modelValue, val => {
-      if (val === '') {
-        resetStyle()
-        return
-      }
-      backWidth()
-      styleValue.value = val
-    }, { immediate: true })
+    watch(
+      () => props.modelValue,
+      val => {
+        if (val === '') {
+          resetStyle()
+          return
+        }
+        backWidth()
+        styleValue.value = val
+      },
+      { immediate: true },
+    )
 
     // 监听宽度
-    watch(() => width.value, val => {
-      styleValue.value = `width: ${val};`
-      emitValue()
-    })
+    watch(
+      () => width.value,
+      val => {
+        styleValue.value = `width: ${val};`
+        emitValue()
+      },
+    )
 
     return {
       width,
@@ -132,7 +139,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .styles-editor-wrap {
   .editor-box {
     flex: 1;

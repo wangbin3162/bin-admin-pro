@@ -13,7 +13,10 @@
         {{ noDataWarningText }}
       </b-empty>
       <div v-else-if="cols.length && rows.length" class="table-responsive">
-        <table class="pivot-table pivot-table-bordered" :aria-busy="isDataLoading || isDataComputing">
+        <table
+          class="pivot-table pivot-table-bordered"
+          :aria-busy="isDataLoading || isDataComputing"
+        >
           <!-- Table header -->
           <thead>
             <template v-for="({ colField, cols }, colFieldIndex) in tableHeader.colHeaderFields">
@@ -57,8 +60,16 @@
                   :rowspan="colHeaderSize"
                 ></th>
                 <!-- Column headers -->
-                <th v-for="(col, colIndex) in cols" :key="`${colFieldIndex}-${colIndex}`" :colspan="col.colspan">
-                  <slot v-if="colField.headerSlotName" :name="colField.headerSlotName" :value="col.value">
+                <th
+                  v-for="(col, colIndex) in cols"
+                  :key="`${colFieldIndex}-${colIndex}`"
+                  :colspan="col.colspan"
+                >
+                  <slot
+                    v-if="colField.headerSlotName"
+                    :name="colField.headerSlotName"
+                    :value="col.value"
+                  >
                     Missing slot
                     <code>{{ colField.headerSlotName }}</code>
                   </slot>
@@ -77,7 +88,10 @@
           </thead>
           <!-- Table body -->
           <tbody>
-            <tr v-for="({ row, rowHeaderFields, rowFooterFields }, rowIndex) in tableRows" :key="rowIndex">
+            <tr
+              v-for="({ row, rowHeaderFields, rowFooterFields }, rowIndex) in tableRows"
+              :key="rowIndex"
+            >
               <!-- Row headers -->
               <template v-for="(rowField, rowFieldIndex) in rowHeaderFields">
                 <!-- Multiple slots -->
@@ -95,7 +109,11 @@
                 </template>
                 <!-- Single slot/no slot -->
                 <th v-else :key="`header-${rowIndex}-${rowFieldIndex}`" :rowspan="rowField.rowspan">
-                  <slot v-if="rowField.headerSlotName" :name="rowField.headerSlotName" :value="rowField.value">
+                  <slot
+                    v-if="rowField.headerSlotName"
+                    :name="rowField.headerSlotName"
+                    :value="rowField.value"
+                  >
                     Missing slot
                     <code>{{ rowField.headerSlotName }}</code>
                   </slot>
@@ -103,7 +121,11 @@
                 </th>
               </template>
               <!-- Values -->
-              <td v-for="(col, colIndex) in sortedCols" :key="`value-${rowIndex}-${colIndex}`" class="text-right">
+              <td
+                v-for="(col, colIndex) in sortedCols"
+                :key="`value-${rowIndex}-${colIndex}`"
+                class="text-right"
+              >
                 <slot
                   v-if="$slots.value"
                   name="value"
@@ -130,7 +152,11 @@
                 </template>
                 <!-- Single slot/no slot -->
                 <th v-else :key="`footer-${rowIndex}-${rowFieldIndex}`" :rowspan="rowField.rowspan">
-                  <slot v-if="rowField.footerSlotName" :name="rowField.footerSlotName" :value="rowField.value">
+                  <slot
+                    v-if="rowField.footerSlotName"
+                    :name="rowField.footerSlotName"
+                    :value="rowField.value"
+                  >
                     Missing slot
                     <code>{{ rowField.footerSlotName }}</code>
                   </slot>
@@ -182,8 +208,16 @@
                   :rowspan="colFooterSize"
                 ></th>
                 <!-- Column footers -->
-                <th v-for="(col, colIndex) in cols" :key="`${colFieldIndex}-${colIndex}`" :colspan="col.colspan">
-                  <slot v-if="colField.footerSlotName" :name="colField.footerSlotName" :value="col.value">
+                <th
+                  v-for="(col, colIndex) in cols"
+                  :key="`${colFieldIndex}-${colIndex}`"
+                  :colspan="col.colspan"
+                >
+                  <slot
+                    v-if="colField.footerSlotName"
+                    :name="colField.footerSlotName"
+                    :value="col.value"
+                  >
                     Missing slot
                     <code>{{ colField.footerSlotName }}</code>
                   </slot>
@@ -266,7 +300,9 @@ export default {
         if (rowFieldIndex === 0) {
           composedSortFunction = firstBy(0, { cmp: rowField.sort || naturalSort })
         } else {
-          composedSortFunction = composedSortFunction.thenBy(rowFieldIndex, { cmp: rowField.sort || naturalSort })
+          composedSortFunction = composedSortFunction.thenBy(rowFieldIndex, {
+            cmp: rowField.sort || naturalSort,
+          })
         }
       })
 
@@ -278,7 +314,9 @@ export default {
         if (colFieldIndex === 0) {
           composedSortFunction = firstBy(0, { cmp: colField.sort || naturalSort })
         } else {
-          composedSortFunction = composedSortFunction.thenBy(colFieldIndex, { cmp: colField.sort || naturalSort })
+          composedSortFunction = composedSortFunction.thenBy(colFieldIndex, {
+            cmp: colField.sort || naturalSort,
+          })
         }
       })
       return [...this.cols].sort(composedSortFunction)
@@ -287,8 +325,14 @@ export default {
     fields() {
       return [
         [this.colFields, this.rowFields],
-        [this.colFields.map(field => field.headerSlotNames), this.rowFields.map(field => field.headerSlotNames)],
-        [this.colFields.map(field => field.valuesFiltered), this.rowFields.map(field => field.valuesFiltered)],
+        [
+          this.colFields.map(field => field.headerSlotNames),
+          this.rowFields.map(field => field.headerSlotNames),
+        ],
+        [
+          this.colFields.map(field => field.valuesFiltered),
+          this.rowFields.map(field => field.valuesFiltered),
+        ],
       ]
     },
     // Number of row header columns
@@ -375,7 +419,10 @@ export default {
             value: row[rowFieldIndex],
             rowspan: this.spanSize(this.sortedRows, rowIndex, rowFieldIndex),
           }))
-          .filter(rowField => (rowField.showHeader === undefined || rowField.showHeader) && rowField.rowspan !== 0)
+          .filter(
+            rowField =>
+              (rowField.showHeader === undefined || rowField.showHeader) && rowField.rowspan !== 0,
+          )
 
         const rowFooterFields = this.internalRowFields
           .map((rowField, rowFieldIndex) => ({
@@ -419,7 +466,8 @@ export default {
       while (
         i + 1 < values.length &&
         values[i + 1][fieldIndex] === values[i][fieldIndex] &&
-        (fieldIndex === 0 || (i + 1 < values.length && this.spanSize(values, i + 1, fieldIndex - 1) === 0))
+        (fieldIndex === 0 ||
+          (i + 1 < values.length && this.spanSize(values, i + 1, fieldIndex - 1) === 0))
       ) {
         i++
         size++
@@ -529,7 +577,7 @@ export default {
 }
 </script>
 
-<style scoped lang="stylus">
+<style scoped>
 .position-relative {
   position: relative;
   min-height: 150px;
@@ -540,7 +588,7 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: rgba(255, 255, 255, .8);
+    background-color: rgba(255, 255, 255, 0.8);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -555,7 +603,8 @@ export default {
     width: 100%;
     color: #515a6e;
     border-collapse: collapse;
-    th, td {
+    th,
+    td {
       min-width: 0;
       padding: 0 16px;
       height: 40px;
