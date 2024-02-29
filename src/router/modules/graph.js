@@ -20,11 +20,6 @@ export default [
         component: () => import('@/views/demo/graph/charts-map/index.vue'),
       },
       {
-        name: 'GraphEasyFlow',
-        title: 'EasyFlow',
-        component: () => import('@/views/demo/graph/easy-flow/index.vue'),
-      },
-      {
         name: 'GraphCanvasDemo',
         title: 'Canvas绘图',
         component: () => import('@/views/demo/graph/canvas-demo/index.vue'),

@@ -138,9 +138,9 @@ function dragStart(evt, item) {
       align-items: center;
       height: 32px;
       cursor: pointer;
-      transition: .2s;
+      transition: 0.2s;
       &:hover {
-        background-color: #E0E0E0;
+        background-color: #e0e0e0;
       }
       &.active {
         background-color: #e7f3ff;
@@ -149,7 +149,7 @@ function dragStart(evt, item) {
   }
   .ef-node-menu-ul {
     list-style: none;
-    padding: 8px
+    padding: 8px;
     width: calc(100% - 32px);
     overflow: auto;
   }
@@ -160,7 +160,7 @@ function dragStart(evt, item) {
   user-select: none;
   color: #565758;
   width: 100%;
-  border: 1px dashed #E0E3E7;
+  border: 1px dashed #e0e3e7;
   margin-bottom: 8px;
   padding: 0 8px 0 4px;
   border-radius: 5px;
@@ -168,7 +168,7 @@ function dragStart(evt, item) {
   display: flex;
   align-items: center;
   &:before {
-    content: ''
+    content: '';
     position: absolute;
     left: 0;
     width: 4px;
@@ -177,10 +177,10 @@ function dragStart(evt, item) {
     border-radius: 4px 0 0 4px;
   }
   &.switch {
-    &:before  {
+    &:before {
       background-color: #fa8c16;
     }
-    &:not(.view-only){
+    &:not(.view-only) {
       &:hover {
         background-color: #fff9f3;
         border: 1px dashed #fa8c16;
@@ -199,8 +199,8 @@ function dragStart(evt, item) {
   }
   &:hover {
     cursor: move;
-    background-color: #F0F7FF;
-    border: 1px dashed #1879FF;
+    background-color: #f0f7ff;
+    border: 1px dashed #1879ff;
   }
 
   .ef-node-left-ico {
@@ -224,10 +224,10 @@ function dragStart(evt, item) {
       cursor: not-allowed;
       border-color: #bfbfbf;
     }
-    .ef-node-left-ico , .ef-node-text{
-      opacity : 0.6;
+    .ef-node-left-ico,
+    .ef-node-text {
+      opacity: 0.6;
     }
   }
-
 }
 </style>

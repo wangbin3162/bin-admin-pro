@@ -322,7 +322,6 @@ onMounted(async () => {
       }
     }
   }
-  // 左侧的图片列表
   .image-list-wp {
     height: calc(100% - 50px);
     overflow-x: hidden;

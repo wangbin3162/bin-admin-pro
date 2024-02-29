@@ -92,7 +92,7 @@ import { ref, onMounted, nextTick, reactive, watch } from 'vue'
 import getMockData from './mock-data'
 import { deepCopy, getUuid } from '@/utils/util'
 import { Message, MessageBox } from 'bin-ui-design'
-import './index.styl'
+import './index.css'
 
 const props = defineProps({
   height: {
@@ -462,10 +462,6 @@ function cancelSelect() {
   .right-side {
     width: 300px;
     border-left: 1px solid #eeeeee;
-    // background: linear-gradient(to right, #f5f5f5 1px, transparent 1px),linear-gradient(to bottom, #f5f5f5 1px, transparent 1px);
-    // background-size: 10px 10px;
-    // background: radial-gradient(circle, #dddddd 1px, transparent 1px);
-    // background-size: 10px 10px;
   }
 }
 </style>

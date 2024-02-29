@@ -4,6 +4,7 @@ import pages from './pages'
 import nested from './nested'
 import dynamicRoute from './dynamic-route'
 import links from './links'
+import flow from './flow'
 import graph from './graph'
 import excel from './excel'
 import sys from './sys'
@@ -20,6 +21,7 @@ export default [
   ...nested,
   ...dynamicRoute,
   ...links,
+  ...flow,
   ...graph,
   ...excel,
   ...sys,
