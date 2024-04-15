@@ -1,0 +1,47 @@
+@import '@vue-flow/core/dist/style.css';
+@import '@vue-flow/core/dist/theme-default.css';
+@import '@vue-flow/controls/dist/style.css';
+@import '@vue-flow/minimap/dist/style.css';
+
+.custom-flow {
+  --chakra-colors-white: #fff;
+  --chakra-colors-borderColor-base: #dfe2ea;
+  --chakra-radii-md: 8px;
+  --chakra-shadows-1: 0px 0px 1px 0px rgba(19, 51, 107, 0.08),
+    0px 1px 2px 0px rgba(19, 51, 107, 0.05);
+  --chakra-shadows-2: 0px 0px 1px 0px rgba(19, 51, 107, 0.08),
+    0px 4px 4px 0px rgba(19, 51, 107, 0.05);
+  --chakra-shadows-3: 0px 0px 1px 0px rgba(19, 51, 107, 0.08),
+    0px 4px 10px 0px rgba(19, 51, 107, 0.08);
+  --chakra-shadows-4: 0px 0px 1px 0px rgba(19, 51, 107, 0.2),
+    0px 12px 16px -4px rgba(19, 51, 107, 0.2);
+  --chakra-shadows-5: 0px 0px 1px 0px rgba(19, 51, 107, 0.15),
+    0px 20px 24px -8px rgba(19, 51, 107, 0.15);
+  --chakra-shadows-6: 0px 0px 1px 0px rgba(19, 51, 107, 0.2),
+    0px 24px 48px -12px rgba(19, 51, 107, 0.2);
+  --chakra-shadows-7: 0px 0px 1px 0px rgba(19, 51, 107, 0.2),
+    0px 32px 64px -12px rgba(19, 51, 107, 0.2);
+
+  .vue-flow__minimap > svg {
+    width: 126px;
+    height: 78px;
+  }
+
+  .vue-flow__controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    right: 16px;
+  }
+
+  .vue-flow__node {
+    &.vue-flow__node-output {
+      padding: 0;
+      background: var(--chakra-colors-white);
+      border-width: 1px;
+      border-color: var(--chakra-colors-borderColor-base);
+      border-radius: var(--chakra-radii-md);
+      box-shadow: var(--chakra-shadows-1);
+    }
+  }
+}

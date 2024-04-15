@@ -102,6 +102,12 @@ export const routesOutLayout = [
     name: 'DataEditSimple',
     component: () => import('@/views/pages/DataEditSimple/index.vue'),
   },
+  // 流程编排编辑
+  {
+    path: '/ad-edit',
+    name: 'AdEdit',
+    component: () => import('@/views/pages/AdEdit/index.vue'),
+  },
 ]
 
 /**

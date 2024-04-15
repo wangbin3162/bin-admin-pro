@@ -1,7 +1,7 @@
 <template>
   <div class="panel">
     <b-tabs v-model="activeTab" :data="tabs" type="card"></b-tabs>
-    <div class="content-box">
+    <div class="content-box" v-if="render">
       <Demo01 v-if="activeTab === 'demo01'" />
       <Demo02 v-if="activeTab === 'demo02'" />
       <Demo03 v-if="activeTab === 'demo03'" />
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import '@vue-flow/core/dist/style.css'
 import '@vue-flow/core/dist/theme-default.css'
 
@@ -20,6 +20,9 @@ import Demo02 from './demo02/index.vue'
 import Demo03 from './demo03/index.vue'
 import Demo04 from './demo04/index.vue'
 
+defineOptions({
+  name: 'VueFlowBasic',
+})
 const activeTab = ref('demo01')
 const tabs = ref([
   { key: 'demo01', title: '基础' },
@@ -27,6 +30,9 @@ const tabs = ref([
   { key: 'demo03', title: '综合' },
   { key: 'demo04', title: '拖放' },
 ])
+
+const render = ref(false)
+onMounted(() => (render.value = true))
 </script>
 
 <style scoped>

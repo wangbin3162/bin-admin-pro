@@ -19,6 +19,11 @@ export default [
         title: 'VueFlowAdvance',
         component: () => import('@/views/demo/flow/vue-flow-advance/index.vue'),
       },
+      {
+        name: 'VueFlowCustom',
+        title: '综合流程编排',
+        component: () => import('@/views/demo/flow/vue-flow-custom/index.vue'),
+      },
     ],
   },
 ]

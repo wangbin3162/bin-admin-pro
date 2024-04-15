@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import '@vue-flow/core/dist/style.css'
 import '@vue-flow/core/dist/theme-default.css'
 
@@ -20,13 +20,19 @@ import Demo02 from './demo02/index.vue'
 import Demo03 from './demo03/index.vue'
 import Demo04 from './demo04/index.vue'
 
-const activeTab = ref('demo04')
+defineOptions({
+  name: 'VueFlowAdvance',
+})
+
+const activeTab = ref('demo01')
 const tabs = ref([
   { key: 'demo01', title: '自定义节点' },
   { key: 'demo02', title: '节点更新' },
   { key: 'demo03', title: '自定义连线' },
   { key: 'demo04', title: '连线验证' },
 ])
+const render = ref(false)
+onMounted(() => (render.value = true))
 </script>
 
 <style scoped>
