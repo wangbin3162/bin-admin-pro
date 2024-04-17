@@ -1,6 +1,7 @@
 import { generateId } from '@/utils/util'
 import { ref, watch } from 'vue'
 import { useVueFlow } from '@vue-flow/core'
+import { CreateNewJob } from './Job'
 
 const state = {
   /**
@@ -50,19 +51,39 @@ export default function useDragDrop() {
     }
   }
 
+  // 放置
   function onDrop(event) {
     // 降一个位置投射到viewport视窗中去
     const position = screenToFlowCoordinate({
       x: event.clientX,
       y: event.clientY,
     })
-    const nodeId = `flownode_${generateId()}`
+    const prefix = {
+      start: 'StartNode',
+      simple: 'SimpleNode',
+      multiple: 'MultipleNode',
+      end: 'EndNode',
+    }
+    const nodeId = `${prefix[draggedType.value]}${generateId()}`
 
     const newNode = {
       id: nodeId,
       type: draggedType.value,
       position,
       label: `[${nodeId}]`,
+    }
+
+    // 如果是简单节点
+    if (draggedType.value === 'simple') {
+      newNode.data = CreateNewJob()
+    }
+    // 如果是并联节点
+    if (draggedType.value === 'multiple') {
+      newNode.data = {
+        parallel: [CreateNewJob()],
+        errorPairing: 1,
+        poly: true,
+      }
     }
 
     /**

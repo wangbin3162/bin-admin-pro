@@ -34,9 +34,21 @@
         />
       </template>
 
+      <!-- 自定义开始节点 -->
+      <template #node-start="node">
+        <StartNode :node="node" />
+      </template>
+      <!-- 自定义简单任务节点 -->
+      <template #node-simple="node">
+        <SimpleNode :node="node" />
+      </template>
+      <!-- 自定义并联任务节点 -->
+      <template #node-multiple="node">
+        <MultipleNode :node="node" />
+      </template>
       <!-- 自定义结束节点 -->
-      <template #node-endnode>
-        <EndNode />
+      <template #node-end="node">
+        <EndNode :node="node" />
       </template>
     </VueFlow>
 
@@ -52,10 +64,13 @@ import { ControlButton, Controls } from '@vue-flow/controls'
 import { MiniMap } from '@vue-flow/minimap'
 import Sidebar from './Sidebar.vue'
 import useDragDrop from '../hooks/useDragDrop'
-import useConnect from '../hooks/useConnect'
+import useEdges from '../hooks/useEdges'
 
-import EdgeWithButton from './EdgeWithButton.vue'
-import EndNode from './EndNode.vue'
+import EdgeWithButton from './custom/EdgeWithButton.vue'
+import StartNode from './custom/StartNode.vue'
+import SimpleNode from './custom/SimpleNode.vue'
+import MultipleNode from './custom/MultipleNode.vue'
+import EndNode from './custom/EndNode.vue'
 import './styles.css'
 
 const { toObject } = useVueFlow()
@@ -63,11 +78,14 @@ const nodes = ref([])
 const edges = ref([])
 
 const { onDragOver, onDrop } = useDragDrop()
-const { onConnect } = useConnect()
+const { onConnect } = useEdges()
 
 function logToObject() {
-  console.log(toObject())
-  console.log('--------------------------------------states--------------------------------------')
+  const { nodes, edges } = toObject()
+  console.log('--------------------------------------state--------------------------------------')
+  console.log('----> nodes: ', nodes)
+  console.log('----> edges: ', edges)
+  console.log('---------------------------------------------------------------------------------')
 }
 </script>
 

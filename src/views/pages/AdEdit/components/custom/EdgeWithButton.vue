@@ -36,8 +36,9 @@ export default {
 </script>
 
 <script setup>
-import { BaseEdge, EdgeLabelRenderer, getBezierPath, useVueFlow } from '@vue-flow/core'
+import { BaseEdge, EdgeLabelRenderer, getBezierPath } from '@vue-flow/core'
 import { computed } from 'vue'
+import useEdges from '../../hooks/useEdges'
 
 const props = defineProps({
   id: {
@@ -78,7 +79,7 @@ const props = defineProps({
   },
 })
 
-const { removeEdges } = useVueFlow()
+const { removeEdges } = useEdges()
 
 const path = computed(() => getBezierPath(props))
 </script>

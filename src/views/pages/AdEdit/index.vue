@@ -7,8 +7,19 @@
           <h4 class="header-title">作业流程配置</h4>
         </div>
         <b-space :size="20" style="margin-right: 8px">
-          <b-button style="padding: 0 8px; --bin-border-radius-default: 6px" icon="message">
-            测试
+          <b-button
+            style="padding: 0 8px; --bin-border-radius-default: 6px"
+            icon="message"
+            @click="onSave"
+          >
+            Save
+          </b-button>
+          <b-button
+            style="padding: 0 8px; --bin-border-radius-default: 6px"
+            icon="message"
+            @click="onRestore"
+          >
+            Restore
           </b-button>
           <b-button
             style="padding: 0 8px; --bin-border-radius-default: 6px"
@@ -44,6 +55,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import FlowEditor from './components/FlowEditor.vue'
+import { useVueFlow } from '@vue-flow/core'
 
 defineOptions({
   name: 'AdEdit',
@@ -53,12 +65,39 @@ const router = useRouter()
 
 const confirm = ref(false)
 
+const { toObject, fromObject } = useVueFlow()
+
 function goEdit() {
   router.push('/ad-edit')
 }
 
 function goBack(save = false) {
   router.push('/VueFlowCustom')
+}
+
+function logToObject() {
+  const { nodes, edges } = toObject()
+  console.log('--------------------------------------state--------------------------------------')
+  console.log('----> nodes: ', nodes)
+  console.log('----> edges: ', edges)
+  console.log('---------------------------------------------------------------------------------')
+}
+
+const flowKey = 'example-flow'
+
+function onSave() {
+  const data = toObject()
+  console.log('----> save Data: ', data)
+  localStorage.setItem(flowKey, JSON.stringify(data))
+}
+
+function onRestore() {
+  const flow = JSON.parse(localStorage.getItem(flowKey))
+  console.log('----> restore Data: ', flow)
+
+  if (flow) {
+    fromObject(flow)
+  }
 }
 </script>
 
