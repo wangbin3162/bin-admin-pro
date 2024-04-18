@@ -1,8 +1,9 @@
 import { useVueFlow } from '@vue-flow/core'
 import { MessageBox } from 'bin-ui-design'
+import { computed } from 'vue'
 // nodes hooks
 export default function useNodes() {
-  const { removeNodes, getSelectedNodes } = useVueFlow()
+  const { removeNodes, getSelectedNodes, nodesDraggable, nodesConnectable } = useVueFlow()
 
   function deleteNode(node) {
     MessageBox.confirm({
@@ -20,6 +21,8 @@ export default function useNodes() {
   function isNodeSelected(node) {
     return getSelectedNodes.value.findIndex(i => i.id === node.id) > -1
   }
+  // 是否不可交互
+  const isNotInteractive = computed(() => !nodesDraggable.value && !nodesConnectable.value)
 
-  return { deleteNode, isNodeSelected }
+  return { deleteNode, isNodeSelected, isNotInteractive }
 }

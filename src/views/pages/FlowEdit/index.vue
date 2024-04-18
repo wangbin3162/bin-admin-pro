@@ -1,7 +1,7 @@
 <template>
-  <div class="ad-edit-container">
-    <div class="ad-edit-panel">
-      <div class="ad-edit-header" flex="main:justify">
+  <div class="flow-editor-container">
+    <div class="flow-editor-panel">
+      <div class="flow-editor-header" flex="main:justify">
         <div class="left" flex="cross:center">
           <i class="b-iconfont b-icon-left" @click="confirm = true"></i>
           <h4 class="header-title">作业流程配置</h4>
@@ -30,8 +30,8 @@
           </b-button>
         </b-space>
       </div>
-      <div class="ad-edit-content">
-        <div class="ad-edit-flow"><FlowEditor /></div>
+      <div class="flow-editor-content">
+        <div class="flow-editor-flow"><FlowEditor /></div>
       </div>
     </div>
 
@@ -54,11 +54,11 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import FlowEditor from './components/FlowEditor.vue'
 import { useVueFlow } from '@vue-flow/core'
+import FlowEditor from './FlowEditor.vue'
 
 defineOptions({
-  name: 'AdEdit',
+  name: 'FlowEditor',
 })
 
 const router = useRouter()
@@ -66,10 +66,6 @@ const router = useRouter()
 const confirm = ref(false)
 
 const { toObject, fromObject } = useVueFlow()
-
-function goEdit() {
-  router.push('/ad-edit')
-}
 
 function goBack(save = false) {
   router.push('/VueFlowCustom')
@@ -102,18 +98,18 @@ function onRestore() {
 </script>
 
 <style scope>
-.ad-edit-container {
+.flow-editor-container {
   height: 100%;
   position: fixed;
   z-index: 999;
   inset: 0px;
-  .ad-edit-panel {
+  .flow-editor-panel {
     display: flex;
     height: 100%;
     flex-direction: column;
     background: rgb(255, 255, 255);
   }
-  .ad-edit-header {
+  .flow-editor-header {
     display: flex;
     padding: 10px 24px;
     height: 52px;
@@ -141,14 +137,14 @@ function onRestore() {
       --b-icon-size: 20px;
     }
   }
-  .ad-edit-content {
+  .flow-editor-content {
     min-height: 400px;
     flex: 1 0 0px;
     width: 100%;
     height: 0px;
     position: relative;
   }
-  .ad-edit-flow {
+  .flow-editor-flow {
     width: 100%;
     height: 100%;
     overflow: hidden;

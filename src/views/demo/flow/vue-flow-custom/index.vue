@@ -15,6 +15,6 @@ defineOptions({
 const router = useRouter()
 
 function goEdit() {
-  router.push('/ad-edit')
+  router.push('/flow-editor')
 }
 </script>

@@ -54,8 +54,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import useDragDrop from '../hooks/useDragDrop'
-import { NodeType, NodeInfo } from '../hooks/Job'
+import useDragDrop from './hooks/useDragDrop'
+import { NodeType, NodeInfo } from './hooks/Job'
 
 const { onDragStart } = useDragDrop()
 const show = ref(false)

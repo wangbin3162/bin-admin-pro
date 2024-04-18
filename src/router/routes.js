@@ -104,9 +104,9 @@ export const routesOutLayout = [
   },
   // 流程编排编辑
   {
-    path: '/ad-edit',
-    name: 'AdEdit',
-    component: () => import('@/views/pages/AdEdit/index.vue'),
+    path: '/flow-editor',
+    name: 'FlowEditor',
+    component: () => import('@/views/pages/FlowEdit/index.vue'),
   },
 ]
 

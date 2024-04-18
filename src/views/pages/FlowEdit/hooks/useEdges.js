@@ -1,7 +1,8 @@
 import { useVueFlow, MarkerType } from '@vue-flow/core'
+import { computed } from 'vue'
 // 连线hooks
 export default function useEdges() {
-  const { addEdges, removeEdges } = useVueFlow()
+  const { addEdges, removeEdges, nodesDraggable, nodesConnectable } = useVueFlow()
 
   // 连线连接
   function onConnect(params) {
@@ -27,8 +28,14 @@ export default function useEdges() {
     return targetHandle.includes('_target_')
   }
 
+  // 是否不可交互
+  const isNotInteractive = computed(() => !nodesDraggable.value && !nodesConnectable.value)
+
   return {
     onConnect,
     removeEdges,
+    isNotInteractive,
+    nodesDraggable,
+    nodesConnectable,
   }
 }

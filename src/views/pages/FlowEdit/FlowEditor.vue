@@ -13,7 +13,7 @@
     >
       <Background :size="1" :gap="20" pattern-color="#91919a" />
       <MiniMap />
-      <Controls position="top-right" :showInteractive="false">
+      <Controls position="top-right">
         <ControlButton title="Log `toObject`" @click="logToObject">
           <b-icon name="bug"></b-icon>
         </ControlButton>
@@ -62,15 +62,15 @@ import { VueFlow, useVueFlow } from '@vue-flow/core'
 import { Background } from '@vue-flow/background'
 import { ControlButton, Controls } from '@vue-flow/controls'
 import { MiniMap } from '@vue-flow/minimap'
+import useDragDrop from './hooks/useDragDrop'
+import useEdges from './hooks/useEdges'
 import Sidebar from './Sidebar.vue'
-import useDragDrop from '../hooks/useDragDrop'
-import useEdges from '../hooks/useEdges'
 
-import EdgeWithButton from './custom/EdgeWithButton.vue'
-import StartNode from './custom/StartNode.vue'
-import SimpleNode from './custom/SimpleNode.vue'
-import MultipleNode from './custom/MultipleNode.vue'
-import EndNode from './custom/EndNode.vue'
+import EdgeWithButton from './components/EdgeWithButton.vue'
+import StartNode from './components/StartNode.vue'
+import SimpleNode from './components/SimpleNode.vue'
+import MultipleNode from './components/MultipleNode.vue'
+import EndNode from './components/EndNode.vue'
 import './styles.css'
 
 const { toObject } = useVueFlow()

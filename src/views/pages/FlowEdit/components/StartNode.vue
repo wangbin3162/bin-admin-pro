@@ -2,11 +2,15 @@
   <div class="custom-node">
     <div class="custom-node-inner">
       <div class="top-box">
-        <b-icon class="chakra-image" :name="NodeInfo.End.icon" :color="NodeInfo.End.iconColor" />
-        <div class="title">{{ NodeInfo.End.title }}</div>
+        <b-icon
+          class="chakra-image"
+          :name="NodeInfo.Start.icon"
+          :color="NodeInfo.Start.iconColor"
+        />
+        <div class="title">{{ NodeInfo.Start.title }}</div>
       </div>
 
-      <div class="desc">{{ NodeInfo.End.desc }}</div>
+      <div class="desc">{{ NodeInfo.Start.desc }}</div>
       <!-- 悬停按钮 -->
       <div class="nodrag controller-menu">
         <div class="css-0">
@@ -16,22 +20,25 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="custom-node-inner divider">
       <div class="nodrag trigger">
         <div class="trigger-handle">
           <Handle
-            id="_EndA_target_"
-            type="target"
-            :position="Position.Left"
+            id="_StartA_source_"
+            type="source"
+            :position="Position.Right"
             :style="{
               width: '14px',
               height: '14px',
               borderWidth: '3.5px',
               backgroundColor: '#fff',
-              borderColor: 'rgb(156, 162, 168)',
+              borderColor: 'rgb(54, 173, 239)',
             }"
           />
         </div>
-        <div class="trigger-name">触发器</div>
+        <div class="trigger-name">执行任务</div>
       </div>
     </div>
   </div>
@@ -39,8 +46,8 @@
 
 <script setup>
 import { Handle, Position } from '@vue-flow/core'
-import { NodeInfo } from '../../hooks/Job'
-import useNodes from '../../hooks/useNodes'
+import { NodeInfo } from '../hooks/Job'
+import useNodes from '../hooks/useNodes'
 
 const props = defineProps({
   node: {
@@ -65,6 +72,9 @@ const { deleteNode } = useNodes()
     .controller-menu {
       display: flex;
     }
+  }
+  &.selected {
+    border-color: var(--bin-color-primary);
   }
 }
 
@@ -98,15 +108,17 @@ const { deleteNode } = useNodes()
     display: flex;
     cursor: default;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     position: relative;
-    margin-top: 8px;
     .trigger-handle {
       position: absolute;
       top: 50%;
-      left: -18px;
+      right: -18px;
       transform: translate(0px, -50%);
     }
+  }
+  &.divider {
+    border-top: 2px solid var(--chakra-colors-borderColor-base);
   }
 }
 

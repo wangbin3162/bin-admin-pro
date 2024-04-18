@@ -106,8 +106,8 @@
 <script setup>
 import { computed } from 'vue'
 import { Handle, Position } from '@vue-flow/core'
-import { CreateNewJob, NodeInfo } from '../../hooks/Job'
-import useNodes from '../../hooks/useNodes'
+import { CreateNewJob, NodeInfo } from '../hooks/Job'
+import useNodes from '../hooks/useNodes'
 
 const emit = defineEmits(['update:node'])
 const props = defineProps({

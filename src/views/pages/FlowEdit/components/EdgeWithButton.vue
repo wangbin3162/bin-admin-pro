@@ -3,7 +3,7 @@
   <BaseEdge :id="id" :style="style" :path="path[0]" :marker-end="markerEnd" />
 
   <!-- 使用' EdgeLabelRenderer '来转义SVG的边缘世界，并在a中呈现您自己的自定义标签`<div>` ctx -->
-  <EdgeLabelRenderer>
+  <EdgeLabelRenderer v-if="nodesConnectable">
     <div
       :style="{
         pointerEvents: 'all',
@@ -38,7 +38,7 @@ export default {
 <script setup>
 import { BaseEdge, EdgeLabelRenderer, getBezierPath } from '@vue-flow/core'
 import { computed } from 'vue'
-import useEdges from '../../hooks/useEdges'
+import useEdges from '../hooks/useEdges'
 
 const props = defineProps({
   id: {
@@ -79,7 +79,7 @@ const props = defineProps({
   },
 })
 
-const { removeEdges } = useEdges()
+const { removeEdges, nodesConnectable } = useEdges()
 
 const path = computed(() => getBezierPath(props))
 </script>

@@ -2,15 +2,11 @@
   <div class="custom-node">
     <div class="custom-node-inner">
       <div class="top-box">
-        <b-icon
-          class="chakra-image"
-          :name="NodeInfo.Simple.icon"
-          :color="NodeInfo.Simple.iconColor"
-        />
-        <div class="title">{{ NodeInfo.Simple.title }}</div>
+        <b-icon class="chakra-image" :name="NodeInfo.End.icon" :color="NodeInfo.End.iconColor" />
+        <div class="title">{{ NodeInfo.End.title }}</div>
       </div>
 
-      <div class="desc">{{ NodeInfo.Simple.desc }}</div>
+      <div class="desc">{{ NodeInfo.End.desc }}</div>
       <!-- 悬停按钮 -->
       <div class="nodrag controller-menu">
         <div class="css-0">
@@ -20,11 +16,10 @@
           </button>
         </div>
       </div>
-
-      <div class="nodrag trigger mt-8">
+      <div class="nodrag trigger">
         <div class="trigger-handle">
           <Handle
-            id="_SimpleA_target_"
+            id="_EndA_target_"
             type="target"
             :position="Position.Left"
             :style="{
@@ -32,62 +27,21 @@
               height: '14px',
               borderWidth: '3.5px',
               backgroundColor: '#fff',
-              borderColor: 'rgb(54, 173, 239)',
+              borderColor: 'rgb(156, 162, 168)',
             }"
           />
         </div>
         <div class="trigger-name">触发器</div>
-
-        <div class="trigger-handle-right">
-          <Handle
-            id="_SimpleA_source_"
-            type="source"
-            :position="Position.Right"
-            :style="{
-              width: '14px',
-              height: '14px',
-              borderWidth: '3.5px',
-              backgroundColor: '#fff',
-              borderColor: 'rgb(165, 88, 201)',
-            }"
-          />
-        </div>
-        <div class="trigger-name">执行任务结束</div>
-      </div>
-    </div>
-
-    <div class="nowheel">
-      <div class="middle-info">配置</div>
-      <div class="edit-box nodrag">
-        <b-form style="width: 200px">
-          <b-form-item label="任务名称">
-            <!-- <b-button type="primary" icon="select" style="border-radius: 8px; width: 180px">
-            选择
-          </b-button> -->
-            <b-select v-model="nodeModel.data.jobId">
-              <b-option label="任务1" value="job1" />
-              <b-option label="任务2" value="job2" />
-            </b-select>
-          </b-form-item>
-          <b-form-item label="错误处理">
-            <b-select v-model="nodeModel.data.error">
-              <b-option label="停止" value="stop" />
-              <b-option label="继续" value="continue" />
-            </b-select>
-          </b-form-item>
-        </b-form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue'
 import { Handle, Position } from '@vue-flow/core'
-import { NodeInfo } from '../../hooks/Job'
-import useNodes from '../../hooks/useNodes'
+import { NodeInfo } from '../hooks/Job'
+import useNodes from '../hooks/useNodes'
 
-const emit = defineEmits(['update:node'])
 const props = defineProps({
   node: {
     type: Object,
@@ -96,17 +50,12 @@ const props = defineProps({
 })
 
 const { deleteNode } = useNodes()
-
-const nodeModel = computed({
-  get: () => props.node,
-  set: val => emit('update:node', val),
-})
 </script>
 
 <style scoped>
 .custom-node {
-  min-width: 350px;
-  max-width: 600px;
+  min-width: 100px;
+  max-width: 300px;
   background: var(--chakra-colors-white);
   border: 1px solid var(--chakra-colors-borderColor-base);
   border-radius: var(--chakra-radii-md);
@@ -151,40 +100,16 @@ const nodeModel = computed({
     align-items: center;
     justify-content: space-between;
     position: relative;
+    margin-top: 8px;
     .trigger-handle {
       position: absolute;
       top: 50%;
       left: -18px;
       transform: translate(0px, -50%);
     }
-    .trigger-handle-right {
-      position: absolute;
-      top: 50%;
-      right: -18px;
-      transform: translate(0px, -50%);
-    }
-  }
-  &.divider {
-    border-top: 2px solid var(--chakra-colors-borderColor-base);
   }
 }
 
-.middle-info {
-  text-align: center;
-  background: rgb(248, 248, 248);
-  padding: 10px 0;
-  border-top: 1px solid rgb(223, 226, 234);
-  border-bottom: 1px solid rgb(223, 226, 234);
-  font-size: 16px;
-}
-
-.edit-box {
-  padding: 10px 14px;
-  min-width: 350px;
-  :deep(.bin-form-item) {
-    margin-bottom: 8px;
-  }
-}
 .controller-menu {
   display: none;
   flex-direction: column;
