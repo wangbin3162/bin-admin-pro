@@ -24,6 +24,15 @@
           <b-button
             style="padding: 0 8px; --bin-border-radius-default: 6px"
             type="primary"
+            plain
+            icon="file-image"
+            @click="handleExportImg"
+          >
+            保存图片
+          </b-button>
+          <b-button
+            style="padding: 0 8px; --bin-border-radius-default: 6px"
+            type="primary"
             icon="save"
           >
             保存
@@ -53,9 +62,13 @@
 
 <script setup>
 import { ref } from 'vue'
+import { LoadingBar, Message } from 'bin-ui-design'
 import { useRouter } from 'vue-router'
 import { useVueFlow } from '@vue-flow/core'
 import FlowEditor from './FlowEditor.vue'
+import { createPreviewThumb } from '@/hooks/usePreviewImg'
+import { getNow } from '@/utils/util'
+import { dataURLtoFile } from '@/utils/file-helper'
 
 defineOptions({
   name: 'FlowEditor',
@@ -65,7 +78,7 @@ const router = useRouter()
 
 const confirm = ref(false)
 
-const { toObject, fromObject } = useVueFlow()
+const { toObject, fromObject, fitView } = useVueFlow()
 
 function goBack(save = false) {
   router.push('/VueFlowCustom')
@@ -94,6 +107,34 @@ function onRestore() {
   if (flow) {
     fromObject(flow)
   }
+}
+
+// 导出图片
+async function handleExportImg() {
+  LoadingBar.start()
+
+  try {
+    await fitView()
+    const el = document.querySelector('#flow-pane .custom-flow .vue-flow__viewport')
+    const tumb = await createPreviewThumb(el)
+    // 下载
+    const link = document.createElement('a')
+    link.download = `thumb_${getNow()}.png`
+    link.href = tumb
+    link.click()
+    // 组装图片调用上传
+    // const img = {
+    //   name: 'fileName',
+    //   attr: { w: el.clientWidth, h: el.clientHeight },
+    //   file: dataURLtoFile(tumb, 'fileName'),
+    // }
+    // TODO 这里保存了base64格式的缩略图，实际可能需要调用一次上传后存储路径
+    // await api.saveComps(selectGroup.value, selectedCom.value, tumbUrl)
+  } catch (error) {
+    console.error(error)
+    Message.warning('图片导出失败，请重试。')
+  }
+  LoadingBar.done()
 }
 </script>
 

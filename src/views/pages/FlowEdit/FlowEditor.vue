@@ -1,5 +1,5 @@
 <template>
-  <div class="flow-editor-wrap">
+  <div class="flow-editor-wrap" id="flow-pane">
     <VueFlow
       class="custom-flow"
       :nodes="nodes"

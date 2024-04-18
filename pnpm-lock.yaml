@@ -59,6 +59,9 @@ dependencies:
   gsap:
     specifier: ^3.12.5
     version: 3.12.5
+  html-to-image:
+    specifier: ^1.11.11
+    version: 1.11.11
   insert-css:
     specifier: ^2.0.0
     version: 2.0.0
@@ -4673,6 +4676,10 @@ packages:
       hash.js: 1.1.7
       minimalistic-assert: 1.0.1
       minimalistic-crypto-utils: 1.0.1
+    dev: false
+
+  /html-to-image@1.11.11:
+    resolution: {integrity: sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==}
     dev: false
 
   /https-browserify@1.0.0:

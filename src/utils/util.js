@@ -170,3 +170,7 @@ export function strToUnicode(str) {
 export function unicodeToStr(str) {
   return String.fromCharCode(...str.split('-'))
 }
+
+export function getNow() {
+  return Utils.util.parseTime(new Date())
+}
