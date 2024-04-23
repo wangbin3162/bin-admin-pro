@@ -2,6 +2,7 @@ import { generateId } from '@/utils/util'
 import { ref, watch } from 'vue'
 import { useVueFlow } from '@vue-flow/core'
 import { CreateNewJob } from './Job'
+import { Message } from 'bin-ui-design'
 
 const state = {
   /**
@@ -16,7 +17,8 @@ const state = {
 export default function useDragDrop() {
   const { draggedType, isDragging } = state
 
-  const { addNodes, screenToFlowCoordinate, onNodesInitialized, updateNode } = useVueFlow()
+  const { addNodes, screenToFlowCoordinate, onNodesInitialized, updateNode, toObject } =
+    useVueFlow()
 
   // 如果正在拖拽，则禁用全部的鼠标选中
   watch(isDragging, dragging => {
@@ -71,6 +73,17 @@ export default function useDragDrop() {
       type: draggedType.value,
       position,
       label: `[${nodeId}]`,
+    }
+
+    const { nodes } = toObject()
+
+    if (nodes.findIndex(i => i.type === 'start') > -1 && newNode.type === 'start') {
+      Message.error({ message: '已经包含一个任务入口，无需重复放置!' })
+      return false
+    }
+    if (nodes.findIndex(i => i.type === 'end') > -1 && newNode.type === 'end') {
+      Message.error({ message: '已经包含一个结束节点，无需重复放置!' })
+      return false
     }
 
     // 如果是简单节点
