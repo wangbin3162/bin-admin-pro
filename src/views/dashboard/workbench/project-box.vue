@@ -16,7 +16,7 @@
       </div>
     </template>
     <div class="items-wrap">
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-ui-design" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-ui-design" target="_blank">
         <div class="title">
           <iconfont icon="appstore" color="#25bbe3" :size="36" bg round />
           <span class="ml-15">Bin UI Design</span>
@@ -27,7 +27,7 @@
           <span>1.0.0</span>
         </div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-editor-next" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-editor-next" target="_blank">
         <div class="title">
           <iconfont icon="codelibrary" color="#4ab017" :size="36" bg round />
           <span class="ml-15">Ace Editor</span>
@@ -38,7 +38,7 @@
           <span>1.0.0</span>
         </div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-charts-next" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-charts-next" target="_blank">
         <div class="title">
           <iconfont icon="barchart" color="#304255" :size="36" bg round />
           <span class="ml-15">Charts</span>
@@ -49,7 +49,7 @@
           <span>1.0.0</span>
         </div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-tree-org" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-tree-org" target="_blank">
         <div class="title">
           <iconfont icon="cluster" color="#fa8c16" :size="36" bg round />
           <span class="ml-15">Tree Org</span>
@@ -60,7 +60,7 @@
           <span>1.3.0</span>
         </div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-animation" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-animation" target="_blank">
         <div class="title">
           <iconfont icon="thunderbolt" color="#eb2f96" :size="36" bg round />
           <span class="ml-15">Animation</span>
@@ -71,7 +71,7 @@
           <span>1.1.1</span>
         </div>
       </a>
-      <a class="hover-item" href="https://wangbin3162.gitee.io/bin-admin-pro" target="_blank">
+      <a class="hover-item" href="https://wangbin3162.github.io/bin-admin-pro" target="_blank">
         <div class="title">
           <iconfont icon="sketch" color="#8e58da" :size="36" bg round />
           <span class="ml-15">Admin Pro</span>

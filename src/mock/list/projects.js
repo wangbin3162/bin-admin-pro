@@ -10,7 +10,7 @@ export default {
     {
       id: '001',
       title: 'Bin UI Design',
-      url: 'https://wangbin3162.gitee.io/bin-ui-design/#/guide',
+      url: 'https://wangbin3162.github.io/bin-ui-design/#/guide',
       desc: '基于vue3的ui组件库，内涵60+组件',
       banner: banner1,
       author: 'wangbin',
@@ -20,7 +20,7 @@ export default {
     {
       id: '002',
       title: 'Bin Admin Pro',
-      url: 'https://wangbin3162.gitee.io/bin-ace-editor/#/guide',
+      url: 'https://wangbin3162.github.io/bin-ace-editor/#/guide',
       desc: '基于vue3,bin-ui-design的企业级后台管理框架',
       banner: banner2,
       author: 'wangbin',
@@ -30,7 +30,7 @@ export default {
     {
       id: '003',
       title: 'Bin Ace Editor',
-      url: 'https://wangbin3162.gitee.io/bin-ace-editor/#/guide',
+      url: 'https://wangbin3162.github.io/bin-ace-editor/#/guide',
       desc: '基于vue3的代码编辑器，支持多种格式',
       banner: banner3,
       author: 'wangbin',
@@ -40,7 +40,7 @@ export default {
     {
       id: '004',
       title: 'Bin Charts',
-      url: 'https://wangbin3162.gitee.io/bin-charts/#/guide',
+      url: 'https://wangbin3162.github.io/bin-charts/#/guide',
       desc: '基于vue3、echart5 的图表封装组件',
       banner: banner4,
       author: 'wangbin',
@@ -50,7 +50,7 @@ export default {
     {
       id: '005',
       title: 'Bin UI',
-      url: 'https://wangbin3162.gitee.io/bin-ui/#/guide',
+      url: 'https://wangbin3162.github.io/bin-ui/#/guide',
       desc: '基于vue2的基础组件库。',
       banner: banner5,
       author: 'wangbin',

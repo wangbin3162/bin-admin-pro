@@ -10,27 +10,27 @@ const useApp = defineStore('app', {
     // 快捷链接
     links: [
       {
-        link: 'https://wangbin3162.gitee.io/bin-ui-design',
+        link: 'https://wangbin3162.github.io/bin-ui-design',
         text: 'bin-ui-design',
         newTab: true,
       },
       {
-        link: 'https://wangbin3162.gitee.io/bin-editor-next',
+        link: 'https://wangbin3162.github.io/bin-editor-next',
         text: 'bin-editor-next',
         newTab: true,
       },
       {
-        link: 'https://wangbin3162.gitee.io/bin-charts-next',
+        link: 'https://wangbin3162.github.io/bin-charts-next',
         text: 'bin-charts-next',
         newTab: true,
       },
       {
-        link: 'https://wangbin3162.gitee.io/bin-tree-org',
+        link: 'https://wangbin3162.github.io/bin-tree-org',
         text: 'bin-tree-org',
         newTab: true,
       },
       {
-        link: 'https://wangbin3162.gitee.io/bin-animation',
+        link: 'https://wangbin3162.github.io/bin-animation',
         text: 'bin-animation',
         newTab: true,
       },
