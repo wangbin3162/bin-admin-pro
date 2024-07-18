@@ -1,0 +1,151 @@
+/* 全屏弹窗自适应高度 */
+.bin-modal.fullscreen-center {
+  margin-top: 0 !important;
+  top: 40px;
+  height: calc(100% - 80px);
+  display: flex;
+  flex-direction: column;
+  .bin-modal-body {
+    flex: 1 !important;
+    overflow-y: auto;
+  }
+  .bin-modal-header,
+  .bin-modal-footer {
+    flex-shrink: 0;
+  }
+}
+
+/* 自适应高度编辑器 */
+.bin-editor-next.auto-scroll {
+  height: 100% !important;
+}
+
+/* hilightjs */
+pre code.hljs {
+  background: #fafafa;
+  font-size: 12px;
+}
+
+/* 编辑表格（需在父容器增加class来实现） */
+.edit-table {
+  --border-color: #f2f4f7;
+  --border-radius: 8px;
+  .bin-table {
+    th,
+    td {
+      border-bottom: none;
+      box-sizing: border-box;
+    }
+    thead th {
+      background-color: #fff;
+      border-top: 1px solid var(--border-color);
+      border-left: 1px solid var(--border-color);
+      height: 34px;
+      line-height: 34px;
+      &:nth-child(1) {
+        border-left: 1px solid var(--border-color);
+        border-radius: var(--border-radius) 0 0 0;
+      }
+      &:nth-last-child(1) {
+        border-radius: 0 var(--border-radius) 0 0;
+        border-right: 1px solid var(--border-color);
+      }
+      .bin-table-cell {
+        padding: 5px 6px;
+      }
+    }
+    tbody td {
+      height: 32px;
+      line-height: 32px;
+      border-left: 1px solid var(--border-color);
+      border-top: 1px solid var(--border-color);
+      &:last-of-type {
+        border-right: 1px solid var(--border-color);
+      }
+    }
+    tbody tr:last-of-type > td {
+      border-bottom: 1px solid var(--border-color);
+      &:nth-child(1) {
+        border-radius: 0 0 0 var(--border-radius);
+      }
+      &:last-of-type {
+        border-radius: 0 0 var(--border-radius) 0;
+      }
+    }
+    .bin-table-cell {
+      display: flex;
+      align-items: center;
+      padding: 0;
+      line-height: 1;
+      height: 100%;
+      .bin-form-item {
+        margin: 0px;
+
+        &.is-error .bin-input {
+          border-color: var(--bin-color-danger);
+        }
+      }
+      .bin-input {
+        border-color: transparent;
+        box-shadow: none;
+        &:focus {
+          border-color: var(--bin-color-primary);
+        }
+      }
+      .bin-input-number {
+        border-color: transparent;
+        box-shadow: none;
+        .bin-input-number-handler {
+          border: none;
+        }
+        &.bin-input-number-focused {
+          border-color: var(--bin-color-primary);
+        }
+        &.bin-input-number-always {
+          .bin-input-number-handler-minus,
+          .bin-input-number-handler-plus {
+            border: none;
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    td.bin-table-column-center,
+    th.bin-table-column-center {
+      .bin-table-cell {
+        justify-content: center;
+      }
+    }
+
+    .bin-table-tip {
+      tbody > tr > td {
+        border-top: 1px solid var(--border-color);
+        height: 34px;
+        border-radius: 0 0 var(--border-radius) var(--border-radius) !important;
+      }
+      .bin-empty {
+        margin: 0;
+        .bin-empty-image {
+          display: none;
+        }
+      }
+    }
+    .handle {
+      transform: rotateZ(90deg);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .bin-form-item__error {
+    position: absolute;
+    display: flex;
+    top: 11px;
+    left: unset;
+    right: 28px;
+    padding-top: 0px;
+    width: auto;
+    pointer-events: none;
+  }
+}

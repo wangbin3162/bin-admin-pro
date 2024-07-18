@@ -24,6 +24,16 @@ export default [
             title: '高级表单',
             component: () => import('@/views/demo/pages/form/advanced-form.vue'),
           },
+          {
+            name: 'EditTable',
+            title: '编辑表格',
+            component: () => import('@/views/demo/pages/form/edit-table.vue'),
+          },
+          {
+            name: 'EditTree',
+            title: '编辑树表',
+            component: () => import('@/views/demo/pages/form/edit-tree.vue'),
+          },
         ],
       },
       {

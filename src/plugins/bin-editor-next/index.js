@@ -18,6 +18,11 @@ import 'brace/snippets/dot'
 import 'brace/theme/chrome'
 import 'brace/theme/sqlserver'
 
+import HljsVuePlugin from '@highlightjs/vue-plugin'
+import 'highlight.js/styles/xcode.min.css'
+import 'highlight.js/lib/common'
+
 export function registerEditor(app) {
   app.component('BAceEditor', BAceEditor)
+  app.use(HljsVuePlugin)
 }
