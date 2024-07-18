@@ -41,7 +41,7 @@ import { ref } from 'vue'
 import { Message, MessageBox } from 'bin-ui-design'
 import { getUuid } from '@/utils/util'
 import EditTree from './EditTree/index.vue'
-import { renderNodeForms, initFormMaps, validAllForm } from './EditTree/formValid'
+import { initFormMaps, validAllForm } from './EditTree/formValid'
 
 defineOptions({
   name: 'EditTree',
