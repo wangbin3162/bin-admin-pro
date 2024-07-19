@@ -1,47 +1,51 @@
 <template>
   <page-wrapper desc="编辑树表，实际开发时可能会根据实际情况进行组件定义和使用。">
-    <b-form :model="treeData" ref="formRef">
-      <b-collapse-wrap title="编辑树表" shadow="none">
-        <template #right>
+    <b-collapse-wrap title="编辑树表" shadow="none">
+      <template #right>
+        <b-space :size="16">
+          <debug-modal ref="transDataRef">
+            <b-button type="primary" size="mini" plain @click="showTransData">
+              转换数据结构
+            </b-button>
+          </debug-modal>
+
+          <b-button type="warning" size="mini" plain @click="validData">校验错误</b-button>
+
           <debug-modal :data="{ treeData, testData }" />
-        </template>
-        <div class="p16">
-          <b-row :gutter="16">
-            <b-col :span="17">
-              <b-form :model="treeData">
-                <EditTree
-                  :data="treeData"
-                  ref="editTreeRef"
-                  @appendRootNode="appendRootNode"
-                  @appendNode="appendNode"
-                  @removeNode="removeNode"
-                ></EditTree>
-              </b-form>
-            </b-col>
-            <b-col :span="7">
-              <b-ace-editor readonly :model-value="JSON.stringify(treeData, null, 2)" />
-            </b-col>
-          </b-row>
-
-          <b-space>
-            <debug-modal ref="transDataRef">
-              <b-button type="primary" plain @click="showTransData">转换数据结构</b-button>
-            </debug-modal>
-
-            <b-button type="warning" plain @click="validData">校验错误</b-button>
-          </b-space>
-        </div>
-      </b-collapse-wrap>
-    </b-form>
+        </b-space>
+      </template>
+      <div class="p16">
+        <b-form :model="treeData" ref="formRef">
+          <EditTree
+            :data="treeData"
+            ref="editTreeRef"
+            @import="batchAddNodes"
+            @appendRootNode="appendRootNode"
+            @appendNode="appendNode"
+            @appendLevelNode="appendLevelNode"
+            @removeNode="removeNode"
+          ></EditTree>
+        </b-form>
+      </div>
+    </b-collapse-wrap>
+    <JsonPaster
+      ref="jsonPasterRef"
+      title="响应参数批量添加"
+      tip=""
+      @ok="batchAddItems"
+    ></JsonPaster>
   </page-wrapper>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, nextTick } from 'vue'
 import { Message, MessageBox } from 'bin-ui-design'
 import { getUuid } from '@/utils/util'
-import EditTree from './EditTree/index.vue'
-import { initFormMaps, validAllForm } from './EditTree/formValid'
+import EditTree from '@/components/Service/EditTree/index.vue'
+import { initFormMaps, validAllForm } from '@/components/Service/EditTree/formValid'
+import { scrollToNode } from '@/components/Service/EditTree/scrollToNode'
+import { formatArr, formatTree } from '@/components/Service/EditTree/useTreeFormat'
+import JsonPaster from './json-paster.vue'
 
 defineOptions({
   name: 'EditTree',
@@ -50,6 +54,7 @@ initFormMaps()
 
 const formRef = ref(null)
 const editTreeRef = ref(null)
+const jsonPasterRef = ref(null)
 
 // 转换数据
 const transDataRef = ref(null)
@@ -68,6 +73,8 @@ async function validData() {
   const valid = await validAllForm()
   if (!valid) {
     Message.error('校验失败，请检查错误！')
+  } else {
+    Message.success('校验成功！')
   }
 }
 
@@ -147,82 +154,37 @@ const testData = ref([
 ])
 const treeData = ref([])
 
-/**
- * 将拉平的结构数组转换成树形结构
- * @param {*} arr
- */
-function formatTree(arr = []) {
-  if (!Array.isArray(arr) || arr.length === 0) return []
-
-  let result = []
-  let map = {}
-  // 本次遍历的目的是为了防止在arr数据混乱的情况下，下面的【map[pid]】找不到对应的值
-  arr.forEach((item, index) => {
-    map[item.parent] = index // 以id为key，下标为value，方便后面根据pid，找到原来数组的下标，然后添加children
-  })
-
-  arr.forEach(item => {
-    item.children = []
-    const pid = item.belongParent
-    if (pid) {
-      let parent = arr[map[pid]]['children']
-      // 可能原来的数据存在一定混乱，这样可以更加严谨一点，不报push属性找不到的错
-      if (Array.isArray(parent)) {
-        parent.push(item)
-      } else {
-        parent = [item]
-      }
-    } else {
-      result.push(item)
-    }
-  })
-  return result
-}
-
-/**
- * 将树结构拉平成一个带有次序的数组
- * @param {*} arr
- */
-function formatArr(arr = []) {
-  const flat = []
-  for (let i = 0; i < arr.length; i++) {
-    const ele = arr[i]
-    const node = ele.node
-    // 父元素id，如果存在父元素，则获取父元素的id
-    const pId = ele.parent > -1 ? arr[ele.parent].node.parent : ''
-    const parents = ele.parents ?? []
-    // 组合parentsName
-    const names = []
-    parents.forEach(p => names.push(arr[p].node.name))
-    flat.push({
-      belongParent: pId,
-      parent: node.parent,
-      name: node.name,
-      des: node.des,
-      paramType: ele.node.paramType,
-      // 追加的参数
-      parentName: names.join(','),
-      level: parents.length + 1,
-      sort: i,
-    })
-  }
-  return flat
-}
-
 treeData.value = formatTree(testData.value)
 
 // 新增一个根节点
 function appendRootNode() {
-  treeData.value.push({ parent: getUuid(), name: '', des: '', paramType: 'String' })
+  const newNode = { parent: getUuid(), name: '', des: '', paramType: 'String' }
+  treeData.value.push(newNode)
+  nextTick(() => scrollToNode(null))
 }
 
 // 新增一个子节点
-function appendNode(node) {
+function appendNode(node, name = '') {
   const children = node.children || []
   node.expand = true
-  children.push({ parent: getUuid(), name: '', des: '', paramType: 'String' })
+  const newNode = { parent: getUuid(), name, des: '', paramType: 'String' }
+  children.push(newNode)
   node.children = children
   treeData.value = [...treeData.value]
+  nextTick(() => scrollToNode(newNode))
+}
+
+// 新增同级节点
+function appendLevelNode(root, node) {
+  const parentKey = root.find(el => el === node).parent
+  // 如果有父级元素
+  if (parentKey > -1) {
+    const parent = root.find(el => el.nodeKey === parentKey)?.node
+    appendNode(parent)
+  } else {
+    // 没有父级元素，表示根节点，
+    appendRootNode()
+  }
 }
 
 // 移除拦截
@@ -248,7 +210,7 @@ async function removeNode(root, node, data) {
   if (result) {
     const parentKey = root.find(el => el === node).parent
     // 移除子节点
-    if (parentKey !== undefined && parentKey >= 0) {
+    if (parentKey > -1) {
       const parent = root.find(el => el.nodeKey === parentKey)?.node
       const index = parent.children.indexOf(data)
       parent.children.splice(index, 1)
@@ -261,5 +223,18 @@ async function removeNode(root, node, data) {
   }
 }
 
-// onMounted(() => ())
+let lastBatchNode = null
+// 批量添加数组元素
+function batchAddNodes(node) {
+  lastBatchNode = node // 缓存当前节点
+  jsonPasterRef.value.open()
+}
+
+function batchAddItems(data) {
+  data.forEach(name => {
+    appendNode(lastBatchNode, name)
+  })
+  Message.success('导入成功')
+  jsonPasterRef.value?.handleClose()
+}
 </script>

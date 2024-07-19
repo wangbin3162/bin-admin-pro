@@ -1,21 +1,28 @@
 <!-- eslint-disable vue/no-mutating-props -->
 <template>
   <b-form :model="data" :rules="rules" ref="formRef">
-    <div class="custom-render-node" :class="`node-level-${level}`">
-      <div style="width: calc(100% - 75px - 500px)">
+    <div class="custom-render-node" :class="[`node-level-${level}`, `node_${data.parent}`]">
+      <div style="width: calc(100% - 75px - 600px)">
         <div class="title">
-          <b-form-item prop="name">
+          <b-form-item prop="name" v-if="isEdit">
             <b-input v-model="data.name" placeholder="参数名称" />
           </b-form-item>
+          <label class="label" v-else>{{ data.name }}</label>
         </div>
       </div>
-      <div class="input" style="width: 500px; padding: 0 4px">
+
+      <div class="input" style="width: 600px; padding: 0 4px">
         <b-space>
-          <div style="width: 300px">
-            <b-input v-model="data.des" placeholder="参数说明" />
+          <div style="width: 340px">
+            <b-input v-if="isEdit" v-model="data.des" placeholder="参数说明" />
+            <label class="label" v-else>{{ data.des || '--' }}</label>
           </div>
-          <div style="width: 180px">
-            <b-dropdown @command="name => (data.paramType = name)" placement="right">
+          <div style="width: 240px">
+            <b-dropdown
+              @command="name => (data.paramType = name)"
+              placement="right-start"
+              v-if="isEdit"
+            >
               <a href="javascript:void(0)" class="f-s-12 pl-8 pr-8" style="line-height: 32px">
                 {{ data.paramType }}
               </a>
@@ -27,27 +34,36 @@
                 </b-dropdown-menu>
               </template>
             </b-dropdown>
+            <label class="label" v-else>{{ data.paramType }}</label>
           </div>
         </b-space>
       </div>
-      <div class="ctrl" style="width: 75px; line-height: 32px; padding: 0 4px" flex="main:right">
-        <!-- <b-icon
+
+      <div
+        class="ctrl"
+        v-if="isEdit"
+        style="width: 75px; line-height: 32px; padding: 0 4px"
+        flex="main:right"
+      >
+        <b-icon
           v-if="data.paramType === 'Array'"
           name="Storedprocedure"
           type="button"
           color="var(--bin-color-warning)"
           title="批量导入"
           @click="emit('import')"
-        ></b-icon> -->
-        <b-icon
-          v-if="data.paramType !== 'String'"
-          name="plus-circle"
-          type="button"
-          color="var(--bin-color-success)"
-          title="增加子节点"
-          @click="emit('append')"
         ></b-icon>
-        <i v-else></i>
+        <b-dropdown @command="name => emit(name)">
+          <b-icon name="plus-circle" type="button" color="var(--bin-color-success)"></b-icon>
+          <template #dropdown>
+            <b-dropdown-menu>
+              <b-dropdown-item name="append-level">增加同级节点</b-dropdown-item>
+              <b-dropdown-item name="append" v-if="data.paramType !== 'String'">
+                增加子节点
+              </b-dropdown-item>
+            </b-dropdown-menu>
+          </template>
+        </b-dropdown>
         <b-icon
           name="minus-circle"
           type="button"
@@ -68,7 +84,7 @@ import { renderNodeForms } from './formValid'
  */
 defineOptions({ name: 'RenderNode' })
 
-const emit = defineEmits(['append', 'import', 'remove'])
+const emit = defineEmits(['append', 'append-level', 'import', 'remove'])
 
 const props = defineProps({
   root: {
@@ -82,6 +98,10 @@ const props = defineProps({
   data: {
     type: Object,
     default: () => ({}),
+  },
+  isEdit: {
+    type: Boolean,
+    default: true,
   },
 })
 
@@ -123,36 +143,19 @@ const validateNameSame = async (rule, value, callback) => {
 
 const rules = reactive({
   name: [
-    {
-      required: true,
-      message: '必填项',
-      trigger: 'blur',
-    },
-    {
-      validator: validateName,
-      trigger: 'blur',
-    },
-    {
-      validator: validateNameSame,
-      trigger: 'blur',
-    },
+    { required: true, message: '必填项', trigger: 'blur' },
+    { validator: validateName, trigger: 'blur' },
+    { validator: validateNameSame, trigger: 'blur' },
   ],
-  // des: [
-  //   {
-  //     required: true,
-  //     message: '必填项',
-  //     trigger: 'blur',
-  //   },
-  // ],
 })
 
 const formRef = ref(null)
 
 onMounted(() => {
-  renderNodeForms.value.set(props.data.parent, formRef)
+  if (props.isEdit) renderNodeForms.value.set(props.data.parent, formRef.value)
 })
 
 onBeforeUnmount(() => {
-  renderNodeForms.value.delete(props.data.parent)
+  if (props.isEdit) renderNodeForms.value.delete(props.data.parent)
 })
 </script>

@@ -1,6 +1,8 @@
 .edit-tree-container {
   --border-color: #f2f4f7;
   --border-radius: 8px;
+  --node-height: 32px;
+  --node-height-minus: 32px;
   overflow: hidden;
   .edit-tree-header {
     display: flex;
@@ -18,18 +20,18 @@
     border-top: none;
     padding: 12px;
     overflow-x: auto;
-    max-height: 380px;
+    max-height: 372px;
   }
 
   .bin-tree {
     min-width: 800px;
   }
   .bin-tree-node {
-    height: 32px;
+    height: var(--node-height);
     align-items: center;
     .bin-tree-render-title {
       line-height: 1.5715;
-      height: 32px;
+      height: var(--node-height);
       padding: 0;
     }
     &::after {
@@ -38,7 +40,7 @@
       left: 0;
       right: 0;
       border-bottom: 1px solid var(--border-color);
-      margin-bottom: -32px;
+      margin-top: var(--node-height);
     }
   }
 
@@ -48,7 +50,7 @@
     width: 100%;
     cursor: default;
     .ctrl {
-      > i {
+      i {
         margin-left: 8px;
       }
     }
@@ -100,6 +102,11 @@
           background-color: transparent;
         }
       }
+    }
+    .label {
+      height: 100%;
+      padding: 0 8px;
+      line-height: var(--node-height);
     }
   }
 }

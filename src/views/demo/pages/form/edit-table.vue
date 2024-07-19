@@ -74,6 +74,16 @@
           </div>
         </div>
       </b-collapse-wrap>
+
+      <b-collapse-wrap title="只读" shadow="none">
+        <div class="edit-table is-detail" style="padding: 10px 24px">
+          <b-table :columns="columns2" :data="list">
+            <template #hobby="{ row }">
+              {{ hobbyMap[row.hobby] }}
+            </template>
+          </b-table>
+        </div>
+      </b-collapse-wrap>
     </b-form>
   </page-wrapper>
 </template>
@@ -98,6 +108,13 @@ const columns = [
   { title: '爱好', slot: 'hobby' },
   { title: '地址', slot: 'address' },
   { title: ' ', slot: 'action', width: 50, align: 'center' },
+]
+const columns2 = [
+  { title: '姓名', key: 'name' },
+  { title: '年龄', key: 'age' },
+  { title: '出生日期', key: 'birthday' },
+  { title: '爱好', slot: 'hobby' },
+  { title: '地址', key: 'address' },
 ]
 
 const validateRules = reactive({

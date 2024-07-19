@@ -3,19 +3,37 @@
     <div class="edit-tree-header">
       <slot name="header">
         <b-tag type="primary">返回响应</b-tag>
-        <b-button type="success" size="mini" plain icon="plus" @click="emit('appendRootNode')">
+        <b-button
+          type="success"
+          size="mini"
+          plain
+          icon="plus"
+          @click="emit('appendRootNode')"
+          v-if="isEdit"
+        >
           <span class="f-s-12">增加根节点</span>
         </b-button>
       </slot>
     </div>
     <div class="edit-tree-content">
       <b-tree
+        v-if="isEdit"
         :data="data"
         :render="renderContent"
         :allow-drop="allowDrop"
-        style="min-width: 800px"
+        style="min-width: 1000px"
         ref="treeRef"
         draggable
+        default-expand
+        lock-select
+        @node-drag-start="handleDragStart"
+      ></b-tree>
+      <b-tree
+        v-else
+        :data="data"
+        :render="renderContentOnly"
+        style="min-width: 1000px"
+        ref="treeRef"
         default-expand
         lock-select
       ></b-tree>
@@ -26,20 +44,29 @@
 <script setup>
 import { h, ref } from 'vue'
 import RenderNode from './RenderNode.vue'
+import { validAllForm } from './formValid'
+
 /**
  * 编辑树，此处为参考写法，根据不同的业务，可以封装不同的内容和组件，
  */
 defineOptions({ name: 'EditTree' })
 
-const emit = defineEmits(['appendRootNode', 'jsonImport', 'appendNode', 'removeNode'])
+const emit = defineEmits([
+  'appendRootNode',
+  'import',
+  'appendNode',
+  'appendLevelNode',
+  'removeNode',
+])
+
 const props = defineProps({
   data: {
     type: Array,
     default: () => [],
   },
-  headerTitle: {
-    type: String,
-    default: '标题',
+  isEdit: {
+    type: Boolean,
+    default: true,
   },
 })
 
@@ -53,17 +80,31 @@ function renderContent({ root, node, data }) {
     onAppend: () => {
       emit('appendNode', data)
     },
+    onAppendLevel: () => {
+      emit('appendLevelNode', root, node, data)
+    },
     onRemove: () => {
       emit('removeNode', root, node, data)
     },
     onImport: () => {
-      emit('jsonImport', root, node, data)
+      emit('import', data)
     },
   })
 }
 
+function renderContentOnly({ root, node, data }) {
+  return h(RenderNode, {
+    root,
+    node,
+    data,
+    isEdit: props.isEdit,
+  })
+}
+
+let validSuccess = true // 校验拦截，如果校验失败也不能放置
 function allowDrop(draggingNode, dropNode, type) {
-  if (!treeRef.value) return false
+  if (!treeRef.value || !validSuccess) return false
+
   // 获取目标点的父级nodeKeys
   // 获取拉平的数据
   const flat = treeRef.value.getFlatState()
@@ -81,6 +122,10 @@ function allowDrop(draggingNode, dropNode, type) {
 function getFlatState() {
   const flat = treeRef.value.getFlatState()
   return flat
+}
+
+async function handleDragStart(node, ev) {
+  validSuccess = await validAllForm()
 }
 
 defineExpose({
