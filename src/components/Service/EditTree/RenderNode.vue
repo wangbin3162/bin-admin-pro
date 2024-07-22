@@ -18,11 +18,7 @@
             <label class="label" v-else>{{ data.des || '--' }}</label>
           </div>
           <div style="width: 240px">
-            <b-dropdown
-              @command="name => (data.paramType = name)"
-              placement="right-start"
-              v-if="isEdit"
-            >
+            <b-dropdown @command="typeChange" placement="right-start" v-if="isEdit">
               <a href="javascript:void(0)" class="f-s-12 pl-8 pr-8" style="line-height: 32px">
                 {{ data.paramType }}
               </a>
@@ -30,7 +26,13 @@
                 <b-dropdown-menu>
                   <b-dropdown-item name="Object">Object</b-dropdown-item>
                   <b-dropdown-item name="Array">Array</b-dropdown-item>
-                  <b-dropdown-item name="String">String</b-dropdown-item>
+                  <b-dropdown-item
+                    name="String"
+                    :disabled="data.children?.length > 0"
+                    :title="data.children?.length > 0 ? '已有子节点，不可设置为String类型' : ''"
+                  >
+                    String
+                  </b-dropdown-item>
                 </b-dropdown-menu>
               </template>
             </b-dropdown>
@@ -150,6 +152,13 @@ const rules = reactive({
 })
 
 const formRef = ref(null)
+
+// 类型变换
+function typeChange(type) {
+  // console.log(type, props.node)
+  // eslint-disable-next-line vue/no-mutating-props
+  props.data.paramType = type
+}
 
 onMounted(() => {
   if (props.isEdit) renderNodeForms.value.set(props.data.parent, formRef.value)
