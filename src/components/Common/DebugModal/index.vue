@@ -11,6 +11,7 @@
       v-model="debugVisible"
       :width="width"
       @opened="showEditor"
+      screen-center
     >
       <b-skeleton :loading="!render" animation :rows="10">
         <b-ace-editor :model-value="debugStr" readonly :height="height" />

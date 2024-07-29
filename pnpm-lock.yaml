@@ -45,8 +45,8 @@ importers:
         specifier: ^1.0.0
         version: 1.0.0
       bin-ui-design:
-        specifier: ^0.5.0
-        version: 0.5.0
+        specifier: ^0.5.1
+        version: 0.5.1
       brace:
         specifier: ^0.11.1
         version: 0.11.1
@@ -1508,8 +1508,8 @@ packages:
   bin-keyframe-animation@1.0.0:
     resolution: {integrity: sha512-r+0Wi+q7sHv3d22kSTBZ7W346bZliXQ09qD7AuLmUdnzxt7v9itzv71sd+naUAi1/s1CXDbEnpe56hiF+Krd5Q==}
 
-  bin-ui-design@0.5.0:
-    resolution: {integrity: sha512-Hkcn8Qr+iq109ZiuFXvA09YHOaOp2S+j0fN3CtqRIUfAc+HU8Wjcfq4vpI/gUPFbYhFuup6vzMLMUm+Lr1ca/g==}
+  bin-ui-design@0.5.1:
+    resolution: {integrity: sha512-1olKawaeN38WrzJ8SgfPvQtsHQeuoSbp7A0eNfYHaa1aqPtrwjNwCQNU6D8ZjfoTXTSAkaItsyoGX49hvdjO4w==}
 
   binary-extensions@1.13.1:
     resolution: {integrity: sha512-Un7MIEDdUC5gNpcGDV97op1Ywk748MpHcFTHoYs6qnj1Z3j7I53VG3nwZhKzoBZmbdRNnb6WRdFlwl7tSDuZGw==}
@@ -5500,7 +5500,7 @@ snapshots:
       - webpack-cli
       - webpack-command
 
-  bin-ui-design@0.5.0:
+  bin-ui-design@0.5.1:
     dependencies:
       '@popperjs/core': 2.11.8
       async-validator: 4.2.5

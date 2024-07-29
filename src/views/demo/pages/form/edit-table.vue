@@ -5,12 +5,13 @@
         <template #right>
           <debug-modal :data="list" />
         </template>
-        <div class="edit-table" style="padding: 10px 24px">
+        <div style="padding: 10px 24px">
           <b-table
             :columns="columns"
             :data="list"
             noDataText="暂无参数"
             draggable
+            edit-table
             drag-handle=".drag"
             max-height="420"
             @drag-drop="handleDragDrop"
@@ -76,8 +77,8 @@
       </b-collapse-wrap>
 
       <b-collapse-wrap title="只读" shadow="none">
-        <div class="edit-table is-detail" style="padding: 10px 24px">
-          <b-table :columns="columns2" :data="list">
+        <div style="padding: 10px 24px">
+          <b-table edit-table edit-table-detail :columns="columns2" :data="list">
             <template #hobby="{ row }">
               {{ hobbyMap[row.hobby] }}
             </template>
