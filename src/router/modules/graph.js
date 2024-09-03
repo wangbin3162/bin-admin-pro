@@ -20,6 +20,11 @@ export default [
         component: () => import('@/views/demo/graph/charts-map/index.vue'),
       },
       {
+        name: 'RelationChart',
+        title: '资产地图',
+        component: () => import('@/views/demo/graph/relation-chart/index.vue'),
+      },
+      {
         name: 'GraphCanvasDemo',
         title: 'Canvas绘图',
         component: () => import('@/views/demo/graph/canvas-demo/index.vue'),

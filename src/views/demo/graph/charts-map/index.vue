@@ -14,7 +14,7 @@
 
 <script setup>
 import { ref } from 'vue'
-// import Demo0 from './demo0/index.vue'
+import Demo0 from './demo0/index.vue'
 import Demo1 from './demo1/demo1.vue'
 import Demo2 from './demo2/demo2.vue'
 import Demo3 from './demo3/demo3.vue'
