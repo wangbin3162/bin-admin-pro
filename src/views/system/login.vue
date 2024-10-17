@@ -135,7 +135,6 @@ async function loginSuccess(data) {
   if (data.code === '00') {
     const token = data.data.accessToken
     await userStore.setToken(token)
-    console.log('登录成功', token)
     // 重定向对象不存在则返回顶层路径
     const redirect = route.query.redirect || '/'
     await router.push({ path: redirect })
