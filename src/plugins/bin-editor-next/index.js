@@ -12,12 +12,8 @@ import 'brace/snippets/stylus'
 import 'brace/mode/groovy'
 import 'brace/snippets/groovy'
 
-import 'brace/mode/dot'
-import 'brace/snippets/dot'
-
 import 'brace/theme/chrome'
 import 'brace/theme/sqlserver'
-
 import HljsVuePlugin from '@highlightjs/vue-plugin'
 import 'highlight.js/styles/xcode.min.css'
 import 'highlight.js/lib/common'

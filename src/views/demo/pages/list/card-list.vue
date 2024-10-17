@@ -13,10 +13,14 @@
 
 <script>
 import useTable from '@/hooks/service/useTable'
-import { getProjectList } from '@/api/modules/list.api'
+import { getProjectList } from '@/api/modules/mock.api'
+import AppItem from '../../components/List/app-item.vue'
 
 export default {
   name: 'CardList',
+  components: {
+    AppItem,
+  },
   setup() {
     const { getListData, list } = useTable(getProjectList)
 

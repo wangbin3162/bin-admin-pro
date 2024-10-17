@@ -3,7 +3,7 @@
     <div class="left-side">
       <div class="logo-wrap">
         <img class="icon" src="@/assets/images/logo/logo.svg" alt="logo-small" />
-        <h5>ADMIN-PRO</h5>
+        <h5>{{ SYSTEM_NAME }}</h5>
       </div>
     </div>
     <div class="center-side">
@@ -40,6 +40,7 @@ import ThemeTrigger from './theme/Theme.vue'
 import UserTrigger from './user/User.vue'
 import { useStore } from '@/pinia'
 import useMenu from '@/hooks/store/useMenu'
+import { SYSTEM_NAME } from '@/config/system.cfg'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 

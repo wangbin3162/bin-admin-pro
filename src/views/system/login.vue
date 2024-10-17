@@ -16,7 +16,7 @@
           <!-- logo -->
           <div class="page-login--logo">
             <img src="@/assets/images/logo/logo.svg" alt="logo" />
-            <span>BIN-ADMIN-PRO</span>
+            <span class="pl-8">{{ SYSTEM_NAME }}</span>
           </div>
           <!-- 表单 -->
           <div class="form">
@@ -81,7 +81,7 @@
         </div>
         <div class="footer">
           <p class="footer-copyright">
-            bin admin pro 简版后台管理系统vue3 重构版
+            {{ SYSTEM_NAME }} 简版后台管理系统
             <a href="https://github.com/wangbin3162/bin-admin-pro" target="_blank">github</a>
           </p>
         </div>
@@ -96,14 +96,11 @@ import { throwError } from '@/utils/util'
 import { useUserStoreWithOut } from '@/pinia/modules/user'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
-
-defineOptions({
-  name: 'Login',
-})
+import { SYSTEM_NAME } from '@/config/system.cfg'
 
 const formLogin = ref({
   username: 'admin',
-  password: 'admin',
+  password: '123456',
   captcha: 'v9am',
 })
 const loading = ref(false)
@@ -117,14 +114,15 @@ const userStore = useUserStoreWithOut()
 const router = useRouter()
 const route = useRoute()
 const loginRef = ref(null)
+
 // 提交登录信息
 function submit() {
   loginRef.value.validate(async valid => {
     if (valid) {
       try {
         loading.value = true
-        const { data } = await login(formLogin.value)
-        await loginSuccess(data)
+        const res = await login(formLogin.value)
+        await loginSuccess(res)
       } catch (e) {
         throwError('login/requestFailed', e)
       }
@@ -132,10 +130,12 @@ function submit() {
     }
   })
 }
+
 async function loginSuccess(data) {
   if (data.code === '00') {
     const token = data.data.accessToken
     await userStore.setToken(token)
+    console.log('登录成功', token)
     // 重定向对象不存在则返回顶层路径
     const redirect = route.query.redirect || '/'
     await router.push({ path: redirect })
@@ -199,9 +199,9 @@ async function loginSuccess(data) {
           width: 48px;
         }
         span {
-          padding-left: 12px;
           font-size: 32px;
           font-weight: bold;
+          color: var(--bin-color-primary);
         }
       }
       .form {

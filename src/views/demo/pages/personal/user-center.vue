@@ -44,19 +44,19 @@
                 <b-skeleton />
               </template>
               <template #default>
-                <article-item
+                <ArcticleItem
                   v-for="(item, index) in articleList"
                   :key="index"
                   :item="item"
-                ></article-item>
+                ></ArcticleItem>
               </template>
             </b-skeleton>
           </div>
           <div v-if="activeTab === 'tab2'" class="pt-16 pl-16">
-            <img-item v-for="(item, index) in projectList" :key="index" :item="item"></img-item>
+            <ImgItem v-for="(item, index) in projectList" :key="index" :item="item"></ImgItem>
           </div>
           <div v-if="activeTab === 'tab3'" class="p16">
-            <app-item v-for="(item, index) in projectList" :key="index" :item="item"></app-item>
+            <AppItem v-for="(item, index) in projectList" :key="index" :item="item"></AppItem>
           </div>
         </b-card>
       </b-col>
@@ -64,36 +64,39 @@
   </div>
 </template>
 
-<script>
-import { getArticleList, getProjectList } from '@/api/modules/list.api'
+<script setup>
+import { getArticleList, getProjectList } from '@/api/modules/mock.api'
+import AppItem from '../../components/List/app-item.vue'
+import ImgItem from '../../components/List/img-item.vue'
+import ArcticleItem from '../../components/List/article-item.vue'
+import { ref } from 'vue'
 
-export default {
-  name: 'UserCenter',
-  data() {
-    return {
-      tabs: [
-        { key: 'tab1', title: '文章' },
-        { key: 'tab2', title: '项目' },
-        { key: 'tab3', title: '应用' },
-      ],
-      activeTab: 'tab1',
-      articleList: [],
-      projectList: [],
-      loading: false,
-    }
-  },
-  async created() {
-    this.loading = true
-    const articles = await getArticleList()
-    const projects = await getProjectList()
-    this.tabs[0].title = `文章(${articles.rows.length})`
-    this.tabs[1].title = `项目(${projects.rows.length})`
-    this.tabs[2].title = `应用(${projects.rows.length})`
-    this.articleList = articles.rows
-    this.projectList = projects.rows
-    this.loading = false
-  },
+defineOptions({ name: 'UserCenter' })
+const tabs = ref([
+  { key: 'tab1', title: '文章' },
+  { key: 'tab2', title: '项目' },
+  { key: 'tab3', title: '应用' },
+])
+
+const activeTab = ref('tab1')
+
+const articleList = ref([])
+const projectList = ref([])
+const loading = ref(false)
+
+async function created() {
+  loading.value = true
+  const articles = await getArticleList()
+  const projects = await getProjectList()
+  tabs.value[0].title = `文章(${articles.rows.length})`
+  tabs.value[1].title = `项目(${projects.rows.length})`
+  tabs.value[2].title = `应用(${projects.rows.length})`
+  articleList.value = articles.rows
+  projectList.value = projects.rows
+  loading.value = false
 }
+
+created()
 </script>
 
 <style scoped>

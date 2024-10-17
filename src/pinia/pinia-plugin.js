@@ -1,9 +1,9 @@
 import { toRaw } from 'vue'
 import { deepCopy } from '@/utils/util'
 import localforage from 'localforage'
+import { SYSTEM_STORE } from '@/config/system.cfg'
 
-const __piniaKey = '__BIN_ADMIN_PRO_PINIAKEY__'
-localforage.config({ name: __piniaKey, version: 1, driver: localforage.LOCALSTORAGE })
+localforage.config({ name: SYSTEM_STORE, version: 1, driver: localforage.LOCALSTORAGE })
 
 // 取值
 const getStorage = async key => await localforage.getItem(key)

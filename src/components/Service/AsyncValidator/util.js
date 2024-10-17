@@ -1,5 +1,5 @@
 import { isEmpty } from '@/utils/util'
-import { isIdCard, isOrgNo, isRegNo, isUnifiedCode, isDate } from '@/utils/validate'
+import { isIdCard, isOrgNo, isRegNo, isUnifiedCode, isDate } from './validate'
 
 /**
  * 触发条件枚举
@@ -73,7 +73,13 @@ export const validatorBuild = {
   },
   // 长度 opts: { min,max,message,trigger,type }
   $length: function (opts) {
-    return { min: opts.min, max: opts.max, message: opts.message, trigger: opts.trigger, type: opts.type }
+    return {
+      min: opts.min,
+      max: opts.max,
+      message: opts.message,
+      trigger: opts.trigger,
+      type: opts.type,
+    }
   },
   // 邮箱 opts: { message,trigger }
   $email: function (opts) {
@@ -81,7 +87,11 @@ export const validatorBuild = {
   },
   // 手机号 opts: { message,trigger }
   $phone: function (opts) {
-    return { pattern: /^((0\d{2,3}-\d{7,8})|(1[35874]\d{9}))$/, message: opts.message, trigger: opts.trigger }
+    return {
+      pattern: /^((0\d{2,3}-\d{7,8})|(1[35874]\d{9}))$/,
+      message: opts.message,
+      trigger: opts.trigger,
+    }
   },
   // 正则表达式  opts: { regexp,message,trigger }
   $regexp: function (opts) {
@@ -96,11 +106,11 @@ export const validatorBuild = {
     return {
       validator: (rule, value, callback) => {
         // 需判断证件类型值，这里要求配置校验规则时区分法人与自然人
-        const preField = obj[opts.preField]// 前置字段当前值
+        const preField = obj[opts.preField] // 前置字段当前值
         // 判断前置字段不满足情况 字段名为空，字段值为空或者不等于目标值的时候，返回true
-        const preFieldRule = (!isEmpty(opts.preField) && preField !== 'N1')
+        const preFieldRule = !isEmpty(opts.preField) && preField !== 'N1'
         const caseValue = opts.ignoreCase ? String(value).toUpperCase() : value
-        const result = (isEmpty(value) || preFieldRule || isIdCard(caseValue))
+        const result = isEmpty(value) || preFieldRule || isIdCard(caseValue)
         if (!result) callback(new Error(opts.message))
         callback()
       },
@@ -118,7 +128,11 @@ export const validatorBuild = {
         const preFieldRule = !isEmpty(opts.preField) && preField !== 'L1'
         // 需判是否需要级联判断id_type，统一社会信用代码为L1，工商注册号代码为L2，组织机构代码为L3
         const caseValue = opts.ignoreCase ? String(value).toUpperCase() : value
-        const result = (isEmpty(value) || value === '00000000000000000X' || preFieldRule || isUnifiedCode(caseValue))
+        const result =
+          isEmpty(value) ||
+          value === '00000000000000000X' ||
+          preFieldRule ||
+          isUnifiedCode(caseValue)
         if (!result) callback(new Error(opts.message))
         // console.log('$unifiedCode', result)
         callback()
@@ -137,7 +151,7 @@ export const validatorBuild = {
         const preFieldRule = !isEmpty(opts.preField) && preField !== 'L2'
         // 需判是否需要级联判断id_type，统一社会信用代码为L1，工商注册号代码为L2，组织机构代码为L3
         const caseValue = opts.ignoreCase ? String(value).toUpperCase() : value
-        const result = (isEmpty(value) || preFieldRule || isRegNo(caseValue))
+        const result = isEmpty(value) || preFieldRule || isRegNo(caseValue)
         if (!result) callback(new Error(opts.message))
         // console.log('$regNo', result)
         callback()
@@ -156,7 +170,7 @@ export const validatorBuild = {
         const preFieldRule = !isEmpty(opts.preField) && preField !== 'L3'
         // 需判是否需要级联判断id_type，统一社会信用代码为L1，工商注册号代码为L2，组织机构代码为L3
         const caseValue = opts.ignoreCase ? String(value).toUpperCase() : value
-        const result = (isEmpty(value) || preFieldRule || isOrgNo(caseValue))
+        const result = isEmpty(value) || preFieldRule || isOrgNo(caseValue)
         if (!result) callback(new Error(opts.message))
         // console.log('$orgInstCode', result)
         callback()
@@ -171,12 +185,12 @@ export const validatorBuild = {
     }
     return {
       validator: (rule, value, callback) => {
-        const preField = obj[opts.preField]// 前置字段当前值
-        const preFieldValue = opts.preFieldValue// 前置字段需要匹配的值
+        const preField = obj[opts.preField] // 前置字段当前值
+        const preFieldValue = opts.preFieldValue // 前置字段需要匹配的值
         // console.log(preField, preFieldValue)
         if (
           (isEmpty(preField) && isEmpty(preFieldValue)) ||
-          (preField === preFieldValue) ||
+          preField === preFieldValue ||
           (isEmpty(preFieldValue) && String(preField) === preFieldValue) ||
           (!isEmpty(preFieldValue) && String(preField).includes(preFieldValue))
         ) {
@@ -194,13 +208,13 @@ export const validatorBuild = {
     }
     return {
       validator: (rule, value, callback) => {
-        const preField = obj[opts.preField]// 前置字段当前值
-        const preFieldValue = opts.preFieldValue// 前置字段需要匹配的值
+        const preField = obj[opts.preField] // 前置字段当前值
+        const preFieldValue = opts.preFieldValue // 前置字段需要匹配的值
         // console.log(opts.preField + ':' + preField)
         // console.log((String(preField) === preFieldValue), (String(preField).includes(preFieldValue)))
         if (
           (isEmpty(preField) && isEmpty(preFieldValue)) ||
-          (preField === preFieldValue) ||
+          preField === preFieldValue ||
           (isEmpty(preFieldValue) && String(preField) === preFieldValue) ||
           (!isEmpty(preFieldValue) && String(preField).includes(preFieldValue))
         ) {
@@ -218,10 +232,10 @@ export const validatorBuild = {
     }
     return {
       validator: (rule, value, callback) => {
-        const preField = obj[opts.preField]// 前置字段当前值
-        const preFieldValue = opts.preFieldValue// 前置字段需要匹配的值
+        const preField = obj[opts.preField] // 前置字段当前值
+        const preFieldValue = opts.preFieldValue // 前置字段需要匹配的值
         if (
-          (preField === preFieldValue) ||
+          preField === preFieldValue ||
           (isEmpty(preFieldValue) && String(preField) === preFieldValue) ||
           (!isEmpty(preFieldValue) && String(preField).includes(preFieldValue))
         ) {
@@ -241,8 +255,8 @@ export const validatorBuild = {
     }
     return {
       validator: (rule, value, callback) => {
-        const preField = obj[opts.preField]// 前置字段当前值
-        if ((preField && (String(preField) === value)) || (preField === value)) {
+        const preField = obj[opts.preField] // 前置字段当前值
+        if ((preField && String(preField) === value) || preField === value) {
           callback(new Error(opts.message))
         }
         callback()
@@ -273,7 +287,7 @@ export const validatorBuild = {
             // console.log(otherTime)
             // console.log('time is date string')
           } else {
-            const preField = obj[opts.time]// 前置字段当前值
+            const preField = obj[opts.time] // 前置字段当前值
             otherTime = isDate(preField) ? new Date(preField.replace(/-/g, '/')) : null
             // console.log('time is field[' + opts.time + ']:' + preField)
           }

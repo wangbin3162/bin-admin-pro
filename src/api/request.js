@@ -1,8 +1,8 @@
-import { ACCESS_TOKEN } from '@/config/token-const'
 import request from 'axios'
-import cookies from '../utils/util.cookies'
 import router from '@/router'
+import cookies from '@/utils/util.cookies'
 import { throwError } from '@/utils/util'
+import { ACCESS_TOKEN } from '@/config/token-const'
 
 const baseUrl = process.env.NODE_ENV === 'production' ? '/' : '/mock'
 

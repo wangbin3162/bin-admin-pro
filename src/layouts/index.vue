@@ -22,7 +22,7 @@
             </Transition>
           </router-view>
         </div>
-        <footer class="app-layout-footer">bin admin pro</footer>
+        <footer class="app-layout-footer">{{ SYSTEM_NAME }}</footer>
       </div>
     </section>
   </section>
@@ -37,6 +37,7 @@ import './index.css'
 import NavHeader from './src/nav-header/NavHeader.vue'
 import SiderMenu from './src/sider-menu/SiderMenu.vue'
 import TagsView from './src/tags-view/TagsView.vue'
+import { SYSTEM_NAME } from '@/config/system.cfg'
 
 import { useStore } from '@/pinia'
 

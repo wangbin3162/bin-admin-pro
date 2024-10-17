@@ -1,5 +1,5 @@
 import layout from '@/layouts/index.vue'
-import { flatMenus, HOME_NAME } from './menus'
+import { flatMenus, HOME_NAME, HOME_PATH } from './menus'
 
 // 获取实际存储的路由
 export const realRoutes = flatMenus
@@ -24,7 +24,7 @@ export const asyncRouterMap = [
     path: 'Analysis',
     name: 'Analysis',
     meta: { title: '分析页', noCache: true },
-    component: () => import('@/views/dashboard/analysis/index.vue'),
+    component: () => import('@/views/demo/analysis/index.vue'),
   },
   ...realRoutes,
 ]
@@ -37,15 +37,15 @@ export function createRoutesInLayout(routes = []) {
   return [
     {
       path: '/',
-      redirect: { name: 'WorkBench' },
+      redirect: { name: HOME_PATH },
       name: 'Root',
       component: layout,
       children: [
         {
-          path: 'WorkBench',
-          name: 'WorkBench',
+          path: HOME_PATH,
+          name: HOME_PATH,
           meta: { title: HOME_NAME },
-          component: () => import('@/views/dashboard/workbench/index.vue'),
+          component: () => import('@/views/home/index.vue'),
         },
         // 刷新页面 必须保留
         {

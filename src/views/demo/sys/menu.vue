@@ -27,11 +27,9 @@
           </div>
         </template>
         <div style="position: relative; min-height: 100px; overflow: hidden">
-          <transition name="fade-in">
-            <div style="position: absolute; width: 100%">
-              <b-alert v-show="pageStatus.isNormal">点选左侧部门，进行编辑操作</b-alert>
-            </div>
-          </transition>
+          <div style="position: absolute; width: 100%">
+            <b-alert v-show="pageStatus.isNormal">点选左侧部门，进行编辑操作</b-alert>
+          </div>
           <transition name="fade-transverse">
             <div class="pt-8" v-if="!pageStatus.isNormal">
               <b-row v-if="copyNode.path !== 'root'">
@@ -82,7 +80,7 @@
 </template>
 
 <script setup>
-import { getMenuTree } from '@/api/modules/menu.api'
+import { getMenuTree } from '@/api/modules/mock.api'
 import { ref } from 'vue'
 import { deepCopy } from '@/utils/util'
 import useForm from '@/hooks/service/useForm'

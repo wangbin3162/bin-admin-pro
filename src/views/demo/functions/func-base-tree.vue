@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import { getDepartTree } from '@/api/modules/depart.api'
+import { getDepartTree } from '@/api/modules/mock.api'
 import { h } from 'vue'
 
 export default {

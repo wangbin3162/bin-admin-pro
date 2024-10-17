@@ -1,5 +1,5 @@
 <template>
-  <b-popover placement="bottom-end" width="320px" popper-class="weather-box" trigger="hover">
+  <b-popover placement="bottom-end" width="320px" popper-class="weather-box" trigger="click">
     <div class="header-trigger" flex="cross:center">
       <div class="trigger">
         <i :class="`qi-${current.icon}`" :title="current.text"></i>
@@ -21,14 +21,6 @@
               {{ current.windDir }} {{ current.windScale }}级
             </p>
           </div>
-          <div
-            v-if="warning.typeName"
-            class="warning-tag"
-            :style="getWarningColor(warning.level)"
-            :title="warning.text"
-          >
-            {{ warning.typeName }}{{ warning.level }}预警
-          </div>
         </div>
         <div class="weather-air mb-5" flex="cross:center">
           空气质量指数
@@ -42,6 +34,16 @@
           </div>
           PM2.5: {{ air.pm2p5 }}
         </div>
+
+        <div
+          v-if="warning.typeName"
+          class="warning-tag"
+          :style="getWarningColor(warning.level)"
+          :title="warning.text"
+        >
+          {{ warning.typeName }}{{ warning.level }}预警
+        </div>
+
         <div class="weather-desc mb-5">
           <div v-for="(hour, index) in weather" :key="index" class="hour-item">
             <div>{{ hour.fxTime }}</div>
@@ -193,15 +195,15 @@ function getAirColor(aqi) {
 // 根据预警颜色返回样式
 function getWarningColor(level) {
   if (level === '蓝色') {
-    return { background: 'rgba(64,161,255,0.8)', color: '#fff' }
+    return { color: '#40a1ff' }
   } else if (level === '黄色') {
-    return { background: 'rgba(255,255,0,0.8)', color: '#666' }
+    return { color: '#fadb14' }
   } else if (level === '橙色') {
-    return { background: 'rgba(251,163,69,0.8)', color: '#fff' }
+    return { color: '#e17e14' }
   } else if (level === '红色') {
-    return { background: 'rgba(247,78,87,0.8)', color: '#fff' }
+    return { color: '#f5222d' }
   } else {
-    return { background: 'transparent', color: 'rgba(255,255,255,0.7)' }
+    return { color: 'rgba(0,0,0,0.7)' }
   }
 }
 
@@ -270,12 +272,11 @@ initData()
     vertical-align: middle;
     color: #fff;
     font-size: 12px;
-    padding: 0 6px;
-    width: 90px;
     text-align: center;
     height: 20px;
     line-height: 20px;
     border-radius: 2px;
+    margin-bottom: 8px;
     white-space: nowrap;
   }
   .weather-icon {

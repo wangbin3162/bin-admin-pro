@@ -81,7 +81,7 @@
 
 <script>
 import { reactive, ref, watch } from 'vue'
-import { getUserList } from '@/api/modules/user.api'
+import { getUserList } from '@/api/modules/mock.api'
 import useTable from '@/hooks/service/useTable'
 
 export default {

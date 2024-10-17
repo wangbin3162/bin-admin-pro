@@ -76,7 +76,7 @@ const useApp = defineStore('app', {
       return false
     },
   },
-  persist: { paths: ['links', 'todolist'] },
+  // persist: { paths: ['links', 'todolist'] },
 })
 
 export default useApp

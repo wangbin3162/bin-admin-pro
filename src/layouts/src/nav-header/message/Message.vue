@@ -39,31 +39,28 @@
 <script setup>
 import { computed, ref } from 'vue'
 import day from 'dayjs'
-import avatar1 from '@/assets/images/avatar/avatar01.jpeg'
-import avatar2 from '@/assets/images/avatar/avatar00.jpeg'
-import avatar3 from '@/assets/images/avatar/avatar06.jpeg'
-import avatar4 from '@/assets/images/avatar/avatar03.jpg'
+import avatar from '@/assets/images/avatar.jpeg'
 
 const tabs = ref([{ key: 'message', title: '通知' }])
 const activeTab = ref('message')
 const messageList = ref([
   {
-    icon: avatar1,
+    icon: avatar,
     title: '您今天有12个任务',
     date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
   },
   {
-    icon: avatar2,
+    icon: avatar,
     title: '今日需要修改发布新版程序',
     date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
   },
   {
-    icon: avatar3,
+    icon: avatar,
     title: '最新的文章已经发布',
     date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
   },
   {
-    icon: avatar4,
+    icon: avatar,
     title: '这是通知示例，实际需要根据业务需求自行修改',
     date: day().format('YYYY-MM-DD dddd HH:mm:ss'),
   },

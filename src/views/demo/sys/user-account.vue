@@ -154,8 +154,8 @@
 <script setup>
 import { reactive, ref, watch } from 'vue'
 import useTable from '@/hooks/service/useTable'
-import { getUserList } from '@/api/modules/user.api'
-import { getDepartTree } from '@/api/modules/depart.api'
+import { getUserList } from '@/api/modules/mock.api'
+import { getDepartTree } from '@/api/modules/mock.api'
 import useForm from '@/hooks/service/useForm'
 import { Message } from 'bin-ui-design'
 import useTree from '@/hooks/service/useTree'

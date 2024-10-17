@@ -99,7 +99,7 @@
 
 <script>
 import useTable from '@/hooks/service/useTable'
-import { getUserList } from '@/api/modules/user.api'
+import { getUserList } from '@/api/modules/mock.api'
 import { reactive, ref, watch } from 'vue'
 import { Message } from 'bin-ui-design'
 

@@ -1,9 +1,10 @@
+import { SYSTEM_THEME } from '@/config/system.cfg'
 import { Theme } from '../config/default-theme'
 /**
  * 缓存读取器
  * @param {*} key
  */
-export default function useCaches(key = '__BIN_ADMIN_PRO_THEME__') {
+export default function useCaches(key = SYSTEM_THEME) {
   function getVal() {
     let value = { ...Theme }
     let val = localStorage.getItem(key)
@@ -20,6 +21,6 @@ export default function useCaches(key = '__BIN_ADMIN_PRO_THEME__') {
   return { getVal, setVal }
 }
 
-export function removeThemeCaches(key = '__BIN_ADMIN_PRO_THEME__') {
+export function removeThemeCaches(key = SYSTEM_THEME) {
   localStorage.removeItem(key)
 }

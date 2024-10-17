@@ -1,7 +1,7 @@
 <template>
   <b-dropdown @command="handleClick" append-to-body>
     <div class="header-trigger">
-      <img src="@/assets/images/avatar/avatar11.jpeg" class="trigger" alt="avatar" />
+      <img src="@/assets/images/avatar.jpeg" class="trigger" alt="avatar" />
     </div>
     <template #dropdown>
       <b-dropdown-menu style="width: 120px">
@@ -27,8 +27,7 @@ import { MessageBox } from 'bin-ui-design'
 import { useStore } from '@/pinia'
 import { useRouter, useRoute } from 'vue-router'
 
-const { userStore, storeToRefs } = useStore()
-const { userInfo } = storeToRefs(userStore)
+const { userStore } = useStore()
 const router = useRouter()
 const route = useRoute()
 
