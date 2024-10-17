@@ -19,15 +19,7 @@ export const realRoutes = flatMenus
 /**
  * meta 为附带参数，title为默认路由标题，noCache为缓存标识，为true时开启tag-view时不缓存
  */
-export const asyncRouterMap = [
-  {
-    path: 'Analysis',
-    name: 'Analysis',
-    meta: { title: '分析页', noCache: true },
-    component: () => import('@/views/demo/analysis/index.vue'),
-  },
-  ...realRoutes,
-]
+export const asyncRouterMap = [...realRoutes]
 
 /**
  * @description 创建在 layout 中显示的路由设置
@@ -59,12 +51,6 @@ export function createRoutesInLayout(routes = []) {
           name: 'ErrorPage',
           component: () => import('@/views/system/error/index.vue'),
         },
-        // 动态路由组件
-        {
-          path: 'Inline/:params',
-          name: 'Inline',
-          component: () => import('@/views/demo/inline/index.vue'),
-        },
         ...routes,
       ],
     },
@@ -83,30 +69,6 @@ export const routesOutLayout = [
     path: '/login',
     name: 'Login',
     component: () => import('@/views/system/login.vue'),
-  },
-  // excel模板编辑
-  {
-    path: '/excel-edit',
-    name: 'ExcelEdit',
-    component: () => import('@/views/pages/ExcelEdit/index.vue'),
-  },
-  // excel数据填报
-  {
-    path: '/data-edit',
-    name: 'DataEdit',
-    component: () => import('@/views/pages/DataEdit/index.vue'),
-  },
-  // 普通填报
-  {
-    path: '/data-edit-simple',
-    name: 'DataEditSimple',
-    component: () => import('@/views/pages/DataEditSimple/index.vue'),
-  },
-  // 流程编排编辑
-  {
-    path: '/flow-editor',
-    name: 'FlowEditor',
-    component: () => import('@/views/pages/FlowEdit/index.vue'),
   },
 ]
 

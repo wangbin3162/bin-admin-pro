@@ -5,12 +5,12 @@
     </div>
     <template #dropdown>
       <b-dropdown-menu style="width: 120px">
-        <b-dropdown-item name="userCenter">
+        <!-- <b-dropdown-item name="userCenter">
           <div flex="cross:center">
             <b-icon name="user" size="16"></b-icon>
             <span class="ml-5">用户中心</span>
           </div>
-        </b-dropdown-item>
+        </b-dropdown-item> -->
         <b-dropdown-item name="logout">
           <div flex="cross:center">
             <b-icon name="logout" size="16"></b-icon>
@@ -27,7 +27,8 @@ import { MessageBox } from 'bin-ui-design'
 import { useStore } from '@/pinia'
 import { useRouter, useRoute } from 'vue-router'
 
-const { userStore } = useStore()
+const { userStore, storeToRefs } = useStore()
+const { userInfo } = storeToRefs(userStore)
 const router = useRouter()
 const route = useRoute()
 

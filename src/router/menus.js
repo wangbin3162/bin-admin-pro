@@ -17,10 +17,6 @@ export const HOME_MENUS = [{ name: HOME_PATH, title: HOME_NAME, linkType: 'route
  * 组装menus菜单
  * @param menus 接口返回的menus
  */
-export const getFilterMenus = (menus = []) => [
-  ...HOME_MENUS,
-  { name: 'Analysis', icon: 'linechart', title: '分析页' },
-  ...menus,
-]
+export const getFilterMenus = (menus = []) => [...HOME_MENUS, ...menus]
 
 export default menuList

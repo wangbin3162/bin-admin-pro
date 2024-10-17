@@ -1,7 +1,6 @@
 import { loadEnv, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
-import copy from 'rollup-plugin-copy'
 
 function pathResolve(dir) {
   return resolve(process.cwd(), '.', dir)
@@ -15,18 +14,7 @@ export default ({ mode }) => {
 
   return defineConfig({
     base: isProd ? env.VITE_PUBLIC_PATH : '/',
-    plugins: [
-      vue(),
-      copy({
-        targets: [
-          {
-            src: './node_modules/libpag/lib/libpag.wasm',
-            dest: isProd ? 'docs/' : 'public/',
-          },
-        ],
-        hook: isProd ? 'writeBundle' : 'buildStart',
-      }),
-    ],
+    plugins: [vue()],
     server: {
       host: '0.0.0.0',
       port: 9085,
@@ -44,12 +32,10 @@ export default ({ mode }) => {
         'vue-router',
         'pinia',
         'dayjs',
-        'echarts',
         'bin-ui-design',
         'js-cookie',
         'brace',
       ],
-      exclude: ['@vue/repl'],
     },
     build: {
       sourcemap: false,
