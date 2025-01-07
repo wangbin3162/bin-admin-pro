@@ -1,0 +1,1 @@
+const a="/bin-admin-pro/static/jpeg/avatar05-BXlejBm4.jpeg",t="/bin-admin-pro/static/jpeg/avatar07-BbsVsbzz.jpeg",i="/bin-admin-pro/static/jpeg/avatar01-ai6TnOhi.jpeg",s="/bin-admin-pro/static/jpeg/avatar04-Cf3JX2cf.jpeg";export{a,s as b,t as c,i as d};
