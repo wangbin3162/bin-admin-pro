@@ -7,14 +7,13 @@ function pathResolve(dir) {
   return resolve(process.cwd(), '.', dir)
 }
 
-export default ({ mode }) => {
+export default defineConfig(({ mode }) => {
   const dirRoot = process.cwd()
-
   const env = loadEnv(mode, dirRoot)
   const isProd = process.env.NODE_ENV === 'production'
 
-  return defineConfig({
-    base: isProd ? env.VITE_PUBLIC_PATH : '/',
+  return {
+    base: env.VITE_PUBLIC_PATH,
     plugins: [
       vue(),
       copy({
@@ -31,6 +30,14 @@ export default ({ mode }) => {
       host: '0.0.0.0',
       port: 9085,
       open: true,
+      // proxy: {
+      //   // 代理配置只开发时生效。
+      //   [env.VITE_APP_BASE_API]: {
+      //     changeOrigin: true,
+      //     target: env.VITE_APP_API_URL,
+      //     rewrite: path => path.replace(new RegExp('^' + env.VITE_APP_BASE_API), ''),
+      //   },
+      // },
     },
     resolve: {
       alias: {
@@ -79,5 +86,5 @@ export default ({ mode }) => {
       // enable hydration mismatch details in production build
       __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'true',
     },
-  })
-}
+  }
+})

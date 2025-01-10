@@ -4,10 +4,10 @@ import cookies from '@/utils/util.cookies'
 import { throwError } from '@/utils/util'
 import { ACCESS_TOKEN } from '@/config/token-const'
 
-const baseUrl = process.env.NODE_ENV === 'production' ? '/' : '/mock'
+let baseURL = import.meta.env.VITE_APP_BASE_API
 
 const service = request.create({
-  baseUrl,
+  baseURL,
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
